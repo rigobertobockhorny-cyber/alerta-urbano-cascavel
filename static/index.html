@@ -172,7 +172,7 @@
       transition: fill 0.3s ease, stroke 0.3s ease;
     }
 
-    /* SPLASH SCREEN INICIAL (ORDEM DO RIGO: 5 SEGUNDOS COM LOGO E ALERTA URBANO CASCAVEL) */
+    /* SPLASH SCREEN INICIAL (ORDEM DO RIGO: LOGO E ALERTA URBANO CASCAVEL EM PRETO E VERDE NOBRE) */
     .app-splash-screen {
       position: fixed;
       top: 0;
@@ -181,7 +181,7 @@
       bottom: 0;
       width: 100vw;
       height: 100vh;
-      background: #ffffff;
+      background: #09090b;
       z-index: 999999;
       display: flex;
       align-items: center;
@@ -212,8 +212,9 @@
       width: 116px;
       height: 116px;
       border-radius: 50%;
-      background: #ffffff;
-      box-shadow: 0 12px 36px rgba(220, 38, 38, 0.38);
+      background: #09090b;
+      border: 2.5px solid #10b981;
+      box-shadow: 0 12px 36px rgba(16, 185, 129, 0.35);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -230,15 +231,15 @@
       font-size: 26px;
       font-weight: 900;
       letter-spacing: 2px;
-      color: #dc2626; /* Alerta Urbano em Vermelho */
+      color: #ffffff; /* Alerta Urbano em Branco */
       text-transform: uppercase;
       line-height: 1.15;
     }
     .splash-sub {
-      font-size: 15px;
+      font-size: 14px;
       font-weight: 800;
-      letter-spacing: 4px;
-      color: #18181b; /* Cascavel um pouco menor e escuro */
+      letter-spacing: 3px;
+      color: #10b981; /* Cascavel em Verde Nobre */
       text-transform: uppercase;
       line-height: 1.2;
       margin-top: 6px;
@@ -3016,13 +3017,18 @@
     // INICIALIZAÇÃO DO MAPA
     // ========================================================
     function init() {
-      // Splash Screen Oficial: Permanece 5 segundos na abertura com Logo e Alerta Urbano Cascavel (Ordem do Rigo)
+      // Notifica o app nativo que o mapa e aplicação carregaram com sucesso
+      if (window.AndroidAlerta && typeof window.AndroidAlerta.onAppReady === 'function') {
+        try { window.AndroidAlerta.onAppReady(); } catch(e){}
+      }
+
+      // Splash Screen Oficial: Permanece na abertura com Logo e Alerta Urbano Cascavel (Ordem do Rigo)
       const splash = document.getElementById('app-splash-screen');
       if (splash) {
         setTimeout(() => {
           splash.classList.add('fade-out');
           setTimeout(() => { try { splash.remove(); } catch(e) {} }, 700);
-        }, 5000);
+        }, 3500);
         // Permite toque para avançar se o usuário desejar
         splash.addEventListener('click', () => {
           splash.classList.add('fade-out');
