@@ -1794,6 +1794,14 @@
         </button>
       </div>
 
+      <!-- BOTÃO VERMELHO DA IMPRENSA: LER NOTÍCIA COMPLETA (ORDEM DO RIGO) -->
+      <div id="p-imprensa-wrap" style="display:none; width:100%; margin-top:10px;">
+        <button id="btn-imprensa-link" class="btn-imprensa-vermelho" type="button" onclick="abrirLinkImprensa()" style="width:100%; background:#dc2626; color:#ffffff; font-weight:800; font-size:13px; letter-spacing:0.5px; padding:11px 14px; border-radius:12px; border:none; display:flex; align-items:center; justify-content:center; gap:8px; cursor:pointer; box-shadow:0 4px 14px rgba(220,38,38,0.45); transition:transform 0.15s ease;">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+          <span id="p-imprensa-texto">LER NOTÍCIA COMPLETA</span>
+        </button>
+      </div>
+
       <!-- Se for ocorrência do próprio motorista, dá opção de encerrar -->
       <div id="prompt-cancelar-wrap" style="margin-top:10px; width:100%; display:none;">
         <button type="button" onclick="cancelarOcorrenciaDoCard()" style="width:100%; padding:11px 12px; background:#18181b; border:1.5px solid #dc2626; color:#f87171; border-radius:12px; font-size:12px; font-weight:800; cursor:pointer;">
@@ -3680,6 +3688,23 @@
       }
     }
 
+    function calcularHorasPassadas(createdAtStr) {
+      if (!createdAtStr) return 0;
+      try {
+        const created = new Date(createdAtStr.replace(' ', 'T')).getTime();
+        const diffMs = Date.now() - created;
+        return Math.max(0, Math.floor(diffMs / 3600000));
+      } catch (e) {
+        return 0;
+      }
+    }
+
+    function abrirLinkImprensa() {
+      if (alertaFocadoObj && alertaFocadoObj.link_noticia) {
+        window.open(alertaFocadoObj.link_noticia, '_blank');
+      }
+    }
+
     function formatarTituloCurto(tipo, tituloOriginal) {
       const t = (tipo || '').toLowerCase();
       if (t === 'viatura' || t === 'viatura_ronda') return 'VIATURA EM RONDA';
@@ -3822,6 +3847,27 @@
           promptCancelWrap.querySelector('button').innerText = ehPet ? '✕ Encontrei o Animal / Encerrar' : '✕ Encerrar Minha Ocorrência';
         } else {
           promptCancelWrap.style.display = 'none';
+        }
+      }
+
+      // Botão vermelho de notícia da imprensa (Ordem do Rigo - Opção 1)
+      const imprensaWrap = document.getElementById('p-imprensa-wrap');
+      const imprensaTxt = document.getElementById('p-imprensa-texto');
+      if (imprensaWrap) {
+        if (alerta.link_noticia) {
+          const ehCGN = (alerta.descricao || '').includes('CGN') || alerta.link_noticia.includes('cgn.inf.br');
+          const ehCATVE = (alerta.descricao || '').includes('CATVE') || alerta.link_noticia.includes('catve.com');
+          const portal = ehCGN ? 'NA CGN' : (ehCATVE ? 'NA CATVE' : 'NO PORTAL');
+          if (imprensaTxt) imprensaTxt.innerText = `LER NOTÍCIA COMPLETA (${portal})`;
+          imprensaWrap.style.display = 'block';
+
+          if (superLabel) {
+            const tempoRel = calcularTempoRelativo(alerta.created_at);
+            superLabel.innerText = `IMPRENSA • ${tempoRel.toUpperCase()}`;
+            superLabel.style.display = 'block';
+          }
+        } else {
+          imprensaWrap.style.display = 'none';
         }
       }
 
@@ -5194,9 +5240,18 @@
 
       let frase = '';
       const tAlerta = (alerta.tipo || '').toLowerCase();
+      const ehImprensa = alerta.fonte_tipo === 'imprensa' || Boolean(alerta.link_noticia);
+      const horasPassadas = calcularHorasPassadas(alerta.created_at);
+
       if (isPet(tAlerta)) {
         frase = 'Pet desaparecido na região.';
-      } else if (tAlerta.includes('radar') || tAlerta === 'camera_semaforo' || (alerta.titulo && alerta.titulo.toUpperCase().includes('RADAR'))) {
+      } else if (tAlerta === 'camera_semaforo' || (alerta.titulo && alerta.titulo.toUpperCase().includes('SEMÁFORO COM CÂMERA')) || (alerta.titulo && alerta.titulo.toUpperCase().includes('SEMÁFORO COM RADAR'))) {
+        if (etapa === 2) {
+          frase = 'Semáforo com câmera e radar no cruzamento, confirma?';
+        } else {
+          frase = `Atenção: Semáforo com Câmera e Radar a ${distAprox} metros. Cuidado com o sinal amarelo e a faixa.`;
+        }
+      } else if (tAlerta.includes('radar') || (alerta.titulo && alerta.titulo.toUpperCase().includes('RADAR'))) {
         const velMatch = (alerta.titulo + ' ' + tAlerta).match(/\b(30|40|50|60|70|80)\b/);
         const velTxt = velMatch ? ` de ${velMatch[0]} por hora` : '';
         if (etapa === 2) {
@@ -5204,6 +5259,26 @@
         } else {
           frase = `${prefixo}Atenção: Radar${velTxt} a ${distAprox} metros.`;
         }
+      } else if (tAlerta === 'semaforo' || (alerta.titulo && alerta.titulo.toUpperCase().includes('SEMÁFORO'))) {
+        if (etapa === 2) {
+          frase = 'Semáforo no cruzamento à frente, confirma?';
+        } else {
+          frase = `Atenção: Semáforo a ${distAprox} metros.`;
+        }
+      } else if (ehImprensa && horasPassadas >= 2) {
+        // OPÇÃO 1 HOMOLOGADA PELO RIGO (IMPRENSA HISTÓRICA DO DIA: 2h A 24h)
+        let termo = 'um acidente';
+        if (tAlerta.includes('furto')) termo = 'um furto';
+        else if (tAlerta.includes('assalto') || tAlerta.includes('roubo')) termo = 'um assalto';
+        else if (tAlerta.includes('perigo')) termo = 'uma ocorrência policial';
+        
+        if (tAlerta.includes('furto') || tAlerta.includes('assalto')) {
+          frase = `Registro de ocorrência há ${horasPassadas} horas: ${termo} nesta região. Toque no botão para ler a matéria.`;
+        } else {
+          frase = `Informação local: Aqui ocorreu ${termo} há ${horasPassadas} horas. Toque no botão da tela para ver a notícia completa.`;
+        }
+      } else if (ehImprensa) {
+        frase = `Atenção: Notícia recente da imprensa a ${distAprox} metros.`;
       } else if (etapa === 2) {
         frase = `${prefixo}Ocorrência de ${nomeCurto.toLowerCase()}, confirma?`;
       } else {
