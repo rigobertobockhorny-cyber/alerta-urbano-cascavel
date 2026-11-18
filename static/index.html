@@ -2725,7 +2725,8 @@
       return TIPOS_POLICIA.includes(tipo);
     }
     function isPet(tipo) {
-      return tipo === 'pet';
+      const t = (tipo || '').toLowerCase();
+      return t === 'pet' || t.startsWith('pet') || t.includes('pet');
     }
 
     // ========================================================
@@ -4026,7 +4027,8 @@
 
     function estaNoCaminhoAFrente(uLat, uLng, heading, speedKmH, aLat, aLng, tipo) {
       const d = calcularDistanciaMetros(uLat, uLng, aLat, aLng);
-      if (isPet(tipo)) {
+      const t = (tipo || '').toLowerCase();
+      if (isPet(t)) {
         // Animais desaparecidos: Raio circular amplo de 600m na região/bairro (Ordem do Rigo)
         return d <= 600;
       }
@@ -4041,7 +4043,11 @@
         if (desvioLateral > 65) return false; // Desvio lateral de rua paralela
         return d <= 450;
       } else {
-        // Parado ou manobra lenta: raio restrito de 120m
+        // Sem direção clara ou manobra lenta:
+        // Para radares e semáforos, raio seguro de 350m para alertar antes de cruzar
+        if (t.includes('radar') || t.includes('semaforo')) {
+          return d <= 350;
+        }
         return d <= 120;
       }
     }
@@ -4055,8 +4061,9 @@
 
       for (let a of alertasCache) {
         if (alertasDispensados.has(a.id)) continue;
-        // Nunca apitar para quem acabou de registrar seu próprio alerta
-        if (ehMeuAlerta(a.id)) continue;
+        const tAlerta = (a.tipo || '').toLowerCase();
+        // Ocorrências transitórias do próprio usuário não apitam imediatamente, mas semáforos, radares e pets apitam sempre!
+        if (ehMeuAlerta(a.id) && !tAlerta.includes('semaforo') && !tAlerta.includes('radar') && !isPet(tAlerta)) continue;
         if (isPet(a.tipo) && estaEmCooldown(a.id)) continue;
 
         const aLat = parseFloat(a.lat);
@@ -4810,7 +4817,7 @@
           { tipo: 'radar_60', titulo: 'Radar Fixo 60 km/h (Pardal)', desc: 'Fiscalização eletrônica fixa de velocidade regulamentada em 60 km/h', label: 'RADAR 60' },
           { tipo: 'radar_50', titulo: 'Radar Fixo 50 km/h (Pardal)', desc: 'Fiscalização eletrônica fixa de velocidade regulamentada em 50 km/h', label: 'RADAR 50' },
           { tipo: 'radar_40', titulo: 'Lombada Eletrônica 40 km/h', desc: 'Barreira eletrônica com visor e limite de 40 km/h', label: 'LOMBADA 40' },
-          { tipo: 'semaforo', titulo: 'Semáforo Comum (Sem Câmera)', desc: 'Cruzamento semafórico normal da cidade. Sem câmera de multa (silencioso no app).', label: 'SEMÁFORO' },
+          { tipo: 'semaforo', titulo: 'Semáforo da Via (Sinaleiro)', desc: 'Cruzamento semafórico de Cascavel. Alerta com antecedência ao se aproximar.', label: 'SEMÁFORO' },
           { tipo: 'radar_movel', titulo: 'Radar Móvel / Tripé na Via', desc: 'Operação com radar portátil ou viatura monitorando velocidade', label: 'RADAR MÓVEL' }
         ]
       },
@@ -5933,30 +5940,27 @@
     function falarAlertaRadar(alerta, distMetros, etapa) {
       if (!alerta || !radarVozAtivo) return;
       if (!userLat || !userLng || userAccuracy > 350) return;
-      if (ehMeuAlerta(alerta.id)) return;
+      const tAlerta = (alerta.tipo || '').toLowerCase();
+      // Ocorrências transitórias do próprio usuário não apitam imediatamente, mas semáforos, radares e pets apitam sempre!
+      if (ehMeuAlerta(alerta.id) && !tAlerta.includes('semaforo') && !tAlerta.includes('radar') && !isPet(tAlerta)) return;
 
       // TRAVA 1: Ponto silenciado pelo motorista no card (Anti-Tagarela)
       if (alertasSilenciadosVoz.has(alerta.id)) return;
 
-      const tAlerta = (alerta.tipo || '').toLowerCase();
-
-      // TRAVA 2: Semáforo comum é 100% SILENCIOSO por padrão (Ordem do Rigo - Não falar a cada esquina!)
-      if (tAlerta === 'semaforo' || (alerta.titulo && alerta.titulo.toUpperCase().includes('SEMÁFORO COMUM'))) return;
-
-      // TRAVA 3: Velocidade lenta (< 15 km/h) no trânsito/congestionamento fica em silêncio
-      if (userSpeedKmH > 0 && userSpeedKmH < 15) return;
+      // TRAVA 3: Velocidade lenta (< 3 km/h - carro totalmente parado no ponto morto)
+      if (userSpeedKmH > 0 && userSpeedKmH < 3) return;
 
       const agora = Date.now();
 
-      // TRAVA 4: Cooldown global de 25s entre falas de áudio para evitar voz tagarela contínua
-      if (agora - ultimoAvisoVozGlobal < 25000) return;
+      // TRAVA 4: Cooldown global de 10s entre falas de áudio para evitar encavalamento
+      if (agora - ultimoAvisoVozGlobal < 10000) return;
 
       const numEtapa = etapa || 1;
       const chaveAviso = 'alerta_voz_' + alerta.id + '_etapa_' + numEtapa;
       const ultimoAviso = Number(localStorage.getItem(chaveAviso) || alertasAnunciadosVoz.get(chaveAviso) || 0);
 
       const ehTeste = alerta.fonte_tipo === 'teste' || (alerta.titulo && alerta.titulo.includes('[TESTE]'));
-      const cooldownMs = ehTeste ? (2 * 60 * 1000) : (6 * 3600 * 1000);
+      const cooldownMs = ehTeste ? (60 * 1000) : (2 * 60 * 1000); // 2 minutos para permitir testes e trânsito real
       if (agora - ultimoAviso < cooldownMs) return;
 
       alertasAnunciadosVoz.set(chaveAviso, agora);
@@ -5972,20 +5976,28 @@
       const horasPassadas = calcularHorasPassadas(alerta.created_at);
 
       if (isPet(tAlerta)) {
-        frase = 'Pet desaparecido na região.';
+        frase = 'Atenção: Pet desaparecido na região.';
       } else if (tAlerta === 'camera_semaforo' || (alerta.titulo && alerta.titulo.toUpperCase().includes('SEMÁFORO COM CÂMERA')) || (alerta.titulo && alerta.titulo.toUpperCase().includes('SEMÁFORO COM RADAR'))) {
         if (etapa === 2) {
           frase = 'Semáforo com câmera de vídeo no cruzamento, confirma?';
         } else {
           frase = `Atenção: Semáforo com Câmera de Vídeo a ${distAprox} metros. Evite avançar no amarelo.`;
         }
-      } else if (tAlerta.includes('radar') || (alerta.titulo && alerta.titulo.toUpperCase().includes('RADAR'))) {
+      } else if (tAlerta.includes('radar') || (alerta.titulo && alerta.titulo.toUpperCase().includes('RADAR')) || tAlerta.includes('lombada') || (alerta.titulo && alerta.titulo.toUpperCase().includes('LOMBADA'))) {
         const velMatch = (alerta.titulo + ' ' + tAlerta).match(/\b(30|40|50|60|70|80)\b/);
         const velTxt = velMatch ? ` de ${velMatch[0]} por hora` : '';
+        const ehLombada = tAlerta.includes('lombada') || (alerta.titulo && alerta.titulo.toUpperCase().includes('LOMBADA'));
+        const termoRadar = ehLombada ? 'Lombada eletrônica' : 'Radar';
         if (etapa === 2) {
-          frase = `${prefixo}Radar${velTxt} no local, confirma?`;
+          frase = `${termoRadar}${velTxt} no local, confirma?`;
         } else {
-          frase = `${prefixo}Atenção: Radar${velTxt} a ${distAprox} metros.`;
+          frase = `Atenção: ${termoRadar}${velTxt} a ${distAprox} metros.`;
+        }
+      } else if (tAlerta === 'semaforo' || (alerta.titulo && alerta.titulo.toUpperCase().includes('SEMÁFORO')) || (alerta.titulo && alerta.titulo.toUpperCase().includes('SINALEIRO'))) {
+        if (etapa === 2) {
+          frase = 'Semáforo à frente, confirma?';
+        } else {
+          frase = `Atenção: Semáforo a ${distAprox} metros.`;
         }
       } else if (ehImprensa && horasPassadas >= 2) {
         // OPÇÃO 1 HOMOLOGADA PELO RIGO (IMPRENSA HISTÓRICA DO DIA: 2h A 24h)
