@@ -187,9 +187,9 @@ def listar_alertas():
         SELECT * FROM alertas 
         WHERE ativo = 1
           AND (
-            tipo IN ('comercio', 'batalhao_pm', 'delegacia', 'guarda_municipal', 'prf', 'radar_fixo', 'radar_60', 'radar_50', 'radar_40', 'radar', 'camera_semaforo')
+            tipo IN ('comercio', 'batalhao_pm', 'delegacia', 'guarda_municipal', 'prf', 'radar_fixo', 'radar_60', 'radar_50', 'radar_40', 'radar', 'camera_semaforo', 'semaforo')
+            OR fonte_tipo = 'oficial_transitar'
             OR (tipo = 'pet' AND datetime(created_at, '+48 hours') >= datetime('now', 'localtime'))
-            OR (fonte_tipo = 'teste')
             OR (tipo != 'pet' AND datetime(created_at, '+24 hours') >= datetime('now', 'localtime'))
           )
         ORDER BY created_at DESC

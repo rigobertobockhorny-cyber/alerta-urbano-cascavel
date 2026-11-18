@@ -564,6 +564,31 @@
       border-color: #f43f5e;
       box-shadow: 0 4px 14px rgba(244, 63, 94, 0.3);
     }
+
+    /* Botão Flutuante Modo Mira Laser (Fixar com Precisão do Sofá) */
+    .mira-float-btn {
+      position: absolute;
+      right: 18px;
+      bottom: 206px;
+      z-index: 1000;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: #ffffff;
+      border: 1.5px solid var(--uber-gray-200);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.18);
+      cursor: pointer;
+      transition: transform 0.15s ease, background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .mira-float-btn:active { transform: scale(0.92); }
+    .mira-float-btn.active {
+      background: #fef2f2;
+      border-color: #dc2626;
+      box-shadow: 0 4px 14px rgba(220, 38, 38, 0.4);
+    }
     .gps-float-btn.tracking svg {
       stroke: #38bdf8;
     }
@@ -1802,6 +1827,14 @@
         </button>
       </div>
 
+      <!-- BOTÃO DE SILENCIAR VOZ DESTE RADAR (ORDEM DO RIGO - CONTROLE ANTI-TAGARELA) -->
+      <div id="p-silenciar-wrap" style="display:none; width:100%; margin-top:8px;">
+        <button id="btn-silenciar-ponto" type="button" onclick="alternarSilenciarAlertaFocado()" style="width:100%; background:transparent; border:1px solid #3f3f46; color:#a1a1aa; font-size:11px; font-weight:700; padding:8px 12px; border-radius:10px; display:flex; align-items:center; justify-content:center; gap:6px; cursor:pointer; transition:all 0.2s ease;">
+          <span id="p-silenciar-icon">🔇</span>
+          <span id="p-silenciar-texto">Silenciar Voz Deste Ponto</span>
+        </button>
+      </div>
+
       <!-- Se for ocorrência do próprio motorista, dá opção de encerrar -->
       <div id="prompt-cancelar-wrap" style="margin-top:10px; width:100%; display:none;">
         <button type="button" onclick="cancelarOcorrenciaDoCard()" style="width:100%; padding:11px 12px; background:#18181b; border:1.5px solid #dc2626; color:#f87171; border-radius:12px; font-size:12px; font-weight:800; cursor:pointer;">
@@ -1827,6 +1860,11 @@
       <span style="font-size:20px; line-height:1;">🔥</span>
     </div>
 
+    <!-- Botão Flutuante Modo Mira Laser (Fixar do Sofá com Precisão) -->
+    <div class="mira-float-btn" id="btn-modo-mira" onclick="toggleModoMira()" title="Modo Mira de Precisão (Fixar Esquinas)">
+      <span style="font-size:20px; line-height:1;">🎯</span>
+    </div>
+
     <!-- 2. Botão Flutuante de GPS (Toque para Centralizar e Seguir - Modo Navegação) -->
     <div class="gps-float-btn" onclick="focarGPSExato()" title="Centralizar no Carro e Iniciar Navegação">
       <svg viewBox="0 0 24 24">
@@ -1836,6 +1874,29 @@
         <line x1="1" y1="12" x2="4" y2="12"></line>
         <line x1="20" y1="12" x2="23" y2="12"></line>
       </svg>
+    </div>
+
+    <!-- Mirinha Central no Mapa (Fixa no Centro da Tela com Modo Mira Ativo) -->
+    <div class="mira-crosshair-overlay" id="mira-crosshair" style="display:none; position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); z-index:1000; pointer-events:none;">
+      <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+        <circle cx="24" cy="24" r="14" stroke="#dc2626" stroke-width="2.5" stroke-dasharray="3 3"/>
+        <circle cx="24" cy="24" r="4" fill="#dc2626"/>
+        <line x1="24" y1="2" x2="24" y2="14" stroke="#dc2626" stroke-width="2.5"/>
+        <line x1="24" y1="34" x2="24" y2="46" stroke="#dc2626" stroke-width="2.5"/>
+        <line x1="2" y1="24" x2="14" y2="24" stroke="#dc2626" stroke-width="2.5"/>
+        <line x1="34" y1="24" x2="46" y2="24" stroke="#dc2626" stroke-width="2.5"/>
+      </svg>
+    </div>
+
+    <!-- Barra de Ação da Mira (Aparece apenas com Modo Mira Ativo) -->
+    <div class="mira-bottom-bar" id="mira-bottom-bar" style="display:none; position:absolute; bottom:84px; left:16px; right:16px; z-index:1200; background:#18181b; border:1.5px solid #dc2626; border-radius:14px; padding:12px 16px; box-shadow:0 8px 30px rgba(0,0,0,0.85); align-items:center; justify-content:space-between; gap:10px;">
+      <div style="font-size:12px; color:#ffffff; font-weight:800; line-height:1.2;">
+        <div style="display:flex; align-items:center; gap:6px;"><span style="color:#ef4444;">🎯</span> MIRA DE PRECISÃO</div>
+        <div style="font-size:10px; color:#a1a1aa; font-weight:500; margin-top:2px;">Posicione a mira na esquina exata</div>
+      </div>
+      <button type="button" onclick="confirmarPontoMira()" style="background:#dc2626; color:#ffffff; font-weight:900; font-size:12px; padding:10px 16px; border-radius:10px; border:none; cursor:pointer; box-shadow:0 4px 14px rgba(220,38,38,0.45);">
+        FIXAR NESTE PONTO ➔
+      </button>
     </div>
   </div>
 
@@ -3705,6 +3766,59 @@
       }
     }
 
+    // Gerenciador de pontos silenciados pelo motorista (Anti-Tagarela - Ordem do Rigo)
+    let alertasSilenciadosVoz = new Set();
+    try {
+      alertasSilenciadosVoz = new Set(JSON.parse(localStorage.getItem('alerta_silenciados_voz') || '[]'));
+    } catch(e) {}
+
+    let ultimoAvisoVozGlobal = 0;
+
+    function alternarSilenciarAlertaFocado() {
+      if (!alertaFocadoObj || !alertaFocadoObj.id) return;
+      const id = alertaFocadoObj.id;
+      if (alertasSilenciadosVoz.has(id)) {
+        alertasSilenciadosVoz.delete(id);
+        showToast('Voz REATIVADA para este ponto 🔊');
+      } else {
+        alertasSilenciadosVoz.add(id);
+        showToast('Ponto SILENCIADO: a voz não avisará mais aqui 🔇');
+      }
+      try {
+        localStorage.setItem('alerta_silenciados_voz', JSON.stringify([...alertasSilenciadosVoz]));
+      } catch(e) {}
+      exibirPromptOcorrencia(alertaFocadoObj);
+    }
+
+    // Modo Mira de Precisão para marcar cruzamentos exatos do sofá (Ordem do Rigo)
+    let modoMiraAtivo = false;
+
+    function toggleModoMira() {
+      modoMiraAtivo = !modoMiraAtivo;
+      const btn = document.getElementById('btn-modo-mira');
+      const crosshair = document.getElementById('mira-crosshair');
+      const bottomBar = document.getElementById('mira-bottom-bar');
+      if (btn) btn.classList.toggle('active', modoMiraAtivo);
+      if (crosshair) crosshair.style.display = modoMiraAtivo ? 'block' : 'none';
+      if (bottomBar) bottomBar.style.display = modoMiraAtivo ? 'flex' : 'none';
+
+      if (modoMiraAtivo) {
+        showToast('🎯 Modo Mira ATIVADO: posicione a mira no cruzamento');
+      } else {
+        showToast('Modo Mira DESATIVADO');
+      }
+    }
+
+    function confirmarPontoMira() {
+      if (!map) return;
+      const center = map.getCenter();
+      toggleModoMira();
+      pontoSelecionadoLat = center.lat;
+      pontoSelecionadoLng = center.lng;
+      showToast('Ponto capturado com precisão! Escolha a ocorrência ➔');
+      irPara('central');
+    }
+
     function formatarTituloCurto(tipo, tituloOriginal) {
       const t = (tipo || '').toLowerCase();
       if (t === 'viatura' || t === 'viatura_ronda') return 'VIATURA EM RONDA';
@@ -3868,6 +3982,44 @@
           }
         } else {
           imprensaWrap.style.display = 'none';
+        }
+      }
+
+      // Diferencial Câmera de Vídeo (10 segundos) da Transitar (Ordem do Rigo)
+      const tAlertaNorm = (alerta.tipo || '').toLowerCase();
+      const ehCameraSemaforo = tAlertaNorm === 'camera_semaforo' || (alerta.titulo && alerta.titulo.toUpperCase().includes('SEMÁFORO COM CÂMERA'));
+      if (ehCameraSemaforo && superLabel) {
+        superLabel.innerText = '📹 CÂMERA DE VÍDEO (10 SEGUNDOS)';
+        superLabel.style.display = 'block';
+      }
+
+      // Botão de Silenciar / Ativar Voz Deste Ponto (Anti-Tagarela - Ordem do Rigo)
+      const silenciarWrap = document.getElementById('p-silenciar-wrap');
+      const silenciarBtn = document.getElementById('btn-silenciar-ponto');
+      const silenciarIcon = document.getElementById('p-silenciar-icon');
+      const silenciarTxt = document.getElementById('p-silenciar-texto');
+      if (silenciarWrap) {
+        const ehPontoAudio = tAlertaNorm.includes('radar') || ehCameraSemaforo || tAlertaNorm === 'semaforo';
+        if (ehPontoAudio) {
+          const estaSilenciado = alertasSilenciadosVoz.has(alerta.id);
+          if (estaSilenciado) {
+            if (silenciarIcon) silenciarIcon.innerText = '🔊';
+            if (silenciarTxt) silenciarTxt.innerText = 'Reativar Voz Deste Ponto';
+            if (silenciarBtn) {
+              silenciarBtn.style.borderColor = '#10b981';
+              silenciarBtn.style.color = '#34d399';
+            }
+          } else {
+            if (silenciarIcon) silenciarIcon.innerText = '🔇';
+            if (silenciarTxt) silenciarTxt.innerText = 'Silenciar Voz Deste Ponto';
+            if (silenciarBtn) {
+              silenciarBtn.style.borderColor = '#3f3f46';
+              silenciarBtn.style.color = '#a1a1aa';
+            }
+          }
+          silenciarWrap.style.display = 'block';
+        } else {
+          silenciarWrap.style.display = 'none';
         }
       }
 
@@ -4272,14 +4424,15 @@
         ]
       },
       radar: {
-        titulo: 'Radar & Fiscalização',
+        titulo: 'Radar & Semáforo',
         classe: 'radar',
         opcoes: [
-          { tipo: 'radar_60', titulo: 'Radar Fixo 60 km/h', desc: 'Fiscalização eletrônica fixa / pardal regulamentado em 60 km/h', label: 'RADAR 60' },
-          { tipo: 'radar_50', titulo: 'Radar Fixo 50 km/h', desc: 'Fiscalização eletrônica fixa regulamentada em 50 km/h', label: 'RADAR 50' },
-          { tipo: 'radar_40', titulo: 'Radar Fixo 40 km/h (Lombada)', desc: 'Lombada eletrônica fixa com limite de 40 km/h', label: 'RADAR 40' },
-          { tipo: 'radar_movel', titulo: 'Radar Móvel / Tripé na Via', desc: 'Operação com radar portátil ou viatura monitorando velocidade', label: 'RADAR MÓVEL' },
-          { tipo: 'camera_semaforo', titulo: 'Semáforo com Câmera / Radar', desc: 'Câmera fiscalizando avanço de sinal vermelho e parada sobre faixa', label: 'CÂMERA' }
+          { tipo: 'camera_semaforo', titulo: 'Semáforo com Câmera / Radar', desc: 'Cruzamento com vídeo de 10s. Fiscaliza avanço de sinal vermelho, parada na faixa e velocidade.', label: 'SEMÁFORO CÂMERA' },
+          { tipo: 'radar_60', titulo: 'Radar Fixo 60 km/h (Pardal)', desc: 'Fiscalização eletrônica fixa de velocidade regulamentada em 60 km/h', label: 'RADAR 60' },
+          { tipo: 'radar_50', titulo: 'Radar Fixo 50 km/h (Pardal)', desc: 'Fiscalização eletrônica fixa de velocidade regulamentada em 50 km/h', label: 'RADAR 50' },
+          { tipo: 'radar_40', titulo: 'Lombada Eletrônica 40 km/h', desc: 'Barreira eletrônica com visor e limite de 40 km/h', label: 'LOMBADA 40' },
+          { tipo: 'semaforo', titulo: 'Semáforo Comum (Sem Câmera)', desc: 'Cruzamento semafórico normal da cidade. Sem câmera de multa (silencioso no app).', label: 'SEMÁFORO' },
+          { tipo: 'radar_movel', titulo: 'Radar Móvel / Tripé na Via', desc: 'Operação com radar portátil ou viatura monitorando velocidade', label: 'RADAR MÓVEL' }
         ]
       },
       iluminacao: {
@@ -5220,26 +5373,40 @@
       if (!alerta || !radarVozAtivo) return;
       if (!userLat || !userLng || userAccuracy > 350) return;
       if (ehMeuAlerta(alerta.id)) return;
+
+      // TRAVA 1: Ponto silenciado pelo motorista no card (Anti-Tagarela)
+      if (alertasSilenciadosVoz.has(alerta.id)) return;
+
+      const tAlerta = (alerta.tipo || '').toLowerCase();
+
+      // TRAVA 2: Semáforo comum é 100% SILENCIOSO por padrão (Ordem do Rigo - Não falar a cada esquina!)
+      if (tAlerta === 'semaforo' || (alerta.titulo && alerta.titulo.toUpperCase().includes('SEMÁFORO COMUM'))) return;
+
+      // TRAVA 3: Velocidade lenta (< 15 km/h) no trânsito/congestionamento fica em silêncio
+      if (userSpeedKmH > 0 && userSpeedKmH < 15) return;
+
       const agora = Date.now();
+
+      // TRAVA 4: Cooldown global de 25s entre falas de áudio para evitar voz tagarela contínua
+      if (agora - ultimoAvisoVozGlobal < 25000) return;
+
       const numEtapa = etapa || 1;
       const chaveAviso = 'alerta_voz_' + alerta.id + '_etapa_' + numEtapa;
       const ultimoAviso = Number(localStorage.getItem(chaveAviso) || alertasAnunciadosVoz.get(chaveAviso) || 0);
 
       const ehTeste = alerta.fonte_tipo === 'teste' || (alerta.titulo && alerta.titulo.includes('[TESTE]'));
-      // Para testes no asfalto: 2 minutos de cooldown para permitir passar na mesma via sem travar
-      // Para alertas reais: 6 horas de cooldown por etapa (Ordem do Rigo)
       const cooldownMs = ehTeste ? (2 * 60 * 1000) : (6 * 3600 * 1000);
       if (agora - ultimoAviso < cooldownMs) return;
 
       alertasAnunciadosVoz.set(chaveAviso, agora);
       localStorage.setItem(chaveAviso, String(agora));
+      ultimoAvisoVozGlobal = agora;
 
       const prefixo = ehTeste ? 'Alerta de teste: ' : '';
       const nomeCurto = formatarTituloCurto(alerta.tipo, alerta.titulo);
       const distAprox = Math.max(50, Math.round((distMetros || 400) / 50) * 50);
 
       let frase = '';
-      const tAlerta = (alerta.tipo || '').toLowerCase();
       const ehImprensa = alerta.fonte_tipo === 'imprensa' || Boolean(alerta.link_noticia);
       const horasPassadas = calcularHorasPassadas(alerta.created_at);
 
@@ -5247,9 +5414,9 @@
         frase = 'Pet desaparecido na região.';
       } else if (tAlerta === 'camera_semaforo' || (alerta.titulo && alerta.titulo.toUpperCase().includes('SEMÁFORO COM CÂMERA')) || (alerta.titulo && alerta.titulo.toUpperCase().includes('SEMÁFORO COM RADAR'))) {
         if (etapa === 2) {
-          frase = 'Semáforo com câmera e radar no cruzamento, confirma?';
+          frase = 'Semáforo com câmera de vídeo no cruzamento, confirma?';
         } else {
-          frase = `Atenção: Semáforo com Câmera e Radar a ${distAprox} metros. Cuidado com o sinal amarelo e a faixa.`;
+          frase = `Atenção: Semáforo com Câmera de Vídeo a ${distAprox} metros. Evite avançar no amarelo.`;
         }
       } else if (tAlerta.includes('radar') || (alerta.titulo && alerta.titulo.toUpperCase().includes('RADAR'))) {
         const velMatch = (alerta.titulo + ' ' + tAlerta).match(/\b(30|40|50|60|70|80)\b/);
@@ -5258,12 +5425,6 @@
           frase = `${prefixo}Radar${velTxt} no local, confirma?`;
         } else {
           frase = `${prefixo}Atenção: Radar${velTxt} a ${distAprox} metros.`;
-        }
-      } else if (tAlerta === 'semaforo' || (alerta.titulo && alerta.titulo.toUpperCase().includes('SEMÁFORO'))) {
-        if (etapa === 2) {
-          frase = 'Semáforo no cruzamento à frente, confirma?';
-        } else {
-          frase = `Atenção: Semáforo a ${distAprox} metros.`;
         }
       } else if (ehImprensa && horasPassadas >= 2) {
         // OPÇÃO 1 HOMOLOGADA PELO RIGO (IMPRENSA HISTÓRICA DO DIA: 2h A 24h)
