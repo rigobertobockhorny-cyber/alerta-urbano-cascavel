@@ -95,6 +95,9 @@ def ping():
     return jsonify({"ok": True, "app": "Alerta Urbano", "ts": int(time.time())})
 
 @app.route("/baixar-apk")
+@app.route("/ALERTA_URBANO_CASCAVEL.apk")
+@app.route("/app.apk")
+@app.route("/download")
 def baixar_apk():
     base_dir = os.path.dirname(os.path.abspath(__file__))
     apk_path = os.path.join(base_dir, "ALERTA_URBANO_CASCAVEL.apk")
