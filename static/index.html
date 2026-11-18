@@ -1561,9 +1561,49 @@
        ======================================================== */
     .screen-tab-btn#tab-btn-pets.active {
       background: #09090b !important;
-      color: #10b981 !important;
-      border: 1.5px solid #10b981 !important;
+      border-color: #10b981 !important;
       box-shadow: 0 4px 16px rgba(16, 185, 129, 0.25) !important;
+    }
+    .screen-tab-btn#tab-btn-pets.active span {
+      color: #10b981 !important;
+      font-weight: 900 !important;
+    }
+    .screen-tab-btn#tab-btn-pets svg path {
+      fill: #ef4444 !important;
+    }
+
+    /* ESTEIRA CONTÍNUA INFINITA (PADRÃO VÓRTICE MÍDIA) */
+    @keyframes deslizarEsteiraMarquee {
+      0% {
+        transform: translate3d(0, 0, 0);
+      }
+      100% {
+        transform: translate3d(-50%, 0, 0);
+      }
+    }
+
+    .esteira-marquee-outer {
+      width: 100%;
+      overflow: hidden;
+      position: relative;
+      border-radius: 18px;
+      background: #09090b;
+      padding: 6px 0 10px 0;
+      -webkit-mask-image: linear-gradient(to right, transparent, black 3%, black 97%, transparent);
+      mask-image: linear-gradient(to right, transparent, black 3%, black 97%, transparent);
+    }
+
+    .esteira-marquee-track {
+      display: flex;
+      gap: 12px;
+      width: max-content;
+      animation: deslizarEsteiraMarquee 38s linear infinite;
+      will-change: transform;
+    }
+
+    .esteira-marquee-outer:hover .esteira-marquee-track,
+    .esteira-marquee-outer:active .esteira-marquee-track {
+      animation-play-state: paused;
     }
 
     .btn-novo-pet-callout {
@@ -2134,11 +2174,11 @@
       <!-- ABA 3: REDE SOLIDÁRIA DE ANIMAIS (PRETO NOBRE + VERDE + VERMELHO - ORDEM DO RIGO) -->
       <div id="aba-conteudo-pets" style="display:none; flex-direction:column; gap:16px; background:#09090b; margin:-16px; padding:16px 16px 36px 16px; min-height:calc(100vh - 120px);">
         
-        <!-- Hero Card de Acolhimento & Esperança (Bloco Preto com Detalhes Verde e Vermelho) -->
+        <!-- Hero Card de Acolhimento & Esperança (Bloco Preto Nobre com Moldura Verde Nobre) -->
         <div style="background: #18181b; border: 1.5px solid #10b981; border-radius: 18px; padding: 18px 16px; color: #ffffff; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6); position: relative; overflow: hidden;">
           <div style="display:flex; align-items:center; gap:10px;">
-            <div style="width:42px; height:42px; border-radius:12px; background:#09090b; border:1.5px solid #27272a; display:flex; align-items:center; justify-content:center; font-size:20px; flex-shrink:0;">
-              <span style="color:#ef4444; filter: drop-shadow(0 0 6px rgba(239,68,68,0.6));">🐾</span>
+            <div style="width:42px; height:42px; border-radius:12px; background:#09090b; border:1.5px solid #27272a; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="#ef4444"><path d="M12 11.5c-1.65 0-3 1.35-3 3 0 1.66 1.35 3 3 3s3-1.34 3-3c0-1.65-1.35-3-3-3zm-6-2.5c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-9.5-4c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm7 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
             </div>
             <div>
               <div style="font-size:16px; font-weight:900; letter-spacing:0.3px; color:#ffffff;">Rede Solidária de Animais</div>
@@ -2150,42 +2190,71 @@
             <span style="color:#ef4444;">❤️</span> <strong style="color:#ffffff;">Estamos juntos com você:</strong> motoristas e parceiros em rota por Cascavel atentos para localizar seu companheiro.
           </div>
 
-          <!-- 2 Botões Estratégicos (Ordem do Rigo) -->
-          <div style="display:flex; flex-direction:column; gap:8px; margin-top:14px;">
-            <button type="button" class="btn-novo-pet-callout" onclick="irPara('cadastrar-pet')" style="width:100%;">
-              <span style="font-size:16px; font-weight:900;">+</span>
-              <span>Cadastrar Animal (Perdido ou Resgatado)</span>
-            </button>
-            <button type="button" onclick="abrirModalTodosPets()" style="width:100%; background:#09090b; color:#ffffff; font-weight:800; font-size:12px; padding:11px 14px; border-radius:12px; border:1.5px solid #10b981; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px;">
-              <span style="color:#ef4444;">🐾</span>
+          <!-- Os 4 Botões Estratégicos Oficiais (Ordem do Rigo) -->
+          <div style="display:flex; flex-direction:column; gap:10px; margin-top:14px;">
+            
+            <!-- LINHA 1: CADASTROS (QUEM PERDEU vs QUEM ACHOU) -->
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:8px;">
+              <button type="button" onclick="irPara('cadastrar-pet'); selecionarSubtipoPet('desaparecido');" style="background:#09090b; border:1.5px solid #ef4444; color:#ffffff; font-size:12px; font-weight:800; padding:12px 8px; border-radius:12px; cursor:pointer; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; box-shadow:0 4px 14px rgba(239,68,68,0.25);">
+                <span style="font-size:16px;">🚨</span>
+                <span style="font-weight:900; color:#ef4444;">Perdi meu Pet</span>
+                <span style="font-size:9.5px; color:#a1a1aa;">Cadastrar Desaparecido</span>
+              </button>
+
+              <button type="button" onclick="irPara('cadastrar-pet'); selecionarSubtipoPet('visto');" style="background:#09090b; border:1.5px solid #10b981; color:#ffffff; font-size:12px; font-weight:800; padding:12px 8px; border-radius:12px; cursor:pointer; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; box-shadow:0 4px 14px rgba(16,185,129,0.25);">
+                <span style="font-size:16px;">🤝</span>
+                <span style="font-weight:900; color:#34d399;">Achei um Pet</span>
+                <span style="font-size:9.5px; color:#a1a1aa;">Cadastrar Resgate / Visto</span>
+              </button>
+            </div>
+
+            <!-- LINHA 2: CONSULTAS (PERDIDOS vs RESGATADOS/TUTELA) -->
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:8px;">
+              <button type="button" onclick="abrirModalTodosPets('desaparecido')" style="background:#09090b; border:1.5px solid #27272a; color:#ffffff; font-size:11.5px; font-weight:800; padding:11px 8px; border-radius:12px; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:6px;">
+                <span style="color:#ef4444; font-size:13px;">🔴</span>
+                <span>Animais Perdidos</span>
+                <span id="badge-pets-perdidos" style="background:rgba(239,68,68,0.2); color:#ef4444; font-size:10px; font-weight:900; padding:1px 6px; border-radius:8px;">--</span>
+              </button>
+
+              <button type="button" onclick="abrirModalTodosPets('visto')" style="background:#09090b; border:1.5px solid #27272a; color:#ffffff; font-size:11.5px; font-weight:800; padding:11px 8px; border-radius:12px; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:6px;">
+                <span style="color:#10b981; font-size:13px;">🟢</span>
+                <span>Resgatados / Tutela</span>
+                <span id="badge-pets-resgatados" style="background:rgba(16,185,129,0.2); color:#34d399; font-size:10px; font-weight:900; padding:1px 6px; border-radius:8px;">--</span>
+              </button>
+            </div>
+
+            <!-- BOTÃO GERAL: VER TODOS NA CIDADE -->
+            <button type="button" onclick="abrirModalTodosPets('todos')" style="width:100%; background:#09090b; color:#ffffff; font-weight:800; font-size:12.5px; padding:12px 14px; border-radius:12px; border:1.5px solid #10b981; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px;">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="#ef4444"><path d="M12 11.5c-1.65 0-3 1.35-3 3 0 1.66 1.35 3 3 3s3-1.34 3-3c0-1.65-1.35-3-3-3zm-6-2.5c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-9.5-4c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm7 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
               <span style="color:#34d399;">Ver Todos os Animais de Cascavel</span>
-              <span id="badge-total-pets-count" style="background:#10b981; color:#064e3b; font-size:10px; font-weight:900; padding:1px 6px; border-radius:10px;">62</span>
+              <span id="badge-total-pets-count" style="background:#10b981; color:#064e3b; font-size:10.5px; font-weight:900; padding:1px 7px; border-radius:10px;">60</span>
             </button>
           </div>
         </div>
 
-        <!-- Seção da Esteira Deslizante de Animais (Ordem do Rigo) -->
-        <div style="margin-top:2px;">
+        <!-- Seção da Esteira Marquee Deslizante de Animais (Ordem do Rigo - Padrão Vórtice Mídia) -->
+        <div style="margin-top:4px;">
           <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; padding:0 2px;">
             <div style="font-size:14px; font-weight:900; color:#ffffff; display:flex; align-items:center; gap:6px;">
-              <span style="color:#ef4444; font-size:15px;">🐾</span>
-              <span>Esteira de Animais em Destaque:</span>
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="#ef4444"><path d="M12 11.5c-1.65 0-3 1.35-3 3 0 1.66 1.35 3 3 3s3-1.34 3-3c0-1.65-1.35-3-3-3zm-6-2.5c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-9.5-4c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm7 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
+              <span>Esteira Deslizante de Animais:</span>
             </div>
-            <div style="font-size:11px; font-weight:800; color:#34d399; cursor:pointer; text-decoration:underline;" onclick="abrirModalTodosPets()">
-              Ver Lista (62) ➔
+            <div style="font-size:11.5px; font-weight:800; color:#34d399; cursor:pointer; text-decoration:underline;" onclick="abrirModalTodosPets('todos')">
+              Ver Todos (60) ➔
             </div>
           </div>
 
-          <!-- Esteira Horizontal com Rolagem Contínua e Suave -->
-          <div id="pets-esteira-track" class="pets-esteira-carousel" style="display:flex; gap:12px; overflow-x:auto; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch; padding:4px 2px 14px; scrollbar-width:none;">
-            <!-- Injetado dinamicamente via JS com cards dos animais -->
+          <!-- Esteira Contínua em Movimento da Direita para a Esquerda (Estilo Vórtice Mídia) -->
+          <div class="esteira-marquee-outer">
+            <div id="pets-esteira-track" class="esteira-marquee-track">
+              <!-- Injetado dinamicamente via JS com cards duplicados para loop infinito -->
+            </div>
           </div>
-        </div>
 
-        <!-- Seção: Destaques da Comunidade -->
-        <div style="font-size:13px; font-weight:800; color:#e4e4e7; margin-top:2px;">Últimos Relatos Comunitários:</div>
-        <div id="pets-lista-container" style="display:flex; flex-direction:column; gap:14px;">
-          <!-- Injetado via JS -->
+          <button type="button" onclick="abrirModalTodosPets('todos')" style="width:100%; background:#18181b; border:1.5px solid #27272a; color:#34d399; font-weight:800; font-size:12.5px; padding:12px; border-radius:14px; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px; margin-top:10px;">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="#ef4444"><path d="M12 11.5c-1.65 0-3 1.35-3 3 0 1.66 1.35 3 3 3s3-1.34 3-3c0-1.65-1.35-3-3-3zm-6-2.5c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-9.5-4c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm7 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
+            <span>📋 Abrir Lista Completa em Tela Cheia</span>
+          </button>
         </div>
       </div>
 
@@ -2614,9 +2683,9 @@
       
       <!-- Chips de Filtro -->
       <div style="display:flex; gap:8px; overflow-x:auto; scrollbar-width:none; padding-bottom:2px;">
-        <button class="uber-chip active" onclick="filtrarModalPets('todos', this)" style="background:#09090b; color:#34d399; border-color:#10b981; font-weight:800; font-size:12px;">Todos (62)</button>
-        <button class="uber-chip" onclick="filtrarModalPets('desaparecido', this)" style="background:#09090b; color:#ffffff; border-color:#27272a; font-weight:800; font-size:12px;">🔴 Procura-se</button>
-        <button class="uber-chip" onclick="filtrarModalPets('visto', this)" style="background:#09090b; color:#ffffff; border-color:#27272a; font-weight:800; font-size:12px;">🟢 Resgatados</button>
+        <button id="chip-modal-todos" class="uber-chip active" onclick="filtrarModalPets('todos', this)" style="background:#09090b; color:#34d399; border-color:#10b981; font-weight:800; font-size:12px;">Todos (60)</button>
+        <button id="chip-modal-desaparecido" class="uber-chip" onclick="filtrarModalPets('desaparecido', this)" style="background:#09090b; color:#ffffff; border-color:#27272a; font-weight:800; font-size:12px;">🔴 Procura-se</button>
+        <button id="chip-modal-visto" class="uber-chip" onclick="filtrarModalPets('visto', this)" style="background:#09090b; color:#ffffff; border-color:#27272a; font-weight:800; font-size:12px;">🟢 Resgatados</button>
       </div>
     </div>
 
@@ -5011,33 +5080,37 @@
       'https://images.unsplash.com/photo-1548767797-d8c844163c4c?w=600&auto=format&fit=crop&q=80'
     ];
 
-    let esteiraInterval = null;
-
     function renderizarListaPets() {
-      const container = document.getElementById('pets-lista-container');
       const esteiraTrack = document.getElementById('pets-esteira-track');
       const badgeCount = document.getElementById('badge-total-pets-count');
+      const badgePerdidos = document.getElementById('badge-pets-perdidos');
+      const badgeResgatados = document.getElementById('badge-pets-resgatados');
+
       const pets = alertasCache.filter(a => isPet(a.tipo));
+      const perdidos = pets.filter(p => p.tipo !== 'pet_visto' && !(p.titulo || '').toLowerCase().includes('encontrado'));
+      const resgatados = pets.filter(p => p.tipo === 'pet_visto' || (p.titulo || '').toLowerCase().includes('encontrado'));
 
       if (badgeCount) badgeCount.innerText = pets.length;
+      if (badgePerdidos) badgePerdidos.innerText = perdidos.length;
+      if (badgeResgatados) badgeResgatados.innerText = resgatados.length;
 
       if (pets.length === 0) {
-        if (container) {
-          container.innerHTML = `
-            <div style="background:#18181b; border:1.5px dashed #27272a; border-radius:16px; padding:32px 20px; text-align:center;">
-              <div style="font-size:32px; margin-bottom:8px;">🐾</div>
-              <div style="font-size:14px; font-weight:800; color:#ffffff;">Nenhum animal desaparecido registrado no momento.</div>
-              <div style="font-size:12px; color:#a1a1aa; margin-top:4px;">Se souber de algum cãozinho ou gatinho perdido em Cascavel, cadastre acima!</div>
+        if (esteiraTrack) {
+          esteiraTrack.innerHTML = `
+            <div style="background:#18181b; border:1.5px dashed #27272a; border-radius:16px; padding:24px; text-align:center; color:#a1a1aa; width:100%;">
+              🐾 Nenhum animal registrado no momento.
             </div>
           `;
         }
-        if (esteiraTrack) esteiraTrack.innerHTML = '';
         return;
       }
 
-      // 1. Renderiza a ESTEIRA HORIZONTAL DESLIZANTE (Ordem do Rigo)
+      // ESTEIRA INFINITA DESLIZANTE (Duplicamos a lista para loop contínuo e sem corte - Padrão Vórtice Mídia)
+      const listaBase = pets.slice(0, 12);
+      const listaDuplicada = [...listaBase, ...listaBase];
+
       if (esteiraTrack) {
-        esteiraTrack.innerHTML = pets.slice(0, 15).map((p, idx) => {
+        esteiraTrack.innerHTML = listaDuplicada.map((p, idx) => {
           let imgUrl = p.foto_url;
           if (!imgUrl || imgUrl.includes('1552053831-71594a27632d')) {
             imgUrl = PET_FALLBACK_FOTOS[idx % PET_FALLBACK_FOTOS.length];
@@ -5046,35 +5119,35 @@
           const ehEncontrado = (p.tipo === 'pet_visto' || (p.titulo || '').toLowerCase().includes('encontrado'));
           const badgeLabel = ehEncontrado ? 'RESGATADO' : 'PROCURA-SE';
           const badgeStyle = ehEncontrado 
-            ? 'background:rgba(30,58,138,0.92); border:1px solid #3b82f6; color:#bfdbfe;' 
-            : 'background:rgba(6,78,59,0.92); border:1px solid #10b981; color:#34d399;';
+            ? 'background:rgba(6,78,59,0.92); border:1px solid #10b981; color:#34d399;' 
+            : 'background:rgba(220,38,38,0.92); border:1px solid #ef4444; color:#ffffff;';
 
           return `
             <div class="esteira-pet-card">
-              <div style="position:relative; width:100%; height:185px;">
-                <img class="esteira-pet-img" src="${imgUrl}" alt="${p.titulo}" onerror="this.src='${PET_FALLBACK_FOTOS[0]}'">
-                <span style="position:absolute; top:10px; left:10px; ${badgeStyle} font-size:9.5px; font-weight:900; padding:3px 8px; border-radius:8px; letter-spacing:0.3px; backdrop-filter:blur(6px);">
+              <div style="position:relative; width:100%; height:150px; background:#09090b;">
+                <img src="${imgUrl}" alt="${p.titulo}" onerror="this.src='${PET_FALLBACK_FOTOS[0]}'" style="width:100%; height:100%; object-fit:cover; object-position:center; display:block;">
+                <span style="position:absolute; top:8px; left:8px; ${badgeStyle} font-size:9.5px; font-weight:900; padding:3px 7px; border-radius:7px; letter-spacing:0.3px; backdrop-filter:blur(6px);">
                   ${badgeLabel}
                 </span>
               </div>
-              <div class="esteira-pet-content">
-                <div style="font-size:15px; font-weight:900; color:#ffffff; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">
+              <div style="padding:12px 14px; display:flex; flex-direction:column; gap:5px;">
+                <div style="font-size:14.5px; font-weight:900; color:#ffffff; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">
                   ${p.titulo}
                 </div>
-                <div style="font-size:11.5px; color:#a1a1aa; line-height:1.35; height:32px; overflow:hidden; text-overflow:ellipsis; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical;">
+                <div style="font-size:11px; color:#a1a1aa; line-height:1.35; height:30px; overflow:hidden; text-overflow:ellipsis; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical;">
                   ${p.descricao || 'Desaparecido em Cascavel'}
                 </div>
-                <div style="font-size:11.5px; font-weight:800; color:#34d399; display:flex; align-items:center; gap:4px;">
+                <div style="font-size:11px; font-weight:800; color:#34d399; display:flex; align-items:center; gap:4px; margin-top:2px;">
                   <span style="color:#ef4444;">📍</span> <span>Visto em: ${p.bairro || 'Cascavel'}</span>
                 </div>
                 <div style="display:flex; gap:6px; margin-top:4px;">
                   ${p.contato ? `
-                    <button class="btn-pet-zap" onclick="window.open('${zapLink}', '_blank')" style="flex:1.2; padding:9px 8px; font-size:11px;">
-                      <svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2z"/></svg>
+                    <button class="btn-pet-zap" onclick="window.open('${zapLink}', '_blank')" style="flex:1.1; padding:8px 6px; font-size:10.5px; border-radius:10px;">
+                      <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2z"/></svg>
                       <span>WhatsApp</span>
                     </button>
                   ` : ''}
-                  <button class="btn-pet-mapa-vermelho" onclick="focarNoMapa(${p.lat}, ${p.lng}, ${p.id})" style="flex:1; padding:9px 8px; font-size:11px;">
+                  <button class="btn-pet-mapa-vermelho" onclick="focarNoMapa(${p.lat}, ${p.lng}, ${p.id})" style="flex:1; padding:8px 6px; font-size:10.5px; border-radius:10px;">
                     <span style="color:#ef4444;">📍</span> <span>No Mapa</span>
                   </button>
                 </div>
@@ -5082,94 +5155,40 @@
             </div>
           `;
         }).join('');
-
-        iniciarEsteiraAutoPlay();
       }
-
-      // 2. Renderiza a lista vertical recente
-      if (container) {
-        container.innerHTML = pets.slice(0, 8).map((p, idx) => {
-          let imgUrl = p.foto_url;
-          if (!imgUrl || imgUrl.includes('1552053831-71594a27632d')) {
-            imgUrl = PET_FALLBACK_FOTOS[(idx + 2) % PET_FALLBACK_FOTOS.length];
-          }
-          const zapLink = p.contato ? `https://wa.me/55${p.contato.replace(/\D/g, '')}?text=${encodeURIComponent('Olá! Vi o anúncio do pet ' + p.titulo + ' no Alerta Urbano de Cascavel e gostaria de passar informações.')}` : '#';
-          const ehEncontrado = (p.tipo === 'pet_visto' || (p.titulo || '').toLowerCase().includes('encontrado'));
-          const badgeLabel = ehEncontrado ? 'RESGATADO / ENCONTRADO' : 'PROCURA-SE';
-          const badgeStyle = ehEncontrado 
-            ? 'background:rgba(30,58,138,0.92); border:1px solid #3b82f6; color:#bfdbfe;' 
-            : 'background:rgba(6,78,59,0.92); border:1px solid #10b981; color:#34d399;';
-
-          return `
-            <div class="pet-card">
-              <div style="position:relative; width:100%; height:190px;">
-                <img class="pet-card-img" src="${imgUrl}" alt="${p.titulo}" onerror="this.src='${PET_FALLBACK_FOTOS[1]}'">
-                <span style="position:absolute; top:12px; left:12px; ${badgeStyle} font-size:10px; font-weight:900; padding:4px 10px; border-radius:8px; letter-spacing:0.3px; backdrop-filter:blur(6px);">
-                  ${badgeLabel}
-                </span>
-              </div>
-              <div class="pet-card-content">
-                <div class="pet-card-title">${p.titulo}</div>
-                <div class="pet-card-desc">${p.descricao || 'Animal necessitando de acolhimento ou reencontro em Cascavel.'}</div>
-                <div style="font-size:12px; font-weight:800; color:#34d399; display:flex; align-items:center; gap:5px; margin-top:2px;">
-                  <span style="color:#ef4444;">📍</span> <span>Visto por último: ${p.bairro || p.rua || 'Cascavel'}</span>
-                </div>
-                ${p.recompensa ? `<div style="font-size:12px; font-weight:900; color:#fbbf24; background:rgba(251,191,36,0.12); padding:4px 8px; border-radius:6px; border:1px solid rgba(251,191,36,0.25); display:inline-block; margin-top:2px;">💰 Recompensa Oferecida: ${p.recompensa}</div>` : ''}
-                
-                <div class="pet-card-actions">
-                  ${p.contato ? `
-                    <button class="btn-pet-zap" onclick="window.open('${zapLink}', '_blank')">
-                      <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2z"/></svg>
-                      <span>Falar no WhatsApp</span>
-                    </button>
-                  ` : ''}
-                  <button class="btn-pet-mapa-vermelho" onclick="focarNoMapa(${p.lat}, ${p.lng}, ${p.id})">
-                    <span style="color:#ef4444;">📍</span> <span>Ver no Mapa</span>
-                  </button>
-                </div>
-              </div>
-            </div>
-          `;
-        }).join('');
-      }
-    }
-
-    function iniciarEsteiraAutoPlay() {
-      if (esteiraInterval) clearInterval(esteiraInterval);
-      const track = document.getElementById('pets-esteira-track');
-      if (!track) return;
-      esteiraInterval = setInterval(() => {
-        if (!track || track.matches(':hover') || track.matches(':active')) return;
-        const maxScroll = track.scrollWidth - track.clientWidth;
-        if (track.scrollLeft >= maxScroll - 15) {
-          track.scrollTo({ left: 0, behavior: 'smooth' });
-        } else {
-          track.scrollBy({ left: 285, behavior: 'smooth' });
-        }
-      }, 3500);
     }
 
     let filtroPetsModalAtual = 'todos';
 
-    function abrirModalTodosPets() {
+    function abrirModalTodosPets(filtro = 'todos') {
       const modal = document.getElementById('modal-todos-pets');
       if (!modal) return;
       modal.style.display = 'flex';
       const input = document.getElementById('input-busca-modal-pets');
       if (input) input.value = '';
-      filtroPetsModalAtual = 'todos';
+      filtroPetsModalAtual = filtro;
+
       document.querySelectorAll('#modal-todos-pets .uber-chip').forEach(b => {
         b.classList.remove('active');
         b.style.borderColor = '#27272a';
         b.style.color = '#ffffff';
       });
-      const primeiroChip = document.querySelector('#modal-todos-pets .uber-chip');
-      if (primeiroChip) {
-        primeiroChip.classList.add('active');
-        primeiroChip.style.borderColor = '#10b981';
-        primeiroChip.style.color = '#34d399';
+
+      let chipId = 'chip-modal-todos';
+      if (filtro === 'desaparecido') {
+        chipId = 'chip-modal-desaparecido';
+      } else if (filtro === 'visto') {
+        chipId = 'chip-modal-visto';
       }
-      renderizarConteudoModalTodosPets('todos');
+
+      const chipAtivo = document.getElementById(chipId);
+      if (chipAtivo) {
+        chipAtivo.classList.add('active');
+        chipAtivo.style.borderColor = '#10b981';
+        chipAtivo.style.color = '#34d399';
+      }
+
+      renderizarConteudoModalTodosPets(filtro);
     }
 
     function fecharModalTodosPets() {
