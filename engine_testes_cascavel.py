@@ -327,17 +327,8 @@ def _worker_daemon(db_path, intervalo_seg):
             time.sleep(10)
 
 def iniciar_engine_testes_background(db_path=DB_PATH, intervalo_seg=60):
-    inicializar_e_migrar_alertas_teste(db_path)
-    executar_ciclo_regeneracao(db_path)
-
-    t = threading.Thread(target=_worker_daemon, args=(db_path, intervalo_seg), daemon=True)
-    t.name = "EngineTestesCascavel"
-    t.start()
-    print(f"[ENGINE TESTES] Daemon iniciado com sucesso (Verificação a cada {intervalo_seg}s).")
-    return t
+    print("[ENGINE TESTES] DESATIVADA PERMANENTEMENTE POR ORDEM DO RIGO.")
+    return None
 
 if __name__ == "__main__":
-    print("Testando Engine de Testes Cascavel Light...")
-    inicializar_e_migrar_alertas_teste()
-    executar_ciclo_regeneracao()
-    print("Sucesso!")
+    print("[ENGINE TESTES] DESATIVADA PERMANENTEMENTE POR ORDEM DO RIGO.")
