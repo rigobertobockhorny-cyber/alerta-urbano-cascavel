@@ -351,14 +351,9 @@ def desativar_alerta(alerta_id):
     conn.close()
     return jsonify({"status": "ok", "desativado": alerta_id})
 
-# Inicialização automática do banco e engine tanto para Gunicorn quanto para execução direta
+# Inicialização automática do banco para Gunicorn ou execução direta
 init_db()
-try:
-    from engine_testes_cascavel import iniciar_engine_testes_background
-    iniciar_engine_testes_background(intervalo_seg=60)
-    print("[SERVER NUVEM] Engine de Rotação Automática de Testes iniciada.")
-except Exception as e:
-    print(f"[SERVER NUVEM] Aviso engine de testes: {e}")
+# Engine de testes desativada permanentemente por ordem do Rigo
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
