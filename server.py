@@ -193,7 +193,7 @@ def listar_alertas():
             tipo IN ('comercio', 'batalhao_pm', 'delegacia', 'guarda_municipal', 'prf', 'radar_fixo', 'radar_60', 'radar_50', 'radar_40', 'radar', 'camera_semaforo', 'semaforo')
             OR fonte_tipo = 'oficial_transitar'
             OR tipo IN ('pet', 'pet_visto')
-            OR (tipo NOT IN ('pet', 'pet_visto') AND datetime(created_at, '+24 hours') >= datetime('now', 'localtime'))
+            OR (tipo NOT IN ('pet', 'pet_visto') AND datetime(created_at, '+48 hours') >= datetime('now', 'localtime'))
           )
         ORDER BY created_at DESC
     """)
