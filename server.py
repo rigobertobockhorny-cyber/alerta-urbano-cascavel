@@ -143,6 +143,11 @@ def pagina_instalar():
 </body>
 </html>"""
 
+@app.route("/politica_privacidade.html")
+@app.route("/politica")
+def pagina_politica():
+    return send_from_directory(os.path.join(app.root_path, "static"), "politica_privacidade.html")
+
 @app.route("/api/falar")
 def api_falar():
     texto = request.args.get("texto", "").strip()

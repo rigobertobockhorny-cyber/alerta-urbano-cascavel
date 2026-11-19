@@ -4101,25 +4101,23 @@
       const d = calcularDistanciaMetros(uLat, uLng, aLat, aLng);
       const t = (tipo || '').toLowerCase();
       if (isPet(t)) {
-        // Animais desaparecidos: Raio circular amplo de 600m na região/bairro (Ordem do Rigo)
-        return d <= 600;
+        // Animais desaparecidos: Raio circular amplo de 400m na região/bairro
+        return d <= 400;
       }
-      // Ocorrências de trânsito (acidentes, buracos, obras, etc.):
-      // Cone frontal cirúrgico para NÃO disparar em ruas paralelas (ex: Paraná vs Brasil)
+      // Ocorrências de trânsito (acidentes, buracos, semáforos, radares):
+      // ORDEM DO RIGO: Máximo de 120 metros (1 quadra urbana)! NUNCA 400 metros!
+      if (d > 120) return false;
+
       if (speedKmH >= 6 && heading !== null && !isNaN(heading) && heading > 0) {
         const brngTo = calcularRumoPara(uLat, uLng, aLat, aLng);
         let diff = Math.abs(heading - brngTo) % 360;
         if (diff > 180) diff = 360 - diff;
-        if (diff > 55) return false; // Mais de 55° para o lado ou para trás
+        if (diff > 65) return false; // Mais de 65° para o lado ou para trás
         const desvioLateral = d * Math.sin(diff * Math.PI / 180);
-        if (desvioLateral > 65) return false; // Desvio lateral de rua paralela
-        return d <= 450;
+        if (desvioLateral > 45) return false; // Desvio lateral de rua paralela
+        return true;
       } else {
-        // Sem direção clara ou manobra lenta:
-        // Para radares e semáforos, raio seguro de 350m para alertar antes de cruzar
-        if (t.includes('radar') || t.includes('semaforo')) {
-          return d <= 350;
-        }
+        // Parado no semáforo ou manobra lenta:
         return d <= 120;
       }
     }
@@ -4150,11 +4148,11 @@
         }
       }
 
-      // 2. ORDENA CIRURGICAMENTE DO MAIS PRÓXIMO PARA O MAIS DISTANTE (Garante que quem está a 50m apita antes de quem está a 400m!)
+      // 2. ORDENA CIRURGICAMENTE DO MAIS PRÓXIMO PARA O MAIS DISTANTE (Garante que quem está a 50m apita antes de quem está a 100m!)
       candidatos.sort((x, y) => x.dist - y.dist);
       if (candidatos.length === 0) return;
 
-      // 3. Processa o candidato mais próximo da frente do carro
+      // 3. Processa o candidato mais próximo da frente do carro (Regra do Rigo: 100m e 50m)
       for (let item of candidatos) {
         const a = item.alerta;
         const d = item.dist;
@@ -4170,21 +4168,21 @@
           continue;
         }
 
-        // Trânsito / Radares / Semáforos:
-        // Etapa 2 (<= 80m - Presença Imediata / Confirmação)
-        if (d <= 80) {
+        // Trânsito / Radares / Semáforos / Buracos:
+        // Etapa 2: AVISO IMEDIATO A 50 METROS (<= 60m)
+        if (d <= 60) {
           if (!alertasAvisadosEtapa2.has(a.id)) {
             alertasAvisadosEtapa2.add(a.id);
             exibirPromptOcorrencia(a, null, 2);
-            falarAlertaRadar(a, Math.round(d), 2);
+            falarAlertaRadar(a, 50, 2);
             break;
           }
-        } else {
-          // Etapa 1 (> 80m - Aviso Preventivo)
+        } else if (d <= 120) {
+          // Etapa 1: AVISO DE APROXIMAÇÃO A 100 METROS (60m a 120m)
           if (!alertasAvisadosEtapa1.has(a.id)) {
             alertasAvisadosEtapa1.add(a.id);
             exibirPromptOcorrencia(a, null, 1);
-            falarAlertaRadar(a, Math.round(d), 1);
+            falarAlertaRadar(a, 100, 1);
             break;
           }
         }
