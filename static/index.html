@@ -16,6 +16,13 @@
   <link rel="icon" type="image/png" href="/static/logo_bolha_pura.png?v=20">
   <link rel="apple-touch-icon" href="/static/logo_bolha_pura.png?v=20">
   <title>Alerta Urbano - Cascavel</title>
+  <script>
+    try {
+      if (window.AndroidAlerta && typeof window.AndroidAlerta.onAppReady === 'function') {
+        window.AndroidAlerta.onAppReady();
+      }
+    } catch (_) {}
+  </script>
 
   <!-- Leaflet CSS -->
   <link rel="stylesheet" href="/static/vendor/leaflet.css" />
@@ -3076,12 +3083,12 @@
       if (splash) {
         setTimeout(() => {
           splash.classList.add('fade-out');
-          setTimeout(() => { try { splash.remove(); } catch(e) {} }, 700);
-        }, 3500);
+          setTimeout(() => { try { splash.remove(); } catch(e) {} }, 300);
+        }, 500);
         // Permite toque para avançar se o usuário desejar
         splash.addEventListener('click', () => {
           splash.classList.add('fade-out');
-          setTimeout(() => { try { splash.remove(); } catch(e) {} }, 700);
+          setTimeout(() => { try { splash.remove(); } catch(e) {} }, 200);
         });
       }
 
@@ -6192,7 +6199,11 @@
       });
     }
 
-    window.addEventListener('DOMContentLoaded', () => { init(); });
+    if (document.readyState === 'loading') {
+      window.addEventListener('DOMContentLoaded', () => { init(); });
+    } else {
+      init();
+    }
   </script>
 </body>
 </html>
