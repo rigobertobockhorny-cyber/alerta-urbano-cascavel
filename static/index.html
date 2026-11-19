@@ -464,22 +464,25 @@
     }
 
     /* ========================================================
-       BARRA INFERIOR DE REGISTRO RÁPIDO NO MAPA (ORDEM DO RIGO)
-       Centralizada 100% de fora a fora, ampla e simétrica
+       BARRA INFERIOR DE 3 ACESSOS ESTRATÉGICOS (ORDEM DO RIGO)
+       [ ANIMAIS ] | [ + REGISTRAR ] | [ NOTÍCIAS ]
        ======================================================== */
     .bottom-action-bar {
       position: absolute;
       bottom: 24px;
-      left: 16px;
-      right: 16px;
+      left: 12px;
+      right: 12px;
       z-index: 1000;
       pointer-events: auto;
       display: flex;
+      align-items: center;
       justify-content: center;
+      gap: 8px;
+      max-width: 540px;
+      margin: 0 auto;
     }
     .btn-registrar-master {
-      width: 100%;
-      max-width: 520px;
+      flex: 1.35;
       height: 52px;
       background: #dc2626;
       color: #ffffff;
@@ -488,10 +491,10 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
-      font-size: 14px;
+      gap: 8px;
+      font-size: 13px;
       font-weight: 900;
-      letter-spacing: 0.8px;
+      letter-spacing: 0.6px;
       box-shadow: 0 6px 22px rgba(220, 38, 38, 0.45);
       cursor: pointer;
       transition: transform 0.12s ease, background 0.15s ease;
@@ -500,6 +503,30 @@
     .btn-registrar-master:active {
       transform: scale(0.97);
       background: #b91c1c;
+    }
+    .btn-bottom-sub {
+      flex: 1;
+      height: 52px;
+      background: #09090b;
+      color: #f4f4f5;
+      border: 1.5px solid #27272a;
+      border-radius: 26px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+      cursor: pointer;
+      transition: transform 0.12s ease, background 0.15s ease, border-color 0.15s ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .btn-bottom-sub:active {
+      transform: scale(0.97);
+      background: #18181b;
+      border-color: #52525b;
     }
 
     /* Botao Flutuante de GPS (Centralizar no Carro / Modo Seguir Navegação) */
@@ -811,6 +838,9 @@
       width: 48px;
       height: 48px;
       pointer-events: none;
+    }
+    .user-nav-wrap.panoramic .user-heading-beam {
+      display: none !important;
     }
     .user-heading-beam {
       position: absolute;
@@ -2002,15 +2032,34 @@
       </div>
     </div>
 
-    <!-- 1. Botão Principal Inferior: REGISTRAR OCORRÊNCIA (Ordem do Rigo) -->
+    <!-- Barra Inferior de 3 Acessos Estratégicos (Ordem do Rigo) -->
     <div class="bottom-action-bar">
-      <button type="button" class="btn-registrar-master" onclick="irPara('central')" title="Abrir Central de Ocorrências">
+      <!-- 1. Botão Animais / Pets (Atalho Direto para a Rede Solidária) -->
+      <button type="button" class="btn-bottom-sub" onclick="irPara('central'); trocarAbaCentral('pets');" title="Abrir Rede Solidária de Animais Desaparecidos">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="#ef4444"><path d="M12 11.5c-1.65 0-3 1.35-3 3 0 1.66 1.35 3 3 3s3-1.34 3-3c0-1.65-1.35-3-3-3zm-6-2.5c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-9.5-4c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm7 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
+        <span>ANIMAIS</span>
+      </button>
+
+      <!-- 2. Botão Principal: REGISTRAR (Ação Rápida de Envio) -->
+      <button type="button" class="btn-registrar-master" onclick="irPara('central'); trocarAbaCentral('categorias');" title="Registrar Ocorrência na Via">
         <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
           <circle cx="12" cy="12" r="10"></circle>
           <line x1="12" y1="8" x2="12" y2="16"></line>
           <line x1="8" y1="12" x2="16" y2="12"></line>
         </svg>
-        <span>REGISTRAR OCORRÊNCIA</span>
+        <span>REGISTRAR</span>
+      </button>
+
+      <!-- 3. Botão Ocorrências & Notícias (Consultar tudo o que acontece em Cascavel) -->
+      <button type="button" class="btn-bottom-sub" onclick="irPara('central'); trocarAbaCentral('historico');" title="Ver Ocorrências e Notícias da Cidade">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#e4e4e7" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+          <polyline points="14 2 14 8 20 8"></polyline>
+          <line x1="16" y1="13" x2="8" y2="13"></line>
+          <line x1="16" y1="17" x2="8" y2="17"></line>
+          <polyline points="10 9 9 9 8 9"></polyline>
+        </svg>
+        <span>NOTÍCIAS</span>
       </button>
     </div>
 
@@ -3039,16 +3088,16 @@
       if (document.pictureInPictureElement) {
         try { document.exitPictureInPicture().catch(() => {}); } catch (_) {}
       }
-      // Inicia com suporte a rotação fluida (Course-Up estilo Google Maps / Waze / Uber)
+      // Inicia com mapa estável Norte-Cima (visão panorâmica de utilidade urbana - Ordem do Rigo)
       map = L.map('map', {
         rotate: true,
         bearing: 0,
-        touchRotate: true,
+        touchRotate: false,
         rotateControl: false,
         zoomControl: false,
         attributionControl: false,
         maxZoom: 20
-      }).setView([CASCAVEL_LAT, CASCAVEL_LNG], 16.5);
+      }).setView([CASCAVEL_LAT, CASCAVEL_LNG], 13.0);
 
       baseTileLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxNativeZoom: 19,
@@ -3610,8 +3659,9 @@
     // MARCADOR DO VEÍCULO: SETA 3D GOOGLE MAPS / WAZE / UBER
     // ========================================================
     function desenharMarcadorUsuario(lat, lng) {
+      const isPan = !modoSeguirVeiculo || visualizandoPanoramica;
       const html = `
-        <div class="user-nav-wrap">
+        <div class="user-nav-wrap ${isPan ? 'panoramic' : ''}">
           <!-- Feixe frontal de farol na via (alcance sobre o asfalto) -->
           <div class="user-heading-beam" id="user-heading-beam"></div>
           <!-- Halo de presença pulsante -->
@@ -3678,9 +3728,9 @@
     // MODO NAVEGAÇÃO CONTÍNUA (ACOMPANHAMENTO DO VEÍCULO EM ROTA)
     // ========================================================
     const ZOOM_NAVEGACAO = 17; // Nível de zoom cirúrgico estilo Waze / Uber (asfalto nítido com visão à frente)
-    let modoSeguirVeiculo = true; // INICIA EM TRUE (Acompanha o carro imediatamente ao abrir!)
+    let modoSeguirVeiculo = false; // INICIA EM FALSE (Mapa abre panorâmico e travado em Cascavel - Ordem do Rigo)
     let timerAutoRecenter = null;
-    let visualizandoPanoramica = false; // Trava para visão panorâmica do alto (Ordem do Rigo)
+    let visualizandoPanoramica = true; // INICIA EM TRUE (Visão panorâmica estável Norte-Cima)
 
     function ativarModoSeguir(exibirToast = true) {
       visualizandoPanoramica = false;
@@ -3689,6 +3739,8 @@
         timerAutoRecenter = null;
       }
       modoSeguirVeiculo = true;
+      const wrap = document.querySelector('.user-nav-wrap');
+      if (wrap) wrap.classList.remove('panoramic');
       const btn = document.querySelector('.gps-float-btn');
       if (btn) btn.classList.add('tracking');
       if (userLat && userLng) {
@@ -3708,6 +3760,10 @@
       modoSeguirVeiculo = false;
       const btn = document.querySelector('.gps-float-btn');
       if (btn) btn.classList.remove('tracking');
+      if (visualizandoPanoramica) {
+        const wrap = document.querySelector('.user-nav-wrap');
+        if (wrap) wrap.classList.add('panoramic');
+      }
 
       if (timerAutoRecenter) {
         clearTimeout(timerAutoRecenter);

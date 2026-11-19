@@ -191,6 +191,14 @@ def listar_alertas():
         WHERE ativo = 1
           AND (
             tipo IN ('comercio', 'batalhao_pm', 'delegacia', 'guarda_municipal', 'prf', 'radar_fixo', 'radar_60', 'radar_50', 'radar_40', 'radar', 'camera_semaforo', 'semaforo')
+            OR tipo LIKE '%semaforo%'
+            OR tipo LIKE '%radar%'
+            OR tipo LIKE '%lombada%'
+            OR tipo LIKE '%sinaleiro%'
+            OR titulo LIKE '%Semáforo%'
+            OR titulo LIKE '%Radar%'
+            OR titulo LIKE '%Lombada%'
+            OR titulo LIKE '%Sinaleiro%'
             OR fonte_tipo = 'oficial_transitar'
             OR tipo IN ('pet', 'pet_visto')
             OR (tipo NOT IN ('pet', 'pet_visto') AND datetime(created_at, '+48 hours') >= datetime('now', 'localtime'))
