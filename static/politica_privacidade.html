@@ -97,25 +97,30 @@
     </div>
 
     <h2>1. Visão Geral e Finalidade</h2>
-    <p>O <strong>Alerta Urbano Cascavel</strong> é um aplicativo de utilidade pública e segurança viária desenvolvido pela <strong>Vórtice Mídia</strong>, projetado para auxiliar motoristas, motociclistas, ciclistas e pedestres do município de Cascavel - PR.</p>
-    <p>O aplicativo tem como finalidade exclusiva alertar em tempo real sobre a aproximação de <strong>radares de velocidade, semáforos com câmera de avanço/faixa, lombadas eletrônicas, animais soltos na pista, buracos críticos e incidentes de trânsito</strong>.</p>
+    <p>O <strong>Alerta Urbano</strong> (lançamento inicial: <strong>Alerta Urbano Cascavel</strong>) é um aplicativo de utilidade pública, segurança comunitária e rede solidária desenvolvido pela <strong>Vórtice Mídia</strong>.</p>
+    <p>O aplicativo tem como finalidade informar a população e motoristas sobre três pilares exclusivos: <strong>(1) Rede Solidária de Pets Desaparecidos e Avistados</strong>, <strong>(2) Segurança Hiperlocal</strong> (alimentada exclusivamente por portais de imprensa oficial) e <strong>(3) Utilidade Pública</strong> (alertas meteorológicos oficiais do INMET, comunicados públicos de abastecimento de água, energia elétrica e interdições de vias).</p>
 
     <h2>2. Dados Coletados e Uso da Localização (GPS)</h2>
     <div class="highlight-box">
       <strong>⚠️ Declaração de Uso de Localização em Primeiro e Segundo Plano:</strong><br>
-      Para cumprir sua missão de segurança viária e prevenção de acidentes, o <strong>Alerta Urbano Cascavel</strong> requer acesso aos dados de localização precisa (GPS):
+      Para cumprir sua finalidade de copiloto urbano e rede de busca comunitária, o <strong>Alerta Urbano</strong> utiliza dados de localização precisa (GPS):
       <ul style="margin-top: 8px;">
-        <li><strong>Em Primeiro Plano:</strong> Quando o aplicativo está aberto na tela, para exibir a posição do condutor no mapa vetorial de Cascavel.</li>
-        <li><strong>Em Segundo Plano e com Tela Bloqueada:</strong> O aplicativo utiliza serviço em primeiro plano (Foreground Service com notificação persistente) para monitorar a aproximação de radares e perigos viários mesmo quando o motorista estiver utilizando outros aplicativos de navegação ou trabalho (como Uber, 99 ou Waze), ou com a tela do aparelho desligada.</li>
+        <li><strong>Em Primeiro Plano:</strong> Quando o aplicativo está aberto na tela, para centralizar o mapa de calor, exibir pets desaparecidos na região e registrar pontos de avistamento.</li>
+        <li><strong>Em Segundo Plano (Modo Copiloto Flutuante):</strong> Quando ativado voluntariamente pelo usuário, o aplicativo utiliza um serviço em primeiro plano (Foreground Service com notificação persistente) para emitir alertas sonoros ao entrar em regiões com pets desaparecidos, avisos de segurança ou utilidade pública, mesmo enquanto o usuário utiliza seu navegador GPS preferido (como Waze, Google Maps, Uber ou 99).</li>
       </ul>
-      <strong>Nenhum histórico de trajeto ou rota individual é comercializado ou compartilhado com terceiros.</strong> Os cálculos de proximidade dos radares são processados localmente no dispositivo.
+      <strong>Nenhum histórico de trajeto ou rota individual é armazenado, vendido ou compartilhado com terceiros.</strong> Os cálculos de proximidade ocorrem localmente no dispositivo.
     </div>
 
     <h2>3. Permissão de Sobreposição de Tela (Bolinha Flutuante)</h2>
-    <p>O aplicativo oferece uma interface flutuante (bolinha discreta sobre a tela) que permite ao condutor manter visibilidade de alertas sonoros e visuais sem precisar alternar entre aplicativos durante a condução de passageiros ou deslocamento urbano, aumentando a atenção no trânsito.</p>
+    <p>O aplicativo oferece um modo opcional de bolinha flutuante discreta sobre a tela para que o usuário receba alertas sonoros e visuais ou registre o avistamento de um pet em 1 toque sem precisar sair do seu aplicativo de navegação. O aplicativo <strong>não lê a tela nem captura dados de outros aplicativos</strong>.</p>
 
-    <h2>4. Colaboração Comunitária e Anonimato</h2>
-    <p>Quando um usuário reporta uma ocorrência (exemplo: animal perdido, buraco no asfalto), apenas as coordenadas geográficas, descrição e foto (caso anexada voluntariamente) são registradas no mapa público. Não são solicitados dados confidenciais de cartão, CPF ou documentos de identidade.</p>
+    <h2>4. Registro de Pets e Proteção de Telefone / WhatsApp (LGPD)</h2>
+    <p>A colaboração pública no aplicativo é restrita exclusivamente ao módulo de <strong>Pets Desaparecidos e Avistados</strong> (alertas de segurança e utilidade pública são alimentados exclusivamente por fontes oficiais e imprensa). Ao cadastrar um pet, o usuário pode informar voluntariamente foto, localização aproximada e, caso deseje e marque o consentimento expresso, um número de WhatsApp para contato.</p>
+    <ul>
+      <li><strong>Consentimento Expresso:</strong> O número de telefone somente é armazenado mediante autorização explícita no formulário.</li>
+      <li><strong>Minimização e Auto-Exclusão:</strong> Assim que o autor encerra o caso ("Marcar como Encontrado" ou "Encerrar") ou o registro expira, o número de telefone é <strong>removido automaticamente</strong> da base ativa.</li>
+      <li><strong>Controle Total:</strong> Somente o dispositivo autor do cadastro pode renovar ou encerrar a publicação a qualquer momento.</li>
+    </ul>
 
     <h2>5. Compartilhamento de Dados e Segurança</h2>
     <p>A Vórtice Mídia adota padrões rigorosos de segurança e criptografia HTTPS/TLS:</p>

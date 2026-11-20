@@ -1,28 +1,83 @@
 # -*- coding: utf-8 -*-
+"""
+Alerta Urbano v3.0 — Backend Oficial (Flask + SQLite)
+Arquitetura: 3 Pilares Exclusivos (Pets | Segurança Imprensa | Utilidade Pública Oficial)
+Blindagem Anti-Fake News: Público cadastra EXCLUSIVAMENTE Pets.
+Segurança e Utilidade Pública são alimentadas exclusivamente pelo Robô Coletor Oficial.
+"""
 import os
+import re
 import sqlite3
 import time
 import hashlib
 from datetime import datetime
-from flask import Flask, render_template, request, jsonify, send_from_directory, make_response, send_file
+from flask import Flask, request, jsonify, send_from_directory, make_response, send_file
 from werkzeug.utils import secure_filename
 
 app = Flask(__name__, static_folder="static", template_folder="static")
 
-UPLOAD_FOLDER = os.path.join(os.path.dirname(os.path.abspath(__file__)), "static", "uploads")
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+UPLOAD_FOLDER = os.path.join(BASE_DIR, "static", "uploads")
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
+app.config["MAX_CONTENT_LENGTH"] = 8 * 1024 * 1024  # 8 MB máx por foto
 ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg", "webp"}
+
+DB_PATH = os.path.join(BASE_DIR, "alertas_cascavel.db")
+ROBO_API_TOKEN = os.environ.get("ALERTA_ROBO_TOKEN", "vortice_robo_oficial_2026")
+ADMIN_TOKEN = os.environ.get("ALERTA_ADMIN_TOKEN", "admin_cascavel")
+
+# Governança rígida de tipos por pilar (v3.0)
+TIPOS_PET = {"pet", "pet_perdido", "pet_avistado", "pet_encontrado"}
+TIPOS_SEGURANCA = {"seguranca", "assalto", "furto", "suspeito"}
+TIPOS_UTILIDADE = {
+    "utilidade",
+    "utilidade_clima",
+    "utilidade_agua",
+    "utilidade_luz",
+    "utilidade_interdicao",
+    "utilidade_geral",
+    "escuro",
+}
+TIPOS_BLOQUEADOS_LEGADO = {
+    "radar", "radar_fixo", "radar_40", "radar_50", "radar_60",
+    "camera_semaforo", "semaforo", "lombada", "buraco", "acidente",
+    "transito", "policia", "comercio", "batalhao_pm", "delegacia",
+    "guarda_municipal", "prf",
+}
+
 
 def allowed_file(filename):
     return "." in filename and filename.rsplit(".", 1)[1].lower() in ALLOWED_EXTENSIONS
 
-DB_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "alertas_cascavel.db")
+
+def normalizar_telefone(tel):
+    if not tel:
+        return ""
+    digits = re.sub(r"\D+", "", str(tel))
+    if len(digits) < 10 or len(digits) > 13:
+        return ""
+    if len(digits) in (10, 11) and not digits.startswith("55"):
+        digits = "55" + digits
+    return digits
+
+
+def inferir_pilar(tipo):
+    t = (tipo or "").strip().lower()
+    if t in TIPOS_PET or t.startswith("pet"):
+        return "pet"
+    if t in TIPOS_SEGURANCA:
+        return "seguranca"
+    if t in TIPOS_UTILIDADE or t.startswith("utilidade"):
+        return "utilidade"
+    return "legado"
+
 
 def get_db():
     conn = sqlite3.connect(DB_PATH, timeout=30.0)
     conn.row_factory = sqlite3.Row
     return conn
+
 
 def init_db():
     conn = get_db()
@@ -32,6 +87,8 @@ def init_db():
         CREATE TABLE IF NOT EXISTS alertas (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             tipo TEXT NOT NULL,
+            pilar TEXT DEFAULT 'pet',
+            cidade TEXT DEFAULT 'Cascavel',
             titulo TEXT NOT NULL,
             descricao TEXT,
             rua TEXT,
@@ -48,22 +105,112 @@ def init_db():
             link_noticia TEXT,
             autor_token TEXT,
             votos_passou INTEGER DEFAULT 0,
-            fonte_tipo TEXT DEFAULT 'cidadao_alerta'
+            fonte_tipo TEXT DEFAULT 'comunidade_pet',
+            fonte_nome TEXT DEFAULT 'Comunidade',
+            especie TEXT DEFAULT '',
+            porte TEXT DEFAULT '',
+            status_pet TEXT DEFAULT '',
+            pet_pai_id INTEGER,
+            severidade TEXT DEFAULT 'normal',
+            consentimento_contato INTEGER DEFAULT 0
         )
     """)
-    # Migração segura para tabelas existentes
+
+    # Migração segura para bancos existentes (v2.1 -> v3.0)
     cur.execute("PRAGMA table_info(alertas)")
-    cols = [r[1] for r in cur.fetchall()]
-    if "autor_token" not in cols:
-        cur.execute("ALTER TABLE alertas ADD COLUMN autor_token TEXT;")
-    if "votos_passou" not in cols:
-        cur.execute("ALTER TABLE alertas ADD COLUMN votos_passou INTEGER DEFAULT 0;")
-    if "link_noticia" not in cols:
-        cur.execute("ALTER TABLE alertas ADD COLUMN link_noticia TEXT;")
-    if "fonte_tipo" not in cols:
-        cur.execute("ALTER TABLE alertas ADD COLUMN fonte_tipo TEXT DEFAULT 'cidadao_alerta';")
+    cols = {r[1] for r in cur.fetchall()}
+
+    novas_colunas = [
+        ("autor_token", "TEXT"),
+        ("votos_passou", "INTEGER DEFAULT 0"),
+        ("link_noticia", "TEXT"),
+        ("fonte_tipo", "TEXT DEFAULT 'comunidade_pet'"),
+        ("cidade", "TEXT DEFAULT 'Cascavel'"),
+        ("pilar", "TEXT DEFAULT 'pet'"),
+        ("fonte_nome", "TEXT DEFAULT 'Comunidade'"),
+        ("especie", "TEXT DEFAULT ''"),
+        ("porte", "TEXT DEFAULT ''"),
+        ("status_pet", "TEXT DEFAULT ''"),
+        ("pet_pai_id", "INTEGER"),
+        ("severidade", "TEXT DEFAULT 'normal'"),
+        ("consentimento_contato", "INTEGER DEFAULT 0"),
+    ]
+    for col_name, col_def in novas_colunas:
+        if col_name not in cols:
+            cur.execute(f"ALTER TABLE alertas ADD COLUMN {col_name} {col_def};")
+
+    # Índices para performance do Dashboard Slim e Mapa de Calor
+    cur.execute("CREATE INDEX IF NOT EXISTS idx_alertas_ativo_pilar ON alertas (ativo, pilar, cidade);")
+    cur.execute("CREATE INDEX IF NOT EXISTS idx_alertas_pet_pai ON alertas (pet_pai_id);")
+
+    # Higienização e classificação v3.0 (desativa legados de trânsito/radar/semáforo e não-pets do público)
+    placeholders = ",".join("?" for _ in TIPOS_BLOQUEADOS_LEGADO)
+    cur.execute(
+        f"UPDATE alertas SET ativo = 0, pilar = 'legado' WHERE LOWER(tipo) IN ({placeholders}) AND ativo = 1",
+        tuple(TIPOS_BLOQUEADOS_LEGADO),
+    )
+
+    # Qualquer registro antigo enviado por 'cidadao_alerta' que NÃO seja pet é desativado (governança v3.0)
+    cur.execute("""
+        UPDATE alertas
+        SET ativo = 0, pilar = 'legado'
+        WHERE fonte_tipo IN ('cidadao_alerta', 'parceiro_transito', 'oficial_transitar')
+          AND LOWER(tipo) NOT LIKE 'pet%'
+          AND ativo = 1
+    """)
+
+    # Normaliza pilares de registros válidos existentes
+    cur.execute("""
+        UPDATE alertas
+        SET pilar = 'pet',
+            cidade = COALESCE(NULLIF(cidade, ''), 'Cascavel'),
+            fonte_nome = CASE
+                WHEN fonte_tipo = 'imprensa' AND (fonte_nome IS NULL OR fonte_nome = '' OR fonte_nome = 'Comunidade') THEN 'CGN'
+                ELSE COALESCE(NULLIF(fonte_nome, ''), 'Comunidade')
+            END,
+            status_pet = CASE
+                WHEN status_pet IS NOT NULL AND status_pet != '' THEN status_pet
+                WHEN LOWER(tipo) = 'pet_avistado' OR LOWER(titulo) LIKE '%encontrado%' OR LOWER(titulo) LIKE '%avistado%' THEN 'avistado'
+                ELSE 'desaparecido'
+            END
+        WHERE LOWER(tipo) LIKE 'pet%'
+    """)
+    cur.execute("""
+        UPDATE alertas
+        SET pilar = 'seguranca',
+            cidade = COALESCE(NULLIF(cidade, ''), 'Cascavel'),
+            fonte_nome = CASE
+                WHEN fonte_nome IS NOT NULL AND fonte_nome != '' AND fonte_nome != 'Comunidade' THEN fonte_nome
+                WHEN LOWER(COALESCE(descricao, '')) LIKE '%catve%' OR LOWER(COALESCE(link_noticia, '')) LIKE '%catve%' THEN 'CATVE'
+                ELSE 'CGN'
+            END
+        WHERE LOWER(tipo) IN ('seguranca', 'assalto', 'furto', 'suspeito')
+          AND fonte_tipo IN ('imprensa', 'robo_oficial')
+    """)
+    cur.execute("""
+        UPDATE alertas
+        SET pilar = 'utilidade',
+            cidade = COALESCE(NULLIF(cidade, ''), 'Cascavel'),
+            fonte_nome = CASE
+                WHEN fonte_nome IS NOT NULL AND fonte_nome != '' AND fonte_nome != 'Comunidade' THEN fonte_nome
+                WHEN LOWER(COALESCE(descricao, '')) LIKE '%inmet%' THEN 'INMET'
+                WHEN LOWER(COALESCE(descricao, '')) LIKE '%sanepar%' THEN 'Sanepar'
+                WHEN LOWER(COALESCE(descricao, '')) LIKE '%copel%' THEN 'Copel'
+                WHEN LOWER(COALESCE(descricao, '')) LIKE '%transitar%' OR LOWER(COALESCE(descricao, '')) LIKE '%cettrans%' THEN 'Transitar'
+                WHEN LOWER(COALESCE(descricao, '')) LIKE '%prefeitura%' THEN 'Prefeitura'
+                WHEN LOWER(COALESCE(descricao, '')) LIKE '%catve%' THEN 'CATVE'
+                ELSE 'CGN'
+            END
+        WHERE (LOWER(tipo) LIKE 'utilidade%' OR LOWER(tipo) = 'escuro')
+          AND fonte_tipo IN ('imprensa', 'robo_oficial')
+    """)
+
+    # LGPD: limpa telefones de registros já inativos/encerrados
+    cur.execute("UPDATE alertas SET contato = '' WHERE ativo = 0 AND contato IS NOT NULL AND contato != ''")
+
     conn.commit()
     conn.close()
+
 
 @app.after_request
 def add_header(response):
@@ -71,6 +218,7 @@ def add_header(response):
     response.headers["Pragma"] = "no-cache"
     response.headers["Expires"] = "0"
     return response
+
 
 @app.route("/")
 def index():
@@ -80,9 +228,16 @@ def index():
     resp.headers["Expires"] = "0"
     return resp
 
+
+@app.route("/politica_privacidade.html")
+def politica_privacidade():
+    return send_from_directory("static", "politica_privacidade.html")
+
+
 @app.route("/manifest.json")
 def manifest():
     return send_from_directory("static", "manifest.json", mimetype="application/manifest+json")
+
 
 @app.route("/sw.js")
 def service_worker():
@@ -90,129 +245,72 @@ def service_worker():
     resp.headers["Service-Worker-Allowed"] = "/"
     return resp
 
+
 @app.route("/api/ping")
 def ping():
-    return jsonify({"ok": True, "app": "Alerta Urbano", "ts": int(time.time())})
+    return jsonify({
+        "ok": True,
+        "app": "Alerta Urbano",
+        "version": "3.0.0",
+        "cidade_padrao": "Cascavel",
+        "ts": int(time.time()),
+    })
+
 
 @app.route("/baixar-apk")
 @app.route("/ALERTA_URBANO_CASCAVEL.apk")
 @app.route("/app.apk")
 @app.route("/download")
 def baixar_apk():
-    base_dir = os.path.dirname(os.path.abspath(__file__))
-    apk_path = os.path.join(base_dir, "ALERTA_URBANO_CASCAVEL.apk")
+    apk_path = os.path.join(BASE_DIR, "ALERTA_URBANO_CASCAVEL.apk")
     if not os.path.exists(apk_path):
-        apk_path = os.path.join(base_dir, "android_app", "app", "build", "outputs", "apk", "debug", "app-debug.apk")
+        apk_path = os.path.join(BASE_DIR, "android_app", "app", "build", "outputs", "apk", "debug", "app-debug.apk")
     if not os.path.exists(apk_path):
         return "APK ainda sendo gerado...", 404
     return send_from_directory(
         os.path.dirname(apk_path),
         os.path.basename(apk_path),
         as_attachment=True,
-        download_name="Alerta_Urbano_Cascavel.apk",
-        mimetype="application/vnd.android.package-archive"
+        download_name="Alerta_Urbano_v3.apk",
+        mimetype="application/vnd.android.package-archive",
     )
 
-@app.route("/instalar")
-def pagina_instalar():
-    return """<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Instalar Alerta Urbano</title>
-  <style>
-    body { margin:0; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; background:#09090b; color:#fff; display:flex; align-items:center; justify-content:center; min-height:100vh; padding:20px; box-sizing:border-box; }
-    .card { max-width:380px; width:100%; background:#18181b; border:1.5px solid #27272a; border-radius:24px; padding:28px 24px; text-align:center; box-shadow:0 20px 50px rgba(0,0,0,0.6); }
-    .logo { width:92px; height:92px; border-radius:50%; display:block; margin:0 auto 18px; }
-    h1 { font-size:21px; font-weight:900; margin:0 0 8px; }
-    p { font-size:14px; color:#a1a1aa; line-height:1.45; margin:0 0 22px; }
-    .btn { display:block; width:100%; box-sizing:border-box; padding:16px; border-radius:14px; font-size:15px; font-weight:900; text-decoration:none; margin-bottom:12px; }
-    .btn-red { background:#dc2626; color:#fff; box-shadow:0 8px 24px rgba(220,38,38,0.45); }
-    .btn-dark { background:#27272a; color:#fff; }
-  </style>
-</head>
-<body>
-  <div class="card">
-    <img src="/static/logo_bolha_pura.png?v=20" class="logo" alt="Alerta Urbano">
-    <h1>ALERTA URBANO</h1>
-    <p>Instale o aplicativo oficial para liberar a <b>Bolha Redonda Vermelha</b> pura (fecha o app ao tocar na logo e reabre em 1 único clique).</p>
-    <a href="/baixar-apk" class="btn btn-red">BAIXAR APLICATIVO (.APK)</a>
-    <a href="#" onclick="window.location.href='alertaurbano://abrir?url='+encodeURIComponent(window.location.origin); return false;" class="btn btn-dark">JÁ INSTALEI • ABRIR APP</a>
-  </div>
-</body>
-</html>"""
-
-@app.route("/politica_privacidade.html")
-@app.route("/politica")
-def pagina_politica():
-    return send_from_directory(os.path.join(app.root_path, "static"), "politica_privacidade.html")
 
 @app.route("/api/falar")
 def api_falar():
+    """Sintetiza alertas de voz exclusivos (padrão: voz masculina pt-BR-AntonioNeural)."""
     texto = request.args.get("texto", "").strip()
     if not texto:
         return jsonify({"error": "Texto vazio"}), 400
-    
-    h = hashlib.md5(texto.lower().encode('utf-8')).hexdigest()
-    cache_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "static", "audios_tts")
+
+    voz_param = request.args.get("voz", "masculina").strip().lower()
+    voice_id = "pt-BR-FranciscaNeural" if voz_param == "feminina" else "pt-BR-AntonioNeural"
+
+    cache_key = f"{voice_id}:{texto.lower()}"
+    h = hashlib.md5(cache_key.encode("utf-8")).hexdigest()
+    cache_dir = os.path.join(BASE_DIR, "static", "audios_tts")
     os.makedirs(cache_dir, exist_ok=True)
     filepath = os.path.join(cache_dir, f"{h}.mp3")
-    
+
     if os.path.exists(filepath) and os.path.getsize(filepath) > 0:
         return send_file(filepath, mimetype="audio/mpeg")
-    
-    # Se não estiver em cache, sintetiza via edge_tts nativo em python
+
     try:
         import asyncio
         import edge_tts
+
         async def _synthesize():
-            comm = edge_tts.Communicate(texto, "pt-BR-AntonioNeural")
+            comm = edge_tts.Communicate(texto, voice_id)
             await comm.save(filepath)
+
         asyncio.run(_synthesize())
         if os.path.exists(filepath) and os.path.getsize(filepath) > 0:
             return send_file(filepath, mimetype="audio/mpeg")
     except Exception as e:
         print(f"[TTS SERVER] Erro ao gerar fala: {e}")
-    
+
     return jsonify({"error": "Falha na síntese de áudio"}), 500
 
-@app.route("/mesa")
-def mesa_validacao():
-    base_dir = os.path.dirname(os.path.abspath(__file__))
-    return send_file(os.path.join(base_dir, "00_MESA_DE_VALIDACAO_DE_AVISOS.html"))
-
-@app.route("/api/alertas", methods=["GET"])
-def listar_alertas():
-    # REGRA DE CICLO DE VIDA (ORDEM DO RIGO - PROTOCOLO DE TESTES EM ROTA):
-    # - Locais fixos (postos, delegacias, bombeiros): permanentes
-    # - Animais (pets): 48 horas de vida útil (renováveis pelo tutor)
-    # - Ocorrências reais dinâmicas (imprensa, cidadão): 24 horas de vida útil
-    # - Ocorrências de teste no asfalto: gerenciadas rigorosamente pela Engine de Testes (6h, 12h, 24h com rotação automática)
-    conn = get_db()
-    cur = conn.cursor()
-    cur.execute("""
-        SELECT * FROM alertas 
-        WHERE ativo = 1
-          AND (
-            tipo IN ('comercio', 'batalhao_pm', 'delegacia', 'guarda_municipal', 'prf', 'radar_fixo', 'radar_60', 'radar_50', 'radar_40', 'radar', 'camera_semaforo', 'semaforo')
-            OR tipo LIKE '%semaforo%'
-            OR tipo LIKE '%radar%'
-            OR tipo LIKE '%lombada%'
-            OR tipo LIKE '%sinaleiro%'
-            OR titulo LIKE '%Semáforo%'
-            OR titulo LIKE '%Radar%'
-            OR titulo LIKE '%Lombada%'
-            OR titulo LIKE '%Sinaleiro%'
-            OR fonte_tipo = 'oficial_transitar'
-            OR tipo IN ('pet', 'pet_visto')
-            OR (tipo NOT IN ('pet', 'pet_visto') AND datetime(created_at, '+48 hours') >= datetime('now', 'localtime'))
-          )
-        ORDER BY created_at DESC
-    """)
-    rows = [dict(r) for r in cur.fetchall()]
-    conn.close()
-    return jsonify(rows)
 
 @app.route("/api/upload", methods=["POST"])
 def upload_foto():
@@ -226,39 +324,247 @@ def upload_foto():
         filepath = os.path.join(app.config["UPLOAD_FOLDER"], filename)
         file.save(filepath)
         return jsonify({"url": f"/static/uploads/{filename}"}), 201
-    return jsonify({"error": "Formato de arquivo não suportado"}), 400
+    return jsonify({"error": "Formato de arquivo não suportado (use PNG, JPG ou WEBP)"}), 400
+
+
+@app.route("/api/resumo", methods=["GET"])
+def resumo_dashboard():
+    """Resumo ultra-leve para os cards e banner climático do Dashboard Slim."""
+    cidade = request.args.get("cidade", "Cascavel").strip()
+    conn = get_db()
+    cur = conn.cursor()
+
+    cur.execute("""
+        SELECT
+            SUM(CASE WHEN pilar = 'pet' AND status_pet != 'avistado' AND pet_pai_id IS NULL THEN 1 ELSE 0 END) AS pets_perdidos,
+            SUM(CASE WHEN pilar = 'pet' AND (status_pet = 'avistado' OR pet_pai_id IS NOT NULL) THEN 1 ELSE 0 END) AS pets_avistados,
+            SUM(CASE WHEN pilar = 'seguranca' AND datetime(created_at, '+48 hours') >= datetime('now', 'localtime') THEN 1 ELSE 0 END) AS seguranca,
+            SUM(CASE WHEN pilar = 'utilidade' AND datetime(created_at, '+48 hours') >= datetime('now', 'localtime') THEN 1 ELSE 0 END) AS utilidade
+        FROM alertas
+        WHERE ativo = 1
+          AND LOWER(COALESCE(cidade, 'Cascavel')) = LOWER(?)
+          AND pilar IN ('pet', 'seguranca', 'utilidade')
+    """, (cidade,))
+    counts = dict(cur.fetchone() or {})
+
+    cur.execute("""
+        SELECT id, titulo, descricao, severidade, fonte_nome, link_noticia, created_at
+        FROM alertas
+        WHERE ativo = 1
+          AND pilar = 'utilidade'
+          AND tipo = 'utilidade_clima'
+          AND LOWER(COALESCE(cidade, 'Cascavel')) = LOWER(?)
+          AND datetime(created_at, '+36 hours') >= datetime('now', 'localtime')
+        ORDER BY
+            CASE severidade WHEN 'critico' THEN 1 WHEN 'alerta' THEN 2 WHEN 'atencao' THEN 3 ELSE 4 END,
+            created_at DESC
+        LIMIT 1
+    """, (cidade,))
+    clima_row = cur.fetchone()
+    conn.close()
+
+    return jsonify({
+        "cidade": cidade,
+        "pets_perdidos": counts.get("pets_perdidos") or 0,
+        "pets_avistados": counts.get("pets_avistados") or 0,
+        "seguranca": counts.get("seguranca") or 0,
+        "utilidade": counts.get("utilidade") or 0,
+        "alerta_clima": dict(clima_row) if clima_row else None,
+        "ts": int(time.time()),
+    })
+
+
+@app.route("/api/alertas", methods=["GET"])
+def listar_alertas():
+    """
+    Lista exclusivamente registros ativos dos 3 pilares v3.0:
+    - pet (comunidade + achados/perdidos imprensa; 7 dias para imprensa/renováveis para comunidade)
+    - seguranca (imprensa oficial; últimas 48h)
+    - utilidade (fontes oficiais/imprensa; últimas 48h)
+    """
+    cidade = request.args.get("cidade", "Cascavel").strip()
+    pilar = request.args.get("pilar", "").strip().lower()
+
+    conn = get_db()
+    cur = conn.cursor()
+
+    params = [cidade]
+    pilar_clause = ""
+    if pilar in ("pet", "seguranca", "utilidade"):
+        pilar_clause = " AND pilar = ?"
+        params.append(pilar)
+
+    cur.execute(f"""
+        SELECT * FROM alertas
+        WHERE ativo = 1
+          AND LOWER(COALESCE(cidade, 'Cascavel')) = LOWER(?)
+          AND pilar IN ('pet', 'seguranca', 'utilidade')
+          {pilar_clause}
+          AND (
+            pilar = 'pet'
+            OR (pilar IN ('seguranca', 'utilidade') AND datetime(created_at, '+48 hours') >= datetime('now', 'localtime'))
+          )
+        ORDER BY
+            CASE WHEN tipo = 'utilidade_clima' THEN 0 ELSE 1 END,
+            created_at DESC
+        LIMIT 250
+    """, params)
+    rows = [dict(r) for r in cur.fetchall()]
+
+    # Anexa contagem de avistamentos para cada pet desaparecido
+    cur.execute("""
+        SELECT pet_pai_id, COUNT(*) as total
+        FROM alertas
+        WHERE ativo = 1 AND pet_pai_id IS NOT NULL
+        GROUP BY pet_pai_id
+    """)
+    avistamentos_map = {r["pet_pai_id"]: r["total"] for r in cur.fetchall()}
+    conn.close()
+
+    for r in rows:
+        r["avistamentos_count"] = avistamentos_map.get(r["id"], 0)
+        # Privacidade: sinaliza se tem WhatsApp sem precisar expor desnecessariamente se não houver consentimento
+        r["tem_whatsapp"] = bool(r.get("contato"))
+
+    return jsonify(rows)
+
 
 @app.route("/api/alertas", methods=["POST"])
 def criar_alerta():
+    """
+    BLINDAGEM ANTI-FAKE NEWS v3.0:
+    - Requisições públicas (usuário comum) SÓ podem criar registros de PETS (pet_perdido / pet_avistado).
+    - Registros de Segurança e Utilidade Pública exigem X-Robo-Token válido.
+    """
     data = request.json or {}
-    tipo = data.get("tipo", "suspeito")
-    titulo = data.get("titulo", "Alerta Registrado")
-    descricao = data.get("descricao", "")
-    rua = data.get("rua", "")
-    bairro = data.get("bairro", "Cascavel")
+    robo_token = request.headers.get("X-Robo-Token") or data.get("robo_token", "")
+    eh_robo_autorizado = robo_token in (ROBO_API_TOKEN, ADMIN_TOKEN)
+
+    tipo = (data.get("tipo") or "pet_perdido").strip().lower()
+    if tipo == "pet":
+        tipo = "pet_perdido"
+
+    pilar = inferir_pilar(tipo)
+
+    if pilar == "legado":
+        return jsonify({
+            "error": "Categoria descontinuada na versão 3.0. O Alerta Urbano foca exclusivamente em Pets, Segurança Oficial e Utilidade Pública."
+        }), 400
+
+    if not eh_robo_autorizado and pilar != "pet":
+        return jsonify({
+            "error": "Acesso restrito: alertas de Segurança e Utilidade Pública são alimentados exclusivamente por fontes oficiais e imprensa."
+        }), 403
+
     lat = data.get("lat")
     lng = data.get("lng")
-    foto_url = data.get("foto_url")
-    contato = data.get("contato")
-    recompensa = data.get("recompensa")
-    autor_token = data.get("autor_token", "")
-    fonte_tipo = data.get("fonte_tipo", "cidadao_alerta")
-
     if lat is None or lng is None:
-        return jsonify({"error": "Latitude e Longitude obrigatorias"}), 400
+        return jsonify({"error": "Localização (latitude e longitude) é obrigatória."}), 400
+
+    titulo = (data.get("titulo") or ("Pet Desaparecido" if tipo == "pet_perdido" else "Pet Avistado")).strip()[:120]
+    descricao = (data.get("descricao") or "").strip()[:600]
+    rua = (data.get("rua") or "").strip()[:120]
+    bairro = (data.get("bairro") or "Cascavel").strip()[:80]
+    cidade = (data.get("cidade") or "Cascavel").strip()[:80]
+    foto_url = (data.get("foto_url") or "").strip()
+    recompensa = (data.get("recompensa") or "").strip()[:60]
+    autor_token = (data.get("autor_token") or "").strip()[:100]
+    especie = (data.get("especie") or "").strip()[:40]
+    porte = (data.get("porte") or "").strip()[:40]
+    pet_pai_id = data.get("pet_pai_id")
+    severidade = (data.get("severidade") or "normal").strip().lower()
+    link_noticia = (data.get("link_noticia") or "").strip()
+
+    # LGPD: só armazena WhatsApp se houver consentimento explícito no formulário de Pet
+    consentimento = 1 if data.get("consentimento_contato") else 0
+    contato_bruto = data.get("contato") or ""
+    contato = normalizar_telefone(contato_bruto) if (pilar == "pet" and consentimento) else ""
+
+    if pilar == "pet":
+        status_pet = "avistado" if tipo == "pet_avistado" or pet_pai_id else "desaparecido"
+        fonte_tipo = "imprensa" if eh_robo_autorizado and data.get("fonte_tipo") == "imprensa" else "comunidade_pet"
+        fonte_nome = (data.get("fonte_nome") or ("CGN" if fonte_tipo == "imprensa" else "Comunidade")).strip()
+    else:
+        status_pet = ""
+        fonte_tipo = "robo_oficial"
+        fonte_nome = (data.get("fonte_nome") or "Imprensa Oficial").strip()
 
     conn = get_db()
     cur = conn.cursor()
     agora = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     cur.execute("""
-        INSERT INTO alertas (tipo, titulo, descricao, rua, bairro, lat, lng, peso, foto_url, contato, recompensa, autor_token, fonte_tipo, created_at)
-        VALUES (?, ?, ?, ?, ?, ?, ?, 1, ?, ?, ?, ?, ?, ?)
-    """, (tipo, titulo, descricao, rua, bairro, lat, lng, foto_url, contato, recompensa, autor_token, fonte_tipo, agora))
+        INSERT INTO alertas (
+            tipo, pilar, cidade, titulo, descricao, rua, bairro, lat, lng,
+            peso, foto_url, contato, recompensa, link_noticia, autor_token,
+            fonte_tipo, fonte_nome, especie, porte, status_pet, pet_pai_id,
+            severidade, consentimento_contato, created_at
+        )
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 1, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    """, (
+        tipo, pilar, cidade, titulo, descricao, rua, bairro, float(lat), float(lng),
+        foto_url, contato, recompensa, link_noticia, autor_token,
+        fonte_tipo, fonte_nome, especie, porte, status_pet, pet_pai_id,
+        severidade, consentimento, agora,
+    ))
     novo_id = cur.lastrowid
     conn.commit()
     conn.close()
 
-    return jsonify({"status": "ok", "id": novo_id}), 201
+    return jsonify({"status": "ok", "id": novo_id, "pilar": pilar, "tipo": tipo}), 201
+
+
+@app.route("/api/pets/<int:pet_id>/avistamento", methods=["POST"])
+def registrar_avistamento_pet(pet_id):
+    """Registra um ponto de avistamento vinculado a um Pet Desaparecido (constrói trilha/calor)."""
+    data = request.json or {}
+    lat = data.get("lat")
+    lng = data.get("lng")
+    if lat is None or lng is None:
+        return jsonify({"error": "Localização do avistamento é obrigatória."}), 400
+
+    conn = get_db()
+    cur = conn.cursor()
+    cur.execute("SELECT id, titulo, bairro, cidade, especie, porte, foto_url FROM alertas WHERE id = ? AND pilar = 'pet' AND ativo = 1", (pet_id,))
+    pet_pai = cur.fetchone()
+    if not pet_pai:
+        conn.close()
+        return jsonify({"error": "Pet não encontrado ou já encerrado."}), 404
+
+    obs = (data.get("descricao") or "Pet avistado neste local por um usuário do Alerta Urbano.").strip()[:400]
+    foto_avistamento = (data.get("foto_url") or pet_pai["foto_url"] or "").strip()
+    bairro = (data.get("bairro") or pet_pai["bairro"] or "Cascavel").strip()
+    autor_token = (data.get("autor_token") or "").strip()[:100]
+    agora = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+    cur.execute("""
+        INSERT INTO alertas (
+            tipo, pilar, cidade, titulo, descricao, rua, bairro, lat, lng,
+            peso, foto_url, autor_token, fonte_tipo, fonte_nome,
+            especie, porte, status_pet, pet_pai_id, created_at
+        )
+        VALUES ('pet_avistado', 'pet', ?, ?, ?, ?, ?, ?, ?, 2, ?, ?, 'comunidade_pet', 'Comunidade', ?, ?, 'avistado', ?, ?)
+    """, (
+        pet_pai["cidade"] or "Cascavel",
+        f"Avistado: {pet_pai['titulo']}",
+        obs,
+        bairro,
+        bairro,
+        float(lat),
+        float(lng),
+        foto_avistamento,
+        autor_token,
+        pet_pai["especie"] or "",
+        pet_pai["porte"] or "",
+        pet_id,
+        agora,
+    ))
+    avistamento_id = cur.lastrowid
+    cur.execute("UPDATE alertas SET confirmacoes = confirmacoes + 1, peso = peso + 1 WHERE id = ?", (pet_id,))
+    conn.commit()
+    conn.close()
+
+    return jsonify({"status": "ok", "avistamento_id": avistamento_id, "pet_pai_id": pet_id}), 201
+
 
 @app.route("/api/alertas/<int:alerta_id>/confirmar", methods=["POST"])
 def confirmar_alerta(alerta_id):
@@ -269,52 +575,22 @@ def confirmar_alerta(alerta_id):
     conn.close()
     return jsonify({"status": "ok"})
 
-@app.route("/api/alertas/<int:alerta_id>/votar_passou", methods=["POST"])
-def votar_passou(alerta_id):
-    # REGRA DO RIGO:
-    # Pessoa B NÃO PODE cancelar a ocorrência da Pessoa A sozinha!
-    # Apenas computa o voto comunitário de 'já passou'.
-    # Para animais: Votos de terceiros são 100% ignorados.
-    conn = get_db()
-    cur = conn.cursor()
-    cur.execute("SELECT id, tipo, votos_passou, confirmacoes FROM alertas WHERE id = ?", (alerta_id,))
-    alerta = cur.fetchone()
-    if not alerta:
-        conn.close()
-        return jsonify({"error": "Alerta não encontrado"}), 404
-
-    if "pet" in alerta["tipo"]:
-        conn.close()
-        return jsonify({"status": "ignorado", "motivo": "Registros de animais só podem ser encerrados pelo tutor."})
-
-    novos_votos = (alerta["votos_passou"] or 0) + 1
-    # Se receber 3 ou mais votos de que 'já passou' e superar as confirmações, a comunidade desativa
-    if novos_votos >= 3 and novos_votos > (alerta["confirmacoes"] or 1):
-        cur.execute("UPDATE alertas SET ativo = 0, votos_passou = ? WHERE id = ?", (novos_votos, alerta_id))
-    else:
-        cur.execute("UPDATE alertas SET votos_passou = ? WHERE id = ?", (novos_votos, alerta_id))
-
-    conn.commit()
-    conn.close()
-    return jsonify({"status": "ok", "votos_passou": novos_votos})
 
 @app.route("/api/alertas/<int:alerta_id>/renovar", methods=["POST"])
 def renovar_alerta(alerta_id):
-    # REGRA DE RENOVAÇÃO (+48 Horas para Pets):
     data = request.json or {}
     token = data.get("autor_token") or request.args.get("autor_token", "")
 
     conn = get_db()
     cur = conn.cursor()
-    cur.execute("SELECT id, tipo, autor_token FROM alertas WHERE id = ?", (alerta_id,))
+    cur.execute("SELECT id, pilar, autor_token FROM alertas WHERE id = ?", (alerta_id,))
     alerta = cur.fetchone()
-
     if not alerta:
         conn.close()
-        return jsonify({"error": "Alerta não encontrado"}), 404
+        return jsonify({"error": "Registro não encontrado."}), 404
 
     db_autor_token = alerta["autor_token"]
-    if db_autor_token and token != db_autor_token and token != "admin_cascavel":
+    if db_autor_token and token != db_autor_token and token != ADMIN_TOKEN:
         conn.close()
         return jsonify({"error": "Apenas o autor deste registro pode renová-lo."}), 403
 
@@ -324,54 +600,48 @@ def renovar_alerta(alerta_id):
     conn.close()
     return jsonify({"status": "ok", "renovado": alerta_id, "novo_created_at": agora})
 
+
+@app.route("/api/alertas/<int:alerta_id>/encontrado", methods=["POST"])
 @app.route("/api/alertas/<int:alerta_id>/desativar", methods=["POST"])
 @app.route("/api/alertas/<int:alerta_id>", methods=["DELETE"])
 def desativar_alerta(alerta_id):
-    # REGRA SUPREMA DO RIGO:
-    # Uma Pessoa B (terceiro) NUNCA pode ter o direito de cancelar uma ocorrência da Pessoa A!
-    # Especialmente para animais: SOMENTE o perfil do tutor/autor que criou tem direito de cancelar!
+    """
+    Regra Suprema do Rigo + LGPD:
+    - Somente o autor (autor_token) ou admin pode encerrar um registro de Pet.
+    - Ao encerrar, limpa automaticamente o telefone/WhatsApp (contato = '') por LGPD.
+    """
     data = request.json or {}
     token = data.get("autor_token") or request.args.get("autor_token", "")
 
     conn = get_db()
     cur = conn.cursor()
-    cur.execute("SELECT id, tipo, autor_token FROM alertas WHERE id = ?", (alerta_id,))
+    cur.execute("SELECT id, pilar, autor_token FROM alertas WHERE id = ?", (alerta_id,))
     alerta = cur.fetchone()
-
     if not alerta:
         conn.close()
-        return jsonify({"error": "Alerta não encontrado"}), 404
+        return jsonify({"error": "Registro não encontrado."}), 404
 
-    alerta_tipo = alerta["tipo"]
     db_autor_token = alerta["autor_token"]
-
-    eh_pet = (alerta_tipo == "pet" or "pet" in alerta_tipo)
-
-    if eh_pet:
-        # Se tem autor_token e não bate com quem está tentando apagar:
-        if db_autor_token and token != db_autor_token and token != "admin_cascavel":
-            conn.close()
-            return jsonify({
-                "error": "Acesso negado. Apenas o autor que cadastrou este animal tem permissão para encerrar a publicação."
-            }), 403
-
-    # Para ocorrências gerais cadastradas com token do usuário:
-    if db_autor_token and token and token != db_autor_token and token != "admin_cascavel":
+    if db_autor_token and token != db_autor_token and token != ADMIN_TOKEN:
         conn.close()
         return jsonify({
-            "error": "Apenas o autor desta ocorrência tem permissão para encerrá-la."
+            "error": "Acesso negado. Apenas o autor que cadastrou este registro tem permissão para encerrá-lo."
         }), 403
 
-    cur.execute("UPDATE alertas SET ativo = 0 WHERE id = ?", (alerta_id,))
+    eh_encontrado = request.path.endswith("/encontrado")
+    if eh_encontrado:
+        cur.execute("UPDATE alertas SET ativo = 0, status_pet = 'encontrado', contato = '' WHERE id = ? OR pet_pai_id = ?", (alerta_id, alerta_id))
+    else:
+        cur.execute("UPDATE alertas SET ativo = 0, contato = '' WHERE id = ? OR pet_pai_id = ?", (alerta_id, alerta_id))
+
     conn.commit()
     conn.close()
-    return jsonify({"status": "ok", "desativado": alerta_id})
+    return jsonify({"status": "ok", "desativado": alerta_id, "encontrado": eh_encontrado})
 
-# Inicialização automática do banco para Gunicorn ou execução direta
+
+# Inicializa/migra banco ao importar (compatível com Gunicorn no Render)
 init_db()
-# Engine de testes desativada permanentemente por ordem do Rigo
 
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 5000))
-    print(f"Iniciando Alerta Urbano na porta {port}...")
-    app.run(host="0.0.0.0", port=port, debug=False)
+    print("Iniciando Alerta Urbano v3.0 na porta 5000...")
+    app.run(host="0.0.0.0", port=5000, debug=False)

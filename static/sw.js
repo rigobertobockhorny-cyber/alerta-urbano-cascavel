@@ -1,5 +1,5 @@
-// Service Worker - Alerta Urbano v3 (Anti-Cache Force Update)
-const CACHE_NAME = 'alerta-urbano-v20';
+// Service Worker - Alerta Urbano v3.1 (Anti-Cache Force Update)
+const CACHE_NAME = 'alerta-urbano-v31';
 
 self.addEventListener('install', event => {
   self.skipWaiting();
