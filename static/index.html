@@ -24,35 +24,38 @@
     } catch (_) {}
   </script>
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/static/vendor/leaflet.css" />
 
   <style>
     /* =====================================================================
-       ALERTA URBANO v3.0 — DESIGN SYSTEM SLIM (NOTURNO PADRÃO + CLARO)
+       ALERTA URBANO v3.4 — DESIGN SYSTEM SLIM PREMIUM (ZERO SCROLL HOME)
        ===================================================================== */
     :root,
     [data-theme="dark"] {
-      --bg: #09090b;
-      --bg-elevated: #121216;
-      --bg-subtle: #1a1a20;
-      --bg-glass: rgba(18, 18, 22, 0.88);
+      --bg: #000000;
+      --bg-elevated: #0d0e12;
+      --bg-subtle: #15171e;
+      --bg-glass: rgba(8, 9, 12, 0.90);
       --border: rgba(255, 255, 255, 0.08);
       --border-strong: rgba(255, 255, 255, 0.14);
-      --text: #f4f4f5;
-      --text-muted: #a1a1aa;
-      --text-dim: #71717a;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
 
       --accent-pet: #f59e0b;
       --accent-pet-bg: rgba(245, 158, 11, 0.14);
-      --accent-seg: #ef4444;
-      --accent-seg-bg: rgba(239, 68, 68, 0.14);
+      --accent-seg: #f43f5e;
+      --accent-seg-bg: rgba(244, 63, 94, 0.14);
       --accent-uti: #38bdf8;
       --accent-uti-bg: rgba(56, 189, 248, 0.14);
       --accent-ok: #10b981;
       --accent-ok-bg: rgba(16, 185, 129, 0.14);
       --brand-red: #dc2626;
-      --shadow: 0 10px 28px rgba(0, 0, 0, 0.45);
-      --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.30);
+      --shadow: 0 10px 28px rgba(0, 0, 0, 0.55);
+      --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.35);
     }
 
     [data-theme="light"] {
@@ -61,15 +64,15 @@
       --bg-subtle: #f1f5f9;
       --bg-glass: rgba(255, 255, 255, 0.92);
       --border: rgba(15, 23, 42, 0.08);
-      --border-strong: rgba(15, 23, 42, 0.15);
+      --border-strong: rgba(15, 23, 42, 0.14);
       --text: #0f172a;
       --text-muted: #475569;
       --text-dim: #94a3b8;
 
       --accent-pet: #d97706;
       --accent-pet-bg: rgba(217, 119, 6, 0.11);
-      --accent-seg: #dc2626;
-      --accent-seg-bg: rgba(220, 38, 38, 0.10);
+      --accent-seg: #e11d48;
+      --accent-seg-bg: rgba(225, 29, 72, 0.10);
       --accent-uti: #0284c7;
       --accent-uti-bg: rgba(2, 132, 199, 0.10);
       --accent-ok: #059669;
@@ -92,7 +95,7 @@
       overflow: hidden;
       background: var(--bg);
       color: var(--text);
-      font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, sans-serif;
+      font-family: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       -webkit-font-smoothing: antialiased;
       transition: background 0.2s ease, color 0.2s ease;
     }
@@ -258,6 +261,14 @@
       padding: 14px 16px 24px;
     }
     .tab-pane.active { display: block; }
+    .tab-pane.home-pane.active {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+      padding: 10px 14px 10px;
+      gap: 6px;
+    }
     .tab-pane.map-pane {
       padding: 0;
       overflow: hidden;
@@ -319,31 +330,31 @@
       cursor: pointer;
     }
 
-    /* ==================== HOME v3.1: CLIMA + ESTEIRAS VIVAS ==================== */
-    .weather-card {
-      background: var(--bg-elevated);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 15px 16px 13px;
-      box-shadow: var(--shadow-sm);
+    /* ==================== HOME v3.4: CLIMA SOLTO + ESTEIRAS SINCRONIZADAS (ZERO SCROLL) ==================== */
+    .weather-strip {
+      background: transparent;
+      border: none;
+      padding: 2px 4px 2px;
+      flex-shrink: 0;
     }
     .weather-top {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 12px;
+      gap: 10px;
     }
     .weather-temp-wrap {
       display: flex;
       align-items: center;
       gap: 10px;
     }
-    .weather-ico { font-size: 34px; line-height: 1; }
+    .weather-ico { font-size: 32px; line-height: 1; }
     .weather-temp {
-      font-size: 34px;
+      font-size: 36px;
       font-weight: 800;
-      letter-spacing: -1.4px;
-      line-height: 1;
+      letter-spacing: -1.8px;
+      line-height: 0.95;
+      color: var(--text);
     }
     .weather-cond {
       font-size: 13px;
@@ -353,56 +364,58 @@
     }
     .weather-hl {
       font-size: 11px;
+      font-weight: 600;
       color: var(--text-muted);
       margin-top: 2px;
       text-align: right;
     }
     .weather-metrics {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 6px;
-      margin-top: 12px;
-      padding-top: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 8px;
+      padding: 6px 2px 0;
       border-top: 1px solid var(--border);
     }
     .w-metric {
-      text-align: center;
+      display: flex;
+      align-items: baseline;
+      gap: 4px;
     }
-    .w-metric-val { font-size: 12px; font-weight: 800; color: var(--text); }
-    .w-metric-lbl { font-size: 10px; color: var(--text-dim); margin-top: 1px; }
+    .w-metric-val { font-size: 11.5px; font-weight: 700; color: var(--text); }
+    .w-metric-lbl { font-size: 10px; font-weight: 500; color: var(--text-dim); }
 
-    /* Esteira Rolante de Status / Alerta Climático */
+    /* Pílula / Esteira Rolante de Status Climático (Resumida, Sem Emoji) */
     .alert-ticker {
-      margin-top: 10px;
-      border-radius: 12px;
+      flex-shrink: 0;
+      border-radius: 999px;
       overflow: hidden;
-      padding: 8px 0;
+      padding: 6px 0;
       position: relative;
       cursor: pointer;
       border: 1px solid var(--border-strong);
       background: #ffffff;
       color: #09090b;
-      box-shadow: var(--shadow-sm);
     }
     .alert-ticker.amarelo {
-      background: #f59e0b;
+      background: linear-gradient(90deg, #f59e0b, #fbbf24);
       color: #09090b;
-      border-color: #d97706;
+      border-color: rgba(245, 158, 11, 0.5);
     }
     .alert-ticker.laranja {
-      background: #ea580c;
+      background: linear-gradient(90deg, #ea580c, #f97316);
       color: #ffffff;
-      border-color: #c2410c;
+      border-color: rgba(234, 88, 12, 0.5);
     }
     .alert-ticker.vermelho {
-      background: #dc2626;
+      background: linear-gradient(90deg, #dc2626, #ef4444);
       color: #ffffff;
-      border-color: #991b1b;
+      border-color: rgba(220, 38, 38, 0.6);
     }
     .ticker-track {
       display: flex;
       width: max-content;
-      animation: tickerRun 24s linear infinite;
+      animation: tickerRun 22s linear infinite;
     }
     .alert-ticker:hover .ticker-track,
     .alert-ticker:active .ticker-track {
@@ -410,40 +423,41 @@
     }
     .ticker-item {
       white-space: nowrap;
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 800;
-      letter-spacing: 0.2px;
-      padding-right: 36px;
+      letter-spacing: 0.35px;
+      text-transform: uppercase;
+      padding-right: 40px;
     }
     @keyframes tickerRun {
       0% { transform: translateX(0); }
       100% { transform: translateX(-50%); }
     }
 
-    /* Blocos de Esteiras Horizontais (Pets, Utilidade, Segurança) */
+    /* Blocos de Esteiras Horizontais (Mesma Velocidade Calibrada via JS) */
     .belt-block {
-      margin-top: 16px;
+      flex-shrink: 0;
     }
     .belt-head {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
       padding: 0 2px;
     }
     .belt-title {
-      font-size: 12px;
+      font-size: 10.5px;
       font-weight: 800;
       text-transform: uppercase;
-      letter-spacing: 0.6px;
+      letter-spacing: 0.9px;
       color: var(--text-muted);
       display: flex;
       align-items: center;
       gap: 6px;
     }
     .belt-dot {
-      width: 7px;
-      height: 7px;
+      width: 6px;
+      height: 6px;
       border-radius: 50%;
       display: inline-block;
     }
@@ -458,11 +472,10 @@
       display: flex;
       gap: 10px;
       width: max-content;
-      animation: beltSlide 36s linear infinite;
+      animation: beltSlide 45s linear infinite;
+      will-change: transform;
     }
-    .belt-track.slow { animation-duration: 46s; }
-    .belt-track.med { animation-duration: 40s; }
-    .belt-track.static { animation: none; }
+    .belt-track.static { animation: none !important; }
     .belt-viewport:hover .belt-track,
     .belt-viewport:active .belt-track {
       animation-play-state: paused;
@@ -472,39 +485,120 @@
       100% { transform: translateX(-50%); }
     }
 
-    .belt-info-card {
-      width: 218px;
+    /* Card de Pet na Home — Mais Trabalhado (Foto Full + Gradiente Elegante) */
+    .pet-belt-card {
+      width: 132px;
+      height: 146px;
       flex-shrink: 0;
+      border-radius: 16px;
+      position: relative;
+      overflow: hidden;
       background: var(--bg-elevated);
-      border: 1px solid var(--border);
-      border-radius: 15px;
-      padding: 11px 12px;
+      border: 1px solid var(--border-strong);
       cursor: pointer;
     }
-    .belt-info-card:active { transform: scale(0.98); }
-    .belt-info-title {
+    .pet-belt-card:active { transform: scale(0.97); }
+    .pet-belt-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .pet-belt-grad {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.88) 0%, rgba(0, 0, 0, 0.22) 48%, rgba(0, 0, 0, 0) 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 8px 9px;
+    }
+    .pet-belt-badge {
+      position: absolute;
+      top: 7px;
+      left: 7px;
+      padding: 2px 7px;
+      border-radius: 999px;
+      font-size: 8.5px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      background: rgba(9, 9, 11, 0.78);
+      color: #fbbf24;
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(251, 191, 36, 0.35);
+    }
+    .pet-belt-badge.avistado {
+      color: #34d399;
+      border-color: rgba(52, 211, 153, 0.35);
+    }
+    .pet-belt-name {
       font-size: 12px;
       font-weight: 800;
-      margin-top: 6px;
+      color: #ffffff;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      line-height: 1.15;
+    }
+    .pet-belt-loc {
+      font-size: 10px;
+      font-weight: 600;
+      color: #cbd5e1;
+      margin-top: 2px;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
-    .belt-info-desc {
-      font-size: 11px;
+
+    /* Cards Slim Elegantes — Utilidade Pública e Segurança */
+    .belt-info-card {
+      width: 224px;
+      flex-shrink: 0;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent-uti);
+      border-radius: 13px;
+      padding: 9px 11px;
+      cursor: pointer;
+    }
+    .belt-info-card.seguranca {
+      border-left-color: var(--accent-seg);
+    }
+    .belt-info-card:active { transform: scale(0.98); }
+    .belt-info-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+    }
+    .belt-info-src {
+      font-size: 9.5px;
+      font-weight: 800;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      color: var(--accent-uti);
+    }
+    .belt-info-card.seguranca .belt-info-src {
+      color: var(--accent-seg);
+    }
+    .belt-info-title {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text);
+      margin-top: 4px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .belt-info-sub {
+      font-size: 10.5px;
+      font-weight: 500;
       color: var(--text-muted);
       margin-top: 3px;
-      line-height: 1.35;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
+      white-space: nowrap;
       overflow: hidden;
-    }
-    .belt-info-loc {
-      font-size: 10px;
-      color: var(--text-dim);
-      margin-top: 6px;
-      font-weight: 600;
+      text-overflow: ellipsis;
     }
 
     /* Tela Completa de Perfil (Full Screen Slim) */
@@ -1428,81 +1522,69 @@
     <!-- ==================== CONTEÚDO DAS 4 ABAS ==================== -->
     <main class="main-stage">
 
-      <!-- ABA 1: INÍCIO (HOME SLIM — CLIMA + ESTEIRA DE ALERTAS + BLOCOS DE ESTEIRAS) -->
-      <section class="tab-pane active" id="tab-inicio">
-        <!-- Bloco 1: Painel Climático de Cascavel -->
-        <div class="weather-card" id="weather-card">
+      <!-- ABA 1: INÍCIO (ZERO SCROLL — CLIMA SOLTO + PÍLULA RESUMIDA + 3 ESTEIRAS NA MESMA VELOCIDADE) -->
+      <section class="tab-pane home-pane active" id="tab-inicio">
+        <!-- Clima solto direto no fundo (sem bloco/caixinha) -->
+        <div class="weather-strip" id="weather-card">
           <div class="weather-top">
             <div class="weather-temp-wrap">
               <div class="weather-ico" id="w-ico">⛅</div>
               <div>
                 <div class="weather-temp" id="w-temp">--°</div>
-                <div style="font-size:11px; color:var(--text-muted); margin-top:2px;">Cascavel • Agora</div>
+                <div style="font-size:10.5px; color:var(--text-dim); margin-top:2px; font-weight:600;">Cascavel • Agora</div>
               </div>
             </div>
             <div>
-              <div class="weather-cond" id="w-cond">Carregando clima...</div>
-              <div class="weather-hl" id="w-hl">Máx --° • Mín --°</div>
+              <div class="weather-cond" id="w-cond">Carregando...</div>
+              <div class="weather-hl" id="w-hl">Máx --° · Mín --°</div>
             </div>
           </div>
           <div class="weather-metrics">
-            <div class="w-metric">
-              <div class="w-metric-val" id="w-sens">--°</div>
-              <div class="w-metric-lbl">Sensação</div>
-            </div>
-            <div class="w-metric">
-              <div class="w-metric-val" id="w-umid">--%</div>
-              <div class="w-metric-lbl">Umidade</div>
-            </div>
-            <div class="w-metric">
-              <div class="w-metric-val" id="w-vento">-- km/h</div>
-              <div class="w-metric-lbl">Vento</div>
-            </div>
-            <div class="w-metric">
-              <div class="w-metric-val" id="w-chuva">--%</div>
-              <div class="w-metric-lbl">Chuva</div>
-            </div>
+            <div class="w-metric"><span class="w-metric-lbl">Sens.</span><span class="w-metric-val" id="w-sens">--°</span></div>
+            <div class="w-metric"><span class="w-metric-lbl">Umid.</span><span class="w-metric-val" id="w-umid">--%</span></div>
+            <div class="w-metric"><span class="w-metric-lbl">Vento</span><span class="w-metric-val" id="w-vento">-- km/h</span></div>
+            <div class="w-metric"><span class="w-metric-lbl">Chuva</span><span class="w-metric-val" id="w-chuva">--%</span></div>
           </div>
         </div>
 
-        <!-- Bloco 2: Esteira Rolante Dinâmica (Branca sem alerta / Amarela / Laranja / Vermelha) -->
+        <!-- Pílula / Esteira Climática Dinâmica (sem emoji, resumo objetivo) -->
         <div class="alert-ticker" id="alert-ticker" onclick="abrirClimaBanner()">
           <div class="ticker-track" id="ticker-track">
-            <span class="ticker-item">● Monitoramento climático de Cascavel em tempo real...</span>
-            <span class="ticker-item">● Monitoramento climático de Cascavel em tempo real...</span>
+            <span class="ticker-item">CASCAVEL • MONITORAMENTO CLIMÁTICO ATIVO</span>
+            <span class="ticker-item">CASCAVEL • MONITORAMENTO CLIMÁTICO ATIVO</span>
           </div>
         </div>
 
-        <!-- Bloco 3: Esteira de Pets Desaparecidos -->
+        <!-- Bloco 1: Esteira Pets (mais trabalhada com fotos) -->
         <div class="belt-block">
           <div class="belt-head">
             <div class="belt-title"><span class="belt-dot" style="background:var(--accent-pet);"></span> Pets Desaparecidos</div>
             <button type="button" class="section-link" onclick="trocarAba('pets')">Ver todos ›</button>
           </div>
           <div class="belt-viewport">
-            <div class="belt-track slow" id="belt-pets-track"></div>
+            <div class="belt-track" id="belt-pets-track"></div>
           </div>
         </div>
 
-        <!-- Bloco 4: Esteira de Utilidade Pública -->
+        <!-- Bloco 2: Esteira Utilidade Pública -->
         <div class="belt-block">
           <div class="belt-head">
             <div class="belt-title"><span class="belt-dot" style="background:var(--accent-uti);"></span> Utilidade Pública</div>
             <button type="button" class="section-link" style="color:var(--accent-uti);" onclick="irParaMapaComFiltro('utilidade')">Mapa ›</button>
           </div>
           <div class="belt-viewport">
-            <div class="belt-track med" id="belt-utilidade-track"></div>
+            <div class="belt-track" id="belt-utilidade-track"></div>
           </div>
         </div>
 
-        <!-- Bloco 5: Esteira de Segurança (Imprensa) -->
+        <!-- Bloco 3: Esteira Segurança (Imprensa) -->
         <div class="belt-block">
           <div class="belt-head">
-            <div class="belt-title"><span class="belt-dot" style="background:var(--accent-seg);"></span> Segurança • Imprensa</div>
+            <div class="belt-title"><span class="belt-dot" style="background:var(--accent-seg);"></span> Segurança</div>
             <button type="button" class="section-link" style="color:var(--accent-seg);" onclick="irParaMapaComFiltro('seguranca')">Mapa ›</button>
           </div>
           <div class="belt-viewport">
-            <div class="belt-track med" id="belt-seguranca-track"></div>
+            <div class="belt-track" id="belt-seguranca-track"></div>
           </div>
         </div>
       </section>
@@ -2214,42 +2296,61 @@
       }
     }
 
+    function resumirAlertaClima(al, nivel) {
+      const fonte = (al.fonte_nome || 'INMET').toUpperCase();
+      const tituloLimpo = (al.titulo || 'Alerta Climático')
+        .replace(/Aviso de\s*/i, '')
+        .replace(/Severidade Grau:\s*/i, '— ')
+        .replace(/\.\s*/g, ' ')
+        .trim();
+      const tag = nivel === 'vermelho' ? 'ALERTA VERMELHO'
+        : (nivel === 'laranja' ? 'ALERTA LARANJA' : 'ATENÇÃO CLIMÁTICA');
+      return `${tag} • ${fonte}: ${tituloLimpo} em Cascavel`;
+    }
+
+    function calibrarVelocidadeEsteira(el, pxPorSegundo) {
+      if (!el || el.classList.contains('static')) return;
+      requestAnimationFrame(() => {
+        const meiaLargura = el.scrollWidth / 2;
+        if (meiaLargura > 0) {
+          const duracao = Math.max(14, meiaLargura / pxPorSegundo);
+          el.style.animationDuration = `${duracao.toFixed(1)}s`;
+        }
+      });
+    }
+
     function renderizarDashboard() {
-      // 1. Painel Climático de Cascavel
+      // 1. Clima solto (sem bloco)
       const c = state.clima;
       if (c) {
         document.getElementById('w-ico').textContent = c.icone || '⛅';
         document.getElementById('w-temp').textContent = `${c.temp}°`;
         document.getElementById('w-cond').textContent = c.condicao || 'Monitorando';
-        document.getElementById('w-hl').textContent = `Máx ${c.max}° • Mín ${c.min}°`;
+        document.getElementById('w-hl').textContent = `Máx ${c.max}° · Mín ${c.min}°`;
         document.getElementById('w-sens').textContent = `${c.sensacao}°`;
         document.getElementById('w-umid').textContent = `${c.umidade}%`;
         document.getElementById('w-vento').textContent = `${c.vento} km/h`;
         document.getElementById('w-chuva').textContent = `${c.chance_chuva}%`;
 
-        // 2. Esteira Rolante Dinâmica (Branca sem alerta | Amarela | Laranja | Vermelha)
+        // 2. Pílula / Esteira Climática Resumida (sem emoji, sem texto cortado "...")
         const ticker = document.getElementById('alert-ticker');
         const track = document.getElementById('ticker-track');
         ticker.classList.remove('amarelo', 'laranja', 'vermelho');
-        let frases = [];
+        let linha = '';
         if (c.alertas && c.alertas.length > 0) {
           if (c.nivel_alerta && c.nivel_alerta !== 'normal') {
             ticker.classList.add(c.nivel_alerta);
           }
-          const prefixo = c.nivel_alerta === 'vermelho' ? '🔴 ALERTA VERMELHO'
-            : (c.nivel_alerta === 'laranja' ? '🟠 ALERTA LARANJA' : '🟡 ALERTA CLIMÁTICO');
-          frases = c.alertas.map(al => `${prefixo} (${al.fonte_nome || 'INMET'}): ${al.titulo} — ${al.descricao}`);
+          linha = resumirAlertaClima(c.alertas[0], c.nivel_alerta);
         } else {
-          frases = [
-            `● Sem alertas climáticos críticos em Cascavel • ${c.condicao} • ${c.temp}°C (Sensação ${c.sensacao}°C) • Umidade ${c.umidade}% • Vento ${c.vento} km/h`
-          ];
+          linha = `SEM ALERTAS EM CASCAVEL • TEMPO ESTÁVEL • ${c.condicao.toUpperCase()} • ${c.temp}°C`;
         }
-        const linha = frases.join('   •   ');
         track.innerHTML = `<span class="ticker-item">${escapeHtml(linha)}</span><span class="ticker-item">${escapeHtml(linha)}</span>`;
+        calibrarVelocidadeEsteira(track, 34);
       }
 
-      // 3. Esteira Bloco A — Pets Desaparecidos
-      const pets = state.alertas.filter(a => a.pilar === 'pet').slice(0, 14);
+      // 3. Esteira Pets (mais trabalhada — foto full + gradiente + mesma velocidade exata: 28 px/s)
+      const pets = state.alertas.filter(a => a.pilar === 'pet').slice(0, 12);
       const beltPets = document.getElementById('belt-pets-track');
       if (!pets.length) {
         beltPets.className = 'belt-track static';
@@ -2258,30 +2359,29 @@
         const cardsHtml = pets.map(p => {
           const av = p.status_pet === 'avistado' || p.tipo === 'pet_avistado';
           const img = p.foto_url
-            ? `<img class="pet-mini-img" src="${escapeAttr(p.foto_url)}" alt="${escapeAttr(p.titulo)}" loading="lazy">`
-            : `<div class="pet-mini-img" style="display:flex;align-items:center;justify-content:center;font-size:28px;">🐾</div>`;
+            ? `<img class="pet-belt-img" src="${escapeAttr(p.foto_url)}" alt="${escapeAttr(p.titulo)}" loading="lazy">`
+            : `<div class="pet-belt-img" style="display:flex;align-items:center;justify-content:center;font-size:32px;background:var(--bg-subtle);">🐾</div>`;
           return `
-            <div class="pet-mini-card" onclick="abrirDetalheById(${p.id})">
-              <div class="pet-mini-img-wrap">
-                ${img}
-                <span class="pet-mini-badge ${av ? 'avistado' : ''}">${av ? 'Avistado' : 'Perdido'}</span>
-              </div>
-              <div class="pet-mini-body">
-                <div class="pet-mini-name">${escapeHtml(p.titulo)}</div>
-                <div class="pet-mini-loc">${escapeHtml(p.bairro || 'Cascavel')}</div>
+            <div class="pet-belt-card" onclick="abrirDetalheById(${p.id})">
+              ${img}
+              <span class="pet-belt-badge ${av ? 'avistado' : ''}">${av ? 'Avistado' : 'Perdido'}</span>
+              <div class="pet-belt-grad">
+                <div class="pet-belt-name">${escapeHtml(p.titulo)}</div>
+                <div class="pet-belt-loc">${escapeHtml(p.bairro || 'Cascavel')}</div>
               </div>
             </div>
           `;
         }).join('');
-        beltPets.className = pets.length >= 3 ? 'belt-track slow' : 'belt-track static';
+        beltPets.className = pets.length >= 3 ? 'belt-track' : 'belt-track static';
         beltPets.innerHTML = pets.length >= 3 ? (cardsHtml + cardsHtml) : cardsHtml;
+        calibrarVelocidadeEsteira(beltPets, 28);
       }
 
-      // 4. Esteira Bloco B — Utilidade Pública
-      renderizarEsteiraInfo('belt-utilidade-track', state.alertas.filter(a => a.pilar === 'utilidade').slice(0, 14), 'Nenhum comunicado de utilidade pública recente.');
+      // 4. Esteira Utilidade Pública (mesma velocidade exata: 28 px/s)
+      renderizarEsteiraInfo('belt-utilidade-track', state.alertas.filter(a => a.pilar === 'utilidade').slice(0, 12), 'Sem comunicados de utilidade pública.');
 
-      // 5. Esteira Bloco C — Segurança (Imprensa)
-      renderizarEsteiraInfo('belt-seguranca-track', state.alertas.filter(a => a.pilar === 'seguranca').slice(0, 14), 'Nenhuma ocorrência policial recente.');
+      // 5. Esteira Segurança (mesma velocidade exata: 28 px/s)
+      renderizarEsteiraInfo('belt-seguranca-track', state.alertas.filter(a => a.pilar === 'seguranca').slice(0, 12), 'Sem ocorrências policiais recentes.');
     }
 
     function renderizarEsteiraInfo(elId, lista, vazioMsg) {
@@ -2289,22 +2389,22 @@
       if (!el) return;
       if (!lista.length) {
         el.className = 'belt-track static';
-        el.innerHTML = `<div class="empty-box" style="width:280px;">${escapeHtml(vazioMsg)}</div>`;
+        el.innerHTML = `<div class="empty-box" style="width:260px; padding:14px;">${escapeHtml(vazioMsg)}</div>`;
         return;
       }
       const html = lista.map(a => `
-        <div class="belt-info-card" onclick="abrirDetalheById(${a.id})">
-          <div style="display:flex;align-items:center;justify-content:space-between;gap:6px;">
-            <span class="source-tag ${a.pilar}">${escapeHtml(a.fonte_nome || 'Oficial')}</span>
+        <div class="belt-info-card ${a.pilar}" onclick="abrirDetalheById(${a.id})">
+          <div class="belt-info-top">
+            <span class="belt-info-src">${escapeHtml(a.fonte_nome || 'Oficial')}</span>
             <span class="feed-time">${tempoRelativo(a.created_at)}</span>
           </div>
           <div class="belt-info-title">${escapeHtml(a.titulo)}</div>
-          <div class="belt-info-desc">${escapeHtml(a.descricao || '')}</div>
-          <div class="belt-info-loc">📍 ${escapeHtml(a.bairro || 'Cascavel')}</div>
+          <div class="belt-info-sub">${escapeHtml(a.bairro || 'Cascavel')} · ${escapeHtml(a.descricao || '')}</div>
         </div>
       `).join('');
-      el.className = lista.length >= 2 ? 'belt-track med' : 'belt-track static';
+      el.className = lista.length >= 2 ? 'belt-track' : 'belt-track static';
       el.innerHTML = lista.length >= 2 ? (html + html) : html;
+      calibrarVelocidadeEsteira(el, 28);
     }
 
     function filtrarPetsAba(sub, el) {
