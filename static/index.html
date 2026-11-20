@@ -2900,6 +2900,19 @@
       renderizarPetsAba();
     }
 
+    function abrirResgatePetPorId(petId) {
+      fecharModal('modal-perfil');
+      fecharModal('modal-detalhe');
+      trocarAba('pets');
+      const pet = state.alertas.find(a => a.id === Number(petId));
+      const ehImprensa = pet && (pet.fonte_tipo === 'imprensa' || (!pet.tem_tutor_notificavel && pet.link_noticia));
+      if (ehImprensa && pet) {
+        abrirDetalhe(pet);
+        return;
+      }
+      abrirModalAvistamento(Number(petId), false, 'resgatado');
+    }
+
     function registrarFcmNativo(fcmToken) {
       if (!fcmToken) return;
       fetch('/api/fcm/registrar', {
