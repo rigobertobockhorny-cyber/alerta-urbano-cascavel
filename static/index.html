@@ -913,6 +913,66 @@
       border: 3px solid #ffffff;
       box-shadow: 0 0 0 6px rgba(37, 99, 235, 0.25);
     }
+    .pin-trail {
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: #09090b;
+      color: #fbbf24;
+      border: 2px solid #f59e0b;
+      font-size: 10px;
+      font-weight: 800;
+      white-space: nowrap;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    }
+    .pin-trail.inicio {
+      background: #f59e0b;
+      color: #09090b;
+    }
+    .pin-trail.resgatado {
+      background: #10b981;
+      color: #09090b;
+      border-color: #ffffff;
+    }
+    .trail-bar {
+      position: absolute;
+      top: 56px;
+      left: 12px;
+      right: 12px;
+      z-index: 410;
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 9px 12px;
+      border-radius: 14px;
+      background: var(--bg-glass);
+      backdrop-filter: blur(12px);
+      border: 1.5px solid var(--accent-pet);
+      box-shadow: var(--shadow-sm);
+    }
+    .trail-bar.show { display: flex; }
+    .timeline-box {
+      margin-top: 12px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      background: var(--bg-subtle);
+      border: 1px solid var(--border);
+    }
+    .timeline-item {
+      display: flex;
+      gap: 9px;
+      padding: 6px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 12px;
+    }
+    .timeline-item:last-child { border-bottom: none; }
+    .timeline-hora {
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--accent-pet);
+      min-width: 44px;
+      flex-shrink: 0;
+    }
     .leaflet-control-attribution {
       font-size: 9px !important;
       opacity: 0.65;
@@ -1458,6 +1518,14 @@
           <button type="button" class="map-pill" data-pilar="utilidade" onclick="filtrarMapa('utilidade', this)">Utilidade</button>
         </div>
 
+        <div class="trail-bar" id="trail-bar">
+          <div style="min-width:0;">
+            <div style="font-size:11px; font-weight:800; color:var(--accent-pet);" id="trail-bar-title">Trilha do Pet</div>
+            <div style="font-size:10px; color:var(--text-muted);" id="trail-bar-sub">Ordem cronológica de avistamentos</div>
+          </div>
+          <button type="button" class="btn-slim" onclick="limparTrilhaMapa()">✕ Sair</button>
+        </div>
+
         <div class="map-tools">
           <button type="button" class="map-tool-btn" id="btn-satelite" onclick="alternarSatelite()" title="Alternar Satélite / Ruas">SAT</button>
           <button type="button" class="map-tool-btn active" id="btn-calor" onclick="alternarCalor()" title="Alternar Mapa de Calor">🔥</button>
@@ -1717,25 +1785,43 @@
     <div class="sheet" id="detalhe-conteudo"></div>
   </div>
 
-  <!-- ==================== MODAL: VISTO AQUI (PRIVACIDADE BLINDADA) ==================== -->
+  <!-- ==================== MODAL: VISTO AQUI / PET RESGATADO ==================== -->
   <div class="sheet-backdrop" id="modal-avistamento" onclick="if(event.target===this) fecharModal('modal-avistamento')">
     <div class="sheet">
       <div class="sheet-handle"></div>
       <div class="sheet-header">
-        <div class="sheet-title">🐾 Visto Aqui</div>
+        <div class="sheet-title" id="av-modal-title">🐾 Visto Aqui</div>
         <button type="button" class="sheet-close" onclick="fecharModal('modal-avistamento')">✕</button>
       </div>
-      <div style="font-size:12px; color:var(--text-muted); line-height:1.45; margin-bottom:12px;">
-        Seu ponto GPS será marcado no mapa e o tutor receberá uma notificação pelo Alerta Urbano. <b>Nenhum número de WhatsApp do tutor é exposto.</b>
+
+      <div class="mode-switch">
+        <button type="button" class="mode-btn active" id="av-mode-visto" onclick="selecionarSubtipoAv('avistamento')">🐾 Apenas Avistei</button>
+        <button type="button" class="mode-btn" id="av-mode-resgate" onclick="selecionarSubtipoAv('resgatado')">🛟 Pet Resgatado</button>
       </div>
+
+      <div id="av-modal-desc" style="font-size:12px; color:var(--text-muted); line-height:1.45; margin-bottom:12px;">
+        Seu ponto GPS será marcado na trilha do mapa e o tutor será notificado. <b>Nenhum número de WhatsApp do tutor é exposto.</b>
+      </div>
+
       <input type="hidden" id="av-pet-id" value="">
+      <input type="hidden" id="av-subtipo" value="avistamento">
+
       <div class="form-group">
-        <label class="form-label">Observação rápida (Opcional)</label>
-        <input type="text" class="form-input" id="av-obs" placeholder="Ex.: Visto correndo sentido Av. Brasil / Estou com ele">
+        <label class="form-label" id="av-foto-label">Foto do Animal (Opcional)</label>
+        <div class="photo-upload-box" onclick="document.getElementById('av-foto-file').click()">
+          <div id="av-photo-hint" style="font-size:12px; color:var(--text-muted); font-weight:600;">📷 Toque para tirar foto e enviar ao tutor</div>
+          <img id="av-foto-preview" class="photo-preview" alt="Preview">
+        </div>
+        <input type="file" id="av-foto-file" accept="image/*" style="display:none" onchange="previewFotoAvistamento(this)">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Observação / Local de Referência</label>
+        <input type="text" class="form-input" id="av-obs" placeholder="Ex.: Visto correndo sentido Av. Brasil / Estou com ele seguro">
       </div>
       <label class="lgpd-box">
         <input type="checkbox" id="av-permitir-wa" onchange="document.getElementById('av-wa-wrap').style.display = this.checked ? 'block' : 'none'">
-        <span><b>Opcional:</b> Permitir que <b>somente o tutor</b> deste pet possa me chamar no WhatsApp para combinar o resgate.</span>
+        <span><b>Permitir contato do tutor:</b> Liberar meu WhatsApp <b>exclusivamente para o tutor</b> confirmar e combinar a entrega.</span>
       </label>
       <div class="form-group" id="av-wa-wrap" style="display:none;">
         <label class="form-label">Seu WhatsApp (visível apenas para o tutor)</label>
@@ -1918,8 +2004,10 @@
     let baseTileLayer = null;
     let labelsTileLayer = null;
     let markersLayer = null;
+    let trailLayer = null;
     let heatLayer = null;
     let userMarker = null;
+    let avFotoUploadUrl = '';
 
     /* ==================== TEMA NOTURNO / CLARO ==================== */
     function aplicarTema(tema) {
@@ -1985,6 +2073,7 @@
         attributionControl: true
       });
       markersLayer = L.layerGroup().addTo(map);
+      trailLayer = L.layerGroup().addTo(map);
       atualizarCamadaBaseMapa();
       renderizarMapa();
       if (state.userLat && state.userLng) atualizarMarcadorUsuario();
@@ -2225,6 +2314,29 @@
       renderizarPetsAba();
     }
 
+    function calcularDistanciaM(lat1, lng1, lat2, lng2) {
+      if (lat1 == null || lng1 == null || lat2 == null || lng2 == null) return null;
+      const R = 6371000;
+      const dLat = (lat2 - lat1) * Math.PI / 180;
+      const dLng = (lng2 - lng1) * Math.PI / 180;
+      const a = Math.sin(dLat / 2) ** 2 +
+        Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.sin(dLng / 2) ** 2;
+      return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    }
+
+    function formatarDistancia(m) {
+      if (m == null) return '';
+      if (m < 1000) return ` • a ${Math.round(m)}m`;
+      return ` • a ${(m / 1000).toFixed(1).replace('.', ',')} km`;
+    }
+
+    function formatarHora(iso) {
+      if (!iso) return '--:--';
+      const dt = new Date(iso.replace(' ', 'T'));
+      if (isNaN(dt.getTime())) return '--:--';
+      return dt.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+    }
+
     function renderizarPetsAba() {
       const pets = state.alertas.filter(a => a.pilar === 'pet').filter(p => {
         const av = p.status_pet === 'avistado' || p.tipo === 'pet_avistado';
@@ -2234,6 +2346,15 @@
         return true;
       });
 
+      // Ordena automaticamente por proximidade do GPS atual (pet da sua região sempre no topo!)
+      if (state.userLat && state.userLng) {
+        pets.sort((a, b) => {
+          const da = calcularDistanciaM(state.userLat, state.userLng, a.lat, a.lng) ?? 999999;
+          const db = calcularDistanciaM(state.userLat, state.userLng, b.lat, b.lng) ?? 999999;
+          return da - db;
+        });
+      }
+
       const el = document.getElementById('pets-full-list');
       if (!pets.length) {
         el.innerHTML = `<div class="empty-box">Nenhum pet encontrado nesta aba.<br><br><button type="button" class="btn-primary-pet" onclick="abrirModalPet('pet_perdido')">+ Registrar Pet</button></div>`;
@@ -2242,10 +2363,11 @@
 
       el.innerHTML = pets.map(p => {
         const av = p.status_pet === 'avistado' || p.tipo === 'pet_avistado';
-        const ehImprensa = p.fonte_tipo === 'imprensa' || (!p.contato && p.link_noticia);
+        const ehImprensa = p.fonte_tipo === 'imprensa' || (!p.tem_tutor_notificavel && p.link_noticia);
         const thumb = p.foto_url
           ? `<img class="pet-card-thumb" src="${escapeAttr(p.foto_url)}" alt="Pet" loading="lazy">`
           : `<div class="pet-card-thumb" style="display:flex;align-items:center;justify-content:center;font-size:30px;">🐾</div>`;
+        const distTxt = (state.userLat && state.userLng) ? formatarDistancia(calcularDistanciaM(state.userLat, state.userLng, p.lat, p.lng)) : '';
         const avCount = p.avistamentos_count ? ` • ${p.avistamentos_count} avist.` : '';
         const origemBadge = ehImprensa ? `${escapeHtml(p.fonte_nome || 'CGN')} • Imprensa` : (av ? 'Avistado' : 'Comunidade');
         return `
@@ -2258,14 +2380,16 @@
                   <span class="feed-time">${tempoRelativo(p.created_at)}</span>
                 </div>
                 <div class="pet-card-title">${escapeHtml(p.titulo)}</div>
-                <div class="pet-card-sub">📍 ${escapeHtml(p.bairro || 'Cascavel')}${avCount}</div>
+                <div class="pet-card-sub">📍 ${escapeHtml(p.bairro || 'Cascavel')}${distTxt}${avCount}</div>
               </div>
               <div class="pet-card-actions" onclick="event.stopPropagation()">
                 ${ehImprensa
-                  ? `<button type="button" class="btn-slim" onclick="abrirModalAvistamento(${p.id}, true)">📍 Marcar onde vi</button>
+                  ? `<button type="button" class="btn-slim" onclick="abrirModalAvistamento(${p.id}, true, 'avistamento')">📍 Marcar onde vi</button>
                      ${p.link_noticia ? `<a href="${escapeAttr(p.link_noticia)}" target="_blank" class="btn-slim pet" style="text-decoration:none;">📰 Contato ${escapeHtml(p.fonte_nome || 'CGN')}</a>` : ''}`
-                  : `${!av ? `<button type="button" class="btn-slim pet" onclick="abrirModalAvistamento(${p.id}, false)">🐾 Visto aqui</button>` : ''}
-                     <button type="button" class="btn-slim" onclick="abrirDetalheById(${p.id})">Ver ficha</button>`
+                  : `${!av
+                      ? `<button type="button" class="btn-slim pet" onclick="abrirModalAvistamento(${p.id}, false, 'avistamento')">🐾 Visto aqui</button>
+                         <button type="button" class="btn-slim ok" onclick="abrirModalAvistamento(${p.id}, false, 'resgatado')">🛟 Resgatei</button>`
+                      : `<button type="button" class="btn-slim" onclick="abrirDetalheById(${p.id})">Ver ficha</button>`}`
                 }
               </div>
             </div>
@@ -2295,7 +2419,7 @@
       const ehPet = a.pilar === 'pet';
       const ehDono = a.autor_token && a.autor_token === state.autorToken;
       const ehAvistado = a.status_pet === 'avistado' || a.tipo === 'pet_avistado';
-      const ehImprensaPet = ehPet && (a.fonte_tipo === 'imprensa' || (!a.contato && a.link_noticia));
+      const ehImprensaPet = ehPet && (a.fonte_tipo === 'imprensa' || (!a.tem_tutor_notificavel && a.link_noticia));
 
       let photoHtml = a.foto_url ? `<img src="${escapeAttr(a.foto_url)}" class="detail-photo" alt="Foto">` : '';
       let extraMeta = '';
@@ -2307,16 +2431,18 @@
       let botoes = '';
       if (ehPet && !ehAvistado) {
         if (ehImprensaPet) {
-          botoes += `<button type="button" class="btn-full" onclick="abrirModalAvistamento(${a.id}, true)">📍 Marcar no Mapa onde Vi este Pet</button>`;
+          botoes += `<button type="button" class="btn-full" onclick="abrirModalAvistamento(${a.id}, true, 'avistamento')">📍 Marcar no Mapa onde Vi este Pet</button>`;
         } else {
-          botoes += `<button type="button" class="btn-full pet" onclick="abrirModalAvistamento(${a.id}, false)">🐾 Visto Aqui (Avisar o Tutor)</button>`;
+          botoes += `<button type="button" class="btn-full pet" onclick="abrirModalAvistamento(${a.id}, false, 'avistamento')">🐾 Visto Aqui (Marcar na Trilha)</button>`;
+          botoes += `<button type="button" class="btn-full whatsapp" onclick="abrirModalAvistamento(${a.id}, false, 'resgatado')">🛟 Pet Resgatado (Enviar Foto ao Tutor)</button>`;
         }
+        botoes += `<button type="button" class="btn-full" onclick="verTrilhaPetNoMapa(${a.id})">🧭 Ver Trilha / Caminho no Mapa</button>`;
       }
       if (a.link_noticia) {
         const lbl = ehImprensaPet ? `📰 Ver Contato na Matéria (${a.fonte_nome || 'CGN'})` : `📰 Ler Matéria Completa (${a.fonte_nome || 'Fonte'})`;
         botoes += `<a href="${escapeAttr(a.link_noticia)}" target="_blank" class="btn-full imprensa">${escapeHtml(lbl)}</a>`;
       }
-      if (a.lat && a.lng) {
+      if (a.lat && a.lng && (!ehPet || ehAvistado)) {
         botoes += `<button type="button" class="btn-full" onclick="focarPontoNoMapa(${a.lat}, ${a.lng})">🗺️ Ver Região no Mapa de Calor</button>`;
       }
       if (ehPet && ehDono) {
@@ -2326,8 +2452,12 @@
 
       let notaTutorImprensa = ehImprensaPet
         ? `<div style="margin-top:12px; padding:10px 12px; border-radius:12px; background:var(--bg-subtle); border:1px solid var(--border); font-size:11px; color:var(--text-muted); line-height:1.4;">
-             <b>Aviso de Privacidade:</b> Este registro veio de notícia pública (${escapeHtml(a.fonte_nome || 'CGN')}). Não copiamos dados pessoais de terceiros. Se você é o tutor, cadastre direto pelo botão <b>+ Registrar Pet</b> para receber avistamentos no seu WhatsApp.
+             <b>Aviso de Privacidade:</b> Este registro veio de notícia pública (${escapeHtml(a.fonte_nome || 'CGN')}). Não copiamos dados pessoais de terceiros. Se você é o tutor, cadastre direto pelo botão <b>+ Registrar Pet</b> para receber avistamentos e fotos de resgate.
            </div>`
+        : '';
+
+      const timelineSlot = (ehPet && !ehAvistado)
+        ? `<div id="detalhe-timeline-slot" class="timeline-box" style="display:none;"></div>`
         : '';
 
       box.innerHTML = `
@@ -2341,11 +2471,93 @@
         <div style="font-size:12px;color:var(--text-muted);margin-top:4px;">📍 ${escapeHtml(a.bairro || 'Cascavel')} • ${tempoRelativo(a.created_at)}</div>
         ${extraMeta}
         <div style="font-size:13px;color:var(--text);line-height:1.5;margin-top:10px;">${escapeHtml(a.descricao || 'Sem descrição adicional.')}</div>
+        ${timelineSlot}
         <div class="detail-actions">${botoes}</div>
         ${notaTutorImprensa}
       `;
 
       document.getElementById('modal-detalhe').classList.add('open');
+      if (ehPet && !ehAvistado) carregarTimelineNaFicha(a.id);
+    }
+
+    async function carregarTimelineNaFicha(petId) {
+      try {
+        const resp = await fetch(`/api/pets/${petId}/trilha`);
+        if (!resp.ok) return;
+        const data = await resp.json();
+        const slot = document.getElementById('detalhe-timeline-slot');
+        if (!slot || !data.pontos || data.pontos.length < 2) return;
+        slot.style.display = 'block';
+        const linhas = data.pontos.slice().reverse().map(pt => `
+          <div class="timeline-item">
+            <div class="timeline-hora">${formatarHora(pt.created_at)}</div>
+            <div style="flex:1;">
+              <div style="font-weight:800; color:${pt.tipo === 'resgatado' ? 'var(--accent-ok)' : 'var(--text)'};">${pt.tipo === 'resgatado' ? '🛟 ' : (pt.tipo === 'inicio' ? '📍 ' : '🐾 ')}${escapeHtml(pt.titulo)}</div>
+              <div style="font-size:11px; color:var(--text-muted);">${escapeHtml(pt.bairro || 'Cascavel')}${pt.descricao ? ' — ' + escapeHtml(pt.descricao) : ''}</div>
+            </div>
+          </div>
+        `).join('');
+        slot.innerHTML = `<div style="font-size:11px;font-weight:800;color:var(--accent-pet);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">Linha do Tempo (${data.total_eventos} ${data.total_eventos === 1 ? 'registro' : 'registros'})</div>${linhas}`;
+      } catch (_) {}
+    }
+
+    async function verTrilhaPetNoMapa(petId) {
+      fecharModal('modal-detalhe');
+      trocarAba('mapa');
+      try {
+        const resp = await fetch(`/api/pets/${petId}/trilha`);
+        if (!resp.ok) return;
+        const data = await resp.json();
+        setTimeout(() => {
+          if (!map || !trailLayer) return;
+          trailLayer.clearLayers();
+          if (markersLayer) markersLayer.clearLayers();
+          if (heatLayer) { map.removeLayer(heatLayer); heatLayer = null; }
+
+          const coords = [];
+          (data.pontos || []).forEach(pt => {
+            if (!pt.lat || !pt.lng) return;
+            coords.push([pt.lat, pt.lng]);
+            const hora = formatarHora(pt.created_at);
+            const cls = pt.tipo === 'inicio' ? 'inicio' : (pt.tipo === 'resgatado' ? 'resgatado' : '');
+            const lbl = pt.tipo === 'inicio' ? `Início • ${hora}` : (pt.tipo === 'resgatado' ? `🛟 Resgate • ${hora}` : `#${pt.etapa} • ${hora}`);
+            const icon = L.divIcon({
+              className: '',
+              html: `<div class="pin-trail ${cls}">${lbl}</div>`,
+              iconSize: [94, 24],
+              iconAnchor: [47, 12]
+            });
+            L.marker([pt.lat, pt.lng], { icon }).addTo(trailLayer);
+          });
+
+          if (coords.length >= 2) {
+            L.polyline(coords, {
+              color: '#f59e0b',
+              weight: 3.5,
+              opacity: 0.9,
+              dashArray: '8, 7'
+            }).addTo(trailLayer);
+            map.fitBounds(coords, { padding: [55, 70], maxZoom: 16 });
+          } else if (coords.length === 1) {
+            map.flyTo(coords[0], 15, { duration: 0.5 });
+          }
+
+          document.getElementById('trail-bar-title').textContent = `Trilha: ${data.pet_titulo}`;
+          document.getElementById('trail-bar-sub').textContent = data.total_eventos > 0
+            ? `${data.total_eventos} ${data.total_eventos === 1 ? 'ponto registrado' : 'pontos registrados'} em ordem de horário`
+            : 'Ponto inicial do desaparecimento (aguardando avistamentos)';
+          document.getElementById('trail-bar').classList.add('show');
+        }, 140);
+      } catch (_) {
+        mostrarToast('Não foi possível carregar a trilha.');
+      }
+    }
+
+    function limparTrilhaMapa() {
+      if (trailLayer) trailLayer.clearLayers();
+      const bar = document.getElementById('trail-bar');
+      if (bar) bar.classList.remove('show');
+      renderizarMapa();
     }
 
     function focarPontoNoMapa(lat, lng) {
@@ -2501,26 +2713,78 @@
       }
     }
 
-    function abrirModalAvistamento(petId, ehImprensa) {
+    function abrirModalAvistamento(petId, ehImprensa, subtipoInicial) {
       fecharModal('modal-detalhe');
       if (ehImprensa) {
-        registrarAvistamentoDireto(petId, 'Pet visto na rua (ponto marcado no mapa comunitário).', false, '');
+        registrarAvistamentoDireto(petId, 'Pet visto na rua (ponto marcado na trilha comunitária).', false, '', 'avistamento', '');
         return;
       }
+      avFotoUploadUrl = '';
       document.getElementById('av-pet-id').value = petId;
       document.getElementById('av-obs').value = '';
-      const chk = document.getElementById('av-permitir-wa');
-      chk.checked = false;
-      document.getElementById('av-wa-wrap').style.display = 'none';
+      document.getElementById('av-foto-preview').style.display = 'none';
+      document.getElementById('av-foto-file').value = '';
+      document.getElementById('av-photo-hint').textContent = '📷 Toque para tirar foto e enviar ao tutor';
       document.getElementById('av-wa-input').value = (state.perfil && state.perfil.whatsapp) ? state.perfil.whatsapp : '';
+      selecionarSubtipoAv(subtipoInicial || 'avistamento');
       document.getElementById('modal-avistamento').classList.add('open');
+    }
+
+    function selecionarSubtipoAv(subtipo) {
+      const ehResg = subtipo === 'resgatado';
+      document.getElementById('av-subtipo').value = subtipo;
+      document.getElementById('av-mode-visto').classList.toggle('active', !ehResg);
+      document.getElementById('av-mode-resgate').classList.toggle('active', ehResg);
+      document.getElementById('av-modal-title').textContent = ehResg ? '🛟 Pet Resgatado' : '🐾 Visto Aqui';
+      document.getElementById('av-modal-desc').innerHTML = ehResg
+        ? 'Tire uma <b>foto do animal que você resgatou</b>. Somente o tutor receberá a foto para confirmar se é o pet dele e entrar em contato.'
+        : 'Seu ponto GPS será marcado na trilha do mapa e o tutor será notificado. <b>Nenhum número de WhatsApp do tutor é exposto.</b>';
+      document.getElementById('av-foto-label').textContent = ehResg ? 'Foto do Animal Resgatado (Recomendado)' : 'Foto do Animal (Opcional)';
+      document.getElementById('btn-confirmar-av').textContent = ehResg ? 'Enviar Foto de Resgate ao Tutor' : 'Enviar "Visto Aqui" ao Tutor';
+      document.getElementById('btn-confirmar-av').style.background = ehResg ? 'var(--accent-ok)' : 'var(--accent-pet)';
+      document.getElementById('btn-confirmar-av').style.color = ehResg ? '#ffffff' : '#09090b';
+
+      const chk = document.getElementById('av-permitir-wa');
+      chk.checked = ehResg;
+      document.getElementById('av-wa-wrap').style.display = ehResg ? 'block' : 'none';
+    }
+
+    async function previewFotoAvistamento(input) {
+      const file = input.files && input.files[0];
+      if (!file) return;
+      const preview = document.getElementById('av-foto-preview');
+      preview.src = URL.createObjectURL(file);
+      preview.style.display = 'block';
+      document.getElementById('av-photo-hint').textContent = 'Enviando foto...';
+
+      const fd = new FormData();
+      fd.append('foto', file);
+      try {
+        const resp = await fetch('/api/upload', { method: 'POST', body: fd });
+        const data = await resp.json();
+        if (resp.ok && data.url) {
+          avFotoUploadUrl = data.url;
+          document.getElementById('av-photo-hint').textContent = '✓ Foto pronta para enviar ao tutor';
+        } else {
+          mostrarToast(data.error || 'Erro ao enviar foto');
+        }
+      } catch (_) {
+        mostrarToast('Falha no upload da foto');
+      }
     }
 
     async function confirmarAvistamentoModal() {
       const petId = document.getElementById('av-pet-id').value;
-      const obs = document.getElementById('av-obs').value.trim() || 'Pet avistado neste local agora.';
+      const subtipo = document.getElementById('av-subtipo').value || 'avistamento';
+      const ehResg = subtipo === 'resgatado';
+      const obs = document.getElementById('av-obs').value.trim() || (ehResg ? 'Segurei este animal parecido — foto enviada para confirmação.' : 'Pet avistado neste local agora.');
       const permitir = document.getElementById('av-permitir-wa').checked;
       const wa = document.getElementById('av-wa-input').value.trim();
+
+      if (ehResg && !avFotoUploadUrl) {
+        mostrarToast('Tire ou selecione uma foto do animal resgatado para o tutor confirmar.');
+        return;
+      }
       if (permitir && !wa) {
         mostrarToast('Informe seu WhatsApp ou desmarque a opção de contato.');
         return;
@@ -2528,13 +2792,13 @@
       const btn = document.getElementById('btn-confirmar-av');
       btn.disabled = true;
       btn.textContent = 'Enviando aviso...';
-      await registrarAvistamentoDireto(petId, obs, permitir, wa);
+      await registrarAvistamentoDireto(petId, obs, permitir, wa, subtipo, avFotoUploadUrl);
       btn.disabled = false;
-      btn.textContent = 'Enviar "Visto Aqui" ao Tutor';
+      selecionarSubtipoAv(subtipo);
       fecharModal('modal-avistamento');
     }
 
-    async function registrarAvistamentoDireto(petId, obs, permitirContato, waAvistador) {
+    async function registrarAvistamentoDireto(petId, obs, permitirContato, waAvistador, subtipo, fotoUrl) {
       const lat = state.userLat || CASCAVEL_CENTER[0];
       const lng = state.userLng || CASCAVEL_CENTER[1];
       try {
@@ -2545,6 +2809,8 @@
             lat,
             lng,
             descricao: obs,
+            subtipo_evento: subtipo || 'avistamento',
+            foto_url: fotoUrl || '',
             autor_token: state.autorToken,
             permitir_contato_tutor: !!permitirContato,
             contato_avistador: permitirContato ? waAvistador : '',
@@ -2552,14 +2818,31 @@
           })
         });
         if (resp.ok) {
-          mostrarToast('Visto Aqui enviado! O tutor foi notificado com o ponto no mapa.');
+          mostrarToast(subtipo === 'resgatado'
+            ? 'Foto de resgate enviada! Aguardando confirmação do tutor.'
+            : 'Visto Aqui marcado na trilha! O tutor foi notificado.');
           carregarDados();
         } else {
-          mostrarToast('Não foi possível registrar o avistamento.');
+          mostrarToast('Não foi possível registrar.');
         }
       } catch (_) {
         mostrarToast('Erro de conexão.');
       }
+    }
+
+    async function descartarAvistamento(avId) {
+      try {
+        const resp = await fetch(`/api/avistamentos/${avId}/descartar`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ autor_token: state.autorToken })
+        });
+        if (resp.ok) {
+          mostrarToast('Registro descartado — a busca continua ativa.');
+          carregarMeusAvistamentosTutor();
+          carregarDados();
+        }
+      } catch (_) {}
     }
 
     async function carregarMeusAvistamentosTutor() {
@@ -2572,29 +2855,49 @@
         const lista = await resp.json();
         if (tot) tot.textContent = `${lista.length} ${lista.length === 1 ? 'aviso' : 'avisos'}`;
         if (!lista.length) {
-          box.innerHTML = '<div class="empty-box" style="padding:14px;">Nenhum avistamento recebido ainda.</div>';
+          box.innerHTML = '<div class="empty-box" style="padding:14px;">Nenhum avistamento ou resgate recebido ainda.</div>';
           return;
         }
         box.innerHTML = lista.map(av => {
+          const ehResg = av.subtipo_evento === 'resgatado';
           const mapsUrl = `https://maps.google.com/?q=${av.lat},${av.lng}`;
+          const fotoHtml = av.foto_url
+            ? `<img src="${escapeAttr(av.foto_url)}" style="width:100%;max-height:170px;object-fit:cover;border-radius:12px;margin:8px 0;" alt="Foto enviada">`
+            : '';
           const waBtn = av.contato_avistador
-            ? `<a href="https://wa.me/${escapeAttr(av.contato_avistador)}?text=${encodeURIComponent('Olá! Sou o tutor de ' + av.pet_titulo + ' no Alerta Urbano. Vi que você marcou Visto Aqui!')}" target="_blank" class="btn-slim ok" style="text-decoration:none;">💬 Chamar quem avistou</a>`
+            ? `<a href="https://wa.me/${escapeAttr(av.contato_avistador)}?text=${encodeURIComponent('Olá! Sou o tutor de ' + av.pet_titulo + ' no Alerta Urbano. Vi seu aviso!')}" target="_blank" class="btn-slim ok" style="text-decoration:none;">💬 Falar no WhatsApp</a>`
             : `<span style="font-size:10px; color:var(--text-dim);">Contato privado (somente ponto no mapa)</span>`;
+          const acoesResgate = ehResg
+            ? `<div style="display:flex; gap:6px; margin-top:8px;">
+                 <button type="button" class="btn-slim ok" style="flex:1;" onclick="encerrarMeuPet(${av.pet_pai_id})">✅ Sim, é meu Pet!</button>
+                 <button type="button" class="btn-slim" style="flex:1; color:var(--accent-seg);" onclick="descartarAvistamento(${av.id})">❌ Não é o meu</button>
+               </div>`
+            : '';
           return `
-            <div class="perfil-card-box" style="margin-bottom:0; padding:12px;">
+            <div class="perfil-card-box" style="margin-bottom:0; padding:12px; ${ehResg ? 'border-color:var(--accent-ok);' : ''}">
               <div style="display:flex; justify-content:space-between; align-items:center;">
-                <strong style="font-size:13px; color:var(--accent-ok);">🐾 ${escapeHtml(av.pet_titulo)}</strong>
-                <span class="feed-time">${tempoRelativo(av.created_at)}</span>
+                <strong style="font-size:12px; color:${ehResg ? 'var(--accent-ok)' : 'var(--accent-pet)'};">${ehResg ? '🛟 POSSÍVEL RESGATE' : '🐾 VISTO AQUI'} • ${escapeHtml(av.pet_titulo)}</strong>
+                <span class="feed-time">${formatarHora(av.created_at)}</span>
               </div>
+              ${fotoHtml}
               <div style="font-size:12px; color:var(--text-muted); margin-top:4px;">${escapeHtml(av.descricao || '')}</div>
               <div style="display:flex; flex-wrap:wrap; gap:6px; margin-top:8px; align-items:center;">
-                <a href="${mapsUrl}" target="_blank" class="btn-slim pet" style="text-decoration:none;">📍 Abrir no Mapa</a>
+                <a href="${mapsUrl}" target="_blank" class="btn-slim pet" style="text-decoration:none;">📍 Localização</a>
+                <button type="button" class="btn-slim" onclick="fecharModal('modal-perfil'); verTrilhaPetNoMapa(${av.pet_pai_id})">🧭 Ver Trilha</button>
                 ${waBtn}
               </div>
+              ${acoesResgate}
             </div>
           `;
         }).join('');
       } catch (_) {}
+    }
+
+    function abrirPetsProximos() {
+      fecharModal('modal-perfil');
+      fecharModal('modal-detalhe');
+      trocarAba('pets');
+      renderizarPetsAba();
     }
 
     function registrarFcmNativo(fcmToken) {

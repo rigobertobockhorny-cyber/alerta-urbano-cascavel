@@ -138,6 +138,7 @@ def init_db():
         ("consentimento_contato", "INTEGER DEFAULT 0"),
         ("contato_avistador", "TEXT DEFAULT ''"),
         ("avistador_nome", "TEXT DEFAULT ''"),
+        ("subtipo_evento", "TEXT DEFAULT 'avistamento'"),
     ]
     for col_name, col_def in novas_colunas:
         if col_name not in cols:
@@ -736,9 +737,9 @@ def registrar_fcm_token():
 @app.route("/api/meus-avistamentos", methods=["GET"])
 def listar_meus_avistamentos():
     """
-    PRIVACIDADE BLINDADA v3.2:
-    Retorna EXCLUSIVAMENTE para o tutor (autor_token dono do pet) os avistamentos recebidos,
-    incluindo o WhatsApp de quem avistou SOMENTE se quem avistou autorizou expressamente.
+    PRIVACIDADE BLINDADA v3.3:
+    Retorna EXCLUSIVAMENTE para o tutor (autor_token dono do pet) os avistamentos e resgates recebidos,
+    incluindo a foto enviada por quem resgatou e o WhatsApp SOMENTE se autorizado.
     """
     token = request.args.get("autor_token", "").strip()
     if not token:
@@ -748,16 +749,104 @@ def listar_meus_avistamentos():
         SELECT
             av.id, av.pet_pai_id, pai.titulo AS pet_titulo,
             av.descricao, av.bairro, av.lat, av.lng, av.foto_url,
-            av.contato_avistador, av.avistador_nome, av.created_at
+            av.contato_avistador, av.avistador_nome,
+            COALESCE(NULLIF(av.subtipo_evento, ''), 'avistamento') AS subtipo_evento,
+            av.created_at
         FROM alertas av
         JOIN alertas pai ON pai.id = av.pet_pai_id
         WHERE av.ativo = 1
           AND pai.autor_token = ?
-        ORDER BY av.created_at DESC
-        LIMIT 30
+        ORDER BY
+            CASE WHEN av.subtipo_evento = 'resgatado' THEN 0 ELSE 1 END,
+            av.created_at DESC
+        LIMIT 40
     """, (token,)).fetchall()
     conn.close()
     return jsonify([dict(r) for r in rows])
+
+
+@app.route("/api/pets/<int:pet_id>/trilha", methods=["GET"])
+def trilha_cronologica_pet(pet_id):
+    """
+    Retorna a Trilha Cronológica completa de um Pet (ponto inicial + avistamentos/resgates em ordem de horário)
+    para desenhar o caminho do animal no mapa (ZERO exposição de telefones).
+    """
+    conn = get_db()
+    pai = conn.execute("""
+        SELECT id, titulo, bairro, lat, lng, foto_url, created_at, status_pet
+        FROM alertas
+        WHERE id = ? AND pilar = 'pet'
+    """, (pet_id,)).fetchone()
+    if not pai:
+        conn.close()
+        return jsonify({"error": "Pet não encontrado"}), 404
+
+    eventos = conn.execute("""
+        SELECT id, descricao, bairro, lat, lng, foto_url,
+               COALESCE(NULLIF(subtipo_evento, ''), 'avistamento') AS subtipo_evento,
+               created_at
+        FROM alertas
+        WHERE pet_pai_id = ? AND ativo = 1
+        ORDER BY created_at ASC
+    """, (pet_id,)).fetchall()
+    conn.close()
+
+    pontos = [{
+        "id": pai["id"],
+        "etapa": 0,
+        "tipo": "inicio",
+        "titulo": "Ponto inicial do desaparecimento",
+        "bairro": pai["bairro"] or "Cascavel",
+        "lat": pai["lat"],
+        "lng": pai["lng"],
+        "foto_url": pai["foto_url"] or "",
+        "created_at": pai["created_at"],
+    }]
+    for idx, ev in enumerate(eventos, start=1):
+        eh_resg = ev["subtipo_evento"] == "resgatado"
+        pontos.append({
+            "id": ev["id"],
+            "etapa": idx,
+            "tipo": "resgatado" if eh_resg else "avistamento",
+            "titulo": "Possível Resgate (foto enviada)" if eh_resg else f"Avistamento #{idx}",
+            "descricao": ev["descricao"] or "",
+            "bairro": ev["bairro"] or pai["bairro"] or "Cascavel",
+            "lat": ev["lat"],
+            "lng": ev["lng"],
+            "foto_url": ev["foto_url"] or "",
+            "created_at": ev["created_at"],
+        })
+
+    return jsonify({
+        "pet_id": pai["id"],
+        "pet_titulo": pai["titulo"],
+        "total_eventos": len(eventos),
+        "pontos": pontos,
+    })
+
+
+@app.route("/api/avistamentos/<int:av_id>/descartar", methods=["POST"])
+def descartar_avistamento_tutor(av_id):
+    """Permite EXCLUSIVAMENTE ao tutor do pet pai descartar um possível resgate/avistamento ('Não é o meu pet')."""
+    data = request.json or {}
+    token = (data.get("autor_token") or "").strip()
+    conn = get_db()
+    row = conn.execute("""
+        SELECT av.id, pai.autor_token AS tutor_token
+        FROM alertas av
+        JOIN alertas pai ON pai.id = av.pet_pai_id
+        WHERE av.id = ?
+    """, (av_id,)).fetchone()
+    if not row:
+        conn.close()
+        return jsonify({"error": "Evento não encontrado"}), 404
+    if row["tutor_token"] and token != row["tutor_token"] and token != ADMIN_TOKEN:
+        conn.close()
+        return jsonify({"error": "Apenas o tutor pode descartar este registro."}), 403
+    conn.execute("UPDATE alertas SET ativo = 0, contato_avistador = '' WHERE id = ?", (av_id,))
+    conn.commit()
+    conn.close()
+    return jsonify({"status": "ok", "descartado": av_id})
 
 
 @app.route("/api/pets/<int:pet_id>/avistamento", methods=["POST"])
@@ -786,8 +875,16 @@ def registrar_avistamento_pet(pet_id):
         conn.close()
         return jsonify({"error": "Pet não encontrado ou já encerrado."}), 404
 
-    obs = (data.get("descricao") or "Pet avistado neste local por um usuário do Alerta Urbano.").strip()[:400]
-    foto_avistamento = (data.get("foto_url") or pet_pai["foto_url"] or "").strip()
+    subtipo = (data.get("subtipo_evento") or "avistamento").strip().lower()
+    if subtipo not in ("avistamento", "resgatado"):
+        subtipo = "avistamento"
+    eh_resgate = (subtipo == "resgatado")
+
+    obs = (data.get("descricao") or (
+        "Possível resgate: usuário segurou o animal e enviou foto para confirmação do tutor."
+        if eh_resgate else "Pet avistado neste local por um usuário do Alerta Urbano."
+    )).strip()[:400]
+    foto_avistamento = (data.get("foto_url") or ("" if eh_resgate else (pet_pai["foto_url"] or ""))).strip()
     bairro = (data.get("bairro") or pet_pai["bairro"] or "Cascavel").strip()
     autor_token = (data.get("autor_token") or "").strip()[:100]
     permitir_contato = bool(data.get("permitir_contato_tutor"))
@@ -799,12 +896,12 @@ def registrar_avistamento_pet(pet_id):
         INSERT INTO alertas (
             tipo, pilar, cidade, titulo, descricao, rua, bairro, lat, lng,
             peso, foto_url, autor_token, fonte_tipo, fonte_nome,
-            especie, porte, status_pet, pet_pai_id, contato_avistador, avistador_nome, created_at
+            especie, porte, status_pet, pet_pai_id, contato_avistador, avistador_nome, subtipo_evento, created_at
         )
-        VALUES ('pet_avistado', 'pet', ?, ?, ?, ?, ?, ?, ?, 2, ?, ?, 'comunidade_pet', 'Comunidade', ?, ?, 'avistado', ?, ?, ?, ?)
+        VALUES ('pet_avistado', 'pet', ?, ?, ?, ?, ?, ?, ?, 2, ?, ?, 'comunidade_pet', 'Comunidade', ?, ?, 'avistado', ?, ?, ?, ?, ?)
     """, (
         pet_pai["cidade"] or "Cascavel",
-        f"Avistado: {pet_pai['titulo']}",
+        f"{'Resgatado' if eh_resgate else 'Avistado'}: {pet_pai['titulo']}",
         obs,
         bairro,
         bairro,
@@ -817,6 +914,7 @@ def registrar_avistamento_pet(pet_id):
         pet_id,
         contato_av,
         avistador_nome,
+        subtipo,
         agora,
     ))
     avistamento_id = cur.lastrowid
@@ -834,17 +932,23 @@ def registrar_avistamento_pet(pet_id):
 
     push_enviado = False
     if tutor_fcm:
+        push_titulo = f"🛟 POSSÍVEL RESGATE: {pet_pai['titulo']}!" if eh_resgate else f"🐾 {pet_pai['titulo']} foi avistado!"
+        push_corpo = (
+            f"Alguém segurou um animal parecido em {bairro} e enviou foto para você confirmar!"
+            if eh_resgate else f"Alguém marcou Visto Aqui agora em {bairro}. Toque para ver a trilha no mapa."
+        )
         push_enviado = enviar_push_firebase(
             tutor_fcm,
-            f"🐾 {pet_pai['titulo']} foi avistado!",
-            f"Alguém marcou um ponto de avistamento agora em {bairro}. Toque para ver no mapa.",
-            {"pet_id": pet_id, "avistamento_id": avistamento_id, "lat": lat, "lng": lng},
+            push_titulo,
+            push_corpo,
+            {"pet_id": pet_id, "avistamento_id": avistamento_id, "subtipo": subtipo, "lat": lat, "lng": lng},
         )
 
     return jsonify({
         "status": "ok",
         "avistamento_id": avistamento_id,
         "pet_pai_id": pet_id,
+        "subtipo_evento": subtipo,
         "push_enviado": push_enviado,
     }), 201
 
