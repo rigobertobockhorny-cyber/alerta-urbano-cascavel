@@ -7,9 +7,11 @@ Segurança e Utilidade Pública são alimentadas exclusivamente pelo Robô Colet
 """
 import os
 import re
+import json
 import sqlite3
 import time
 import hashlib
+import urllib.request
 from datetime import datetime
 from flask import Flask, request, jsonify, send_from_directory, make_response, send_file
 from werkzeug.utils import secure_filename
@@ -142,6 +144,21 @@ def init_db():
     # Índices para performance do Dashboard Slim e Mapa de Calor
     cur.execute("CREATE INDEX IF NOT EXISTS idx_alertas_ativo_pilar ON alertas (ativo, pilar, cidade);")
     cur.execute("CREATE INDEX IF NOT EXISTS idx_alertas_pet_pai ON alertas (pet_pai_id);")
+
+    # Tabela de Perfil / Cadastro do Cidadão (v3.1)
+    cur.execute("""
+        CREATE TABLE IF NOT EXISTS usuarios (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            autor_token TEXT UNIQUE NOT NULL,
+            nome TEXT DEFAULT '',
+            whatsapp TEXT DEFAULT '',
+            bairro TEXT DEFAULT 'Centro',
+            cidade TEXT DEFAULT 'Cascavel',
+            foto_url TEXT DEFAULT '',
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )
+    """)
 
     # Higienização e classificação v3.0 (desativa legados de trânsito/radar/semáforo e não-pets do público)
     placeholders = ",".join("?" for _ in TIPOS_BLOQUEADOS_LEGADO)
@@ -325,6 +342,147 @@ def upload_foto():
         file.save(filepath)
         return jsonify({"url": f"/static/uploads/{filename}"}), 201
     return jsonify({"error": "Formato de arquivo não suportado (use PNG, JPG ou WEBP)"}), 400
+
+
+_CLIMA_CACHE = {"ts": 0, "data": None}
+
+WMO_DESC = {
+    0: ("Céu limpo", "☀️"),
+    1: ("Predomínio de sol", "🌤️"),
+    2: ("Parcialmente nublado", "⛅"),
+    3: ("Nublado", "☁️"),
+    45: ("Nevoeiro", "🌫️"),
+    48: ("Nevoeiro", "🌫️"),
+    51: ("Garoa leve", "🌦️"),
+    53: ("Garoa moderada", "🌦️"),
+    55: ("Garoa forte", "🌧️"),
+    61: ("Chuva leve", "🌦️"),
+    63: ("Chuva moderada", "🌧️"),
+    65: ("Chuva forte", "🌧️"),
+    80: ("Pancadas leves", "🌦️"),
+    81: ("Pancadas de chuva", "🌧️"),
+    82: ("Chuva intensa", "⛈️"),
+    95: ("Tempestade", "⛈️"),
+    96: ("Tempestade com granizo", "⛈️"),
+    99: ("Tempestade severa", "⛈️"),
+}
+
+
+@app.route("/api/clima", methods=["GET"])
+def api_clima():
+    """Retorna clima em tempo real de Cascavel (Open-Meteo, cache 10min) + alertas oficiais ativos."""
+    cidade = request.args.get("cidade", "Cascavel").strip()
+    agora_ts = time.time()
+
+    if not _CLIMA_CACHE["data"] or (agora_ts - _CLIMA_CACHE["ts"] > 600):
+        try:
+            url = (
+                "https://api.open-meteo.com/v1/forecast"
+                "?latitude=-24.9555&longitude=-53.4550"
+                "&current=temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,wind_speed_10m,precipitation"
+                "&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max"
+                "&timezone=America%2FSao_Paulo&forecast_days=1"
+            )
+            req = urllib.request.Request(url, headers={"User-Agent": "AlertaUrbano/3.1"})
+            with urllib.request.urlopen(req, timeout=8) as resp:
+                raw = json.loads(resp.read().decode("utf-8"))
+            cur_w = raw.get("current", {})
+            day_w = raw.get("daily", {})
+            wcode = int(cur_w.get("weather_code", 0))
+            cond_txt, cond_ico = WMO_DESC.get(wcode, ("Tempo instável", "⛅"))
+            _CLIMA_CACHE["data"] = {
+                "cidade": cidade,
+                "temp": round(float(cur_w.get("temperature_2m", 23))),
+                "sensacao": round(float(cur_w.get("apparent_temperature", 23))),
+                "umidade": int(cur_w.get("relative_humidity_2m", 65)),
+                "vento": round(float(cur_w.get("wind_speed_10m", 10))),
+                "condicao": cond_txt,
+                "icone": cond_ico,
+                "max": round(float((day_w.get("temperature_2m_max") or [27])[0])),
+                "min": round(float((day_w.get("temperature_2m_min") or [18])[0])),
+                "chance_chuva": int((day_w.get("precipitation_probability_max") or [0])[0]),
+            }
+            _CLIMA_CACHE["ts"] = agora_ts
+        except Exception as e:
+            print(f"[CLIMA] Falha Open-Meteo: {e}")
+            if not _CLIMA_CACHE["data"]:
+                _CLIMA_CACHE["data"] = {
+                    "cidade": cidade, "temp": 24, "sensacao": 24, "umidade": 65,
+                    "vento": 12, "condicao": "Tempo em monitoramento", "icone": "⛅",
+                    "max": 27, "min": 18, "chance_chuva": 20,
+                }
+
+    # Busca alertas climáticos oficiais de Cascavel (prioridade absoluta: INMET / Simepar / Defesa Civil)
+    conn = get_db()
+    cur = conn.cursor()
+    cur.execute("""
+        SELECT id, titulo, descricao, severidade, fonte_nome, link_noticia, created_at
+        FROM alertas
+        WHERE ativo = 1
+          AND pilar = 'utilidade'
+          AND tipo = 'utilidade_clima'
+          AND fonte_nome IN ('INMET', 'Simepar', 'Defesa Civil', 'Prefeitura')
+          AND LOWER(COALESCE(cidade, 'Cascavel')) = LOWER(?)
+          AND datetime(created_at, '+36 hours') >= datetime('now', 'localtime')
+        ORDER BY
+            CASE severidade WHEN 'critico' THEN 1 WHEN 'alerta' THEN 2 WHEN 'atencao' THEN 3 ELSE 4 END,
+            created_at DESC
+        LIMIT 5
+    """, (cidade,))
+    alertas_clima = [dict(r) for r in cur.fetchall()]
+    conn.close()
+
+    nivel = "normal"
+    if alertas_clima:
+        sev0 = (alertas_clima[0].get("severidade") or "atencao").lower()
+        nivel = "vermelho" if sev0 == "critico" else ("laranja" if sev0 == "alerta" else "amarelo")
+
+    resp_data = dict(_CLIMA_CACHE["data"])
+    resp_data["nivel_alerta"] = nivel
+    resp_data["alertas"] = alertas_clima
+    return jsonify(resp_data)
+
+
+@app.route("/api/perfil", methods=["GET", "POST"])
+def api_perfil():
+    """Cadastro e consulta de perfil do cidadão (Nome, WhatsApp, Bairro, Foto)."""
+    if request.method == "GET":
+        token = request.args.get("autor_token", "").strip()
+        if not token:
+            return jsonify({"perfil": None})
+        conn = get_db()
+        row = conn.execute("SELECT autor_token, nome, whatsapp, bairro, cidade, foto_url FROM usuarios WHERE autor_token = ?", (token,)).fetchone()
+        conn.close()
+        return jsonify({"perfil": dict(row) if row else None})
+
+    data = request.json or {}
+    token = (data.get("autor_token") or "").strip()[:100]
+    if not token:
+        return jsonify({"error": "Token do dispositivo ausente."}), 400
+
+    nome = (data.get("nome") or "").strip()[:100]
+    whatsapp = normalizar_telefone(data.get("whatsapp") or "")
+    bairro = (data.get("bairro") or "Centro").strip()[:80]
+    cidade = (data.get("cidade") or "Cascavel").strip()[:80]
+    foto_url = (data.get("foto_url") or "").strip()[:300]
+    agora = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+    conn = get_db()
+    cur = conn.cursor()
+    cur.execute("""
+        INSERT INTO usuarios (autor_token, nome, whatsapp, bairro, cidade, foto_url, created_at, updated_at)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+        ON CONFLICT(autor_token) DO UPDATE SET
+            nome = excluded.nome,
+            whatsapp = excluded.whatsapp,
+            bairro = excluded.bairro,
+            cidade = excluded.cidade,
+            foto_url = CASE WHEN excluded.foto_url != '' THEN excluded.foto_url ELSE usuarios.foto_url END,
+            updated_at = excluded.updated_at
+    """, (token, nome, whatsapp, bairro, cidade, foto_url, agora, agora))
+    conn.commit()
+    conn.close()
+    return jsonify({"status": "ok", "nome": nome, "bairro": bairro})
 
 
 @app.route("/api/resumo", methods=["GET"])

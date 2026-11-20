@@ -319,111 +319,337 @@
       cursor: pointer;
     }
 
-    /* Banner Clima INMET */
-    .clima-banner {
-      display: none;
-      align-items: flex-start;
+    /* ==================== HOME v3.1: CLIMA + ESTEIRAS VIVAS ==================== */
+    .weather-card {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 15px 16px 13px;
+      box-shadow: var(--shadow-sm);
+    }
+    .weather-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .weather-temp-wrap {
+      display: flex;
+      align-items: center;
       gap: 10px;
-      padding: 12px 14px;
-      border-radius: 16px;
-      background: var(--accent-pet-bg);
-      border: 1px solid rgba(245, 158, 11, 0.35);
-      margin-bottom: 14px;
+    }
+    .weather-ico { font-size: 34px; line-height: 1; }
+    .weather-temp {
+      font-size: 34px;
+      font-weight: 800;
+      letter-spacing: -1.4px;
+      line-height: 1;
+    }
+    .weather-cond {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text);
+      text-align: right;
+    }
+    .weather-hl {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 2px;
+      text-align: right;
+    }
+    .weather-metrics {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+      margin-top: 12px;
+      padding-top: 10px;
+      border-top: 1px solid var(--border);
+    }
+    .w-metric {
+      text-align: center;
+    }
+    .w-metric-val { font-size: 12px; font-weight: 800; color: var(--text); }
+    .w-metric-lbl { font-size: 10px; color: var(--text-dim); margin-top: 1px; }
+
+    /* Esteira Rolante de Status / Alerta Climático */
+    .alert-ticker {
+      margin-top: 10px;
+      border-radius: 12px;
+      overflow: hidden;
+      padding: 8px 0;
+      position: relative;
       cursor: pointer;
+      border: 1px solid var(--border-strong);
+      background: #ffffff;
+      color: #09090b;
+      box-shadow: var(--shadow-sm);
     }
-    .clima-banner.critico {
-      background: var(--accent-seg-bg);
-      border-color: rgba(239, 68, 68, 0.45);
+    .alert-ticker.amarelo {
+      background: #f59e0b;
+      color: #09090b;
+      border-color: #d97706;
     }
-    .clima-banner.show { display: flex; }
-    .clima-badge {
-      font-size: 10px;
+    .alert-ticker.laranja {
+      background: #ea580c;
+      color: #ffffff;
+      border-color: #c2410c;
+    }
+    .alert-ticker.vermelho {
+      background: #dc2626;
+      color: #ffffff;
+      border-color: #991b1b;
+    }
+    .ticker-track {
+      display: flex;
+      width: max-content;
+      animation: tickerRun 24s linear infinite;
+    }
+    .alert-ticker:hover .ticker-track,
+    .alert-ticker:active .ticker-track {
+      animation-play-state: paused;
+    }
+    .ticker-item {
+      white-space: nowrap;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.2px;
+      padding-right: 36px;
+    }
+    @keyframes tickerRun {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* Blocos de Esteiras Horizontais (Pets, Utilidade, Segurança) */
+    .belt-block {
+      margin-top: 16px;
+    }
+    .belt-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      padding: 0 2px;
+    }
+    .belt-title {
+      font-size: 12px;
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 0.6px;
-      color: var(--accent-pet);
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }
-    .clima-banner.critico .clima-badge { color: var(--accent-seg); }
-    .clima-title { font-size: 13px; font-weight: 700; margin-top: 2px; }
-    .clima-desc { font-size: 12px; color: var(--text-muted); margin-top: 2px; line-height: 1.35; }
-
-    /* 3 Mini-Cards de Resumo */
-    .kpi-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
+    .belt-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+    .belt-viewport {
+      width: 100%;
+      overflow: hidden;
+      position: relative;
+      mask-image: linear-gradient(to right, transparent, #000 3%, #000 97%, transparent);
+      -webkit-mask-image: linear-gradient(to right, transparent, #000 3%, #000 97%, transparent);
+    }
+    .belt-track {
+      display: flex;
       gap: 10px;
+      width: max-content;
+      animation: beltSlide 36s linear infinite;
     }
-    .kpi-card {
+    .belt-track.slow { animation-duration: 46s; }
+    .belt-track.med { animation-duration: 40s; }
+    .belt-track.static { animation: none; }
+    .belt-viewport:hover .belt-track,
+    .belt-viewport:active .belt-track {
+      animation-play-state: paused;
+    }
+    @keyframes beltSlide {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    .belt-info-card {
+      width: 218px;
+      flex-shrink: 0;
       background: var(--bg-elevated);
       border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 12px 10px;
+      border-radius: 15px;
+      padding: 11px 12px;
       cursor: pointer;
-      transition: transform 0.12s ease, border-color 0.15s ease;
-      text-align: left;
     }
-    .kpi-card:active { transform: scale(0.97); }
-    .kpi-top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 6px;
-    }
-    .kpi-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-    }
-    .kpi-num {
-      font-size: 22px;
+    .belt-info-card:active { transform: scale(0.98); }
+    .belt-info-title {
+      font-size: 12px;
       font-weight: 800;
-      letter-spacing: -0.6px;
-      line-height: 1;
+      margin-top: 6px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
-    .kpi-label {
+    .belt-info-desc {
       font-size: 11px;
-      font-weight: 600;
       color: var(--text-muted);
-      margin-top: 4px;
+      margin-top: 3px;
+      line-height: 1.35;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .belt-info-loc {
+      font-size: 10px;
+      color: var(--text-dim);
+      margin-top: 6px;
+      font-weight: 600;
     }
 
-    /* Botão CTA Slim + Registrar Pet */
-    .cta-pet-bar {
-      margin-top: 12px;
-      width: 100%;
-      padding: 12px 14px;
-      border-radius: 16px;
-      border: 1px solid rgba(245, 158, 11, 0.35);
-      background: linear-gradient(135deg, rgba(245, 158, 11, 0.18), rgba(234, 88, 12, 0.08));
-      color: var(--text);
+    /* Tela Completa de Perfil (Full Screen Slim) */
+    .full-screen-view {
+      position: fixed;
+      inset: 0;
+      z-index: 2500;
+      background: var(--bg);
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .full-screen-view.open { display: flex; }
+    .fs-header {
+      flex-shrink: 0;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      cursor: pointer;
-      transition: transform 0.12s ease;
+      padding: calc(env(safe-area-inset-top, 0px) + 12px) 16px 12px;
+      background: var(--bg-glass);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
     }
-    .cta-pet-bar:active { transform: scale(0.985); }
-    .cta-pet-left {
+    .fs-back {
+      border: 1px solid var(--border);
+      background: var(--bg-elevated);
+      color: var(--text);
+      padding: 7px 12px;
+      border-radius: 11px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .fs-save {
+      border: none;
+      background: var(--accent-ok);
+      color: #ffffff;
+      padding: 8px 14px;
+      border-radius: 11px;
+      font-size: 12px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+    .fs-body {
+      flex: 1;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      padding: 16px 16px calc(env(safe-area-inset-bottom, 0px) + 32px);
+      max-width: 540px;
+      width: 100%;
+      margin: 0 auto;
+    }
+    .perfil-hero {
       display: flex;
       align-items: center;
-      gap: 10px;
-      text-align: left;
+      gap: 14px;
+      padding: 14px 16px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      margin-bottom: 16px;
     }
-    .cta-pet-ico {
-      width: 34px;
-      height: 34px;
-      border-radius: 11px;
-      background: var(--accent-pet);
-      color: #09090b;
+    .perfil-avatar-wrap {
+      position: relative;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .perfil-avatar-circle {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: var(--brand-red);
+      color: #ffffff;
       display: flex;
       align-items: center;
       justify-content: center;
+      font-size: 22px;
       font-weight: 900;
-      font-size: 18px;
+      overflow: hidden;
+      border: 2px solid var(--border-strong);
+    }
+    .perfil-avatar-circle img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: none;
+    }
+    .perfil-avatar-plus {
+      position: absolute;
+      bottom: -2px;
+      right: -2px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--text);
+      color: var(--bg);
+      font-size: 12px;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid var(--bg-elevated);
+    }
+    .perfil-card-box {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 15px;
+      margin-bottom: 16px;
+    }
+    .perfil-section-lbl {
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      margin: 0 0 8px 4px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .partner-row {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      padding: 10px 11px;
+      border-radius: 12px;
+      background: var(--bg-subtle);
+      border: 1px solid var(--border);
+      margin-bottom: 8px;
+    }
+    .partner-badge {
+      width: 42px;
+      height: 36px;
+      border-radius: 9px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-strong);
+      color: var(--text);
+      font-size: 9px;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       flex-shrink: 0;
     }
-    .cta-pet-title { font-size: 13px; font-weight: 800; }
-    .cta-pet-sub { font-size: 11px; color: var(--text-muted); margin-top: 1px; }
 
     /* Carrossel Horizontal de Pets (Home) */
     .pets-carousel {
@@ -1142,78 +1368,83 @@
     <!-- ==================== CONTEÚDO DAS 4 ABAS ==================== -->
     <main class="main-stage">
 
-      <!-- ABA 1: INÍCIO (DASHBOARD SLIM) -->
+      <!-- ABA 1: INÍCIO (HOME SLIM — CLIMA + ESTEIRA DE ALERTAS + BLOCOS DE ESTEIRAS) -->
       <section class="tab-pane active" id="tab-inicio">
-        <!-- Banner Climático Oficial (INMET) -->
-        <div class="clima-banner" id="clima-banner" onclick="abrirClimaBanner()">
-          <div style="font-size:20px; line-height:1;">⛈️</div>
-          <div style="flex:1; min-width:0;">
-            <div class="clima-badge" id="clima-badge">ALERTA METEOROLÓGICO • INMET</div>
-            <div class="clima-title" id="clima-title"></div>
-            <div class="clima-desc" id="clima-desc"></div>
-          </div>
-        </div>
-
-        <!-- 3 Contadores Slim -->
-        <div class="kpi-grid">
-          <button type="button" class="kpi-card" onclick="trocarAba('pets')">
-            <div class="kpi-top">
-              <span class="kpi-dot" style="background:var(--accent-pet);"></span>
-              <span style="font-size:11px; color:var(--text-dim);">Comunidade</span>
+        <!-- Bloco 1: Painel Climático de Cascavel -->
+        <div class="weather-card" id="weather-card">
+          <div class="weather-top">
+            <div class="weather-temp-wrap">
+              <div class="weather-ico" id="w-ico">⛅</div>
+              <div>
+                <div class="weather-temp" id="w-temp">--°</div>
+                <div style="font-size:11px; color:var(--text-muted); margin-top:2px;">Cascavel • Agora</div>
+              </div>
             </div>
-            <div class="kpi-num" id="kpi-pets">--</div>
-            <div class="kpi-label">Pets ativos</div>
-          </button>
-
-          <button type="button" class="kpi-card" onclick="irParaMapaComFiltro('seguranca')">
-            <div class="kpi-top">
-              <span class="kpi-dot" style="background:var(--accent-seg);"></span>
-              <span style="font-size:11px; color:var(--text-dim);">Imprensa</span>
-            </div>
-            <div class="kpi-num" id="kpi-seg">--</div>
-            <div class="kpi-label">Segurança</div>
-          </button>
-
-          <button type="button" class="kpi-card" onclick="irParaMapaComFiltro('utilidade')">
-            <div class="kpi-top">
-              <span class="kpi-dot" style="background:var(--accent-uti);"></span>
-              <span style="font-size:11px; color:var(--text-dim);">Oficial</span>
-            </div>
-            <div class="kpi-num" id="kpi-uti">--</div>
-            <div class="kpi-label">Utilidade</div>
-          </button>
-        </div>
-
-        <!-- Ação Única do Usuário: + Registrar Pet -->
-        <button type="button" class="cta-pet-bar" onclick="abrirModalPet('pet_perdido')">
-          <div class="cta-pet-left">
-            <div class="cta-pet-ico">+</div>
             <div>
-              <div class="cta-pet-title">Registrar Pet (Perdido ou Avistado)</div>
-              <div class="cta-pet-sub">Cadastre um pet desaparecido ou informe um avistamento</div>
+              <div class="weather-cond" id="w-cond">Carregando clima...</div>
+              <div class="weather-hl" id="w-hl">Máx --° • Mín --°</div>
             </div>
           </div>
-          <span style="font-size:16px; color:var(--accent-pet); font-weight:800;">›</span>
-        </button>
+          <div class="weather-metrics">
+            <div class="w-metric">
+              <div class="w-metric-val" id="w-sens">--°</div>
+              <div class="w-metric-lbl">Sensação</div>
+            </div>
+            <div class="w-metric">
+              <div class="w-metric-val" id="w-umid">--%</div>
+              <div class="w-metric-lbl">Umidade</div>
+            </div>
+            <div class="w-metric">
+              <div class="w-metric-val" id="w-vento">-- km/h</div>
+              <div class="w-metric-lbl">Vento</div>
+            </div>
+            <div class="w-metric">
+              <div class="w-metric-val" id="w-chuva">--%</div>
+              <div class="w-metric-lbl">Chuva</div>
+            </div>
+          </div>
+        </div>
 
-        <!-- Carrossel de Pets Desaparecidos -->
-        <div class="section-head">
-          <div class="section-title">Pets na Região</div>
-          <button type="button" class="section-link" onclick="trocarAba('pets')">Ver todos ›</button>
+        <!-- Bloco 2: Esteira Rolante Dinâmica (Branca sem alerta / Amarela / Laranja / Vermelha) -->
+        <div class="alert-ticker" id="alert-ticker" onclick="abrirClimaBanner()">
+          <div class="ticker-track" id="ticker-track">
+            <span class="ticker-item">● Monitoramento climático de Cascavel em tempo real...</span>
+            <span class="ticker-item">● Monitoramento climático de Cascavel em tempo real...</span>
+          </div>
         </div>
-        <div class="pets-carousel" id="home-pets-carousel"></div>
 
-        <!-- Feed Oficial (Segurança & Utilidade Pública) -->
-        <div class="section-head">
-          <div class="section-title">Boletins Oficiais • Cascavel</div>
-          <button type="button" class="section-link" onclick="trocarAba('mapa')">Abrir mapa ›</button>
+        <!-- Bloco 3: Esteira de Pets Desaparecidos -->
+        <div class="belt-block">
+          <div class="belt-head">
+            <div class="belt-title"><span class="belt-dot" style="background:var(--accent-pet);"></span> Pets Desaparecidos</div>
+            <button type="button" class="section-link" onclick="trocarAba('pets')">Ver todos ›</button>
+          </div>
+          <div class="belt-viewport">
+            <div class="belt-track slow" id="belt-pets-track"></div>
+          </div>
         </div>
-        <div class="pills-row" id="home-feed-pills">
-          <button type="button" class="pill active" onclick="filtrarFeedHome('todos', this)">Todos</button>
-          <button type="button" class="pill" onclick="filtrarFeedHome('utilidade', this)">Utilidade Pública</button>
-          <button type="button" class="pill" onclick="filtrarFeedHome('seguranca', this)">Segurança</button>
+
+        <!-- Bloco 4: Esteira de Utilidade Pública -->
+        <div class="belt-block">
+          <div class="belt-head">
+            <div class="belt-title"><span class="belt-dot" style="background:var(--accent-uti);"></span> Utilidade Pública</div>
+            <button type="button" class="section-link" style="color:var(--accent-uti);" onclick="irParaMapaComFiltro('utilidade')">Mapa ›</button>
+          </div>
+          <div class="belt-viewport">
+            <div class="belt-track med" id="belt-utilidade-track"></div>
+          </div>
         </div>
-        <div class="feed-list" id="home-feed-list"></div>
+
+        <!-- Bloco 5: Esteira de Segurança (Imprensa) -->
+        <div class="belt-block">
+          <div class="belt-head">
+            <div class="belt-title"><span class="belt-dot" style="background:var(--accent-seg);"></span> Segurança • Imprensa</div>
+            <button type="button" class="section-link" style="color:var(--accent-seg);" onclick="irParaMapaComFiltro('seguranca')">Mapa ›</button>
+          </div>
+          <div class="belt-viewport">
+            <div class="belt-track med" id="belt-seguranca-track"></div>
+          </div>
+        </div>
       </section>
 
       <!-- ABA 2: MAPA FIXO DE CALOR (CARTO HD + SATÉLITE ESRI) -->
@@ -1486,38 +1717,115 @@
     <div class="sheet" id="detalhe-conteudo"></div>
   </div>
 
-  <!-- ==================== MODAL: PERFIL & STATUS GPS ==================== -->
-  <div class="sheet-backdrop" id="modal-perfil" onclick="if(event.target===this) fecharModal('modal-perfil')">
-    <div class="sheet">
-      <div class="sheet-handle"></div>
-      <div class="sheet-header">
-        <div class="sheet-title">Alerta Urbano • Status</div>
-        <button type="button" class="sheet-close" onclick="fecharModal('modal-perfil')">✕</button>
+  <!-- ==================== TELA COMPLETA: MEU PERFIL & CADASTRO ==================== -->
+  <div class="full-screen-view" id="modal-perfil">
+    <div class="fs-header">
+      <button type="button" class="fs-back" onclick="fecharModal('modal-perfil')">‹ Voltar</button>
+      <div style="text-align:center;">
+        <div style="font-size:15px; font-weight:800;">Meu Perfil</div>
+        <div style="font-size:10px; color:var(--text-muted); font-weight:700;" id="perfil-gps-txt">GPS sincronizando...</div>
       </div>
-      <div class="settings-group">
-        <div class="setting-row">
-          <div>
-            <div class="setting-title">Cidade Ativa</div>
-            <div class="setting-sub">Preparado para expansão regional PR</div>
+      <button type="button" class="fs-save" onclick="salvarPerfilUsuario()">Salvar</button>
+    </div>
+
+    <div class="fs-body">
+      <!-- Card Identidade com Foto Editável -->
+      <div class="perfil-hero">
+        <div class="perfil-avatar-wrap" onclick="document.getElementById('perfil-input-foto').click()">
+          <div class="perfil-avatar-circle">
+            <span id="perfil-avatar-letter">U</span>
+            <img id="perfil-avatar-img" src="" alt="Foto">
           </div>
-          <span class="source-tag utilidade">Cascavel • PR</span>
+          <div class="perfil-avatar-plus">+</div>
         </div>
-        <div class="setting-row">
-          <div>
-            <div class="setting-title">Sinal GPS</div>
-            <div class="setting-sub" id="perfil-gps-txt">Localizando aparelho...</div>
-          </div>
-          <button type="button" class="btn-slim" onclick="tentarReconectarGPS(true)">Atualizar</button>
+        <input type="file" id="perfil-input-foto" accept="image/*" style="display:none;" onchange="uploadFotoPerfil(this)">
+        <div style="flex:1; min-width:0;">
+          <div id="perfil-display-nome" style="font-size:16px; font-weight:800; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">Seu Nome</div>
+          <div id="perfil-display-sub" style="font-size:12px; color:var(--text-muted); margin-top:2px;">Centro • Cascavel - PR</div>
         </div>
-        <div class="setting-row">
-          <div>
-            <div class="setting-title">Fontes Oficiais Ativas</div>
-            <div class="setting-sub">CGN, CATVE, INMET, Sanepar, Copel, Transitar e Prefeitura</div>
-          </div>
-          <span class="source-tag pet">v3.0</span>
+        <span class="source-tag pet">Ativo</span>
+      </div>
+
+      <!-- Grupo 1: Cadastro do Cidadão -->
+      <div class="perfil-section-lbl"><span>Identificação & Cadastro</span></div>
+      <div class="perfil-card-box">
+        <div class="form-group">
+          <label class="form-label" for="perfil-input-nome">Seu Nome Completo</label>
+          <input type="text" class="form-input" id="perfil-input-nome" placeholder="Digite seu nome (Ex: Rigo)" oninput="atualizarPreviewPerfil()">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="perfil-input-whatsapp">WhatsApp / Telefone</label>
+          <input type="tel" class="form-input" id="perfil-input-whatsapp" placeholder="(45) 99999-9999">
+        </div>
+        <div class="form-group" style="margin-bottom:0;">
+          <label class="form-label" for="perfil-select-bairro">Seu Bairro em Cascavel</label>
+          <select class="form-select" id="perfil-select-bairro" onchange="atualizarPreviewPerfil()">
+            <option value="Centro">Centro</option>
+            <option value="Alto Alegre">Alto Alegre</option>
+            <option value="Brasmadeira">Brasmadeira</option>
+            <option value="Canadá">Canadá</option>
+            <option value="Cancelli">Cancelli</option>
+            <option value="Cascavel Velho">Cascavel Velho</option>
+            <option value="Cataratas">Cataratas</option>
+            <option value="Cidade Verde">Cidade Verde</option>
+            <option value="Claudete">Claudete</option>
+            <option value="Coqueiral">Coqueiral</option>
+            <option value="Country">Country</option>
+            <option value="Esmeralda">Esmeralda</option>
+            <option value="Floresta">Floresta</option>
+            <option value="Guarujá">Guarujá</option>
+            <option value="Interlagos">Interlagos</option>
+            <option value="Maria Luiza">Maria Luiza</option>
+            <option value="Morumbi">Morumbi</option>
+            <option value="Neva">Neva</option>
+            <option value="Pacaembu">Pacaembu</option>
+            <option value="Parque São Paulo">Parque São Paulo</option>
+            <option value="Periolo">Periolo</option>
+            <option value="Pioneiros Catarinenses">Pioneiros Catarinenses</option>
+            <option value="Quatorze de Novembro">14 de Novembro</option>
+            <option value="Recanto Tropical">Recanto Tropical</option>
+            <option value="Santa Cruz">Santa Cruz</option>
+            <option value="Santa Felicidade">Santa Felicidade</option>
+            <option value="Santo Onofre">Santo Onofre</option>
+            <option value="São Cristóvão">São Cristóvão</option>
+            <option value="Tarumã">Tarumã</option>
+            <option value="Universitário">Universitário</option>
+          </select>
         </div>
       </div>
-      <a href="/politica_privacidade.html" target="_blank" class="btn-full" style="margin-top:8px;">Política de Privacidade & LGPD</a>
+
+      <!-- Grupo 2: Meus Pets Cadastrados -->
+      <div class="perfil-section-lbl">
+        <span>Meus Registros de Pets</span>
+        <span id="perfil-total-minhas" style="color:var(--accent-pet);">0 no ar</span>
+      </div>
+      <div id="perfil-lista-meus-pets" style="display:flex; flex-direction:column; gap:8px; margin-bottom:16px;"></div>
+
+      <!-- Grupo 3: Empresas Parceiras & Clube de Vantagens -->
+      <div class="perfil-section-lbl">
+        <span>Parceiros de Cascavel</span>
+        <span style="color:var(--accent-ok);">Clube</span>
+      </div>
+      <div class="perfil-card-box">
+        <div class="partner-row">
+          <div class="partner-badge">PET</div>
+          <div>
+            <div style="font-size:12px; font-weight:800;">Clínicas & Pet Shops Parceiros</div>
+            <div style="font-size:11px; color:var(--text-muted);">Apoio à rede solidária de animais de Cascavel</div>
+          </div>
+        </div>
+        <div class="partner-row">
+          <div class="partner-badge">POSTO</div>
+          <div>
+            <div style="font-size:12px; font-weight:800;">Rede de Postos & Serviços</div>
+            <div style="font-size:11px; color:var(--text-muted);">Benefícios exclusivos para motoristas e moradores</div>
+          </div>
+        </div>
+        <a href="https://wa.me/5545999999999?text=Ol%C3%A1!%20Tenho%20interesse%20em%20ser%20empresa%20parceira%20no%20Alerta%20Urbano%20Cascavel" target="_blank" class="btn-full" style="margin-top:6px;">Anunciar Minha Empresa Aqui</a>
+      </div>
+
+      <button type="button" class="btn-submit" style="background:var(--accent-ok); color:#ffffff; margin-bottom:10px;" onclick="salvarPerfilUsuario()">Salvar Alterações</button>
+      <a href="/politica_privacidade.html" target="_blank" class="btn-full">Política de Privacidade & LGPD</a>
     </div>
   </div>
 
@@ -1553,8 +1861,7 @@
       theme: localStorage.getItem('au_theme') || 'dark',
       tab: 'inicio',
       alertas: [],
-      resumo: null,
-      feedHomeFilter: 'todos',
+      clima: null,
       petsSubFilter: 'desaparecido',
       mapaFilter: 'todos',
       satelite: false,
@@ -1565,6 +1872,9 @@
         const t = 'au_' + Math.random().toString(36).slice(2) + Date.now().toString(36);
         localStorage.setItem('au_autor_token', t);
         return t;
+      })(),
+      perfil: (() => {
+        try { return JSON.parse(localStorage.getItem('au_perfil') || '{}'); } catch (_) { return {}; }
       })(),
       fotoUploadUrl: ''
     };
@@ -1623,6 +1933,8 @@
     }
 
     function voltarNavegacao() {
+      const openFs = document.querySelector('.full-screen-view.open');
+      if (openFs) { openFs.classList.remove('open'); return; }
       const openSheet = document.querySelector('.sheet-backdrop.open');
       if (openSheet) { openSheet.classList.remove('open'); return; }
       if (state.tab !== 'inicio') trocarAba('inicio');
@@ -1758,51 +2070,68 @@
       }
     }
 
-    /* ==================== DADOS & RENDERIZAÇÃO ==================== */
+    /* ==================== DADOS & RENDERIZAÇÃO v3.1 ==================== */
     async function carregarDados() {
       try {
-        const [resResumo, resAlertas] = await Promise.all([
-          fetch('/api/resumo?cidade=Cascavel'),
+        const [resClima, resAlertas] = await Promise.all([
+          fetch('/api/clima?cidade=Cascavel'),
           fetch('/api/alertas?cidade=Cascavel')
         ]);
-        if (resResumo.ok) state.resumo = await resResumo.json();
+        if (resClima.ok) state.clima = await resClima.json();
         if (resAlertas.ok) state.alertas = await resAlertas.json();
 
         renderizarDashboard();
         renderizarPetsAba();
         renderizarMapa();
         preencherSelectPetsPai();
+        renderizarMeusPetsPerfil();
       } catch (e) {
         console.error('Erro ao carregar dados:', e);
       }
     }
 
     function renderizarDashboard() {
-      const r = state.resumo || {};
-      const totalPets = (r.pets_perdidos || 0) + (r.pets_avistados || 0);
-      document.getElementById('kpi-pets').textContent = totalPets;
-      document.getElementById('kpi-seg').textContent = r.seguranca || 0;
-      document.getElementById('kpi-uti').textContent = r.utilidade || 0;
+      // 1. Painel Climático de Cascavel
+      const c = state.clima;
+      if (c) {
+        document.getElementById('w-ico').textContent = c.icone || '⛅';
+        document.getElementById('w-temp').textContent = `${c.temp}°`;
+        document.getElementById('w-cond').textContent = c.condicao || 'Monitorando';
+        document.getElementById('w-hl').textContent = `Máx ${c.max}° • Mín ${c.min}°`;
+        document.getElementById('w-sens').textContent = `${c.sensacao}°`;
+        document.getElementById('w-umid').textContent = `${c.umidade}%`;
+        document.getElementById('w-vento').textContent = `${c.vento} km/h`;
+        document.getElementById('w-chuva').textContent = `${c.chance_chuva}%`;
 
-      // Banner Climático (INMET)
-      const banner = document.getElementById('clima-banner');
-      if (r.alerta_clima) {
-        banner.classList.add('show');
-        banner.classList.toggle('critico', r.alerta_clima.severidade === 'critico');
-        document.getElementById('clima-badge').textContent = `ALERTA CLIMÁTICO • ${r.alerta_clima.fonte_nome || 'INMET'}`;
-        document.getElementById('clima-title').textContent = r.alerta_clima.titulo || 'Aviso Meteorológico';
-        document.getElementById('clima-desc').textContent = r.alerta_clima.descricao || '';
-      } else {
-        banner.classList.remove('show');
+        // 2. Esteira Rolante Dinâmica (Branca sem alerta | Amarela | Laranja | Vermelha)
+        const ticker = document.getElementById('alert-ticker');
+        const track = document.getElementById('ticker-track');
+        ticker.classList.remove('amarelo', 'laranja', 'vermelho');
+        let frases = [];
+        if (c.alertas && c.alertas.length > 0) {
+          if (c.nivel_alerta && c.nivel_alerta !== 'normal') {
+            ticker.classList.add(c.nivel_alerta);
+          }
+          const prefixo = c.nivel_alerta === 'vermelho' ? '🔴 ALERTA VERMELHO'
+            : (c.nivel_alerta === 'laranja' ? '🟠 ALERTA LARANJA' : '🟡 ALERTA CLIMÁTICO');
+          frases = c.alertas.map(al => `${prefixo} (${al.fonte_nome || 'INMET'}): ${al.titulo} — ${al.descricao}`);
+        } else {
+          frases = [
+            `● Sem alertas climáticos críticos em Cascavel • ${c.condicao} • ${c.temp}°C (Sensação ${c.sensacao}°C) • Umidade ${c.umidade}% • Vento ${c.vento} km/h`
+          ];
+        }
+        const linha = frases.join('   •   ');
+        track.innerHTML = `<span class="ticker-item">${escapeHtml(linha)}</span><span class="ticker-item">${escapeHtml(linha)}</span>`;
       }
 
-      // Carrossel de Pets
-      const pets = state.alertas.filter(a => a.pilar === 'pet').slice(0, 12);
-      const car = document.getElementById('home-pets-carousel');
+      // 3. Esteira Bloco A — Pets Desaparecidos
+      const pets = state.alertas.filter(a => a.pilar === 'pet').slice(0, 14);
+      const beltPets = document.getElementById('belt-pets-track');
       if (!pets.length) {
-        car.innerHTML = '<div class="empty-box" style="width:100%;">Nenhum pet ativo no momento em Cascavel.</div>';
+        beltPets.className = 'belt-track static';
+        beltPets.innerHTML = '<div class="empty-box" style="width:100%;">Nenhum pet ativo em Cascavel no momento.</div>';
       } else {
-        car.innerHTML = pets.map(p => {
+        const cardsHtml = pets.map(p => {
           const av = p.status_pet === 'avistado' || p.tipo === 'pet_avistado';
           const img = p.foto_url
             ? `<img class="pet-mini-img" src="${escapeAttr(p.foto_url)}" alt="${escapeAttr(p.titulo)}" loading="lazy">`
@@ -1820,45 +2149,38 @@
             </div>
           `;
         }).join('');
+        beltPets.className = pets.length >= 3 ? 'belt-track slow' : 'belt-track static';
+        beltPets.innerHTML = pets.length >= 3 ? (cardsHtml + cardsHtml) : cardsHtml;
       }
 
-      renderizarFeedHome();
+      // 4. Esteira Bloco B — Utilidade Pública
+      renderizarEsteiraInfo('belt-utilidade-track', state.alertas.filter(a => a.pilar === 'utilidade').slice(0, 14), 'Nenhum comunicado de utilidade pública recente.');
+
+      // 5. Esteira Bloco C — Segurança (Imprensa)
+      renderizarEsteiraInfo('belt-seguranca-track', state.alertas.filter(a => a.pilar === 'seguranca').slice(0, 14), 'Nenhuma ocorrência policial recente.');
     }
 
-    function filtrarFeedHome(filtro, el) {
-      state.feedHomeFilter = filtro;
-      document.querySelectorAll('#home-feed-pills .pill').forEach(p => p.classList.remove('active'));
-      if (el) el.classList.add('active');
-      renderizarFeedHome();
-    }
-
-    function renderizarFeedHome() {
-      const lista = state.alertas.filter(a => {
-        if (a.pilar === 'pet') return false;
-        if (state.feedHomeFilter === 'todos') return true;
-        return a.pilar === state.feedHomeFilter;
-      }).slice(0, 30);
-
-      const container = document.getElementById('home-feed-list');
+    function renderizarEsteiraInfo(elId, lista, vazioMsg) {
+      const el = document.getElementById(elId);
+      if (!el) return;
       if (!lista.length) {
-        container.innerHTML = '<div class="empty-box">Nenhum boletim oficial recente nesta categoria.</div>';
+        el.className = 'belt-track static';
+        el.innerHTML = `<div class="empty-box" style="width:280px;">${escapeHtml(vazioMsg)}</div>`;
         return;
       }
-
-      container.innerHTML = lista.map(a => `
-        <div class="feed-card" onclick="abrirDetalheById(${a.id})">
-          <div class="feed-meta">
-            <span class="source-tag ${a.pilar}">${escapeHtml(a.fonte_nome || 'Oficial')} • ${a.pilar === 'seguranca' ? 'Segurança' : 'Utilidade'}</span>
+      const html = lista.map(a => `
+        <div class="belt-info-card" onclick="abrirDetalheById(${a.id})">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:6px;">
+            <span class="source-tag ${a.pilar}">${escapeHtml(a.fonte_nome || 'Oficial')}</span>
             <span class="feed-time">${tempoRelativo(a.created_at)}</span>
           </div>
-          <div class="feed-title">${escapeHtml(a.titulo)}</div>
-          <div class="feed-desc">${escapeHtml(a.descricao || '')}</div>
-          <div class="feed-foot">
-            <span>📍 ${escapeHtml(a.bairro || 'Cascavel')}</span>
-            <span style="font-weight:700; color:var(--text-muted);">Detalhes ›</span>
-          </div>
+          <div class="belt-info-title">${escapeHtml(a.titulo)}</div>
+          <div class="belt-info-desc">${escapeHtml(a.descricao || '')}</div>
+          <div class="belt-info-loc">📍 ${escapeHtml(a.bairro || 'Cascavel')}</div>
         </div>
       `).join('');
+      el.className = lista.length >= 2 ? 'belt-track med' : 'belt-track static';
+      el.innerHTML = lista.length >= 2 ? (html + html) : html;
     }
 
     function filtrarPetsAba(sub, el) {
@@ -1885,25 +2207,31 @@
 
       el.innerHTML = pets.map(p => {
         const av = p.status_pet === 'avistado' || p.tipo === 'pet_avistado';
+        const ehImprensa = p.fonte_tipo === 'imprensa' || (!p.contato && p.link_noticia);
         const thumb = p.foto_url
           ? `<img class="pet-card-thumb" src="${escapeAttr(p.foto_url)}" alt="Pet" loading="lazy">`
           : `<div class="pet-card-thumb" style="display:flex;align-items:center;justify-content:center;font-size:30px;">🐾</div>`;
         const avCount = p.avistamentos_count ? ` • ${p.avistamentos_count} avist.` : '';
+        const origemBadge = ehImprensa ? `${escapeHtml(p.fonte_nome || 'CGN')} • Imprensa` : (av ? 'Avistado' : 'Comunidade');
         return `
           <div class="pet-card" onclick="abrirDetalheById(${p.id})">
             ${thumb}
             <div class="pet-card-info">
               <div>
                 <div style="display:flex;align-items:center;justify-content:space-between;gap:6px;margin-bottom:3px;">
-                  <span class="source-tag pet">${av ? 'Avistado' : 'Desaparecido'}</span>
+                  <span class="source-tag pet">${origemBadge}</span>
                   <span class="feed-time">${tempoRelativo(p.created_at)}</span>
                 </div>
                 <div class="pet-card-title">${escapeHtml(p.titulo)}</div>
                 <div class="pet-card-sub">📍 ${escapeHtml(p.bairro || 'Cascavel')}${avCount}</div>
               </div>
               <div class="pet-card-actions" onclick="event.stopPropagation()">
-                ${!av ? `<button type="button" class="btn-slim pet" onclick="registrarAvistamentoRapido(${p.id})">Avistei aqui</button>` : ''}
-                <button type="button" class="btn-slim" onclick="abrirDetalheById(${p.id})">Ver ficha</button>
+                ${ehImprensa
+                  ? `<button type="button" class="btn-slim" onclick="registrarAvistamentoRapido(${p.id}, false)">📍 Marcar onde vi</button>
+                     ${p.link_noticia ? `<a href="${escapeAttr(p.link_noticia)}" target="_blank" class="btn-slim pet" style="text-decoration:none;">📰 Contato ${escapeHtml(p.fonte_nome || 'CGN')}</a>` : ''}`
+                  : `${!av ? `<button type="button" class="btn-slim pet" onclick="registrarAvistamentoRapido(${p.id}, true)">🐾 Avistei aqui</button>` : ''}
+                     <button type="button" class="btn-slim" onclick="abrirDetalheById(${p.id})">Ver ficha</button>`
+                }
               </div>
             </div>
           </div>
@@ -1918,10 +2246,12 @@
     }
 
     function abrirClimaBanner() {
-      if (state.resumo && state.resumo.alerta_clima) {
-        const c = state.resumo.alerta_clima;
+      if (state.clima && state.clima.alertas && state.clima.alertas.length > 0) {
+        const c = state.clima.alertas[0];
         const found = state.alertas.find(a => a.id === c.id);
         abrirDetalhe(found || Object.assign({ pilar: 'utilidade', bairro: 'Cascavel' }, c));
+      } else {
+        mostrarToast('Sem alertas climáticos críticos ativos em Cascavel.');
       }
     }
 
@@ -1930,6 +2260,7 @@
       const ehPet = a.pilar === 'pet';
       const ehDono = a.autor_token && a.autor_token === state.autorToken;
       const ehAvistado = a.status_pet === 'avistado' || a.tipo === 'pet_avistado';
+      const ehImprensaPet = ehPet && (a.fonte_tipo === 'imprensa' || (!a.contato && a.link_noticia));
 
       let photoHtml = a.foto_url ? `<img src="${escapeAttr(a.foto_url)}" class="detail-photo" alt="Foto">` : '';
       let extraMeta = '';
@@ -1940,14 +2271,19 @@
 
       let botoes = '';
       if (ehPet && !ehAvistado) {
-        botoes += `<button type="button" class="btn-full pet" onclick="registrarAvistamentoRapido(${a.id})">🐾 Avistei este Pet Agora (Marcar no GPS)</button>`;
+        if (ehImprensaPet) {
+          botoes += `<button type="button" class="btn-full" onclick="registrarAvistamentoRapido(${a.id}, false)">📍 Marcar no Mapa onde Vi este Pet</button>`;
+        } else {
+          botoes += `<button type="button" class="btn-full pet" onclick="registrarAvistamentoRapido(${a.id}, true)">🐾 Avistei este Pet Agora (Mapa + WhatsApp)</button>`;
+        }
       }
-      if (ehPet && a.contato) {
+      if (ehPet && !ehImprensaPet && a.contato) {
         const msg = encodeURIComponent(`Olá! Vi o registro de "${a.titulo}" no aplicativo Alerta Urbano Cascavel.`);
-        botoes += `<a href="https://wa.me/${escapeAttr(a.contato)}?text=${msg}" target="_blank" class="btn-full whatsapp">💬 Falar no WhatsApp</a>`;
+        botoes += `<a href="https://wa.me/${escapeAttr(a.contato)}?text=${msg}" target="_blank" class="btn-full whatsapp">💬 Falar com o Tutor no WhatsApp</a>`;
       }
       if (a.link_noticia) {
-        botoes += `<a href="${escapeAttr(a.link_noticia)}" target="_blank" class="btn-full imprensa">📰 Ler Matéria Completa (${escapeHtml(a.fonte_nome || 'Fonte')})</a>`;
+        const lbl = ehImprensaPet ? `📰 Ver Contato na Matéria (${a.fonte_nome || 'CGN'})` : `📰 Ler Matéria Completa (${a.fonte_nome || 'Fonte'})`;
+        botoes += `<a href="${escapeAttr(a.link_noticia)}" target="_blank" class="btn-full imprensa">${escapeHtml(lbl)}</a>`;
       }
       if (a.lat && a.lng) {
         botoes += `<button type="button" class="btn-full" onclick="focarPontoNoMapa(${a.lat}, ${a.lng})">🗺️ Ver Região no Mapa de Calor</button>`;
@@ -1956,6 +2292,12 @@
         botoes += `<button type="button" class="btn-full" onclick="renovarMeuPet(${a.id})">↻ Renovar por +48h</button>`;
         botoes += `<button type="button" class="btn-full danger" onclick="encerrarMeuPet(${a.id})">✓ Marcar como Encontrado / Encerrar</button>`;
       }
+
+      let notaTutorImprensa = ehImprensaPet
+        ? `<div style="margin-top:12px; padding:10px 12px; border-radius:12px; background:var(--bg-subtle); border:1px solid var(--border); font-size:11px; color:var(--text-muted); line-height:1.4;">
+             <b>Aviso de Privacidade:</b> Este registro veio de notícia pública (${escapeHtml(a.fonte_nome || 'CGN')}). Não copiamos dados pessoais de terceiros. Se você é o tutor, cadastre direto pelo botão <b>+ Registrar Pet</b> para receber avistamentos no seu WhatsApp.
+           </div>`
+        : '';
 
       box.innerHTML = `
         <div class="sheet-handle"></div>
@@ -1969,6 +2311,7 @@
         ${extraMeta}
         <div style="font-size:13px;color:var(--text);line-height:1.5;margin-top:10px;">${escapeHtml(a.descricao || 'Sem descrição adicional.')}</div>
         <div class="detail-actions">${botoes}</div>
+        ${notaTutorImprensa}
       `;
 
       document.getElementById('modal-detalhe').classList.add('open');
@@ -1988,6 +2331,15 @@
       document.getElementById('form-pet').reset();
       document.getElementById('pet-foto-preview').style.display = 'none';
       document.getElementById('photo-upload-hint').textContent = '📷 Toque para escolher ou tirar uma foto';
+      // Pré-preenche bairro e WhatsApp se já cadastrados no Perfil
+      if (state.perfil && state.perfil.bairro) {
+        const bSel = document.getElementById('pet-bairro');
+        if (bSel) bSel.value = state.perfil.bairro;
+      }
+      if (state.perfil && state.perfil.whatsapp) {
+        const cInp = document.getElementById('pet-contato');
+        if (cInp) cInp.value = state.perfil.whatsapp;
+      }
       selecionarModoPet(modo || 'pet_perdido');
       preencherSelectPetsPai();
       document.getElementById('modal-pet').classList.add('open');
@@ -2118,9 +2470,10 @@
       }
     }
 
-    async function registrarAvistamentoRapido(petId) {
+    async function registrarAvistamentoRapido(petId, abrirWhatsappSeAutorizado) {
       const lat = state.userLat || CASCAVEL_CENTER[0];
       const lng = state.userLng || CASCAVEL_CENTER[1];
+      const pet = state.alertas.find(a => a.id === petId);
       try {
         const resp = await fetch(`/api/pets/${petId}/avistamento`, {
           method: 'POST',
@@ -2134,8 +2487,16 @@
         });
         if (resp.ok) {
           fecharModal('modal-detalhe');
-          mostrarToast('Avistamento marcado! O mapa de busca foi atualizado.');
+          mostrarToast('Ponto de avistamento marcado no mapa de busca!');
           carregarDados();
+          // Somente abre WhatsApp se o pet foi cadastrado no app com autorização LGPD do tutor
+          if (abrirWhatsappSeAutorizado && pet && pet.contato && pet.fonte_tipo !== 'imprensa') {
+            const mapsLink = `https://maps.google.com/?q=${lat},${lng}`;
+            const msg = encodeURIComponent(`Olá! Acabei de avistar "${pet.titulo}" pelo Alerta Urbano Cascavel. Localização aproximada: ${mapsLink}`);
+            if (confirm('Avistamento marcado no mapa! Deseja abrir o WhatsApp para enviar a localização exata ao tutor?')) {
+              window.open(`https://wa.me/${pet.contato}?text=${msg}`, '_blank');
+            }
+          }
         } else {
           mostrarToast('Não foi possível registrar o avistamento.');
         }
@@ -2306,7 +2667,114 @@
       if (txt) txt.textContent = texto;
     }
 
+    /* ==================== PERFIL COMPLETO & CADASTRO ==================== */
+    function carregarPerfilUsuario() {
+      const p = state.perfil || {};
+      const inpNome = document.getElementById('perfil-input-nome');
+      const inpWa = document.getElementById('perfil-input-whatsapp');
+      const selBairro = document.getElementById('perfil-select-bairro');
+      if (inpNome && p.nome) inpNome.value = p.nome;
+      if (inpWa && p.whatsapp) inpWa.value = p.whatsapp;
+      if (selBairro && p.bairro) selBairro.value = p.bairro;
+      if (p.foto_url) {
+        const img = document.getElementById('perfil-avatar-img');
+        const letEl = document.getElementById('perfil-avatar-letter');
+        if (img) { img.src = p.foto_url; img.style.display = 'block'; }
+        if (letEl) letEl.style.display = 'none';
+      }
+      atualizarPreviewPerfil();
+      renderizarMeusPetsPerfil();
+    }
+
+    function atualizarPreviewPerfil() {
+      const nome = (document.getElementById('perfil-input-nome')?.value || '').trim();
+      const bairro = document.getElementById('perfil-select-bairro')?.value || 'Centro';
+      const dispNome = document.getElementById('perfil-display-nome');
+      const dispSub = document.getElementById('perfil-display-sub');
+      const letEl = document.getElementById('perfil-avatar-letter');
+      if (dispNome) dispNome.textContent = nome || 'Seu Nome';
+      if (dispSub) dispSub.textContent = `${bairro} • Cascavel - PR`;
+      if (letEl && (!state.perfil || !state.perfil.foto_url)) {
+        letEl.textContent = (nome ? nome[0] : 'U').toUpperCase();
+      }
+    }
+
+    async function uploadFotoPerfil(input) {
+      const file = input.files && input.files[0];
+      if (!file) return;
+      const fd = new FormData();
+      fd.append('foto', file);
+      try {
+        const resp = await fetch('/api/upload', { method: 'POST', body: fd });
+        const data = await resp.json();
+        if (resp.ok && data.url) {
+          state.perfil = Object.assign({}, state.perfil, { foto_url: data.url });
+          localStorage.setItem('au_perfil', JSON.stringify(state.perfil));
+          const img = document.getElementById('perfil-avatar-img');
+          const letEl = document.getElementById('perfil-avatar-letter');
+          if (img) { img.src = data.url; img.style.display = 'block'; }
+          if (letEl) letEl.style.display = 'none';
+          mostrarToast('Foto de perfil atualizada!');
+        }
+      } catch (_) {
+        mostrarToast('Erro ao enviar foto de perfil');
+      }
+    }
+
+    async function salvarPerfilUsuario() {
+      const nome = (document.getElementById('perfil-input-nome')?.value || '').trim();
+      const whatsapp = (document.getElementById('perfil-input-whatsapp')?.value || '').trim();
+      const bairro = document.getElementById('perfil-select-bairro')?.value || 'Centro';
+
+      state.perfil = Object.assign({}, state.perfil, { nome, whatsapp, bairro, cidade: 'Cascavel' });
+      localStorage.setItem('au_perfil', JSON.stringify(state.perfil));
+      atualizarPreviewPerfil();
+
+      try {
+        await fetch('/api/perfil', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            autor_token: state.autorToken,
+            nome,
+            whatsapp,
+            bairro,
+            cidade: 'Cascavel',
+            foto_url: state.perfil.foto_url || ''
+          })
+        });
+      } catch (_) {}
+
+      mostrarToast('Perfil salvo com sucesso!');
+      fecharModal('modal-perfil');
+    }
+
+    function renderizarMeusPetsPerfil() {
+      const box = document.getElementById('perfil-lista-meus-pets');
+      const tot = document.getElementById('perfil-total-minhas');
+      if (!box) return;
+      const meus = state.alertas.filter(a => a.pilar === 'pet' && a.autor_token && a.autor_token === state.autorToken);
+      if (tot) tot.textContent = `${meus.length} no ar`;
+      if (!meus.length) {
+        box.innerHTML = '<div class="empty-box" style="padding:14px;">Você ainda não cadastrou nenhum pet.</div>';
+        return;
+      }
+      box.innerHTML = meus.map(p => `
+        <div class="perfil-card-box" style="margin-bottom:0; padding:12px; display:flex; align-items:center; justify-content:space-between; gap:10px;">
+          <div style="min-width:0;">
+            <div style="font-size:13px; font-weight:800;">${escapeHtml(p.titulo)}</div>
+            <div style="font-size:11px; color:var(--text-muted);">📍 ${escapeHtml(p.bairro || 'Cascavel')}</div>
+          </div>
+          <div style="display:flex; gap:6px; flex-shrink:0;">
+            <button type="button" class="btn-slim" onclick="renovarMeuPet(${p.id})">↻ 48h</button>
+            <button type="button" class="btn-slim ok" onclick="encerrarMeuPet(${p.id})">Encontrei</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
     function abrirPerfil() {
+      carregarPerfilUsuario();
       document.getElementById('modal-perfil').classList.add('open');
     }
 
@@ -2343,6 +2811,7 @@
     window.addEventListener('DOMContentLoaded', () => {
       aplicarTema(state.theme);
       carregarPrefsCopiloto();
+      carregarPerfilUsuario();
       carregarDados();
       tentarReconectarGPS(false);
 

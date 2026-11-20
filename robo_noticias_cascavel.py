@@ -92,7 +92,12 @@ OUTRAS_CIDADES = [
     "capitão leônidas marques", "capitao leonidas", "marechal cândido rondon",
     "marechal candido", "corbélia", "corbelia", "cafelândia", "cafelandia",
     "medianeira", "matelândia", "matelandia", "são miguel do iguaçu",
+    "rio grande do sul", "santa catarina", "são paulo", "sao paulo",
+    "rio de janeiro", "minas gerais", "bahia", "brasília", "brasilia",
+    "tupanciretã", "porto alegre", "florianópolis", "joinville",
 ]
+
+ESTADOS_FORA_PR = [" rs", " sp", " sc", " rj", " mg", " ba", " go", " ms", " mt", "sp:", "rs:", "rj:"]
 
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
@@ -111,8 +116,10 @@ def limpar_html(texto):
 def eh_outra_cidade(texto_lower):
     if "cascavel" in texto_lower:
         return False
+    if any(est in texto_lower for est in ESTADOS_FORA_PR):
+        return True
     return any(
-        f"em {c}" in texto_lower or f"no {c}" in texto_lower or f"na {c}" in texto_lower or f"de {c}" in texto_lower
+        f"em {c}" in texto_lower or f"no {c}" in texto_lower or f"na {c}" in texto_lower or f"de {c}" in texto_lower or c in texto_lower
         for c in OUTRAS_CIDADES
     )
 
