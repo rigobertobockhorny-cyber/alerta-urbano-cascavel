@@ -1717,6 +1717,34 @@
     <div class="sheet" id="detalhe-conteudo"></div>
   </div>
 
+  <!-- ==================== MODAL: VISTO AQUI (PRIVACIDADE BLINDADA) ==================== -->
+  <div class="sheet-backdrop" id="modal-avistamento" onclick="if(event.target===this) fecharModal('modal-avistamento')">
+    <div class="sheet">
+      <div class="sheet-handle"></div>
+      <div class="sheet-header">
+        <div class="sheet-title">🐾 Visto Aqui</div>
+        <button type="button" class="sheet-close" onclick="fecharModal('modal-avistamento')">✕</button>
+      </div>
+      <div style="font-size:12px; color:var(--text-muted); line-height:1.45; margin-bottom:12px;">
+        Seu ponto GPS será marcado no mapa e o tutor receberá uma notificação pelo Alerta Urbano. <b>Nenhum número de WhatsApp do tutor é exposto.</b>
+      </div>
+      <input type="hidden" id="av-pet-id" value="">
+      <div class="form-group">
+        <label class="form-label">Observação rápida (Opcional)</label>
+        <input type="text" class="form-input" id="av-obs" placeholder="Ex.: Visto correndo sentido Av. Brasil / Estou com ele">
+      </div>
+      <label class="lgpd-box">
+        <input type="checkbox" id="av-permitir-wa" onchange="document.getElementById('av-wa-wrap').style.display = this.checked ? 'block' : 'none'">
+        <span><b>Opcional:</b> Permitir que <b>somente o tutor</b> deste pet possa me chamar no WhatsApp para combinar o resgate.</span>
+      </label>
+      <div class="form-group" id="av-wa-wrap" style="display:none;">
+        <label class="form-label">Seu WhatsApp (visível apenas para o tutor)</label>
+        <input type="tel" class="form-input" id="av-wa-input" placeholder="(45) 99999-9999">
+      </div>
+      <button type="button" class="btn-submit" id="btn-confirmar-av" onclick="confirmarAvistamentoModal()">Enviar "Visto Aqui" ao Tutor</button>
+    </div>
+  </div>
+
   <!-- ==================== TELA COMPLETA: MEU PERFIL & CADASTRO ==================== -->
   <div class="full-screen-view" id="modal-perfil">
     <div class="fs-header">
@@ -1794,7 +1822,14 @@
         </div>
       </div>
 
-      <!-- Grupo 2: Meus Pets Cadastrados -->
+      <!-- Grupo 2: Avistamentos Recebidos (Exclusivo do Tutor) -->
+      <div class="perfil-section-lbl">
+        <span>🐾 Avistamentos dos Meus Pets</span>
+        <span id="perfil-total-avistamentos" style="color:var(--accent-ok);">0 novos</span>
+      </div>
+      <div id="perfil-lista-avistamentos" style="display:flex; flex-direction:column; gap:8px; margin-bottom:16px;"></div>
+
+      <!-- Grupo 3: Meus Pets Cadastrados -->
       <div class="perfil-section-lbl">
         <span>Meus Registros de Pets</span>
         <span id="perfil-total-minhas" style="color:var(--accent-pet);">0 no ar</span>
@@ -2227,9 +2262,9 @@
               </div>
               <div class="pet-card-actions" onclick="event.stopPropagation()">
                 ${ehImprensa
-                  ? `<button type="button" class="btn-slim" onclick="registrarAvistamentoRapido(${p.id}, false)">📍 Marcar onde vi</button>
+                  ? `<button type="button" class="btn-slim" onclick="abrirModalAvistamento(${p.id}, true)">📍 Marcar onde vi</button>
                      ${p.link_noticia ? `<a href="${escapeAttr(p.link_noticia)}" target="_blank" class="btn-slim pet" style="text-decoration:none;">📰 Contato ${escapeHtml(p.fonte_nome || 'CGN')}</a>` : ''}`
-                  : `${!av ? `<button type="button" class="btn-slim pet" onclick="registrarAvistamentoRapido(${p.id}, true)">🐾 Avistei aqui</button>` : ''}
+                  : `${!av ? `<button type="button" class="btn-slim pet" onclick="abrirModalAvistamento(${p.id}, false)">🐾 Visto aqui</button>` : ''}
                      <button type="button" class="btn-slim" onclick="abrirDetalheById(${p.id})">Ver ficha</button>`
                 }
               </div>
@@ -2272,14 +2307,10 @@
       let botoes = '';
       if (ehPet && !ehAvistado) {
         if (ehImprensaPet) {
-          botoes += `<button type="button" class="btn-full" onclick="registrarAvistamentoRapido(${a.id}, false)">📍 Marcar no Mapa onde Vi este Pet</button>`;
+          botoes += `<button type="button" class="btn-full" onclick="abrirModalAvistamento(${a.id}, true)">📍 Marcar no Mapa onde Vi este Pet</button>`;
         } else {
-          botoes += `<button type="button" class="btn-full pet" onclick="registrarAvistamentoRapido(${a.id}, true)">🐾 Avistei este Pet Agora (Mapa + WhatsApp)</button>`;
+          botoes += `<button type="button" class="btn-full pet" onclick="abrirModalAvistamento(${a.id}, false)">🐾 Visto Aqui (Avisar o Tutor)</button>`;
         }
-      }
-      if (ehPet && !ehImprensaPet && a.contato) {
-        const msg = encodeURIComponent(`Olá! Vi o registro de "${a.titulo}" no aplicativo Alerta Urbano Cascavel.`);
-        botoes += `<a href="https://wa.me/${escapeAttr(a.contato)}?text=${msg}" target="_blank" class="btn-full whatsapp">💬 Falar com o Tutor no WhatsApp</a>`;
       }
       if (a.link_noticia) {
         const lbl = ehImprensaPet ? `📰 Ver Contato na Matéria (${a.fonte_nome || 'CGN'})` : `📰 Ler Matéria Completa (${a.fonte_nome || 'Fonte'})`;
@@ -2470,10 +2501,42 @@
       }
     }
 
-    async function registrarAvistamentoRapido(petId, abrirWhatsappSeAutorizado) {
+    function abrirModalAvistamento(petId, ehImprensa) {
+      fecharModal('modal-detalhe');
+      if (ehImprensa) {
+        registrarAvistamentoDireto(petId, 'Pet visto na rua (ponto marcado no mapa comunitário).', false, '');
+        return;
+      }
+      document.getElementById('av-pet-id').value = petId;
+      document.getElementById('av-obs').value = '';
+      const chk = document.getElementById('av-permitir-wa');
+      chk.checked = false;
+      document.getElementById('av-wa-wrap').style.display = 'none';
+      document.getElementById('av-wa-input').value = (state.perfil && state.perfil.whatsapp) ? state.perfil.whatsapp : '';
+      document.getElementById('modal-avistamento').classList.add('open');
+    }
+
+    async function confirmarAvistamentoModal() {
+      const petId = document.getElementById('av-pet-id').value;
+      const obs = document.getElementById('av-obs').value.trim() || 'Pet avistado neste local agora.';
+      const permitir = document.getElementById('av-permitir-wa').checked;
+      const wa = document.getElementById('av-wa-input').value.trim();
+      if (permitir && !wa) {
+        mostrarToast('Informe seu WhatsApp ou desmarque a opção de contato.');
+        return;
+      }
+      const btn = document.getElementById('btn-confirmar-av');
+      btn.disabled = true;
+      btn.textContent = 'Enviando aviso...';
+      await registrarAvistamentoDireto(petId, obs, permitir, wa);
+      btn.disabled = false;
+      btn.textContent = 'Enviar "Visto Aqui" ao Tutor';
+      fecharModal('modal-avistamento');
+    }
+
+    async function registrarAvistamentoDireto(petId, obs, permitirContato, waAvistador) {
       const lat = state.userLat || CASCAVEL_CENTER[0];
       const lng = state.userLng || CASCAVEL_CENTER[1];
-      const pet = state.alertas.find(a => a.id === petId);
       try {
         const resp = await fetch(`/api/pets/${petId}/avistamento`, {
           method: 'POST',
@@ -2481,28 +2544,66 @@
           body: JSON.stringify({
             lat,
             lng,
-            descricao: 'Avistamento rápido registrado via GPS no Alerta Urbano.',
-            autor_token: state.autorToken
+            descricao: obs,
+            autor_token: state.autorToken,
+            permitir_contato_tutor: !!permitirContato,
+            contato_avistador: permitirContato ? waAvistador : '',
+            avistador_nome: (state.perfil && state.perfil.nome) ? state.perfil.nome : ''
           })
         });
         if (resp.ok) {
-          fecharModal('modal-detalhe');
-          mostrarToast('Ponto de avistamento marcado no mapa de busca!');
+          mostrarToast('Visto Aqui enviado! O tutor foi notificado com o ponto no mapa.');
           carregarDados();
-          // Somente abre WhatsApp se o pet foi cadastrado no app com autorização LGPD do tutor
-          if (abrirWhatsappSeAutorizado && pet && pet.contato && pet.fonte_tipo !== 'imprensa') {
-            const mapsLink = `https://maps.google.com/?q=${lat},${lng}`;
-            const msg = encodeURIComponent(`Olá! Acabei de avistar "${pet.titulo}" pelo Alerta Urbano Cascavel. Localização aproximada: ${mapsLink}`);
-            if (confirm('Avistamento marcado no mapa! Deseja abrir o WhatsApp para enviar a localização exata ao tutor?')) {
-              window.open(`https://wa.me/${pet.contato}?text=${msg}`, '_blank');
-            }
-          }
         } else {
           mostrarToast('Não foi possível registrar o avistamento.');
         }
       } catch (_) {
         mostrarToast('Erro de conexão.');
       }
+    }
+
+    async function carregarMeusAvistamentosTutor() {
+      const box = document.getElementById('perfil-lista-avistamentos');
+      const tot = document.getElementById('perfil-total-avistamentos');
+      if (!box) return;
+      try {
+        const resp = await fetch(`/api/meus-avistamentos?autor_token=${encodeURIComponent(state.autorToken)}`);
+        if (!resp.ok) return;
+        const lista = await resp.json();
+        if (tot) tot.textContent = `${lista.length} ${lista.length === 1 ? 'aviso' : 'avisos'}`;
+        if (!lista.length) {
+          box.innerHTML = '<div class="empty-box" style="padding:14px;">Nenhum avistamento recebido ainda.</div>';
+          return;
+        }
+        box.innerHTML = lista.map(av => {
+          const mapsUrl = `https://maps.google.com/?q=${av.lat},${av.lng}`;
+          const waBtn = av.contato_avistador
+            ? `<a href="https://wa.me/${escapeAttr(av.contato_avistador)}?text=${encodeURIComponent('Olá! Sou o tutor de ' + av.pet_titulo + ' no Alerta Urbano. Vi que você marcou Visto Aqui!')}" target="_blank" class="btn-slim ok" style="text-decoration:none;">💬 Chamar quem avistou</a>`
+            : `<span style="font-size:10px; color:var(--text-dim);">Contato privado (somente ponto no mapa)</span>`;
+          return `
+            <div class="perfil-card-box" style="margin-bottom:0; padding:12px;">
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <strong style="font-size:13px; color:var(--accent-ok);">🐾 ${escapeHtml(av.pet_titulo)}</strong>
+                <span class="feed-time">${tempoRelativo(av.created_at)}</span>
+              </div>
+              <div style="font-size:12px; color:var(--text-muted); margin-top:4px;">${escapeHtml(av.descricao || '')}</div>
+              <div style="display:flex; flex-wrap:wrap; gap:6px; margin-top:8px; align-items:center;">
+                <a href="${mapsUrl}" target="_blank" class="btn-slim pet" style="text-decoration:none;">📍 Abrir no Mapa</a>
+                ${waBtn}
+              </div>
+            </div>
+          `;
+        }).join('');
+      } catch (_) {}
+    }
+
+    function registrarFcmNativo(fcmToken) {
+      if (!fcmToken) return;
+      fetch('/api/fcm/registrar', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ autor_token: state.autorToken, fcm_token: fcmToken })
+      }).catch(() => {});
     }
 
     async function renovarMeuPet(id) {
@@ -2775,6 +2876,7 @@
 
     function abrirPerfil() {
       carregarPerfilUsuario();
+      carregarMeusAvistamentosTutor();
       document.getElementById('modal-perfil').classList.add('open');
     }
 

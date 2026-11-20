@@ -136,6 +136,8 @@ def init_db():
         ("pet_pai_id", "INTEGER"),
         ("severidade", "TEXT DEFAULT 'normal'"),
         ("consentimento_contato", "INTEGER DEFAULT 0"),
+        ("contato_avistador", "TEXT DEFAULT ''"),
+        ("avistador_nome", "TEXT DEFAULT ''"),
     ]
     for col_name, col_def in novas_colunas:
         if col_name not in cols:
@@ -145,7 +147,7 @@ def init_db():
     cur.execute("CREATE INDEX IF NOT EXISTS idx_alertas_ativo_pilar ON alertas (ativo, pilar, cidade);")
     cur.execute("CREATE INDEX IF NOT EXISTS idx_alertas_pet_pai ON alertas (pet_pai_id);")
 
-    # Tabela de Perfil / Cadastro do Cidadão (v3.1)
+    # Tabela de Perfil / Cadastro do Cidadão (v3.1 + FCM Push)
     cur.execute("""
         CREATE TABLE IF NOT EXISTS usuarios (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -155,10 +157,15 @@ def init_db():
             bairro TEXT DEFAULT 'Centro',
             cidade TEXT DEFAULT 'Cascavel',
             foto_url TEXT DEFAULT '',
+            fcm_token TEXT DEFAULT '',
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )
     """)
+    cur.execute("PRAGMA table_info(usuarios)")
+    ucols = {r[1] for r in cur.fetchall()}
+    if "fcm_token" not in ucols:
+        cur.execute("ALTER TABLE usuarios ADD COLUMN fcm_token TEXT DEFAULT '';")
 
     # Higienização e classificação v3.0 (desativa legados de trânsito/radar/semáforo e não-pets do público)
     placeholders = ",".join("?" for _ in TIPOS_BLOQUEADOS_LEGADO)
@@ -581,8 +588,11 @@ def listar_alertas():
 
     for r in rows:
         r["avistamentos_count"] = avistamentos_map.get(r["id"], 0)
-        # Privacidade: sinaliza se tem WhatsApp sem precisar expor desnecessariamente se não houver consentimento
-        r["tem_whatsapp"] = bool(r.get("contato"))
+        # PRIVACIDADE BLINDADA v3.2 (Ordem do Rigo):
+        # O WhatsApp do tutor e o WhatsApp de quem avistou NUNCA são expostos na API pública!
+        r["tem_tutor_notificavel"] = bool(r.get("autor_token")) and r.get("fonte_tipo") != "imprensa"
+        r["contato"] = ""
+        r["contato_avistador"] = ""
 
     return jsonify(rows)
 
@@ -671,9 +681,93 @@ def criar_alerta():
     return jsonify({"status": "ok", "id": novo_id, "pilar": pilar, "tipo": tipo}), 201
 
 
+def enviar_push_firebase(fcm_token, titulo, corpo, dados=None):
+    """
+    Envia Notificação Push via Firebase Cloud Messaging (HTTP v1 / Admin SDK) quando configurado.
+    100% gratuito via Google Firebase; falha silenciosa se ainda não houver credencial no servidor.
+    """
+    if not fcm_token:
+        return False
+    cred_json = os.environ.get("FIREBASE_SERVICE_ACCOUNT_JSON", "").strip()
+    cred_path = os.path.join(BASE_DIR, "firebase_service_account.json")
+    if not cred_json and not os.path.exists(cred_path):
+        return False
+    try:
+        import firebase_admin
+        from firebase_admin import credentials, messaging
+        if not firebase_admin._apps:
+            if cred_json:
+                cred = credentials.Certificate(json.loads(cred_json))
+            else:
+                cred = credentials.Certificate(cred_path)
+            firebase_admin.initialize_app(cred)
+        msg = messaging.Message(
+            notification=messaging.Notification(title=titulo, body=corpo),
+            data={str(k): str(v) for k, v in (dados or {}).items()},
+            token=fcm_token,
+        )
+        messaging.send(msg)
+        return True
+    except Exception as e:
+        print(f"[FCM PUSH] Aviso ao enviar push: {e}")
+        return False
+
+
+@app.route("/api/fcm/registrar", methods=["POST"])
+def registrar_fcm_token():
+    """Vincula o token Push do Firebase do celular Android ao autor_token do usuário."""
+    data = request.json or {}
+    autor_token = (data.get("autor_token") or "").strip()[:100]
+    fcm_token = (data.get("fcm_token") or "").strip()[:400]
+    if not autor_token or not fcm_token:
+        return jsonify({"error": "autor_token e fcm_token obrigatórios"}), 400
+    agora = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    conn = get_db()
+    conn.execute("""
+        INSERT INTO usuarios (autor_token, fcm_token, created_at, updated_at)
+        VALUES (?, ?, ?, ?)
+        ON CONFLICT(autor_token) DO UPDATE SET fcm_token = excluded.fcm_token, updated_at = excluded.updated_at
+    """, (autor_token, fcm_token, agora, agora))
+    conn.commit()
+    conn.close()
+    return jsonify({"status": "ok"})
+
+
+@app.route("/api/meus-avistamentos", methods=["GET"])
+def listar_meus_avistamentos():
+    """
+    PRIVACIDADE BLINDADA v3.2:
+    Retorna EXCLUSIVAMENTE para o tutor (autor_token dono do pet) os avistamentos recebidos,
+    incluindo o WhatsApp de quem avistou SOMENTE se quem avistou autorizou expressamente.
+    """
+    token = request.args.get("autor_token", "").strip()
+    if not token:
+        return jsonify([])
+    conn = get_db()
+    rows = conn.execute("""
+        SELECT
+            av.id, av.pet_pai_id, pai.titulo AS pet_titulo,
+            av.descricao, av.bairro, av.lat, av.lng, av.foto_url,
+            av.contato_avistador, av.avistador_nome, av.created_at
+        FROM alertas av
+        JOIN alertas pai ON pai.id = av.pet_pai_id
+        WHERE av.ativo = 1
+          AND pai.autor_token = ?
+        ORDER BY av.created_at DESC
+        LIMIT 30
+    """, (token,)).fetchall()
+    conn.close()
+    return jsonify([dict(r) for r in rows])
+
+
 @app.route("/api/pets/<int:pet_id>/avistamento", methods=["POST"])
 def registrar_avistamento_pet(pet_id):
-    """Registra um ponto de avistamento vinculado a um Pet Desaparecido (constrói trilha/calor)."""
+    """
+    Registra um ponto de avistamento vinculado a um Pet Desaparecido:
+    - Quem avista NUNCA recebe o WhatsApp do tutor.
+    - Opcionalmente, quem avista pode liberar seu contato EXCLUSIVAMENTE para o tutor.
+    - Dispara notificação Push via Firebase para o celular do tutor.
+    """
     data = request.json or {}
     lat = data.get("lat")
     lng = data.get("lng")
@@ -682,7 +776,11 @@ def registrar_avistamento_pet(pet_id):
 
     conn = get_db()
     cur = conn.cursor()
-    cur.execute("SELECT id, titulo, bairro, cidade, especie, porte, foto_url FROM alertas WHERE id = ? AND pilar = 'pet' AND ativo = 1", (pet_id,))
+    cur.execute("""
+        SELECT id, titulo, bairro, cidade, especie, porte, foto_url, autor_token
+        FROM alertas
+        WHERE id = ? AND pilar = 'pet' AND ativo = 1
+    """, (pet_id,))
     pet_pai = cur.fetchone()
     if not pet_pai:
         conn.close()
@@ -692,15 +790,18 @@ def registrar_avistamento_pet(pet_id):
     foto_avistamento = (data.get("foto_url") or pet_pai["foto_url"] or "").strip()
     bairro = (data.get("bairro") or pet_pai["bairro"] or "Cascavel").strip()
     autor_token = (data.get("autor_token") or "").strip()[:100]
+    permitir_contato = bool(data.get("permitir_contato_tutor"))
+    contato_av = normalizar_telefone(data.get("contato_avistador") or "") if permitir_contato else ""
+    avistador_nome = (data.get("avistador_nome") or "").strip()[:60] if permitir_contato else ""
     agora = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
     cur.execute("""
         INSERT INTO alertas (
             tipo, pilar, cidade, titulo, descricao, rua, bairro, lat, lng,
             peso, foto_url, autor_token, fonte_tipo, fonte_nome,
-            especie, porte, status_pet, pet_pai_id, created_at
+            especie, porte, status_pet, pet_pai_id, contato_avistador, avistador_nome, created_at
         )
-        VALUES ('pet_avistado', 'pet', ?, ?, ?, ?, ?, ?, ?, 2, ?, ?, 'comunidade_pet', 'Comunidade', ?, ?, 'avistado', ?, ?)
+        VALUES ('pet_avistado', 'pet', ?, ?, ?, ?, ?, ?, ?, 2, ?, ?, 'comunidade_pet', 'Comunidade', ?, ?, 'avistado', ?, ?, ?, ?)
     """, (
         pet_pai["cidade"] or "Cascavel",
         f"Avistado: {pet_pai['titulo']}",
@@ -714,14 +815,38 @@ def registrar_avistamento_pet(pet_id):
         pet_pai["especie"] or "",
         pet_pai["porte"] or "",
         pet_id,
+        contato_av,
+        avistador_nome,
         agora,
     ))
     avistamento_id = cur.lastrowid
     cur.execute("UPDATE alertas SET confirmacoes = confirmacoes + 1, peso = peso + 1 WHERE id = ?", (pet_id,))
+
+    # Busca token Firebase do tutor para disparar Push na tela bloqueada
+    tutor_fcm = ""
+    if pet_pai["autor_token"]:
+        u_row = cur.execute("SELECT fcm_token FROM usuarios WHERE autor_token = ?", (pet_pai["autor_token"],)).fetchone()
+        if u_row and u_row["fcm_token"]:
+            tutor_fcm = u_row["fcm_token"]
+
     conn.commit()
     conn.close()
 
-    return jsonify({"status": "ok", "avistamento_id": avistamento_id, "pet_pai_id": pet_id}), 201
+    push_enviado = False
+    if tutor_fcm:
+        push_enviado = enviar_push_firebase(
+            tutor_fcm,
+            f"🐾 {pet_pai['titulo']} foi avistado!",
+            f"Alguém marcou um ponto de avistamento agora em {bairro}. Toque para ver no mapa.",
+            {"pet_id": pet_id, "avistamento_id": avistamento_id, "lat": lat, "lng": lng},
+        )
+
+    return jsonify({
+        "status": "ok",
+        "avistamento_id": avistamento_id,
+        "pet_pai_id": pet_id,
+        "push_enviado": push_enviado,
+    }), 201
 
 
 @app.route("/api/alertas/<int:alerta_id>/confirmar", methods=["POST"])
@@ -788,9 +913,9 @@ def desativar_alerta(alerta_id):
 
     eh_encontrado = request.path.endswith("/encontrado")
     if eh_encontrado:
-        cur.execute("UPDATE alertas SET ativo = 0, status_pet = 'encontrado', contato = '' WHERE id = ? OR pet_pai_id = ?", (alerta_id, alerta_id))
+        cur.execute("UPDATE alertas SET ativo = 0, status_pet = 'encontrado', contato = '', contato_avistador = '' WHERE id = ? OR pet_pai_id = ?", (alerta_id, alerta_id))
     else:
-        cur.execute("UPDATE alertas SET ativo = 0, contato = '' WHERE id = ? OR pet_pai_id = ?", (alerta_id, alerta_id))
+        cur.execute("UPDATE alertas SET ativo = 0, contato = '', contato_avistador = '' WHERE id = ? OR pet_pai_id = ?", (alerta_id, alerta_id))
 
     conn.commit()
     conn.close()
