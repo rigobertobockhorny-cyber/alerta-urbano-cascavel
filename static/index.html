@@ -207,7 +207,7 @@
     .brand-city {
       font-size: 11px;
       font-weight: 600;
-      color: var(--accent-ok);
+      color: var(--text-muted);
       margin-top: 2px;
       display: flex;
       align-items: center;
@@ -657,13 +657,14 @@
     }
     .fs-save {
       border: none;
-      background: var(--accent-ok);
-      color: #ffffff;
-      padding: 8px 14px;
-      border-radius: 11px;
+      background: #ffffff;
+      color: #09090b;
+      padding: 8px 16px;
+      border-radius: 999px;
       font-size: 12px;
       font-weight: 800;
       cursor: pointer;
+      box-shadow: 0 2px 8px rgba(255, 255, 255, 0.15);
     }
     .fs-body {
       flex: 1;
@@ -1300,12 +1301,12 @@
       transition: 0.2s;
     }
     .switch input:checked + .slider {
-      background: var(--accent-ok);
-      border-color: var(--accent-ok);
+      background: #ffffff;
+      border-color: #ffffff;
     }
     .switch input:checked + .slider:before {
       transform: translateX(20px);
-      background: #ffffff;
+      background: #09090b;
     }
 
     .gps-shortcuts {
@@ -1727,12 +1728,12 @@
         <div class="pets-grid" id="pets-full-list"></div>
       </section>
 
-      <!-- ABA 4: COPILOTO (BOLINHA FLUTUANTE + VOZ EXCLUSIVA) -->
+      <!-- ABA 4: COPILOTO (BOLINHA FLUTUANTE) -->
       <section class="tab-pane" id="tab-copiloto">
         <div class="hero-copiloto">
           <img src="/static/logo_bolha_pura.png?v=30" class="hero-copiloto-logo" alt="Copiloto">
           <h2>Copiloto Flutuante</h2>
-          <p>Use o GPS que preferir (Waze, Google Maps, Uber ou 99). Nossa bolinha avisa por cima com voz masculina exclusiva sobre pets, segurança e utilidade pública na sua região.</p>
+          <p>Nossa bolinha flutuante funciona em segundo plano e avisa você por áudio sobre pets desaparecidos, alertas policiais e comunicados de utilidade pública na sua região de Cascavel.</p>
           <button type="button" class="btn-bolha-hero" onclick="ativarBolhaFlutuante()">ATIVAR BOLINHA FLUTUANTE</button>
         </div>
 
@@ -1761,29 +1762,6 @@
             </div>
             <label class="switch"><input type="checkbox" id="pref-uti" checked onchange="salvarPrefsCopiloto()"><span class="slider"></span></label>
           </div>
-        </div>
-
-        <div class="section-head">
-          <div class="section-title">Identidade Sonora Exclusiva</div>
-        </div>
-        <div class="settings-group">
-          <div class="setting-row">
-            <div>
-              <div class="setting-title">Voz Masculina (Padrão)</div>
-              <div class="setting-sub">Contraste imediato com a voz feminina do Waze/Maps</div>
-            </div>
-            <button type="button" class="btn-slim pet" onclick="testarVozExclusiva()">▶ Ouvir</button>
-          </div>
-        </div>
-
-        <div class="section-head">
-          <div class="section-title">Abrir GPS com Copiloto Ativo</div>
-        </div>
-        <div class="gps-shortcuts">
-          <button type="button" class="gps-shortcut-btn" onclick="abrirGpsExterno('waze')">🧭 Waze</button>
-          <button type="button" class="gps-shortcut-btn" onclick="abrirGpsExterno('maps')">📍 Google Maps</button>
-          <button type="button" class="gps-shortcut-btn" onclick="abrirGpsExterno('uber')">🚗 Uber</button>
-          <button type="button" class="gps-shortcut-btn" onclick="abrirGpsExterno('99')">🚕 99</button>
         </div>
       </section>
     </main>
@@ -2112,7 +2090,7 @@
         <a href="https://wa.me/5545999999999?text=Ol%C3%A1!%20Tenho%20interesse%20em%20ser%20empresa%20parceira%20no%20Alerta%20Urbano%20Cascavel" target="_blank" class="btn-full" style="margin-top:6px;">Anunciar Minha Empresa Aqui</a>
       </div>
 
-      <button type="button" class="btn-submit" style="background:var(--accent-ok); color:#ffffff; margin-bottom:10px;" onclick="salvarPerfilUsuario()">Salvar Alterações</button>
+      <button type="button" class="btn-submit" style="background:#ffffff; color:#09090b; font-weight:800; margin-bottom:10px;" onclick="salvarPerfilUsuario()">Salvar Alterações</button>
       <a href="/politica_privacidade.html" target="_blank" class="btn-full">Política de Privacidade & LGPD</a>
     </div>
   </div>
@@ -2957,8 +2935,8 @@
         : 'Seu ponto GPS será marcado na trilha do mapa e o tutor será notificado. <b>Nenhum número de WhatsApp do tutor é exposto.</b>';
       document.getElementById('av-foto-label').textContent = ehResg ? 'Foto do Animal Resgatado (Recomendado)' : 'Foto do Animal (Opcional)';
       document.getElementById('btn-confirmar-av').textContent = ehResg ? 'Enviar Foto de Resgate ao Tutor' : 'Enviar "Visto Aqui" ao Tutor';
-      document.getElementById('btn-confirmar-av').style.background = ehResg ? 'var(--accent-ok)' : 'var(--accent-pet)';
-      document.getElementById('btn-confirmar-av').style.color = ehResg ? '#ffffff' : '#09090b';
+      document.getElementById('btn-confirmar-av').style.background = '#ffffff';
+      document.getElementById('btn-confirmar-av').style.color = '#09090b';
 
       const chk = document.getElementById('av-permitir-wa');
       chk.checked = ehResg;
@@ -3203,24 +3181,6 @@
       }
     }
 
-    function abrirGpsExterno(appKey) {
-      salvarPrefsCopiloto();
-      if (window.AndroidAlerta && typeof window.AndroidAlerta.abrirAppComBolha === 'function') {
-        window.AndroidAlerta.abrirAppComBolha(appKey);
-        return;
-      }
-      const urls = {
-        waze: 'https://waze.com/ul',
-        maps: 'https://maps.google.com',
-        uber: 'https://m.uber.com',
-        '99': 'https://99app.com'
-      };
-      if (window.AndroidAlerta && typeof window.AndroidAlerta.minimizarParaBolha === 'function') {
-        window.AndroidAlerta.minimizarParaBolha();
-      }
-      window.open(urls[appKey] || 'https://maps.google.com', '_blank');
-    }
-
     function tocarVinhetaExclusiva() {
       try {
         const AudioCtx = window.AudioContext || window.webkitAudioContext;
@@ -3241,21 +3201,6 @@
           osc.stop(now + i * 0.11 + 0.2);
         });
       } catch (_) {}
-    }
-
-    function testarVozExclusiva() {
-      tocarVinhetaExclusiva();
-      const frase = 'Alerta Urbano ativo. Você está em zona de busca de um pet desaparecido na região.';
-      setTimeout(() => {
-        const audio = new Audio('/api/falar?voz=masculina&texto=' + encodeURIComponent(frase));
-        audio.play().catch(() => {
-          if ('speechSynthesis' in window) {
-            const u = new SpeechSynthesisUtterance(frase);
-            u.lang = 'pt-BR';
-            speechSynthesis.speak(u);
-          }
-        });
-      }, 260);
     }
 
     /* ==================== GPS & BRIDGE ANDROID ==================== */
