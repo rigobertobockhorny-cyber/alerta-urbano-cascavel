@@ -139,6 +139,12 @@ def init_db():
         ("contato_avistador", "TEXT DEFAULT ''"),
         ("avistador_nome", "TEXT DEFAULT ''"),
         ("subtipo_evento", "TEXT DEFAULT 'avistamento'"),
+        ("castrado", "INTEGER DEFAULT 0"),
+        ("vacinado", "INTEGER DEFAULT 0"),
+        ("faixa_etaria", "TEXT DEFAULT 'adulto'"),
+        ("sexo", "TEXT DEFAULT 'indefinido'"),
+        ("sigiloso", "INTEGER DEFAULT 0"),
+        ("orgao_destino", "TEXT DEFAULT ''"),
     ]
     for col_name, col_def in novas_colunas:
         if col_name not in cols:
@@ -544,12 +550,14 @@ def resumo_dashboard():
 def listar_alertas():
     """
     Lista exclusivamente registros ativos dos 3 pilares v3.0:
-    - pet (comunidade + achados/perdidos imprensa; 7 dias para imprensa/renováveis para comunidade)
+    - pet (desaparecidos, adoção responsável, sos público e comunitários)
     - seguranca (imprensa oficial; últimas 48h)
     - utilidade (fontes oficiais/imprensa; últimas 48h)
+    * Denúncias sigilosas de maus-tratos NUNCA aparecem na listagem pública aberta!
     """
     cidade = request.args.get("cidade", "Cascavel").strip()
     pilar = request.args.get("pilar", "").strip().lower()
+    autor_token = request.args.get("autor_token", "").strip()
 
     conn = get_db()
     cur = conn.cursor()
@@ -560,12 +568,16 @@ def listar_alertas():
         pilar_clause = " AND pilar = ?"
         params.append(pilar)
 
+    sigiloso_clause = " AND (COALESCE(sigiloso, 0) = 0 OR (autor_token != '' AND autor_token = ?))"
+    params.append(autor_token)
+
     cur.execute(f"""
         SELECT * FROM alertas
         WHERE ativo = 1
           AND LOWER(COALESCE(cidade, 'Cascavel')) = LOWER(?)
           AND pilar IN ('pet', 'seguranca', 'utilidade')
           {pilar_clause}
+          {sigiloso_clause}
           AND (
             pilar = 'pet'
             OR (pilar IN ('seguranca', 'utilidade') AND datetime(created_at, '+48 hours') >= datetime('now', 'localtime'))
@@ -589,10 +601,12 @@ def listar_alertas():
 
     for r in rows:
         r["avistamentos_count"] = avistamentos_map.get(r["id"], 0)
-        # PRIVACIDADE BLINDADA v3.2 (Ordem do Rigo):
-        # O WhatsApp do tutor e o WhatsApp de quem avistou NUNCA são expostos na API pública!
         r["tem_tutor_notificavel"] = bool(r.get("autor_token")) and r.get("fonte_tipo") != "imprensa"
-        r["contato"] = ""
+        # Se for pet para adoção solidária e tutor autorizou LGPD, disponibiliza flag de contato
+        eh_adocao = r.get("tipo") == "pet_adocao" or r.get("status_pet") == "adocao"
+        r["tem_contato_adocao"] = bool(r.get("contato")) and eh_adocao and bool(r.get("consentimento_contato"))
+        if not eh_adocao:
+            r["contato"] = ""
         r["contato_avistador"] = ""
 
     return jsonify(rows)
@@ -601,8 +615,13 @@ def listar_alertas():
 @app.route("/api/alertas", methods=["POST"])
 def criar_alerta():
     """
-    BLINDAGEM ANTI-FAKE NEWS v3.0:
-    - Requisições públicas (usuário comum) SÓ podem criar registros de PETS (pet_perdido / pet_avistado).
+    BLINDAGEM ANTI-FAKE NEWS v3.0 + HUB PET COMPLETO (Desaparecidos, Adoção e SOS):
+    - Requisições públicas (usuário comum) criam registros de PETS:
+      * pet_perdido (desaparecido)
+      * pet_avistado (visto na rua)
+      * pet_adocao (adoção solidária / responsável)
+      * pet_sos_rua (animal atropelado / em risco urgente na via pública)
+      * pet_denuncia_maustratos (denúncia sigilosa com dossiê oficial)
     - Registros de Segurança e Utilidade Pública exigem X-Robo-Token válido.
     """
     data = request.json or {}
@@ -630,7 +649,13 @@ def criar_alerta():
     if lat is None or lng is None:
         return jsonify({"error": "Localização (latitude e longitude) é obrigatória."}), 400
 
-    titulo = (data.get("titulo") or ("Pet Desaparecido" if tipo == "pet_perdido" else "Pet Avistado")).strip()[:120]
+    titulo_padrao = "Pet Desaparecido"
+    if tipo == "pet_avistado": titulo_padrao = "Pet Avistado"
+    elif tipo == "pet_adocao": titulo_padrao = "Pet para Adoção"
+    elif tipo == "pet_sos_rua": titulo_padrao = "Animal em Risco (Socorro Urgente)"
+    elif tipo == "pet_denuncia_maustratos": titulo_padrao = "Denúncia de Maus-Tratos"
+
+    titulo = (data.get("titulo") or titulo_padrao).strip()[:120]
     descricao = (data.get("descricao") or "").strip()[:600]
     rua = (data.get("rua") or "").strip()[:120]
     bairro = (data.get("bairro") or "Cascavel").strip()[:80]
@@ -644,13 +669,30 @@ def criar_alerta():
     severidade = (data.get("severidade") or "normal").strip().lower()
     link_noticia = (data.get("link_noticia") or "").strip()
 
-    # LGPD: só armazena WhatsApp se houver consentimento explícito no formulário de Pet
+    # Campos novos: Adoção Solidária e Denúncias
+    castrado = 1 if data.get("castrado") else 0
+    vacinado = 1 if data.get("vacinado") else 0
+    faixa_etaria = (data.get("faixa_etaria") or "adulto").strip()[:30]
+    sexo = (data.get("sexo") or "indefinido").strip()[:20]
+    sigiloso = 1 if (data.get("sigiloso") or tipo == "pet_denuncia_maustratos") else 0
+    orgao_destino = (data.get("orgao_destino") or "").strip()[:60]
+
+    # LGPD: armazena WhatsApp apenas com consentimento explícito
     consentimento = 1 if data.get("consentimento_contato") else 0
     contato_bruto = data.get("contato") or ""
     contato = normalizar_telefone(contato_bruto) if (pilar == "pet" and consentimento) else ""
 
     if pilar == "pet":
-        status_pet = "avistado" if tipo == "pet_avistado" or pet_pai_id else "desaparecido"
+        if tipo == "pet_adocao":
+            status_pet = "adocao"
+        elif tipo == "pet_sos_rua":
+            status_pet = "sos_rua"
+        elif tipo == "pet_denuncia_maustratos":
+            status_pet = "maustratos"
+        elif tipo == "pet_avistado" or pet_pai_id:
+            status_pet = "avistado"
+        else:
+            status_pet = "desaparecido"
         fonte_tipo = "imprensa" if eh_robo_autorizado and data.get("fonte_tipo") == "imprensa" else "comunidade_pet"
         fonte_nome = (data.get("fonte_nome") or ("CGN" if fonte_tipo == "imprensa" else "Comunidade")).strip()
     else:
@@ -666,17 +708,22 @@ def criar_alerta():
             tipo, pilar, cidade, titulo, descricao, rua, bairro, lat, lng,
             peso, foto_url, contato, recompensa, link_noticia, autor_token,
             fonte_tipo, fonte_nome, especie, porte, status_pet, pet_pai_id,
-            severidade, consentimento_contato, created_at
+            severidade, consentimento_contato, castrado, vacinado, faixa_etaria,
+            sexo, sigiloso, orgao_destino, created_at
         )
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 1, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 1, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     """, (
         tipo, pilar, cidade, titulo, descricao, rua, bairro, float(lat), float(lng),
         foto_url, contato, recompensa, link_noticia, autor_token,
         fonte_tipo, fonte_nome, especie, porte, status_pet, pet_pai_id,
-        severidade, consentimento, agora,
+        severidade, consentimento, castrado, vacinado, faixa_etaria,
+        sexo, sigiloso, orgao_destino, agora,
     ))
     novo_id = cur.lastrowid
     conn.commit()
+    conn.close()
+
+    return jsonify({"status": "ok", "id": novo_id, "pilar": pilar, "tipo": tipo, "sigiloso": sigiloso}), 201
     conn.close()
 
     return jsonify({"status": "ok", "id": novo_id, "pilar": pilar, "tipo": tipo}), 201
@@ -1024,6 +1071,63 @@ def desativar_alerta(alerta_id):
     conn.commit()
     conn.close()
     return jsonify({"status": "ok", "desativado": alerta_id, "encontrado": eh_encontrado})
+
+
+@app.route("/api/pets/<int:pet_id>/adotar", methods=["GET"])
+def obter_contato_adocao(pet_id):
+    import urllib.parse
+    conn = get_db()
+    cur = conn.cursor()
+    cur.execute("SELECT id, titulo, contato, consentimento_contato, bairro, cidade, tipo, status_pet FROM alertas WHERE id = ? AND ativo = 1", (pet_id,))
+    pet = cur.fetchone()
+    conn.close()
+    if not pet:
+        return jsonify({"error": "Pet não encontrado ou já adotado."}), 404
+    p = dict(pet)
+    if not p.get("contato") or not p.get("consentimento_contato"):
+        return jsonify({"error": "Tutor não disponibilizou contato via WhatsApp para este pet."}), 400
+    msg = urllib.parse.quote(f"Olá! Vi o pet '{p.get('titulo')}' anunciado para adoção responsável no Alerta Urbano Cascavel. Gostaria de saber mais informações!")
+    wa_url = f"https://wa.me/{p.get('contato')}?text={msg}"
+    return jsonify({"status": "ok", "whatsapp_url": wa_url, "titulo": p.get("titulo")})
+
+
+@app.route("/api/denuncias/<int:alerta_id>/dossie", methods=["GET"])
+def gerar_dossie_denuncia(alerta_id):
+    conn = get_db()
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM alertas WHERE id = ?", (alerta_id,))
+    row = cur.fetchone()
+    conn.close()
+    if not row:
+        return jsonify({"error": "Registro não encontrado"}), 404
+    a = dict(row)
+    dossie_texto = (
+        f"🚨 DOSSIÊ DE REGISTRO — BEM-ESTAR ANIMAL (CASCAVEL/PR)\n"
+        f"--------------------------------------------------\n"
+        f"Tipo de Ocorrência: {a.get('titulo')}\n"
+        f"Data/Hora: {a.get('created_at')}\n"
+        f"Bairro: {a.get('bairro', 'Cascavel')}\n"
+        f"Localização GPS: {a.get('lat')}, {a.get('lng')}\n"
+        f"Localização Maps: https://maps.google.com/?q={a.get('lat')},{a.get('lng')}\n"
+        f"Espécie/Porte: {a.get('especie', '')} ({a.get('porte', '')})\n"
+        f"Relato dos Fatos:\n{a.get('descricao', 'Sem descrição adicional.')}\n"
+        f"{'Foto registrada: ' + a.get('foto_url') if a.get('foto_url') else ''}\n"
+        f"--------------------------------------------------\n"
+        f"Órgãos Oficiais de Cascavel:\n"
+        f"• SEMA / Bem-Estar Animal: Ouvidoria 156 / Atende.net\n"
+        f"• Polícia Civil do Paraná (15ª SDP / Delegacia Cidadã): policiacivil.pr.gov.br\n"
+        f"• Polícia Militar Ambiental (Força Verde): 190 ou 181"
+    )
+    return jsonify({
+        "status": "ok",
+        "id": alerta_id,
+        "dossie_texto": dossie_texto,
+        "links_oficiais": {
+            "sema_ouvidoria": "https://cascavel.atende.net",
+            "delegacia_cidada": "https://www.policiacivil.pr.gov.br",
+            "pm_ambiental": "tel:190"
+        }
+    })
 
 
 # Inicializa/migra banco ao importar (compatível com Gunicorn no Render)
