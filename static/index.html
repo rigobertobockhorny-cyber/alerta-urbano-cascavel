@@ -1662,6 +1662,64 @@
     .btn-full.pet { background: #ffffff; border-color: #ffffff; color: #09090b; }
     .btn-full.imprensa { background: var(--brand-red); border-color: var(--brand-red); color: #ffffff; }
     .btn-full.danger { background: transparent; border-color: var(--accent-seg); color: var(--accent-seg); }
+    /* ==================== NOVA ARQUITETURA MOBILE: PILARES & CONTEXTO PET ==================== */
+    .pet-pillars-segmented {
+      display: flex;
+      background: #141416;
+      border-radius: 14px;
+      padding: 4px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      margin-bottom: 12px;
+      gap: 4px;
+    }
+    .pillar-tab {
+      flex: 1;
+      padding: 10px 4px;
+      border-radius: 10px;
+      font-size: 11.5px;
+      font-weight: 700;
+      text-align: center;
+      color: #a1a1aa;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      white-space: nowrap;
+    }
+    .pillar-tab.active {
+      background: #ffffff;
+      color: #09090b;
+      font-weight: 800;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    }
+    .pet-pillar-context {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .btn-pet-action {
+      width: 100%;
+      min-height: 46px;
+      padding: 12px 16px;
+      border-radius: 13px;
+      background: #ffffff;
+      color: #09090b;
+      font-size: 13px;
+      font-weight: 800;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+      transition: all 0.15s ease;
+    }
+    .btn-pet-action:hover, .btn-pet-action:active {
+      background: #f4f4f5;
+      transform: scale(0.985);
+    }
   </style>
 </head>
 <body>
@@ -1833,56 +1891,77 @@
         </div>
       </section>
 
-      <!-- ABA 3: PETS (CENTRAL ANIMAL • CASCAVEL) -->
+      <!-- ABA 3: PETS (ARQUITETURA DE 3 PILARES HIERÁRQUICOS) -->
       <section class="tab-pane" id="tab-pets">
-        <div class="pets-header-bar">
-          <div>
-            <div style="font-size:17px; font-weight:800; letter-spacing:-0.2px;">Central Pet & Proteção Animal</div>
-            <div style="font-size:11px; color:var(--text-muted); margin-top:2px;">Cascavel • Desaparecidos, Adoção Solidária e SOS</div>
+        <!-- NÍVEL 1: NAVEGAÇÃO DOS 3 PILARES PRINCIPAIS -->
+        <div class="pet-pillars-segmented" id="pets-main-pills">
+          <button type="button" class="pillar-tab active" id="btn-pillar-desaparecidos" onclick="alternarPilarPet('desaparecidos')">
+            <span>🐾 Desaparecidos</span>
+          </button>
+          <button type="button" class="pillar-tab" id="btn-pillar-adocao" onclick="alternarPilarPet('adocao')">
+            <span>Adoção Responsável</span>
+          </button>
+          <button type="button" class="pillar-tab" id="btn-pillar-sos" onclick="alternarPilarPet('sos')">
+            <span>SOS Denúncias</span>
+          </button>
+        </div>
+
+        <!-- NÍVEL 2: CONTROLES & AÇÕES CONTEXTUAIS DO PILAR ATIVO -->
+
+        <!-- Contexto 1: Desaparecidos -->
+        <div id="context-desaparecidos" class="pet-pillar-context">
+          <button type="button" class="btn-pet-action" onclick="abrirModalPet('pet_perdido')">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+            <span>+ Registrar Pet Desaparecido</span>
+          </button>
+          <div class="pills-row" id="sub-pills-desaparecidos">
+            <button type="button" class="pill active" onclick="filtrarPetsAba('desaparecido', this)">Perdidos</button>
+            <button type="button" class="pill" onclick="filtrarPetsAba('avistado', this)">Avistados</button>
+            <button type="button" class="pill" onclick="filtrarPetsAba('meus', this)">Meus Registros</button>
           </div>
-          <button type="button" class="btn-primary-pet" id="btn-central-pet-novo" onclick="abrirModalPetContextual()">+ Novo Registro</button>
         </div>
 
-        <!-- 3 Pilares Superiores Principais -->
-        <div class="pills-row" id="pets-main-pills">
-          <button type="button" class="pill active" id="btn-pillar-desaparecidos" onclick="alternarPilarPet('desaparecidos')">🐾 Desaparecidos</button>
-          <button type="button" class="pill" id="btn-pillar-adocao" onclick="alternarPilarPet('adocao')">Adoção Solidária</button>
-          <button type="button" class="pill" id="btn-pillar-sos" onclick="alternarPilarPet('sos')">SOS Denúncias</button>
+        <!-- Contexto 2: Adoção Responsável -->
+        <div id="context-adocao" class="pet-pillar-context" style="display:none;">
+          <button type="button" class="btn-pet-action" onclick="abrirModalPet('pet_adocao')">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+            <span>+ Cadastrar Pet para Adoção</span>
+          </button>
+          <div class="pills-row" id="sub-pills-adocao">
+            <button type="button" class="pill active" onclick="filtrarAdocao('todos', this)">Todos</button>
+            <button type="button" class="pill" onclick="filtrarAdocao('Cachorro', this)">Cães</button>
+            <button type="button" class="pill" onclick="filtrarAdocao('Gato', this)">Gatos</button>
+            <button type="button" class="pill" onclick="filtrarAdocao('Filhote', this)">Filhotes</button>
+          </div>
         </div>
 
-        <!-- Sub-pílulas: Desaparecidos -->
-        <div class="pills-row" id="sub-pills-desaparecidos">
-          <button type="button" class="pill active" onclick="filtrarPetsAba('desaparecido', this)">Perdidos</button>
-          <button type="button" class="pill" onclick="filtrarPetsAba('avistado', this)">Avistados</button>
-          <button type="button" class="pill" onclick="filtrarPetsAba('meus', this)">Meus Registros</button>
-        </div>
-
-        <!-- Sub-pílulas: Adoção Solidária -->
-        <div class="pills-row" id="sub-pills-adocao" style="display:none;">
-          <button type="button" class="pill active" onclick="filtrarAdocao('todos', this)">Todos</button>
-          <button type="button" class="pill" onclick="filtrarAdocao('Cachorro', this)">Cães</button>
-          <button type="button" class="pill" onclick="filtrarAdocao('Gato', this)">Gatos</button>
-          <button type="button" class="pill" onclick="filtrarAdocao('Filhote', this)">Filhotes</button>
-        </div>
-
-        <!-- Painel Institucional: SOS & Denúncias de Maus-Tratos -->
-        <div id="panel-sos-info" class="sos-panel" style="display:none;">
-          <div class="sos-panel-title">Central de Proteção e Denúncia Animal</div>
-          <div class="sos-panel-desc">Maus-tratos a animais é crime federal (Lei 14.064/2020). As denúncias de residências são tratadas com <strong>sigilo total</strong> (não aparecem no mapa público) e geram dossiê oficial para envio à SEMA e Polícia Civil.</div>
-          <div class="sos-actions-row">
-            <button type="button" class="btn-sos-cta" onclick="abrirModalPet('pet_denuncia_maustratos')">
-              <span>Registrar Denúncia Sigilosa de Maus-Tratos</span>
-            </button>
-            <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px;">
-              <a href="https://cascavel.atende.net" target="_blank" class="btn-sos-secondary">Ouvidoria 156 SEMA</a>
-              <a href="https://www.policiacivil.pr.gov.br" target="_blank" class="btn-sos-secondary">Delegacia Cidadã 15ª SDP</a>
+        <!-- Contexto 3: SOS Denúncias -->
+        <div id="context-sos" class="pet-pillar-context" style="display:none;">
+          <div class="sos-panel" id="panel-sos-info">
+            <div class="sos-panel-title">Central de Proteção e Denúncia Animal</div>
+            <div class="sos-panel-desc">Maus-tratos a animais é crime federal (Lei 14.064/2020). As denúncias de residências são tratadas com <strong>sigilo total</strong> (não aparecem no mapa aberto) e geram dossiê oficial para envio direto à SEMA e Polícia Civil.</div>
+            <div class="sos-actions-row">
+              <button type="button" class="btn-sos-cta" onclick="abrirModalPet('pet_denuncia_maustratos')">
+                <span>Registrar Denúncia Sigilosa de Maus-Tratos</span>
+              </button>
+              <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px;">
+                <a href="https://cascavel.atende.net" target="_blank" class="btn-sos-secondary">Ouvidoria 156 SEMA</a>
+                <a href="https://www.policiacivil.pr.gov.br" target="_blank" class="btn-sos-secondary">Delegacia Cidadã 15ª SDP</a>
+              </div>
+            </div>
+            <div style="margin-top:14px; font-size:12px; font-weight:800; color:#ffffff; display:flex; align-items:center; gap:5px;">
+              <span>Animais em Risco na Via Pública (Socorro Urgente)</span>
             </div>
           </div>
-          <div style="margin-top:14px; font-size:12px; font-weight:800; color:#ffffff; display:flex; align-items:center; gap:5px;">
-            <span>Animais em Risco na Via Pública (Socorro Urgente)</span>
-          </div>
         </div>
 
+        <!-- NÍVEL 3: FEED DOS PETS CONFORME O PILAR ATIVO -->
         <div class="pets-grid" id="pets-full-list"></div>
       </section>
 
@@ -1971,20 +2050,6 @@
         <button type="button" class="sheet-close" onclick="fecharModal('modal-pet')">✕</button>
       </div>
 
-      <div class="mode-switch" style="display:flex; gap:6px; margin-bottom:10px;">
-        <button type="button" class="mode-btn active" id="mode-perdido" onclick="selecionarModoPet('pet_perdido')">Desaparecido</button>
-        <button type="button" class="mode-btn" id="mode-adocao" onclick="selecionarModoPet('pet_adocao')">Para Adoção</button>
-        <button type="button" class="mode-btn" id="mode-sos" onclick="selecionarModoPet('pet_denuncia_maustratos')">SOS / Denúncia</button>
-      </div>
-
-      <!-- Sub-alternador exclusivo para SOS / Denúncia -->
-      <div id="wrap-sos-subtypes" style="display:none; margin-bottom:10px;">
-        <div class="mode-switch" style="display:flex; gap:6px;">
-          <button type="button" class="mode-btn" id="mode-sub-sos-rua" onclick="selecionarSubModoSOS('pet_sos_rua')">Animal na Via (Público)</button>
-          <button type="button" class="mode-btn active" id="mode-sub-maustratos" onclick="selecionarSubModoSOS('pet_denuncia_maustratos')">Maus-Tratos (Sigiloso)</button>
-        </div>
-      </div>
-
       <!-- Aviso Explicativo de Sigilo para Maus-Tratos -->
       <div id="wrap-sigilo-aviso" style="display:none; background:#18181b; border:1px solid rgba(255, 255, 255, 0.12); border-radius:12px; padding:10px 12px; margin-bottom:12px; font-size:11.5px; color:#d4d4d8; line-height:1.4;">
         <strong>Sigilo Absoluto:</strong> Esta denúncia <strong>NÃO</strong> aparecerá no mapa aberto. Os dados e fotos serão compilados em um Dossiê Oficial para envio direto à SEMA 156 e Polícia Civil de Cascavel.
@@ -2015,7 +2080,7 @@
           <input type="text" class="form-input" id="pet-titulo" placeholder="Ex.: Bob (Cachorro Caramelo)" required>
         </div>
 
-        <!-- Campos Específicos para Adoção Solidária -->
+        <!-- Campos Específicos para Adoção Responsável -->
         <div id="wrap-adocao-fields" style="display:none;">
           <div class="form-row-2">
             <div class="form-group">
@@ -2731,24 +2796,17 @@
 
     function alternarPilarPet(pilar) {
       state.petMainPillar = pilar;
-      document.querySelectorAll('#pets-main-pills .pill').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('#pets-main-pills .pillar-tab').forEach(b => b.classList.remove('active'));
       const activeBtn = document.getElementById(`btn-pillar-${pilar}`);
       if (activeBtn) activeBtn.classList.add('active');
 
-      const subDesap = document.getElementById('sub-pills-desaparecidos');
-      const subAdocao = document.getElementById('sub-pills-adocao');
-      const panelSos = document.getElementById('panel-sos-info');
+      const ctxDesap = document.getElementById('context-desaparecidos');
+      const ctxAdocao = document.getElementById('context-adocao');
+      const ctxSos = document.getElementById('context-sos');
 
-      if (subDesap) subDesap.style.display = pilar === 'desaparecidos' ? 'flex' : 'none';
-      if (subAdocao) subAdocao.style.display = pilar === 'adocao' ? 'flex' : 'none';
-      if (panelSos) panelSos.style.display = pilar === 'sos' ? 'block' : 'none';
-
-      const btnNovo = document.getElementById('btn-central-pet-novo');
-      if (btnNovo) {
-        if (pilar === 'adocao') btnNovo.textContent = '+ Divulgar Adoção';
-        else if (pilar === 'sos') btnNovo.textContent = '+ Nova Denúncia';
-        else btnNovo.textContent = '+ Novo Registro';
-      }
+      if (ctxDesap) ctxDesap.style.display = (pilar === 'desaparecidos') ? 'flex' : 'none';
+      if (ctxAdocao) ctxAdocao.style.display = (pilar === 'adocao') ? 'flex' : 'none';
+      if (ctxSos) ctxSos.style.display = (pilar === 'sos') ? 'flex' : 'none';
 
       renderizarPetsAba();
     }
@@ -2911,7 +2969,7 @@
               <div class="pet-card-info">
                 <div>
                   <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:2px;">
-                    <span style="font-size:9.5px;font-weight:800;color:#38bdf8;text-transform:uppercase;">Adoção Solidária</span>
+                    <span style="font-size:9.5px;font-weight:800;color:#38bdf8;text-transform:uppercase;">Adoção Responsável</span>
                     <span class="feed-time" style="font-size:10px;color:#71717a;">${tempoRelativo(p.created_at)}</span>
                   </div>
                   <div class="pet-card-title">${escapeHtml(p.titulo)}</div>
@@ -3009,7 +3067,7 @@
 
       let tagTexto = 'Oficial';
       if (ehPet) {
-        if (a.tipo === 'pet_adocao') tagTexto = 'Adoção Solidária';
+        if (a.tipo === 'pet_adocao') tagTexto = 'Adoção Responsável';
         else if (a.tipo === 'pet_denuncia_maustratos') tagTexto = 'Denúncia de Maus-Tratos';
         else if (a.tipo === 'pet_sos_rua') tagTexto = 'Socorro Urgente na Via';
         else if (ehAvistado) tagTexto = 'Pet Avistado';
@@ -3194,9 +3252,6 @@
 
     function selecionarModoPet(modo) {
       document.getElementById('pet-tipo-input').value = modo;
-      document.getElementById('mode-perdido').classList.toggle('active', modo === 'pet_perdido' || modo === 'pet_avistado');
-      document.getElementById('mode-adocao').classList.toggle('active', modo === 'pet_adocao');
-      document.getElementById('mode-sos').classList.toggle('active', modo.startsWith('pet_sos') || modo === 'pet_denuncia_maustratos');
 
       const isAdocao = (modo === 'pet_adocao');
       const isSos = (modo === 'pet_sos_rua' || modo === 'pet_denuncia_maustratos');
@@ -3205,21 +3260,12 @@
       const wrapPai = document.getElementById('wrap-pet-pai');
       const wrapRec = document.getElementById('wrap-pet-recompensa');
       const wrapAdo = document.getElementById('wrap-adocao-fields');
-      const wrapSos = document.getElementById('wrap-sos-subtypes');
       const wrapSig = document.getElementById('wrap-sigilo-aviso');
 
       if (wrapPai) wrapPai.style.display = (modo === 'pet_avistado') ? 'block' : 'none';
       if (wrapRec) wrapRec.style.display = (modo === 'pet_perdido') ? 'block' : 'none';
       if (wrapAdo) wrapAdo.style.display = isAdocao ? 'block' : 'none';
-      if (wrapSos) wrapSos.style.display = isSos ? 'block' : 'none';
       if (wrapSig) wrapSig.style.display = isMaustratos ? 'block' : 'none';
-
-      if (isSos) {
-        const btnRua = document.getElementById('mode-sub-sos-rua');
-        const btnMaus = document.getElementById('mode-sub-maustratos');
-        if (btnRua) btnRua.classList.toggle('active', modo === 'pet_sos_rua');
-        if (btnMaus) btnMaus.classList.toggle('active', modo === 'pet_denuncia_maustratos');
-      }
 
       const modalTitle = document.getElementById('modal-pet-title');
       const btn = document.getElementById('btn-enviar-pet');
@@ -3227,26 +3273,27 @@
       const descInp = document.getElementById('pet-descricao');
 
       if (isAdocao) {
-        if (modalTitle) modalTitle.textContent = 'Divulgar para Adoção';
+        if (modalTitle) modalTitle.textContent = 'Cadastrar para Adoção Responsável';
         titInp.placeholder = 'Ex.: Pretinha (Dócil e brincalhona)';
         descInp.placeholder = 'Conte a história do pet, temperamento, se convive com outros animais e crianças...';
         btn.textContent = 'Publicar Pet para Adoção Responsável';
       } else if (isMaustratos) {
-        if (modalTitle) modalTitle.textContent = 'Denúncia de Maus-Tratos';
+        if (modalTitle) modalTitle.textContent = 'Denúncia Sigilosa de Maus-Tratos';
         titInp.placeholder = 'Ex.: Cão acorrentado sem água e exposto ao sol';
         descInp.placeholder = 'Relate com detalhes os fatos, endereço exato com número e situação do animal...';
         btn.textContent = 'Registrar Denúncia Sigilosa & Gerar Dossiê';
       } else if (modo === 'pet_sos_rua') {
-        if (modalTitle) modalTitle.textContent = 'Alerta de Socorro na Via';
+        if (modalTitle) modalTitle.textContent = 'Alerta de Animal em Risco na Via';
         titInp.placeholder = 'Ex.: Cão atropelado / filhotes abandonados na via';
         descInp.placeholder = 'Informe ponto de referência da rua e estado de saúde para os protetores...';
-        btn.textContent = 'Publicar Alerta de Socorro Urgente na Via';
+        btn.textContent = 'Publicar Alerta de Socorro na Via';
       } else {
         if (modalTitle) modalTitle.textContent = 'Registrar Pet Desaparecido';
         titInp.placeholder = 'Ex.: Bob (Cachorro Caramelo)';
         descInp.placeholder = 'Cor, coleira, rua próxima ou comportamento...';
         btn.textContent = 'Publicar Busca de Pet Desaparecido';
       }
+    }
     }
 
     function selecionarSubModoSOS(submodo) {
