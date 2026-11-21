@@ -322,12 +322,23 @@
       color: var(--text);
     }
     .section-link {
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--accent-pet);
-      background: none;
-      border: none;
+      font-size: 11px;
+      font-weight: 700;
+      color: rgba(255, 255, 255, 0.75);
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      padding: 3px 10px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
       cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .section-link:hover, .section-link:active {
+      background: rgba(255, 255, 255, 0.14);
+      color: #ffffff;
+      transform: scale(0.96);
     }
 
     /* ==================== HOME v3.4: CLIMA SOLTO + ESTEIRAS SINCRONIZADAS (ZERO SCROLL) ==================== */
@@ -485,87 +496,121 @@
       100% { transform: translateX(-50%); }
     }
 
-    /* Card de Pet na Home — Mais Trabalhado (Foto Full + Gradiente Elegante) */
+    /* Card de Pet na Home — Foto Full Bleed (100% Bloco) + Gradiente + Letras Brancas */
     .pet-belt-card {
-      width: 132px;
-      height: 146px;
+      width: 134px;
+      height: 148px;
       flex-shrink: 0;
       border-radius: 16px;
       position: relative;
       overflow: hidden;
-      background: var(--bg-elevated);
-      border: 1px solid var(--border-strong);
+      background: #0f0f12;
+      border: 1px solid rgba(255, 255, 255, 0.12);
       cursor: pointer;
     }
     .pet-belt-card:active { transform: scale(0.97); }
     .pet-belt-img {
+      position: absolute;
+      inset: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
+      object-position: center;
       display: block;
     }
     .pet-belt-grad {
       position: absolute;
       inset: 0;
-      background: linear-gradient(to top, rgba(0, 0, 0, 0.88) 0%, rgba(0, 0, 0, 0.22) 48%, rgba(0, 0, 0, 0) 100%);
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.94) 0%, rgba(0, 0, 0, 0.45) 45%, rgba(0, 0, 0, 0) 100%);
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
-      padding: 8px 9px;
+      padding: 9px 10px;
+      z-index: 2;
+      pointer-events: none;
     }
     .pet-belt-badge {
       position: absolute;
       top: 7px;
       left: 7px;
-      padding: 2px 7px;
+      padding: 2.5px 8px;
       border-radius: 999px;
       font-size: 8.5px;
       font-weight: 800;
-      letter-spacing: 0.5px;
+      letter-spacing: 0.6px;
       text-transform: uppercase;
-      background: rgba(9, 9, 11, 0.78);
-      color: #fbbf24;
-      backdrop-filter: blur(6px);
-      border: 1px solid rgba(251, 191, 36, 0.35);
-    }
-    .pet-belt-badge.avistado {
-      color: #34d399;
-      border-color: rgba(52, 211, 153, 0.35);
+      background: rgba(0, 0, 0, 0.68);
+      color: #ffffff;
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      z-index: 3;
     }
     .pet-belt-name {
-      font-size: 12px;
+      font-size: 12.5px;
       font-weight: 800;
       color: #ffffff;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      line-height: 1.15;
+      line-height: 1.2;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.85);
     }
     .pet-belt-loc {
       font-size: 10px;
       font-weight: 600;
-      color: #cbd5e1;
+      color: #ffffff;
+      opacity: 0.9;
       margin-top: 2px;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.85);
     }
 
-    /* Cards Slim Elegantes — Utilidade Pública e Segurança */
+    /* Cards Slim Elegantes — Utilidade Pública e Segurança Distintos */
     .belt-info-card {
-      width: 224px;
+      width: 236px;
       flex-shrink: 0;
-      background: var(--bg-elevated);
-      border: 1px solid var(--border);
-      border-left: 3px solid var(--accent-uti);
-      border-radius: 13px;
-      padding: 9px 11px;
+      border-radius: 14px;
+      padding: 9px 12px;
       cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.15s ease;
     }
+    .belt-info-card:active { transform: scale(0.97); }
+
+    /* Estilo Utilidade Pública: Azul-Gelo / Ciano Tecnológico */
+    .belt-info-card.utilidade {
+      background: linear-gradient(145deg, rgba(14, 165, 233, 0.08) 0%, rgba(15, 23, 42, 0.75) 100%);
+      border: 1px solid rgba(56, 189, 248, 0.22);
+      border-left: 3.5px solid #38bdf8;
+    }
+    .belt-info-card.utilidade .belt-info-src {
+      color: #38bdf8;
+      background: rgba(56, 189, 248, 0.14);
+      border: 1px solid rgba(56, 189, 248, 0.28);
+    }
+    .belt-info-card.utilidade .belt-info-title {
+      color: #f8fafc;
+    }
+
+    /* Estilo Segurança: Rubi / Coral Alerta */
     .belt-info-card.seguranca {
-      border-left-color: var(--accent-seg);
+      background: linear-gradient(145deg, rgba(244, 63, 94, 0.08) 0%, rgba(24, 14, 18, 0.75) 100%);
+      border: 1px solid rgba(244, 63, 94, 0.22);
+      border-left: 3.5px solid #f43f5e;
     }
-    .belt-info-card:active { transform: scale(0.98); }
+    .belt-info-card.seguranca .belt-info-src {
+      color: #f43f5e;
+      background: rgba(244, 63, 94, 0.14);
+      border: 1px solid rgba(244, 63, 94, 0.28);
+    }
+    .belt-info-card.seguranca .belt-info-title {
+      color: #fff1f2;
+    }
+
     .belt-info-top {
       display: flex;
       align-items: center;
@@ -573,28 +618,26 @@
       gap: 6px;
     }
     .belt-info-src {
-      font-size: 9.5px;
+      font-size: 8.5px;
       font-weight: 800;
-      letter-spacing: 0.6px;
+      letter-spacing: 0.5px;
       text-transform: uppercase;
-      color: var(--accent-uti);
-    }
-    .belt-info-card.seguranca .belt-info-src {
-      color: var(--accent-seg);
+      padding: 1.5px 6px;
+      border-radius: 4px;
     }
     .belt-info-title {
-      font-size: 12px;
+      font-size: 11.5px;
       font-weight: 700;
-      color: var(--text);
       margin-top: 4px;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+      line-height: 1.25;
     }
     .belt-info-sub {
-      font-size: 10.5px;
+      font-size: 10px;
       font-weight: 500;
-      color: var(--text-muted);
+      color: #94a3b8;
       margin-top: 3px;
       white-space: nowrap;
       overflow: hidden;
@@ -1086,18 +1129,20 @@
       margin-bottom: 12px;
     }
     .btn-primary-pet {
-      padding: 10px 14px;
-      border-radius: 13px;
-      border: none;
-      background: var(--accent-pet);
-      color: #09090b;
-      font-size: 12px;
+      padding: 9px 15px;
+      border-radius: 999px;
+      border: 1px solid rgba(245, 158, 11, 0.45);
+      background: linear-gradient(135deg, #d97706 0%, #b45309 100%);
+      color: #ffffff;
+      font-size: 11.5px;
       font-weight: 800;
+      letter-spacing: 0.2px;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      box-shadow: 0 6px 18px rgba(245, 158, 11, 0.28);
+      box-shadow: 0 4px 16px rgba(217, 119, 6, 0.35);
+      white-space: nowrap;
     }
     .btn-primary-pet:active { transform: scale(0.96); }
     .pets-grid {
@@ -1623,14 +1668,14 @@
         </div>
       </section>
 
-      <!-- ABA 3: PETS (MURAL SOLIDÁRIO) -->
+      <!-- ABA 3: PETS (RADAR DE BUSCA ANIMAL) -->
       <section class="tab-pane" id="tab-pets">
         <div class="pets-header-bar">
           <div>
-            <div style="font-size:17px; font-weight:800;">Rede Solidária de Pets</div>
-            <div style="font-size:11px; color:var(--text-muted);">Cascavel • Comunidade + Achados & Perdidos</div>
+            <div style="font-size:17px; font-weight:800; letter-spacing:-0.2px;">Radar de Busca Animal</div>
+            <div style="font-size:11px; color:var(--text-muted); margin-top:2px;">Cascavel • Alertas Oficiais & Comunidade em Tempo Real</div>
           </div>
-          <button type="button" class="btn-primary-pet" onclick="abrirModalPet('pet_perdido')">+ Registrar Pet</button>
+          <button type="button" class="btn-primary-pet" onclick="abrirModalPet('pet_perdido')">+ Registrar Pet Desaparecido</button>
         </div>
 
         <div class="pills-row" id="pets-sub-pills">
@@ -2227,50 +2272,78 @@
     }
 
     function renderizarMapa() {
-      if (!map || !markersLayer) return;
-      markersLayer.clearLayers();
+      if (!map) return;
+      if (markersLayer) markersLayer.clearLayers();
       if (heatLayer) { map.removeLayer(heatLayer); heatLayer = null; }
 
-      const filtrados = state.alertas.filter(a => state.mapaFilter === 'todos' || a.pilar === state.mapaFilter);
+      // Pure Heatmap: ZERO pinos, ZERO fotos de pets, ZERO bolinhas brancas!
+      const filtrados = state.alertas.filter(a => {
+        if (!a.lat || !a.lng) return false;
+        if (state.mapaFilter === 'todos') return true;
+        return a.pilar === state.mapaFilter;
+      });
+
       const heatPoints = [];
 
       filtrados.forEach(a => {
-        if (!a.lat || !a.lng) return;
-
         if (a.pilar === 'pet') {
-          const ehAvistado = a.status_pet === 'avistado' || a.tipo === 'pet_avistado';
-          const imgHtml = a.foto_url
-            ? `<img src="${escapeAttr(a.foto_url)}" alt="Pet" onerror="this.remove()">`
-            : '🐾';
-          const icon = L.divIcon({
-            className: '',
-            html: `<div class="pin-pet ${ehAvistado ? 'avistado' : ''}">${imgHtml}</div>`,
-            iconSize: [40, 40],
-            iconAnchor: [20, 20]
-          });
-          L.marker([a.lat, a.lng], { icon }).addTo(markersLayer).on('click', () => abrirDetalhe(a));
-          heatPoints.push([a.lat, a.lng, 0.7]);
-        } else {
-          const cls = a.tipo === 'utilidade_clima' ? 'clima' : a.pilar;
-          const icon = L.divIcon({
-            className: '',
-            html: `<div class="pin-dot ${cls}"></div>`,
-            iconSize: [14, 14],
-            iconAnchor: [7, 7]
-          });
-          L.marker([a.lat, a.lng], { icon }).addTo(markersLayer).on('click', () => abrirDetalhe(a));
-          heatPoints.push([a.lat, a.lng, a.pilar === 'seguranca' ? 1.0 : 0.75]);
+          // No mapa térmico de pets: estritamente animais perdidos (sem avistados/encontrados)
+          const ehAvistado = a.status_pet === 'avistado' || a.status_pet === 'encontrado' || a.tipo === 'pet_avistado' || ((a.titulo || '').toLowerCase().includes('encontrad'));
+          if (!ehAvistado) {
+            heatPoints.push([a.lat, a.lng, 0.85]);
+          }
+        } else if (a.pilar === 'seguranca') {
+          heatPoints.push([a.lat, a.lng, 1.0]);
+        } else if (a.pilar === 'utilidade') {
+          heatPoints.push([a.lat, a.lng, 0.85]);
         }
       });
 
-      if (state.calorAtivo && state.tab === 'mapa' && heatPoints.length > 0 && typeof L.heatLayer === 'function') {
+      // Calibração pura de calor solicitada pelo Rigo (sem bolinhas, apenas o borrão térmico)
+      let gradientCfg = { 0.2: '#38bdf8', 0.5: '#f59e0b', 0.85: '#ef4444' };
+      let radiusCfg = 34;
+      let blurCfg = 26;
+
+      if (state.mapaFilter === 'seguranca') {
+        // Mancha Térmica Pura Vermelha
+        gradientCfg = {
+          0.15: 'rgba(239, 68, 68, 0.25)',
+          0.45: 'rgba(239, 68, 68, 0.65)',
+          0.8: '#ef4444',
+          1.0: '#b91c1c'
+        };
+        radiusCfg = 36;
+        blurCfg = 28;
+      } else if (state.mapaFilter === 'utilidade') {
+        // Mancha Térmica Pura Amarela
+        gradientCfg = {
+          0.15: 'rgba(234, 179, 8, 0.25)',
+          0.45: 'rgba(234, 179, 8, 0.65)',
+          0.8: '#eab308',
+          1.0: '#ca8a04'
+        };
+        radiusCfg = 36;
+        blurCfg = 28;
+      } else if (state.mapaFilter === 'pet') {
+        // Mancha Térmica Pura Laranja-Âmbar (Pet Desaparecido)
+        gradientCfg = {
+          0.15: 'rgba(249, 115, 22, 0.25)',
+          0.45: 'rgba(249, 115, 22, 0.65)',
+          0.8: '#f97316',
+          1.0: '#c2410c'
+        };
+        radiusCfg = 38;
+        blurCfg = 30;
+      }
+
+      if (state.tab === 'mapa' && heatPoints.length > 0 && typeof L.heatLayer === 'function') {
         const sz = map.getSize();
         if (sz && sz.x > 0 && sz.y > 0) {
           heatLayer = L.heatLayer(heatPoints, {
-            radius: 30,
-            blur: 24,
+            radius: radiusCfg,
+            blur: blurCfg,
             maxZoom: 16,
-            gradient: { 0.2: '#38bdf8', 0.5: '#f59e0b', 0.85: '#ef4444' }
+            gradient: gradientCfg
           }).addTo(map);
         }
       }
@@ -2349,22 +2422,27 @@
         calibrarVelocidadeEsteira(track, 34);
       }
 
-      // 3. Esteira Pets (mais trabalhada — foto full + gradiente + mesma velocidade exata: 28 px/s)
-      const pets = state.alertas.filter(a => a.pilar === 'pet').slice(0, 12);
+      // 3. Esteira Pets: Foto Full Bleed (100% bloco) + Somente Perdidos + Pílula Branca
+      const pets = state.alertas.filter(a =>
+        a.pilar === 'pet' &&
+        a.status_pet !== 'avistado' &&
+        a.status_pet !== 'encontrado' &&
+        a.tipo !== 'pet_avistado' &&
+        !((a.titulo || '').toLowerCase().includes('encontrad'))
+      ).slice(0, 15);
       const beltPets = document.getElementById('belt-pets-track');
       if (!pets.length) {
         beltPets.className = 'belt-track static';
-        beltPets.innerHTML = '<div class="empty-box" style="width:100%;">Nenhum pet ativo em Cascavel no momento.</div>';
+        beltPets.innerHTML = '<div class="empty-box" style="width:100%;">Nenhum pet desaparecido registrado no momento.</div>';
       } else {
         const cardsHtml = pets.map(p => {
-          const av = p.status_pet === 'avistado' || p.tipo === 'pet_avistado';
           const img = p.foto_url
             ? `<img class="pet-belt-img" src="${escapeAttr(p.foto_url)}" alt="${escapeAttr(p.titulo)}" loading="lazy">`
-            : `<div class="pet-belt-img" style="display:flex;align-items:center;justify-content:center;font-size:32px;background:var(--bg-subtle);">🐾</div>`;
+            : `<div class="pet-belt-img" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#1c1917 0%,#0c0a09 100%);color:#a8a29e;"><svg width="38" height="38" viewBox="0 0 24 24" fill="currentColor" opacity="0.65"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg></div>`;
           return `
             <div class="pet-belt-card" onclick="abrirDetalheById(${p.id})">
               ${img}
-              <span class="pet-belt-badge ${av ? 'avistado' : ''}">${av ? 'Avistado' : 'Perdido'}</span>
+              <span class="pet-belt-badge">Perdido</span>
               <div class="pet-belt-grad">
                 <div class="pet-belt-name">${escapeHtml(p.titulo)}</div>
                 <div class="pet-belt-loc">${escapeHtml(p.bairro || 'Cascavel')}</div>
@@ -2392,16 +2470,22 @@
         el.innerHTML = `<div class="empty-box" style="width:260px; padding:14px;">${escapeHtml(vazioMsg)}</div>`;
         return;
       }
-      const html = lista.map(a => `
-        <div class="belt-info-card ${a.pilar}" onclick="abrirDetalheById(${a.id})">
-          <div class="belt-info-top">
-            <span class="belt-info-src">${escapeHtml(a.fonte_nome || 'Oficial')}</span>
-            <span class="feed-time">${tempoRelativo(a.created_at)}</span>
+      const html = lista.map(a => {
+        const tag = a.pilar === 'seguranca' 
+          ? `POLICIAL • ${a.fonte_nome || 'OFICIAL'}` 
+          : (a.fonte_nome ? a.fonte_nome.toUpperCase() : 'UTILIDADE');
+        const tit = a.titulo || a.descricao || 'Comunicado';
+        return `
+          <div class="belt-info-card ${a.pilar}" onclick="abrirDetalheById(${a.id})">
+            <div class="belt-info-top">
+              <span class="belt-info-src">${escapeHtml(tag)}</span>
+              <span class="feed-time">${tempoRelativo(a.created_at)}</span>
+            </div>
+            <div class="belt-info-title">${escapeHtml(tit)}</div>
+            <div class="belt-info-sub">${escapeHtml(a.bairro || 'Cascavel')}</div>
           </div>
-          <div class="belt-info-title">${escapeHtml(a.titulo)}</div>
-          <div class="belt-info-sub">${escapeHtml(a.bairro || 'Cascavel')} · ${escapeHtml(a.descricao || '')}</div>
-        </div>
-      `).join('');
+        `;
+      }).join('');
       el.className = lista.length >= 2 ? 'belt-track' : 'belt-track static';
       el.innerHTML = lista.length >= 2 ? (html + html) : html;
       calibrarVelocidadeEsteira(el, 28);
@@ -2446,18 +2530,16 @@
         return true;
       });
 
-      // Ordena automaticamente por proximidade do GPS atual (pet da sua região sempre no topo!)
-      if (state.userLat && state.userLng) {
-        pets.sort((a, b) => {
-          const da = calcularDistanciaM(state.userLat, state.userLng, a.lat, a.lng) ?? 999999;
-          const db = calcularDistanciaM(state.userLat, state.userLng, b.lat, b.lng) ?? 999999;
-          return da - db;
-        });
-      }
+      // Ordenação estrita por mais recente: o último registrado/avistado fica no topo em 1º lugar!
+      pets.sort((a, b) => {
+        const ta = new Date((a.created_at || '').replace(' ', 'T')).getTime() || 0;
+        const tb = new Date((b.created_at || '').replace(' ', 'T')).getTime() || 0;
+        return tb - ta;
+      });
 
       const el = document.getElementById('pets-full-list');
       if (!pets.length) {
-        el.innerHTML = `<div class="empty-box">Nenhum pet encontrado nesta aba.<br><br><button type="button" class="btn-primary-pet" onclick="abrirModalPet('pet_perdido')">+ Registrar Pet</button></div>`;
+        el.innerHTML = `<div class="empty-box">Nenhum pet encontrado nesta aba.<br><br><button type="button" class="btn-primary-pet" onclick="abrirModalPet('pet_perdido')">+ Registrar Pet Desaparecido</button></div>`;
         return;
       }
 
@@ -2466,7 +2548,7 @@
         const ehImprensa = p.fonte_tipo === 'imprensa' || (!p.tem_tutor_notificavel && p.link_noticia);
         const thumb = p.foto_url
           ? `<img class="pet-card-thumb" src="${escapeAttr(p.foto_url)}" alt="Pet" loading="lazy">`
-          : `<div class="pet-card-thumb" style="display:flex;align-items:center;justify-content:center;font-size:30px;">🐾</div>`;
+          : `<div class="pet-card-thumb" style="display:flex;align-items:center;justify-content:center;background:#18181b;color:#a1a1aa;"><svg width="34" height="34" viewBox="0 0 24 24" fill="currentColor" opacity="0.6"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg></div>`;
         const distTxt = (state.userLat && state.userLng) ? formatarDistancia(calcularDistanciaM(state.userLat, state.userLng, p.lat, p.lng)) : '';
         const avCount = p.avistamentos_count ? ` • ${p.avistamentos_count} avist.` : '';
         const origemBadge = ehImprensa ? `${escapeHtml(p.fonte_nome || 'CGN')} • Imprensa` : (av ? 'Avistado' : 'Comunidade');
@@ -2480,15 +2562,15 @@
                   <span class="feed-time">${tempoRelativo(p.created_at)}</span>
                 </div>
                 <div class="pet-card-title">${escapeHtml(p.titulo)}</div>
-                <div class="pet-card-sub">📍 ${escapeHtml(p.bairro || 'Cascavel')}${distTxt}${avCount}</div>
+                <div class="pet-card-sub">${escapeHtml(p.bairro || 'Cascavel')}${distTxt}${avCount}</div>
               </div>
               <div class="pet-card-actions" onclick="event.stopPropagation()">
                 ${ehImprensa
-                  ? `<button type="button" class="btn-slim" onclick="abrirModalAvistamento(${p.id}, true, 'avistamento')">📍 Marcar onde vi</button>
-                     ${p.link_noticia ? `<a href="${escapeAttr(p.link_noticia)}" target="_blank" class="btn-slim pet" style="text-decoration:none;">📰 Contato ${escapeHtml(p.fonte_nome || 'CGN')}</a>` : ''}`
+                  ? `<button type="button" class="btn-slim" onclick="abrirModalAvistamento(${p.id}, true, 'avistamento')">Marcar onde vi</button>
+                     ${p.link_noticia ? `<a href="${escapeAttr(p.link_noticia)}" target="_blank" class="btn-slim pet" style="text-decoration:none;">Contato ${escapeHtml(p.fonte_nome || 'CGN')}</a>` : ''}`
                   : `${!av
-                      ? `<button type="button" class="btn-slim pet" onclick="abrirModalAvistamento(${p.id}, false, 'avistamento')">🐾 Visto aqui</button>
-                         <button type="button" class="btn-slim ok" onclick="abrirModalAvistamento(${p.id}, false, 'resgatado')">🛟 Resgatei</button>`
+                      ? `<button type="button" class="btn-slim pet" onclick="abrirModalAvistamento(${p.id}, false, 'avistamento')">Visto aqui</button>
+                         <button type="button" class="btn-slim ok" onclick="abrirModalAvistamento(${p.id}, false, 'resgatado')">Resgatei</button>`
                       : `<button type="button" class="btn-slim" onclick="abrirDetalheById(${p.id})">Ver ficha</button>`}`
                 }
               </div>

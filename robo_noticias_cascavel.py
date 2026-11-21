@@ -236,11 +236,12 @@ def minerar_cgn():
 
             pilar, tipo, titulo_curto, severidade, fonte_ov = clf
             bairro, lat, lng = identificar_local_cascavel(texto_full)
+            titulo_manchete = title if len(title) <= 90 else (title[:87].rsplit(' ', 1)[0] + '...')
             alertas.append({
                 "pilar": pilar,
                 "tipo": tipo,
-                "titulo": titulo_curto,
-                "descricao": title if len(title) <= 220 else title[:217] + "...",
+                "titulo": titulo_manchete,
+                "descricao": desc if desc else title,
                 "rua": bairro,
                 "bairro": bairro,
                 "lat": lat,
@@ -248,6 +249,7 @@ def minerar_cgn():
                 "link": link,
                 "fonte_nome": fonte_ov or "CGN",
                 "severidade": severidade,
+                "subtipo_evento": titulo_curto,
             })
     except Exception as e:
         print(f"⚠️ CGN indisponível neste ciclo: {e}")
@@ -279,10 +281,13 @@ def minerar_catve():
 
         pilar, tipo, titulo_curto, severidade, fonte_ov = clf
         bairro, lat, lng = identificar_local_cascavel(slug_texto)
+        titulo_catve = slug_texto.capitalize()
+        if len(titulo_catve) > 90:
+            titulo_catve = titulo_catve[:87].rsplit(' ', 1)[0] + '...'
         alertas.append({
             "pilar": pilar,
             "tipo": tipo,
-            "titulo": titulo_curto,
+            "titulo": titulo_catve,
             "descricao": slug_texto.capitalize(),
             "rua": bairro,
             "bairro": bairro,
@@ -291,6 +296,7 @@ def minerar_catve():
             "link": f"https://catve.com{path_url}",
             "fonte_nome": fonte_ov or "CATVE",
             "severidade": severidade,
+            "subtipo_evento": titulo_curto,
         })
     return alertas
 
@@ -389,11 +395,12 @@ def minerar_portal_publico(nome_fonte, urls, tipo_padrao, titulo_padrao):
                 titulo_curto = clf[2] if clf and clf[0] == "utilidade" else titulo_padrao
                 severidade = clf[3] if clf else "normal"
                 bairro, lat, lng = identificar_local_cascavel(texto)
+                titulo_oficial = texto if len(texto) <= 90 else (texto[:87].rsplit(' ', 1)[0] + '...')
 
                 encontrados.append({
                     "pilar": pilar,
                     "tipo": tipo,
-                    "titulo": titulo_curto,
+                    "titulo": titulo_oficial,
                     "descricao": texto,
                     "rua": bairro,
                     "bairro": bairro,
@@ -402,6 +409,7 @@ def minerar_portal_publico(nome_fonte, urls, tipo_padrao, titulo_padrao):
                     "link": full_url,
                     "fonte_nome": nome_fonte,
                     "severidade": severidade,
+                    "subtipo_evento": titulo_curto,
                 })
         except Exception as e:
             print(f"⚠️ {nome_fonte} ({url}): indisponível ({e})")
