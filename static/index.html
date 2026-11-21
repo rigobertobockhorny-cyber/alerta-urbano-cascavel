@@ -925,7 +925,7 @@
     /* Painel Institucional de SOS e Denúncias */
     .sos-panel {
       background: #111113;
-      border: 1px solid rgba(239, 68, 68, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 16px;
       padding: 14px;
       margin-bottom: 14px;
@@ -933,7 +933,7 @@
     .sos-panel-title {
       font-size: 13.5px;
       font-weight: 800;
-      color: #ef4444;
+      color: #ffffff;
       display: flex;
       align-items: center;
       gap: 6px;
@@ -955,16 +955,21 @@
       align-items: center;
       justify-content: center;
       gap: 6px;
-      padding: 10px 12px;
-      background: #ef4444;
+      padding: 11px 14px;
+      background: #27272a;
       color: #ffffff;
       font-size: 12px;
       font-weight: 800;
-      border-radius: 10px;
-      border: none;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
       cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+      transition: all 0.15s ease;
     }
-    .btn-sos-cta:active { transform: scale(0.98); }
+    .btn-sos-cta:hover, .btn-sos-cta:active {
+      background: #3f3f46;
+      transform: scale(0.98);
+    }
     .btn-sos-secondary {
       display: flex;
       align-items: center;
@@ -1119,31 +1124,40 @@
       color: var(--accent-pet);
     }
 
-    /* Pins Personalizados no Mapa */
-    .pin-pet {
-      width: 40px;
-      height: 40px;
+    /* Pins Personalizados no Mapa: Bolinha com Foto e Margem Preta Sólida */
+    .pin-pet, .pin-pet-black-border {
+      width: 42px;
+      height: 42px;
       border-radius: 50%;
-      border: 2.5px solid #f59e0b;
-      background: #18181b;
-      box-shadow: 0 4px 14px rgba(245, 158, 11, 0.45);
+      border: 3.5px solid #000000;
+      background: #000000;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.85);
       overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #fbbf24;
-      font-weight: 800;
-      font-size: 16px;
+      position: relative;
     }
-    .pin-pet.avistado {
-      border-color: #10b981;
-      box-shadow: 0 4px 14px rgba(16, 185, 129, 0.45);
+    .pin-pet.avistado, .pin-pet-black-border.avistado {
+      border-color: #000000;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.85);
     }
-    .pin-pet img {
+    .pin-pet img, .pin-pet-black-border img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
+      border-radius: 50%;
+    }
+    .pin-pet-black-border svg {
+      width: 22px;
+      height: 22px;
+      color: #ffffff;
+      opacity: 0.85;
+    }
+    .custom-leaflet-pet-pin {
+      background: transparent !important;
+      border: none !important;
     }
     .pin-dot {
       width: 14px;
@@ -1167,16 +1181,17 @@
       padding: 3px 8px;
       border-radius: 999px;
       background: #09090b;
-      color: #fbbf24;
-      border: 2px solid #f59e0b;
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.25);
       font-size: 10px;
       font-weight: 800;
       white-space: nowrap;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.7);
     }
     .pin-trail.inicio {
-      background: #f59e0b;
-      color: #09090b;
+      background: #27272a;
+      color: #ffffff;
+      border-color: rgba(255, 255, 255, 0.4);
     }
     .pin-trail.resgatado {
       background: #10b981;
@@ -1242,11 +1257,11 @@
       margin-bottom: 12px;
     }
     .btn-primary-pet {
-      padding: 9px 15px;
+      padding: 8px 14px;
       border-radius: 999px;
-      border: 1px solid rgba(245, 158, 11, 0.45);
-      background: linear-gradient(135deg, #d97706 0%, #b45309 100%);
-      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      background: #ffffff;
+      color: #09090b;
       font-size: 11.5px;
       font-weight: 800;
       letter-spacing: 0.2px;
@@ -1254,7 +1269,7 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      box-shadow: 0 4px 16px rgba(217, 119, 6, 0.35);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
       white-space: nowrap;
     }
     .btn-primary-pet:active { transform: scale(0.96); }
@@ -1568,11 +1583,12 @@
       padding: 13px;
       border-radius: 14px;
       border: none;
-      background: var(--accent-pet);
+      background: #ffffff;
       color: #09090b;
       font-size: 14px;
       font-weight: 800;
       cursor: pointer;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
     }
     .btn-submit:disabled { opacity: 0.55; }
 
@@ -1640,7 +1656,7 @@
       text-decoration: none;
     }
     .btn-full.whatsapp { background: #16a34a; border-color: #16a34a; color: #ffffff; }
-    .btn-full.pet { background: var(--accent-pet); border-color: var(--accent-pet); color: #09090b; }
+    .btn-full.pet { background: #ffffff; border-color: #ffffff; color: #09090b; }
     .btn-full.imprensa { background: var(--brand-red); border-color: var(--brand-red); color: #ffffff; }
     .btn-full.danger { background: transparent; border-color: var(--accent-seg); color: var(--accent-seg); }
   </style>
@@ -1734,7 +1750,7 @@
                 <circle cx="20.5" cy="12" r="1.6"/>
                 <circle cx="17.5" cy="16.2" r="2.8"/>
               </svg>
-              <span>Pets Desaparecidos</span>
+              <span>Pets</span>
             </div>
             <button type="button" class="section-link" onclick="trocarAba('pets')">Ver todos ›</button>
           </div>
@@ -1797,7 +1813,11 @@
 
         <div class="map-tools">
           <button type="button" class="map-tool-btn" id="btn-satelite" onclick="alternarSatelite()" title="Alternar Satélite / Ruas">SAT</button>
-          <button type="button" class="map-tool-btn active" id="btn-calor" onclick="alternarCalor()" title="Alternar Mapa de Calor">🔥</button>
+          <button type="button" class="map-tool-btn active" id="btn-calor" onclick="alternarCalor()" title="Alternar Mapa de Calor">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/>
+            </svg>
+          </button>
           <button type="button" class="map-tool-btn" onclick="centralizarNoUsuario()" title="Minha posição no mapa">
             <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2">
               <circle cx="12" cy="12" r="4"></circle>
@@ -1817,14 +1837,14 @@
             <div style="font-size:17px; font-weight:800; letter-spacing:-0.2px;">Central Pet & Proteção Animal</div>
             <div style="font-size:11px; color:var(--text-muted); margin-top:2px;">Cascavel • Desaparecidos, Adoção Solidária e SOS</div>
           </div>
-          <button type="button" class="btn-primary-pet" onclick="abrirModalPet('pet_perdido')">+ Novo Registro</button>
+          <button type="button" class="btn-primary-pet" id="btn-central-pet-novo" onclick="abrirModalPetContextual()">+ Novo Registro</button>
         </div>
 
         <!-- 3 Pilares Superiores Principais -->
         <div class="pills-row" id="pets-main-pills">
           <button type="button" class="pill active" id="btn-pillar-desaparecidos" onclick="alternarPilarPet('desaparecidos')">🐾 Desaparecidos</button>
-          <button type="button" class="pill" id="btn-pillar-adocao" onclick="alternarPilarPet('adocao')">🏠 Adoção Solidária</button>
-          <button type="button" class="pill" id="btn-pillar-sos" onclick="alternarPilarPet('sos')">🚨 SOS & Denúncias</button>
+          <button type="button" class="pill" id="btn-pillar-adocao" onclick="alternarPilarPet('adocao')">Adoção Solidária</button>
+          <button type="button" class="pill" id="btn-pillar-sos" onclick="alternarPilarPet('sos')">SOS Denúncias</button>
         </div>
 
         <!-- Sub-pílulas: Desaparecidos -->
@@ -1844,19 +1864,19 @@
 
         <!-- Painel Institucional: SOS & Denúncias de Maus-Tratos -->
         <div id="panel-sos-info" class="sos-panel" style="display:none;">
-          <div class="sos-panel-title">🚨 Central Oficial de Proteção & Denúncia Animal</div>
+          <div class="sos-panel-title">Central de Proteção e Denúncia Animal</div>
           <div class="sos-panel-desc">Maus-tratos a animais é crime federal (Lei 14.064/2020). As denúncias de residências são tratadas com <strong>sigilo total</strong> (não aparecem no mapa público) e geram dossiê oficial para envio à SEMA e Polícia Civil.</div>
           <div class="sos-actions-row">
             <button type="button" class="btn-sos-cta" onclick="abrirModalPet('pet_denuncia_maustratos')">
-              <span>🔒 Registrar Denúncia Sigilosa de Maus-Tratos</span>
+              <span>Registrar Denúncia Sigilosa de Maus-Tratos</span>
             </button>
             <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px;">
-              <a href="https://cascavel.atende.net" target="_blank" class="btn-sos-secondary">🏛️ Ouvidoria 156 SEMA</a>
-              <a href="https://www.policiacivil.pr.gov.br" target="_blank" class="btn-sos-secondary">🚔 Delegacia Cidadã 15ª</a>
+              <a href="https://cascavel.atende.net" target="_blank" class="btn-sos-secondary">Ouvidoria 156 SEMA</a>
+              <a href="https://www.policiacivil.pr.gov.br" target="_blank" class="btn-sos-secondary">Delegacia Cidadã 15ª SDP</a>
             </div>
           </div>
           <div style="margin-top:14px; font-size:12px; font-weight:800; color:#ffffff; display:flex; align-items:center; gap:5px;">
-            <span>⚠️ Animais em Risco na Via Pública (Socorro Urgente)</span>
+            <span>Animais em Risco na Via Pública (Socorro Urgente)</span>
           </div>
         </div>
 
@@ -1944,27 +1964,27 @@
     <div class="sheet">
       <div class="sheet-handle"></div>
       <div class="sheet-header">
-        <div class="sheet-title">Registrar Pet</div>
+        <div class="sheet-title" id="modal-pet-title">Registrar Pet</div>
         <button type="button" class="sheet-close" onclick="fecharModal('modal-pet')">✕</button>
       </div>
 
       <div class="mode-switch" style="display:flex; gap:6px; margin-bottom:10px;">
-        <button type="button" class="mode-btn active" id="mode-perdido" onclick="selecionarModoPet('pet_perdido')">🐾 Desaparecido</button>
-        <button type="button" class="mode-btn" id="mode-adocao" onclick="selecionarModoPet('pet_adocao')">🏠 Para Adoção</button>
-        <button type="button" class="mode-btn" id="mode-sos" onclick="selecionarModoPet('pet_sos_rua')">🚨 SOS / Denúncia</button>
+        <button type="button" class="mode-btn active" id="mode-perdido" onclick="selecionarModoPet('pet_perdido')">Desaparecido</button>
+        <button type="button" class="mode-btn" id="mode-adocao" onclick="selecionarModoPet('pet_adocao')">Para Adoção</button>
+        <button type="button" class="mode-btn" id="mode-sos" onclick="selecionarModoPet('pet_denuncia_maustratos')">SOS / Denúncia</button>
       </div>
 
       <!-- Sub-alternador exclusivo para SOS / Denúncia -->
       <div id="wrap-sos-subtypes" style="display:none; margin-bottom:10px;">
         <div class="mode-switch" style="display:flex; gap:6px;">
-          <button type="button" class="mode-btn active" id="mode-sub-sos-rua" onclick="selecionarSubModoSOS('pet_sos_rua')">⚠️ Animal na Via (Público)</button>
-          <button type="button" class="mode-btn" id="mode-sub-maustratos" onclick="selecionarSubModoSOS('pet_denuncia_maustratos')">🔒 Maus-Tratos (Sigiloso)</button>
+          <button type="button" class="mode-btn" id="mode-sub-sos-rua" onclick="selecionarSubModoSOS('pet_sos_rua')">Animal na Via (Público)</button>
+          <button type="button" class="mode-btn active" id="mode-sub-maustratos" onclick="selecionarSubModoSOS('pet_denuncia_maustratos')">Maus-Tratos (Sigiloso)</button>
         </div>
       </div>
 
       <!-- Aviso Explicativo de Sigilo para Maus-Tratos -->
-      <div id="wrap-sigilo-aviso" style="display:none; background:#18181b; border:1px solid rgba(239, 68, 68, 0.4); border-radius:12px; padding:10px 12px; margin-bottom:12px; font-size:11.5px; color:#d4d4d8; line-height:1.4;">
-        🔒 <strong>Sigilo Absoluto:</strong> Esta denúncia <strong>NÃO</strong> aparecerá no mapa aberto. Os dados e fotos serão compilados em um Dossiê Oficial para envio direto à SEMA 156 e Polícia Civil de Cascavel.
+      <div id="wrap-sigilo-aviso" style="display:none; background:#18181b; border:1px solid rgba(255, 255, 255, 0.12); border-radius:12px; padding:10px 12px; margin-bottom:12px; font-size:11.5px; color:#d4d4d8; line-height:1.4;">
+        <strong>Sigilo Absoluto:</strong> Esta denúncia <strong>NÃO</strong> aparecerá no mapa aberto. Os dados e fotos serão compilados em um Dossiê Oficial para envio direto à SEMA 156 e Polícia Civil de Cascavel.
       </div>
 
       <form id="form-pet" onsubmit="enviarPet(event)">
@@ -1981,7 +2001,7 @@
         <div class="form-group">
           <label class="form-label">Foto do Animal</label>
           <div class="photo-upload-box" onclick="document.getElementById('pet-foto-file').click()">
-            <div id="photo-upload-hint" style="font-size:12px; color:var(--text-muted); font-weight:600;">📷 Toque para escolher ou tirar uma foto</div>
+            <div id="photo-upload-hint" style="font-size:12px; color:var(--text-muted); font-weight:600;">Toque para escolher ou tirar uma foto</div>
             <img id="pet-foto-preview" class="photo-preview" alt="Preview">
           </div>
           <input type="file" id="pet-foto-file" accept="image/*" style="display:none" onchange="previewFotoPet(this)">
@@ -2122,7 +2142,7 @@
 
       <div class="mode-switch">
         <button type="button" class="mode-btn active" id="av-mode-visto" onclick="selecionarSubtipoAv('avistamento')">🐾 Apenas Avistei</button>
-        <button type="button" class="mode-btn" id="av-mode-resgate" onclick="selecionarSubtipoAv('resgatado')">🛟 Pet Resgatado</button>
+        <button type="button" class="mode-btn" id="av-mode-resgate" onclick="selecionarSubtipoAv('resgatado')">Pet Resgatado</button>
       </div>
 
       <div id="av-modal-desc" style="font-size:12px; color:var(--text-muted); line-height:1.45; margin-bottom:12px;">
@@ -2135,7 +2155,7 @@
       <div class="form-group">
         <label class="form-label" id="av-foto-label">Foto do Animal (Opcional)</label>
         <div class="photo-upload-box" onclick="document.getElementById('av-foto-file').click()">
-          <div id="av-photo-hint" style="font-size:12px; color:var(--text-muted); font-weight:600;">📷 Toque para tirar foto e enviar ao tutor</div>
+          <div id="av-photo-hint" style="font-size:12px; color:var(--text-muted); font-weight:600;">Toque para tirar foto e enviar ao tutor</div>
           <img id="av-foto-preview" class="photo-preview" alt="Preview">
         </div>
         <input type="file" id="av-foto-file" accept="image/*" style="display:none" onchange="previewFotoAvistamento(this)">
@@ -2477,30 +2497,52 @@
       if (markersLayer) markersLayer.clearLayers();
       if (heatLayer) { map.removeLayer(heatLayer); heatLayer = null; }
 
-      // Pure Heatmap: ZERO pinos, ZERO fotos de pets, ZERO bolinhas brancas!
       const filtrados = state.alertas.filter(a => {
         if (!a.lat || !a.lng) return false;
         if (state.mapaFilter === 'todos') return true;
         return a.pilar === state.mapaFilter;
       });
 
-      const heatPoints = [];
+      // Aba Pets: ZERO CALOR! Bolinha com margem preta sólida e foto do animalzinho
+      if (state.mapaFilter === 'pet') {
+        filtrados.forEach(p => {
+          if (!p.lat || !p.lng) return;
+          if (p.sigiloso || p.tipo === 'pet_denuncia_maustratos') return;
 
+          const thumb = p.foto_url;
+          const innerHtml = thumb
+            ? `<img src="${escapeAttr(thumb)}" alt="${escapeAttr(p.titulo || 'Pet')}">`
+            : `<svg viewBox="0 0 24 24" fill="currentColor"><circle cx="4.5" cy="5" r="1.6"/><circle cx="7.5" cy="3.5" r="1.6"/><circle cx="10.5" cy="5" r="1.6"/><circle cx="7.5" cy="9.2" r="2.8"/><circle cx="14.5" cy="12" r="1.6"/><circle cx="17.5" cy="10.5" r="1.6"/><circle cx="20.5" cy="12" r="1.6"/><circle cx="17.5" cy="16.2" r="2.8"/></svg>`;
+
+          const customIcon = L.divIcon({
+            className: 'custom-leaflet-pet-pin',
+            html: `<div class="pin-pet-black-border">${innerHtml}</div>`,
+            iconSize: [42, 42],
+            iconAnchor: [21, 21]
+          });
+
+          const m = L.marker([p.lat, p.lng], { icon: customIcon });
+          m.on('click', () => abrirDetalheById(p.id));
+          markersLayer.addLayer(m);
+        });
+        return; // Sai sem adicionar mapa de calor
+      }
+
+      // Heatmap para Todos, Segurança e Utilidade
+      const heatPoints = [];
       filtrados.forEach(a => {
-        if (a.pilar === 'pet') {
-          // No mapa térmico de pets: estritamente animais perdidos (sem avistados/encontrados)
-          const ehAvistado = a.status_pet === 'avistado' || a.status_pet === 'encontrado' || a.tipo === 'pet_avistado' || ((a.titulo || '').toLowerCase().includes('encontrad'));
-          if (!ehAvistado) {
-            heatPoints.push([a.lat, a.lng, 0.85]);
-          }
-        } else if (a.pilar === 'seguranca') {
+        if (a.pilar === 'seguranca') {
           heatPoints.push([a.lat, a.lng, 1.0]);
         } else if (a.pilar === 'utilidade') {
           heatPoints.push([a.lat, a.lng, 0.85]);
+        } else if (a.pilar === 'pet') {
+          const ehAvistado = a.status_pet === 'avistado' || a.status_pet === 'encontrado' || a.tipo === 'pet_avistado';
+          if (!ehAvistado && !a.sigiloso) {
+            heatPoints.push([a.lat, a.lng, 0.85]);
+          }
         }
       });
 
-      // Calibração pura de calor solicitada pelo Rigo (sem bolinhas, apenas o borrão térmico)
       let gradientCfg = { 0.2: '#38bdf8', 0.5: '#f59e0b', 0.85: '#ef4444' };
       let radiusCfg = 34;
       let blurCfg = 26;
@@ -2525,19 +2567,9 @@
         };
         radiusCfg = 36;
         blurCfg = 28;
-      } else if (state.mapaFilter === 'pet') {
-        // Mancha Térmica Pura Laranja-Âmbar (Pet Desaparecido)
-        gradientCfg = {
-          0.15: 'rgba(249, 115, 22, 0.25)',
-          0.45: 'rgba(249, 115, 22, 0.65)',
-          0.8: '#f97316',
-          1.0: '#c2410c'
-        };
-        radiusCfg = 38;
-        blurCfg = 30;
       }
 
-      if (state.tab === 'mapa' && heatPoints.length > 0 && typeof L.heatLayer === 'function') {
+      if (state.tab === 'mapa' && heatPoints.length > 0 && typeof L.heatLayer === 'function' && state.calorAtivo !== false) {
         const sz = map.getSize();
         if (sz && sz.x > 0 && sz.y > 0) {
           heatLayer = L.heatLayer(heatPoints, {
@@ -2623,37 +2655,43 @@
         calibrarVelocidadeEsteira(track, 34);
       }
 
-      // 3. Esteira Pets: Foto Full Bleed (100% bloco) + Somente Perdidos + Pílula Branca
+      // 3. Esteira Pets: Foto Full Bleed (100% bloco) + Perdidos e Adoção + Pílula Perdido / Adoção
       const pets = state.alertas.filter(a =>
         a.pilar === 'pet' &&
         a.status_pet !== 'avistado' &&
         a.status_pet !== 'encontrado' &&
         a.tipo !== 'pet_avistado' &&
+        a.tipo !== 'pet_denuncia_maustratos' &&
+        !a.sigiloso &&
         !((a.titulo || '').toLowerCase().includes('encontrad'))
       ).slice(0, 15);
       const beltPets = document.getElementById('belt-pets-track');
-      if (!pets.length) {
-        beltPets.className = 'belt-track static';
-        beltPets.innerHTML = '<div class="empty-box" style="width:100%;">Nenhum pet desaparecido registrado no momento.</div>';
-      } else {
-        const cardsHtml = pets.map(p => {
-          const img = p.foto_url
-            ? `<img class="pet-belt-img" src="${escapeAttr(p.foto_url)}" alt="${escapeAttr(p.titulo)}" loading="lazy">`
-            : `<div class="pet-belt-img" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#1c1917 0%,#0c0a09 100%);color:#a8a29e;"><svg width="38" height="38" viewBox="0 0 24 24" fill="currentColor" opacity="0.65"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg></div>`;
-          return `
-            <div class="pet-belt-card" onclick="abrirDetalheById(${p.id})">
-              ${img}
-              <span class="pet-belt-badge">Perdido</span>
-              <div class="pet-belt-grad">
-                <div class="pet-belt-name">${escapeHtml(p.titulo)}</div>
-                <div class="pet-belt-loc">${escapeHtml(p.bairro || 'Cascavel')}</div>
+      if (beltPets) {
+        if (!pets.length) {
+          beltPets.className = 'belt-track static';
+          beltPets.innerHTML = '<div class="empty-box" style="width:100%;">Nenhum pet registrado no momento.</div>';
+        } else {
+          const cardsHtml = pets.map(p => {
+            const ehAdocao = (p.tipo === 'pet_adocao' || p.status_pet === 'adocao');
+            const badgeText = ehAdocao ? 'Adoção' : 'Perdido';
+            const img = p.foto_url
+              ? `<img class="pet-belt-img" src="${escapeAttr(p.foto_url)}" alt="${escapeAttr(p.titulo)}" loading="lazy">`
+              : `<div class="pet-belt-img" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#1c1917 0%,#0c0a09 100%);color:#a8a29e;"><svg width="38" height="38" viewBox="0 0 24 24" fill="currentColor" opacity="0.65"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg></div>`;
+            return `
+              <div class="pet-belt-card" onclick="abrirDetalheById(${p.id})">
+                ${img}
+                <span class="pet-belt-badge ${ehAdocao ? 'adocao' : 'perdido'}">${badgeText}</span>
+                <div class="pet-belt-grad">
+                  <div class="pet-belt-name">${escapeHtml(p.titulo)}</div>
+                  <div class="pet-belt-loc">${escapeHtml(p.bairro || 'Cascavel')}</div>
+                </div>
               </div>
-            </div>
-          `;
-        }).join('');
-        beltPets.className = pets.length >= 3 ? 'belt-track' : 'belt-track static';
-        beltPets.innerHTML = pets.length >= 3 ? (cardsHtml + cardsHtml) : cardsHtml;
-        calibrarVelocidadeEsteira(beltPets, 28);
+            `;
+          }).join('');
+          beltPets.className = pets.length >= 3 ? 'belt-track' : 'belt-track static';
+          beltPets.innerHTML = pets.length >= 3 ? (cardsHtml + cardsHtml) : cardsHtml;
+          calibrarVelocidadeEsteira(beltPets, 28);
+        }
       }
 
       // 4. Esteira Utilidade Pública (mesma velocidade exata: 28 px/s)
@@ -2702,7 +2740,25 @@
       if (subAdocao) subAdocao.style.display = pilar === 'adocao' ? 'flex' : 'none';
       if (panelSos) panelSos.style.display = pilar === 'sos' ? 'block' : 'none';
 
+      const btnNovo = document.getElementById('btn-central-pet-novo');
+      if (btnNovo) {
+        if (pilar === 'adocao') btnNovo.textContent = '+ Divulgar Adoção';
+        else if (pilar === 'sos') btnNovo.textContent = '+ Nova Denúncia';
+        else btnNovo.textContent = '+ Novo Registro';
+      }
+
       renderizarPetsAba();
+    }
+
+    function abrirModalPetContextual() {
+      const pilar = state.petMainPillar || 'desaparecidos';
+      if (pilar === 'adocao') {
+        abrirModalPet('pet_adocao');
+      } else if (pilar === 'sos') {
+        abrirModalPet('pet_denuncia_maustratos');
+      } else {
+        abrirModalPet('pet_perdido');
+      }
     }
 
     function filtrarAdocao(filtro, el) {
@@ -2819,7 +2875,7 @@
         if (pilarAtivo === 'adocao') {
           el.innerHTML = `<div class="empty-box">Nenhum animal cadastrado para adoção nesta categoria.<br><br><button type="button" class="btn-primary-pet" onclick="abrirModalPet('pet_adocao')">+ Cadastrar Pet para Adoção</button></div>`;
         } else if (pilarAtivo === 'sos') {
-          el.innerHTML = `<div class="empty-box" style="padding:18px;">Nenhum alerta de animal em risco na rua no momento.<br><br><span style="font-size:11px;color:#a1a1aa;">Para denúncias sigilosas de maus-tratos em residências, use o botão vermelho acima.</span></div>`;
+          el.innerHTML = `<div class="empty-box" style="padding:18px;">Nenhum alerta de animal em risco na rua no momento.<br><br><span style="font-size:11px;color:#a1a1aa;">Para denúncias sigilosas de maus-tratos em residências, use o botão Registrar Denúncia acima.</span></div>`;
         } else {
           el.innerHTML = `<div class="empty-box">Nenhum pet encontrado nesta aba.<br><br><button type="button" class="btn-primary-pet" onclick="abrirModalPet('pet_perdido')">+ Registrar Pet Desaparecido</button></div>`;
         }
@@ -2841,8 +2897,8 @@
           const tags = [
             p.porte ? `Porte ${escapeHtml(p.porte)}` : '',
             p.sexo && p.sexo !== 'Indefinido' ? escapeHtml(p.sexo) : '',
-            p.castrado ? '✓ Castrado' : '',
-            p.vacinado ? '✓ Vacinado' : '',
+            p.castrado ? 'Castrado' : '',
+            p.vacinado ? 'Vacinado' : '',
             p.faixa_etaria ? escapeHtml(p.faixa_etaria) : ''
           ].filter(Boolean).map(t => `<span class="pet-tag-pill">${t}</span>`).join('');
 
@@ -2852,11 +2908,11 @@
               <div class="pet-card-info">
                 <div>
                   <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:2px;">
-                    <span style="font-size:9.5px;font-weight:800;color:#38bdf8;text-transform:uppercase;">🏠 Adoção Solidária</span>
+                    <span style="font-size:9.5px;font-weight:800;color:#38bdf8;text-transform:uppercase;">Adoção Solidária</span>
                     <span class="feed-time" style="font-size:10px;color:#71717a;">${tempoRelativo(p.created_at)}</span>
                   </div>
                   <div class="pet-card-title">${escapeHtml(p.titulo)}</div>
-                  <div class="pet-card-sub">📍 ${escapeHtml(p.bairro || 'Cascavel')}${distTxt}</div>
+                  <div class="pet-card-sub">${escapeHtml(p.bairro || 'Cascavel')}${distTxt}</div>
                   <div style="margin-top:4px;">${tags}</div>
                 </div>
                 <div class="pet-card-actions" onclick="event.stopPropagation()">
@@ -2875,11 +2931,11 @@
               <div class="pet-card-info">
                 <div>
                   <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:2px;">
-                    <span style="font-size:9.5px;font-weight:800;color:#ef4444;text-transform:uppercase;">🚨 Socorro Urgente na Via</span>
+                    <span style="font-size:9.5px;font-weight:800;color:#ef4444;text-transform:uppercase;">Socorro Urgente na Via</span>
                     <span class="feed-time" style="font-size:10px;color:#71717a;">${tempoRelativo(p.created_at)}</span>
                   </div>
                   <div class="pet-card-title">${escapeHtml(p.titulo)}</div>
-                  <div class="pet-card-sub">📍 ${escapeHtml(p.bairro || 'Cascavel')}${distTxt}</div>
+                  <div class="pet-card-sub">${escapeHtml(p.bairro || 'Cascavel')}${distTxt}</div>
                   <div style="font-size:11.5px;color:#d4d4d8;margin-top:4px;line-height:1.35;">${escapeHtml(p.descricao || 'Animal necessitando de resgate imediato.')}</div>
                 </div>
                 <div class="pet-card-actions" onclick="event.stopPropagation()">
@@ -2948,32 +3004,45 @@
         if (partes.length) extraMeta = `<div style="font-size:12px;color:var(--accent-pet);font-weight:700;margin-top:6px;">${escapeHtml(partes.join(' • '))}</div>`;
       }
 
+      let tagTexto = 'Oficial';
+      if (ehPet) {
+        if (a.tipo === 'pet_adocao') tagTexto = 'Adoção Solidária';
+        else if (a.tipo === 'pet_denuncia_maustratos') tagTexto = 'Denúncia de Maus-Tratos';
+        else if (a.tipo === 'pet_sos_rua') tagTexto = 'Socorro Urgente na Via';
+        else if (ehAvistado) tagTexto = 'Pet Avistado';
+        else tagTexto = 'Pet Desaparecido';
+      } else if (a.pilar === 'seguranca') {
+        tagTexto = 'Segurança';
+      } else {
+        tagTexto = 'Utilidade Pública';
+      }
+
       let botoes = '';
       if (a.tipo === 'pet_adocao') {
         botoes += `<button type="button" class="btn-full" style="background:#ffffff; color:#09090b; font-weight:800;" onclick="abrirContatoAdocao(${a.id})">❤️ Quero Adotar (Falar no WhatsApp)</button>`;
       }
       if (a.tipo === 'pet_denuncia_maustratos') {
-        botoes += `<button type="button" class="btn-full danger" onclick="abrirDossieDenuncia(${a.id})">📋 Copiar Dossiê Oficial & Abrir Ouvidoria 156</button>`;
+        botoes += `<button type="button" class="btn-full danger" onclick="abrirDossieDenuncia(${a.id})">Copiar Dossiê Oficial e Abrir Ouvidoria 156</button>`;
       }
       if (ehPet && !ehAvistado && a.tipo !== 'pet_adocao' && a.tipo !== 'pet_denuncia_maustratos') {
         if (ehImprensaPet) {
-          botoes += `<button type="button" class="btn-full" onclick="abrirModalAvistamento(${a.id}, true, 'avistamento')">📍 Marcar no Mapa onde Vi este Pet</button>`;
+          botoes += `<button type="button" class="btn-full" onclick="abrirModalAvistamento(${a.id}, true, 'avistamento')">Marcar no Mapa onde Vi este Pet</button>`;
         } else {
           botoes += `<button type="button" class="btn-full pet" onclick="abrirModalAvistamento(${a.id}, false, 'avistamento')">🐾 Visto Aqui (Marcar na Trilha)</button>`;
-          botoes += `<button type="button" class="btn-full whatsapp" onclick="abrirModalAvistamento(${a.id}, false, 'resgatado')">🛟 Pet Resgatado (Enviar Foto ao Tutor)</button>`;
+          botoes += `<button type="button" class="btn-full whatsapp" onclick="abrirModalAvistamento(${a.id}, false, 'resgatado')">Pet Resgatado (Enviar Foto ao Tutor)</button>`;
         }
-        botoes += `<button type="button" class="btn-full" onclick="verTrilhaPetNoMapa(${a.id})">🧭 Ver Trilha / Caminho no Mapa</button>`;
+        botoes += `<button type="button" class="btn-full" onclick="verTrilhaPetNoMapa(${a.id})">Ver Trilha / Caminho no Mapa</button>`;
       }
       if (a.link_noticia) {
-        const lbl = ehImprensaPet ? `📰 Ver Contato na Matéria (${a.fonte_nome || 'CGN'})` : `📰 Ler Matéria Completa (${a.fonte_nome || 'Fonte'})`;
+        const lbl = ehImprensaPet ? `Ver Contato na Matéria (${a.fonte_nome || 'CGN'})` : `Ler Matéria Completa (${a.fonte_nome || 'Fonte'})`;
         botoes += `<a href="${escapeAttr(a.link_noticia)}" target="_blank" class="btn-full imprensa">${escapeHtml(lbl)}</a>`;
       }
       if (a.lat && a.lng && (!ehPet || ehAvistado)) {
-        botoes += `<button type="button" class="btn-full" onclick="focarPontoNoMapa(${a.lat}, ${a.lng})">🗺️ Ver Região no Mapa de Calor</button>`;
+        botoes += `<button type="button" class="btn-full" onclick="focarPontoNoMapa(${a.lat}, ${a.lng})">Ver Região no Mapa</button>`;
       }
       if (ehPet && ehDono) {
-        botoes += `<button type="button" class="btn-full" onclick="renovarMeuPet(${a.id})">↻ Renovar por +48h</button>`;
-        botoes += `<button type="button" class="btn-full danger" onclick="encerrarMeuPet(${a.id})">✓ Marcar como Encontrado / Encerrar</button>`;
+        botoes += `<button type="button" class="btn-full" onclick="renovarMeuPet(${a.id})">Renovar por +48h</button>`;
+        botoes += `<button type="button" class="btn-full danger" onclick="encerrarMeuPet(${a.id})">Marcar como Encontrado / Encerrar</button>`;
       }
 
       let notaTutorImprensa = ehImprensaPet
@@ -2989,12 +3058,12 @@
       box.innerHTML = `
         <div class="sheet-handle"></div>
         <div class="sheet-header">
-          <span class="source-tag ${a.pilar}">${escapeHtml(a.fonte_nome || 'Oficial')} • ${ehPet ? (ehAvistado ? 'Pet Avistado' : 'Pet Desaparecido') : (a.pilar === 'seguranca' ? 'Segurança' : 'Utilidade Pública')}</span>
+          <span class="source-tag ${a.pilar}">${escapeHtml(a.fonte_nome || 'Oficial')} • ${tagTexto}</span>
           <button type="button" class="sheet-close" onclick="fecharModal('modal-detalhe')">✕</button>
         </div>
         ${photoHtml}
         <div style="font-size:18px;font-weight:800;line-height:1.25;">${escapeHtml(a.titulo)}</div>
-        <div style="font-size:12px;color:var(--text-muted);margin-top:4px;">📍 ${escapeHtml(a.bairro || 'Cascavel')} • ${tempoRelativo(a.created_at)}</div>
+        <div style="font-size:12px;color:var(--text-muted);margin-top:4px;">${escapeHtml(a.bairro || 'Cascavel')} • ${tempoRelativo(a.created_at)}</div>
         ${extraMeta}
         <div style="font-size:13px;color:var(--text);line-height:1.5;margin-top:10px;">${escapeHtml(a.descricao || 'Sem descrição adicional.')}</div>
         ${timelineSlot}
@@ -3018,7 +3087,7 @@
           <div class="timeline-item">
             <div class="timeline-hora">${formatarHora(pt.created_at)}</div>
             <div style="flex:1;">
-              <div style="font-weight:800; color:${pt.tipo === 'resgatado' ? 'var(--accent-ok)' : 'var(--text)'};">${pt.tipo === 'resgatado' ? '🛟 ' : (pt.tipo === 'inicio' ? '📍 ' : '🐾 ')}${escapeHtml(pt.titulo)}</div>
+              <div style="font-weight:800; color:${pt.tipo === 'resgatado' ? 'var(--accent-ok)' : 'var(--text)'};">${pt.tipo === 'resgatado' ? '' : (pt.tipo === 'inicio' ? '' : '🐾 ')}${escapeHtml(pt.titulo)}</div>
               <div style="font-size:11px; color:var(--text-muted);">${escapeHtml(pt.bairro || 'Cascavel')}${pt.descricao ? ' — ' + escapeHtml(pt.descricao) : ''}</div>
             </div>
           </div>
@@ -3046,7 +3115,7 @@
             coords.push([pt.lat, pt.lng]);
             const hora = formatarHora(pt.created_at);
             const cls = pt.tipo === 'inicio' ? 'inicio' : (pt.tipo === 'resgatado' ? 'resgatado' : '');
-            const lbl = pt.tipo === 'inicio' ? `Início • ${hora}` : (pt.tipo === 'resgatado' ? `🛟 Resgate • ${hora}` : `#${pt.etapa} • ${hora}`);
+            const lbl = pt.tipo === 'inicio' ? `Início • ${hora}` : (pt.tipo === 'resgatado' ? `Resgate • ${hora}` : `#${pt.etapa} • ${hora}`);
             const icon = L.divIcon({
               className: '',
               html: `<div class="pin-trail ${cls}">${lbl}</div>`,
@@ -3096,10 +3165,16 @@
 
     /* ==================== FORMULÁRIO + REGISTRAR PET ==================== */
     function abrirModalPet(modo) {
+      if (!modo) {
+        const pilar = state.petMainPillar || 'desaparecidos';
+        if (pilar === 'adocao') modo = 'pet_adocao';
+        else if (pilar === 'sos') modo = 'pet_denuncia_maustratos';
+        else modo = 'pet_perdido';
+      }
       state.fotoUploadUrl = '';
       document.getElementById('form-pet').reset();
       document.getElementById('pet-foto-preview').style.display = 'none';
-      document.getElementById('photo-upload-hint').textContent = '📷 Toque para escolher ou tirar uma foto';
+      document.getElementById('photo-upload-hint').textContent = 'Toque para escolher ou tirar uma foto';
       // Pré-preenche bairro e WhatsApp se já cadastrados no Perfil
       if (state.perfil && state.perfil.bairro) {
         const bSel = document.getElementById('pet-bairro');
@@ -3109,7 +3184,7 @@
         const cInp = document.getElementById('pet-contato');
         if (cInp) cInp.value = state.perfil.whatsapp;
       }
-      selecionarModoPet(modo || 'pet_perdido');
+      selecionarModoPet(modo);
       preencherSelectPetsPai();
       document.getElementById('modal-pet').classList.add('open');
     }
@@ -3136,23 +3211,35 @@
       if (wrapSos) wrapSos.style.display = isSos ? 'block' : 'none';
       if (wrapSig) wrapSig.style.display = isMaustratos ? 'block' : 'none';
 
+      if (isSos) {
+        const btnRua = document.getElementById('mode-sub-sos-rua');
+        const btnMaus = document.getElementById('mode-sub-maustratos');
+        if (btnRua) btnRua.classList.toggle('active', modo === 'pet_sos_rua');
+        if (btnMaus) btnMaus.classList.toggle('active', modo === 'pet_denuncia_maustratos');
+      }
+
+      const modalTitle = document.getElementById('modal-pet-title');
       const btn = document.getElementById('btn-enviar-pet');
       const titInp = document.getElementById('pet-titulo');
       const descInp = document.getElementById('pet-descricao');
 
       if (isAdocao) {
+        if (modalTitle) modalTitle.textContent = 'Divulgar para Adoção';
         titInp.placeholder = 'Ex.: Pretinha (Dócil e brincalhona)';
         descInp.placeholder = 'Conte a história do pet, temperamento, se convive com outros animais e crianças...';
         btn.textContent = 'Publicar Pet para Adoção Responsável';
       } else if (isMaustratos) {
+        if (modalTitle) modalTitle.textContent = 'Denúncia de Maus-Tratos';
         titInp.placeholder = 'Ex.: Cão acorrentado sem água e exposto ao sol';
         descInp.placeholder = 'Relate com detalhes os fatos, endereço exato com número e situação do animal...';
         btn.textContent = 'Registrar Denúncia Sigilosa & Gerar Dossiê';
       } else if (modo === 'pet_sos_rua') {
+        if (modalTitle) modalTitle.textContent = 'Alerta de Socorro na Via';
         titInp.placeholder = 'Ex.: Cão atropelado / filhotes abandonados na via';
         descInp.placeholder = 'Informe ponto de referência da rua e estado de saúde para os protetores...';
         btn.textContent = 'Publicar Alerta de Socorro Urgente na Via';
       } else {
+        if (modalTitle) modalTitle.textContent = 'Registrar Pet Desaparecido';
         titInp.placeholder = 'Ex.: Bob (Cachorro Caramelo)';
         descInp.placeholder = 'Cor, coleira, rua próxima ou comportamento...';
         btn.textContent = 'Publicar Busca de Pet Desaparecido';
@@ -3193,7 +3280,7 @@
         const data = await resp.json();
         if (resp.ok && data.url) {
           state.fotoUploadUrl = data.url;
-          document.getElementById('photo-upload-hint').textContent = '✓ Foto carregada (toque para trocar)';
+          document.getElementById('photo-upload-hint').textContent = 'Foto carregada (toque para trocar)';
         } else {
           mostrarToast(data.error || 'Erro ao enviar foto');
         }
@@ -3318,7 +3405,7 @@
       document.getElementById('av-obs').value = '';
       document.getElementById('av-foto-preview').style.display = 'none';
       document.getElementById('av-foto-file').value = '';
-      document.getElementById('av-photo-hint').textContent = '📷 Toque para tirar foto e enviar ao tutor';
+      document.getElementById('av-photo-hint').textContent = 'Toque para tirar foto e enviar ao tutor';
       document.getElementById('av-wa-input').value = (state.perfil && state.perfil.whatsapp) ? state.perfil.whatsapp : '';
       selecionarSubtipoAv(subtipoInicial || 'avistamento');
       document.getElementById('modal-avistamento').classList.add('open');
@@ -3329,7 +3416,7 @@
       document.getElementById('av-subtipo').value = subtipo;
       document.getElementById('av-mode-visto').classList.toggle('active', !ehResg);
       document.getElementById('av-mode-resgate').classList.toggle('active', ehResg);
-      document.getElementById('av-modal-title').textContent = ehResg ? '🛟 Pet Resgatado' : '🐾 Visto Aqui';
+      document.getElementById('av-modal-title').textContent = ehResg ? 'Pet Resgatado' : '🐾 Visto Aqui';
       document.getElementById('av-modal-desc').innerHTML = ehResg
         ? 'Tire uma <b>foto do animal que você resgatou</b>. Somente o tutor receberá a foto para confirmar se é o pet dele e entrar em contato.'
         : 'Seu ponto GPS será marcado na trilha do mapa e o tutor será notificado. <b>Nenhum número de WhatsApp do tutor é exposto.</b>';
@@ -3358,7 +3445,7 @@
         const data = await resp.json();
         if (resp.ok && data.url) {
           avFotoUploadUrl = data.url;
-          document.getElementById('av-photo-hint').textContent = '✓ Foto pronta para enviar ao tutor';
+          document.getElementById('av-photo-hint').textContent = 'Foto pronta para enviar ao tutor';
         } else {
           mostrarToast(data.error || 'Erro ao enviar foto');
         }
@@ -3459,25 +3546,25 @@
             ? `<img src="${escapeAttr(av.foto_url)}" style="width:100%;max-height:170px;object-fit:cover;border-radius:12px;margin:8px 0;" alt="Foto enviada">`
             : '';
           const waBtn = av.contato_avistador
-            ? `<a href="https://wa.me/${escapeAttr(av.contato_avistador)}?text=${encodeURIComponent('Olá! Sou o tutor de ' + av.pet_titulo + ' no Alerta Urbano. Vi seu aviso!')}" target="_blank" class="btn-slim ok" style="text-decoration:none;">💬 Falar no WhatsApp</a>`
+            ? `<a href="https://wa.me/${escapeAttr(av.contato_avistador)}?text=${encodeURIComponent('Olá! Sou o tutor de ' + av.pet_titulo + ' no Alerta Urbano. Vi seu aviso!')}" target="_blank" class="btn-slim ok" style="text-decoration:none;">Falar no WhatsApp</a>`
             : `<span style="font-size:10px; color:var(--text-dim);">Contato privado (somente ponto no mapa)</span>`;
           const acoesResgate = ehResg
             ? `<div style="display:flex; gap:6px; margin-top:8px;">
-                 <button type="button" class="btn-slim ok" style="flex:1;" onclick="encerrarMeuPet(${av.pet_pai_id})">✅ Sim, é meu Pet!</button>
-                 <button type="button" class="btn-slim" style="flex:1; color:var(--accent-seg);" onclick="descartarAvistamento(${av.id})">❌ Não é o meu</button>
+                 <button type="button" class="btn-slim ok" style="flex:1;" onclick="encerrarMeuPet(${av.pet_pai_id})">Sim, é meu Pet!</button>
+                 <button type="button" class="btn-slim" style="flex:1; color:var(--accent-seg);" onclick="descartarAvistamento(${av.id})">Não é o meu</button>
                </div>`
             : '';
           return `
             <div class="perfil-card-box" style="margin-bottom:0; padding:12px; ${ehResg ? 'border-color:var(--accent-ok);' : ''}">
               <div style="display:flex; justify-content:space-between; align-items:center;">
-                <strong style="font-size:12px; color:${ehResg ? 'var(--accent-ok)' : 'var(--accent-pet)'};">${ehResg ? '🛟 POSSÍVEL RESGATE' : '🐾 VISTO AQUI'} • ${escapeHtml(av.pet_titulo)}</strong>
+                <strong style="font-size:12px; color:${ehResg ? 'var(--accent-ok)' : 'var(--accent-pet)'};">${ehResg ? 'POSSÍVEL RESGATE' : '🐾 VISTO AQUI'} • ${escapeHtml(av.pet_titulo)}</strong>
                 <span class="feed-time">${formatarHora(av.created_at)}</span>
               </div>
               ${fotoHtml}
               <div style="font-size:12px; color:var(--text-muted); margin-top:4px;">${escapeHtml(av.descricao || '')}</div>
               <div style="display:flex; flex-wrap:wrap; gap:6px; margin-top:8px; align-items:center;">
-                <a href="${mapsUrl}" target="_blank" class="btn-slim pet" style="text-decoration:none;">📍 Localização</a>
-                <button type="button" class="btn-slim" onclick="fecharModal('modal-perfil'); verTrilhaPetNoMapa(${av.pet_pai_id})">🧭 Ver Trilha</button>
+                <a href="${mapsUrl}" target="_blank" class="btn-slim pet" style="text-decoration:none;">Localização GPS</a>
+                <button type="button" class="btn-slim" onclick="fecharModal('modal-perfil'); verTrilhaPetNoMapa(${av.pet_pai_id})">Ver Trilha</button>
                 ${waBtn}
               </div>
               ${acoesResgate}
@@ -3741,10 +3828,10 @@
         <div class="perfil-card-box" style="margin-bottom:0; padding:12px; display:flex; align-items:center; justify-content:space-between; gap:10px;">
           <div style="min-width:0;">
             <div style="font-size:13px; font-weight:800;">${escapeHtml(p.titulo)}</div>
-            <div style="font-size:11px; color:var(--text-muted);">📍 ${escapeHtml(p.bairro || 'Cascavel')}</div>
+            <div style="font-size:11px; color:var(--text-muted);">${escapeHtml(p.bairro || 'Cascavel')}</div>
           </div>
           <div style="display:flex; gap:6px; flex-shrink:0;">
-            <button type="button" class="btn-slim" onclick="renovarMeuPet(${p.id})">↻ 48h</button>
+            <button type="button" class="btn-slim" onclick="renovarMeuPet(${p.id})">+48h</button>
             <button type="button" class="btn-slim ok" onclick="encerrarMeuPet(${p.id})">Encontrei</button>
           </div>
         </div>
