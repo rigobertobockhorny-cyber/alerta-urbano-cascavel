@@ -3101,9 +3101,11 @@
         return a.pilar === state.mapaFilter;
       });
 
-      // Aba Pets: ZERO CALOR! Bolinha com margem preta sólida e foto do animalzinho
-      if (state.mapaFilter === 'pet') {
-        filtrados.forEach(p => {
+      // 1. Marcadores de Pets: Bolinha com Foto e Borda Preta (Em 'pet' e em 'todos')
+      // PETS NUNCA ENTRAM EM MAPA DE CALOR!
+      if (state.mapaFilter === 'pet' || state.mapaFilter === 'todos') {
+        const petsParaMarcar = filtrados.filter(p => p.pilar === 'pet');
+        petsParaMarcar.forEach(p => {
           if (!p.lat || !p.lng) return;
           if (p.sigiloso || p.tipo === 'pet_denuncia_maustratos') return;
 
@@ -3123,59 +3125,44 @@
           m.on('click', () => abrirDetalheById(p.id));
           markersLayer.addLayer(m);
         });
-        return; // Sai sem adicionar mapa de calor
+
+        // Se o filtro for estritamente 'pet', encerra sem mapa de calor
+        if (state.mapaFilter === 'pet') {
+          return;
+        }
       }
 
-      // Heatmap para Todos, Segurança e Utilidade
+      // 2. Heatmap Exclusivo para Segurança (Zero arco-íris, zero azul estranho)
       const heatPoints = [];
       filtrados.forEach(a => {
         if (a.pilar === 'seguranca') {
           heatPoints.push([a.lat, a.lng, 1.0]);
-        } else if (a.pilar === 'utilidade') {
-          heatPoints.push([a.lat, a.lng, 0.85]);
-        } else if (a.pilar === 'pet') {
-          const ehAvistado = a.status_pet === 'avistado' || a.status_pet === 'encontrado' || a.tipo === 'pet_avistado';
-          if (!ehAvistado && !a.sigiloso) {
-            heatPoints.push([a.lat, a.lng, 0.85]);
-          }
         }
       });
 
-      let gradientCfg = { 0.2: '#38bdf8', 0.5: '#f59e0b', 0.85: '#ef4444' };
-      let radiusCfg = 34;
-      let blurCfg = 26;
-
-      if (state.mapaFilter === 'seguranca') {
-        // Mancha Térmica Pura Vermelha
-        gradientCfg = {
-          0.15: 'rgba(239, 68, 68, 0.25)',
-          0.45: 'rgba(239, 68, 68, 0.65)',
-          0.8: '#ef4444',
-          1.0: '#b91c1c'
-        };
-        radiusCfg = 36;
-        blurCfg = 28;
-      } else if (state.mapaFilter === 'utilidade') {
-        // Mancha Térmica Pura Amarela
-        gradientCfg = {
-          0.15: 'rgba(234, 179, 8, 0.25)',
-          0.45: 'rgba(234, 179, 8, 0.65)',
-          0.8: '#eab308',
-          1.0: '#ca8a04'
-        };
-        radiusCfg = 36;
-        blurCfg = 28;
-      }
+      // Degradê Termal Monocromático Puro (Âmbar para Vermelho Carmesim)
+      const gradientCfg = {
+        0.0: 'rgba(239, 68, 68, 0)',
+        0.25: 'rgba(245, 158, 11, 0.35)',
+        0.6: 'rgba(239, 68, 68, 0.75)',
+        1.0: '#b91c1c'
+      };
+      const radiusCfg = 36;
+      const blurCfg = 26;
 
       if (state.tab === 'mapa' && heatPoints.length > 0 && typeof L.heatLayer === 'function' && state.calorAtivo !== false) {
         const sz = map.getSize();
         if (sz && sz.x > 0 && sz.y > 0) {
-          heatLayer = L.heatLayer(heatPoints, {
-            radius: radiusCfg,
-            blur: blurCfg,
-            maxZoom: 16,
-            gradient: gradientCfg
-          }).addTo(map);
+          try {
+            heatLayer = L.heatLayer(heatPoints, {
+              radius: radiusCfg,
+              blur: blurCfg,
+              maxZoom: 16,
+              gradient: gradientCfg
+            }).addTo(map);
+          } catch (e) {
+            console.warn('Erro ao renderizar camada de calor:', e);
+          }
         }
       }
     }
