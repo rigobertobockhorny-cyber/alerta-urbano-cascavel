@@ -267,6 +267,8 @@ def index():
     return resp
 
 
+@app.route("/privacidade")
+@app.route("/politica-privacidade")
 @app.route("/politica_privacidade.html")
 def politica_privacidade():
     return send_from_directory("static", "politica_privacidade.html")
