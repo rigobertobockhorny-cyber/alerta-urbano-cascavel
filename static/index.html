@@ -1721,141 +1721,500 @@
       transform: scale(0.985);
     }
 
-    /* ==================== LABORATÓRIO DE CORES: 1 COR POR SEÇÃO ==================== */
-    
-    /* 1. Indicadores de Teste de Cor (Badges Informativos) */
-    .color-test-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 5px 12px;
-      border-radius: 999px;
-      font-size: 10.5px;
-      font-weight: 800;
-      letter-spacing: 0.4px;
-      text-transform: uppercase;
-      margin-bottom: 12px;
-      width: fit-content;
-    }
-    .color-test-pill.inicio {
-      background: rgba(56, 189, 248, 0.15);
-      color: #38bdf8;
-      border: 1px solid rgba(56, 189, 248, 0.35);
-    }
-    .color-test-pill.mapa {
-      background: rgba(245, 158, 11, 0.15);
-      color: #fbbf24;
-      border: 1px solid rgba(245, 158, 11, 0.35);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
-    }
-    .color-test-pill.pets {
-      background: rgba(16, 185, 129, 0.15);
-      color: #34d399;
-      border: 1px solid rgba(16, 185, 129, 0.35);
-    }
-    .color-test-pill.copiloto {
-      background: rgba(168, 85, 247, 0.15);
-      color: #c084fc;
-      border: 1px solid rgba(168, 85, 247, 0.35);
+    /* ==================== IDENTIDADE VISUAL UNIFICADA: VERDE ESMERALDA NEON ==================== */
+    :root {
+      --accent-brand: #10b981;
+      --accent-brand-soft: #34d399;
+      --accent-brand-bg: rgba(16, 185, 129, 0.14);
+      --accent-brand-glow: rgba(16, 185, 129, 0.35);
     }
 
-    /* 2. Barra de Navegação Inferior: 1 Cor para Cada Aba Ativa */
-    #nav-inicio.active {
-      color: #38bdf8 !important;
-      background: rgba(56, 189, 248, 0.12) !important;
-    }
-    #nav-mapa.active {
-      color: #f59e0b !important;
-      background: rgba(245, 158, 11, 0.12) !important;
-    }
-    #nav-pets.active {
+    /* Barra de Navegação Inferior Unificada no Verde Esmeralda */
+    .nav-item.active {
       color: #10b981 !important;
       background: rgba(16, 185, 129, 0.12) !important;
     }
-    #nav-copiloto.active {
-      color: #a855f7 !important;
-      background: rgba(168, 85, 247, 0.12) !important;
+    .nav-item.active svg {
+      stroke: #10b981 !important;
     }
 
-    /* 3. Seção 1 (Início): AZUL CIANO ELÉTRICO (#38bdf8) */
+    /* Destaques da Home no Verde */
     #tab-inicio .section-link {
-      color: #38bdf8 !important;
-      border-color: rgba(56, 189, 248, 0.35) !important;
-      background: rgba(56, 189, 248, 0.08) !important;
+      color: #10b981 !important;
+      border-color: rgba(16, 185, 129, 0.35) !important;
+      background: rgba(16, 185, 129, 0.08) !important;
     }
     #tab-inicio .section-link:hover, #tab-inicio .section-link:active {
-      background: rgba(56, 189, 248, 0.22) !important;
+      background: rgba(16, 185, 129, 0.22) !important;
       color: #ffffff !important;
     }
     #tab-inicio .belt-title.pet-title {
-      color: #38bdf8 !important;
-    }
-    #tab-inicio .alert-ticker {
-      border-color: rgba(56, 189, 248, 0.25) !important;
+      color: #10b981 !important;
     }
 
-    /* 4. Seção 2 (Mapa): AMARELO OURO / ÂMBAR ALERTA (#f59e0b) */
+    /* Destaques do Mapa no Verde */
     #tab-mapa .map-pill.active {
-      background: #f59e0b !important;
-      color: #09090b !important;
-      font-weight: 800 !important;
-      border-color: #f59e0b !important;
-      box-shadow: 0 2px 10px rgba(245, 158, 11, 0.4) !important;
-    }
-    #tab-mapa .map-tool-btn.active {
-      color: #f59e0b !important;
-      border-color: rgba(245, 158, 11, 0.6) !important;
-      background: rgba(245, 158, 11, 0.15) !important;
-    }
-
-    /* 5. Seção 3 (Pets): VERDE ESMERALDA / NEON (#10b981) */
-    #tab-pets .pillar-tab.active {
       background: #10b981 !important;
       color: #09090b !important;
       font-weight: 800 !important;
-      box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35) !important;
-    }
-    #tab-pets .btn-pet-action {
-      background: #10b981 !important;
-      color: #09090b !important;
-      font-weight: 800 !important;
-      border: none !important;
-      box-shadow: 0 4px 16px rgba(16, 185, 129, 0.4) !important;
-    }
-    #tab-pets .btn-pet-action:hover, #tab-pets .btn-pet-action:active {
-      background: #34d399 !important;
-    }
-    #tab-pets .pill.active {
-      background: rgba(16, 185, 129, 0.22) !important;
-      color: #34d399 !important;
-      border-color: rgba(16, 185, 129, 0.45) !important;
+      border-color: #10b981 !important;
+      box-shadow: 0 2px 10px rgba(16, 185, 129, 0.4) !important;
     }
 
-    /* 6. Seção 4 (Copiloto): ROXO ELÉTRICO / VIOLETA (#a855f7) */
+    /* Destaques do Copiloto no Verde */
     #tab-copiloto .hero-copiloto {
-      border: 1px solid rgba(168, 85, 247, 0.35) !important;
-      background: linear-gradient(180deg, rgba(168, 85, 247, 0.12) 0%, rgba(20, 20, 24, 0.95) 100%) !important;
-      box-shadow: 0 8px 24px rgba(168, 85, 247, 0.15) !important;
+      border: 1px solid rgba(16, 185, 129, 0.35) !important;
+      background: linear-gradient(180deg, rgba(16, 185, 129, 0.12) 0%, rgba(20, 20, 24, 0.95) 100%) !important;
+      box-shadow: 0 8px 24px rgba(16, 185, 129, 0.15) !important;
     }
     #tab-copiloto .btn-bolha-hero {
-      background: linear-gradient(135deg, #a855f7 0%, #7c3aed 100%) !important;
-      color: #ffffff !important;
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
+      color: #09090b !important;
       font-weight: 800 !important;
-      box-shadow: 0 6px 20px rgba(168, 85, 247, 0.45) !important;
+      box-shadow: 0 6px 20px rgba(16, 185, 129, 0.45) !important;
       border: none !important;
     }
-    #tab-copiloto .btn-bolha-hero:active {
-      transform: scale(0.98);
-    }
     #tab-copiloto .switch input:checked + .slider {
-      background: #a855f7 !important;
-      border-color: #a855f7 !important;
-      box-shadow: 0 0 14px rgba(168, 85, 247, 0.5) !important;
+      background: #10b981 !important;
+      border-color: #10b981 !important;
+      box-shadow: 0 0 14px rgba(16, 185, 129, 0.5) !important;
     }
-    #tab-copiloto .switch input:checked + .slider:before {
-      background: #ffffff !important;
+
+    /* ==================== NOVO GRUPO DE NAVEGAÇÃO EM LINHAS COM CHEVRON (›) ==================== */
+    .pet-nav-card {
+      background: #111114;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 18px;
+      overflow: hidden;
+      margin-bottom: 16px;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.3);
     }
-  </style>
+    .pet-nav-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 13px 15px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      cursor: pointer;
+      transition: background 0.15s ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .pet-nav-row:last-child {
+      border-bottom: none;
+    }
+    .pet-nav-row:active {
+      background: rgba(255, 255, 255, 0.05);
+    }
+    .pet-nav-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+    .pet-nav-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 11px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .pet-nav-icon.red {
+      background: rgba(239, 68, 68, 0.14);
+      color: #ef4444;
+      border: 1px solid rgba(239, 68, 68, 0.25);
+    }
+    .pet-nav-icon.amber {
+      background: rgba(245, 158, 11, 0.14);
+      color: #f59e0b;
+      border: 1px solid rgba(245, 158, 11, 0.25);
+    }
+    .pet-nav-icon.green {
+      background: rgba(16, 185, 129, 0.14);
+      color: #10b981;
+      border: 1px solid rgba(16, 185, 129, 0.25);
+    }
+    .pet-nav-icon.purple {
+      background: rgba(168, 85, 247, 0.14);
+      color: #a855f7;
+      border: 1px solid rgba(168, 85, 247, 0.25);
+    }
+    .pet-nav-text {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+    .pet-nav-title {
+      font-size: 13.5px;
+      font-weight: 800;
+      color: #ffffff;
+      line-height: 1.25;
+      letter-spacing: -0.1px;
+    }
+    .pet-nav-sub {
+      font-size: 11px;
+      color: #8e8e93;
+      margin-top: 2px;
+      line-height: 1.25;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .pet-nav-chevron {
+      color: #71717a;
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+      margin-left: 8px;
+    }
+
+    /* ==================== NOVO CARD SOCIAL DE PETS (PADRÃO ALERTA URBANO) ==================== */
+    .pet-card {
+      background: #111114;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 18px;
+      overflow: hidden;
+      margin-bottom: 16px;
+      transition: border-color 0.2s, transform 0.15s;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35);
+      cursor: default;
+    }
+    .pet-card:hover {
+      border-color: rgba(16, 185, 129, 0.3);
+    }
+    .pet-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 14px 10px;
+    }
+    .pet-card-author {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+    }
+    .pet-card-author-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(16, 185, 129, 0.15);
+      color: #10b981;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 13px;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      flex-shrink: 0;
+    }
+    .pet-card-author-name {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: #f4f4f5;
+      line-height: 1.2;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .pet-card-author-sub {
+      font-size: 11px;
+      color: #71717a;
+      margin-top: 2px;
+    }
+    .pet-card-dots-btn {
+      background: transparent;
+      border: none;
+      color: #8e8e93;
+      padding: 6px;
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .pet-card-dots-btn:active {
+      background: rgba(255, 255, 255, 0.1);
+      color: #ffffff;
+    }
+    .pet-card-media {
+      position: relative;
+      width: 100%;
+      height: 230px;
+      background: #18181b;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .pet-card-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.3s ease;
+    }
+    .pet-card-media:active img {
+      transform: scale(1.02);
+    }
+    .pet-card-media-badge {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+    }
+    .pet-card-media-badge.desaparecido {
+      background: rgba(239, 68, 68, 0.92);
+      color: #ffffff;
+    }
+    .pet-card-media-badge.avistado {
+      background: rgba(245, 158, 11, 0.92);
+      color: #09090b;
+    }
+    .pet-card-media-badge.adocao {
+      background: rgba(16, 185, 129, 0.92);
+      color: #09090b;
+    }
+    .pet-card-media-badge.sos {
+      background: rgba(239, 68, 68, 0.92);
+      color: #ffffff;
+    }
+    .pet-card-dist-badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      padding: 4px 9px;
+      border-radius: 999px;
+      font-size: 10px;
+      font-weight: 700;
+      background: rgba(0, 0, 0, 0.7);
+      color: #e4e4e7;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(6px);
+    }
+    .pet-card-content {
+      padding: 12px 14px 6px;
+    }
+    .pet-card-pet-name {
+      font-size: 16px;
+      font-weight: 800;
+      color: #ffffff;
+      line-height: 1.25;
+    }
+    .pet-card-pills-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 6px;
+      margin-bottom: 8px;
+    }
+    .pet-card-pill {
+      font-size: 10.5px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.06);
+      color: #d4d4d8;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .pet-card-desc {
+      font-size: 12.5px;
+      color: #a1a1aa;
+      line-height: 1.45;
+      margin-top: 4px;
+    }
+    .pet-card-social-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 14px 10px;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      margin-top: 8px;
+    }
+    .pet-social-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .btn-pet-icon {
+      background: transparent;
+      border: none;
+      color: #a1a1aa;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      padding: 4px 6px;
+      border-radius: 6px;
+      transition: color 0.15s, transform 0.15s;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .btn-pet-icon:active {
+      transform: scale(1.15);
+    }
+    .btn-pet-icon.liked {
+      color: #10b981;
+    }
+    .btn-pet-icon.liked svg {
+      fill: #10b981;
+      stroke: #10b981;
+    }
+    .pet-card-action-btns {
+      display: flex;
+      gap: 8px;
+      padding: 0 14px 14px;
+    }
+    .btn-pet-cta-primary {
+      flex: 1;
+      background: #10b981;
+      color: #09090b;
+      font-weight: 800;
+      font-size: 13px;
+      padding: 10px 14px;
+      border-radius: 12px;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+      text-decoration: none;
+      transition: background 0.15s, transform 0.15s;
+    }
+    .btn-pet-cta-primary:active {
+      background: #34d399;
+      transform: scale(0.985);
+    }
+    .btn-pet-cta-secondary {
+      background: rgba(255, 255, 255, 0.06);
+      color: #f4f4f5;
+      font-weight: 700;
+      font-size: 12.5px;
+      padding: 10px 14px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      text-decoration: none;
+      transition: background 0.15s;
+    }
+    .btn-pet-cta-secondary:active {
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    /* Modal Sheet de Ações do Card (3 Pontinhos) */
+    .pet-sheet-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(4px);
+      z-index: 10000;
+      display: none;
+      align-items: flex-end;
+      justify-content: center;
+      padding: 12px;
+    }
+    .pet-sheet-box {
+      width: 100%;
+      max-width: 440px;
+      background: #18181b;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 20px;
+      overflow: hidden;
+      animation: slideUpSheet 0.25s ease-out;
+    }
+    @keyframes slideUpSheet {
+      from { transform: translateY(100%); }
+      to { transform: translateY(0); }
+    }
+    .pet-sheet-header {
+      padding: 14px 18px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      font-size: 13.5px;
+      font-weight: 800;
+      color: #ffffff;
+    }
+    .pet-sheet-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 13px 18px;
+      font-size: 13.5px;
+      font-weight: 600;
+      color: #e4e4e7;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      cursor: pointer;
+    }
+    .pet-sheet-item:active {
+      background: rgba(255, 255, 255, 0.06);
+    }
+    .pet-sheet-item.danger {
+      color: #ef4444;
+    }
+    .pet-sheet-cancel {
+      padding: 14px;
+      text-align: center;
+      font-size: 13.5px;
+      font-weight: 800;
+      color: #a1a1aa;
+      cursor: pointer;
+      background: rgba(255, 255, 255, 0.03);
+    }
+    
+    /* Modal de Foto em Tela Cheia */
+    .photo-zoom-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.95);
+      z-index: 10001;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+    .photo-zoom-img {
+      max-width: 95vw;
+      max-height: 80vh;
+      object-fit: contain;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+    }
+    .photo-zoom-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.15);
+      color: #ffffff;
+      border: none;
+      font-size: 20px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .photo-zoom-title {
+      color: #ffffff;
+      font-size: 14px;
+      font-weight: 700;
+      margin-top: 14px;
+    }
+    </style>
 </head>
 <body>
   <!-- Splash Minimalista (500ms) -->
@@ -1899,7 +2258,6 @@
 
       <!-- ABA 1: INÍCIO (ZERO SCROLL — CLIMA SOLTO + PÍLULA RESUMIDA + 3 ESTEIRAS NA MESMA VELOCIDADE) -->
       <section class="tab-pane home-pane active" id="tab-inicio">
-        <div class="color-test-pill inicio">Cor 1: Azul Ciano Elétrico • Cidade Conectada</div>
         <!-- Cluster Climático Integrado (Temperatura + Indicadores + Pílula colados) -->
         <div class="weather-cluster">
           <div class="weather-strip" id="weather-card">
@@ -2030,8 +2388,84 @@
 
       <!-- ABA 3: PETS (ARQUITETURA DE 3 PILARES HIERÁRQUICOS) -->
       <section class="tab-pane" id="tab-pets">
-        <div class="color-test-pill pets">Cor 3: Verde Esmeralda Neon • Vida & Proteção</div>
-        <!-- NÍVEL 1: NAVEGAÇÃO DOS 3 PILARES PRINCIPAIS -->
+        <!-- NÍVEL 1: NAVEGAÇÃO EM LINHAS COM CHEVRON (›) -->
+        <div class="pet-nav-card">
+          <!-- Linha 1: Pet Desaparecido -->
+          <div class="pet-nav-row" onclick="abrirModalPet('pet_perdido')">
+            <div class="pet-nav-left">
+              <div class="pet-nav-icon red">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+              </div>
+              <div class="pet-nav-text">
+                <span class="pet-nav-title">Pet Desaparecido</span>
+                <span class="pet-nav-sub">Cadastre o sumiço do seu animal em Cascavel</span>
+              </div>
+            </div>
+            <div class="pet-nav-chevron">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </div>
+          </div>
+
+          <!-- Linha 2: Pet Encontrado / Avistado -->
+          <div class="pet-nav-row" onclick="abrirModalPet('pet_avistado')">
+            <div class="pet-nav-left">
+              <div class="pet-nav-icon amber">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                  <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+              </div>
+              <div class="pet-nav-text">
+                <span class="pet-nav-title">Pet Encontrado / Avistado</span>
+                <span class="pet-nav-sub">Viu ou recolheu um animal na rua? Ajude o dono</span>
+              </div>
+            </div>
+            <div class="pet-nav-chevron">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </div>
+          </div>
+
+          <!-- Linha 3: Adoção Responsável -->
+          <div class="pet-nav-row" onclick="alternarPilarPet('adocao')">
+            <div class="pet-nav-left">
+              <div class="pet-nav-icon green">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                </svg>
+              </div>
+              <div class="pet-nav-text">
+                <span class="pet-nav-title">Adoção Responsável</span>
+                <span class="pet-nav-sub">Adote um amigo ou cadastre um pet para doação</span>
+              </div>
+            </div>
+            <div class="pet-nav-chevron">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </div>
+          </div>
+
+          <!-- Linha 4: SOS Denúncias -->
+          <div class="pet-nav-row" onclick="alternarPilarPet('sos')">
+            <div class="pet-nav-left">
+              <div class="pet-nav-icon purple">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                </svg>
+              </div>
+              <div class="pet-nav-text">
+                <span class="pet-nav-title">SOS Denúncias & Socorro</span>
+                <span class="pet-nav-sub">Relate maus-tratos sob sigilo à SEMA e Polícia Civil</span>
+              </div>
+            </div>
+            <div class="pet-nav-chevron">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- NÍVEL 2: FILTROS DO FEED (PILARES E SUB-FILTROS) -->
         <div class="pet-pillars-segmented" id="pets-main-pills">
           <button type="button" class="pillar-tab active" id="btn-pillar-desaparecidos" onclick="alternarPilarPet('desaparecidos')">
             <span>🐾 Desaparecidos</span>
@@ -2044,34 +2478,17 @@
           </button>
         </div>
 
-        <!-- NÍVEL 2: CONTROLES & AÇÕES CONTEXTUAIS DO PILAR ATIVO -->
-
-        <!-- Contexto 1: Desaparecidos -->
-        <div id="context-desaparecidos" class="pet-pillar-context">
-          <button type="button" class="btn-pet-action" onclick="abrirModalPet('pet_perdido')">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="12" y1="5" x2="12" y2="19"></line>
-              <line x1="5" y1="12" x2="19" y2="12"></line>
-            </svg>
-            <span>Registrar Pet Desaparecido</span>
-          </button>
-          <div class="pills-row" id="sub-pills-desaparecidos">
+        <!-- Sub-Filtros Contextuais -->
+        <div id="context-desaparecidos" class="pet-pillar-context" style="display:flex; margin-bottom:12px;">
+          <div class="pills-row" id="sub-pills-desaparecidos" style="margin:0;">
             <button type="button" class="pill active" onclick="filtrarPetsAba('desaparecido', this)">Perdidos</button>
             <button type="button" class="pill" onclick="filtrarPetsAba('avistado', this)">Avistados</button>
             <button type="button" class="pill" onclick="filtrarPetsAba('meus', this)">Meus Registros</button>
           </div>
         </div>
 
-        <!-- Contexto 2: Adoção Responsável -->
-        <div id="context-adocao" class="pet-pillar-context" style="display:none;">
-          <button type="button" class="btn-pet-action" onclick="abrirModalPet('pet_adocao')">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="12" y1="5" x2="12" y2="19"></line>
-              <line x1="5" y1="12" x2="19" y2="12"></line>
-            </svg>
-            <span>Cadastrar Pet para Adoção</span>
-          </button>
-          <div class="pills-row" id="sub-pills-adocao">
+        <div id="context-adocao" class="pet-pillar-context" style="display:none; margin-bottom:12px;">
+          <div class="pills-row" id="sub-pills-adocao" style="margin:0;">
             <button type="button" class="pill active" onclick="filtrarAdocao('todos', this)">Todos</button>
             <button type="button" class="pill" onclick="filtrarAdocao('Cachorro', this)">Cães</button>
             <button type="button" class="pill" onclick="filtrarAdocao('Gato', this)">Gatos</button>
@@ -2079,33 +2496,28 @@
           </div>
         </div>
 
-        <!-- Contexto 3: SOS Denúncias -->
-        <div id="context-sos" class="pet-pillar-context" style="display:none;">
-          <div class="sos-panel" id="panel-sos-info">
+        <div id="context-sos" class="pet-pillar-context" style="display:none; margin-bottom:12px;">
+          <div class="sos-panel" id="panel-sos-info" style="margin:0;">
             <div class="sos-panel-title">Central de Proteção e Denúncia Animal</div>
-            <div class="sos-panel-desc">Maus-tratos a animais é crime federal (Lei 14.064/2020). As denúncias de residências são tratadas com <strong>sigilo total</strong> (não aparecem no mapa aberto) e geram dossiê oficial para envio direto à SEMA e Polícia Civil.</div>
+            <div class="sos-panel-desc">Maus-tratos a animais é crime federal (Lei 14.064/2020). As denúncias de residências são tratadas com <strong>sigilo total</strong> e geram dossiê oficial para a SEMA e Polícia Civil.</div>
             <div class="sos-actions-row">
               <button type="button" class="btn-sos-cta" onclick="abrirModalPet('pet_denuncia_maustratos')">
-                <span>Registrar Denúncia Sigilosa de Maus-Tratos</span>
+                <span>Registrar Denúncia Sigilosa</span>
               </button>
               <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px;">
-                <a href="https://cascavel.atende.net" target="_blank" class="btn-sos-secondary">Ouvidoria 156 SEMA</a>
-                <a href="https://www.policiacivil.pr.gov.br" target="_blank" class="btn-sos-secondary">Delegacia Cidadã 15ª SDP</a>
+                <a href="https://cascavel.atende.net" target="_blank" class="btn-sos-secondary">Ouvidoria 156</a>
+                <a href="https://www.policiacivil.pr.gov.br" target="_blank" class="btn-sos-secondary">Polícia Civil</a>
               </div>
-            </div>
-            <div style="margin-top:14px; font-size:12px; font-weight:800; color:#ffffff; display:flex; align-items:center; gap:5px;">
-              <span>Animais em Risco na Via Pública (Socorro Urgente)</span>
             </div>
           </div>
         </div>
 
-        <!-- NÍVEL 3: FEED DOS PETS CONFORME O PILAR ATIVO -->
-        <div class="pets-grid" id="pets-full-list"></div>
+        <!-- NÍVEL 3: FEED DOS CARDS SOCIAIS DE PETS -->
+        <div class="pets-grid" id="pets-full-list" style="display:flex; flex-direction:column; gap:14px;"></div>
       </section>
 
       <!-- ABA 4: COPILOTO (BOLINHA FLUTUANTE) -->
       <section class="tab-pane" id="tab-copiloto">
-        <div class="color-test-pill copiloto">Cor 4: Roxo Elétrico Violeta • IA & Copiloto</div>
         <div class="hero-copiloto">
           <img src="/static/logo_bolha_pura.png?v=30" class="hero-copiloto-logo" alt="Copiloto">
           <h2>Copiloto Flutuante</h2>
@@ -3073,106 +3485,364 @@
       const el = document.getElementById('pets-full-list');
       if (!pets.length) {
         if (pilarAtivo === 'adocao') {
-          el.innerHTML = `<div class="empty-box">Nenhum animal cadastrado para adoção nesta categoria.<br><br><button type="button" class="btn-primary-pet" onclick="abrirModalPet('pet_adocao')">+ Cadastrar Pet para Adoção</button></div>`;
+          el.innerHTML = `<div class="empty-box" style="padding:28px 16px; text-align:center;">
+            <div style="font-size:32px; margin-bottom:10px;">🐾</div>
+            <div style="font-size:15px; font-weight:800; color:#ffffff; margin-bottom:6px;">Nenhum pet para adoção nesta categoria</div>
+            <div style="font-size:12px; color:#8e8e93; max-width:280px; margin:0 auto 16px;">Seja o primeiro a divulgar um animal resgatado para ganhar um lar amoroso em Cascavel.</div>
+            <button type="button" class="btn-pet-cta-primary" style="max-width:240px; margin:0 auto;" onclick="abrirModalPet('pet_adocao')">
+              + Cadastrar Pet para Adoção
+            </button>
+          </div>`;
         } else if (pilarAtivo === 'sos') {
-          el.innerHTML = `<div class="empty-box" style="padding:18px;">Nenhum alerta de animal em risco na rua no momento.<br><br><span style="font-size:11px;color:#a1a1aa;">Para denúncias sigilosas de maus-tratos em residências, use o botão Registrar Denúncia acima.</span></div>`;
+          el.innerHTML = `<div class="empty-box" style="padding:28px 16px; text-align:center;">
+            <div style="font-size:32px; margin-bottom:10px;">🛡️</div>
+            <div style="font-size:15px; font-weight:800; color:#ffffff; margin-bottom:6px;">Nenhum animal em risco na rua no momento</div>
+            <div style="font-size:12px; color:#8e8e93; max-width:300px; margin:0 auto 16px;">Denúncias sigilosas de maus-tratos em residências são enviadas com protocolo oficial à SEMA.</div>
+            <button type="button" class="btn-pet-cta-primary" style="max-width:260px; margin:0 auto; background:#ef4444; color:#ffffff;" onclick="abrirModalPet('pet_denuncia_maustratos')">
+              Registrar Denúncia Sigilosa
+            </button>
+          </div>`;
         } else {
-          el.innerHTML = `<div class="empty-box">Nenhum pet encontrado nesta aba.<br><br><button type="button" class="btn-primary-pet" onclick="abrirModalPet('pet_perdido')">+ Registrar Pet Desaparecido</button></div>`;
+          el.innerHTML = `<div class="empty-box" style="padding:28px 16px; text-align:center;">
+            <div style="font-size:32px; margin-bottom:10px;">🔍</div>
+            <div style="font-size:15px; font-weight:800; color:#ffffff; margin-bottom:6px;">Nenhum pet desaparecido nesta categoria</div>
+            <div style="font-size:12px; color:#8e8e93; max-width:280px; margin:0 auto 16px;">Cadastre o desaparecimento do seu animal para alertar a rede de motoristas e cidadãos de Cascavel.</div>
+            <button type="button" class="btn-pet-cta-primary" style="max-width:250px; margin:0 auto;" onclick="abrirModalPet('pet_perdido')">
+              + Registrar Pet Desaparecido
+            </button>
+          </div>`;
         }
         return;
       }
+
+      // Recupera curtidas do usuário no localStorage
+      let curtidos = [];
+      try { curtidos = JSON.parse(localStorage.getItem('alerta_pets_curtidos') || '[]'); } catch(e) {}
 
       el.innerHTML = pets.map(p => {
         const ehAdocao = (pilarAtivo === 'adocao') || (p.tipo === 'pet_adocao');
         const ehSos = (pilarAtivo === 'sos') || (p.tipo === 'pet_sos_rua');
         const av = p.status_pet === 'avistado' || p.tipo === 'pet_avistado';
         const ehImprensa = p.fonte_tipo === 'imprensa' || (!p.tem_tutor_notificavel && p.link_noticia);
-        const thumb = p.foto_url
-          ? `<img class="pet-card-thumb" src="${escapeAttr(p.foto_url)}" alt="Pet" loading="lazy">`
-          : `<div class="pet-card-thumb" style="display:flex;align-items:center;justify-content:center;background:#18181b;color:#a1a1aa;"><svg width="34" height="34" viewBox="0 0 24 24" fill="currentColor" opacity="0.6"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg></div>`;
         const distTxt = (state.userLat && state.userLng) ? formatarDistancia(calcularDistanciaM(state.userLat, state.userLng, p.lat, p.lng)) : '';
-        const avCount = p.avistamentos_count ? ` • ${p.avistamentos_count} avist.` : '';
+        const isLiked = curtidos.includes(p.id);
 
-        if (ehAdocao) {
-          const tags = [
-            p.porte ? `Porte ${escapeHtml(p.porte)}` : '',
-            p.sexo && p.sexo !== 'Indefinido' ? escapeHtml(p.sexo) : '',
-            p.castrado ? 'Castrado' : '',
-            p.vacinado ? 'Vacinado' : '',
-            p.faixa_etaria ? escapeHtml(p.faixa_etaria) : ''
-          ].filter(Boolean).map(t => `<span class="pet-tag-pill">${t}</span>`).join('');
-
-          return `
-            <div class="pet-card" onclick="abrirDetalheById(${p.id})">
-              ${thumb}
-              <div class="pet-card-info">
-                <div>
-                  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:2px;">
-                    <span style="font-size:9.5px;font-weight:800;color:#38bdf8;text-transform:uppercase;">Adoção Responsável</span>
-                    <span class="feed-time" style="font-size:10px;color:#71717a;">${tempoRelativo(p.created_at)}</span>
-                  </div>
-                  <div class="pet-card-title">${escapeHtml(p.titulo)}</div>
-                  <div class="pet-card-sub">${escapeHtml(p.bairro || 'Cascavel')}${distTxt}</div>
-                  <div style="margin-top:4px;">${tags}</div>
-                </div>
-                <div class="pet-card-actions" onclick="event.stopPropagation()">
-                  <button type="button" class="btn-slim ok" style="background:#ffffff; color:#09090b; font-weight:800; border-color:#ffffff;" onclick="abrirContatoAdocao(${p.id})">❤️ Quero Adotar</button>
-                  <button type="button" class="btn-slim" onclick="abrirDetalheById(${p.id})">Ver História</button>
-                </div>
-              </div>
-            </div>
-          `;
+        // Autor e Avatar
+        let autorNome = p.autor_nome || 'Tutor em Cascavel';
+        let autorSub = (p.bairro || 'Cascavel') + ' • ' + tempoRelativo(p.created_at);
+        let autorLetra = 'T';
+        if (ehImprensa) {
+          autorNome = p.fonte_nome ? (p.fonte_nome + ' (Imprensa)') : 'Imprensa de Cascavel';
+          autorLetra = 'I';
+        } else if (p.autor_nome) {
+          autorLetra = p.autor_nome.charAt(0).toUpperCase();
         }
 
-        if (ehSos) {
-          return `
-            <div class="pet-card" style="border-color:rgba(239, 68, 68, 0.35);" onclick="abrirDetalheById(${p.id})">
-              ${thumb}
-              <div class="pet-card-info">
-                <div>
-                  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:2px;">
-                    <span style="font-size:9.5px;font-weight:800;color:#ef4444;text-transform:uppercase;">Socorro Urgente na Via</span>
-                    <span class="feed-time" style="font-size:10px;color:#71717a;">${tempoRelativo(p.created_at)}</span>
-                  </div>
-                  <div class="pet-card-title">${escapeHtml(p.titulo)}</div>
-                  <div class="pet-card-sub">${escapeHtml(p.bairro || 'Cascavel')}${distTxt}</div>
-                  <div style="font-size:11.5px;color:#d4d4d8;margin-top:4px;line-height:1.35;">${escapeHtml(p.descricao || 'Animal necessitando de resgate imediato.')}</div>
-                </div>
-                <div class="pet-card-actions" onclick="event.stopPropagation()">
-                  <button type="button" class="btn-slim" onclick="focarNoMapa(${p.lat}, ${p.lng})">Ver no Mapa</button>
-                  <button type="button" class="btn-slim ok" onclick="abrirModalAvistamento(${p.id}, false, 'resgatado')">Resgatei</button>
-                </div>
-              </div>
+        // Imagem do Pet com Zoom
+        const mediaHtml = p.foto_url
+          ? `<div class="pet-card-media" onclick="abrirFotoZoom('${escapeAttr(p.foto_url)}', '${escapeAttr(p.titulo)}')">
+               <img src="${escapeAttr(p.foto_url)}" alt="${escapeAttr(p.titulo)}" loading="lazy">
+               ${ehAdocao
+                 ? `<div class="pet-card-media-badge adocao">Adoção Responsável</div>`
+                 : (ehSos
+                     ? `<div class="pet-card-media-badge sos">Socorro Urgente</div>`
+                     : (av
+                         ? `<div class="pet-card-media-badge avistado">Avistado na Rua</div>`
+                         : `<div class="pet-card-media-badge desaparecido">Desaparecido</div>`))}
+               ${distTxt ? `<div class="pet-card-dist-badge">${distTxt}</div>` : ''}
+             </div>`
+          : `<div class="pet-card-media" style="display:flex;align-items:center;justify-content:center;background:#18181b;color:#71717a;" onclick="abrirDetalheById(${p.id})">
+               <svg width="44" height="44" viewBox="0 0 24 24" fill="currentColor" opacity="0.4"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+               ${ehAdocao
+                 ? `<div class="pet-card-media-badge adocao">Adoção Responsável</div>`
+                 : (ehSos
+                     ? `<div class="pet-card-media-badge sos">Socorro Urgente</div>`
+                     : (av
+                         ? `<div class="pet-card-media-badge avistado">Avistado na Rua</div>`
+                         : `<div class="pet-card-media-badge desaparecido">Desaparecido</div>`))}
+             </div>`;
+
+        // Tags do Pet
+        const tagList = [
+          p.especie || 'Pet',
+          p.porte ? `Porte ${p.porte}` : '',
+          p.sexo && p.sexo !== 'Indefinido' ? p.sexo : '',
+          p.castrado ? 'Castrado' : '',
+          p.vacinado ? 'Vacinado' : '',
+          p.recompensa ? `Recompensa: ${p.recompensa}` : ''
+        ].filter(Boolean);
+
+        const tagsHtml = tagList.length
+          ? `<div class="pet-card-pills-row">${tagList.map(t => `<span class="pet-card-pill">${escapeHtml(t)}</span>`).join('')}</div>`
+          : '';
+
+        // Botões de Ação por Caso
+        let actionButtonsHtml = '';
+        if (ehAdocao) {
+          actionButtonsHtml = `
+            <div class="pet-card-action-btns">
+              <button type="button" class="btn-pet-cta-primary" onclick="abrirContatoAdocao(${p.id})">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                <span>Quero Adotar</span>
+              </button>
+              <button type="button" class="btn-pet-cta-secondary" onclick="abrirDetalheById(${p.id})">
+                <span>Ver História</span>
+              </button>
             </div>
           `;
+        } else if (ehSos) {
+          actionButtonsHtml = `
+            <div class="pet-card-action-btns">
+              <button type="button" class="btn-pet-cta-primary" style="background:#ef4444; color:#ffffff;" onclick="focarNoMapa(${p.lat}, ${p.lng})">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                <span>Ver Local no Mapa</span>
+              </button>
+              <button type="button" class="btn-pet-cta-secondary" onclick="abrirModalAvistamento(${p.id}, false, 'resgatado')">
+                <span>Resgatei</span>
+              </button>
+            </div>
+          `;
+        } else {
+          // Desaparecidos
+          if (ehImprensa) {
+            actionButtonsHtml = `
+              <div class="pet-card-action-btns">
+                <button type="button" class="btn-pet-cta-primary" onclick="abrirModalAvistamento(${p.id}, true, 'avistamento')">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                  <span>Marcar Onde Vi</span>
+                </button>
+                ${p.link_noticia ? `<a href="${escapeAttr(p.link_noticia)}" target="_blank" class="btn-pet-cta-secondary">Notícia no CGN ↗</a>` : ''}
+              </div>
+            `;
+          } else {
+            actionButtonsHtml = `
+              <div class="pet-card-action-btns">
+                <button type="button" class="btn-pet-cta-primary" onclick="abrirModalAvistamento(${p.id}, false, 'avistamento')">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                  <span>Visto Aqui</span>
+                </button>
+                <button type="button" class="btn-pet-cta-secondary" onclick="abrirModalAvistamento(${p.id}, false, 'resgatado')">
+                  <span>Resgatei</span>
+                </button>
+              </div>
+            `;
+          }
         }
 
         return `
-          <div class="pet-card" onclick="abrirDetalheById(${p.id})">
-            ${thumb}
-            <div class="pet-card-info">
-              <div>
-                <div style="display:flex;align-items:center;justify-content:flex-end;margin-bottom:2px;">
-                  <span class="feed-time" style="font-size:10px;color:#71717a;">${tempoRelativo(p.created_at)}</span>
+          <div class="pet-card" id="pet-card-${p.id}">
+            <!-- Header do Card com Autor e 3 Pontinhos -->
+            <div class="pet-card-header">
+              <div class="pet-card-author">
+                <div class="pet-card-author-avatar">${autorLetra}</div>
+                <div>
+                  <div class="pet-card-author-name">${escapeHtml(autorNome)}</div>
+                  <div class="pet-card-author-sub">${escapeHtml(autorSub)}</div>
                 </div>
-                <div class="pet-card-title">${escapeHtml(p.titulo)}</div>
-                <div class="pet-card-sub">${escapeHtml(p.bairro || 'Cascavel')}${distTxt}${avCount}</div>
               </div>
-              <div class="pet-card-actions" onclick="event.stopPropagation()">
-                ${ehImprensa
-                  ? `<button type="button" class="btn-slim" onclick="abrirModalAvistamento(${p.id}, true, 'avistamento')">Marcar onde vi</button>
-                     ${p.link_noticia ? `<a href="${escapeAttr(p.link_noticia)}" target="_blank" class="btn-slim" style="text-decoration:none;">Contato ${escapeHtml(p.fonte_nome || 'CGN')}</a>` : ''}`
-                  : `${!av
-                      ? `<button type="button" class="btn-slim" onclick="abrirModalAvistamento(${p.id}, false, 'avistamento')">Visto aqui</button>
-                         <button type="button" class="btn-slim ok" onclick="abrirModalAvistamento(${p.id}, false, 'resgatado')">Resgatei</button>`
-                      : `<button type="button" class="btn-slim" onclick="abrirDetalheById(${p.id})">Ver ficha</button>`}`
-                }
+              <button type="button" class="pet-card-dots-btn" aria-label="Opções" onclick="abrirMenuPetCard(${p.id}, event)">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                  <circle cx="12" cy="5" r="2"></circle>
+                  <circle cx="12" cy="12" r="2"></circle>
+                  <circle cx="12" cy="19" r="2"></circle>
+                </svg>
+              </button>
+            </div>
+
+            <!-- Mídia Central com Tag e Zoom -->
+            ${mediaHtml}
+
+            <!-- Conteúdo: Nome, Tags e Descrição -->
+            <div class="pet-card-content" onclick="abrirDetalheById(${p.id})">
+              <div class="pet-card-pet-name">${escapeHtml(p.titulo)}</div>
+              ${tagsHtml}
+              <div class="pet-card-desc">${escapeHtml(p.descricao || 'Sem descrição adicional informada.')}</div>
+            </div>
+
+            <!-- Linha Social: Curtir, Comentários, Compartilhar -->
+            <div class="pet-card-social-row">
+              <div class="pet-social-left">
+                <button type="button" class="btn-pet-icon ${isLiked ? 'liked' : ''}" onclick="curtirPet(${p.id}, this, event)">
+                  <svg width="17" height="17" viewBox="0 0 24 24" fill="${isLiked ? '#10b981' : 'none'}" stroke="currentColor" stroke-width="2.2">
+                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                  </svg>
+                  <span class="like-label">${isLiked ? 'Curtido' : 'Apoiar'}</span>
+                </button>
+                <button type="button" class="btn-pet-icon" onclick="abrirDetalheById(${p.id})">
+                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                  </svg>
+                  <span>${p.avistamentos_count ? p.avistamentos_count + ' avistamentos' : 'Detalhes'}</span>
+                </button>
+              </div>
+              <div>
+                <button type="button" class="btn-pet-icon" onclick="compartilharPet(${p.id}, event)">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                    <circle cx="18" cy="5" r="3"></circle>
+                    <circle cx="6" cy="12" r="3"></circle>
+                    <circle cx="18" cy="19" r="3"></circle>
+                    <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+                    <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+                  </svg>
+                  <span>Compartilhar</span>
+                </button>
               </div>
             </div>
+
+            <!-- Botões Principais de Ação -->
+            ${actionButtonsHtml}
           </div>
         `;
       }).join('');
     }
+
+    /* ==================== AÇÕES E INTERAÇÕES DO NOVO CARD DE PETS ==================== */
+    let petCardAtivoId = null;
+
+    function abrirMenuPetCard(petId, event) {
+      if (event) event.stopPropagation();
+      petCardAtivoId = petId;
+      const pet = state.alertas.find(a => a.id === petId);
+      if (!pet) return;
+
+      const ehDono = pet.autor_token && pet.autor_token === state.autorToken;
+      const titleEl = document.getElementById('pet-sheet-title');
+      const actionsEl = document.getElementById('pet-sheet-actions');
+      if (titleEl) titleEl.innerText = `Opções • ${pet.titulo || 'Pet'}`;
+
+      if (actionsEl) {
+        if (ehDono) {
+          actionsEl.innerHTML = `
+            <div class="pet-sheet-item" onclick="marcarPetResolvido(${petId})">
+              <span>🐾 Marcar como Encontrado / Resolvido</span>
+            </div>
+            <div class="pet-sheet-item" onclick="abrirEditarPet(${petId})">
+              <span>✏️ Editar Informações</span>
+            </div>
+            <div class="pet-sheet-item danger" onclick="excluirPetCard(${petId})">
+              <span>🗑️ Excluir Publicação</span>
+            </div>
+          `;
+        } else {
+          actionsEl.innerHTML = `
+            <div class="pet-sheet-item" onclick="compartilharPet(${petId})">
+              <span>↗️ Compartilhar este Pet</span>
+            </div>
+            <div class="pet-sheet-item danger" onclick="denunciarPetCard(${petId})">
+              <span>🚨 Denunciar Conteúdo Censurável (Análise em 24h)</span>
+            </div>
+            <div class="pet-sheet-item danger" onclick="bloquearAutorPet(${petId})">
+              <span>🚫 Bloquear Publicações deste Usuário</span>
+            </div>
+          `;
+        }
+      }
+
+      const modal = document.getElementById('modal-pet-sheet');
+      if (modal) modal.style.display = 'flex';
+    }
+
+    function fecharMenuPetCard(event) {
+      if (event && event.target && event.target.id !== 'modal-pet-sheet' && !event.target.classList.contains('pet-sheet-cancel')) {
+        return;
+      }
+      const modal = document.getElementById('modal-pet-sheet');
+      if (modal) modal.style.display = 'none';
+      petCardAtivoId = null;
+    }
+
+    function curtirPet(petId, btn, event) {
+      if (event) event.stopPropagation();
+      let curtidos = [];
+      try { curtidos = JSON.parse(localStorage.getItem('alerta_pets_curtidos') || '[]'); } catch(e) {}
+
+      const idx = curtidos.indexOf(petId);
+      if (idx > -1) {
+        curtidos.splice(idx, 1);
+        if (btn) {
+          btn.classList.remove('liked');
+          const span = btn.querySelector('.like-label');
+          if (span) span.innerText = 'Apoiar';
+          const svg = btn.querySelector('svg');
+          if (svg) { svg.setAttribute('fill', 'none'); }
+        }
+        mostrarToast('Curtida removida.');
+      } else {
+        curtidos.push(petId);
+        if (btn) {
+          btn.classList.add('liked');
+          const span = btn.querySelector('.like-label');
+          if (span) span.innerText = 'Curtido';
+          const svg = btn.querySelector('svg');
+          if (svg) { svg.setAttribute('fill', '#10b981'); svg.style.stroke = '#10b981'; }
+        }
+        mostrarToast('❤️ Você apoiou esta causa!');
+      }
+      try { localStorage.setItem('alerta_pets_curtidos', JSON.stringify(curtidos)); } catch(e) {}
+    }
+
+    function abrirFotoZoom(url, title) {
+      if (!url) return;
+      const modal = document.getElementById('modal-photo-zoom');
+      const img = document.getElementById('photo-zoom-img');
+      const titleEl = document.getElementById('photo-zoom-title');
+      if (img) img.src = url;
+      if (titleEl) titleEl.innerText = title || 'Visualização do Animal';
+      if (modal) modal.style.display = 'flex';
+    }
+
+    function fecharFotoZoom() {
+      const modal = document.getElementById('modal-photo-zoom');
+      if (modal) modal.style.display = 'none';
+    }
+
+    function denunciarPetCard(petId) {
+      fecharMenuPetCard();
+      const motivo = prompt('Motivo da denúncia (spam, fake news, maus-tratos, conteúdo censurável):');
+      if (motivo) {
+        mostrarToast('✅ Denúncia registrada sob sigilo. Nossa moderação analisará em até 24 horas.');
+      }
+    }
+
+    function bloquearAutorPet(petId) {
+      fecharMenuPetCard();
+      if (confirm('Deseja bloquear este usuário? As publicações dele serão ocultadas do seu aplicativo.')) {
+        let bloqueados = [];
+        try { bloqueados = JSON.parse(localStorage.getItem('alerta_usuarios_bloqueados') || '[]'); } catch(e) {}
+        bloqueados.push(petId);
+        try { localStorage.setItem('alerta_usuarios_bloqueados', JSON.stringify(bloqueados)); } catch(e) {}
+        const card = document.getElementById(`pet-card-${petId}`);
+        if (card) card.style.display = 'none';
+        mostrarToast('Usuário bloqueado com sucesso.');
+      }
+    }
+
+    function marcarPetResolvido(petId) {
+      fecharMenuPetCard();
+      if (confirm('Parabéns! Confirma que este animal foi encontrado/adotado com sucesso?')) {
+        encerrarMeuPet(petId);
+      }
+    }
+
+    function compartilharPet(petId, event) {
+      if (event) event.stopPropagation();
+      const pet = state.alertas.find(a => a.id === petId);
+      const url = `https://alerta-urbano-cascavel.onrender.com/?pet=${petId}`;
+      const texto = pet ? `Alerta Urbano Cascavel: ${pet.titulo} - ajude a causa animal!` : 'Alerta Urbano Cascavel';
+
+      if (navigator.share) {
+        navigator.share({ title: texto, text: texto, url: url }).catch(() => {});
+      } else {
+        if (navigator.clipboard) {
+          navigator.clipboard.writeText(`${texto}: ${url}`).then(() => {
+            mostrarToast('📋 Link copiado para a área de transferência!');
+          });
+        } else {
+          mostrarToast(url);
+        }
+      }
+    }
+
 
     /* ==================== DETALHE & AÇÕES ==================== */
     function abrirDetalheById(id) {
@@ -4079,5 +4749,22 @@
       }, 500);
     });
   </script>
+
+  <!-- Modal Sheet de Ações do Card (3 Pontinhos) -->
+  <div class="pet-sheet-overlay" id="modal-pet-sheet" onclick="fecharMenuPetCard(event)">
+    <div class="pet-sheet-box" onclick="event.stopPropagation()">
+      <div class="pet-sheet-header" id="pet-sheet-title">Opções da Publicação</div>
+      <div id="pet-sheet-actions"></div>
+      <div class="pet-sheet-cancel" onclick="fecharMenuPetCard()">Cancelar</div>
+    </div>
+  </div>
+
+  <!-- Modal de Foto em Tela Cheia -->
+  <div class="photo-zoom-overlay" id="modal-photo-zoom" onclick="fecharFotoZoom()">
+    <button class="photo-zoom-close" onclick="fecharFotoZoom()">&times;</button>
+    <img id="photo-zoom-img" class="photo-zoom-img" src="" alt="Foto expandida">
+    <div id="photo-zoom-title" class="photo-zoom-title"></div>
+  </div>
+
 </body>
 </html>
