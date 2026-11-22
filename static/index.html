@@ -4794,6 +4794,15 @@
     }
 
     /* ==================== PERFIL COMPLETO & CADASTRO ==================== */
+    function carregarPerfilUsuario() {
+      try {
+        const salvo = localStorage.getItem('au_perfil');
+        if (salvo) {
+          state.perfil = JSON.parse(salvo);
+        }
+      } catch (e) {}
+    }
+
     function abrirPerfil(forcarCadastro = false) {
       let p = state.perfil || {};
       if (!p.nome) {
