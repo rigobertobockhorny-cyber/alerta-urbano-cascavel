@@ -69,19 +69,19 @@
       --text-muted: #64748b;
       --text-dim: #94a3b8;
 
-      --accent-brand: #059669;
-      --accent-brand-soft: #10b981;
-      --accent-brand-bg: rgba(5, 150, 105, 0.08);
-      --accent-brand-glow: rgba(5, 150, 105, 0.2);
+      --accent-brand: #009B3A;
+      --accent-brand-soft: #FED700;
+      --accent-brand-bg: rgba(0, 155, 58, 0.08);
+      --accent-brand-glow: rgba(254, 215, 0, 0.2);
 
-      --accent-pet: #059669;
-      --accent-pet-bg: rgba(5, 150, 105, 0.08);
-      --accent-seg: #e11d48;
-      --accent-seg-bg: rgba(225, 29, 72, 0.08);
-      --accent-uti: #0284c7;
-      --accent-uti-bg: rgba(2, 132, 199, 0.08);
-      --accent-ok: #059669;
-      --accent-ok-bg: rgba(5, 150, 105, 0.08);
+      --accent-pet: #009B3A;
+      --accent-pet-bg: rgba(0, 155, 58, 0.08);
+      --accent-seg: #dc2626;
+      --accent-seg-bg: rgba(220, 38, 38, 0.08);
+      --accent-uti: #002776;
+      --accent-uti-bg: rgba(0, 39, 118, 0.08);
+      --accent-ok: #009B3A;
+      --accent-ok-bg: rgba(0, 155, 58, 0.08);
       --brand-red: #dc2626;
       --shadow: 0 4px 20px rgba(15, 23, 42, 0.06);
       --shadow-sm: 0 2px 8px rgba(15, 23, 42, 0.04);
@@ -110,18 +110,15 @@
       color: inherit;
     }
 
-    /* ==================== SPLASH RÁPIDA (500ms) ==================== */
+    /* ==================== SPLASH CÍVICA BRASIL COM CURVA DE RIO ==================== */
     .splash {
       position: fixed;
       inset: 0;
       z-index: 99999;
-      background: var(--bg);
-      color: var(--text);
       display: flex;
       flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 14px;
+      background: #009B3A;
+      overflow: hidden;
       transition: opacity 0.4s ease, visibility 0.4s ease;
     }
     .splash.hide {
@@ -129,27 +126,104 @@
       visibility: hidden;
       pointer-events: none;
     }
+    .splash-river-top {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding-top: 30px;
+      gap: 12px;
+      z-index: 2;
+    }
     .splash-logo {
-      width: 84px;
-      height: 84px;
+      width: 108px;
+      height: 108px;
       border-radius: 50%;
       object-fit: cover;
-      box-shadow: 0 10px 30px rgba(220, 38, 38, 0.35);
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.35);
     }
     .splash-title {
-      font-size: 20px;
-      font-weight: 800;
-      letter-spacing: 1.6px;
-      color: #ffffff;
+      font-size: 22px;
+      font-weight: 900;
+      letter-spacing: 1.8px;
+      color: #FED700;
       text-transform: uppercase;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.25);
     }
     .splash-city {
+      font-size: 11.5px;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: 2.2px;
+      text-transform: uppercase;
+      opacity: 0.95;
+    }
+    .splash-river-wave-wrap {
+      width: 100%;
+      height: 75px;
+      position: relative;
+      margin-bottom: -1px;
+      line-height: 0;
+    }
+    .splash-river-svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+    .splash-river-bottom {
+      height: 130px;
+      background: #FED700;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      padding: 0 20px 16px;
+      z-index: 2;
+    }
+    .splash-tagline {
+      font-size: 13px;
+      font-weight: 900;
+      color: #009B3A;
+      letter-spacing: 1.2px;
+    }
+    .splash-subtext {
       font-size: 11px;
       font-weight: 700;
-      letter-spacing: 2.6px;
-      color: #10b981;
+      color: #0f172a;
+      opacity: 0.85;
+    }
+
+    /* Banners e Cards com Curva de Rio Orgânica */
+    .pet-river-banner {
+      background: linear-gradient(135deg, #009B3A 0%, #00843D 70%, #006b31 100%);
+      border-radius: 20px 20px 0 0;
+      padding: 16px 16px 0;
+      position: relative;
+      overflow: hidden;
+      color: #ffffff;
+    }
+    .pet-river-badge {
+      font-size: 9.5px;
+      font-weight: 800;
+      letter-spacing: 1.2px;
+      color: #FED700;
+      margin-bottom: 4px;
       text-transform: uppercase;
-      margin-top: -8px;
+    }
+    .pet-river-headline {
+      font-size: 15px;
+      font-weight: 800;
+      color: #ffffff;
+      letter-spacing: -0.2px;
+    }
+    .pet-river-wave {
+      width: calc(100% + 32px);
+      margin-left: -16px;
+      height: 24px;
+      display: block;
+      margin-top: 10px;
     }
 
     /* ==================== SHELL PRINCIPAL SLIM ==================== */
@@ -1784,10 +1858,10 @@
 
     /* ==================== IDENTIDADE VISUAL UNIFICADA: VERDE ESMERALDA NEON ==================== */
     :root {
-      --accent-brand: #10b981;
-      --accent-brand-soft: #34d399;
-      --accent-brand-bg: rgba(16, 185, 129, 0.14);
-      --accent-brand-glow: rgba(16, 185, 129, 0.35);
+      --accent-brand: #009B3A; /* Verde Bandeira do Brasil */
+      --accent-brand-soft: #FED700; /* Amarelo Ouro Brasil */
+      --accent-brand-bg: rgba(0, 155, 58, 0.08);
+      --accent-brand-glow: rgba(254, 215, 0, 0.25);
     }
 
     /* Barra de Navegação Inferior Unificada no Verde Esmeralda */
@@ -2282,10 +2356,23 @@
 </head>
 <body>
   <!-- Splash Minimalista (500ms) -->
+    <!-- Splash Cívica Brasil com Curva de Rio Orgânica -->
   <div class="splash" id="splash">
-    <img src="/static/logo_bolha_pura.png?v=30" class="splash-logo" alt="Alerta Urbano">
-    <div class="splash-title">Alerta Urbano</div>
-    <div class="splash-city">Cascavel • PR</div>
+    <div class="splash-river-top">
+      <img src="/static/logo_bolha_pura.png?v=42" class="splash-logo" alt="Alerta Urbano">
+      <div class="splash-title">Alerta Urbano</div>
+      <div class="splash-city">Cascavel • Paraná</div>
+    </div>
+    <div class="splash-river-wave-wrap">
+      <svg class="splash-river-svg" viewBox="0 0 500 120" preserveAspectRatio="none">
+        <path d="M 0,30 C 140,80 230,-10 370,50 C 430,75 470,45 500,35 L 500,120 L 0,120 Z" fill="#FED700"/>
+        <path d="M 0,55 C 150,105 250,20 380,75 C 440,95 475,70 500,65 L 500,120 L 0,120 Z" fill="#ffffff" opacity="0.45"/>
+      </svg>
+    </div>
+    <div class="splash-river-bottom">
+      <div class="splash-tagline">REDE COMUNITÁRIA CÍVICA</div>
+      <div class="splash-subtext">Pets • Trânsito • Segurança • Utilidade Pública</div>
+    </div>
   </div>
 
   <div class="app-shell">
@@ -2450,8 +2537,15 @@
 
       <!-- ABA 3: PETS (ARQUITETURA DE 3 PILARES HIERÁRQUICOS) -->
       <section class="tab-pane" id="tab-pets">
-        <!-- NÍVEL 1: NAVEGAÇÃO EM LINHAS COM CHEVRON (›) -->
+                <!-- NÍVEL 1: NAVEGAÇÃO EM LINHAS COM BANNER EM CURVA DE RIO -->
         <div class="pet-nav-card">
+          <div class="pet-river-banner">
+            <div class="pet-river-badge">🐾 Rede Comunitária de Proteção Animal</div>
+            <div class="pet-river-headline">Proteção & Localização de Pets em Cascavel</div>
+            <svg class="pet-river-wave" viewBox="0 0 500 40" preserveAspectRatio="none">
+              <path d="M 0,10 C 140,35 250,-5 380,25 C 430,35 470,15 500,20 L 500,40 L 0,40 Z" fill="var(--bg-elevated)"/>
+            </svg>
+          </div>
           <!-- Linha 1: Pet Desaparecido -->
           <div class="pet-nav-row" onclick="abrirModalPet('pet_perdido')">
             <div class="pet-nav-left">
