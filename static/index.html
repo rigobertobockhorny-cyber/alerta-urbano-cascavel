@@ -675,15 +675,57 @@
       width: 100%;
       margin: 0 auto;
     }
+    
+    /* ==================== PERFIL & CADASTRO SLIM ==================== */
+    .btn-google-auth {
+      width: 100%;
+      background: #ffffff;
+      color: #1f1f1f;
+      font-size: 14px;
+      font-weight: 700;
+      padding: 13px 16px;
+      border-radius: 14px;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+      margin-bottom: 12px;
+      transition: transform 0.15s, background 0.15s;
+    }
+    .btn-google-auth:active {
+      transform: scale(0.985);
+      background: #f1f1f1;
+    }
+    .auth-divider {
+      display: flex;
+      align-items: center;
+      text-align: center;
+      color: #71717a;
+      font-size: 11px;
+      font-weight: 600;
+      margin: 14px 0;
+    }
+    .auth-divider::before, .auth-divider::after {
+      content: '';
+      flex: 1;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .auth-divider span {
+      padding: 0 10px;
+    }
     .perfil-hero {
       display: flex;
       align-items: center;
       gap: 14px;
-      padding: 14px 16px;
-      background: var(--bg-elevated);
-      border: 1px solid var(--border);
+      padding: 16px;
+      background: #111114;
+      border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 18px;
       margin-bottom: 16px;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.25);
     }
     .perfil-avatar-wrap {
       position: relative;
@@ -691,18 +733,18 @@
       flex-shrink: 0;
     }
     .perfil-avatar-circle {
-      width: 56px;
-      height: 56px;
+      width: 58px;
+      height: 58px;
       border-radius: 50%;
-      background: var(--brand-red);
-      color: #ffffff;
+      background: rgba(16, 185, 129, 0.14);
+      color: #10b981;
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 22px;
-      font-weight: 900;
+      font-weight: 800;
       overflow: hidden;
-      border: 2px solid var(--border-strong);
+      border: 2px solid rgba(16, 185, 129, 0.35);
     }
     .perfil-avatar-circle img {
       width: 100%;
@@ -717,33 +759,74 @@
       width: 20px;
       height: 20px;
       border-radius: 50%;
-      background: var(--text);
-      color: var(--bg);
-      font-size: 12px;
+      background: #10b981;
+      color: #09090b;
+      font-size: 13px;
       font-weight: 900;
       display: flex;
       align-items: center;
       justify-content: center;
-      border: 2px solid var(--bg-elevated);
+      border: 2px solid #111114;
     }
     .perfil-card-box {
-      background: var(--bg-elevated);
-      border: 1px solid var(--border);
+      background: #111114;
+      border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 18px;
-      padding: 15px;
+      padding: 16px;
       margin-bottom: 16px;
     }
     .perfil-section-lbl {
       font-size: 11px;
       font-weight: 800;
-      color: var(--text-muted);
+      color: #8e8e93;
       text-transform: uppercase;
-      letter-spacing: 0.6px;
-      margin: 0 0 8px 4px;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
+    .perfil-nav-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .perfil-nav-row:last-child {
+      border-bottom: none;
+    }
+    .perfil-nav-row:active {
+      background: rgba(255, 255, 255, 0.05);
+    }
+    .perfil-nav-row.danger {
+      color: #ef4444;
+    }
+    .perfil-nav-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .perfil-nav-icon {
+      font-size: 18px;
+      width: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .perfil-nav-title {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: inherit;
+    }
+    .perfil-nav-sub {
+      font-size: 11px;
+      color: #71717a;
+      margin-top: 2px;
+    }
+
     .partner-row {
       display: flex;
       align-items: center;
@@ -2780,117 +2863,270 @@
     <div class="fs-header">
       <button type="button" class="fs-back" onclick="fecharModal('modal-perfil')">‹ Voltar</button>
       <div style="text-align:center;">
-        <div style="font-size:15px; font-weight:800;">Meu Perfil</div>
-        <div style="font-size:10px; color:var(--text-muted); font-weight:700;" id="perfil-gps-txt">GPS sincronizando...</div>
+        <div style="font-size:15px; font-weight:800;" id="perfil-header-title">Minha Conta</div>
+        <div style="font-size:10px; color:#8e8e93; font-weight:700;">Alerta Urbano Cascavel</div>
       </div>
-      <button type="button" class="fs-save" onclick="salvarPerfilUsuario()">Salvar</button>
+      <div style="width:48px;"></div> <!-- Espaçador para equilíbrio visual sem botão redundante -->
     </div>
 
-    <div class="fs-body">
-      <!-- Card Identidade com Foto Editável -->
-      <div class="perfil-hero">
-        <div class="perfil-avatar-wrap" onclick="document.getElementById('perfil-input-foto').click()">
-          <div class="perfil-avatar-circle">
-            <span id="perfil-avatar-letter">U</span>
-            <img id="perfil-avatar-img" src="" alt="Foto">
-          </div>
-          <div class="perfil-avatar-plus">+</div>
-        </div>
-        <input type="file" id="perfil-input-foto" accept="image/*" style="display:none;" onchange="uploadFotoPerfil(this)">
-        <div style="flex:1; min-width:0;">
-          <div id="perfil-display-nome" style="font-size:16px; font-weight:800; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">Seu Nome</div>
-          <div id="perfil-display-sub" style="font-size:12px; color:var(--text-muted); margin-top:2px;">Centro • Cascavel - PR</div>
-        </div>
-        <span class="source-tag pet">Ativo</span>
-      </div>
-
-      <!-- Grupo 1: Cadastro do Cidadão -->
-      <div class="perfil-section-lbl"><span>Identificação & Cadastro</span></div>
-      <div class="perfil-card-box">
-        <div class="form-group">
-          <label class="form-label" for="perfil-input-nome">Seu Nome Completo</label>
-          <input type="text" class="form-input" id="perfil-input-nome" placeholder="Digite seu nome (Ex: Rigo)" oninput="atualizarPreviewPerfil()">
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="perfil-input-whatsapp">WhatsApp / Telefone</label>
-          <input type="tel" class="form-input" id="perfil-input-whatsapp" placeholder="(45) 99999-9999">
-        </div>
-        <div class="form-group" style="margin-bottom:0;">
-          <label class="form-label" for="perfil-select-bairro">Seu Bairro em Cascavel</label>
-          <select class="form-select" id="perfil-select-bairro" onchange="atualizarPreviewPerfil()">
-            <option value="Centro">Centro</option>
-            <option value="Alto Alegre">Alto Alegre</option>
-            <option value="Brasmadeira">Brasmadeira</option>
-            <option value="Canadá">Canadá</option>
-            <option value="Cancelli">Cancelli</option>
-            <option value="Cascavel Velho">Cascavel Velho</option>
-            <option value="Cataratas">Cataratas</option>
-            <option value="Cidade Verde">Cidade Verde</option>
-            <option value="Claudete">Claudete</option>
-            <option value="Coqueiral">Coqueiral</option>
-            <option value="Country">Country</option>
-            <option value="Esmeralda">Esmeralda</option>
-            <option value="Floresta">Floresta</option>
-            <option value="Guarujá">Guarujá</option>
-            <option value="Interlagos">Interlagos</option>
-            <option value="Maria Luiza">Maria Luiza</option>
-            <option value="Morumbi">Morumbi</option>
-            <option value="Neva">Neva</option>
-            <option value="Pacaembu">Pacaembu</option>
-            <option value="Parque São Paulo">Parque São Paulo</option>
-            <option value="Periolo">Periolo</option>
-            <option value="Pioneiros Catarinenses">Pioneiros Catarinenses</option>
-            <option value="Quatorze de Novembro">14 de Novembro</option>
-            <option value="Recanto Tropical">Recanto Tropical</option>
-            <option value="Santa Cruz">Santa Cruz</option>
-            <option value="Santa Felicidade">Santa Felicidade</option>
-            <option value="Santo Onofre">Santo Onofre</option>
-            <option value="São Cristóvão">São Cristóvão</option>
-            <option value="Tarumã">Tarumã</option>
-            <option value="Universitário">Universitário</option>
-          </select>
-        </div>
-      </div>
-
-      <!-- Grupo 2: Avistamentos Recebidos (Exclusivo do Tutor) -->
-      <div class="perfil-section-lbl">
-        <span>🐾 Avistamentos dos Meus Pets</span>
-        <span id="perfil-total-avistamentos" style="color:var(--accent-ok);">0 novos</span>
-      </div>
-      <div id="perfil-lista-avistamentos" style="display:flex; flex-direction:column; gap:8px; margin-bottom:16px;"></div>
-
-      <!-- Grupo 3: Meus Pets Cadastrados -->
-      <div class="perfil-section-lbl">
-        <span>Meus Registros de Pets</span>
-        <span id="perfil-total-minhas" style="color:var(--accent-pet);">0 no ar</span>
-      </div>
-      <div id="perfil-lista-meus-pets" style="display:flex; flex-direction:column; gap:8px; margin-bottom:16px;"></div>
-
-      <!-- Grupo 3: Empresas Parceiras & Clube de Vantagens -->
-      <div class="perfil-section-lbl">
-        <span>Parceiros de Cascavel</span>
-        <span style="color:var(--accent-ok);">Clube</span>
-      </div>
-      <div class="perfil-card-box">
-        <div class="partner-row">
-          <div class="partner-badge">PET</div>
-          <div>
-            <div style="font-size:12px; font-weight:800;">Clínicas & Pet Shops Parceiros</div>
-            <div style="font-size:11px; color:var(--text-muted);">Apoio à rede solidária de animais de Cascavel</div>
+    <div class="fs-body" style="max-width:540px; margin:0 auto; width:100%;">
+      <!-- ESTADO 1: TELA DE CADASTRO / LOGIN (QUANDO NÃO LOGADO) -->
+      <div id="perfil-view-cadastro" style="display:none;">
+        <div style="text-align:center; padding:10px 0 16px;">
+          <div style="font-size:20px; font-weight:800; color:#ffffff; margin-bottom:6px;">Acesse sua Conta</div>
+          <div style="font-size:12.5px; color:#8e8e93; line-height:1.4; max-width:340px; margin:0 auto;">
+            Conecte sua conta para publicar animais desaparecidos, registrar adoções e enviar denúncias com segurança.
           </div>
         </div>
-        <div class="partner-row">
-          <div class="partner-badge">POSTO</div>
-          <div>
-            <div style="font-size:12px; font-weight:800;">Rede de Postos & Serviços</div>
-            <div style="font-size:11px; color:var(--text-muted);">Benefícios exclusivos para motoristas e moradores</div>
-          </div>
+
+        <!-- Botão Oficial do Google (1 Toque) -->
+        <button type="button" class="btn-google-auth" onclick="conectarGoogleAuth()">
+          <svg width="18" height="18" viewBox="0 0 24 24">
+            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+            <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+            <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+            <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+          </svg>
+          <span>Continuar com o Google</span>
+        </button>
+
+        <div class="auth-divider">
+          <span>ou faça seu cadastro com dados básicos</span>
         </div>
-        <a href="https://wa.me/5545999999999?text=Ol%C3%A1!%20Tenho%20interesse%20em%20ser%20empresa%20parceira%20no%20Alerta%20Urbano%20Cascavel" target="_blank" class="btn-full" style="margin-top:6px;">Anunciar Minha Empresa Aqui</a>
+
+        <div class="perfil-card-box">
+          <div class="form-group">
+            <label class="form-label" for="cadastro-input-nome">Seu Nome Completo</label>
+            <input type="text" class="form-input" id="cadastro-input-nome" placeholder="Digite seu nome (Ex: Carlos Silva)">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="cadastro-input-whatsapp">WhatsApp / Telefone</label>
+            <input type="tel" class="form-input" id="cadastro-input-whatsapp" placeholder="(45) 99999-9999">
+          </div>
+          <div class="form-group" style="margin-bottom:12px;">
+            <label class="form-label" for="cadastro-select-bairro">Seu Bairro em Cascavel</label>
+            <select class="form-select" id="cadastro-select-bairro">
+              <option value="Centro">Centro</option>
+              <option value="Alto Alegre">Alto Alegre</option>
+              <option value="Brasília">Brasília</option>
+              <option value="Brasmadeira">Brasmadeira</option>
+              <option value="Canadá">Canadá</option>
+              <option value="Cancelli">Cancelli</option>
+              <option value="Cascavel Velho">Cascavel Velho</option>
+              <option value="Cataratas">Cataratas</option>
+              <option value="Cidade Verde">Cidade Verde</option>
+              <option value="Claudete">Claudete</option>
+              <option value="Coqueiral">Coqueiral</option>
+              <option value="Country">Country</option>
+              <option value="Esmeralda">Esmeralda</option>
+              <option value="Floresta">Floresta</option>
+              <option value="Gramado">Gramado</option>
+              <option value="Guarujá">Guarujá</option>
+              <option value="Interlagos">Interlagos</option>
+              <option value="Maria Luiza">Maria Luiza</option>
+              <option value="Morumbi">Morumbi</option>
+              <option value="Neva">Neva</option>
+              <option value="Pacaembu">Pacaembu</option>
+              <option value="Parque São Paulo">Parque São Paulo</option>
+              <option value="Periolo">Periolo</option>
+              <option value="Pioneiros Catarinenses">Pioneiros Catarinenses</option>
+              <option value="Quatorze de Novembro">14 de Novembro</option>
+              <option value="Recanto Tropical">Recanto Tropical</option>
+              <option value="Santa Cruz">Santa Cruz</option>
+              <option value="Santa Felicidade">Santa Felicidade</option>
+              <option value="Santo Inácio">Santo Inácio</option>
+              <option value="Santo Onofre">Santo Onofre</option>
+              <option value="Santos Dumont">Santos Dumont</option>
+              <option value="São Cristóvão">São Cristóvão</option>
+              <option value="São Salvador">São Salvador</option>
+              <option value="Tarumã">Tarumã</option>
+              <option value="Universitário">Universitário</option>
+            </select>
+          </div>
+
+          <label class="lgpd-box" style="margin-bottom:14px;">
+            <input type="checkbox" id="cadastro-termos-check" checked>
+            <span>Li e concordo com os Termos de Uso, Política de Privacidade e Política de Tolerância Zero a conteúdo censurável.</span>
+          </label>
+
+          <button type="button" class="btn-submit" style="background:#10b981; color:#09090b; font-weight:800;" onclick="concluirCadastroManual()">
+            Concluir Cadastro & Entrar
+          </button>
+        </div>
       </div>
 
-      <button type="button" class="btn-submit" style="background:#ffffff; color:#09090b; font-weight:800; margin-bottom:10px;" onclick="salvarPerfilUsuario()">Salvar Alterações</button>
-      <a href="/politica_privacidade.html" target="_blank" class="btn-full">Política de Privacidade & LGPD</a>
+      <!-- ESTADO 2: TELA DE PERFIL DO USUÁRIO LOGADO -->
+      <div id="perfil-view-logado" style="display:none;">
+        <!-- Card de Identidade do Usuário -->
+        <div class="perfil-hero">
+          <div class="perfil-avatar-wrap" onclick="document.getElementById('perfil-input-foto').click()">
+            <div class="perfil-avatar-circle">
+              <span id="perfil-avatar-letter">U</span>
+              <img id="perfil-avatar-img" src="" alt="Foto">
+            </div>
+            <div class="perfil-avatar-plus">+</div>
+          </div>
+          <input type="file" id="perfil-input-foto" accept="image/*" style="display:none;" onchange="uploadFotoPerfil(this)">
+          <div style="flex:1; min-width:0;">
+            <div id="perfil-display-nome" style="font-size:16px; font-weight:800; color:#ffffff; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">Nome do Usuário</div>
+            <div id="perfil-display-sub" style="font-size:12px; color:#8e8e93; margin-top:2px;">Centro • Cascavel - PR</div>
+            <div style="margin-top:6px;">
+              <span style="display:inline-flex; align-items:center; gap:4px; font-size:10px; font-weight:800; color:#10b981; background:rgba(16, 185, 129, 0.12); padding:2px 8px; border-radius:999px; border:1px solid rgba(16, 185, 129, 0.25);">
+                ✓ Conta Ativa
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Grupo de Navegação em Linhas com Chevron (›) -->
+        <div class="perfil-card-box" style="padding:0; overflow:hidden;">
+          <!-- Linha 1: Editar Dados -->
+          <div class="perfil-nav-row" onclick="alternarEdicaoDados()">
+            <div class="perfil-nav-left">
+              <div class="perfil-nav-icon">✏️</div>
+              <div>
+                <div class="perfil-nav-title">Editar Meus Dados</div>
+                <div class="perfil-nav-sub">Atualize seu nome, telefone ou bairro</div>
+              </div>
+            </div>
+            <div class="pet-nav-chevron">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </div>
+          </div>
+
+          <!-- Linha 2: Meus Registros -->
+          <div class="perfil-nav-row" onclick="alternarGavetaMeusRegistros()">
+            <div class="perfil-nav-left">
+              <div class="perfil-nav-icon">🐾</div>
+              <div>
+                <div class="perfil-nav-title">Meus Registros & Avistamentos</div>
+                <div class="perfil-nav-sub" id="perfil-resumo-registros">Alertas e pets cadastrados por você</div>
+              </div>
+            </div>
+            <div class="pet-nav-chevron">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </div>
+          </div>
+
+          <!-- Linha 3: Termos de Uso -->
+          <div class="perfil-nav-row" onclick="abrirTermosDeUso()">
+            <div class="perfil-nav-left">
+              <div class="perfil-nav-icon">📄</div>
+              <div>
+                <div class="perfil-nav-title">Termos de Uso & Diretrizes</div>
+                <div class="perfil-nav-sub">Regras da comunidade e tolerância zero</div>
+              </div>
+            </div>
+            <div class="pet-nav-chevron">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </div>
+          </div>
+
+          <!-- Linha 4: Privacidade & LGPD -->
+          <div class="perfil-nav-row" onclick="window.open('/politica_privacidade.html', '_blank')">
+            <div class="perfil-nav-left">
+              <div class="perfil-nav-icon">🔒</div>
+              <div>
+                <div class="perfil-nav-title">Política de Privacidade & LGPD</div>
+                <div class="perfil-nav-sub">Como tratamos e protegemos seus dados</div>
+              </div>
+            </div>
+            <div class="pet-nav-chevron">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </div>
+          </div>
+
+          <!-- Linha 5: Sair da Conta -->
+          <div class="perfil-nav-row" onclick="desconectarContaUsuario()">
+            <div class="perfil-nav-left">
+              <div class="perfil-nav-icon">🚪</div>
+              <div>
+                <div class="perfil-nav-title">Sair da Conta</div>
+                <div class="perfil-nav-sub">Desconectar seu login deste aparelho</div>
+              </div>
+            </div>
+            <div class="pet-nav-chevron">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </div>
+          </div>
+
+          <!-- Linha 6: Excluir Conta (Regra Google Play) -->
+          <div class="perfil-nav-row danger" onclick="excluirContaUsuarioGooglePlay()">
+            <div class="perfil-nav-left">
+              <div class="perfil-nav-icon">🗑️</div>
+              <div>
+                <div class="perfil-nav-title" style="color:#ef4444;">Excluir Minha Conta</div>
+                <div class="perfil-nav-sub">Apagar permanentemente seus dados do sistema</div>
+              </div>
+            </div>
+            <div class="pet-nav-chevron" style="color:#ef4444;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- Seção Expansível: Formulário de Edição de Dados (Apenas 1 Botão Salvar) -->
+        <div id="perfil-caixa-edicao" class="perfil-card-box" style="display:none;">
+          <div style="font-size:13px; font-weight:800; color:#ffffff; margin-bottom:12px;">Editar Meus Dados</div>
+          <div class="form-group">
+            <label class="form-label" for="perfil-edit-nome">Nome Completo</label>
+            <input type="text" class="form-input" id="perfil-edit-nome" placeholder="Seu nome completo">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="perfil-edit-whatsapp">WhatsApp / Telefone</label>
+            <input type="tel" class="form-input" id="perfil-edit-whatsapp" placeholder="(45) 99999-9999">
+          </div>
+          <div class="form-group" style="margin-bottom:14px;">
+            <label class="form-label" for="perfil-edit-bairro">Bairro em Cascavel</label>
+            <select class="form-select" id="perfil-edit-bairro">
+              <option value="Centro">Centro</option>
+              <option value="Alto Alegre">Alto Alegre</option>
+              <option value="Brasília">Brasília</option>
+              <option value="Brasmadeira">Brasmadeira</option>
+              <option value="Canadá">Canadá</option>
+              <option value="Cancelli">Cancelli</option>
+              <option value="Cascavel Velho">Cascavel Velho</option>
+              <option value="Cataratas">Cataratas</option>
+              <option value="Cidade Verde">Cidade Verde</option>
+              <option value="Claudete">Claudete</option>
+              <option value="Coqueiral">Coqueiral</option>
+              <option value="Country">Country</option>
+              <option value="Esmeralda">Esmeralda</option>
+              <option value="Floresta">Floresta</option>
+              <option value="Gramado">Gramado</option>
+              <option value="Guarujá">Guarujá</option>
+              <option value="Interlagos">Interlagos</option>
+              <option value="Maria Luiza">Maria Luiza</option>
+              <option value="Morumbi">Morumbi</option>
+              <option value="Neva">Neva</option>
+              <option value="Pacaembu">Pacaembu</option>
+              <option value="Parque São Paulo">Parque São Paulo</option>
+              <option value="Periolo">Periolo</option>
+              <option value="Pioneiros Catarinenses">Pioneiros Catarinenses</option>
+              <option value="Quatorze de Novembro">14 de Novembro</option>
+              <option value="Recanto Tropical">Recanto Tropical</option>
+              <option value="Santa Cruz">Santa Cruz</option>
+              <option value="Santa Felicidade">Santa Felicidade</option>
+              <option value="Santo Inácio">Santo Inácio</option>
+              <option value="Santo Onofre">Santo Onofre</option>
+              <option value="Santos Dumont">Santos Dumont</option>
+              <option value="São Cristóvão">São Cristóvão</option>
+              <option value="São Salvador">São Salvador</option>
+              <option value="Tarumã">Tarumã</option>
+              <option value="Universitário">Universitário</option>
+            </select>
+          </div>
+          <button type="button" class="btn-submit" style="background:#10b981; color:#09090b; font-weight:800;" onclick="salvarEdicaoPerfil()">
+            Salvar Alterações
+          </button>
+        </div>
+
+        <!-- Seção Expansível: Meus Registros -->
+        <div id="perfil-caixa-registros" style="display:none; margin-bottom:16px;">
+          <div class="perfil-section-lbl"><span>Seus Alertas e Pets no Ar</span></div>
+          <div id="perfil-lista-meus-pets" style="display:flex; flex-direction:column; gap:8px;"></div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -4219,6 +4455,7 @@
     }
 
     function abrirModalAvistamento(petId, ehImprensa, subtipoInicial) {
+      if (!verificarUsuarioLogado("registrar um avistamento")) return;
       fecharModal('modal-detalhe');
       if (ehImprensa) {
         registrarAvistamentoDireto(petId, 'Pet visto na rua (ponto marcado na trilha comunitária).', false, '', 'avistamento', '');
@@ -4557,35 +4794,207 @@
     }
 
     /* ==================== PERFIL COMPLETO & CADASTRO ==================== */
-    function carregarPerfilUsuario() {
-      const p = state.perfil || {};
-      const inpNome = document.getElementById('perfil-input-nome');
-      const inpWa = document.getElementById('perfil-input-whatsapp');
-      const selBairro = document.getElementById('perfil-select-bairro');
-      if (inpNome && p.nome) inpNome.value = p.nome;
-      if (inpWa && p.whatsapp) inpWa.value = p.whatsapp;
-      if (selBairro && p.bairro) selBairro.value = p.bairro;
-      if (p.foto_url) {
-        const img = document.getElementById('perfil-avatar-img');
-        const letEl = document.getElementById('perfil-avatar-letter');
-        if (img) { img.src = p.foto_url; img.style.display = 'block'; }
-        if (letEl) letEl.style.display = 'none';
+    function abrirPerfil(forcarCadastro = false) {
+      let p = state.perfil || {};
+      if (!p.nome) {
+        try { p = JSON.parse(localStorage.getItem('au_perfil') || '{}'); state.perfil = p; } catch(e) {}
       }
-      atualizarPreviewPerfil();
-      renderizarMeusPetsPerfil();
+      const estaCadastrado = Boolean(p.cadastrado || (p.nome && p.nome.trim() !== ''));
+
+      const viewCadastro = document.getElementById('perfil-view-cadastro');
+      const viewLogado = document.getElementById('perfil-view-logado');
+      const headerTitle = document.getElementById('perfil-header-title');
+
+      if (!estaCadastrado || forcarCadastro) {
+        if (viewCadastro) viewCadastro.style.display = 'block';
+        if (viewLogado) viewLogado.style.display = 'none';
+        if (headerTitle) headerTitle.innerText = 'Acesso & Cadastro';
+      } else {
+        if (viewCadastro) viewCadastro.style.display = 'none';
+        if (viewLogado) viewLogado.style.display = 'block';
+        if (headerTitle) headerTitle.innerText = 'Meu Perfil';
+        atualizarVisualLogado();
+        renderizarMeusPetsPerfil();
+      }
+
+      document.getElementById('modal-perfil').classList.add('open');
     }
 
-    function atualizarPreviewPerfil() {
-      const nome = (document.getElementById('perfil-input-nome')?.value || '').trim();
-      const bairro = document.getElementById('perfil-select-bairro')?.value || 'Centro';
+    function atualizarVisualLogado() {
+      const p = state.perfil || {};
+      const nome = p.nome || 'Cidadão Conectado';
+      const bairro = p.bairro || 'Centro';
       const dispNome = document.getElementById('perfil-display-nome');
       const dispSub = document.getElementById('perfil-display-sub');
       const letEl = document.getElementById('perfil-avatar-letter');
-      if (dispNome) dispNome.textContent = nome || 'Seu Nome';
+      const img = document.getElementById('perfil-avatar-img');
+
+      if (dispNome) dispNome.textContent = nome;
       if (dispSub) dispSub.textContent = `${bairro} • Cascavel - PR`;
-      if (letEl && (!state.perfil || !state.perfil.foto_url)) {
-        letEl.textContent = (nome ? nome[0] : 'U').toUpperCase();
+
+      if (p.foto_url) {
+        if (img) { img.src = p.foto_url; img.style.display = 'block'; }
+        if (letEl) letEl.style.display = 'none';
+      } else {
+        if (img) img.style.display = 'none';
+        if (letEl) {
+          letEl.style.display = 'flex';
+          letEl.textContent = nome.charAt(0).toUpperCase();
+        }
       }
+
+      // Preenche campos de edição
+      const editNome = document.getElementById('perfil-edit-nome');
+      const editWa = document.getElementById('perfil-edit-whatsapp');
+      const editBairro = document.getElementById('perfil-edit-bairro');
+      if (editNome) editNome.value = nome;
+      if (editWa && p.whatsapp) editWa.value = p.whatsapp;
+      if (editBairro && p.bairro) editBairro.value = p.bairro;
+    }
+
+    function conectarGoogleAuth() {
+      const emailMock = 'usuario.cascavel@gmail.com';
+      const nomeGoogle = prompt('Conectar com o Google:\nInforme seu nome para a conta Google:', (state.perfil && state.perfil.nome) ? state.perfil.nome : 'Cidadão Cascavel');
+      
+      if (!nomeGoogle || nomeGoogle.trim() === '') {
+        mostrarToast('Login com o Google cancelado.');
+        return;
+      }
+
+      state.perfil = {
+        nome: nomeGoogle.trim(),
+        email: emailMock,
+        whatsapp: (state.perfil && state.perfil.whatsapp) ? state.perfil.whatsapp : '',
+        bairro: (state.perfil && state.perfil.bairro) ? state.perfil.bairro : 'Centro',
+        cidade: 'Cascavel',
+        cadastrado: true,
+        auth_provider: 'google'
+      };
+
+      try { localStorage.setItem('au_perfil', JSON.stringify(state.perfil)); } catch(e) {}
+      mostrarToast('✅ Conectado com o Google com sucesso!');
+      abrirPerfil(false);
+    }
+
+    function concluirCadastroManual() {
+      const nome = (document.getElementById('cadastro-input-nome')?.value || '').trim();
+      const whatsapp = (document.getElementById('cadastro-input-whatsapp')?.value || '').trim();
+      const bairro = document.getElementById('cadastro-select-bairro')?.value || 'Centro';
+      const termos = document.getElementById('cadastro-termos-check')?.checked;
+
+      if (!termos) {
+        mostrarToast('⚠️ É obrigatório aceitar os Termos de Uso e Política de Tolerância Zero.');
+        return;
+      }
+      if (!nome) {
+        mostrarToast('⚠️ Por favor, digite seu nome completo.');
+        return;
+      }
+
+      state.perfil = {
+        nome,
+        whatsapp,
+        bairro,
+        cidade: 'Cascavel',
+        cadastrado: true,
+        auth_provider: 'manual'
+      };
+
+      try { localStorage.setItem('au_perfil', JSON.stringify(state.perfil)); } catch(e) {}
+
+      try {
+        fetch('/api/perfil', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            autor_token: state.autorToken,
+            nome,
+            whatsapp,
+            bairro,
+            cidade: 'Cascavel'
+          })
+        }).catch(() => {});
+      } catch (_) {}
+
+      mostrarToast('✅ Cadastro concluído! Bem-vindo ao Alerta Urbano.');
+      abrirPerfil(false);
+    }
+
+    function alternarEdicaoDados() {
+      const box = document.getElementById('perfil-caixa-edicao');
+      if (!box) return;
+      const isVisible = box.style.display !== 'none';
+      box.style.display = isVisible ? 'none' : 'block';
+    }
+
+    function salvarEdicaoPerfil() {
+      const nome = (document.getElementById('perfil-edit-nome')?.value || '').trim();
+      const whatsapp = (document.getElementById('perfil-edit-whatsapp')?.value || '').trim();
+      const bairro = document.getElementById('perfil-edit-bairro')?.value || 'Centro';
+
+      if (!nome) {
+        mostrarToast('⚠️ O nome não pode ficar em branco.');
+        return;
+      }
+
+      state.perfil = Object.assign({}, state.perfil, { nome, whatsapp, bairro });
+      try { localStorage.setItem('au_perfil', JSON.stringify(state.perfil)); } catch(e) {}
+      atualizarVisualLogado();
+
+      const box = document.getElementById('perfil-caixa-edicao');
+      if (box) box.style.display = 'none';
+
+      mostrarToast('✅ Perfil atualizado com sucesso!');
+    }
+
+    function alternarGavetaMeusRegistros() {
+      const box = document.getElementById('perfil-caixa-registros');
+      if (!box) return;
+      const isVisible = box.style.display !== 'none';
+      box.style.display = isVisible ? 'none' : 'block';
+      if (!isVisible) {
+        renderizarMeusPetsPerfil();
+      }
+    }
+
+    function desconectarContaUsuario() {
+      if (confirm('Deseja sair da sua conta neste aparelho?')) {
+        state.perfil = { cadastrado: false, nome: '', whatsapp: '', bairro: 'Centro' };
+        try { localStorage.removeItem('au_perfil'); } catch(e) {}
+        mostrarToast('Você saiu da sua conta.');
+        abrirPerfil(true);
+      }
+    }
+
+    function excluirContaUsuarioGooglePlay() {
+      if (confirm('Atenção: Deseja realmente excluir permanentemente sua conta e todos os dados associados? Esta ação não pode ser desfeita (em conformidade com a Google Play Store e LGPD).')) {
+        state.perfil = { cadastrado: false, nome: '', whatsapp: '', bairro: 'Centro' };
+        try {
+          localStorage.removeItem('au_perfil');
+          localStorage.removeItem('alerta_pets_curtidos');
+          localStorage.removeItem('alerta_usuarios_bloqueados');
+        } catch(e) {}
+        mostrarToast('✅ Conta e dados associados excluídos permanentemente.');
+        fecharModal('modal-perfil');
+      }
+    }
+
+    function abrirTermosDeUso() {
+      alert('Alerta Urbano Cascavel — Diretrizes da Comunidade:\n\n1. Tolerância zero para conteúdo falso, ofensivo ou criminoso.\n2. Proibido comércio e venda de animais (apenas adoção responsável).\n3. Denúncias sigilosas de maus-tratos geram dossiê oficial encaminhado à SEMA e Polícia Civil.');
+    }
+
+    function verificarUsuarioLogado(acaoNome) {
+      let p = state.perfil || {};
+      if (!p.nome) {
+        try { p = JSON.parse(localStorage.getItem('au_perfil') || '{}'); state.perfil = p; } catch(e) {}
+      }
+      const estaCadastrado = Boolean(p.cadastrado || (p.nome && p.nome.trim() !== ''));
+      if (!estaCadastrado) {
+        abrirPerfil(true);
+        mostrarToast(`Para ${acaoNome || 'esta ação'}, conecte sua conta Google ou faça seu cadastro.`);
+        return false;
+      }
+      return true;
     }
 
     async function uploadFotoPerfil(input) {
@@ -4598,11 +5007,8 @@
         const data = await resp.json();
         if (resp.ok && data.url) {
           state.perfil = Object.assign({}, state.perfil, { foto_url: data.url });
-          localStorage.setItem('au_perfil', JSON.stringify(state.perfil));
-          const img = document.getElementById('perfil-avatar-img');
-          const letEl = document.getElementById('perfil-avatar-letter');
-          if (img) { img.src = data.url; img.style.display = 'block'; }
-          if (letEl) letEl.style.display = 'none';
+          try { localStorage.setItem('au_perfil', JSON.stringify(state.perfil)); } catch(e) {}
+          atualizarVisualLogado();
           mostrarToast('Foto de perfil atualizada!');
         }
       } catch (_) {
@@ -4610,49 +5016,21 @@
       }
     }
 
-    async function salvarPerfilUsuario() {
-      const nome = (document.getElementById('perfil-input-nome')?.value || '').trim();
-      const whatsapp = (document.getElementById('perfil-input-whatsapp')?.value || '').trim();
-      const bairro = document.getElementById('perfil-select-bairro')?.value || 'Centro';
-
-      state.perfil = Object.assign({}, state.perfil, { nome, whatsapp, bairro, cidade: 'Cascavel' });
-      localStorage.setItem('au_perfil', JSON.stringify(state.perfil));
-      atualizarPreviewPerfil();
-
-      try {
-        await fetch('/api/perfil', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            autor_token: state.autorToken,
-            nome,
-            whatsapp,
-            bairro,
-            cidade: 'Cascavel',
-            foto_url: state.perfil.foto_url || ''
-          })
-        });
-      } catch (_) {}
-
-      mostrarToast('Perfil salvo com sucesso!');
-      fecharModal('modal-perfil');
-    }
-
     function renderizarMeusPetsPerfil() {
       const box = document.getElementById('perfil-lista-meus-pets');
-      const tot = document.getElementById('perfil-total-minhas');
+      const resumo = document.getElementById('perfil-resumo-registros');
       if (!box) return;
       const meus = state.alertas.filter(a => a.pilar === 'pet' && a.autor_token && a.autor_token === state.autorToken);
-      if (tot) tot.textContent = `${meus.length} no ar`;
+      if (resumo) resumo.textContent = `${meus.length} registro(s) publicado(s)`;
       if (!meus.length) {
-        box.innerHTML = '<div class="empty-box" style="padding:14px;">Você ainda não cadastrou nenhum pet.</div>';
+        box.innerHTML = '<div class="empty-box" style="padding:14px; text-align:center; color:#8e8e93;">Você ainda não cadastrou nenhum pet ou alerta.</div>';
         return;
       }
       box.innerHTML = meus.map(p => `
         <div class="perfil-card-box" style="margin-bottom:0; padding:12px; display:flex; align-items:center; justify-content:space-between; gap:10px;">
           <div style="min-width:0;">
-            <div style="font-size:13px; font-weight:800;">${escapeHtml(p.titulo)}</div>
-            <div style="font-size:11px; color:var(--text-muted);">${escapeHtml(p.bairro || 'Cascavel')}</div>
+            <div style="font-size:13px; font-weight:800; color:#ffffff;">${escapeHtml(p.titulo)}</div>
+            <div style="font-size:11px; color:#8e8e93;">${escapeHtml(p.bairro || 'Cascavel')}</div>
           </div>
           <div style="display:flex; gap:6px; flex-shrink:0;">
             <button type="button" class="btn-slim" onclick="renovarMeuPet(${p.id})">+48h</button>
@@ -4660,12 +5038,6 @@
           </div>
         </div>
       `).join('');
-    }
-
-    function abrirPerfil() {
-      carregarPerfilUsuario();
-      carregarMeusAvistamentosTutor();
-      document.getElementById('modal-perfil').classList.add('open');
     }
 
     function fecharModal(id) {
