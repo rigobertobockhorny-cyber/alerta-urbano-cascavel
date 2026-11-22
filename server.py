@@ -12,6 +12,8 @@ import sqlite3
 import time
 import hashlib
 import urllib.request
+import urllib.parse
+import html
 from datetime import datetime
 from flask import Flask, request, jsonify, send_from_directory, make_response, send_file
 from werkzeug.utils import secure_filename
@@ -302,7 +304,7 @@ def baixar_apk():
         os.path.dirname(apk_path),
         os.path.basename(apk_path),
         as_attachment=True,
-        download_name="Alerta_Urbano_v3.6.3_Cascavel.apk",
+        download_name="Alerta_Urbano_v3.6.4_Cascavel.apk",
         mimetype="application/vnd.android.package-archive",
     )
 
@@ -1128,6 +1130,370 @@ def gerar_dossie_denuncia(alerta_id):
             "pm_ambiental": "tel:190"
         }
     })
+
+
+@app.route("/cartaz/<int:alerta_id>")
+def ver_cartaz(alerta_id):
+    """
+    Cartaz Oficial de Utilidade Pública — Alerta Urbano Cascavel.
+    Visualmente otimizado para abertura imediata no WhatsApp e redes sociais.
+    """
+    conn = get_db()
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM alertas WHERE id = ?", (alerta_id,))
+    row = cur.fetchone()
+    conn.close()
+
+    if not row:
+        return """<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alerta Urbano Cascavel</title>
+  <style>
+    body { font-family: -apple-system, sans-serif; background: #09090b; color: #fff; text-align: center; padding: 40px 20px; }
+    .card { background: #18181b; max-width: 420px; margin: 0 auto; padding: 30px; border-radius: 20px; border: 2px solid #27272a; }
+    .btn { display: inline-block; background: #FED700; color: #000; font-weight: 800; padding: 12px 24px; border-radius: 999px; text-decoration: none; margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2>Alerta Concluído</h2>
+    <p style="margin-top:10px; color:#a1a1aa;">Este registro foi marcado como localizado ou encerrado pelo autor.</p>
+    <a href="/download" class="btn">Baixar Alerta Urbano</a>
+  </div>
+</body>
+</html>""", 404
+
+    a = dict(row)
+    titulo = html.escape(a.get("titulo") or "Alerta Pet")
+    bairro = html.escape(a.get("bairro") or "Cascavel")
+    descricao = html.escape(a.get("descricao") or "Sem detalhes adicionais informados.")
+    status_pet = (a.get("status_pet") or "").lower()
+    tipo = (a.get("tipo") or "").lower()
+    foto_url = a.get("foto_url") or "https://alerta-urbano-cascavel.onrender.com/static/logo_bolha_pura.png?v=60"
+    especie = html.escape(a.get("especie") or "")
+    porte = html.escape(a.get("porte") or "")
+    recompensa = html.escape(a.get("recompensa") or "")
+    contato = a.get("contato") or ""
+
+    if status_pet == "desaparecido":
+        badge_bg = "#DC2626"
+        badge_txt = "#FFFFFF"
+        badge_label = "🚨 PET DESAPARECIDO"
+        og_status = "Desaparecido"
+    elif status_pet == "avistado" or "avistad" in tipo:
+        badge_bg = "#FED700"
+        badge_txt = "#000000"
+        badge_label = "👁️ ANIMAL AVISTADO NA RUA"
+        og_status = "Avistado na rua"
+    elif "adocao" in tipo:
+        badge_bg = "#009B3A"
+        badge_txt = "#FFFFFF"
+        badge_label = "💚 ADOÇÃO RESPONSÁVEL"
+        og_status = "Para Adoção"
+    else:
+        badge_bg = "#FED700"
+        badge_txt = "#000000"
+        badge_label = "📢 COMUNICADO CÍVICO"
+        og_status = "Alerta"
+
+    og_title = f"{titulo} ({og_status} em Cascavel/PR)"
+    og_desc = f"Bairro: {bairro}. Toque para ver foto e detalhes completos no Alerta Urbano."
+    download_url = "https://alerta-urbano-cascavel.onrender.com/download"
+    cartaz_url = f"https://alerta-urbano-cascavel.onrender.com/cartaz/{alerta_id}"
+
+    msg_whatsapp = (
+        f"📢 *ALERTA URBANO CASCAVEL*\n"
+        f"🐾 *{badge_label}*\n\n"
+        f"🐶 *Nome:* {titulo}\n"
+        f"📍 *Bairro:* {bairro} • Cascavel/PR\n"
+        f"{f'📏 *Porte:* {porte} • {especie}' + chr(10) if porte or especie else ''}"
+        f"{f'💰 *Recompensa:* {recompensa}' + chr(10) if recompensa else ''}"
+        f"📝 *Detalhes:* {descricao}\n\n"
+        f"🖼️ *VER CARTAZ OFICIAL COM FOTO:*\n"
+        f"👉 {cartaz_url}\n\n"
+        f"📱 *Baixe o App Comunitário de Cascavel:*\n"
+        f"👉 {download_url}"
+    )
+    msg_wa_encoded = urllib.parse.quote(msg_whatsapp)
+
+    btn_contato_html = ""
+    if contato and any(c.isdigit() for c in contato):
+        num_limpo = "".join(filter(str.isdigit, contato))
+        if len(num_limpo) in (10, 11):
+            num_limpo = "55" + num_limpo
+        wa_tutor_msg = urllib.parse.quote(f"Olá, vi o cartaz do {titulo} no Alerta Urbano e tenho informações!")
+        btn_contato_html = f"""
+        <a href="https://wa.me/{num_limpo}?text={wa_tutor_msg}" target="_blank" class="btn-action btn-tutor">
+          💬 Falar com o Tutor no WhatsApp
+        </a>
+        """
+
+    tag_porte_html = f'<span class="tag-pill">{porte}</span>' if porte else ''
+    tag_especie_html = f'<span class="tag-pill">{especie}</span>' if especie else ''
+    tag_recompensa_html = f'<span class="tag-pill" style="background:#dc2626;color:#fff;">💰 Recompensa: {recompensa}</span>' if recompensa else ''
+
+    html_content = f"""<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>{og_title}</title>
+  
+  <!-- OpenGraph WhatsApp & Redes Sociais -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="{og_title}">
+  <meta property="og:description" content="{og_desc}">
+  <meta property="og:image" content="{foto_url}">
+  <meta property="og:url" content="{cartaz_url}">
+  <meta property="og:site_name" content="Alerta Urbano Cascavel">
+  
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{og_title}">
+  <meta name="twitter:description" content="{og_desc}">
+  <meta name="twitter:image" content="{foto_url}">
+
+  <style>
+    * {{ box-sizing: border-box; margin: 0; padding: 0; }}
+    body {{
+      background: #0f172a;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: #0f172a;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      padding: 0 0 40px;
+    }}
+    .topbar {{
+      width: 100%;
+      background: #009B3A;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      color: #ffffff;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    }}
+    .topbar img {{
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 2px solid #FED700;
+    }}
+    .topbar-text {{
+      display: flex;
+      flex-direction: column;
+      line-height: 1.15;
+    }}
+    .topbar-title {{ font-size: 15px; font-weight: 900; letter-spacing: 0.5px; }}
+    .topbar-sub {{ font-size: 11px; font-weight: 700; color: #FED700; letter-spacing: 0.8px; }}
+
+    .container {{
+      width: 100%;
+      max-width: 440px;
+      padding: 16px 14px;
+    }}
+    
+    .cartaz-box {{
+      background: #FED700;
+      border: 2.5px solid #000000;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.5);
+    }}
+    .badge-status {{
+      background: {badge_bg};
+      color: {badge_txt};
+      font-size: 13.5px;
+      font-weight: 900;
+      text-align: center;
+      padding: 10px 14px;
+      letter-spacing: 1px;
+      border-bottom: 2px solid #000000;
+    }}
+    .photo-wrap {{
+      width: 100%;
+      max-height: 280px;
+      background: #000000;
+      overflow: hidden;
+      position: relative;
+    }}
+    .photo-wrap img {{
+      width: 100%;
+      height: 100%;
+      max-height: 280px;
+      object-fit: cover;
+      display: block;
+    }}
+    .cartaz-body {{
+      padding: 16px 16px 18px;
+    }}
+    .pet-name {{
+      font-size: 24px;
+      font-weight: 900;
+      color: #000000;
+      line-height: 1.15;
+      text-align: center;
+      margin-bottom: 4px;
+    }}
+    .pet-bairro {{
+      font-size: 13px;
+      font-weight: 800;
+      color: #000000;
+      text-align: center;
+      opacity: 0.9;
+      margin-bottom: 12px;
+      letter-spacing: 0.6px;
+    }}
+    .tags-grid {{
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 6px;
+      margin-bottom: 12px;
+    }}
+    .tag-pill {{
+      background: #000000;
+      color: #FED700;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 5px 10px;
+      border-radius: 999px;
+    }}
+    .desc-box {{
+      background: #FFFFFF;
+      border: 1.5px solid #000000;
+      border-radius: 12px;
+      padding: 12px;
+      font-size: 13px;
+      line-height: 1.45;
+      color: #0f172a;
+      margin-bottom: 14px;
+      font-weight: 500;
+    }}
+
+    .actions-wrap {{
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }}
+    .btn-action {{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 13px 18px;
+      border-radius: 14px;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 900;
+      border: 2px solid #000000;
+      cursor: pointer;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      transition: transform 0.1s ease;
+    }}
+    .btn-action:active {{ transform: scale(0.98); }}
+    .btn-tutor {{
+      background: #22c55e;
+      color: #FFFFFF;
+      border-color: #15803d;
+    }}
+    .btn-whatsapp {{
+      background: #000000;
+      color: #FFFFFF;
+    }}
+    .btn-download {{
+      background: #009B3A;
+      color: #FFFFFF;
+      border-color: #007028;
+    }}
+    
+    .app-promo-card {{
+      margin-top: 18px;
+      background: #1e293b;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 16px;
+      padding: 16px;
+      color: #ffffff;
+      text-align: center;
+    }}
+    .app-promo-card h4 {{
+      font-size: 14px;
+      font-weight: 800;
+      color: #FED700;
+      margin-bottom: 6px;
+    }}
+    .app-promo-card p {{
+      font-size: 12px;
+      color: #cbd5e1;
+      line-height: 1.4;
+      margin-bottom: 12px;
+    }}
+    .btn-promo {{
+      display: inline-block;
+      background: #FED700;
+      color: #000000;
+      font-size: 13px;
+      font-weight: 900;
+      padding: 10px 20px;
+      border-radius: 999px;
+      text-decoration: none;
+    }}
+  </style>
+</head>
+<body>
+
+  <header class="topbar">
+    <img src="/static/logo_bolha_pura.png?v=60" alt="Alerta Urbano">
+    <div class="topbar-text">
+      <span class="topbar-title">ALERTA URBANO</span>
+      <span class="topbar-sub">CASCAVEL • PARANÁ</span>
+    </div>
+  </header>
+
+  <main class="container">
+    <article class="cartaz-box">
+      <div class="badge-status">{badge_label}</div>
+      <div class="photo-wrap">
+        <img src="{foto_url}" alt="{titulo}">
+      </div>
+      <div class="cartaz-body">
+        <h1 class="pet-name">{titulo}</h1>
+        <div class="pet-bairro">BAIRRO {bairro.upper()} • CASCAVEL</div>
+
+        <div class="tags-grid">
+          {tag_porte_html}
+          {tag_especie_html}
+          {tag_recompensa_html}
+        </div>
+
+        <div class="desc-box">
+          {descricao}
+        </div>
+
+        <div class="actions-wrap">
+          {btn_contato_html}
+          <a href="https://api.whatsapp.com/send?text={msg_wa_encoded}" class="btn-action btn-whatsapp">
+            ↗️ Compartilhar este Cartaz no WhatsApp
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <section class="app-promo-card">
+      <h4>ALERTA URBANO CASCAVEL</h4>
+      <p>Rede comunitária gratuita para monitoramento em tempo real de pets desaparecidos, segurança pública e avisos de trânsito em Cascavel.</p>
+      <a href="{download_url}" class="btn-promo">Baixar Aplicativo Oficial</a>
+    </section>
+  </main>
+
+</body>
+</html>"""
+    return html_content
 
 
 # Inicializa/migra banco ao importar (compatível com Gunicorn no Render)

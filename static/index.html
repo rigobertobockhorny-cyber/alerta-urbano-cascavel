@@ -4266,19 +4266,55 @@
     function compartilharPet(petId, event) {
       if (event) event.stopPropagation();
       const pet = state.alertas.find(a => a.id === petId);
-      const url = `https://alerta-urbano-cascavel.onrender.com/?pet=${petId}`;
-      const texto = pet ? `Alerta Urbano Cascavel: ${pet.titulo} - ajude a causa animal!` : 'Alerta Urbano Cascavel';
+      if (!pet) {
+        mostrarToast('Alerta não encontrado.');
+        return;
+      }
 
-      if (navigator.share) {
-        navigator.share({ title: texto, text: texto, url: url }).catch(() => {});
-      } else {
-        if (navigator.clipboard) {
-          navigator.clipboard.writeText(`${texto}: ${url}`).then(() => {
-            mostrarToast('📋 Link copiado para a área de transferência!');
-          });
-        } else {
-          mostrarToast(url);
+      const cartazUrl = `https://alerta-urbano-cascavel.onrender.com/cartaz/${pet.id}`;
+      const downloadUrl = `https://alerta-urbano-cascavel.onrender.com/download`;
+      const statusLabel = pet.status_pet === 'avistado' ? 'ANIMAL AVISTADO NA RUA' : 'PET DESAPARECIDO';
+      const bairroStr = (pet.bairro || 'Cascavel').toUpperCase();
+
+      const textoWhatsApp = 
+`📢 *ALERTA URBANO CASCAVEL*
+🐾 *${statusLabel}*
+
+🐶 *Nome:* ${pet.titulo}
+📍 *Bairro:* ${bairroStr} • Cascavel/PR
+${pet.porte ? `📏 *Porte:* ${pet.porte}\n` : ''}${pet.especie ? `🐾 *Espécie:* ${pet.especie}\n` : ''}${pet.recompensa ? `💰 *Recompensa:* ${pet.recompensa}\n` : ''}${pet.descricao ? `📝 *Detalhes:* ${pet.descricao}\n` : ''}
+🖼️ *VER CARTAZ OFICIAL COM FOTO:*
+👉 ${cartazUrl}
+
+📱 *Ajude a monitorar animais e segurança em Cascavel:*
+Baixe o aplicativo gratuito Alerta Urbano:
+👉 ${downloadUrl}`;
+
+      mostrarToast('📲 Abrindo WhatsApp com o Cartaz Oficial...');
+
+      // 1. Android Nativo via Bridge (abre direto o app do WhatsApp no celular)
+      if (window.AndroidAlerta && typeof window.AndroidAlerta.compartilharWhatsApp === 'function') {
+        try {
+          window.AndroidAlerta.compartilharWhatsApp(textoWhatsApp);
+          return;
+        } catch (e) {
+          console.warn('Erro ao disparar WhatsApp nativo:', e);
         }
+      }
+
+      // 2. Disparo direto para WhatsApp Web / Móvel
+      const waLink = 'https://api.whatsapp.com/send?text=' + encodeURIComponent(textoWhatsApp);
+      const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+      if (isMobile) {
+        window.location.href = waLink;
+      } else {
+        window.open(waLink, '_blank');
+      }
+
+      // 3. Fallback de cópia para área de transferência
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(textoWhatsApp).catch(() => {});
       }
     }
 
