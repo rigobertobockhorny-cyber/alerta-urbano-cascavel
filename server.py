@@ -34,6 +34,10 @@ ADMIN_TOKEN = os.environ.get("ALERTA_ADMIN_TOKEN", "admin_cascavel")
 # Governança rígida de tipos por pilar (v3.0)
 TIPOS_PET = {"pet", "pet_perdido", "pet_avistado", "pet_encontrado"}
 TIPOS_SEGURANCA = {"seguranca", "assalto", "furto", "suspeito"}
+TIPOS_TRANSITO = {
+    "transito", "ponto_seguro", "policia_presente", "via_bloqueada",
+    "semaforo", "semaforo_defeito", "acidente", "acidente_via", "arvore_caida", "buraco"
+}
 TIPOS_UTILIDADE = {
     "utilidade",
     "utilidade_clima",
@@ -45,8 +49,7 @@ TIPOS_UTILIDADE = {
 }
 TIPOS_BLOQUEADOS_LEGADO = {
     "radar", "radar_fixo", "radar_40", "radar_50", "radar_60",
-    "camera_semaforo", "semaforo", "lombada", "buraco", "acidente",
-    "transito", "policia", "comercio", "batalhao_pm", "delegacia",
+    "camera_semaforo", "lombada", "comercio", "batalhao_pm", "delegacia",
     "guarda_municipal", "prf",
 }
 
@@ -72,6 +75,8 @@ def inferir_pilar(tipo):
         return "pet"
     if t in TIPOS_SEGURANCA:
         return "seguranca"
+    if t in TIPOS_TRANSITO or t.startswith("transito") or "seguro" in t or "policia" in t or "bloque" in t:
+        return "transito"
     if t in TIPOS_UTILIDADE or t.startswith("utilidade"):
         return "utilidade"
     return "legado"
@@ -304,7 +309,7 @@ def baixar_apk():
         os.path.dirname(apk_path),
         os.path.basename(apk_path),
         as_attachment=True,
-        download_name="Alerta_Urbano_v3.6.4_Cascavel.apk",
+        download_name="Alerta_Urbano_v3.6.5_Cascavel.apk",
         mimetype="application/vnd.android.package-archive",
     )
 
@@ -566,7 +571,7 @@ def listar_alertas():
 
     params = [cidade]
     pilar_clause = ""
-    if pilar in ("pet", "seguranca", "utilidade"):
+    if pilar in ("pet", "seguranca", "utilidade", "transito"):
         pilar_clause = " AND pilar = ?"
         params.append(pilar)
 
@@ -577,12 +582,13 @@ def listar_alertas():
         SELECT * FROM alertas
         WHERE ativo = 1
           AND LOWER(COALESCE(cidade, 'Cascavel')) = LOWER(?)
-          AND pilar IN ('pet', 'seguranca', 'utilidade')
+          AND pilar IN ('pet', 'seguranca', 'utilidade', 'transito')
           {pilar_clause}
           {sigiloso_clause}
           AND (
             pilar = 'pet'
             OR (pilar IN ('seguranca', 'utilidade') AND datetime(created_at, '+48 hours') >= datetime('now', 'localtime'))
+            OR (pilar = 'transito' AND datetime(created_at, '+24 hours') >= datetime('now', 'localtime'))
           )
         ORDER BY
             CASE WHEN tipo = 'utilidade_clima' THEN 0 ELSE 1 END,
@@ -641,9 +647,9 @@ def criar_alerta():
             "error": "Categoria descontinuada na versão 3.0. O Alerta Urbano foca exclusivamente em Pets, Segurança Oficial e Utilidade Pública."
         }), 400
 
-    if not eh_robo_autorizado and pilar != "pet":
+    if not eh_robo_autorizado and pilar not in ("pet", "transito"):
         return jsonify({
-            "error": "Acesso restrito: alertas de Segurança e Utilidade Pública são alimentados exclusivamente por fontes oficiais e imprensa."
+            "error": "Acesso restrito: alertas de Segurança são alimentados exclusivamente por fontes oficiais e imprensa."
         }), 403
 
     lat = data.get("lat")
@@ -656,6 +662,8 @@ def criar_alerta():
     elif tipo == "pet_adocao": titulo_padrao = "Pet para Adoção"
     elif tipo == "pet_sos_rua": titulo_padrao = "Animal em Risco (Socorro Urgente)"
     elif tipo == "pet_denuncia_maustratos": titulo_padrao = "Denúncia de Maus-Tratos"
+    elif tipo == "ponto_seguro": titulo_padrao = "Ponto Seguro • Policiamento Presente"
+    elif tipo == "via_bloqueada": titulo_padrao = "Trânsito • Via Bloqueada"
 
     titulo = (data.get("titulo") or titulo_padrao).strip()[:120]
     descricao = (data.get("descricao") or "").strip()[:600]
