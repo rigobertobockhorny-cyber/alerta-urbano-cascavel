@@ -189,17 +189,18 @@
       letter-spacing: 1.2px;
     }
     .splash-btn-entrar {
-      margin-top: 10px;
-      background: #009B3A;
+      margin-top: 14px;
+      background: #000000; /* Botão Preto 99 de Alto Impacto */
       color: #FFFFFF;
-      font-size: 13px;
-      font-weight: 800;
-      padding: 10px 24px;
+      font-size: 14.5px;
+      font-weight: 900;
+      letter-spacing: 0.9px;
+      padding: 13px 32px;
       border-radius: 999px;
-      border: none;
+      border: 2px solid #000000;
       cursor: pointer;
-      box-shadow: 0 4px 14px rgba(0, 155, 58, 0.4);
-      transition: transform 0.15s ease;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+      transition: transform 0.15s ease, background 0.15s ease;
     }
     .splash-btn-entrar:active { transform: scale(0.96); }
     .splash-subtext {
@@ -5325,10 +5326,9 @@
       // Atualiza automaticamente a cada 60s
       setInterval(carregarDados, 60000);
 
-      // Splash Cívica Brasil 2.5s com transição suave
-      setTimeout(() => {
-        fecharSplashImediato();
-      }, 2500);
+      // Splash Cívica Brasil: Permanece TRAVADA na tela inicial de boas-vindas
+      // até que o usuário clique intencionalmente no botão [ENTRAR NO APP ›] (Ordem do Rigo).
+      // Zero fechamento automático por timer!
     });
   </script>
 
