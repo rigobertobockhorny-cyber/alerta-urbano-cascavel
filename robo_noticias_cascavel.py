@@ -31,6 +31,22 @@ CIDADE_PADRAO = "Cascavel"
 # Dicionário de Bairros e Vias de Cascavel - PR com Coordenadas Base
 COORDENADAS_CASCAVEL = {
     "centro": (-24.9555, -53.4550),
+    "brasília": (-24.9350, -53.4150),
+    "brasilia": (-24.9350, -53.4150),
+    "jardim brasília": (-24.9350, -53.4150),
+    "canadá": (-24.9320, -53.4580),
+    "canada": (-24.9320, -53.4580),
+    "são salvador": (-24.9080, -53.4420),
+    "sao salvador": (-24.9080, -53.4420),
+    "cidade verde": (-24.9750, -53.5150),
+    "itália": (-24.9820, -53.4650),
+    "italia": (-24.9820, -53.4650),
+    "gramado": (-24.9050, -53.4350),
+    "jardim montovani": (-24.9710, -53.4880),
+    "região do lago": (-24.9450, -53.4350),
+    "santo inácio": (-24.9620, -53.4890),
+    "santo inacio": (-24.9620, -53.4890),
+
     "brasmadeira": (-24.9120, -53.4350),
     "santa cruz": (-24.9650, -53.5050),
     "cascavel velho": (-24.9780, -53.4280),
@@ -93,8 +109,7 @@ OUTRAS_CIDADES = [
     "marechal candido", "corbélia", "corbelia", "cafelândia", "cafelandia",
     "medianeira", "matelândia", "matelandia", "são miguel do iguaçu",
     "rio grande do sul", "santa catarina", "são paulo", "sao paulo",
-    "rio de janeiro", "minas gerais", "bahia", "brasília", "brasilia",
-    "tupanciretã", "porto alegre", "florianópolis", "joinville",
+    "rio de janeiro", "minas gerais", "bahia",     "tupanciretã", "porto alegre", "florianópolis", "joinville",
 ]
 
 ESTADOS_FORA_PR = [" rs", " sp", " sc", " rj", " mg", " ba", " go", " ms", " mt", "sp:", "rs:", "rj:"]
