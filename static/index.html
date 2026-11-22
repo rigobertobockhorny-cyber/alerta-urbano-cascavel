@@ -2652,7 +2652,7 @@
             <span>Desaparecidos</span>
           </button>
           <button type="button" class="pillar-tab" id="btn-pillar-avistados" onclick="alternarPilarPet('avistados')">
-            <span>Avistados na Rua</span>
+            <span>Animal Avistado</span>
           </button>
           <button type="button" class="pillar-tab" id="btn-pillar-adocao" onclick="alternarPilarPet('adocao')">
             <span>Para Adoção</span>
@@ -3818,7 +3818,7 @@
           topBarText = 'ADOÇÃO RESPONSÁVEL';
         } else if (av) {
           topBarColor = '#d97706'; // Amarelo/Âmbar para Avistado
-          topBarText = 'ANIMAL AVISTADO NA RUA';
+          topBarText = 'ANIMAL AVISTADO';
         }
 
         // Autor e Subtítulo neutro
@@ -3841,6 +3841,11 @@
           : `<div class="pet-card-media" style="display:flex;align-items:center;justify-content:center;background:#18181b;color:#71717a;" onclick="abrirDetalheById(${p.id})">
                <svg width="44" height="44" viewBox="0 0 24 24" fill="currentColor" opacity="0.4"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
              </div>`;
+
+        let petNomeExibicao = p.titulo || 'Animal Avistado';
+        if (av && petNomeExibicao.toLowerCase().includes('desaparecido')) {
+          petNomeExibicao = 'Animal Avistado';
+        }
 
         // Tags do Pet (monocromáticas em texto limpo)
         const tagList = [
@@ -3928,7 +3933,7 @@
 
             <!-- Conteúdo: Nome, Tags e Descrição -->
             <div class="pet-card-content" onclick="abrirDetalheById(${p.id})">
-              <div class="pet-card-pet-name">${escapeHtml(p.titulo)}</div>
+              <div class="pet-card-pet-name">${escapeHtml(petNomeExibicao)}</div>
               ${tagsHtml}
               <div class="pet-card-desc">${escapeHtml(p.descricao || 'Sem descrição adicional informada.')}</div>
             </div>
