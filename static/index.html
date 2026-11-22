@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR" data-theme="dark">
+<html lang="pt-BR" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
@@ -62,24 +62,29 @@
       --bg: #f8fafc;
       --bg-elevated: #ffffff;
       --bg-subtle: #f1f5f9;
-      --bg-glass: rgba(255, 255, 255, 0.92);
+      --bg-glass: rgba(255, 255, 255, 0.95);
       --border: rgba(15, 23, 42, 0.08);
-      --border-strong: rgba(15, 23, 42, 0.14);
+      --border-strong: rgba(15, 23, 42, 0.16);
       --text: #0f172a;
-      --text-muted: #475569;
+      --text-muted: #64748b;
       --text-dim: #94a3b8;
 
-      --accent-pet: #d97706;
-      --accent-pet-bg: rgba(217, 119, 6, 0.11);
+      --accent-brand: #059669;
+      --accent-brand-soft: #10b981;
+      --accent-brand-bg: rgba(5, 150, 105, 0.08);
+      --accent-brand-glow: rgba(5, 150, 105, 0.2);
+
+      --accent-pet: #059669;
+      --accent-pet-bg: rgba(5, 150, 105, 0.08);
       --accent-seg: #e11d48;
-      --accent-seg-bg: rgba(225, 29, 72, 0.10);
+      --accent-seg-bg: rgba(225, 29, 72, 0.08);
       --accent-uti: #0284c7;
-      --accent-uti-bg: rgba(2, 132, 199, 0.10);
+      --accent-uti-bg: rgba(2, 132, 199, 0.08);
       --accent-ok: #059669;
-      --accent-ok-bg: rgba(5, 150, 105, 0.10);
+      --accent-ok-bg: rgba(5, 150, 105, 0.08);
       --brand-red: #dc2626;
-      --shadow: 0 10px 28px rgba(15, 23, 42, 0.10);
-      --shadow-sm: 0 3px 10px rgba(15, 23, 42, 0.06);
+      --shadow: 0 4px 20px rgba(15, 23, 42, 0.06);
+      --shadow-sm: 0 2px 8px rgba(15, 23, 42, 0.04);
     }
 
     * {
@@ -1834,12 +1839,12 @@
 
     /* ==================== NOVO GRUPO DE NAVEGAÇÃO EM LINHAS COM CHEVRON (›) ==================== */
     .pet-nav-card {
-      background: #111114;
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
       border-radius: 18px;
       overflow: hidden;
       margin-bottom: 16px;
-      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.3);
+      box-shadow: var(--shadow-sm);
       width: 100%;
       max-width: 580px;
       margin-left: auto;
@@ -1849,8 +1854,8 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 13px 15px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 13px 16px;
+      border-bottom: 1px solid var(--border);
       cursor: pointer;
       transition: background 0.15s ease;
       -webkit-tap-highlight-color: transparent;
@@ -1868,33 +1873,14 @@
       min-width: 0;
     }
     .pet-nav-icon {
-      width: 38px;
-      height: 38px;
-      border-radius: 11px;
+      width: 26px;
+      height: 26px;
       display: flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
-    }
-    .pet-nav-icon.red {
-      background: rgba(239, 68, 68, 0.14);
-      color: #ef4444;
-      border: 1px solid rgba(239, 68, 68, 0.25);
-    }
-    .pet-nav-icon.amber {
-      background: rgba(245, 158, 11, 0.14);
-      color: #f59e0b;
-      border: 1px solid rgba(245, 158, 11, 0.25);
-    }
-    .pet-nav-icon.green {
-      background: rgba(16, 185, 129, 0.14);
-      color: #10b981;
-      border: 1px solid rgba(16, 185, 129, 0.25);
-    }
-    .pet-nav-icon.purple {
-      background: rgba(168, 85, 247, 0.14);
-      color: #a855f7;
-      border: 1px solid rgba(168, 85, 247, 0.25);
+      color: var(--text-muted);
+      opacity: 0.85;
     }
     .pet-nav-text {
       display: flex;
@@ -1904,13 +1890,13 @@
     .pet-nav-title {
       font-size: 13.5px;
       font-weight: 800;
-      color: #ffffff;
+      color: var(--text);
       line-height: 1.25;
       letter-spacing: -0.1px;
     }
     .pet-nav-sub {
-      font-size: 11px;
-      color: #8e8e93;
+      font-size: 11.5px;
+      color: var(--text-muted);
       margin-top: 2px;
       line-height: 1.25;
       white-space: nowrap;
@@ -1927,8 +1913,8 @@
 
     /* ==================== NOVO CARD SOCIAL DE PETS (PADRÃO ALERTA URBANO) ==================== */
     .pet-card {
-      background: #111114;
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
       border-radius: 18px;
       overflow: hidden;
       margin-bottom: 16px;
@@ -1936,13 +1922,16 @@
       flex-direction: column !important;
       padding: 0 !important;
       gap: 0 !important;
-      transition: border-color 0.2s, transform 0.15s;
-      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35);
+      transition: border-color 0.2s, box-shadow 0.2s;
+      box-shadow: var(--shadow-sm);
       cursor: default;
       width: 100%;
       max-width: 580px;
       margin-left: auto;
       margin-right: auto;
+    }
+    .pet-card:hover {
+      border-color: var(--accent-brand-soft);
     }
     .pet-card:hover {
       border-color: rgba(16, 185, 129, 0.3);
@@ -1976,7 +1965,7 @@
     .pet-card-author-name {
       font-size: 13.5px;
       font-weight: 700;
-      color: #f4f4f5;
+      color: var(--text);
       line-height: 1.2;
       white-space: nowrap;
       overflow: hidden;
@@ -1984,7 +1973,7 @@
     }
     .pet-card-author-sub {
       font-size: 11px;
-      color: #71717a;
+      color: var(--text-muted);
       margin-top: 2px;
     }
     .pet-card-dots-btn {
@@ -2069,7 +2058,7 @@
     .pet-card-pet-name {
       font-size: 16px;
       font-weight: 800;
-      color: #ffffff;
+      color: var(--text);
       line-height: 1.25;
     }
     .pet-card-pills-row {
@@ -2084,13 +2073,13 @@
       font-weight: 700;
       padding: 3px 8px;
       border-radius: 6px;
-      background: rgba(255, 255, 255, 0.06);
-      color: #d4d4d8;
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: var(--bg-subtle);
+      color: var(--text-muted);
+      border: 1px solid var(--border);
     }
     .pet-card-desc {
       font-size: 12.5px;
-      color: #a1a1aa;
+      color: var(--text-muted);
       line-height: 1.45;
       margin-top: 4px;
     }
@@ -2099,7 +2088,7 @@
       align-items: center;
       justify-content: space-between;
       padding: 8px 14px 10px;
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      border-top: 1px solid var(--border);
       margin-top: 8px;
     }
     .pet-social-left {
@@ -2133,53 +2122,48 @@
       stroke: #10b981;
     }
     .pet-card-action-btns {
-      display: flex;
-      gap: 8px;
-      padding: 0 14px 14px;
+      display: grid !important;
+      grid-template-columns: 1fr 1fr !important;
+      gap: 8px !important;
+      padding: 0 14px 14px !important;
     }
     .btn-pet-cta-primary {
-      flex: 1;
-      background: #10b981;
-      color: #09090b;
-      font-weight: 800;
-      font-size: 13px;
-      padding: 10px 14px;
-      border-radius: 12px;
-      border: none;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 7px;
-      cursor: pointer;
-      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
-      text-decoration: none;
-      transition: background 0.15s, transform 0.15s;
-    }
-    .btn-pet-cta-primary:active {
-      background: #34d399;
-      transform: scale(0.985);
+      background: var(--accent-brand-soft) !important;
+      color: #ffffff !important;
+      font-weight: 800 !important;
+      font-size: 12.5px !important;
+      padding: 11px 10px !important;
+      border-radius: 12px !important;
+      border: none !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      gap: 6px !important;
+      cursor: pointer !important;
+      box-shadow: 0 2px 10px rgba(5, 150, 105, 0.25) !important;
+      text-decoration: none !important;
+      text-align: center !important;
+      width: 100% !important;
     }
     .btn-pet-cta-secondary {
-      background: rgba(255, 255, 255, 0.06);
-      color: #f4f4f5;
-      font-weight: 700;
-      font-size: 12.5px;
-      padding: 10px 14px;
-      border-radius: 12px;
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      text-decoration: none;
-      transition: background 0.15s;
-    }
-    .btn-pet-cta-secondary:active {
-      background: rgba(255, 255, 255, 0.12);
+      background: var(--bg-subtle) !important;
+      color: var(--text) !important;
+      font-weight: 700 !important;
+      font-size: 12px !important;
+      padding: 11px 10px !important;
+      border-radius: 12px !important;
+      border: 1px solid var(--border) !important;
+      cursor: pointer !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      gap: 6px !important;
+      text-decoration: none !important;
+      text-align: center !important;
+      width: 100% !important;
     }
 
-    /* Modal Sheet de Ações do Card (3 Pontinhos) */
+        /* Modal Sheet de Ações do Card (3 Pontinhos com Botões Reais) */
     .pet-sheet-overlay {
       position: fixed;
       inset: 0;
@@ -2189,53 +2173,65 @@
       display: none;
       align-items: flex-end;
       justify-content: center;
-      padding: 12px;
+      padding: 14px;
     }
     .pet-sheet-box {
       width: 100%;
       max-width: 440px;
-      background: #18181b;
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 20px;
-      overflow: hidden;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-strong);
+      border-radius: 22px;
+      padding: 16px;
       animation: slideUpSheet 0.25s ease-out;
-    }
-    @keyframes slideUpSheet {
-      from { transform: translateY(100%); }
-      to { transform: translateY(0); }
+      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
     }
     .pet-sheet-header {
-      padding: 14px 18px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 4px 6px 14px;
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--text);
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 12px;
+    }
+    .pet-sheet-btn {
+      width: 100%;
+      background: var(--bg-subtle);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 12px 14px;
+      margin-bottom: 8px;
+      cursor: pointer;
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      transition: background 0.15s;
+    }
+    .pet-sheet-btn:active {
+      background: var(--border-strong);
+    }
+    .pet-sheet-btn-title {
       font-size: 13.5px;
       font-weight: 800;
-      color: #ffffff;
+      color: var(--text);
     }
-    .pet-sheet-item {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 13px 18px;
-      font-size: 13.5px;
-      font-weight: 600;
-      color: #e4e4e7;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-      cursor: pointer;
+    .pet-sheet-btn-sub {
+      font-size: 11px;
+      color: var(--text-muted);
     }
-    .pet-sheet-item:active {
-      background: rgba(255, 255, 255, 0.06);
-    }
-    .pet-sheet-item.danger {
+    .pet-sheet-btn.danger .pet-sheet-btn-title {
       color: #ef4444;
     }
-    .pet-sheet-cancel {
-      padding: 14px;
+    .pet-sheet-btn.cancel {
       text-align: center;
-      font-size: 13.5px;
-      font-weight: 800;
-      color: #a1a1aa;
-      cursor: pointer;
-      background: rgba(255, 255, 255, 0.03);
+      background: transparent;
+      border-color: transparent;
+      margin-top: 4px;
+      align-items: center;
+    }
+    .pet-sheet-btn.cancel .pet-sheet-btn-title {
+      color: var(--text-muted);
     }
     
     /* Modal de Foto em Tela Cheia */
@@ -3159,7 +3155,7 @@
     };
 
     let state = {
-      theme: localStorage.getItem('au_theme') || 'dark',
+      theme: localStorage.getItem('au_theme') || 'light',
       tab: 'inicio',
       alertas: [],
       clima: null,
@@ -3689,8 +3685,8 @@
         if (pilarAtivo === 'adocao') {
           el.innerHTML = `<div class="empty-box" style="padding:28px 16px; text-align:center;">
             <div style="font-size:32px; margin-bottom:10px;">🐾</div>
-            <div style="font-size:15px; font-weight:800; color:#ffffff; margin-bottom:6px;">Nenhum pet para adoção nesta categoria</div>
-            <div style="font-size:12px; color:#8e8e93; max-width:280px; margin:0 auto 16px;">Seja o primeiro a divulgar um animal resgatado para ganhar um lar amoroso em Cascavel.</div>
+            <div style="font-size:15px; font-weight:800; color:var(--text); margin-bottom:6px;">Nenhum pet para adoção nesta categoria</div>
+            <div style="font-size:12px; color:var(--text-muted); max-width:280px; margin:0 auto 16px;">Seja o primeiro a divulgar um animal resgatado para ganhar um lar amoroso em Cascavel.</div>
             <button type="button" class="btn-pet-cta-primary" style="max-width:240px; margin:0 auto;" onclick="abrirModalPet('pet_adocao')">
               + Cadastrar Pet para Adoção
             </button>
@@ -3698,8 +3694,8 @@
         } else if (pilarAtivo === 'sos') {
           el.innerHTML = `<div class="empty-box" style="padding:28px 16px; text-align:center;">
             <div style="font-size:32px; margin-bottom:10px;">🛡️</div>
-            <div style="font-size:15px; font-weight:800; color:#ffffff; margin-bottom:6px;">Nenhum animal em risco na rua no momento</div>
-            <div style="font-size:12px; color:#8e8e93; max-width:300px; margin:0 auto 16px;">Denúncias sigilosas de maus-tratos em residências são enviadas com protocolo oficial à SEMA.</div>
+            <div style="font-size:15px; font-weight:800; color:var(--text); margin-bottom:6px;">Nenhum animal em risco na rua no momento</div>
+            <div style="font-size:12px; color:var(--text-muted); max-width:300px; margin:0 auto 16px;">Denúncias sigilosas de maus-tratos em residências são enviadas com protocolo oficial à SEMA.</div>
             <button type="button" class="btn-pet-cta-primary" style="max-width:260px; margin:0 auto; background:#ef4444; color:#ffffff;" onclick="abrirModalPet('pet_denuncia_maustratos')">
               Registrar Denúncia Sigilosa
             </button>
@@ -3707,8 +3703,8 @@
         } else {
           el.innerHTML = `<div class="empty-box" style="padding:28px 16px; text-align:center;">
             <div style="font-size:32px; margin-bottom:10px;">🔍</div>
-            <div style="font-size:15px; font-weight:800; color:#ffffff; margin-bottom:6px;">Nenhum pet desaparecido nesta categoria</div>
-            <div style="font-size:12px; color:#8e8e93; max-width:280px; margin:0 auto 16px;">Cadastre o desaparecimento do seu animal para alertar a rede de motoristas e cidadãos de Cascavel.</div>
+            <div style="font-size:15px; font-weight:800; color:var(--text); margin-bottom:6px;">Nenhum pet desaparecido nesta categoria</div>
+            <div style="font-size:12px; color:var(--text-muted); max-width:280px; margin:0 auto 16px;">Cadastre o sumiço do seu animal para alertar a rede de motoristas e cidadãos de Cascavel.</div>
             <button type="button" class="btn-pet-cta-primary" style="max-width:250px; margin:0 auto;" onclick="abrirModalPet('pet_perdido')">
               + Registrar Pet Desaparecido
             </button>
@@ -3717,7 +3713,6 @@
         return;
       }
 
-      // Recupera curtidas do usuário no localStorage
       let curtidos = [];
       try { curtidos = JSON.parse(localStorage.getItem('alerta_pets_curtidos') || '[]'); } catch(e) {}
 
@@ -3729,62 +3724,54 @@
         const distTxt = (state.userLat && state.userLng) ? formatarDistancia(calcularDistanciaM(state.userLat, state.userLng, p.lat, p.lng)) : '';
         const isLiked = curtidos.includes(p.id);
 
-        // Autor e Avatar
+        // Autor e Subtítulo neutro (sem propaganda de marca da imprensa)
         let autorNome = p.autor_nome || 'Tutor em Cascavel';
         let autorSub = (p.bairro || 'Cascavel') + ' • ' + tempoRelativo(p.created_at);
         let autorLetra = 'T';
         if (ehImprensa) {
-          autorNome = p.fonte_nome ? (p.fonte_nome + ' (Imprensa)') : 'Imprensa de Cascavel';
-          autorLetra = 'I';
+          autorNome = 'Imprensa Local';
+          autorLetra = '📰';
         } else if (p.autor_nome) {
           autorLetra = p.autor_nome.charAt(0).toUpperCase();
         }
 
-        // Imagem do Pet com Zoom
+        // Status limpo no texto (sem pílula vermelha em cima da foto)
+        let statusBadgeTxt = 'Desaparecido';
+        if (ehAdocao) statusBadgeTxt = 'Adoção Responsável';
+        else if (ehSos) statusBadgeTxt = 'Socorro Urgente';
+        else if (av) statusBadgeTxt = 'Avistado na Rua';
+
+        // Foto limpa 100% visível sem etiquetas cobrindo
         const mediaHtml = p.foto_url
           ? `<div class="pet-card-media" onclick="abrirFotoZoom('${escapeAttr(p.foto_url)}', '${escapeAttr(p.titulo)}')">
                <img src="${escapeAttr(p.foto_url)}" alt="${escapeAttr(p.titulo)}" loading="lazy">
-               ${ehAdocao
-                 ? `<div class="pet-card-media-badge adocao">Adoção Responsável</div>`
-                 : (ehSos
-                     ? `<div class="pet-card-media-badge sos">Socorro Urgente</div>`
-                     : (av
-                         ? `<div class="pet-card-media-badge avistado">Avistado na Rua</div>`
-                         : `<div class="pet-card-media-badge desaparecido">Desaparecido</div>`))}
                ${distTxt ? `<div class="pet-card-dist-badge">${distTxt}</div>` : ''}
              </div>`
-          : `<div class="pet-card-media" style="display:flex;align-items:center;justify-content:center;background:#18181b;color:#71717a;" onclick="abrirDetalheById(${p.id})">
+          : `<div class="pet-card-media" style="display:flex;align-items:center;justify-content:center;background:var(--bg-subtle);color:var(--text-muted);" onclick="abrirDetalheById(${p.id})">
                <svg width="44" height="44" viewBox="0 0 24 24" fill="currentColor" opacity="0.4"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
-               ${ehAdocao
-                 ? `<div class="pet-card-media-badge adocao">Adoção Responsável</div>`
-                 : (ehSos
-                     ? `<div class="pet-card-media-badge sos">Socorro Urgente</div>`
-                     : (av
-                         ? `<div class="pet-card-media-badge avistado">Avistado na Rua</div>`
-                         : `<div class="pet-card-media-badge desaparecido">Desaparecido</div>`))}
              </div>`;
 
         // Tags do Pet
         const tagList = [
+          statusBadgeTxt,
           p.especie || 'Pet',
           p.porte ? `Porte ${p.porte}` : '',
           p.sexo && p.sexo !== 'Indefinido' ? p.sexo : '',
           p.castrado ? 'Castrado' : '',
-          p.vacinado ? 'Vacinado' : '',
-          p.recompensa ? `Recompensa: ${p.recompensa}` : ''
+          p.vacinado ? 'Vacinado' : ''
         ].filter(Boolean);
 
         const tagsHtml = tagList.length
           ? `<div class="pet-card-pills-row">${tagList.map(t => `<span class="pet-card-pill">${escapeHtml(t)}</span>`).join('')}</div>`
           : '';
 
-        // Botões de Ação por Caso
+        // Botões de Ação com largura 50% / 50% idêntica
         let actionButtonsHtml = '';
         if (ehAdocao) {
           actionButtonsHtml = `
             <div class="pet-card-action-btns">
               <button type="button" class="btn-pet-cta-primary" onclick="abrirContatoAdocao(${p.id})">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
                 <span>Quero Adotar</span>
               </button>
               <button type="button" class="btn-pet-cta-secondary" onclick="abrirDetalheById(${p.id})">
@@ -3795,9 +3782,9 @@
         } else if (ehSos) {
           actionButtonsHtml = `
             <div class="pet-card-action-btns">
-              <button type="button" class="btn-pet-cta-primary" style="background:#ef4444; color:#ffffff;" onclick="focarNoMapa(${p.lat}, ${p.lng})">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                <span>Ver Local no Mapa</span>
+              <button type="button" class="btn-pet-cta-primary" style="background:#ef4444 !important;" onclick="focarNoMapa(${p.lat}, ${p.lng})">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                <span>Ver no Mapa</span>
               </button>
               <button type="button" class="btn-pet-cta-secondary" onclick="abrirModalAvistamento(${p.id}, false, 'resgatado')">
                 <span>Resgatei</span>
@@ -3805,22 +3792,24 @@
             </div>
           `;
         } else {
-          // Desaparecidos
-          if (ehImprensa) {
+          // Desaparecidos: 50% Marcar Onde Vi e 50% Ver Matéria Completa
+          if (ehImprensa && p.link_noticia) {
             actionButtonsHtml = `
               <div class="pet-card-action-btns">
                 <button type="button" class="btn-pet-cta-primary" onclick="abrirModalAvistamento(${p.id}, true, 'avistamento')">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
                   <span>Marcar Onde Vi</span>
                 </button>
-                ${p.link_noticia ? `<a href="${escapeAttr(p.link_noticia)}" target="_blank" class="btn-pet-cta-secondary">Notícia no CGN ↗</a>` : ''}
+                <button type="button" class="btn-pet-cta-secondary" onclick="abrirNoticiaExterna('${escapeAttr(p.link_noticia)}', '${escapeAttr(p.titulo)}', event)">
+                  <span>Ver Matéria ↗</span>
+                </button>
               </div>
             `;
           } else {
             actionButtonsHtml = `
               <div class="pet-card-action-btns">
                 <button type="button" class="btn-pet-cta-primary" onclick="abrirModalAvistamento(${p.id}, false, 'avistamento')">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
                   <span>Visto Aqui</span>
                 </button>
                 <button type="button" class="btn-pet-cta-secondary" onclick="abrirModalAvistamento(${p.id}, false, 'resgatado')">
@@ -3851,7 +3840,7 @@
               </button>
             </div>
 
-            <!-- Mídia Central com Tag e Zoom -->
+            <!-- Mídia Central Limpa -->
             ${mediaHtml}
 
             <!-- Conteúdo: Nome, Tags e Descrição -->
@@ -3861,20 +3850,20 @@
               <div class="pet-card-desc">${escapeHtml(p.descricao || 'Sem descrição adicional informada.')}</div>
             </div>
 
-            <!-- Linha Social: Curtir, Comentários, Compartilhar -->
+            <!-- Linha Social: Apoiar, Detalhes, Compartilhar -->
             <div class="pet-card-social-row">
               <div class="pet-social-left">
                 <button type="button" class="btn-pet-icon ${isLiked ? 'liked' : ''}" onclick="curtirPet(${p.id}, this, event)">
-                  <svg width="17" height="17" viewBox="0 0 24 24" fill="${isLiked ? '#10b981' : 'none'}" stroke="currentColor" stroke-width="2.2">
+                  <svg width="17" height="17" viewBox="0 0 24 24" fill="${isLiked ? 'var(--accent-brand-soft)' : 'none'}" stroke="currentColor" stroke-width="2.2">
                     <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
                   </svg>
-                  <span class="like-label">${isLiked ? 'Curtido' : 'Apoiar'}</span>
+                  <span class="like-label">${isLiked ? 'Apoiado' : 'Apoiar'}</span>
                 </button>
                 <button type="button" class="btn-pet-icon" onclick="abrirDetalheById(${p.id})">
                   <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
                     <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
                   </svg>
-                  <span>${p.avistamentos_count ? p.avistamentos_count + ' avistamentos' : 'Detalhes'}</span>
+                  <span>${p.avistamentos_count ? p.avistamentos_count + ' avist.' : 'Detalhes'}</span>
                 </button>
               </div>
               <div>
@@ -3891,7 +3880,7 @@
               </div>
             </div>
 
-            <!-- Botões Principais de Ação -->
+            <!-- Botões Principais de Ação com Largura Igual -->
             ${actionButtonsHtml}
           </div>
         `;
@@ -3901,7 +3890,7 @@
     /* ==================== AÇÕES E INTERAÇÕES DO NOVO CARD DE PETS ==================== */
     let petCardAtivoId = null;
 
-    function abrirMenuPetCard(petId, event) {
+        function abrirMenuPetCard(petId, event) {
       if (event) event.stopPropagation();
       petCardAtivoId = petId;
       const pet = state.alertas.find(a => a.id === petId);
@@ -3910,32 +3899,44 @@
       const ehDono = pet.autor_token && pet.autor_token === state.autorToken;
       const titleEl = document.getElementById('pet-sheet-title');
       const actionsEl = document.getElementById('pet-sheet-actions');
-      if (titleEl) titleEl.innerText = `Opções • ${pet.titulo || 'Pet'}`;
+      if (titleEl) titleEl.innerText = `Opções da Publicação • ${pet.titulo || 'Pet'}`;
 
       if (actionsEl) {
         if (ehDono) {
           actionsEl.innerHTML = `
-            <div class="pet-sheet-item" onclick="marcarPetResolvido(${petId})">
-              <span>🐾 Marcar como Encontrado / Resolvido</span>
-            </div>
-            <div class="pet-sheet-item" onclick="abrirEditarPet(${petId})">
-              <span>✏️ Editar Informações</span>
-            </div>
-            <div class="pet-sheet-item danger" onclick="excluirPetCard(${petId})">
-              <span>🗑️ Excluir Publicação</span>
-            </div>
+            <button type="button" class="pet-sheet-btn" onclick="marcarPetResolvido(${petId})">
+              <div class="pet-sheet-btn-title">🐾 Marcar como Encontrado / Resolvido</div>
+              <div class="pet-sheet-btn-sub">Finalizar este alerta com sucesso na comunidade</div>
+            </button>
+            <button type="button" class="pet-sheet-btn" onclick="abrirEditarPet(${petId})">
+              <div class="pet-sheet-btn-title">✏️ Editar Informações</div>
+              <div class="pet-sheet-btn-sub">Atualizar telefone, detalhes ou foto</div>
+            </button>
+            <button type="button" class="pet-sheet-btn danger" onclick="excluirPetCard(${petId})">
+              <div class="pet-sheet-btn-title">🗑️ Excluir Publicação</div>
+              <div class="pet-sheet-btn-sub">Remover este anúncio permanentemente</div>
+            </button>
+            <button type="button" class="pet-sheet-btn cancel" onclick="fecharMenuPetCard()">
+              <div class="pet-sheet-btn-title">Cancelar</div>
+            </button>
           `;
         } else {
           actionsEl.innerHTML = `
-            <div class="pet-sheet-item" onclick="compartilharPet(${petId})">
-              <span>↗️ Compartilhar este Pet</span>
-            </div>
-            <div class="pet-sheet-item danger" onclick="denunciarPetCard(${petId})">
-              <span>🚨 Denunciar Conteúdo Censurável (Análise em 24h)</span>
-            </div>
-            <div class="pet-sheet-item danger" onclick="bloquearAutorPet(${petId})">
-              <span>🚫 Bloquear Publicações deste Usuário</span>
-            </div>
+            <button type="button" class="pet-sheet-btn" onclick="compartilharPet(${petId})">
+              <div class="pet-sheet-btn-title">↗️ Compartilhar Publicação</div>
+              <div class="pet-sheet-btn-sub">Divulgue este caso no WhatsApp e redes sociais</div>
+            </button>
+            <button type="button" class="pet-sheet-btn" onclick="denunciarPetCard(${petId})">
+              <div class="pet-sheet-btn-title">🚨 Denunciar Conteúdo Sensível</div>
+              <div class="pet-sheet-btn-sub">Relate fotos impróprias, golpes ou dados falsos</div>
+            </button>
+            <button type="button" class="pet-sheet-btn danger" onclick="bloquearAutorPet(${petId})">
+              <div class="pet-sheet-btn-title">🚫 Bloquear Usuário</div>
+              <div class="pet-sheet-btn-sub">Ocultar publicações deste autor no seu aplicativo</div>
+            </button>
+            <button type="button" class="pet-sheet-btn cancel" onclick="fecharMenuPetCard()">
+              <div class="pet-sheet-btn-title">Cancelar</div>
+            </button>
           `;
         }
       }
@@ -3991,6 +3992,34 @@
       if (img) img.src = url;
       if (titleEl) titleEl.innerText = title || 'Visualização do Animal';
       if (modal) modal.style.display = 'flex';
+    }
+
+    
+    let urlNoticiaAtual = '';
+    function abrirNoticiaExterna(url, titulo, event) {
+      if (event) event.stopPropagation();
+      if (!url) return;
+      urlNoticiaAtual = url;
+      const modal = document.getElementById('modal-leitor-noticia');
+      const iframe = document.getElementById('iframe-noticia-externa');
+      const titleEl = document.getElementById('leitor-noticia-titulo');
+      if (iframe) iframe.src = url;
+      if (titleEl) titleEl.innerText = titulo || 'Matéria da Imprensa Local';
+      if (modal) modal.classList.add('open');
+    }
+
+    function fecharLeitorNoticia() {
+      const modal = document.getElementById('modal-leitor-noticia');
+      const iframe = document.getElementById('iframe-noticia-externa');
+      if (iframe) iframe.src = 'about:blank';
+      if (modal) modal.classList.remove('open');
+      urlNoticiaAtual = '';
+    }
+
+    function abrirNoNavegadorExterno() {
+      if (urlNoticiaAtual) {
+        window.open(urlNoticiaAtual, '_blank');
+      }
     }
 
     function fecharFotoZoom() {
@@ -5111,6 +5140,22 @@
     <button class="photo-zoom-close" onclick="fecharFotoZoom()">&times;</button>
     <img id="photo-zoom-img" class="photo-zoom-img" src="" alt="Foto expandida">
     <div id="photo-zoom-title" class="photo-zoom-title"></div>
+  </div>
+
+
+  <!-- Modal Leitor de Notícia da Imprensa Local (In-App Viewer sem fechar o app) -->
+  <div class="full-screen-view" id="modal-leitor-noticia" style="z-index:10002;">
+    <div class="fs-header" style="background:var(--bg-elevated); border-bottom:1px solid var(--border);">
+      <button type="button" class="fs-back" onclick="fecharLeitorNoticia()">‹ Voltar ao App</button>
+      <div style="text-align:center; min-width:0; padding:0 8px;">
+        <div style="font-size:14px; font-weight:800; color:var(--text); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;" id="leitor-noticia-titulo">Matéria da Imprensa Local</div>
+        <div style="font-size:10px; color:var(--text-muted);">Conteúdo externo de utilidade pública</div>
+      </div>
+      <button type="button" class="btn-slim" onclick="abrirNoNavegadorExterno()" style="font-size:11px;">Navegador ↗</button>
+    </div>
+    <div class="fs-body" style="padding:0; overflow:hidden; display:flex; flex-direction:column; height:calc(100% - 54px);">
+      <iframe id="iframe-noticia-externa" src="" style="width:100%; height:100%; border:none; background:var(--bg);" loading="lazy"></iframe>
+    </div>
   </div>
 
 </body>
