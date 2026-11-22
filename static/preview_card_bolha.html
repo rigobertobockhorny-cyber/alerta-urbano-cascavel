@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Simulação Card Bolha Flutuante no Topo (v3.6.3)</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #111827;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+    /* Moldura Celular Motorista (Uber / 99 / Waze) */
+    .phone-screen {
+      width: 390px;
+      height: 844px;
+      background: #e2e8f0;
+      position: relative;
+      overflow: hidden;
+      border-radius: 40px;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.6);
+      border: 8px solid #27272a;
+    }
+    /* Barra de Status do Android (Hora, Bateria, Wi-Fi) */
+    .status-bar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 44px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 24px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #0f172a;
+      z-index: 1000;
+      background: rgba(255,255,255,0.4);
+      backdrop-filter: blur(8px);
+    }
+    /* Simulação de Mapa do Uber / Waze de Fundo */
+    .map-bg {
+      width: 100%;
+      height: 100%;
+      background: #eef2f6;
+      position: relative;
+    }
+    .road {
+      position: absolute;
+      background: #cbd5e1;
+    }
+    .road-h1 { top: 220px; left: 0; right: 0; height: 32px; border-top: 2px dashed #94a3b8; border-bottom: 2px dashed #94a3b8; }
+    .road-h2 { top: 520px; left: 0; right: 0; height: 48px; border-top: 3px solid #64748b; border-bottom: 3px solid #64748b; background: #e2e8f0; }
+    .road-v1 { top: 0; bottom: 0; left: 140px; width: 44px; border-left: 2px dashed #94a3b8; border-right: 2px dashed #94a3b8; }
+    .road-v2 { top: 0; bottom: 0; right: 80px; width: 36px; border-left: 2px dashed #94a3b8; border-right: 2px dashed #94a3b8; }
+    .route-line {
+      position: absolute;
+      top: 340px;
+      left: 156px;
+      width: 12px;
+      height: 280px;
+      background: #0ea5e9;
+      border-radius: 6px;
+      box-shadow: 0 0 12px rgba(14,165,233,0.6);
+    }
+    .car-marker {
+      position: absolute;
+      top: 480px;
+      left: 148px;
+      width: 28px;
+      height: 28px;
+      background: #0284c7;
+      border: 3px solid #ffffff;
+      border-radius: 50%;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      font-size: 14px;
+      font-weight: 900;
+    }
+    .map-label {
+      position: absolute;
+      font-size: 11px;
+      font-weight: 700;
+      color: #64748b;
+      letter-spacing: 0.5px;
+    }
+    .lbl-1 { top: 540px; left: 16px; }
+    .lbl-2 { top: 380px; right: 20px; }
+
+    /* BOLINHA FLUTUANTE SUSPENSA NA LATERAL */
+    .floating-bubble {
+      position: absolute;
+      top: 380px;
+      right: 14px;
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      background: #FED700;
+      border: 2px solid #000000;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 900;
+      cursor: pointer;
+    }
+    .floating-bubble img {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    /* ==================== CARD FLUTUANTE EXPANDIDO NO TOPO ==================== */
+    /* Posição Superior (y = 48px) • Largura Quase Total (366px) • Centro e Baixo 100% Livres */
+    .top-floating-card-wrap {
+      position: absolute;
+      top: 48px;
+      left: 12px;
+      right: 12px;
+      z-index: 950;
+    }
+    .top-floating-card {
+      background: #FED700; /* Amarelo Ouro Brasil */
+      border: 2px solid #000000; /* Borda Preta Sólida */
+      border-radius: 18px;
+      padding: 12px 14px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.38);
+      display: flex;
+      flex-direction: column;
+    }
+    /* Foto do Animal em formato card horizontal widescreen */
+    .card-photo {
+      width: 100%;
+      height: 125px;
+      border-radius: 12px;
+      object-fit: cover;
+      display: block;
+      margin-bottom: 8px;
+      border: 1px solid rgba(0,0,0,0.15);
+    }
+    /* Nome do Animal / Ocorrência em Preto Bold */
+    .card-title {
+      font-size: 15px;
+      font-weight: 900;
+      color: #000000;
+      text-align: center;
+      line-height: 1.2;
+      margin-bottom: 2px;
+    }
+    /* Subtítulo: Bairro e Distância */
+    .card-subtitle {
+      font-size: 11.5px;
+      font-weight: 800;
+      color: #000000;
+      opacity: 0.9;
+      text-align: center;
+      letter-spacing: 0.5px;
+      margin-bottom: 10px;
+    }
+    /* Linha 1 de Botões: Dois botões de mesmo tamanho lado a lado */
+    .card-row-buttons {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+    .btn-half {
+      flex: 1;
+      height: 38px;
+      background: #000000;
+      color: #FFFFFF;
+      font-size: 13px;
+      font-weight: 800;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.1s ease;
+    }
+    .btn-half:active { transform: scale(0.97); }
+
+    /* Linha 2 de Botão: Grandão e compridão embaixo */
+    .btn-full-bottom {
+      width: 100%;
+      height: 40px;
+      background: #000000;
+      color: #FFFFFF;
+      font-size: 13.5px;
+      font-weight: 900;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.1s ease;
+    }
+    .btn-full-bottom:active { transform: scale(0.97); }
+
+    /* Rótulo de Destaque Visual */
+    .notice-open-map {
+      position: absolute;
+      bottom: 24px;
+      left: 20px;
+      right: 20px;
+      background: rgba(0,0,0,0.85);
+      color: #ffffff;
+      padding: 10px 14px;
+      border-radius: 12px;
+      font-size: 11.5px;
+      font-weight: 700;
+      text-align: center;
+      line-height: 1.4;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="phone-screen">
+    <!-- Barra de Status Android: 100% Visível -->
+    <div class="status-bar">
+      <span>14:32</span>
+      <span>📶 4G • 94% 🔋</span>
+    </div>
+
+    <!-- Simulação do Mapa (Waze / Uber / 99) -->
+    <div class="map-bg">
+      <div class="road road-h1"></div>
+      <div class="road road-h2"></div>
+      <div class="road road-v1"></div>
+      <div class="road road-v2"></div>
+      <div class="route-line"></div>
+      <div class="car-marker">▲</div>
+      <div class="map-label lbl-1">Av. Brasil • Cascavel</div>
+      <div class="map-label lbl-2">R. São Paulo</div>
+    </div>
+
+    <!-- Bolinha Flutuante Suspensa -->
+    <div class="floating-bubble" title="Bolinha Flutuante Alerta Urbano">
+      <img src="/static/logo_bolha_pura.png?v=60" alt="Bolinha">
+    </div>
+
+    <!-- CARD FLUTUANTE REFORMULADO NO TOPO (v3.6.3) -->
+    <div class="top-floating-card-wrap">
+      <div class="top-floating-card">
+        <!-- Foto Card Widescreen Horizontal -->
+        <img src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?w=600&auto=format&fit=crop" class="card-photo" alt="Foto do Pet">
+        
+        <!-- Nome do Animal / Ocorrência (Nunca "Animal Encontrado") -->
+        <div class="card-title">Cachorro Tobi • Perdido</div>
+        
+        <!-- Bairro e Distância -->
+        <div class="card-subtitle">SÃO SALVADOR • A 180M</div>
+        
+        <!-- Linha 1 de Botões: Dois lado a lado de mesmo tamanho -->
+        <div class="card-row-buttons">
+          <button type="button" class="btn-half">Visto aqui</button>
+          <button type="button" class="btn-half">Ver no mapa</button>
+        </div>
+
+        <!-- Linha 2 de Botão: Grandão e compridão embaixo -->
+        <button type="button" class="btn-full-bottom">Fechar card</button>
+      </div>
+    </div>
+
+    <!-- Indicação visual de rota livre -->
+    <div class="notice-open-map">
+      🗺️ <b>Área do Mapa 100% Desobstruída:</b><br>
+      O motorista enxerga a rota do Uber, 99 e Waze com total visibilidade.
+    </div>
+  </div>
+
+</body>
+</html>
