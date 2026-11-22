@@ -302,7 +302,7 @@ def baixar_apk():
         os.path.dirname(apk_path),
         os.path.basename(apk_path),
         as_attachment=True,
-        download_name="Alerta_Urbano_v3.6_Cascavel.apk",
+        download_name="Alerta_Urbano_v3.6.1_Cascavel.apk",
         mimetype="application/vnd.android.package-archive",
     )
 
