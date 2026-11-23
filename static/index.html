@@ -3900,7 +3900,7 @@
   </div>
 
     <!-- MODAL DE TERMOS DE USO, PRIVACIDADE (LGPD) E TOLERÂNCIA ZERO (UGC) -->
-  <div class="full-screen-view" id="modal-termos" style="z-index:10050; background:var(--bg);">
+  <div class="full-screen-view" id="modal-termos" style="display:none; z-index:10050; background:var(--bg);">
     <div class="fs-header" style="background:#009B3A; border-bottom:none; color:#ffffff; padding:calc(env(safe-area-inset-top, 0px) + 12px) 16px 12px;">
       <button type="button" class="fs-back" style="background:#ffffff; color:#000000; font-weight:800; border-radius:12px; padding:6px 14px; border:none; box-shadow:0 2px 6px rgba(0,0,0,0.15); cursor:pointer;" onclick="fecharModal('modal-termos')">‹ Voltar</button>
       <div style="text-align:center;">
@@ -5984,7 +5984,10 @@ Baixe o aplicativo gratuito Alerta Urbano:
 
     function abrirModalTermos(aba) {
       const m = document.getElementById('modal-termos');
-      if (m) m.classList.add('open');
+      if (m) {
+        m.style.display = 'flex';
+        m.classList.add('open');
+      }
       trocarAbaTermos(aba || 'termos');
     }
 
@@ -6019,6 +6022,7 @@ Baixe o aplicativo gratuito Alerta Urbano:
     function aceitarTermosEFechar() {
       const chk = document.getElementById('cadastro-termos-check');
       if (chk) chk.checked = true;
+      try { localStorage.setItem('au_termos_aceitos', 'true'); } catch(e) {}
       fecharModal('modal-termos');
       mostrarToast('✓ Termos e Políticas aceitos!');
     }
@@ -6086,7 +6090,12 @@ Baixe o aplicativo gratuito Alerta Urbano:
 
     function fecharModal(id) {
       const el = document.getElementById(id);
-      if (el) el.classList.remove('open');
+      if (el) {
+        el.classList.remove('open');
+        if (el.classList.contains('full-screen-view')) {
+          el.style.display = 'none';
+        }
+      }
     }
 
     function mostrarToast(msg) {
