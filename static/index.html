@@ -87,13 +87,13 @@
 
     [data-theme="light"] {
       --bg: #FED700; /* Fundo Amarelo Oficial 99 */
-      --bg-elevated: #ffffff; /* Blocos e Cards em Branco Puro */
-      --bg-subtle: #ffffff; /* Sem variação de amarelo claro */
+      --bg-elevated: #F7F3EB; /* Areia Bege Nobre Suave para Cards */
+      --bg-subtle: #ECE6D8; /* Bege Neutro para Pills e Divisórias */
       --bg-glass: #FED700;
       --border: rgba(0, 0, 0, 0.15);
       --border-strong: #000000;
       --text: #000000; /* Preto sólido em alto contraste */
-      --text-muted: #000000;
+      --text-muted: #57534E;
       --text-dim: #141418;
 
       --accent-brand: #000000; /* Preto */
@@ -1976,32 +1976,48 @@
     /* ==================== NOVA ARQUITETURA MOBILE: PILARES & CONTEXTO PET ==================== */
     .pet-pillars-segmented {
       display: flex;
-      background: var(--bg-subtle);
+      background: #EBE5D8;
       border-radius: 14px;
       padding: 4px;
-      border: 1px solid var(--border);
-      margin-bottom: 12px;
+      border: 1px solid #DDD6C6;
+      margin-bottom: 14px;
       gap: 4px;
+    }
+    [data-theme="dark"] .pet-pillars-segmented {
+      background: #15171e;
+      border-color: rgba(255, 255, 255, 0.1);
     }
     .pillar-tab {
       flex: 1;
       padding: 10px 4px;
       border-radius: 10px;
-      font-size: 11.5px;
+      font-size: 11px;
       font-weight: 700;
       text-align: center;
-      color: var(--text-muted);
+      color: #57534E;
       background: transparent;
       border: none;
       cursor: pointer;
-      transition: all 0.15s ease;
-      white-space: nowrap;
+      transition: all 0.18s ease;
+      line-height: 1.25;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    [data-theme="dark"] .pillar-tab {
+      color: #94a3b8;
     }
     .pillar-tab.active {
-      background: var(--bg-elevated);
-      color: var(--text);
-      font-weight: 800;
-      box-shadow: var(--shadow-sm);
+      background: #000000 !important;
+      color: #FFFFFF !important;
+      font-weight: 900;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    }
+    [data-theme="dark"] .pillar-tab.active {
+      background: #009B3A !important;
+      color: #FFFFFF !important;
+      font-weight: 900;
+      box-shadow: 0 4px 12px rgba(0, 155, 58, 0.35);
     }
     .pet-pillar-context {
       display: flex;
@@ -2155,16 +2171,21 @@
 
     /* ==================== NOVO GRUPO DE NAVEGAÇÃO EM LINHAS COM CHEVRON (›) ==================== */
     .pet-nav-card {
-      background: var(--bg-elevated);
-      border: 1px solid var(--border);
-      border-radius: 18px;
+      background: #F7F3EB !important; /* Areia / Bege Aconchegante Nobre */
+      border: 1px solid #E5DFD1 !important;
+      border-radius: 20px !important;
       overflow: hidden;
       margin-bottom: 16px;
-      box-shadow: var(--shadow-sm);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06) !important;
       width: 100%;
       max-width: 580px;
       margin-left: auto;
       margin-right: auto;
+    }
+    [data-theme="dark"] .pet-nav-card {
+      background: #0E0F14 !important;
+      border: 1px solid rgba(255, 255, 255, 0.10) !important;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4) !important;
     }
     .pet-nav-row {
       display: flex;
@@ -2229,9 +2250,9 @@
 
     /* ==================== NOVO CARD SOCIAL DE PETS (PADRÃO ALERTA URBANO) ==================== */
     .pet-card {
-      background: var(--bg-elevated);
-      border: 1px solid var(--border);
-      border-radius: 18px;
+      background: #F7F3EB !important; /* Areia / Bege Aconchegante Nobre */
+      border: 1px solid #E5DFD1 !important;
+      border-radius: 20px !important;
       overflow: hidden;
       margin-bottom: 16px;
       display: flex !important;
@@ -2239,12 +2260,17 @@
       padding: 0 !important;
       gap: 0 !important;
       transition: border-color 0.2s, box-shadow 0.2s;
-      box-shadow: var(--shadow-sm);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06) !important;
       cursor: default;
       width: 100%;
       max-width: 580px;
       margin-left: auto;
       margin-right: auto;
+    }
+    [data-theme="dark"] .pet-card {
+      background: #0E0F14 !important;
+      border: 1px solid rgba(255, 255, 255, 0.10) !important;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4) !important;
     }
     .pet-card:hover {
       border-color: var(--accent-brand-soft);
@@ -2281,16 +2307,22 @@
     .pet-card-author-name {
       font-size: 13.5px;
       font-weight: 700;
-      color: var(--text);
+      color: #1C1917;
       line-height: 1.2;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
+    [data-theme="dark"] .pet-card-author-name {
+      color: #FFFFFF;
+    }
     .pet-card-author-sub {
       font-size: 11px;
-      color: var(--text-muted);
+      color: #78716C;
       margin-top: 2px;
+    }
+    [data-theme="dark"] .pet-card-author-sub {
+      color: #94A3B8;
     }
     .pet-card-dots-btn {
       background: transparent;
@@ -2794,8 +2826,8 @@
         <!-- BLOCO 1: CENTRAL DE REGISTRO DE OCORRÊNCIAS -->
         <div class="pet-nav-card" style="margin-bottom:14px;">
           <div class="pet-river-banner">
-            <div class="pet-river-badge">CENTRAL DE REGISTRO DE OCORRÊNCIAS</div>
-            <div class="pet-river-headline">Cadastrar Alerta na Rede de Cascavel</div>
+            <div class="pet-river-badge">REDE DE PROTEÇÃO E ALERTA URBANO</div>
+            <div class="pet-river-headline">Central de Ocorrências Pet</div>
             <svg class="pet-river-wave" viewBox="0 0 500 40" preserveAspectRatio="none">
               <path d="M 0,10 C 140,35 250,-5 380,25 C 430,35 470,15 500,20 L 500,40 L 0,40 Z" fill="var(--bg-elevated)"/>
             </svg>
@@ -2876,19 +2908,15 @@
           </div>
         </div>
 
-        <!-- BLOCO 2: ACERVO PÚBLICO DA CIDADE (3 ABAS PURAS) -->
-        <div style="margin-bottom:8px; display:flex; align-items:center; justify-content:space-between; padding:0 4px;">
-          <div style="font-size:12px; font-weight:900; color:#0f172a; text-transform:uppercase; letter-spacing:1px;">Acervo da Comunidade</div>
-        </div>
         <div class="pet-pillars-segmented" id="pets-main-pills" style="margin-bottom:14px;">
           <button type="button" class="pillar-tab active" id="btn-pillar-desaparecidos" onclick="alternarPilarPet('desaparecidos')">
-            <span>Desaparecidos</span>
+            <span>Animais Desaparecidos</span>
           </button>
           <button type="button" class="pillar-tab" id="btn-pillar-avistados" onclick="alternarPilarPet('avistados')">
-            <span>Animal Avistado</span>
+            <span>Animais Avistados</span>
           </button>
           <button type="button" class="pillar-tab" id="btn-pillar-adocao" onclick="alternarPilarPet('adocao')">
-            <span>Para Adoção</span>
+            <span>Animais para Adoção</span>
           </button>
         </div>
 
@@ -4001,14 +4029,6 @@
       return dt.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
     }
 
-    function alternarPilarPet(pilar) {
-      state.petMainPillar = pilar;
-      document.querySelectorAll('#pets-main-pills .pillar-tab').forEach(b => b.classList.remove('active'));
-      const activeBtn = document.getElementById(`btn-pillar-${pilar}`);
-      if (activeBtn) activeBtn.classList.add('active');
-      renderizarPetsAba();
-    }
-
     function renderizarPetsAba() {
       const pilarAtivo = state.petMainPillar || 'desaparecidos';
       let pets = [];
@@ -4040,25 +4060,25 @@
       const el = document.getElementById('pets-full-list');
       if (!pets.length) {
         if (pilarAtivo === 'adocao') {
-          el.innerHTML = `<div class="empty-box" style="padding:28px 16px; text-align:center; background:#ffffff; border-radius:18px;">
-            <div style="font-size:15px; font-weight:800; color:#0f172a; margin-bottom:6px;">Nenhum pet para adoção no momento</div>
-            <div style="font-size:12px; color:#475569; max-width:280px; margin:0 auto 16px;">Divulgue um animal resgatado para ganhar um lar amoroso em Cascavel.</div>
+          el.innerHTML = `<div class="empty-box" style="padding:28px 16px; text-align:center; background:#F7F3EB; border:1px solid #E5DFD1; border-radius:18px;">
+            <div style="font-size:15px; font-weight:800; color:#1C1917; margin-bottom:6px;">Nenhum pet para adoção no momento</div>
+            <div style="font-size:12px; color:#57534E; max-width:280px; margin:0 auto 16px;">Divulgue um animal resgatado para ganhar um lar amoroso em Cascavel.</div>
             <button type="button" class="btn-pet-cta-primary" style="max-width:240px; margin:0 auto;" onclick="abrirModalPet('pet_adocao')">
               + Cadastrar Pet para Adoção
             </button>
           </div>`;
         } else if (pilarAtivo === 'avistados') {
-          el.innerHTML = `<div class="empty-box" style="padding:28px 16px; text-align:center; background:#ffffff; border-radius:18px;">
-            <div style="font-size:15px; font-weight:800; color:#0f172a; margin-bottom:6px;">Nenhum pet avistado na rua registrado</div>
-            <div style="font-size:12px; color:#475569; max-width:300px; margin:0 auto 16px;">Viu algum animal perambulando sem tutor? Registre o ponto para ajudar o dono.</div>
+          el.innerHTML = `<div class="empty-box" style="padding:28px 16px; text-align:center; background:#F7F3EB; border:1px solid #E5DFD1; border-radius:18px;">
+            <div style="font-size:15px; font-weight:800; color:#1C1917; margin-bottom:6px;">Nenhum pet avistado na rua registrado</div>
+            <div style="font-size:12px; color:#57534E; max-width:300px; margin:0 auto 16px;">Viu algum animal perambulando sem tutor? Registre o ponto para ajudar o dono.</div>
             <button type="button" class="btn-pet-cta-primary" style="max-width:260px; margin:0 auto;" onclick="abrirModalPet('pet_avistado')">
               + Registrar Animal Visto
             </button>
           </div>`;
         } else {
-          el.innerHTML = `<div class="empty-box" style="padding:28px 16px; text-align:center; background:#ffffff; border-radius:18px;">
-            <div style="font-size:15px; font-weight:800; color:#0f172a; margin-bottom:6px;">Nenhum pet desaparecido no momento</div>
-            <div style="font-size:12px; color:#475569; max-width:280px; margin:0 auto 16px;">Cadastre o sumiço do seu animal para alertar a rede de motoristas e cidadãos de Cascavel.</div>
+          el.innerHTML = `<div class="empty-box" style="padding:28px 16px; text-align:center; background:#F7F3EB; border:1px solid #E5DFD1; border-radius:18px;">
+            <div style="font-size:15px; font-weight:800; color:#1C1917; margin-bottom:6px;">Nenhum pet desaparecido no momento</div>
+            <div style="font-size:12px; color:#57534E; max-width:280px; margin:0 auto 16px;">Cadastre o sumiço do seu animal para alertar a rede de motoristas e cidadãos de Cascavel.</div>
             <button type="button" class="btn-pet-cta-primary" style="max-width:250px; margin:0 auto;" onclick="abrirModalPet('pet_perdido')">
               + Cadastrar Pet Desaparecido
             </button>
@@ -4171,12 +4191,7 @@
         }
 
         return `
-          <div class="pet-card" id="pet-card-${p.id}" style="border-radius:20px; overflow:hidden; border:1px solid var(--border); background:#ffffff; box-shadow:var(--shadow-sm);">
-            <!-- Barra Superior Colorida de Identificação Imediata -->
-            <div style="background:${topBarColor}; color:#ffffff; padding:5px 14px; font-size:10px; font-weight:900; letter-spacing:1px; text-transform:uppercase;">
-              ${topBarText}
-            </div>
-
+          <div class="pet-card" id="pet-card-${p.id}">
             <!-- Header do Card com Autor e 3 Pontinhos -->
             <div class="pet-card-header">
               <div class="pet-card-author">
