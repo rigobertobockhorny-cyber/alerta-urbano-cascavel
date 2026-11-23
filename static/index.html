@@ -58,10 +58,16 @@
       --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.35);
     }
 
-    /* MODO NOTURNO 100% PRETO OLED (Zero barras verdes soltas no Noturno) */
+    /* MODO NOTURNO 100% PRETO OLED (Harmonia Completa & Zero Títulos Invisíveis) */
     [data-theme="dark"] .topbar {
       background: #000000 !important;
       border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+    }
+    [data-theme="dark"] .topbar .brand-name {
+      color: #ffffff !important;
+    }
+    [data-theme="dark"] .topbar .brand-city span {
+      color: #FED700 !important;
     }
     [data-theme="dark"] .home-green-canopy {
       background: #000000 !important;
@@ -80,9 +86,47 @@
       background: #000000 !important;
       border-top: 1px solid rgba(255, 255, 255, 0.12) !important;
     }
+    [data-theme="dark"] .nav-item {
+      color: #71717A !important;
+    }
+    [data-theme="dark"] .nav-item.active {
+      color: #FED700 !important;
+    }
+    [data-theme="dark"] .belt-title,
+    [data-theme="dark"] .belt-title.pet-title,
+    [data-theme="dark"] .belt-title.uti-title,
+    [data-theme="dark"] .belt-title.seg-title,
+    [data-theme="dark"] .belt-title span {
+      color: #FED700 !important; /* Dourado Alerta brilhante e legível no preto! */
+    }
+    [data-theme="dark"] .belt-svg {
+      color: #FED700 !important;
+      stroke: #FED700 !important;
+    }
+    [data-theme="dark"] .belt-title.pet-title .belt-svg {
+      fill: #FED700 !important;
+      stroke: none !important;
+    }
     [data-theme="dark"] .belt-info-card {
-      background: #0e0f14 !important;
-      border: 1px solid rgba(255, 255, 255, 0.12) !important;
+      background: #151821 !important;
+      border: 1px solid rgba(255, 255, 255, 0.14) !important;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5) !important;
+    }
+    [data-theme="dark"] .belt-info-title {
+      color: #FFFFFF !important;
+    }
+    [data-theme="dark"] .belt-info-loc {
+      color: #FED700 !important;
+    }
+    [data-theme="dark"] .belt-info-time {
+      color: #94A3B8 !important;
+    }
+    [data-theme="dark"] .lgpd-box {
+      background: #151821 !important;
+      border-color: rgba(255, 255, 255, 0.15) !important;
+    }
+    [data-theme="dark"] .lgpd-box span {
+      color: #E4E4E7 !important;
     }
 
     [data-theme="light"] {
@@ -793,26 +837,60 @@
       text-shadow: 0 1px 2px rgba(0, 0, 0, 0.9);
     }
 
-    /* Cards Robustos e Elegantes — Preto Sólido 99 (Igual ao estilo dos Pets) */
+    /* Cards Robustos e Elegantes — Alto Contraste (Branco no Diurno, Grafite no Noturno) */
     .belt-info-card {
-      width: 254px;
-      height: 82px;
+      width: 252px;
+      height: 88px; /* Mais gordinho para reduzir o suspiro entre utilidade e segurança */
       flex-shrink: 0;
-      border-radius: 16px;
+      border-radius: 14px;
       padding: 10px 14px;
       cursor: pointer;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      background: #000000 !important;
-      border: 1px solid rgba(0, 0, 0, 0.2);
-      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
       transition: transform 0.15s ease;
     }
     .belt-info-card:active { transform: scale(0.97); }
 
-    .belt-info-title {
-      font-size: 12px;
+    [data-theme="light"] .belt-info-card {
+      background: #FFFFFF !important;
+      border: 1.5px solid rgba(0, 0, 0, 0.16) !important;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+    }
+    [data-theme="light"] .belt-info-title {
+      font-size: 12.5px;
+      font-weight: 800;
+      color: #000000 !important;
+      line-height: 1.35;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+    }
+    [data-theme="light"] .belt-info-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+      margin-top: 4px;
+    }
+    [data-theme="light"] .belt-info-loc {
+      font-size: 11px;
+      font-weight: 800;
+      color: #000000 !important;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    [data-theme="light"] .belt-info-time {
+      font-size: 10.5px;
+      font-weight: 700;
+      color: #52525B !important;
+      white-space: nowrap;
+    }
+
+    [data-theme="dark"] .belt-info-title {
+      font-size: 12.5px;
       font-weight: 800;
       color: #FFFFFF !important;
       line-height: 1.35;
@@ -821,24 +899,13 @@
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
     }
-    .belt-info-meta {
+    [data-theme="dark"] .belt-info-meta {
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 6px;
       margin-top: 4px;
     }
-    .belt-info-loc {
-      font-size: 10.5px;
-      font-weight: 700;
-      color: #FED700 !important;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-    .belt-info-time {
-      font-size: 10px;
-      font-weight: 600;
       color: #94A3B8 !important;
       white-space: nowrap;
       flex-shrink: 0;
@@ -3624,14 +3691,20 @@
             </select>
           </div>
 
-          <div class="lgpd-box" style="margin-bottom:14px; background:#f4f4f5; border:1px solid rgba(0,0,0,0.12); padding:12px; border-radius:14px; display:flex; align-items:flex-start; gap:10px;">
-            <input type="checkbox" id="cadastro-termos-check" checked style="accent-color:#009B3A; width:18px; height:18px; margin-top:2px; flex-shrink:0; cursor:pointer;">
-            <span style="font-size:12px; color:#18181B; line-height:1.45;">
-              Li e concordo com os 
-              <a href="javascript:void(0)" onclick="abrirModalTermos('termos')" style="color:#009B3A; font-weight:800; text-decoration:underline;">Termos de Uso</a>, a 
-              <a href="javascript:void(0)" onclick="abrirModalTermos('privacidade')" style="color:#009B3A; font-weight:800; text-decoration:underline;">Política de Privacidade</a> e as 
-              <a href="javascript:void(0)" onclick="abrirModalTermos('tolerancia')" style="color:#009B3A; font-weight:800; text-decoration:underline;">Diretrizes de Tolerância Zero</a>.
-            </span>
+          <div class="lgpd-box" style="margin-bottom:14px; background:#f4f4f5; border:1.5px solid rgba(0,0,0,0.14); padding:13px; border-radius:14px; display:flex; flex-direction:column; gap:9px;">
+            <div style="display:flex; align-items:flex-start; gap:10px;">
+              <input type="checkbox" id="cadastro-termos-check" checked style="accent-color:#009B3A; width:19px; height:19px; margin-top:2px; flex-shrink:0; cursor:pointer;">
+              <span style="font-size:12px; color:#18181B; line-height:1.45; font-weight:600;">
+                Li e concordo com os 
+                <a href="javascript:void(0)" onclick="abrirModalTermos('termos')" style="color:#009B3A; font-weight:800; text-decoration:underline;">Termos de Uso</a>, a 
+                <a href="javascript:void(0)" onclick="abrirModalTermos('privacidade')" style="color:#009B3A; font-weight:800; text-decoration:underline;">Política de Privacidade</a> e as 
+                <a href="javascript:void(0)" onclick="abrirModalTermos('tolerancia')" style="color:#009B3A; font-weight:800; text-decoration:underline;">Diretrizes de Tolerância Zero</a>.
+              </span>
+            </div>
+            <div style="padding-top:8px; border-top:1px dashed rgba(0,0,0,0.15); display:flex; gap:8px;">
+              <button type="button" onclick="abrirModalTermos('termos')" style="flex:1; background:#000000; color:#FED700; border:none; padding:8px 10px; border-radius:8px; font-size:11px; font-weight:800; cursor:pointer; text-align:center;">📋 Ler Termos Completos ↗</button>
+              <button type="button" onclick="abrirModalTermos('privacidade')" style="flex:1; background:#ffffff; color:#000000; border:1px solid rgba(0,0,0,0.25); padding:8px 10px; border-radius:8px; font-size:11px; font-weight:800; cursor:pointer; text-align:center;">🔒 Privacidade LGPD ↗</button>
+            </div>
           </div>
 
           <button type="button" class="btn-submit btn-cadastrar-entrar" onclick="concluirCadastroManual()">
@@ -4275,8 +4348,16 @@
         } else {
           linha = `SEM ALERTAS EM CASCAVEL • TEMPO ESTÁVEL • ${c.condicao.toUpperCase()} • ${c.temp}°C`;
         }
-        track.innerHTML = `<span class="ticker-item">${escapeHtml(linha)}</span><span class="ticker-item">${escapeHtml(linha)}</span>`;
-        calibrarVelocidadeEsteira(track, 34);
+        if (track.dataset.currentLine !== linha) {
+          track.dataset.currentLine = linha;
+          track.innerHTML = `
+            <span class="ticker-item">${escapeHtml(linha)}</span>
+            <span class="ticker-item">${escapeHtml(linha)}</span>
+            <span class="ticker-item">${escapeHtml(linha)}</span>
+            <span class="ticker-item">${escapeHtml(linha)}</span>
+          `;
+          calibrarVelocidadeEsteira(track, 32);
+        }
       }
 
       // 3. Esteira Pets: Foto Full Bleed (100% bloco) + Perdidos e Adoção + Pílula Perdido / Adoção
