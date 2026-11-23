@@ -364,9 +364,18 @@
       padding: 0;
       background: transparent;
       cursor: pointer;
-      box-shadow: 0 4px 12px rgba(220, 38, 38, 0.35);
-      transition: transform 0.15s ease;
+      box-shadow: none;
+      transition: transform 0.15s ease, border 0.2s ease, box-shadow 0.2s ease;
       flex-shrink: 0;
+      box-sizing: border-box;
+    }
+    .logo-bubble-btn.alerta-laranja {
+      border: 2.5px solid #F97316 !important;
+      box-shadow: 0 0 10px rgba(249, 115, 22, 0.5) !important;
+    }
+    .logo-bubble-btn.alerta-vermelho {
+      border: 2.5px solid #DC2626 !important;
+      box-shadow: 0 0 12px rgba(220, 38, 38, 0.6) !important;
     }
     .logo-bubble-btn:active { transform: scale(0.9); }
     .logo-bubble-btn img {
@@ -2509,7 +2518,7 @@
     /* ==================== NOVO CARD SOCIAL DE PETS (PADRÃO ALERTA URBANO) ==================== */
     .pet-card {
       background: #FFFFFF !important;
-      border: 1.5px solid rgba(0, 0, 0, 0.08) !important;
+      border: 1.5px solid rgba(0, 0, 0, 0.09) !important;
       border-radius: 22px !important;
       position: relative;
       overflow: hidden;
@@ -2526,58 +2535,47 @@
       margin-left: auto;
       margin-right: auto;
     }
-    /* TEMA ROSINHA PASTEL (FÊMEA) */
-    .pet-card.femea {
-      background: #FFF0F5 !important;
-      border: 1.5px solid #FBCFE8 !important;
-      box-shadow: 0 4px 18px rgba(244, 114, 182, 0.12) !important;
-    }
-    /* TEMA AZULZINHO PASTEL (MACHO) */
-    .pet-card.macho {
-      background: #F0F9FF !important;
-      border: 1.5px solid #BAE6FD !important;
-      box-shadow: 0 4px 18px rgba(56, 189, 248, 0.12) !important;
-    }
-    /* TEMA ROXINHO PASTEL (GENÉRICO / NINHADA / OUTRO) */
-    .pet-card.outro {
-      background: #F8F5FF !important;
-      border: 1.5px solid #DDD6FE !important;
-      box-shadow: 0 4px 18px rgba(167, 139, 250, 0.12) !important;
+
+    [data-theme="dark"] .pet-card {
+      background: #141720 !important;
+      border: 1.5px solid rgba(255, 255, 255, 0.10) !important;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.45) !important;
     }
 
-    [data-theme="dark"] .pet-card.femea {
-      background: #1C0F18 !important;
-      border: 1.5px solid rgba(244, 114, 182, 0.28) !important;
-      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4) !important;
-    }
-    [data-theme="dark"] .pet-card.macho {
-      background: #0C1524 !important;
-      border: 1.5px solid rgba(56, 189, 248, 0.28) !important;
-      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4) !important;
-    }
-    [data-theme="dark"] .pet-card.outro {
-      background: #160F26 !important;
-      border: 1.5px solid rgba(167, 139, 250, 0.28) !important;
-      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4) !important;
-    }
-
-    /* BOLINHAS ORGÂNICAS DECORATIVAS (ESTILO PETSHOME) */
+    /* BOLHAS ESFÉRICAS COM MARGEM VISÍVEL (ROSA, ROXA, AZUL) */
     .pet-bubble {
       position: absolute;
       border-radius: 50%;
       pointer-events: none;
-      z-index: 0;
+      z-index: 1;
+      box-sizing: border-box;
+      backdrop-filter: blur(2px);
     }
-    .bubble-tr {
-      top: -24px;
-      right: -24px;
-      width: 86px;
-      height: 86px;
+    .bubble-rosa {
+      background: rgba(244, 114, 182, 0.20) !important;
+      border: 2.5px solid #EC4899 !important;
     }
-    .bubble-bl {
-      bottom: 46px;
-      left: -20px;
-      width: 62px;
+    .bubble-roxa {
+      background: rgba(168, 85, 247, 0.20) !important;
+      border: 2.5px solid #9333EA !important;
+    }
+    .bubble-azul {
+      background: rgba(56, 189, 248, 0.20) !important;
+      border: 2.5px solid #0284C7 !important;
+    }
+
+    [data-theme="dark"] .bubble-rosa {
+      background: rgba(244, 114, 182, 0.18) !important;
+      border: 2.5px solid rgba(244, 114, 182, 0.75) !important;
+    }
+    [data-theme="dark"] .bubble-roxa {
+      background: rgba(168, 85, 247, 0.18) !important;
+      border: 2.5px solid rgba(168, 85, 247, 0.75) !important;
+    }
+    [data-theme="dark"] .bubble-azul {
+      background: rgba(56, 189, 248, 0.18) !important;
+      border: 2.5px solid rgba(56, 189, 248, 0.75) !important;
+    }
       height: 62px;
     }
     .pet-card.femea .bubble-tr {
@@ -3595,9 +3593,39 @@
         <input type="file" id="av-foto-file" accept="image/*" style="display:none" onchange="previewFotoAvistamento(this)">
       </div>
 
+      <!-- Seleção de Modo de Localização: GPS, Alfinete no Mapa ou Digitar Endereço -->
+      <div class="form-group" style="margin-bottom:12px;">
+        <label class="form-label">Onde você viu o animal?</label>
+        <div style="display:flex; gap:6px; margin-bottom:8px;">
+          <button type="button" class="btn-tab-loc" id="av-loc-tipo-gps" onclick="trocarModoLocAvistamento('gps')" style="flex:1; padding:8px 4px; font-size:11px; font-weight:800; border-radius:10px; border:1px solid #000; background:#000; color:#FED700; cursor:pointer;">
+            Meu GPS
+          </button>
+          <button type="button" class="btn-tab-loc" id="av-loc-tipo-mapa" onclick="trocarModoLocAvistamento('mapa')" style="flex:1; padding:8px 4px; font-size:11px; font-weight:800; border-radius:10px; border:1px solid var(--border); background:var(--bg-elevated); color:var(--text); cursor:pointer;">
+            Alfinete no Mapa
+          </button>
+          <button type="button" class="btn-tab-loc" id="av-loc-tipo-end" onclick="trocarModoLocAvistamento('endereco')" style="flex:1; padding:8px 4px; font-size:11px; font-weight:800; border-radius:10px; border:1px solid var(--border); background:var(--bg-elevated); color:var(--text); cursor:pointer;">
+            Digitar Endereço
+          </button>
+        </div>
+
+        <div id="av-painel-loc-gps" style="display:block; font-size:11.5px; color:var(--text-muted); background:rgba(0,155,58,0.08); padding:9px 12px; border-radius:12px; border:1px solid rgba(0,155,58,0.2);">
+          <span>Localização detectada automaticamente pelo seu GPS.</span>
+        </div>
+
+        <div id="av-painel-loc-mapa" style="display:none;">
+          <div style="font-size:11px; color:var(--text-muted); margin-bottom:6px;">Arraste o alfinete ou toque no mapa para posicionar onde viu o pet:</div>
+          <div id="av-mini-mapa" style="width:100%; height:180px; border-radius:14px; overflow:hidden; border:1.5px solid var(--border); margin-bottom:6px;"></div>
+          <div style="font-size:11px; font-weight:800; color:#009B3A;" id="av-mapa-coords-txt">Alfinete pronto para mover</div>
+        </div>
+
+        <div id="av-painel-loc-endereco" style="display:none;">
+          <input type="text" class="form-input" id="av-input-endereco" placeholder="Ex: Av. Brasil, 4500 ou Rua Paraná esq. com Pio XII">
+        </div>
+      </div>
+
       <div class="form-group">
-        <label class="form-label">Observação / Local de Referência</label>
-        <input type="text" class="form-input" id="av-obs" placeholder="Ex.: Visto correndo sentido Av. Brasil / Estou com ele seguro">
+        <label class="form-label">Observação / Ponto de Referência</label>
+        <input type="text" class="form-input" id="av-obs" placeholder="Ex.: Visto correndo sentido Av. Brasil / Seguro comigo">
       </div>
       <label class="lgpd-box">
         <input type="checkbox" id="av-permitir-wa" onchange="document.getElementById('av-wa-wrap').style.display = this.checked ? 'block' : 'none'">
@@ -3635,21 +3663,6 @@
           <div class="perfil-intro-sub">
             Conecte sua conta para publicar animais desaparecidos, registrar adoções e enviar denúncias com segurança.
           </div>
-        </div>
-
-        <!-- Botão Oficial do Google (1 Toque) -->
-        <button type="button" class="btn-google-auth" onclick="conectarGoogleAuth()">
-          <svg width="18" height="18" viewBox="0 0 24 24">
-            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-            <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-            <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
-            <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
-          </svg>
-          <span>Continuar com o Google</span>
-        </button>
-
-        <div class="auth-divider">
-          <span>ou faça seu cadastro com dados básicos</span>
         </div>
 
         <div class="perfil-card-box">
@@ -3713,8 +3726,8 @@
               </span>
             </div>
             <div style="padding-top:8px; border-top:1px dashed rgba(0,0,0,0.15); display:flex; gap:8px;">
-              <button type="button" onclick="abrirModalTermos('termos')" style="flex:1; background:#000000; color:#FED700; border:none; padding:8px 10px; border-radius:8px; font-size:11px; font-weight:800; cursor:pointer; text-align:center;">📋 Ler Termos Completos ↗</button>
-              <button type="button" onclick="abrirModalTermos('privacidade')" style="flex:1; background:#ffffff; color:#000000; border:1px solid rgba(0,0,0,0.25); padding:8px 10px; border-radius:8px; font-size:11px; font-weight:800; cursor:pointer; text-align:center;">🔒 Privacidade LGPD ↗</button>
+              <button type="button" onclick="abrirModalTermos('termos')" style="flex:1; background:#000000; color:#FED700; border:none; padding:8px 10px; border-radius:8px; font-size:11px; font-weight:800; cursor:pointer; text-align:center;">Termos de Uso ↗</button>
+              <button type="button" onclick="abrirModalTermos('privacidade')" style="flex:1; background:#ffffff; color:#000000; border:1px solid rgba(0,0,0,0.25); padding:8px 10px; border-radius:8px; font-size:11px; font-weight:800; cursor:pointer; text-align:center;">Privacidade LGPD ↗</button>
             </div>
           </div>
 
@@ -3918,13 +3931,13 @@
     <!-- Navegação de Abas do Modal -->
     <div style="padding:10px 16px 6px; display:flex; gap:8px; overflow-x:auto;">
       <button type="button" id="tab-btn-termos" class="btn-tab-termos active" onclick="trocarAbaTermos('termos')" style="flex:1; padding:9px 6px; border-radius:12px; font-size:11.5px; font-weight:800; border:1px solid #000; background:#000; color:#FED700; cursor:pointer;">
-        📋 Termos de Uso
+        Termos de Uso
       </button>
       <button type="button" id="tab-btn-privacidade" class="btn-tab-termos" onclick="trocarAbaTermos('privacidade')" style="flex:1; padding:9px 6px; border-radius:12px; font-size:11.5px; font-weight:800; border:1px solid rgba(0,0,0,0.18); background:#ffffff; color:#18181B; cursor:pointer;">
-        🔒 Privacidade LGPD
+        Privacidade LGPD
       </button>
       <button type="button" id="tab-btn-tolerancia" class="btn-tab-termos" onclick="trocarAbaTermos('tolerancia')" style="flex:1; padding:9px 6px; border-radius:12px; font-size:11.5px; font-weight:800; border:1px solid rgba(0,0,0,0.18); background:#ffffff; color:#18181B; cursor:pointer;">
-        🛡️ Tolerância Zero
+        Tolerância Zero
       </button>
     </div>
 
@@ -4322,15 +4335,105 @@
       return `${tag} • ${fonte}: ${tituloLimpo} em Cascavel`;
     }
 
-    function calibrarVelocidadeEsteira(el, pxPorSegundo) {
+    function ativarEsteiraArrastavel(el, pxPorSegundo = 26) {
       if (!el || el.classList.contains('static')) return;
+      el.style.animation = 'none';
+
+      if (!el._scroller) {
+        const sc = {
+          currentX: 0,
+          speed: pxPorSegundo,
+          halfWidth: 0,
+          state: 'running',
+          resumeTimer: null,
+          startX: 0,
+          startCurrentX: 0,
+          hasDragged: false,
+          lastTime: performance.now()
+        };
+        el._scroller = sc;
+
+        function tick(now) {
+          const dt = Math.min(0.1, (now - sc.lastTime) / 1000);
+          sc.lastTime = now;
+
+          if (sc.state === 'running' && sc.halfWidth > 0) {
+            sc.currentX -= sc.speed * dt;
+            while (sc.currentX <= -sc.halfWidth) sc.currentX += sc.halfWidth;
+            while (sc.currentX > 0) sc.currentX -= sc.halfWidth;
+            el.style.transform = `translate3d(${sc.currentX}px, 0, 0)`;
+          }
+          requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+
+        function onStart(e) {
+          sc.state = 'dragging';
+          sc.hasDragged = false;
+          if (sc.resumeTimer) {
+            clearTimeout(sc.resumeTimer);
+            sc.resumeTimer = null;
+          }
+          const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+          sc.startX = clientX;
+          sc.startCurrentX = sc.currentX;
+        }
+
+        function onMove(e) {
+          if (sc.state !== 'dragging') return;
+          const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+          const deltaX = clientX - sc.startX;
+          if (Math.abs(deltaX) > 6) sc.hasDragged = true;
+
+          sc.currentX = sc.startCurrentX + deltaX;
+          if (sc.halfWidth > 0) {
+            while (sc.currentX <= -sc.halfWidth) sc.currentX += sc.halfWidth;
+            while (sc.currentX > 0) sc.currentX -= sc.halfWidth;
+          }
+          el.style.transform = `translate3d(${sc.currentX}px, 0, 0)`;
+        }
+
+        function onEnd() {
+          if (sc.state !== 'dragging') return;
+          sc.state = 'paused';
+          if (sc.resumeTimer) clearTimeout(sc.resumeTimer);
+          sc.resumeTimer = setTimeout(() => {
+            sc.state = 'running';
+            sc.lastTime = performance.now();
+          }, 2500); // 2.5s após soltar o dedo, retoma o fluxo suave!
+        }
+
+        // Touch events (celular / tablet)
+        el.addEventListener('touchstart', onStart, { passive: true });
+        window.addEventListener('touchmove', onMove, { passive: true });
+        window.addEventListener('touchend', onEnd, { passive: true });
+        window.addEventListener('touchcancel', onEnd, { passive: true });
+
+        // Mouse events (desktop / emulador)
+        el.addEventListener('mousedown', onStart);
+        window.addEventListener('mousemove', onMove);
+        window.addEventListener('mouseup', onEnd);
+
+        // Previne clique acidental ao arrastar o card
+        el.addEventListener('click', (e) => {
+          if (sc.hasDragged) {
+            e.preventDefault();
+            e.stopPropagation();
+          }
+        }, true);
+      }
+
       requestAnimationFrame(() => {
-        const meiaLargura = el.scrollWidth / 2;
-        if (meiaLargura > 0) {
-          const duracao = Math.max(14, meiaLargura / pxPorSegundo);
-          el.style.animationDuration = `${duracao.toFixed(1)}s`;
+        el.style.animation = 'none';
+        if (el._scroller) {
+          el._scroller.halfWidth = el.scrollWidth / 2;
+          el._scroller.speed = pxPorSegundo;
         }
       });
+    }
+
+    function calibrarVelocidadeEsteira(el, pxPorSegundo) {
+      ativarEsteiraArrastavel(el, pxPorSegundo);
     }
 
     function renderizarDashboard() {
@@ -4349,6 +4452,12 @@
         // 2. Pílula / Esteira Climática Resumida (sem emoji, sem texto cortado "...")
         const ticker = document.getElementById('alert-ticker');
         const track = document.getElementById('ticker-track');
+        const logoBtn = document.querySelector('.logo-bubble-btn');
+        if (logoBtn) {
+          logoBtn.classList.remove('alerta-laranja', 'alerta-vermelho');
+          if (c.nivel_alerta === 'vermelho') logoBtn.classList.add('alerta-vermelho');
+          else if (c.nivel_alerta === 'laranja') logoBtn.classList.add('alerta-laranja');
+        }
         ticker.classList.remove('amarelo', 'laranja', 'vermelho');
         let linha = '';
         if (c.alertas && c.alertas.length > 0) {
@@ -4606,37 +4715,12 @@
       let curtidos = [];
       try { curtidos = JSON.parse(localStorage.getItem('alerta_pets_curtidos') || '[]'); } catch(e) {}
 
-      el.innerHTML = pets.map(p => {
+      el.innerHTML = pets.map((p, idx) => {
         const ehAdocao = (pilarAtivo === 'adocao') || (p.tipo === 'pet_adocao') || (p.status_pet === 'adocao');
         const av = p.status_pet === 'avistado' || p.status_pet === 'encontrado' || p.tipo === 'pet_avistado' || p.tipo === 'pet_encontrado';
         const ehImprensa = p.fonte_tipo === 'imprensa' || (!p.tem_tutor_notificavel && p.link_noticia);
         const distTxt = (state.userLat && state.userLng) ? formatarDistancia(calcularDistanciaM(state.userLat, state.userLng, p.lat, p.lng)) : '';
         const isLiked = curtidos.includes(p.id);
-
-        // Dedução de Sexo (Fêmea = Rosinha, Macho = Azulzinho, Outro = Roxinho)
-        let sexoClass = 'outro';
-        let sexLabel = '🐾 Pet';
-        let rawSexo = (p.sexo || '').toLowerCase();
-        let titDesc = ((p.titulo || '') + ' ' + (p.descricao || '')).toLowerCase();
-
-        if (rawSexo === 'fêmea' || rawSexo === 'femea' || (!rawSexo.includes('macho') && (titDesc.includes('cachorra') || titDesc.includes('cadela') || titDesc.includes('gata') || titDesc.includes('fêmea') || titDesc.includes('femea') || titDesc.includes('princesa') || titDesc.includes('mika') || titDesc.includes('cora') || titDesc.includes('aurora') || titDesc.includes('skay') || titDesc.includes('mel')))) {
-          sexoClass = 'femea';
-          sexLabel = '♀ Fêmea';
-        } else if (rawSexo === 'macho' || titDesc.includes('cachorro') || titDesc.includes('gato') || titDesc.includes('macho') || titDesc.includes('tobi') || titDesc.includes('homer') || titDesc.includes('sadam') || titDesc.includes('theod') || titDesc.includes('thor') || titDesc.includes('cacau')) {
-          sexoClass = 'macho';
-          sexLabel = '♂ Macho';
-        }
-
-        // Pílula de Status (Adoção, Desaparecido, Avistado)
-        let statusClass = 'desaparecido';
-        let statusLabel = '🚨 Desaparecido';
-        if (ehAdocao) {
-          statusClass = 'adocao';
-          statusLabel = '💚 Para Adoção';
-        } else if (av) {
-          statusClass = 'avistado';
-          statusLabel = '👁️ Animal Avistado';
-        }
 
         // Autor e Subtítulo neutro
         let autorNome = p.autor_nome || 'Tutor em Cascavel';
@@ -4648,6 +4732,42 @@
         } else if (p.autor_nome) {
           autorLetra = p.autor_nome.charAt(0).toUpperCase();
         }
+
+        // Sistema de 2 Bolhas Decorativas com Margem (Rosa, Roxa, Azul)
+        const paresCores = [
+          ['rosa', 'roxa'],
+          ['roxa', 'azul'],
+          ['azul', 'rosa'],
+          ['rosa', 'azul'],
+          ['roxa', 'rosa'],
+          ['azul', 'roxa']
+        ];
+        const presetsPosicoes = [
+          [
+            'top:-28px; right:-28px; width:94px; height:94px;',
+            'bottom:50px; left:-24px; width:76px; height:76px;'
+          ],
+          [
+            'top:-24px; left:-24px; width:88px; height:88px;',
+            'top:48%; right:-28px; width:82px; height:82px;'
+          ],
+          [
+            'top:40%; left:-30px; width:86px; height:86px;',
+            'bottom:42px; right:-25px; width:90px; height:90px;'
+          ],
+          [
+            'top:-22px; right:28%; width:76px; height:76px;',
+            'bottom:60px; left:-22px; width:86px; height:86px;'
+          ]
+        ];
+
+        const parCor = paresCores[idx % paresCores.length];
+        const parPos = presetsPosicoes[idx % presetsPosicoes.length];
+
+        const bolhasHtml = `
+          <div class="pet-bubble bubble-${parCor[0]}" style="${parPos[0]}"></div>
+          <div class="pet-bubble bubble-${parCor[1]}" style="${parPos[1]}"></div>
+        `;
 
         // Foto com fundo preto de letterbox (preservando o enquadramento horizontal/vertical exato)
         const mediaHtml = p.foto_url
@@ -4663,18 +4783,6 @@
         if (av && petNomeExibicao.toLowerCase().includes('desaparecido')) {
           petNomeExibicao = 'Animal Avistado';
         }
-
-        // Tags do Pet
-        const tagList = [
-          (p.especie && !p.especie.toLowerCase().includes('indefinid')) ? p.especie : '',
-          (p.porte && !p.porte.toLowerCase().includes('indefinid') && !p.porte.toLowerCase().includes('não')) ? `Porte ${p.porte}` : '',
-          p.castrado ? 'Castrado' : '',
-          p.vacinado ? 'Vacinado' : ''
-        ].filter(t => t && !t.toLowerCase().includes('indefinid'));
-
-        const tagsHtml = tagList.length
-          ? `<div class="pet-card-pills-row">${tagList.map(t => `<span class="pet-card-pill">${escapeHtml(t)}</span>`).join('')}</div>`
-          : '';
 
         // Botões de Ação com largura 50% / 50% idêntica
         let actionButtonsHtml = '';
@@ -4719,10 +4827,9 @@
         }
 
         return `
-          <div class="pet-card ${sexoClass}" id="pet-card-${p.id}">
-            <!-- Bolinhas Decorativas Flutuantes (Estilo PetsHome) -->
-            <div class="pet-bubble bubble-tr"></div>
-            <div class="pet-bubble bubble-bl"></div>
+          <div class="pet-card" id="pet-card-${p.id}">
+            <!-- 2 Bolhas Decorativas Intercaladas (Rosa, Roxa, Azul) -->
+            ${bolhasHtml}
 
             <!-- Header do Card com Autor e 3 Pontinhos -->
             <div class="pet-card-header" style="position:relative; z-index:2;">
@@ -4745,14 +4852,9 @@
             <!-- Mídia com Fundo Preto de Letterbox -->
             ${mediaHtml}
 
-            <!-- Conteúdo: Pílulas de Status/Sexo, Nome, Tags e Descrição em Negrito -->
+            <!-- Conteúdo: Nome do Pet e Descrição (SEM PÍLULAS) -->
             <div class="pet-card-content" style="position:relative; z-index:2;" onclick="abrirDetalheById(${p.id})">
-              <div class="pet-badges-row">
-                <span class="pet-status-pill ${statusClass}">${statusLabel}</span>
-                <span class="pet-sex-pill ${sexoClass}">${sexLabel}</span>
-              </div>
               <div class="pet-card-pet-name">${escapeHtml(petNomeExibicao)}</div>
-              ${tagsHtml}
               <div class="pet-card-desc">${escapeHtml(p.descricao || 'Sem descrição adicional informada.')}</div>
             </div>
 
@@ -5440,21 +5542,107 @@ Baixe o aplicativo gratuito Alerta Urbano:
       }
     }
 
-    function abrirModalAvistamento(petId, ehImprensa, subtipoInicial) {
-      if (!verificarUsuarioLogado("registrar um avistamento")) return;
-      fecharModal('modal-detalhe');
-      if (ehImprensa) {
-        registrarAvistamentoDireto(petId, 'Pet visto na rua (ponto marcado na trilha comunitária).', false, '', 'avistamento', '');
-        return;
+    let avMiniMap = null;
+    let avMarker = null;
+    let avSelectedLat = null;
+    let avSelectedLng = null;
+    let avModoLoc = 'gps';
+
+    function trocarModoLocAvistamento(modo) {
+      avModoLoc = modo;
+      const bGps = document.getElementById('av-loc-tipo-gps');
+      const bMapa = document.getElementById('av-loc-tipo-mapa');
+      const bEnd = document.getElementById('av-loc-tipo-end');
+      const pGps = document.getElementById('av-painel-loc-gps');
+      const pMapa = document.getElementById('av-painel-loc-mapa');
+      const pEnd = document.getElementById('av-painel-loc-endereco');
+
+      [bGps, bMapa, bEnd].forEach(b => {
+        if (!b) return;
+        b.style.background = 'var(--bg-elevated)';
+        b.style.color = 'var(--text)';
+        b.style.border = '1px solid var(--border)';
+      });
+
+      if (modo === 'gps') {
+        if (bGps) { bGps.style.background = '#000000'; bGps.style.color = '#FED700'; bGps.style.border = '1px solid #000'; }
+        if (pGps) pGps.style.display = 'block';
+        if (pMapa) pMapa.style.display = 'none';
+        if (pEnd) pEnd.style.display = 'none';
+      } else if (modo === 'mapa') {
+        if (bMapa) { bMapa.style.background = '#000000'; bMapa.style.color = '#FED700'; bMapa.style.border = '1px solid #000'; }
+        if (pGps) pGps.style.display = 'none';
+        if (pMapa) pMapa.style.display = 'block';
+        if (pEnd) pEnd.style.display = 'none';
+        initMiniMapAvistamento();
+      } else if (modo === 'endereco') {
+        if (bEnd) { bEnd.style.background = '#000000'; bEnd.style.color = '#FED700'; bEnd.style.border = '1px solid #000'; }
+        if (pGps) pGps.style.display = 'none';
+        if (pMapa) pMapa.style.display = 'none';
+        if (pEnd) pEnd.style.display = 'block';
       }
+    }
+
+    function initMiniMapAvistamento() {
+      setTimeout(() => {
+        const cLat = state.userLat || -24.9555;
+        const cLng = state.userLng || -53.4552;
+        if (!avMiniMap) {
+          avMiniMap = L.map('av-mini-mapa', { zoomControl: false }).setView([cLat, cLng], 15);
+          L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+            maxZoom: 19
+          }).addTo(avMiniMap);
+
+          const pinIcon = L.divIcon({
+            className: 'av-pin-icon',
+            html: '<div style="background:#dc2626; color:#fff; width:30px; height:30px; border-radius:50% 50% 50% 0; transform:rotate(-45deg); display:flex; align-items:center; justify-content:center; box-shadow:0 3px 10px rgba(0,0,0,0.3); border:2px solid #fff;"><div style="width:8px; height:8px; border-radius:50%; background:#fff; transform:rotate(45deg);"></div></div>',
+            iconSize: [30, 30],
+            iconAnchor: [15, 30]
+          });
+
+          avMarker = L.marker([cLat, cLng], { icon: pinIcon, draggable: true }).addTo(avMiniMap);
+          avSelectedLat = cLat;
+          avSelectedLng = cLng;
+
+          avMarker.on('dragend', () => {
+            const p = avMarker.getLatLng();
+            avSelectedLat = p.lat;
+            avSelectedLng = p.lng;
+            const t = document.getElementById('av-mapa-coords-txt');
+            if (t) t.textContent = `Alfinete fixado: ${p.lat.toFixed(5)}, ${p.lng.toFixed(5)}`;
+          });
+
+          avMiniMap.on('click', (e) => {
+            avMarker.setLatLng(e.latlng);
+            avSelectedLat = e.latlng.lat;
+            avSelectedLng = e.latlng.lng;
+            const t = document.getElementById('av-mapa-coords-txt');
+            if (t) t.textContent = `Alfinete fixado: ${e.latlng.lat.toFixed(5)}, ${e.latlng.lng.toFixed(5)}`;
+          });
+        } else {
+          avMiniMap.invalidateSize();
+          avMiniMap.setView([cLat, cLng], 15);
+          if (avMarker) avMarker.setLatLng([cLat, cLng]);
+          avSelectedLat = cLat;
+          avSelectedLng = cLng;
+        }
+      }, 120);
+    }
+
+    function abrirModalAvistamento(petId, ehImprensa, subtipoInicial) {
+      if (!verificarUsuarioLogado("marcar onde viu")) return;
+      fecharModal('modal-detalhe');
       avFotoUploadUrl = '';
       document.getElementById('av-pet-id').value = petId;
       document.getElementById('av-obs').value = '';
+      const inpEnd = document.getElementById('av-input-endereco');
+      if (inpEnd) inpEnd.value = '';
       document.getElementById('av-foto-preview').style.display = 'none';
       document.getElementById('av-foto-file').value = '';
       document.getElementById('av-photo-hint').textContent = 'Toque para tirar foto e enviar ao tutor';
       document.getElementById('av-wa-input').value = (state.perfil && state.perfil.whatsapp) ? state.perfil.whatsapp : '';
       selecionarSubtipoAv(subtipoInicial || 'avistamento');
+      trocarModoLocAvistamento('gps');
       document.getElementById('modal-avistamento').classList.add('open');
     }
 
@@ -5505,7 +5693,7 @@ Baixe o aplicativo gratuito Alerta Urbano:
       const petId = document.getElementById('av-pet-id').value;
       const subtipo = document.getElementById('av-subtipo').value || 'avistamento';
       const ehResg = subtipo === 'resgatado';
-      const obs = document.getElementById('av-obs').value.trim() || (ehResg ? 'Segurei este animal parecido — foto enviada para confirmação.' : 'Pet avistado neste local agora.');
+      let obs = document.getElementById('av-obs').value.trim() || (ehResg ? 'Segurei este animal parecido — foto enviada para confirmação.' : 'Pet avistado neste local agora.');
       const permitir = document.getElementById('av-permitir-wa').checked;
       const wa = document.getElementById('av-wa-input').value.trim();
 
@@ -5517,18 +5705,32 @@ Baixe o aplicativo gratuito Alerta Urbano:
         mostrarToast('Informe seu WhatsApp ou desmarque a opção de contato.');
         return;
       }
+
+      let latFinal = state.userLat || CASCAVEL_CENTER[0];
+      let lngFinal = state.userLng || CASCAVEL_CENTER[1];
+
+      if (avModoLoc === 'mapa' && avSelectedLat && avSelectedLng) {
+        latFinal = avSelectedLat;
+        lngFinal = avSelectedLng;
+      } else if (avModoLoc === 'endereco') {
+        const endTxt = (document.getElementById('av-input-endereco')?.value || '').trim();
+        if (endTxt) {
+          obs = `[Endereço: ${endTxt}] ${obs}`;
+        }
+      }
+
       const btn = document.getElementById('btn-confirmar-av');
       btn.disabled = true;
       btn.textContent = 'Enviando aviso...';
-      await registrarAvistamentoDireto(petId, obs, permitir, wa, subtipo, avFotoUploadUrl);
+      await registrarAvistamentoDireto(petId, obs, permitir, wa, subtipo, avFotoUploadUrl, latFinal, lngFinal);
       btn.disabled = false;
       selecionarSubtipoAv(subtipo);
       fecharModal('modal-avistamento');
     }
 
-    async function registrarAvistamentoDireto(petId, obs, permitirContato, waAvistador, subtipo, fotoUrl) {
-      const lat = state.userLat || CASCAVEL_CENTER[0];
-      const lng = state.userLng || CASCAVEL_CENTER[1];
+    async function registrarAvistamentoDireto(petId, obs, permitirContato, waAvistador, subtipo, fotoUrl, customLat, customLng) {
+      const lat = (typeof customLat === 'number') ? customLat : (state.userLat || CASCAVEL_CENTER[0]);
+      const lng = (typeof customLng === 'number') ? customLng : (state.userLng || CASCAVEL_CENTER[1]);
       try {
         const resp = await fetch(`/api/pets/${petId}/avistamento`, {
           method: 'POST',
@@ -5546,6 +5748,16 @@ Baixe o aplicativo gratuito Alerta Urbano:
           })
         });
         if (resp.ok) {
+          mostrarToast('Avistamento registrado com sucesso!');
+          await carregarDados();
+        } else {
+          const d = await resp.json().catch(() => ({}));
+          mostrarToast(d.error || 'Erro ao registrar');
+        }
+      } catch (_) {
+        mostrarToast('Erro de conexão ao enviar avistamento');
+      }
+    }
           mostrarToast(subtipo === 'resgatado'
             ? 'Foto de resgate enviada! Aguardando confirmação do tutor.'
             : 'Visto Aqui marcado na trilha! O tutor foi notificado.');
@@ -5820,7 +6032,11 @@ Baixe o aplicativo gratuito Alerta Urbano:
         renderizarMeusPetsPerfil();
       }
 
-      document.getElementById('modal-perfil').classList.add('open');
+      const mp = document.getElementById('modal-perfil');
+      if (mp) {
+        mp.style.display = 'flex';
+        mp.classList.add('open');
+      }
     }
 
     function atualizarVisualLogado() {
@@ -5886,11 +6102,11 @@ Baixe o aplicativo gratuito Alerta Urbano:
       const termos = document.getElementById('cadastro-termos-check')?.checked;
 
       if (!termos) {
-        mostrarToast('⚠️ É obrigatório aceitar os Termos de Uso e Política de Tolerância Zero.');
+        mostrarToast('É obrigatório aceitar os Termos de Uso e Diretrizes.');
         return;
       }
       if (!nome) {
-        mostrarToast('⚠️ Por favor, digite seu nome completo.');
+        mostrarToast('Por favor, digite seu nome completo.');
         return;
       }
 
@@ -5919,7 +6135,7 @@ Baixe o aplicativo gratuito Alerta Urbano:
         }).catch(() => {});
       } catch (_) {}
 
-      mostrarToast('✅ Cadastro concluído! Bem-vindo ao Alerta Urbano.');
+      mostrarToast('Cadastro concluído com sucesso!');
       abrirPerfil(false);
     }
 
@@ -5936,7 +6152,7 @@ Baixe o aplicativo gratuito Alerta Urbano:
       const bairro = document.getElementById('perfil-edit-bairro')?.value || 'Centro';
 
       if (!nome) {
-        mostrarToast('⚠️ O nome não pode ficar em branco.');
+        mostrarToast('O nome não pode ficar em branco.');
         return;
       }
 
@@ -5947,7 +6163,7 @@ Baixe o aplicativo gratuito Alerta Urbano:
       const box = document.getElementById('perfil-caixa-edicao');
       if (box) box.style.display = 'none';
 
-      mostrarToast('✅ Perfil atualizado com sucesso!');
+      mostrarToast('Perfil atualizado com sucesso.');
     }
 
     function alternarGavetaMeusRegistros() {
@@ -5977,7 +6193,7 @@ Baixe o aplicativo gratuito Alerta Urbano:
           localStorage.removeItem('alerta_pets_curtidos');
           localStorage.removeItem('alerta_usuarios_bloqueados');
         } catch(e) {}
-        mostrarToast('✅ Conta e dados associados excluídos permanentemente.');
+        mostrarToast('Conta e dados associados excluídos com sucesso.');
         fecharModal('modal-perfil');
       }
     }
@@ -6024,7 +6240,7 @@ Baixe o aplicativo gratuito Alerta Urbano:
       if (chk) chk.checked = true;
       try { localStorage.setItem('au_termos_aceitos', 'true'); } catch(e) {}
       fecharModal('modal-termos');
-      mostrarToast('✓ Termos e Políticas aceitos!');
+      mostrarToast('Termos e políticas aceitos com sucesso.');
     }
 
     function abrirTermosDeUso() {
