@@ -87,8 +87,8 @@
 
     [data-theme="light"] {
       --bg: #FED700; /* Fundo Amarelo Oficial 99 */
-      --bg-elevated: #F7F3EB; /* Areia Bege Nobre Suave para Cards */
-      --bg-subtle: #ECE6D8; /* Bege Neutro para Pills e Divisórias */
+      --bg-elevated: #E8DCC4; /* Areia Bege Encorpado e Acolhedor */
+      --bg-subtle: #DECDB0; /* Bege Neutro para Divisórias */
       --bg-glass: #FED700;
       --border: rgba(0, 0, 0, 0.15);
       --border-strong: #000000;
@@ -2351,8 +2351,8 @@
 
     /* ==================== NOVO GRUPO DE NAVEGAÇÃO EM LINHAS COM CHEVRON (›) ==================== */
     .pet-nav-card {
-      background: #F7F3EB !important; /* Areia / Bege Aconchegante Nobre */
-      border: 1px solid #E5DFD1 !important;
+      background: #E8DCC4 !important; /* Areia / Bege Aconchegante Nobre */
+      border: 1px solid #D4C4A4 !important;
       border-radius: 20px !important;
       overflow: hidden;
       margin-bottom: 16px;
@@ -2430,8 +2430,8 @@
 
     /* ==================== NOVO CARD SOCIAL DE PETS (PADRÃO ALERTA URBANO) ==================== */
     .pet-card {
-      background: #F7F3EB !important; /* Areia / Bege Aconchegante Nobre */
-      border: 1px solid #E5DFD1 !important;
+      background: #E8DCC4 !important; /* Areia / Bege Aconchegante Nobre */
+      border: 1px solid #D4C4A4 !important;
       border-radius: 20px !important;
       overflow: hidden;
       margin-bottom: 16px;
@@ -3480,10 +3480,15 @@
             </select>
           </div>
 
-          <label class="lgpd-box" style="margin-bottom:14px;">
-            <input type="checkbox" id="cadastro-termos-check" checked>
-            <span>Li e concordo com os Termos de Uso, Política de Privacidade e Política de Tolerância Zero a conteúdo censurável.</span>
-          </label>
+          <div class="lgpd-box" style="margin-bottom:14px; background:#f4f4f5; border:1px solid rgba(0,0,0,0.12); padding:12px; border-radius:14px; display:flex; align-items:flex-start; gap:10px;">
+            <input type="checkbox" id="cadastro-termos-check" checked style="accent-color:#009B3A; width:18px; height:18px; margin-top:2px; flex-shrink:0; cursor:pointer;">
+            <span style="font-size:12px; color:#18181B; line-height:1.45;">
+              Li e concordo com os 
+              <a href="javascript:void(0)" onclick="abrirModalTermos('termos')" style="color:#009B3A; font-weight:800; text-decoration:underline;">Termos de Uso</a>, a 
+              <a href="javascript:void(0)" onclick="abrirModalTermos('privacidade')" style="color:#009B3A; font-weight:800; text-decoration:underline;">Política de Privacidade</a> e as 
+              <a href="javascript:void(0)" onclick="abrirModalTermos('tolerancia')" style="color:#009B3A; font-weight:800; text-decoration:underline;">Diretrizes de Tolerância Zero</a>.
+            </span>
+          </div>
 
           <button type="button" class="btn-submit btn-cadastrar-entrar" onclick="concluirCadastroManual()">
             Concluir Cadastro & Entrar
@@ -3545,7 +3550,7 @@
           </div>
 
           <!-- Linha 3: Termos de Uso -->
-          <div class="perfil-nav-row" onclick="abrirTermosDeUso()">
+          <div class="perfil-nav-row" onclick="abrirModalTermos('termos')">
             <div class="perfil-nav-left">
               <div class="perfil-nav-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg></div>
               <div>
@@ -3559,7 +3564,7 @@
           </div>
 
           <!-- Linha 4: Privacidade & LGPD -->
-          <div class="perfil-nav-row" onclick="window.open('/politica_privacidade.html', '_blank')">
+          <div class="perfil-nav-row" onclick="abrirModalTermos('privacidade')">
             <div class="perfil-nav-left">
               <div class="perfil-nav-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg></div>
               <div>
@@ -3663,6 +3668,96 @@
           <div id="perfil-lista-meus-pets" style="display:flex; flex-direction:column; gap:8px;"></div>
         </div>
       </div>
+    </div>
+  </div>
+
+    <!-- MODAL DE TERMOS DE USO, PRIVACIDADE (LGPD) E TOLERÂNCIA ZERO (UGC) -->
+  <div class="full-screen-view" id="modal-termos" style="z-index:10050; background:var(--bg);">
+    <div class="fs-header" style="background:#009B3A; border-bottom:none; color:#ffffff; padding:calc(env(safe-area-inset-top, 0px) + 12px) 16px 12px;">
+      <button type="button" class="fs-back" style="background:#ffffff; color:#000000; font-weight:800; border-radius:12px; padding:6px 14px; border:none; box-shadow:0 2px 6px rgba(0,0,0,0.15); cursor:pointer;" onclick="fecharModal('modal-termos')">‹ Voltar</button>
+      <div style="text-align:center;">
+        <div style="font-size:16px; font-weight:900; color:#ffffff;">Termos & Diretrizes</div>
+        <div style="font-size:10.5px; font-weight:800; color:rgba(255,255,255,0.85); letter-spacing:0.5px;">ALERTA URBANO CASCAVEL</div>
+      </div>
+      <div style="width:58px;"></div>
+    </div>
+    <div style="background:#009B3A; line-height:0;">
+      <svg viewBox="0 0 500 16" preserveAspectRatio="none" style="width:100%; height:16px; display:block;">
+        <path d="M 0,0 L 500,0 L 500,4 C 420,16 330,2 240,12 C 150,18 80,4 0,14 Z" fill="var(--bg)"/>
+      </svg>
+    </div>
+
+    <!-- Navegação de Abas do Modal -->
+    <div style="padding:10px 16px 6px; display:flex; gap:8px; overflow-x:auto;">
+      <button type="button" id="tab-btn-termos" class="btn-tab-termos active" onclick="trocarAbaTermos('termos')" style="flex:1; padding:9px 6px; border-radius:12px; font-size:11.5px; font-weight:800; border:1px solid #000; background:#000; color:#FED700; cursor:pointer;">
+        📋 Termos de Uso
+      </button>
+      <button type="button" id="tab-btn-privacidade" class="btn-tab-termos" onclick="trocarAbaTermos('privacidade')" style="flex:1; padding:9px 6px; border-radius:12px; font-size:11.5px; font-weight:800; border:1px solid rgba(0,0,0,0.18); background:#ffffff; color:#18181B; cursor:pointer;">
+        🔒 Privacidade LGPD
+      </button>
+      <button type="button" id="tab-btn-tolerancia" class="btn-tab-termos" onclick="trocarAbaTermos('tolerancia')" style="flex:1; padding:9px 6px; border-radius:12px; font-size:11.5px; font-weight:800; border:1px solid rgba(0,0,0,0.18); background:#ffffff; color:#18181B; cursor:pointer;">
+        🛡️ Tolerância Zero
+      </button>
+    </div>
+
+    <!-- Conteúdo Scrollável com Fundo Branco Limpo e Alto Contraste -->
+    <div class="fs-content" style="flex:1; overflow-y:auto; padding:12px 16px 88px; -webkit-overflow-scrolling:touch;">
+      
+      <!-- ABA 1: TERMOS DE USO -->
+      <div id="painel-termos-uso" class="painel-termos" style="display:block; background:#ffffff; border-radius:18px; padding:18px 16px; border:1px solid rgba(0,0,0,0.10); box-shadow:0 4px 16px rgba(0,0,0,0.06); color:#18181B; line-height:1.6;">
+        <div style="font-size:16px; font-weight:900; color:#009B3A; margin-bottom:4px;">Termos de Uso da Plataforma</div>
+        <div style="font-size:11.5px; color:#71717A; margin-bottom:14px;">Rede de Proteção e Alerta Urbano de Cascavel - PR</div>
+
+        <p style="font-size:13px; margin-bottom:12px;"><strong>1. Finalidade do Aplicativo:</strong> O Alerta Urbano Cascavel é uma rede cívica de inteligência urbana e proteção comunitária desenvolvida para apoiar moradores, famílias, motoristas de aplicativo e entregadores de Cascavel na prevenção de riscos e resgate ágil de pets desaparecidos.</p>
+
+        <p style="font-size:13px; margin-bottom:12px;"><strong>2. Veracidade das Informações:</strong> O usuário declara que todas as ocorrências cadastradas (pets perdidos, avistamentos na rua, alertas de trânsito) são verdadeiras e verificáveis. É terminantemente proibido o envio de comunicados fraudulentos, trotes ou alarmes falsos.</p>
+
+        <p style="font-size:13px; margin-bottom:12px;"><strong>3. Proibição Absoluta de Comércio:</strong> É estritamente proibida qualquer menção a comércio, venda, compra, cruza paga ou qualquer transação financeira envolvendo animais. A plataforma destina-se exclusivamente ao resgate e à doação responsável.</p>
+
+        <p style="font-size:13px; margin-bottom:12px;"><strong>4. Encerramento Autônomo pelo Tutor:</strong> Quando o pet for resgatado ou a ocorrência solucionada, o próprio usuário que realizou a publicação deve clicar em "Finalizar/Pet Encontrado". Ao encerrar, seus dados de contato são instantaneamente ocultados do público.</p>
+
+        <p style="font-size:13px; margin-bottom:4px;"><strong>5. Apoio às Autoridades:</strong> Casos graves de maus-tratos a animais ou crimes devem ser encaminhados imediatamente aos órgãos competentes (SEMA Cascavel, Guarda Municipal e Polícia Civil). O aplicativo não substitui os canais de emergência 190 ou 153.</p>
+      </div>
+
+      <!-- ABA 2: PRIVACIDADE E LGPD -->
+      <div id="painel-privacidade-lgpd" class="painel-termos" style="display:none; background:#ffffff; border-radius:18px; padding:18px 16px; border:1px solid rgba(0,0,0,0.10); box-shadow:0 4px 16px rgba(0,0,0,0.06); color:#18181B; line-height:1.6;">
+        <div style="font-size:16px; font-weight:900; color:#009B3A; margin-bottom:4px;">Política de Privacidade e Proteção de Dados (LGPD)</div>
+        <div style="font-size:11.5px; color:#71717A; margin-bottom:14px;">Em conformidade com a Lei Geral de Proteção de Dados (Lei nº 13.709/2018)</div>
+
+        <p style="font-size:13px; margin-bottom:12px;"><strong>1. Controladora dos Dados:</strong> Vórtice Mídia, desenvolvedora responsável pelo aplicativo Alerta Urbano Cascavel.</p>
+
+        <p style="font-size:13px; margin-bottom:12px;"><strong>2. Dados Coletados Mínimos:</strong> Coletamos apenas Nome Completo, WhatsApp/Telefone e Bairro de residência informados voluntariamente no cadastro para viabilizar a identificação do tutor e o contato de resgate.</p>
+
+        <p style="font-size:13px; margin-bottom:12px;"><strong>3. Finalidade e Consentimento:</strong> Seu WhatsApp é utilizado exclusivamente para viabilizar que moradores ou condutores que avistaram o animal possam entrar em contato com você para resgatá-lo. Nenhum dado é repassado para publicidade externa ou disparos em massa.</p>
+
+        <p style="font-size:13px; margin-bottom:12px;"><strong>4. Sigilo e Não Comercialização:</strong> A Vórtice Mídia não vende, aluga ou compartilha suas informações pessoais com terceiros sob qualquer pretexto.</p>
+
+        <p style="font-size:13px; margin-bottom:12px;"><strong>5. Direito de Exclusão Completa:</strong> A qualquer momento você pode apagar sua conta e todos os seus registros clicando no botão "Excluir Minha Conta" no menu de configurações do perfil ou solicitando ao e-mail de suporte: <em>rigobertobockhorny@gmail.com</em>.</p>
+
+        <p style="font-size:13px; margin-bottom:4px;"><strong>6. Documento Integral:</strong> O texto completo da política encontra-se acessível permanentemente na URL oficial: <a href="/politica_privacidade.html" target="_blank" style="color:#009B3A; font-weight:800; text-decoration:underline;">politica_privacidade.html</a>.</p>
+      </div>
+
+      <!-- ABA 3: POLÍTICA DE TOLERÂNCIA ZERO (UGC) -->
+      <div id="painel-tolerancia-zero" class="painel-termos" style="display:none; background:#ffffff; border-radius:18px; padding:18px 16px; border:1px solid rgba(0,0,0,0.10); box-shadow:0 4px 16px rgba(0,0,0,0.06); color:#18181B; line-height:1.6;">
+        <div style="font-size:16px; font-weight:900; color:#dc2626; margin-bottom:4px;">Diretrizes de Tolerância Zero a Conteúdo Censurável (UGC)</div>
+        <div style="font-size:11.5px; color:#71717A; margin-bottom:14px;">Padrão Google Play Developer Policy para Conteúdo Gerado por Usuários</div>
+
+        <p style="font-size:13px; margin-bottom:12px;"><strong>1. Tolerância Zero Estrita:</strong> Não é admitido, sob hipótese alguma, o envio ou compartilhamento de publicações que contenham nudez, pornografia, violência explícita, assédio, ameaças, discurso de ódio, racismo, difamação ou qualquer apologia ao crime.</p>
+
+        <p style="font-size:13px; margin-bottom:12px;"><strong>2. Botão de Denúncia em 1 Toque:</strong> Todas as publicações e fotos no aplicativo contam com um botão de denúncia ("Reportar Conteúdo"). Qualquer usuário pode sinalizar uma publicação abusiva imediatamente.</p>
+
+        <p style="font-size:13px; margin-bottom:12px;"><strong>3. Análise e Remoção em até 24 Horas:</strong> Nossa equipe de moderação audita diariamente os conteúdos reportados. Qualquer material inadequado é removido e o usuário autor é permanentemente banido do ecossistema.</p>
+
+        <p style="font-size:13px; margin-bottom:4px;"><strong>4. Bloqueio Imediato:</strong> O aplicativo reserva o direito de bloquear e banir preventivamente qualquer usuário ou dispositivo que tente violar essas diretrizes de civilidade e respeito.</p>
+      </div>
+
+    </div>
+
+    <!-- Botão de Ação Inferior Fixo -->
+    <div style="position:fixed; bottom:0; left:0; right:0; background:var(--bg); border-top:1px solid var(--border); padding:12px 16px calc(env(safe-area-inset-bottom, 0px) + 12px); z-index:10060; max-width:580px; margin:0 auto;">
+      <button type="button" class="btn-submit" style="background:#009B3A; color:#ffffff; font-weight:900; font-size:15px; border-radius:14px; box-shadow:0 4px 14px rgba(0,155,58,0.35); cursor:pointer;" onclick="aceitarTermosEFechar()">
+        Compreendi e Concordo
+      </button>
     </div>
   </div>
 
@@ -4245,7 +4340,7 @@
       const el = document.getElementById('pets-full-list');
       if (!pets.length) {
         if (pilarAtivo === 'adocao') {
-          el.innerHTML = `<div class="empty-box" style="padding:28px 16px; text-align:center; background:#F7F3EB; border:1px solid #E5DFD1; border-radius:18px;">
+          el.innerHTML = `<div class="empty-box" style="padding:28px 16px; text-align:center; background:#E8DCC4; border:1px solid #D4C4A4; border-radius:18px;">
             <div style="font-size:15px; font-weight:800; color:#1C1917; margin-bottom:6px;">Nenhum pet para adoção no momento</div>
             <div style="font-size:12px; color:#57534E; max-width:280px; margin:0 auto 16px;">Divulgue um animal resgatado para ganhar um lar amoroso em Cascavel.</div>
             <button type="button" class="btn-pet-cta-primary" style="max-width:240px; margin:0 auto;" onclick="abrirModalPet('pet_adocao')">
@@ -4253,7 +4348,7 @@
             </button>
           </div>`;
         } else if (pilarAtivo === 'avistados') {
-          el.innerHTML = `<div class="empty-box" style="padding:28px 16px; text-align:center; background:#F7F3EB; border:1px solid #E5DFD1; border-radius:18px;">
+          el.innerHTML = `<div class="empty-box" style="padding:28px 16px; text-align:center; background:#E8DCC4; border:1px solid #D4C4A4; border-radius:18px;">
             <div style="font-size:15px; font-weight:800; color:#1C1917; margin-bottom:6px;">Nenhum pet avistado na rua registrado</div>
             <div style="font-size:12px; color:#57534E; max-width:300px; margin:0 auto 16px;">Viu algum animal perambulando sem tutor? Registre o ponto para ajudar o dono.</div>
             <button type="button" class="btn-pet-cta-primary" style="max-width:260px; margin:0 auto;" onclick="abrirModalPet('pet_avistado')">
@@ -4261,7 +4356,7 @@
             </button>
           </div>`;
         } else {
-          el.innerHTML = `<div class="empty-box" style="padding:28px 16px; text-align:center; background:#F7F3EB; border:1px solid #E5DFD1; border-radius:18px;">
+          el.innerHTML = `<div class="empty-box" style="padding:28px 16px; text-align:center; background:#E8DCC4; border:1px solid #D4C4A4; border-radius:18px;">
             <div style="font-size:15px; font-weight:800; color:#1C1917; margin-bottom:6px;">Nenhum pet desaparecido no momento</div>
             <div style="font-size:12px; color:#57534E; max-width:280px; margin:0 auto 16px;">Cadastre o sumiço do seu animal para alertar a rede de motoristas e cidadãos de Cascavel.</div>
             <button type="button" class="btn-pet-cta-primary" style="max-width:250px; margin:0 auto;" onclick="abrirModalPet('pet_perdido')">
@@ -5629,8 +5724,49 @@ Baixe o aplicativo gratuito Alerta Urbano:
       }
     }
 
+    function abrirModalTermos(aba) {
+      const m = document.getElementById('modal-termos');
+      if (m) m.classList.add('open');
+      trocarAbaTermos(aba || 'termos');
+    }
+
+    function trocarAbaTermos(aba) {
+      const paineis = {
+        'termos': document.getElementById('painel-termos-uso'),
+        'privacidade': document.getElementById('painel-privacidade-lgpd'),
+        'tolerancia': document.getElementById('painel-tolerancia-zero')
+      };
+      const botoes = {
+        'termos': document.getElementById('tab-btn-termos'),
+        'privacidade': document.getElementById('tab-btn-privacidade'),
+        'tolerancia': document.getElementById('tab-btn-tolerancia')
+      };
+
+      Object.keys(paineis).forEach(k => {
+        if (paineis[k]) paineis[k].style.display = (k === aba) ? 'block' : 'none';
+        if (botoes[k]) {
+          if (k === aba) {
+            botoes[k].style.background = '#000000';
+            botoes[k].style.color = '#FED700';
+            botoes[k].style.border = '1px solid #000000';
+          } else {
+            botoes[k].style.background = '#ffffff';
+            botoes[k].style.color = '#18181B';
+            botoes[k].style.border = '1px solid rgba(0,0,0,0.18)';
+          }
+        }
+      });
+    }
+
+    function aceitarTermosEFechar() {
+      const chk = document.getElementById('cadastro-termos-check');
+      if (chk) chk.checked = true;
+      fecharModal('modal-termos');
+      mostrarToast('✓ Termos e Políticas aceitos!');
+    }
+
     function abrirTermosDeUso() {
-      alert('Alerta Urbano Cascavel — Diretrizes da Comunidade:\n\n1. Tolerância zero para conteúdo falso, ofensivo ou criminoso.\n2. Proibido comércio e venda de animais (apenas adoção responsável).\n3. Denúncias sigilosas de maus-tratos geram dossiê oficial encaminhado à SEMA e Polícia Civil.');
+      abrirModalTermos('termos');
     }
 
     function verificarUsuarioLogado(acaoNome) {
