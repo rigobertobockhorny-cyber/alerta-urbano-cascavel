@@ -896,45 +896,128 @@
       margin: 0 auto;
     }
     
-    /* ==================== PERFIL & CADASTRO SLIM ==================== */
+    /* ==================== PERFIL & CADASTRO (ALTO CONTRASTE VERDE / AMARELO / PRETO) ==================== */
+    #modal-perfil .profile-fs-header {
+      background: #009B3A !important;
+      border-bottom: none !important;
+      padding: calc(env(safe-area-inset-top, 0px) + 12px) 16px 8px;
+    }
+    #modal-perfil .profile-back-btn {
+      background: #000000 !important;
+      color: #ffffff !important;
+      border: 1px solid rgba(255, 255, 255, 0.25) !important;
+      font-weight: 800 !important;
+      border-radius: 999px !important;
+      padding: 7px 14px !important;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    }
+    #modal-perfil #perfil-header-title {
+      color: #ffffff !important;
+      font-size: 16px !important;
+      font-weight: 900 !important;
+    }
+    #modal-perfil #perfil-header-sub {
+      color: #FED700 !important;
+      font-size: 10.5px !important;
+      font-weight: 800 !important;
+      letter-spacing: 0.5px;
+    }
+    .profile-river-wave {
+      width: 100%;
+      height: 18px;
+      line-height: 0;
+      margin-top: -1px;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .profile-river-wave svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+    [data-theme="dark"] #modal-perfil .profile-fs-header {
+      background: #000000 !important;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+    }
+    [data-theme="dark"] .profile-river-wave {
+      display: none !important;
+    }
+
+    .perfil-intro-title {
+      font-size: 22px;
+      font-weight: 900;
+      color: #000000 !important; /* PRETO SÓLIDO (Zero branco no amarelo!) */
+      margin-bottom: 6px;
+      letter-spacing: -0.3px;
+    }
+    [data-theme="dark"] .perfil-intro-title {
+      color: #ffffff !important;
+    }
+
+    .perfil-intro-sub {
+      font-size: 13px;
+      font-weight: 600;
+      color: #18181B !important; /* PRETO PROFUNDO (Zero cinza no amarelo!) */
+      line-height: 1.45;
+      max-width: 340px;
+      margin: 0 auto;
+    }
+    [data-theme="dark"] .perfil-intro-sub {
+      color: #a1a1aa !important;
+    }
+
     .btn-google-auth {
       width: 100%;
       background: #ffffff;
-      color: #1f1f1f;
-      font-size: 14px;
-      font-weight: 700;
+      color: #000000 !important;
+      font-size: 14.5px;
+      font-weight: 800;
       padding: 13px 16px;
       border-radius: 14px;
-      border: none;
+      border: 1.5px solid #000000 !important;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 12px;
       cursor: pointer;
-      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
       margin-bottom: 12px;
       transition: transform 0.15s, background 0.15s;
     }
     .btn-google-auth:active {
       transform: scale(0.985);
-      background: #f1f1f1;
+      background: #f4f4f5;
     }
+    [data-theme="dark"] .btn-google-auth {
+      background: #18181b;
+      color: #ffffff !important;
+      border-color: rgba(255, 255, 255, 0.2) !important;
+    }
+
     .auth-divider {
       display: flex;
       align-items: center;
       text-align: center;
-      color: #71717a;
-      font-size: 11px;
-      font-weight: 600;
-      margin: 14px 0;
+      color: #000000 !important; /* PRETO SÓLIDO */
+      font-size: 11.5px;
+      font-weight: 800;
+      margin: 16px 0;
     }
     .auth-divider::before, .auth-divider::after {
       content: '';
       flex: 1;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      border-bottom: 1.5px solid rgba(0, 0, 0, 0.25) !important; /* LINHA NÍTIDA */
     }
     .auth-divider span {
       padding: 0 10px;
+    }
+    [data-theme="dark"] .auth-divider {
+      color: #a1a1aa !important;
+    }
+    [data-theme="dark"] .auth-divider::before,
+    [data-theme="dark"] .auth-divider::after {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
     }
     .perfil-hero {
       display: flex;
@@ -989,16 +1072,75 @@
       border: 2px solid #111114;
     }
     .perfil-card-box {
-      background: var(--bg-elevated);
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 16px;
+      background: #ffffff !important;
+      border: 1.5px solid rgba(0, 0, 0, 0.15) !important;
+      border-radius: 20px !important;
+      padding: 18px 16px !important;
       margin-bottom: 16px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.10) !important;
     }
+    [data-theme="dark"] .perfil-card-box {
+      background: #0e0f14 !important;
+      border: 1px solid rgba(255, 255, 255, 0.1) !important;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4) !important;
+    }
+
+    #modal-perfil .form-label {
+      color: #000000 !important;
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 5px;
+    }
+    [data-theme="dark"] #modal-perfil .form-label {
+      color: #a1a1aa !important;
+    }
+
+    #modal-perfil .form-input,
+    #modal-perfil .form-select {
+      color: #000000 !important;
+      background: #ffffff !important;
+      font-size: 13.5px;
+      font-weight: 600;
+      border: 1.5px solid rgba(0, 0, 0, 0.25) !important;
+      border-radius: 12px;
+      padding: 12px 14px;
+      outline: none;
+    }
+    #modal-perfil .form-input:focus,
+    #modal-perfil .form-select:focus {
+      border-color: #009B3A !important;
+    }
+    [data-theme="dark"] #modal-perfil .form-input,
+    [data-theme="dark"] #modal-perfil .form-select {
+      color: #ffffff !important;
+      background: #15171e !important;
+      border-color: rgba(255, 255, 255, 0.15) !important;
+    }
+
+    .btn-cadastrar-entrar {
+      background: #009B3A !important;
+      color: #ffffff !important;
+      font-size: 15px !important;
+      font-weight: 900 !important;
+      border-radius: 14px !important;
+      padding: 14px !important;
+      border: none !important;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(0, 155, 58, 0.4) !important;
+      transition: transform 0.15s ease;
+      width: 100%;
+      text-align: center;
+    }
+    .btn-cadastrar-entrar:active {
+      transform: scale(0.98);
+    }
+
     .perfil-section-lbl {
       font-size: 11px;
       font-weight: 800;
-      color: #8e8e93;
+      color: #000000 !important;
       text-transform: uppercase;
       letter-spacing: 0.5px;
       margin-bottom: 8px;
@@ -1006,19 +1148,29 @@
       align-items: center;
       justify-content: space-between;
     }
+    [data-theme="dark"] .perfil-section-lbl {
+      color: #a1a1aa !important;
+    }
+
     .perfil-nav-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 14px 16px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
       cursor: pointer;
       transition: background 0.15s;
+    }
+    [data-theme="dark"] .perfil-nav-row {
+      border-bottom-color: rgba(255, 255, 255, 0.06);
     }
     .perfil-nav-row:last-child {
       border-bottom: none;
     }
     .perfil-nav-row:active {
+      background: rgba(0, 0, 0, 0.04);
+    }
+    [data-theme="dark"] .perfil-nav-row:active {
       background: rgba(255, 255, 255, 0.05);
     }
     .perfil-nav-row.danger {
@@ -1038,13 +1190,41 @@
     }
     .perfil-nav-title {
       font-size: 13.5px;
-      font-weight: 700;
-      color: inherit;
+      font-weight: 800;
+      color: #000000 !important;
+    }
+    [data-theme="dark"] .perfil-nav-title {
+      color: #ffffff !important;
     }
     .perfil-nav-sub {
       font-size: 11px;
-      color: #71717a;
+      color: #52525B !important;
+      font-weight: 500;
       margin-top: 2px;
+    }
+    [data-theme="dark"] .perfil-nav-sub {
+      color: #a1a1aa !important;
+    }
+
+    .perfil-hero-nome {
+      font-size: 17px;
+      font-weight: 900;
+      color: #000000 !important;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    [data-theme="dark"] .perfil-hero-nome {
+      color: #ffffff !important;
+    }
+    .perfil-hero-sub {
+      font-size: 12px;
+      color: #52525B !important;
+      font-weight: 600;
+      margin-top: 2px;
+    }
+    [data-theme="dark"] .perfil-hero-sub {
+      color: #a1a1aa !important;
     }
 
     .partner-row {
@@ -3211,21 +3391,26 @@
 
   <!-- ==================== TELA COMPLETA: MEU PERFIL & CADASTRO ==================== -->
   <div class="full-screen-view" id="modal-perfil">
-    <div class="fs-header">
-      <button type="button" class="fs-back" onclick="fecharModal('modal-perfil')">‹ Voltar</button>
+    <div class="fs-header profile-fs-header">
+      <button type="button" class="fs-back profile-back-btn" onclick="fecharModal('modal-perfil')">‹ Voltar</button>
       <div style="text-align:center;">
-        <div style="font-size:15px; font-weight:800;" id="perfil-header-title">Minha Conta</div>
-        <div style="font-size:10px; color:#8e8e93; font-weight:700;">Alerta Urbano Cascavel</div>
+        <div style="font-size:16px; font-weight:900;" id="perfil-header-title">Minha Conta</div>
+        <div style="font-size:10.5px; font-weight:800; letter-spacing:0.5px;" id="perfil-header-sub">Alerta Urbano Cascavel</div>
       </div>
       <div style="width:48px;"></div> <!-- Espaçador para equilíbrio visual sem botão redundante -->
+    </div>
+    <div class="profile-river-wave">
+      <svg viewBox="0 0 500 20" preserveAspectRatio="none">
+        <path d="M 0,0 L 500,0 L 500,6 C 420,18 330,2 240,14 C 150,22 80,4 0,16 Z" fill="#009B3A"/>
+      </svg>
     </div>
 
     <div class="fs-body" style="max-width:540px; margin:0 auto; width:100%;">
       <!-- ESTADO 1: TELA DE CADASTRO / LOGIN (QUANDO NÃO LOGADO) -->
       <div id="perfil-view-cadastro" style="display:none;">
-        <div style="text-align:center; padding:10px 0 16px;">
-          <div style="font-size:20px; font-weight:800; color:#ffffff; margin-bottom:6px;">Acesse sua Conta</div>
-          <div style="font-size:12.5px; color:#8e8e93; line-height:1.4; max-width:340px; margin:0 auto;">
+        <div style="text-align:center; padding:12px 0 16px;">
+          <div class="perfil-intro-title">Acesse sua Conta</div>
+          <div class="perfil-intro-sub">
             Conecte sua conta para publicar animais desaparecidos, registrar adoções e enviar denúncias com segurança.
           </div>
         </div>
@@ -3300,7 +3485,7 @@
             <span>Li e concordo com os Termos de Uso, Política de Privacidade e Política de Tolerância Zero a conteúdo censurável.</span>
           </label>
 
-          <button type="button" class="btn-submit" style="background:#10b981; color:#09090b; font-weight:800;" onclick="concluirCadastroManual()">
+          <button type="button" class="btn-submit btn-cadastrar-entrar" onclick="concluirCadastroManual()">
             Concluir Cadastro & Entrar
           </button>
         </div>
@@ -3319,10 +3504,10 @@
           </div>
           <input type="file" id="perfil-input-foto" accept="image/*" style="display:none;" onchange="uploadFotoPerfil(this)">
           <div style="flex:1; min-width:0;">
-            <div id="perfil-display-nome" style="font-size:16px; font-weight:800; color:#ffffff; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">Nome do Usuário</div>
-            <div id="perfil-display-sub" style="font-size:12px; color:#8e8e93; margin-top:2px;">Centro • Cascavel - PR</div>
+            <div id="perfil-display-nome" class="perfil-hero-nome">Nome do Usuário</div>
+            <div id="perfil-display-sub" class="perfil-hero-sub">Centro • Cascavel - PR</div>
             <div style="margin-top:6px;">
-              <span style="display:inline-flex; align-items:center; gap:4px; font-size:10px; font-weight:800; color:#10b981; background:rgba(16, 185, 129, 0.12); padding:2px 8px; border-radius:999px; border:1px solid rgba(16, 185, 129, 0.25);">
+              <span style="display:inline-flex; align-items:center; gap:4px; font-size:10px; font-weight:800; color:#009B3A; background:rgba(0, 155, 58, 0.12); padding:2px 8px; border-radius:999px; border:1px solid rgba(0, 155, 58, 0.25);">
                 ✓ Conta Ativa
               </span>
             </div>
@@ -3418,7 +3603,7 @@
 
         <!-- Seção Expansível: Formulário de Edição de Dados (Apenas 1 Botão Salvar) -->
         <div id="perfil-caixa-edicao" class="perfil-card-box" style="display:none;">
-          <div style="font-size:13px; font-weight:800; color:#ffffff; margin-bottom:12px;">Editar Meus Dados</div>
+          <div style="font-size:14px; font-weight:900; color:var(--text); margin-bottom:12px;">Editar Meus Dados</div>
           <div class="form-group">
             <label class="form-label" for="perfil-edit-nome">Nome Completo</label>
             <input type="text" class="form-input" id="perfil-edit-nome" placeholder="Seu nome completo">
@@ -5488,14 +5673,14 @@ Baixe o aplicativo gratuito Alerta Urbano:
       const meus = state.alertas.filter(a => a.pilar === 'pet' && a.autor_token && a.autor_token === state.autorToken);
       if (resumo) resumo.textContent = `${meus.length} registro(s) publicado(s)`;
       if (!meus.length) {
-        box.innerHTML = '<div class="empty-box" style="padding:14px; text-align:center; color:#8e8e93;">Você ainda não cadastrou nenhum pet ou alerta.</div>';
+        box.innerHTML = '<div class="empty-box" style="padding:14px; text-align:center; color:var(--text-muted); font-weight:600;">Você ainda não cadastrou nenhum pet ou alerta.</div>';
         return;
       }
       box.innerHTML = meus.map(p => `
         <div class="perfil-card-box" style="margin-bottom:0; padding:12px; display:flex; align-items:center; justify-content:space-between; gap:10px;">
           <div style="min-width:0;">
-            <div style="font-size:13px; font-weight:800; color:#ffffff;">${escapeHtml(p.titulo)}</div>
-            <div style="font-size:11px; color:#8e8e93;">${escapeHtml(p.bairro || 'Cascavel')}</div>
+            <div style="font-size:13.5px; font-weight:800; color:var(--text);">${escapeHtml(p.titulo)}</div>
+            <div style="font-size:11px; color:var(--text-muted); font-weight:600;">${escapeHtml(p.bairro || 'Cascavel')}</div>
           </div>
           <div style="display:flex; gap:6px; flex-shrink:0;">
             <button type="button" class="btn-slim" onclick="renovarMeuPet(${p.id})">+48h</button>
