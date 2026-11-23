@@ -434,7 +434,8 @@ def minerar_portal_publico(nome_fonte, urls, tipo_padrao, titulo_padrao):
 
 
 def minerar_cgn_pets():
-    """Varre a seção oficial de Achados e Perdidos da CGN (Pets de Cascavel)."""
+    """Varre a seção oficial de Achados e Perdidos da CGN.
+    Separa rigorosamente animais (pilar 'pet') de documentos/chaves/objetos (pilar 'utilidade')."""
     url = "https://cgn.inf.br/achados-e-perdidos"
     try:
         html = fetch_url(url, timeout=12).decode("utf-8", errors="ignore")
@@ -443,8 +444,9 @@ def minerar_cgn_pets():
         return []
 
     items = re.findall(r'<a[^>]*href=[\'"](https://cgn\.inf\.br/noticia/\d+/[^\'"]+)[\'"][^>]*>(.*?)</a>', html, re.DOTALL)
-    pets = []
-    palavras_pet = ["cachorr", "gato", "gata", "calopsita", "cão", "cadela", "filhote", "poodle", "pitbull", "pastor", "shih", "pinscher", "pet"]
+    registros = []
+    palavras_animais = ["cachorr", "gato", "gata", "calopsita", "cão", "cadela", "filhote", "poodle", "pitbull", "pastor", "shih", "pinscher"]
+    palavras_documentos = ["documento", "identidade", "cnh", "carteira", "chave", "placa", "mochila", "celular", "bolsa", "cartão", "cartao"]
     seen = set()
 
     for item_url, inner in items:
@@ -453,13 +455,41 @@ def minerar_cgn_pets():
         seen.add(item_url)
         texto = limpar_html(inner)
         lower = texto.lower()
-        if not any(p in lower for p in palavras_pet):
+
+        # Verifica se é documento / objeto perdido (Utilidade Pública)
+        eh_documento = any(d in lower for d in palavras_documentos)
+        tem_animal = any(p in lower for p in palavras_animais) or bool(re.search(r'\bpets?\b', lower))
+
+        if not eh_documento and not tem_animal:
             continue
+
+        clean_text = re.sub(r'^\d+\s+de\s+[a-zç]+\s+de\s+\d+\s*\|\s*\d+:\d+', '', texto).strip()
+        bairro, lat, lng = identificar_local_cascavel(clean_text)
 
         img_m = re.search(r'src=[\'"]([^\'"]+\.(?:jpg|jpeg|png|webp))[\'"]', inner)
         foto = img_m.group(1) if img_m else ""
-        clean_text = re.sub(r'^\d+\s+de\s+[a-zç]+\s+de\s+\d+\s*\|\s*\d+:\d+', '', texto).strip()
 
+        if eh_documento and not tem_animal:
+            # Achados e Perdidos de Utilidade Pública (Zero foto de pet)
+            registros.append({
+                "pilar": "utilidade",
+                "tipo": "utilidade_geral",
+                "titulo": "Achados e Perdidos: Documentos / Objetos",
+                "descricao": clean_text,
+                "rua": bairro,
+                "bairro": bairro,
+                "lat": lat,
+                "lng": lng,
+                "foto_url": "",
+                "link": item_url,
+                "fonte_nome": "CGN",
+                "especie": "",
+                "status_pet": "",
+                "severidade": "normal",
+            })
+            continue
+
+        # Animal real
         eh_avistado = any(k in lower for k in ["encontrado", "encontrada", "resgatado", "avistado"])
         nome_pet = "Animal Encontrado" if eh_avistado else "Pet Desaparecido"
         m_nome = re.search(r'(Cachorr[ao]|Gat[ao]|Calopsita|Cadela)\s+([A-ZÁÉÍÓÚÂÊÔÃÕ][a-záéíóúâêôãõ]+)', clean_text)
@@ -467,9 +497,8 @@ def minerar_cgn_pets():
             nome_pet = f"{m_nome.group(1)} {m_nome.group(2)}"
 
         especie = "Gato" if ("gato" in lower or "gata" in lower) else ("Ave" if "calopsita" in lower else "Cachorro")
-        bairro, lat, lng = identificar_local_cascavel(clean_text)
 
-        pets.append({
+        registros.append({
             "pilar": "pet",
             "tipo": "pet_avistado" if eh_avistado else "pet_perdido",
             "titulo": nome_pet,
@@ -486,8 +515,8 @@ def minerar_cgn_pets():
             "severidade": "normal",
         })
 
-    print(f"🐾 CGN Pets: {len(pets)} animais identificados.")
-    return pets
+    print(f"🐾 CGN Varredura: {len(registros)} itens qualificados (Pets e Utilidade).")
+    return registros
 
 
 def salvar_alertas_no_banco(alertas):

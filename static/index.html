@@ -110,7 +110,7 @@
       color: inherit;
     }
 
-    /* ==================== SPLASH CÍVICA BRASIL COM CURVA DE RIO ==================== */
+    /* ==================== SPLASH OFICIAL: REDE DE PROTEÇÃO E ALERTA URBANO ==================== */
     .splash {
       position: fixed;
       inset: 0;
@@ -119,7 +119,7 @@
       flex-direction: column;
       background: #009B3A;
       overflow: hidden;
-      transition: opacity 0.4s ease, visibility 0.4s ease;
+      transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .splash.hide {
       opacity: 0;
@@ -132,36 +132,36 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding-top: 30px;
-      gap: 12px;
+      padding-top: 40px;
+      gap: 14px;
       z-index: 2;
     }
     .splash-logo {
-      width: 108px;
-      height: 108px;
+      width: 114px;
+      height: 114px;
       border-radius: 50%;
       object-fit: cover;
-      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.35);
+      box-shadow: 0 14px 40px rgba(0, 0, 0, 0.38);
     }
     .splash-title {
-      font-size: 22px;
+      font-size: 24px;
       font-weight: 900;
-      letter-spacing: 1.8px;
+      letter-spacing: 2px;
       color: #FED700;
       text-transform: uppercase;
-      text-shadow: 0 2px 8px rgba(0,0,0,0.25);
+      text-shadow: 0 2px 10px rgba(0,0,0,0.3);
     }
     .splash-city {
-      font-size: 11.5px;
-      font-weight: 700;
+      font-size: 12px;
+      font-weight: 800;
       color: #ffffff;
-      letter-spacing: 2.2px;
+      letter-spacing: 2.4px;
       text-transform: uppercase;
       opacity: 0.95;
     }
     .splash-river-wave-wrap {
       width: 100%;
-      height: 75px;
+      height: 85px;
       position: relative;
       margin-bottom: -1px;
       line-height: 0;
@@ -172,42 +172,31 @@
       display: block;
     }
     .splash-river-bottom {
-      height: 130px;
+      min-height: 135px;
       background: #FED700;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 5px;
-      padding: 0 20px 16px;
+      gap: 7px;
+      padding: 10px 20px calc(env(safe-area-inset-bottom, 16px) + 20px);
       z-index: 2;
     }
     .splash-tagline {
-      font-size: 13px;
+      font-size: 13.5px;
       font-weight: 900;
       color: #009B3A;
-      letter-spacing: 1.2px;
+      letter-spacing: 1.3px;
+      text-align: center;
+      text-transform: uppercase;
     }
-    .splash-btn-entrar {
-      margin-top: 14px;
-      background: #000000; /* Botão Preto 99 de Alto Impacto */
-      color: #FFFFFF;
-      font-size: 14.5px;
-      font-weight: 900;
-      letter-spacing: 0.9px;
-      padding: 13px 32px;
-      border-radius: 999px;
-      border: 2px solid #000000;
-      cursor: pointer;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
-      transition: transform 0.15s ease, background 0.15s ease;
-    }
-    .splash-btn-entrar:active { transform: scale(0.96); }
     .splash-subtext {
-      font-size: 11px;
-      font-weight: 700;
-      color: #0f172a;
-      opacity: 0.85;
+      font-size: 11.5px;
+      font-weight: 800;
+      color: #000000;
+      opacity: 0.88;
+      text-align: center;
+      letter-spacing: 0.3px;
     }
 
     /* Banners e Cards com Curva de Rio Orgânica */
@@ -384,13 +373,17 @@
       padding: 14px 16px 24px;
     }
     .tab-pane.active { display: block; }
+    body.tab-inicio .topbar-river-wave {
+      display: none !important;
+    }
     .tab-pane.home-pane.active {
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      justify-content: flex-start;
       overflow: hidden;
-      padding: 10px 14px 10px;
-      gap: 6px;
+      padding: 0 !important;
+      gap: 0;
+      height: 100%;
     }
     .tab-pane.map-pane {
       padding: 0;
@@ -484,95 +477,118 @@
       transform: scale(0.96);
     }
 
-    /* ==================== HOME v3.5: CLIMA SOLTO + ESTEIRAS SINCRONIZADAS (ZERO SCROLL) ==================== */
-    .weather-cluster {
+    /* ==================== HOME: CLIMA INTEGRADO NA CABECEIRA VERDE BRASIL ==================== */
+    .home-green-canopy {
+      background: #009B3A;
+      padding: 6px 14px 10px;
       display: flex;
       flex-direction: column;
-      gap: 5px;
+      gap: 8px;
+      flex-shrink: 0;
+      z-index: 10;
+    }
+    .weather-strip-green {
+      background: rgba(0, 0, 0, 0.18);
+      border-radius: 16px;
+      padding: 10px 14px 9px;
+      border: 1px solid rgba(254, 215, 0, 0.28);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
       flex-shrink: 0;
     }
-    .weather-strip {
-      background: var(--bg-elevated);
-      border-radius: 18px;
-      padding: 12px 14px;
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow-sm);
-      flex-shrink: 0;
-    }
-    .weather-top {
+    .weather-strip-green .weather-top {
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 10px;
     }
-    .weather-temp-wrap {
+    .weather-strip-green .weather-temp-wrap {
       display: flex;
       align-items: center;
       gap: 10px;
     }
-    .weather-ico { font-size: 32px; line-height: 1; }
-    .weather-temp {
-      font-size: 36px;
-      font-weight: 800;
-      letter-spacing: -1.8px;
-      line-height: 0.95;
-      color: var(--text);
+    .weather-strip-green .weather-ico {
+      font-size: 32px;
+      line-height: 1;
+      opacity: 0.95;
     }
-    .weather-cond {
+    .weather-strip-green .weather-temp {
+      font-size: 34px;
+      font-weight: 800;
+      letter-spacing: -1.5px;
+      line-height: 0.95;
+      color: #ffffff;
+    }
+    .weather-city-sub {
+      font-size: 10.5px;
+      color: #FED700;
+      margin-top: 2px;
+      font-weight: 700;
+      letter-spacing: 0.4px;
+    }
+    .weather-strip-green .weather-cond {
       font-size: 13px;
       font-weight: 700;
-      color: var(--text);
+      color: #ffffff;
       text-align: right;
     }
-    .weather-hl {
+    .weather-strip-green .weather-hl {
       font-size: 11px;
-      font-weight: 600;
-      color: var(--text-muted);
+      font-weight: 700;
+      color: #FED700;
       margin-top: 2px;
       text-align: right;
     }
-    .weather-metrics {
+    .weather-strip-green .weather-metrics {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-top: 5px;
-      padding: 4px 2px 0;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      margin-top: 6px;
+      padding: 5px 2px 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.14);
     }
-    .w-metric {
+    .weather-strip-green .w-metric {
       display: flex;
       align-items: baseline;
       gap: 4px;
     }
-    .w-metric-val { font-size: 11.5px; font-weight: 700; color: var(--text); }
-    .w-metric-lbl { font-size: 10px; font-weight: 500; color: var(--text-dim); }
+    .weather-strip-green .w-metric-val {
+      font-size: 11.5px;
+      font-weight: 800;
+      color: #ffffff;
+    }
+    .weather-strip-green .w-metric-lbl {
+      font-size: 10px;
+      font-weight: 700;
+      color: #FED700;
+    }
 
-    /* Pílula / Esteira Rolante de Status Climático (Resumida, Sem Emoji, Próxima da Temperatura) */
+    /* Pílula / Esteira Rolante Dinâmica */
     .alert-ticker {
       flex-shrink: 0;
       border-radius: 999px;
       overflow: hidden;
-      padding: 5px 0;
+      padding: 6px 0;
       position: relative;
       cursor: pointer;
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      background: #ffffff;
-      color: #09090b;
+      border: 1.5px solid rgba(254, 215, 0, 0.45);
+      background: #000000;
+      color: #FED700;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.28);
     }
     .alert-ticker.amarelo {
-      background: linear-gradient(90deg, #f59e0b, #fbbf24);
-      color: #09090b;
-      border-color: rgba(245, 158, 11, 0.5);
+      background: #FED700;
+      color: #000000;
+      border-color: #000000;
     }
     .alert-ticker.laranja {
-      background: linear-gradient(90deg, #ea580c, #f97316);
-      color: #ffffff;
-      border-color: rgba(234, 88, 12, 0.5);
+      background: #ea580c;
+      color: #000000;
+      border-color: #000000;
     }
     .alert-ticker.vermelho {
-      background: linear-gradient(90deg, #dc2626, #ef4444);
+      background: #dc2626;
       color: #ffffff;
-      border-color: rgba(220, 38, 38, 0.6);
+      border-color: #ffffff;
     }
     .ticker-track {
       display: flex;
@@ -587,13 +603,32 @@
       white-space: nowrap;
       font-size: 11px;
       font-weight: 800;
-      letter-spacing: 0.35px;
+      letter-spacing: 0.4px;
       text-transform: uppercase;
       padding-right: 40px;
     }
-    @keyframes tickerRun {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
+    .home-river-wave {
+      width: 100%;
+      height: 20px;
+      position: relative;
+      z-index: 5;
+      margin-top: -1px;
+      line-height: 0;
+      flex-shrink: 0;
+    }
+    .home-river-wave svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+    .home-belts-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 4px 14px 8px;
+      gap: 6px;
+      overflow: hidden;
     }
 
     /* Blocos de Esteiras Horizontais (Mesma Velocidade Calibrada via JS) */
@@ -2534,9 +2569,7 @@
     </style>
 </head>
 <body>
-  <!-- Splash Minimalista (500ms) -->
-    <!-- Splash Cívica Brasil com Curva de Rio Orgânica -->
-    <!-- Splash Cívica Brasil com Curva de Rio Orgânica (100% Verde & Amarelo) -->
+  <!-- Splash Oficial: Rede de Proteção e Alerta Urbano -->
   <div class="splash" id="splash">
     <div class="splash-river-top">
       <img src="/static/logo_bolha_pura.png?v=60" class="splash-logo" alt="Alerta Urbano">
@@ -2549,9 +2582,8 @@
       </svg>
     </div>
     <div class="splash-river-bottom">
-      <div class="splash-tagline">REDE COMUNITÁRIA CÍVICA</div>
+      <div class="splash-tagline">REDE DE PROTEÇÃO E ALERTA URBANO</div>
       <div class="splash-subtext">Pets • Trânsito • Segurança • Utilidade Pública</div>
-      <button type="button" class="splash-btn-entrar" onclick="fecharSplashImediato()">ENTRAR NO APP ›</button>
     </div>
   </div>
 
@@ -2592,17 +2624,17 @@
     <!-- ==================== CONTEÚDO DAS 4 ABAS ==================== -->
     <main class="main-stage">
 
-      <!-- ABA 1: INÍCIO (ZERO SCROLL — CLIMA SOLTO + PÍLULA RESUMIDA + 3 ESTEIRAS NA MESMA VELOCIDADE) -->
+      <!-- ABA 1: INÍCIO (ZERO SCROLL — CLIMA INTEGRADO NA CABECEIRA VERDE + ONDA + 3 ESTEIRAS) -->
       <section class="tab-pane home-pane active" id="tab-inicio">
-        <!-- Cluster Climático Integrado (Temperatura + Indicadores + Pílula colados) -->
-        <div class="weather-cluster">
-          <div class="weather-strip" id="weather-card">
+        <!-- Canopy Verde Integrado: Clima + Pílula de Alertas -->
+        <div class="home-green-canopy">
+          <div class="weather-strip-green" id="weather-card">
             <div class="weather-top">
               <div class="weather-temp-wrap">
-                <div class="weather-ico" id="w-ico" style="opacity:0.85;">☁️</div>
+                <div class="weather-ico" id="w-ico" style="opacity:0.92;">☁️</div>
                 <div>
                   <div class="weather-temp" id="w-temp">--°</div>
-                  <div style="font-size:10.5px; color:var(--text-dim); margin-top:2px; font-weight:600;">Cascavel • Agora</div>
+                  <div class="weather-city-sub">Cascavel • Agora</div>
                 </div>
               </div>
               <div>
@@ -2618,7 +2650,7 @@
             </div>
           </div>
 
-          <!-- Pílula / Esteira Climática Dinâmica (sem emoji, resumo objetivo) -->
+          <!-- Pílula / Esteira Climática Dinâmica -->
           <div class="alert-ticker" id="alert-ticker" onclick="abrirClimaBanner()">
             <div class="ticker-track" id="ticker-track">
               <span class="ticker-item">CASCAVEL • MONITORAMENTO CLIMÁTICO ATIVO</span>
@@ -2627,58 +2659,66 @@
           </div>
         </div>
 
-        <!-- Bloco 1: Esteira Pets (mais trabalhada com fotos) -->
-        <div class="belt-block">
-          <div class="belt-head">
-            <div class="belt-title pet-title">
-              <svg class="belt-svg" viewBox="0 0 24 24" fill="currentColor">
-                <circle cx="4.5" cy="5" r="1.6"/>
-                <circle cx="7.5" cy="3.5" r="1.6"/>
-                <circle cx="10.5" cy="5" r="1.6"/>
-                <circle cx="7.5" cy="9.2" r="2.8"/>
-                <circle cx="14.5" cy="12" r="1.6"/>
-                <circle cx="17.5" cy="10.5" r="1.6"/>
-                <circle cx="20.5" cy="12" r="1.6"/>
-                <circle cx="17.5" cy="16.2" r="2.8"/>
-              </svg>
-              <span>Pets</span>
-            </div>
-            
-          </div>
-          <div class="belt-viewport">
-            <div class="belt-track" id="belt-pets-track"></div>
-          </div>
+        <!-- Curva Orgânica Verde -> Amarelo (Logo abaixo do clima) -->
+        <div class="home-river-wave">
+          <svg viewBox="0 0 500 24" preserveAspectRatio="none">
+            <path d="M 0,0 L 500,0 L 500,6 C 410,24 330,4 230,18 C 140,26 70,8 0,20 Z" fill="#009B3A"/>
+          </svg>
         </div>
 
-        <!-- Bloco 2: Esteira Utilidade Pública -->
-        <div class="belt-block">
-          <div class="belt-head">
-            <div class="belt-title uti-title">
-              <svg class="belt-svg" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
-                <path d="m3 11 18-5v12L3 14v-3z"/>
-                <path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/>
-              </svg>
-              <span>Utilidade Pública</span>
+        <div class="home-belts-container">
+          <!-- Bloco 1: Esteira Pets (mais trabalhada com fotos) -->
+          <div class="belt-block">
+            <div class="belt-head">
+              <div class="belt-title pet-title">
+                <svg class="belt-svg" viewBox="0 0 24 24" fill="currentColor">
+                  <circle cx="4.5" cy="5" r="1.6"/>
+                  <circle cx="7.5" cy="3.5" r="1.6"/>
+                  <circle cx="10.5" cy="5" r="1.6"/>
+                  <circle cx="7.5" cy="9.2" r="2.8"/>
+                  <circle cx="14.5" cy="12" r="1.6"/>
+                  <circle cx="17.5" cy="10.5" r="1.6"/>
+                  <circle cx="20.5" cy="12" r="1.6"/>
+                  <circle cx="17.5" cy="16.2" r="2.8"/>
+                </svg>
+                <span>Pets</span>
+              </div>
+            </div>
+            <div class="belt-viewport">
+              <div class="belt-track" id="belt-pets-track"></div>
             </div>
           </div>
-          <div class="belt-viewport">
-            <div class="belt-track" id="belt-utilidade-track"></div>
-          </div>
-        </div>
 
-        <!-- Bloco 3: Esteira Segurança (Imprensa Oficial) -->
-        <div class="belt-block">
-          <div class="belt-head">
-            <div class="belt-title seg-title">
-              <svg class="belt-svg" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                <path d="m9 12 2 2 4-4"/>
-              </svg>
-              <span>Segurança</span>
+          <!-- Bloco 2: Esteira Utilidade Pública -->
+          <div class="belt-block">
+            <div class="belt-head">
+              <div class="belt-title uti-title">
+                <svg class="belt-svg" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="m3 11 18-5v12L3 14v-3z"/>
+                  <path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/>
+                </svg>
+                <span>Utilidade Pública</span>
+              </div>
+            </div>
+            <div class="belt-viewport">
+              <div class="belt-track" id="belt-utilidade-track"></div>
             </div>
           </div>
-          <div class="belt-viewport">
-            <div class="belt-track" id="belt-seguranca-track"></div>
+
+          <!-- Bloco 3: Esteira Segurança (Imprensa Oficial) -->
+          <div class="belt-block">
+            <div class="belt-head">
+              <div class="belt-title seg-title">
+                <svg class="belt-svg" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                  <path d="m9 12 2 2 4-4"/>
+                </svg>
+                <span>Segurança</span>
+              </div>
+            </div>
+            <div class="belt-viewport">
+              <div class="belt-track" id="belt-seguranca-track"></div>
+            </div>
           </div>
         </div>
       </section>
@@ -3468,6 +3508,7 @@
     /* ==================== NAVEGAÇÃO SLIM ==================== */
     function trocarAba(aba) {
       state.tab = aba;
+      document.body.classList.toggle('tab-inicio', aba === 'inicio');
       document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
       document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
       const pane = document.getElementById('tab-' + aba);
@@ -4310,7 +4351,12 @@
 
     function fecharSplashImediato() {
       const sp = document.getElementById('splash');
-      if (sp) sp.classList.add('hide');
+      if (sp) {
+        sp.classList.add('hide');
+        setTimeout(() => {
+          sp.style.display = 'none';
+        }, 650);
+      }
     }
 
     function fecharFotoZoom() {
@@ -5453,12 +5499,16 @@ Baixe o aplicativo gratuito Alerta Urbano:
       carregarDados();
       tentarReconectarGPS(false);
 
+      // Estado inicial da navegação
+      document.body.classList.add('tab-inicio');
+
       // Atualiza automaticamente a cada 60s
       setInterval(carregarDados, 60000);
 
-      // Splash Cívica Brasil: Permanece TRAVADA na tela inicial de boas-vindas
-      // até que o usuário clique intencionalmente no botão [ENTRAR NO APP ›] (Ordem do Rigo).
-      // Zero fechamento automático por timer!
+      // Splash Oficial: Exibe a tela de abertura por 4.5 segundos e faz fade out suave
+      setTimeout(() => {
+        fecharSplashImediato();
+      }, 4500);
     });
   </script>
 
