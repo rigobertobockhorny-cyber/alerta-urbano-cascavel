@@ -58,6 +58,33 @@
       --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.35);
     }
 
+    /* MODO NOTURNO 100% PRETO OLED (Zero barras verdes soltas no Noturno) */
+    [data-theme="dark"] .topbar {
+      background: #000000 !important;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+    }
+    [data-theme="dark"] .home-green-canopy {
+      background: #000000 !important;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+    }
+    [data-theme="dark"] .weather-strip-green {
+      background: #0e0f14 !important;
+      border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    }
+    [data-theme="dark"] .home-river-wave,
+    [data-theme="dark"] .topbar-river-wave,
+    [data-theme="dark"] .bottom-river-wave {
+      display: none !important;
+    }
+    [data-theme="dark"] .bottom-nav {
+      background: #000000 !important;
+      border-top: 1px solid rgba(255, 255, 255, 0.12) !important;
+    }
+    [data-theme="dark"] .belt-info-card {
+      background: #0e0f14 !important;
+      border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    }
+
     [data-theme="light"] {
       --bg: #FED700; /* Fundo Amarelo Oficial 99 */
       --bg-elevated: #ffffff; /* Blocos e Cards em Branco Puro */
@@ -570,34 +597,30 @@
       padding: 6px 0;
       position: relative;
       cursor: pointer;
-      border: 1.5px solid rgba(254, 215, 0, 0.45);
+      border: none !important;
       background: #000000;
       color: #FED700;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.28);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.32);
     }
     .alert-ticker.amarelo {
-      background: #FED700;
-      color: #000000;
-      border-color: #000000;
+      background: #FED700 !important;
+      color: #000000 !important;
+      border: none !important;
     }
     .alert-ticker.laranja {
-      background: #ea580c;
-      color: #000000;
-      border-color: #000000;
+      background: #ea580c !important;
+      color: #000000 !important;
+      border: none !important;
     }
     .alert-ticker.vermelho {
-      background: #dc2626;
-      color: #ffffff;
-      border-color: #ffffff;
+      background: #dc2626 !important;
+      color: #ffffff !important;
+      border: none !important;
     }
     .ticker-track {
       display: flex;
       width: max-content;
       animation: tickerRun 22s linear infinite;
-    }
-    .alert-ticker:hover .ticker-track,
-    .alert-ticker:active .ticker-track {
-      animation-play-state: paused;
     }
     .ticker-item {
       white-space: nowrap;
@@ -606,6 +629,10 @@
       letter-spacing: 0.4px;
       text-transform: uppercase;
       padding-right: 40px;
+    }
+    @keyframes tickerRun {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
     }
     .home-river-wave {
       width: 100%;
@@ -625,9 +652,9 @@
       flex: 1;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
-      padding: 4px 14px 8px;
-      gap: 6px;
+      justify-content: space-evenly;
+      padding: 4px 14px 10px;
+      gap: 8px;
       overflow: hidden;
     }
 
@@ -766,27 +793,28 @@
       text-shadow: 0 1px 2px rgba(0, 0, 0, 0.9);
     }
 
-    /* Cards Slim Elegantes — Preto Sólido Puro (Sem degradê, Sem borda colorida) */
+    /* Cards Robustos e Elegantes — Preto Sólido 99 (Igual ao estilo dos Pets) */
     .belt-info-card {
-      width: 236px;
+      width: 254px;
+      height: 82px;
       flex-shrink: 0;
-      border-radius: 14px;
-      padding: 10px 12px;
+      border-radius: 16px;
+      padding: 10px 14px;
       cursor: pointer;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      background: var(--bg-elevated);
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow-sm);
+      background: #000000 !important;
+      border: 1px solid rgba(0, 0, 0, 0.2);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
       transition: transform 0.15s ease;
     }
     .belt-info-card:active { transform: scale(0.97); }
 
     .belt-info-title {
-      font-size: 11.5px;
-      font-weight: 700;
-      color: var(--text);
+      font-size: 12px;
+      font-weight: 800;
+      color: #FFFFFF !important;
       line-height: 1.35;
       overflow: hidden;
       display: -webkit-box;
@@ -798,20 +826,20 @@
       align-items: center;
       justify-content: space-between;
       gap: 6px;
-      margin-top: 6px;
+      margin-top: 4px;
     }
     .belt-info-loc {
-      font-size: 10px;
-      font-weight: 600;
-      color: var(--text-muted);
+      font-size: 10.5px;
+      font-weight: 700;
+      color: #FED700 !important;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
     .belt-info-time {
-      font-size: 9.5px;
-      font-weight: 500;
-      color: var(--text-dim);
+      font-size: 10px;
+      font-weight: 600;
+      color: #94A3B8 !important;
       white-space: nowrap;
       flex-shrink: 0;
     }
