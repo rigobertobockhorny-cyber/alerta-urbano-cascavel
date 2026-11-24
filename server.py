@@ -181,6 +181,184 @@ def init_db():
     if "fcm_token" not in ucols:
         cur.execute("ALTER TABLE usuarios ADD COLUMN fcm_token TEXT DEFAULT '';")
 
+    # Tabela de Parceiros Comerciais e Empresas Amigas de Cascavel (v3.8)
+    cur.execute("""
+        CREATE TABLE IF NOT EXISTS parceiros (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            nome TEXT NOT NULL,
+            categoria TEXT DEFAULT 'pet_vet',
+            subtitulo TEXT DEFAULT '',
+            descricao TEXT DEFAULT '',
+            bairro TEXT DEFAULT 'Centro',
+            endereco TEXT DEFAULT '',
+            cidade TEXT DEFAULT 'Cascavel',
+            lat REAL NOT NULL,
+            lng REAL NOT NULL,
+            telefone_whatsapp TEXT DEFAULT '',
+            logo_url TEXT DEFAULT '',
+            foto_capa TEXT DEFAULT '',
+            selo_tipo TEXT DEFAULT 'ouro',
+            destaque_esteira INTEGER DEFAULT 1,
+            ativo INTEGER DEFAULT 1,
+            ordem INTEGER DEFAULT 0,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )
+    """)
+
+    # Tabela de Produtos / Serviços em Promoção dos Parceiros
+    cur.execute("""
+        CREATE TABLE IF NOT EXISTS parceiro_produtos (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            parceiro_id INTEGER NOT NULL,
+            titulo TEXT NOT NULL,
+            descricao TEXT DEFAULT '',
+            preco_original REAL DEFAULT 0,
+            preco_promocional REAL DEFAULT 0,
+            tag_desconto TEXT DEFAULT '',
+            foto_url TEXT DEFAULT '',
+            ativo INTEGER DEFAULT 1,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            FOREIGN KEY(parceiro_id) REFERENCES parceiros(id) ON DELETE CASCADE
+        )
+    """)
+
+    # Seed de Parceiros e Promoções modelo de Cascavel (se tabela vazia)
+    cur.execute("SELECT COUNT(*) FROM parceiros")
+    if cur.fetchone()[0] == 0:
+        parceiros_iniciais = [
+            (
+                "Hospital Veterinário 24h Cascavel",
+                "pet_vet",
+                "Emergências, Cirurgias e Internamento 24 Horas",
+                "Atendimento veterinário ininterrupto com UTI, raio-x digital e equipe cirúrgica de plantão em Cascavel.",
+                "Centro",
+                "Rua Paraná, 2840 - Centro",
+                "Cascavel",
+                -24.9540,
+                -53.4560,
+                "45999881122",
+                "ouro",
+                1,
+                1,
+                1,
+                [
+                    ("Consulta Veterinária de Urgência", "Plantão 24h com avaliação clínica completa", 180.0, 129.90, "28% OFF"),
+                    ("Vacina V10 Importada + Avaliação", "Imunização completa com carteirinha oficial", 120.0, 89.90, "OFERTA"),
+                ]
+            ),
+            (
+                "Pet Shop & Estética Patinhas",
+                "pet_shop",
+                "Banho, Tosa, Ração Super Premium e Acessórios",
+                "Ambiente climatizado, tosa higiênica e táxi dog com busca e entrega nos bairros de Cascavel.",
+                "Cancelli",
+                "Rua Manaus, 1420 - Cancelli",
+                "Cascavel",
+                -24.9440,
+                -53.4730,
+                "45999772233",
+                "ouro",
+                1,
+                1,
+                2,
+                [
+                    ("Banho + Tosa Higiênica + Hidratação", "Para cães de pequeno e médio porte com produtos hipoalergênicos", 85.0, 59.90, "PROMOÇÃO"),
+                    ("Ração Premium Especial Cães 15kg", "Fórmula sem corantes com alta absorção nutricional", 189.0, 149.90, "OFERTA"),
+                ]
+            ),
+            (
+                "Auto Center & Pneus Cascavel",
+                "auto_center",
+                "Pneus, Alinhamento 3D, Balanceamento e Freios",
+                "Revisão veicular preventiva, troca de óleo e suspensão com garantia e equipe especializada.",
+                "Alto Alegre",
+                "Av. Brasil, 8900 - Alto Alegre",
+                "Cascavel",
+                -24.9570,
+                -53.4950,
+                "45999663344",
+                "cidadao",
+                1,
+                1,
+                3,
+                [
+                    ("Alinhamento 3D + Balanceamento 4 Rodas", "Ajuste a laser para maior durabilidade dos pneus e segurança", 120.0, 69.90, "42% OFF"),
+                    ("Higienização de Ar-Condicionado + Filtro", "Elimina ácaros, fungos e odores com filtro novo incluso", 110.0, 79.90, "COMBO"),
+                ]
+            ),
+            (
+                "Posto & Conveniência Avenida",
+                "posto",
+                "Combustível de Qualidade, Troca de Óleo e Conveniência 24h",
+                "Abastecimento 24 horas, loja de conveniência completa e ponto de apoio seguro em Cascavel.",
+                "Centro",
+                "Av. Brasil, 4500 - Centro",
+                "Cascavel",
+                -24.9565,
+                -53.4510,
+                "45999554455",
+                "cidadao",
+                1,
+                1,
+                4,
+                [
+                    ("Ducha Completa + Cera Líquida", "Lavagem rápida com cera protetora em qualquer abastecimento", 35.0, 19.90, "VANTAGEM"),
+                ]
+            ),
+            (
+                "Clínica Vet & Castração Solidária Vida Animal",
+                "pet_vet",
+                "Vacinação, Microchipagem e Castração a Preço Social",
+                "Parceira ativa de protetores independentes e tutores no controle populacional e saúde animal.",
+                "São Cristóvão",
+                "Rua Jacarezinho, 1850 - São Cristóvão",
+                "Cascavel",
+                -24.9410,
+                -53.4310,
+                "45999445566",
+                "ouro",
+                1,
+                1,
+                5,
+                [
+                    ("Microchipagem Padrão Internacional + Registro", "Identificação definitiva eletrônica em banco nacional", 90.0, 55.00, "SOCIAL"),
+                    ("Castração Solidária Felinos (Macho/Fêmea)", "Procedimento cirúrgico seguro com pós-operatório assistido", 220.0, 149.00, "SOCIAL"),
+                ]
+            ),
+            (
+                "Centro Automotivo & Baterias Neva",
+                "auto_center",
+                "Baterias Automotivas com Entrega Rápida e Auto Elétrica",
+                "Socorro de bateria e panes elétricas em domicílio em todos os bairros de Cascavel.",
+                "Neva",
+                "Rua Pio XII, 2100 - Neva",
+                "Cascavel",
+                -24.9640,
+                -53.4660,
+                "45999336677",
+                "cidadao",
+                1,
+                1,
+                6,
+                [
+                    ("Bateria 60Ah Selada (Instalada no Local)", "Entrega e instalação grátis em até 30 minutos em Cascavel", 390.0, 319.90, "COM TROCA"),
+                ]
+            ),
+        ]
+        for p in parceiros_iniciais:
+            nome, cat, sub, desc, bairro, end, cid, lat, lng, zap, selo, esteira, ativo, ordem, prods = p
+            cur.execute("""
+                INSERT INTO parceiros (nome, categoria, subtitulo, descricao, bairro, endereco, cidade, lat, lng, telefone_whatsapp, selo_tipo, destaque_esteira, ativo, ordem)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            """, (nome, cat, sub, desc, bairro, end, cid, lat, lng, zap, selo, esteira, ativo, ordem))
+            parceiro_id = cur.lastrowid
+            for prod in prods:
+                ptitulo, pdesc, porig, ppromo, ptag = prod
+                cur.execute("""
+                    INSERT INTO parceiro_produtos (parceiro_id, titulo, descricao, preco_original, preco_promocional, tag_desconto, ativo)
+                    VALUES (?, ?, ?, ?, ?, ?, 1)
+                """, (parceiro_id, ptitulo, pdesc, porig, ppromo, ptag))
+
     # Higienização e classificação v3.0 (desativa legados de trânsito/radar/semáforo e não-pets do público)
     placeholders = ",".join("?" for _ in TIPOS_BLOQUEADOS_LEGADO)
     cur.execute(
@@ -561,6 +739,58 @@ def resumo_dashboard():
         "alerta_clima": dict(clima_row) if clima_row else None,
         "ts": int(time.time()),
     })
+
+
+@app.route("/api/parceiros", methods=["GET"])
+def listar_parceiros():
+    """
+    Lista empresas parceiras ativas de Cascavel e seus produtos/serviços promocionais.
+    Filtros opcionais:
+      - ?categoria=pet_vet / pet_shop / auto_center / posto
+      - ?apenas_esteira=1 (apenas para a esteira rotativa na aba pets)
+    """
+    categoria = request.args.get("categoria", "").strip().lower()
+    apenas_esteira = request.args.get("apenas_esteira", "0").strip() == "1"
+
+    conn = get_db()
+    cur = conn.cursor()
+
+    query = """
+        SELECT id, nome, categoria, subtitulo, descricao, bairro, endereco, cidade,
+               lat, lng, telefone_whatsapp, logo_url, foto_capa, selo_tipo, destaque_esteira, ordem
+        FROM parceiros
+        WHERE ativo = 1
+    """
+    params = []
+
+    if categoria and categoria != "todos":
+        query += " AND LOWER(categoria) = ?"
+        params.append(categoria)
+
+    if apenas_esteira:
+        query += " AND destaque_esteira = 1"
+
+    query += " ORDER BY ordem ASC, id ASC"
+
+    cur.execute(query, tuple(params))
+    rows = cur.fetchall()
+
+    parceiros = []
+    for r in rows:
+        pid = r["id"]
+        cur.execute("""
+            SELECT id, titulo, descricao, preco_original, preco_promocional, tag_desconto, foto_url
+            FROM parceiro_produtos
+            WHERE parceiro_id = ? AND ativo = 1
+            ORDER BY id ASC
+        """, (pid,))
+        prods = [dict(pr) for pr in cur.fetchall()]
+
+        p_dict = dict(r)
+        p_dict["produtos"] = prods
+        parceiros.append(p_dict)
+
+    return jsonify(parceiros)
 
 
 @app.route("/api/alertas", methods=["GET"])

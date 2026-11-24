@@ -495,10 +495,10 @@
     .bottom-nav {
       flex-shrink: 0;
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(5, 1fr);
       background: #009B3A !important; /* Verde Bandeira */
       border-top: none !important;
-      padding: 4px 8px calc(env(safe-area-inset-bottom, 0px) + 8px);
+      padding: 4px 4px calc(env(safe-area-inset-bottom, 0px) + 8px);
       z-index: 500;
     }
     .nav-item {
@@ -508,15 +508,15 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 3px;
-      padding: 6px 4px;
+      gap: 2px;
+      padding: 5px 2px;
       border-radius: 12px;
       color: rgba(255, 255, 255, 0.78) !important;
       cursor: pointer;
       transition: color 0.15s ease, background 0.15s ease;
     }
-    .nav-item svg { width: 20px; height: 20px; stroke: currentColor; }
-    .nav-item span { font-size: 11px; font-weight: 700; color: rgba(255, 255, 255, 0.78); }
+    .nav-item svg { width: 19px; height: 19px; stroke: currentColor; }
+    .nav-item span { font-size: 10px; font-weight: 700; color: rgba(255, 255, 255, 0.78); }
     .nav-item.active {
       color: #FED700 !important; /* Amarelo Ouro ativo */
       background: rgba(0, 0, 0, 0.25) !important;
@@ -3249,6 +3249,7 @@
           <button type="button" class="map-pill" data-pilar="pet" onclick="filtrarMapa('pet', this)">Pets</button>
           <button type="button" class="map-pill" data-pilar="seguranca" onclick="filtrarMapa('seguranca', this)">Segurança</button>
           <button type="button" class="map-pill" data-pilar="transito" onclick="filtrarMapa('transito', this)">Trânsito</button>
+          <button type="button" class="map-pill" data-pilar="parceiros" onclick="filtrarMapa('parceiros', this)">Parceiros</button>
         </div>
 
         <div class="trail-bar" id="trail-bar">
@@ -3378,6 +3379,54 @@
         </div>
 
         <div class="pets-grid" id="pets-full-list" style="display:flex; flex-direction:column; gap:14px;"></div>
+
+        <!-- ESTEIRA ROLANTE DE PARCEIROS (REDE AMIGA DOS ANIMAIS DE CASCAVEL) -->
+        <div id="esteira-parceiros-box" style="margin-top:20px; padding:14px 14px 12px; background:#ffffff; border-radius:18px; border:1px solid rgba(0,0,0,0.10); box-shadow:0 4px 14px rgba(0,0,0,0.05);">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+            <div style="font-size:12.5px; font-weight:900; color:#009B3A; display:flex; align-items:center; gap:6px;">
+              <span>⭐</span> Rede de Parceiros Amigos dos Animais
+            </div>
+            <button type="button" onclick="trocarAba('parceiros')" style="background:none; border:none; color:#71717A; font-size:11px; font-weight:800; cursor:pointer;">Ver Guia Completo ↗</button>
+          </div>
+          <div id="esteira-parceiros-carrossel" style="display:flex; gap:10px; overflow-x:auto; padding-bottom:6px; -webkit-overflow-scrolling:touch; scrollbar-width:none;">
+            <!-- Itens inseridos dinamicamente via JS -->
+          </div>
+        </div>
+      </section>
+
+      <!-- ABA 4: PARCEIROS (EMPRESAS AMIGAS & PROMOÇÕES DE CASCAVEL) -->
+      <section class="tab-pane" id="tab-parceiros" style="padding-bottom:100px;">
+        <!-- Header da Aba Parceiros -->
+        <div style="background:#ffffff; border-radius:18px; padding:18px 16px; margin-bottom:14px; border:1px solid rgba(0,0,0,0.08); box-shadow:0 4px 14px rgba(0,0,0,0.04);">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <div>
+              <div style="display:inline-block; background:rgba(0,155,58,0.12); color:#009B3A; font-weight:800; font-size:10.5px; padding:3px 8px; border-radius:6px; margin-bottom:4px;">REDE OFICIAL DE CASCAVEL</div>
+              <div style="font-size:18px; font-weight:900; color:#18181B;">Empresas Parceiras</div>
+              <div style="font-size:12px; color:#71717A;">Comércio amigo dos animais e serviços essenciais</div>
+            </div>
+            <div style="width:44px; height:44px; border-radius:14px; background:rgba(254,215,0,0.18); display:flex; align-items:center; justify-content:center; font-size:22px; border:1px solid rgba(254,215,0,0.4);">
+              ⭐
+            </div>
+          </div>
+          
+          <!-- Filtro de Categorias de Parceiros -->
+          <div style="display:flex; gap:6px; overflow-x:auto; margin-top:14px; padding-bottom:2px; -webkit-overflow-scrolling:touch;">
+            <button type="button" class="btn-filtro-parceiro active" onclick="filtrarCategoriaParceiro('todos', this)" style="padding:7px 12px; border-radius:10px; font-size:11.5px; font-weight:800; border:1px solid #000; background:#000; color:#FED700; cursor:pointer; white-space:nowrap;">Todos</button>
+            <button type="button" class="btn-filtro-parceiro" onclick="filtrarCategoriaParceiro('pet_vet', this)" style="padding:7px 12px; border-radius:10px; font-size:11.5px; font-weight:800; border:1px solid rgba(0,0,0,0.15); background:#ffffff; color:#18181B; cursor:pointer; white-space:nowrap;">🐾 Clínicas & Vet</button>
+            <button type="button" class="btn-filtro-parceiro" onclick="filtrarCategoriaParceiro('pet_shop', this)" style="padding:7px 12px; border-radius:10px; font-size:11.5px; font-weight:800; border:1px solid rgba(0,0,0,0.15); background:#ffffff; color:#18181B; cursor:pointer; white-space:nowrap;">🐕 Pet Shops & Ração</button>
+            <button type="button" class="btn-filtro-parceiro" onclick="filtrarCategoriaParceiro('auto_center', this)" style="padding:7px 12px; border-radius:10px; font-size:11.5px; font-weight:800; border:1px solid rgba(0,0,0,0.15); background:#ffffff; color:#18181B; cursor:pointer; white-space:nowrap;">🚗 Auto Centers & Pneus</button>
+            <button type="button" class="btn-filtro-parceiro" onclick="filtrarCategoriaParceiro('posto', this)" style="padding:7px 12px; border-radius:10px; font-size:11.5px; font-weight:800; border:1px solid rgba(0,0,0,0.15); background:#ffffff; color:#18181B; cursor:pointer; white-space:nowrap;">⛽ Postos & Serviços</button>
+          </div>
+        </div>
+
+        <!-- Banner de Vantagem Cívica -->
+        <div style="background:linear-gradient(135deg, #009B3A, #007A2E); color:#ffffff; border-radius:16px; padding:14px 16px; margin-bottom:16px; box-shadow:0 4px 16px rgba(0,155,58,0.25);">
+          <div style="font-size:13px; font-weight:900; margin-bottom:2px;">Apoie o Comércio Local Amigo de Cascavel</div>
+          <div style="font-size:11.5px; color:rgba(255,255,255,0.9); line-height:1.4;">Estes estabelecimentos apoiam o resgate de animais e a segurança da nossa cidade. Conheça as promoções e contate direto no WhatsApp sem intermediários.</div>
+        </div>
+
+        <!-- Lista Dinâmica de Cards de Parceiros -->
+        <div id="parceiros-lista-container" style="display:flex; flex-direction:column; gap:14px;"></div>
       </section>
 
       <!-- ABA 4: COPILOTO (BOLINHA FLUTUANTE) -->
@@ -3448,6 +3497,14 @@
           <path d="M12 12c-2 0-3.5 1.5-3.5 3.3 0 1.6 1.2 2.7 3.5 2.7s3.5-1.1 3.5-2.7C15.5 13.5 14 12 12 12zm-5.8-2.3c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm11.6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-8.6-4.1c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm5.6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/>
         </svg>
         <span>Pets</span>
+      </button>
+
+      <button type="button" class="nav-item" id="nav-parceiros" onclick="trocarAba('parceiros')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+          <polyline points="9 22 9 12 15 12 15 22"></polyline>
+        </svg>
+        <span>Parceiros</span>
       </button>
 
       <button type="button" class="nav-item" id="nav-copiloto" onclick="trocarAba('copiloto')">
@@ -3618,6 +3675,11 @@
   <!-- ==================== MODAL: DETALHES DO ITEM ==================== -->
   <div class="sheet-backdrop" id="modal-detalhe" onclick="if(event.target===this) fecharModal('modal-detalhe')">
     <div class="sheet" id="detalhe-conteudo"></div>
+  </div>
+
+  <!-- ==================== MODAL: FOLDER COMERCIAL DO PARCEIRO ==================== -->
+  <div class="sheet-backdrop" id="modal-parceiro" onclick="if(event.target===this) fecharModal('modal-parceiro')">
+    <div class="sheet" id="parceiro-conteudo" style="max-height:88vh; overflow-y:auto; -webkit-overflow-scrolling:touch; padding-bottom:calc(env(safe-area-inset-bottom, 0px) + 24px);"></div>
   </div>
 
   <!-- ==================== TELA COMPLETA: MARCAR ONDE VI / PET RESGATADO ==================== -->
@@ -4262,7 +4324,9 @@
       perfil: (() => {
         try { return JSON.parse(localStorage.getItem('au_perfil') || '{}'); } catch (_) { return {}; }
       })(),
-      fotoUploadUrl: ''
+      fotoUploadUrl: '',
+      parceiros: [],
+      parceiroFiltro: 'todos'
     };
 
     let map = null;
@@ -4312,6 +4376,8 @@
             renderizarMapa();
           }
         }, 90);
+      } else if (aba === 'parceiros') {
+        renderizarAbaParceiros();
       }
     }
 
@@ -4479,6 +4545,38 @@
         }
       }
 
+      // 3. Marcadores de Empresas Parceiras (Em 'parceiros' e em 'todos')
+      if (state.mapaFilter === 'parceiros' || state.mapaFilter === 'todos') {
+        const parceirosParaMarcar = state.parceiros || [];
+        parceirosParaMarcar.forEach(parc => {
+          if (!parc.lat || !parc.lng) return;
+          const ehOuro = parc.selo_tipo === 'ouro';
+          const borderColor = ehOuro ? '#FED700' : '#009B3A';
+          const badgeIcon = (parc.categoria === 'pet_vet' || parc.categoria === 'pet_shop') ? '🐾' : (parc.categoria === 'auto_center' ? '🚗' : '⛽');
+
+          const customPartnerIcon = L.divIcon({
+            className: 'custom-leaflet-partner-pin',
+            html: `
+              <div style="width:38px; height:38px; border-radius:50%; background:#000000; border:2.5px solid ${borderColor}; box-shadow:0 3px 10px rgba(0,0,0,0.45); display:flex; align-items:center; justify-content:center; color:#ffffff; font-size:16px; position:relative; cursor:pointer;">
+                <span>${badgeIcon}</span>
+                <span style="position:absolute; bottom:-3px; right:-3px; width:14px; height:14px; border-radius:50%; background:${borderColor}; border:1px solid #000; display:flex; align-items:center; justify-content:center; font-size:8px; font-weight:900; color:#000;">★</span>
+              </div>
+            `,
+            iconSize: [38, 38],
+            iconAnchor: [19, 19]
+          });
+
+          const m = L.marker([parc.lat, parc.lng], { icon: customPartnerIcon });
+          m.on('click', () => abrirFolderParceiro(parc));
+          markersLayer.addLayer(m);
+        });
+
+        // Se o filtro for estritamente 'parceiros', encerra sem mapa de calor
+        if (state.mapaFilter === 'parceiros') {
+          return;
+        }
+      }
+
       // 2. Heatmap Exclusivo para Segurança (Zero arco-íris, zero azul estranho)
       const heatPoints = [];
       filtrados.forEach(a => {
@@ -4517,15 +4615,19 @@
     /* ==================== DADOS & RENDERIZAÇÃO v3.1 ==================== */
     async function carregarDados() {
       try {
-        const [resClima, resAlertas] = await Promise.all([
+        const [resClima, resAlertas, resParceiros] = await Promise.all([
           fetch('/api/clima?cidade=Cascavel'),
-          fetch('/api/alertas?cidade=Cascavel')
+          fetch('/api/alertas?cidade=Cascavel'),
+          fetch('/api/parceiros')
         ]);
         if (resClima.ok) state.clima = await resClima.json();
         if (resAlertas.ok) state.alertas = await resAlertas.json();
+        if (resParceiros && resParceiros.ok) state.parceiros = await resParceiros.json();
 
         renderizarDashboard();
         renderizarPetsAba();
+        renderizarEsteiraParceiros();
+        renderizarAbaParceiros();
         renderizarMapa();
         preencherSelectPetsPai();
         renderizarMeusPetsPerfil();
@@ -6590,6 +6692,261 @@ Baixe o aplicativo gratuito Alerta Urbano:
           </div>
         </div>
       `).join('');
+    }
+
+    /* ==================== MÓDULO PARCEIROS & PROMOÇÕES DE CASCAVEL ==================== */
+    function renderizarAbaParceiros() {
+      const container = document.getElementById('parceiros-lista-container');
+      if (!container) return;
+
+      const filtro = state.parceiroFiltro || 'todos';
+      const lista = (state.parceiros || []).filter(p => {
+        if (filtro === 'todos') return true;
+        return (p.categoria || '').toLowerCase() === filtro;
+      });
+
+      if (!lista.length) {
+        container.innerHTML = `
+          <div style="background:#ffffff; border-radius:16px; padding:28px 16px; text-align:center; border:1px solid rgba(0,0,0,0.08); color:#71717A;">
+            <div style="font-size:32px; margin-bottom:8px;">🤝</div>
+            <div style="font-size:14px; font-weight:800; color:#18181B;">Nenhum parceiro nesta categoria no momento.</div>
+            <div style="font-size:12px; margin-top:4px;">Seja um parceiro oficial da nossa rede em Cascavel.</div>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = lista.map(p => {
+        const ehOuro = p.selo_tipo === 'ouro';
+        const seloTexto = ehOuro ? '🐾 Empresa Amiga dos Animais' : '🛡️ Empresa Cidadã de Cascavel';
+        const seloBg = ehOuro ? 'rgba(254, 215, 0, 0.18)' : 'rgba(0, 155, 58, 0.12)';
+        const seloColor = ehOuro ? '#B45309' : '#009B3A';
+        const seloBorder = ehOuro ? 'rgba(254, 215, 0, 0.45)' : 'rgba(0, 155, 58, 0.35)';
+
+        const produtosHtml = (p.produtos && p.produtos.length > 0)
+          ? `
+            <div style="margin-top:12px; padding-top:12px; border-top:1px dashed rgba(0,0,0,0.12);">
+              <div style="font-size:11.5px; font-weight:900; color:#18181B; margin-bottom:8px; display:flex; align-items:center; gap:5px;">
+                <span>🏷️</span> Ofertas & Promoções em Destaque:
+              </div>
+              <div style="display:flex; flex-direction:column; gap:8px;">
+                ${p.produtos.map(prod => `
+                  <div style="background:#F8FAFC; border:1px solid rgba(0,0,0,0.08); border-radius:12px; padding:10px 12px; display:flex; justify-content:space-between; align-items:center; gap:8px;">
+                    <div style="min-width:0; flex:1;">
+                      <div style="display:flex; align-items:center; gap:6px; flex-wrap:wrap;">
+                        <span style="font-size:12.5px; font-weight:800; color:#18181B;">${escapeHtml(prod.titulo)}</span>
+                        ${prod.tag_desconto ? `<span style="background:#DC2626; color:#ffffff; font-size:9.5px; font-weight:900; padding:2px 6px; border-radius:6px;">${escapeHtml(prod.tag_desconto)}</span>` : ''}
+                      </div>
+                      ${prod.descricao ? `<div style="font-size:11px; color:#64748B; margin-top:2px; line-height:1.3;">${escapeHtml(prod.descricao)}</div>` : ''}
+                      <div style="margin-top:4px; display:flex; align-items:baseline; gap:6px;">
+                        ${prod.preco_original > prod.preco_promocional ? `<span style="font-size:11px; color:#94A3B8; text-decoration:line-through;">R$ ${prod.preco_original.toFixed(2).replace('.', ',')}</span>` : ''}
+                        <span style="font-size:13.5px; font-weight:900; color:#009B3A;">R$ ${prod.preco_promocional.toFixed(2).replace('.', ',')}</span>
+                      </div>
+                    </div>
+                    <button type="button" onclick="abrirWhatsappParceiroById(${p.id}, '${escapeAttr(prod.titulo)}')" style="background:#009B3A; color:#ffffff; border:none; border-radius:10px; padding:8px 10px; font-size:11px; font-weight:800; cursor:pointer; white-space:nowrap; box-shadow:0 2px 6px rgba(0,155,58,0.3);">
+                      Pedir 💬
+                    </button>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+          `
+          : '';
+
+        return `
+          <div class="card-parceiro-item" style="background:#ffffff; border-radius:18px; padding:16px; border:1px solid rgba(0,0,0,0.08); box-shadow:0 4px 14px rgba(0,0,0,0.05); color:#18181B;">
+            <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:10px;">
+              <div style="min-width:0; flex:1;">
+                <div style="display:inline-block; background:${seloBg}; color:${seloColor}; border:1px solid ${seloBorder}; font-weight:800; font-size:10.5px; padding:3px 8px; border-radius:999px; margin-bottom:6px;">
+                  ${seloTexto}
+                </div>
+                <div style="font-size:16px; font-weight:900; color:#18181B; line-height:1.25;">${escapeHtml(p.nome)}</div>
+                ${p.subtitulo ? `<div style="font-size:11.5px; font-weight:700; color:#009B3A; margin-top:2px;">${escapeHtml(p.subtitulo)}</div>` : ''}
+              </div>
+            </div>
+
+            ${p.descricao ? `<p style="font-size:12px; color:#475569; margin:8px 0 6px; line-height:1.45;">${escapeHtml(p.descricao)}</p>` : ''}
+
+            <div style="font-size:11.5px; color:#64748B; display:flex; align-items:center; gap:5px; margin:6px 0;">
+              <span>📍</span> <strong>${escapeHtml(p.bairro)}</strong> — ${escapeHtml(p.endereco || 'Cascavel - PR')}
+            </div>
+
+            ${produtosHtml}
+
+            <!-- Botões de Ação do Card -->
+            <div style="display:flex; gap:8px; margin-top:14px;">
+              <button type="button" onclick="abrirWhatsappParceiroById(${p.id})" style="flex:1; background:#009B3A; color:#ffffff; border:none; padding:10px 12px; border-radius:12px; font-size:12px; font-weight:900; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:6px; box-shadow:0 3px 10px rgba(0,155,58,0.25);">
+                <span>💬</span> Chamar no WhatsApp
+              </button>
+              <button type="button" onclick="verParceiroNoMapa(${p.id}, ${p.lat}, ${p.lng})" style="background:#000000; color:#FED700; border:none; padding:10px 12px; border-radius:12px; font-size:12px; font-weight:800; cursor:pointer; display:flex; align-items:center; gap:4px; box-shadow:0 3px 10px rgba(0,0,0,0.2);">
+                <span>📍</span> Mapa
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function filtrarCategoriaParceiro(cat, el) {
+      state.parceiroFiltro = cat;
+      document.querySelectorAll('.btn-filtro-parceiro').forEach(b => {
+        b.style.background = '#ffffff';
+        b.style.color = '#18181B';
+        b.style.border = '1px solid rgba(0,0,0,0.15)';
+      });
+      if (el) {
+        el.style.background = '#000000';
+        el.style.color = '#FED700';
+        el.style.border = '1px solid #000000';
+      }
+      renderizarAbaParceiros();
+    }
+
+    function renderizarEsteiraParceiros() {
+      const carrossel = document.getElementById('esteira-parceiros-carrossel');
+      if (!carrossel) return;
+
+      const lista = (state.parceiros || []).filter(p => p.destaque_esteira === 1);
+      if (!lista.length) {
+        const box = document.getElementById('esteira-parceiros-box');
+        if (box) box.style.display = 'none';
+        return;
+      }
+
+      carrossel.innerHTML = lista.map(p => {
+        const ehOuro = p.selo_tipo === 'ouro';
+        const tagDestaque = (p.produtos && p.produtos.length > 0)
+          ? `<div style="font-size:10px; font-weight:900; color:#DC2626; margin-top:4px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">🏷️ ${escapeHtml(p.produtos[0].titulo)} R$ ${p.produtos[0].preco_promocional.toFixed(2).replace('.', ',')}</div>`
+          : `<div style="font-size:10px; font-weight:700; color:#009B3A; margin-top:4px;">Parceiro Oficial</div>`;
+
+        return `
+          <div onclick="abrirFolderParceiroById(${p.id})" style="flex-shrink:0; width:180px; background:#F8FAFC; border:1px solid rgba(0,0,0,0.10); border-radius:14px; padding:10px 12px; cursor:pointer; box-shadow:0 2px 6px rgba(0,0,0,0.04); transition:transform 0.15s ease;">
+            <div style="font-size:9.5px; font-weight:800; color:${ehOuro ? '#B45309' : '#009B3A'}; background:${ehOuro ? 'rgba(254,215,0,0.22)' : 'rgba(0,155,58,0.12)'}; padding:2px 6px; border-radius:999px; display:inline-block; margin-bottom:4px;">
+              ${ehOuro ? '★ Amigo dos Animais' : '🛡️ Parceiro Oficial'}
+            </div>
+            <div style="font-size:12px; font-weight:900; color:#18181B; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${escapeHtml(p.nome)}</div>
+            <div style="font-size:10.5px; color:#64748B;">${escapeHtml(p.bairro)}</div>
+            ${tagDestaque}
+          </div>
+        `;
+      }).join('');
+    }
+
+    function abrirFolderParceiroById(id) {
+      const p = (state.parceiros || []).find(item => item.id === Number(id));
+      if (p) abrirFolderParceiro(p);
+    }
+
+    function abrirFolderParceiro(parc) {
+      const sheet = document.getElementById('modal-parceiro');
+      const box = document.getElementById('parceiro-conteudo');
+      if (!sheet || !box) return;
+
+      const ehOuro = parc.selo_tipo === 'ouro';
+      const seloTexto = ehOuro ? '🐾 Empresa Amiga da Causa Animal' : '🛡️ Empresa Cidadã de Cascavel';
+      const seloBg = ehOuro ? 'rgba(254, 215, 0, 0.18)' : 'rgba(0, 155, 58, 0.12)';
+      const seloColor = ehOuro ? '#B45309' : '#009B3A';
+      const seloBorder = ehOuro ? 'rgba(254, 215, 0, 0.45)' : 'rgba(0, 155, 58, 0.35)';
+
+      const prodsHtml = (parc.produtos && parc.produtos.length > 0)
+        ? `
+          <div style="margin-top:16px;">
+            <div style="font-size:13px; font-weight:900; color:#18181B; margin-bottom:10px; display:flex; align-items:center; gap:6px;">
+              <span>🏷️</span> Ofertas & Promoções da Empresa:
+            </div>
+            <div style="display:flex; flex-direction:column; gap:8px;">
+              ${parc.produtos.map(prod => `
+                <div style="background:#F8FAFC; border:1px solid rgba(0,0,0,0.08); border-radius:12px; padding:10px 12px; display:flex; justify-content:space-between; align-items:center; gap:8px;">
+                  <div style="min-width:0; flex:1;">
+                    <div style="display:flex; align-items:center; gap:6px; flex-wrap:wrap;">
+                      <span style="font-size:12.5px; font-weight:800; color:#18181B;">${escapeHtml(prod.titulo)}</span>
+                      ${prod.tag_desconto ? `<span style="background:#DC2626; color:#ffffff; font-size:9.5px; font-weight:900; padding:2px 6px; border-radius:6px;">${escapeHtml(prod.tag_desconto)}</span>` : ''}
+                    </div>
+                    ${prod.descricao ? `<div style="font-size:11px; color:#64748B; margin-top:2px;">${escapeHtml(prod.descricao)}</div>` : ''}
+                    <div style="margin-top:4px; display:flex; align-items:baseline; gap:6px;">
+                      ${prod.preco_original > prod.preco_promocional ? `<span style="font-size:11px; color:#94A3B8; text-decoration:line-through;">R$ ${prod.preco_original.toFixed(2).replace('.', ',')}</span>` : ''}
+                      <span style="font-size:14px; font-weight:900; color:#009B3A;">R$ ${prod.preco_promocional.toFixed(2).replace('.', ',')}</span>
+                    </div>
+                  </div>
+                  <button type="button" onclick="abrirWhatsappParceiroById(${parc.id}, '${escapeAttr(prod.titulo)}')" style="background:#009B3A; color:#ffffff; border:none; border-radius:10px; padding:8px 12px; font-size:11px; font-weight:800; cursor:pointer;">
+                    Pedir 💬
+                  </button>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `
+        : '';
+
+      box.innerHTML = `
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+          <div style="display:inline-block; background:${seloBg}; color:${seloColor}; border:1px solid ${seloBorder}; font-weight:800; font-size:11px; padding:3px 10px; border-radius:999px;">
+            ${seloTexto}
+          </div>
+          <button type="button" class="sheet-close" onclick="fecharModal('modal-parceiro')" style="background:none; border:none; font-size:18px; font-weight:800; color:#71717A; cursor:pointer;">✕</button>
+        </div>
+
+        <div style="font-size:19px; font-weight:900; color:#18181B; line-height:1.2;">${escapeHtml(parc.nome)}</div>
+        ${parc.subtitulo ? `<div style="font-size:12px; font-weight:700; color:#009B3A; margin-top:3px;">${escapeHtml(parc.subtitulo)}</div>` : ''}
+
+        ${parc.descricao ? `<p style="font-size:12.5px; color:#475569; margin:10px 0; line-height:1.5;">${escapeHtml(parc.descricao)}</p>` : ''}
+
+        <div style="background:#F1F5F9; border-radius:12px; padding:10px 12px; margin:12px 0; font-size:12px; color:#334155;">
+          <div>📍 <strong>Bairro:</strong> ${escapeHtml(parc.bairro)}</div>
+          <div style="margin-top:2px;">🏢 <strong>Endereço:</strong> ${escapeHtml(parc.endereco || 'Cascavel - PR')}</div>
+        </div>
+
+        ${prodsHtml}
+
+        <div style="font-size:11px; color:#94A3B8; text-align:center; margin:14px 0 8px;">
+          Atendimento e venda direta no balcão do parceiro ou via WhatsApp.
+        </div>
+
+        <div style="display:flex; gap:8px; margin-top:10px;">
+          <button type="button" onclick="abrirWhatsappParceiroById(${parc.id})" style="flex:1; background:#009B3A; color:#ffffff; border:none; padding:12px 14px; border-radius:14px; font-size:13px; font-weight:900; cursor:pointer; box-shadow:0 4px 12px rgba(0,155,58,0.3);">
+            Chamar no WhatsApp 💬
+          </button>
+          <button type="button" onclick="fecharModal('modal-parceiro'); verParceiroNoMapa(${parc.id}, ${parc.lat}, ${parc.lng})" style="background:#000000; color:#FED700; border:none; padding:12px 14px; border-radius:14px; font-size:13px; font-weight:800; cursor:pointer; box-shadow:0 4px 12px rgba(0,0,0,0.25);">
+            Como Chegar 📍
+          </button>
+        </div>
+      `;
+
+      sheet.classList.add('open');
+    }
+
+    function abrirWhatsappParceiroById(id, prodTitulo) {
+      const p = (state.parceiros || []).find(item => item.id === Number(id));
+      if (!p) return;
+      abrirWhatsappParceiro(p, prodTitulo);
+    }
+
+    function abrirWhatsappParceiro(parc, prodTitulo) {
+      let fone = String(parc.telefone_whatsapp || '').replace(/\D/g, '');
+      if (!fone) {
+        mostrarToast('Telefone do parceiro não informado.');
+        return;
+      }
+      if (!fone.startsWith('55')) fone = '55' + fone;
+
+      let msg = '';
+      if (prodTitulo) {
+        msg = `Olá! Vi a oferta "${prodTitulo}" no aplicativo Alerta Urbano Cascavel e gostaria de aproveitar.`;
+      } else {
+        msg = `Olá! Encontrei sua empresa no aplicativo Alerta Urbano Cascavel e gostaria de atendimento.`;
+      }
+
+      window.open(`https://wa.me/${fone}?text=${encodeURIComponent(msg)}`, '_blank');
+    }
+
+    function verParceiroNoMapa(parcId, lat, lng) {
+      fecharModal('modal-parceiro');
+      irParaMapaComFiltro('parceiros');
+      setTimeout(() => {
+        if (map && lat && lng) {
+          map.flyTo([lat, lng], 16, { duration: 0.6 });
+        }
+      }, 150);
     }
 
     function fecharModal(id) {

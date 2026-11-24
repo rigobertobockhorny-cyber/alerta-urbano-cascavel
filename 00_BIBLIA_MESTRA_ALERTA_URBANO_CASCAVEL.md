@@ -211,4 +211,29 @@ A plataforma opera sob estrita conformidade com a legislação federal brasileir
   * Linhas de navegação direta para `Termos de Uso & Diretrizes`, `Política de Privacidade & LGPD`, `Tolerância Zero & Conduta (UGC)` e botão de `Excluir Minha Conta`.
 
 ---
-**Fim da Bíblia Mestra — Alerta Urbano Cascavel v3.8.0**
+
+## 8. SISTEMA DE PARCEIROS, ESTEIRA DE PROMOÇÕES E MONETIZAÇÃO LOCAL (v3.8.2)
+
+### 8.1. Estrutura de Negócio e Compliance Google Play
+* **Venda de Produtos e Serviços Físicos:** Conforme as políticas de pagamento da Google Play Store (Google Play Billing Policy), a exigência de faturamento interno do Google aplica-se estritamente a bens digitais consumidos dentro do app. Venda de serviços locais (banho/tosa, consultas, vacinas) e produtos físicos (rações, autopeças, baterias) com finalização no WhatsApp ou balcão físico do lojista é **100% permitida, legal e isenta de taxas do Google**.
+* **Zero Áudio Comercial no Copiloto:** A voz TTS no trânsito é reservada estritamente para segurança e alertas cívicos. Anúncios comerciais em áudio no carro foram descartados para evitar sensação de spam, atritos de concorrência e perda de credibilidade.
+* **5º Botão no Menu Inferior (`nav-parceiros`):** A barra inferior conta com 5 abas (`Início`, `Mapa`, `Pets`, `Parceiros`, `Copiloto`) em proporção ergonômica de 20% cada (`grid-template-columns: repeat(5, 1fr)`).
+
+### 8.2. Componentes da Rede Parceira
+1. **Aba Dedicada "Parceiros" (`#tab-parceiros`):**
+   * Guia oficial de estabelecimentos amigos de Cascavel, com filtro de categorias (`Todos`, `🐾 Clínicas & Vet`, `🐕 Pet Shops & Ração`, `🚗 Auto Centers & Pneus`, `⛽ Postos & Serviços`).
+   * Cards com Selo Oficial (`★ Empresa Amiga da Causa Animal (Ouro)` ou `🛡️ Empresa Cidadã de Cascavel`), endereço no bairro, botão direto de WhatsApp e botão para traçar rota no mapa.
+   * Vitrine de produtos/serviços promocionais dos parceiros com tags de desconto (ex.: "28% OFF", "PROMOÇÃO", "SOCIAL") e botão "Pedir no WhatsApp 💬".
+2. **Esteira Rolante na Aba Pets (`#esteira-parceiros-box`):**
+   * Carrossel horizontal elegante posicionado entre os cards de animais e o rodapé da aba Pets, exibindo as marcas parceiras oficiais com selo e ofertas em destaque.
+3. **Camada Parceiros na Aba Mapa (`#tab-mapa`):**
+   * Pílula de filtro `[ Parceiros ]` no menu superior do mapa.
+   * Marcadores circulares com ícones de categoria, borda dourada/verde e selo com estrela.
+   * Folder Comercial (Bottom Sheet `#modal-parceiro`) exibindo detalhes completos, ofertas da semana e botões "Chamar no WhatsApp" e "Como Chegar".
+4. **Tabelas do Banco de Dados e API:**
+   * Tabela `parceiros`: armazena dados corporativos, coordenadas GPS, bairro, telefone de WhatsApp e selo.
+   * Tabela `parceiro_produtos`: armazena até 5 produtos/serviços promocionais por parceiro com preços de/por e tag de desconto.
+   * Endpoint `GET /api/parceiros`: lista parceiros ativos com produtos aninhados e suporte a filtros por categoria e esteira.
+
+---
+**Fim da Bíblia Mestra — Alerta Urbano Cascavel v3.8.2**
