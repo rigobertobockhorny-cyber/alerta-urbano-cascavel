@@ -3902,7 +3902,7 @@
             </div>
 
             <div style="display:flex; gap:6px;">
-              <button type="button" style="flex:1; background:#2563EB; color:#fff; border:none; padding:6px; border-radius:6px; font-size:11px; font-weight:800; cursor:pointer;" onclick="falarOcorrenciaPerfil('${escapeAttr(p.pet.nome)}', '${escapeAttr(p.pet.raca)}', '${escapeAttr(p.posicao_mapa.rua || '')}', '${escapeAttr(p.posicao_mapa.bairro || '')}')">
+              <button type="button" style="flex:1; background:#2563EB; color:#fff; border:none; padding:6px; border-radius:6px; font-size:11px; font-weight:800; cursor:pointer;" onclick="falarOcorrenciaPerfil('${escapeAttr(p.pet.nome)}', '${escapeAttr(p.pet.raca)}', '${escapeAttr(p.posicao_mapa.rua || '')}', '${escapeAttr(p.posicao_mapa.bairro || '')}', '${escapeAttr(p.pet.categoria || '')}')">
                 🔊 Ouvir 450m
               </button>
               <button type="button" style="background:#EF4444; color:#fff; border:none; padding:6px 10px; border-radius:6px; font-size:11px; font-weight:800; cursor:pointer;" onclick="retirarPerfilDoMapaDirect('${p.id}')">
@@ -3935,18 +3935,27 @@
       if (!perfilSelecionado) return;
       const rua = document.getElementById('perfil-edit-endereco').value || 'sua rua';
       const bairro = document.getElementById('perfil-edit-bairro').value || 'Cascavel';
-      falarOcorrenciaPerfil(perfilSelecionado.pet.nome, perfilSelecionado.pet.raca, rua, bairro);
+      falarOcorrenciaPerfil(perfilSelecionado.pet.nome, perfilSelecionado.pet.raca, rua, bairro, perfilSelecionado.pet.categoria);
     }
 
-    function falarOcorrenciaPerfil(nomePet, raca, rua, bairro) {
+    function falarOcorrenciaPerfil(nomePet, raca, rua, bairro, categoria) {
       if ('speechSynthesis' in window) {
         window.speechSynthesis.cancel();
-        const texto = `Atenção motorista: animal cadastrado a 400 metros na ${rua || 'via'}, ${bairro || 'Cascavel'}. ${nomePet}, ${raca}.`;
+        let bicho = 'animal';
+        const cat = String(categoria || raca || nomePet || '').toLowerCase();
+        if (cat.includes('gat') || cat.includes('felin')) {
+          bicho = 'gato';
+        } else if (cat.includes('cão') || cat.includes('cao') || cat.includes('cachorr') || cat.includes('pitbull') || cat.includes('shih') || cat.includes('poodle') || cat.includes('pastor') || cat.includes('golden') || cat.includes('labrador') || cat.includes('pug') || cat.includes('rottweiler') || cat.includes('beagle') || cat.includes('pinscher') || cat.includes('srd') || cat.includes('vira-lata')) {
+          bicho = 'cachorro';
+        } else if (cat.includes('ave') || cat.includes('passar') || cat.includes('calopsita') || cat.includes('papagaio') || cat.includes('canario')) {
+          bicho = 'ave';
+        }
+        const texto = `Atenção: ${bicho} perdido na região. Fique atento.`;
         const utter = new SpeechSynthesisUtterance(texto);
         utter.lang = 'pt-BR';
         utter.rate = 1.05;
         window.speechSynthesis.speak(utter);
-        mostrarToast('🔊 Simulando áudio do Copiloto no veículo...');
+        mostrarToast(`🔊 Voz do Copiloto: "${texto}"`);
       }
     }
 
