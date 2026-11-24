@@ -3612,79 +3612,127 @@
     <div class="sheet" id="detalhe-conteudo"></div>
   </div>
 
-  <!-- ==================== MODAL: VISTO AQUI / PET RESGATADO ==================== -->
-  <div class="sheet-backdrop" id="modal-avistamento" onclick="if(event.target===this) fecharModal('modal-avistamento')">
-    <div class="sheet">
-      <div class="sheet-handle"></div>
-      <div class="sheet-header">
-        <div class="sheet-title" id="av-modal-title">🐾 Visto Aqui</div>
-        <button type="button" class="sheet-close" onclick="fecharModal('modal-avistamento')">✕</button>
+  <!-- ==================== TELA COMPLETA: MARCAR ONDE VI / PET RESGATADO ==================== -->
+  <div class="full-screen-view" id="modal-avistamento" style="background:#FAF7F0 !important; z-index:2600; display:none; flex-direction:column;">
+    <div class="fs-header" style="background:#FAF7F0 !important; border-bottom:1px solid rgba(0,0,0,0.1); padding:calc(env(safe-area-inset-top, 0px) + 10px) 16px 12px; display:flex; align-items:center; justify-content:space-between; flex-shrink:0;">
+      <button type="button" class="fs-back" onclick="fecharModal('modal-avistamento')" style="background:#E8E4DA !important; color:#000000 !important; border:1px solid rgba(0,0,0,0.15) !important; font-weight:800; border-radius:999px; padding:7px 14px; cursor:pointer;">‹ Voltar</button>
+      <div style="text-align:center;">
+        <div style="font-size:16px; font-weight:900; color:#000000;" id="av-modal-title">Marcar Onde Vi</div>
+        <div style="font-size:10.5px; font-weight:800; color:#78716C; letter-spacing:0.5px;">Alerta Urbano Cascavel</div>
+      </div>
+      <div style="width:48px;"></div>
+    </div>
+
+    <div class="fs-body" style="flex:1; overflow-y:auto; -webkit-overflow-scrolling:touch; padding:16px; max-width:540px; margin:0 auto; width:100%; box-sizing:border-box;">
+      
+      <!-- Alternador de Ação Superior: Apenas Avistei | Pet Resgatado -->
+      <div style="display:flex; gap:8px; margin-bottom:14px; background:#E8E4DA; padding:4px; border-radius:14px; border:1px solid rgba(0,0,0,0.08);">
+        <button type="button" id="av-mode-visto" onclick="selecionarSubtipoAv('avistamento')" style="flex:1; padding:10px 6px; font-size:13px; font-weight:800; border-radius:10px; border:none; cursor:pointer; background:#000000; color:#FFFFFF; transition:all 0.2s;">
+          Apenas Avistei
+        </button>
+        <button type="button" id="av-mode-resgate" onclick="selecionarSubtipoAv('resgatado')" style="flex:1; padding:10px 6px; font-size:13px; font-weight:800; border-radius:10px; border:none; cursor:pointer; background:#E8E4DA; color:#44403C; transition:all 0.2s;">
+          Pet Resgatado
+        </button>
       </div>
 
-      <div class="mode-switch">
-        <button type="button" class="mode-btn active" id="av-mode-visto" onclick="selecionarSubtipoAv('avistamento')">🐾 Apenas Avistei</button>
-        <button type="button" class="mode-btn" id="av-mode-resgate" onclick="selecionarSubtipoAv('resgatado')">Pet Resgatado</button>
-      </div>
-
-      <div id="av-modal-desc" style="font-size:12px; color:var(--text-muted); line-height:1.45; margin-bottom:12px;">
-        Seu ponto GPS será marcado na trilha do mapa e o tutor será notificado. <b>Nenhum número de WhatsApp do tutor é exposto.</b>
+      <div id="av-modal-desc" style="font-size:12px; color:#57534E; line-height:1.45; margin-bottom:14px; font-weight:600; background:#E8E4DA; padding:10px 12px; border-radius:12px; border:1px solid rgba(0,0,0,0.08);">
+        Seu ponto será marcado na trilha do mapa e o tutor será notificado. Nenhum número de WhatsApp do tutor é exposto.
       </div>
 
       <input type="hidden" id="av-pet-id" value="">
       <input type="hidden" id="av-subtipo" value="avistamento">
 
-      <div class="form-group">
-        <label class="form-label" id="av-foto-label">Foto do Animal (Opcional)</label>
-        <div class="photo-upload-box" onclick="document.getElementById('av-foto-file').click()">
-          <div id="av-photo-hint" style="font-size:12px; color:var(--text-muted); font-weight:600;">Toque para tirar foto e enviar ao tutor</div>
-          <img id="av-foto-preview" class="photo-preview" alt="Preview">
+      <!-- Bloco de Foto: Tirar Foto na Câmera OU Escolher da Galeria -->
+      <div class="form-group" style="margin-bottom:14px;">
+        <label style="display:block; font-size:12px; font-weight:800; color:#1C1917; margin-bottom:6px; text-transform:uppercase; letter-spacing:0.5px;" id="av-foto-label">Foto do Animal (Opcional)</label>
+        
+        <div style="background:#E8E4DA; border:1.5px dashed rgba(0,0,0,0.22); border-radius:14px; padding:14px; text-align:center;">
+          <!-- Preview da imagem caso anexada -->
+          <div id="av-foto-preview-wrap" style="display:none; margin-bottom:10px;">
+            <img id="av-foto-preview" src="" alt="Foto" style="max-width:100%; max-height:200px; border-radius:10px; border:2px solid #000000; object-fit:contain; background:#FFFFFF;">
+            <div style="margin-top:6px;">
+              <button type="button" onclick="limparFotoAvistamento()" style="background:#DC2626; color:#FFFFFF; border:none; border-radius:8px; padding:5px 12px; font-size:11px; font-weight:800; cursor:pointer;">Remover Foto</button>
+            </div>
+          </div>
+
+          <!-- Mensagem indicativa -->
+          <div id="av-photo-hint" style="font-size:12px; color:#57534E; font-weight:700; margin-bottom:10px;">
+            Toque para tirar foto na hora ou escolher da galeria:
+          </div>
+
+          <!-- 2 Botões de Ação para Fotos -->
+          <div style="display:flex; gap:8px; justify-content:center;">
+            <button type="button" onclick="document.getElementById('av-foto-camera').click()" style="flex:1; background:#000000; color:#FFFFFF; border:none; border-radius:10px; padding:10px 6px; font-size:12px; font-weight:800; cursor:pointer; box-shadow:0 2px 6px rgba(0,0,0,0.2);">
+              Tirar Foto
+            </button>
+            <button type="button" onclick="document.getElementById('av-foto-galeria').click()" style="flex:1; background:#E8E4DA; color:#1C1917; border:1.5px solid #000000; border-radius:10px; padding:10px 6px; font-size:12px; font-weight:800; cursor:pointer;">
+              Escolher da Galeria
+            </button>
+          </div>
         </div>
-        <input type="file" id="av-foto-file" accept="image/*" style="display:none" onchange="previewFotoAvistamento(this)">
+
+        <input type="file" id="av-foto-camera" accept="image/*" capture="environment" style="display:none" onchange="previewFotoAvistamento(this)">
+        <input type="file" id="av-foto-galeria" accept="image/*" style="display:none" onchange="previewFotoAvistamento(this)">
       </div>
 
       <!-- Seleção de Modo de Localização: GPS, Alfinete no Mapa ou Digitar Endereço -->
-      <div class="form-group" style="margin-bottom:12px;">
-        <label class="form-label">Onde você viu o animal?</label>
-        <div style="display:flex; gap:6px; margin-bottom:8px;">
-          <button type="button" class="btn-tab-loc" id="av-loc-tipo-gps" onclick="trocarModoLocAvistamento('gps')" style="flex:1; padding:8px 4px; font-size:11px; font-weight:800; border-radius:10px; border:1px solid #000; background:#000; color:#FED700; cursor:pointer;">
+      <div class="form-group" style="margin-bottom:14px;">
+        <label style="display:block; font-size:12px; font-weight:800; color:#1C1917; margin-bottom:6px; text-transform:uppercase; letter-spacing:0.5px;">Onde você viu o animal?</label>
+        <div style="display:flex; gap:6px; margin-bottom:10px;">
+          <button type="button" class="btn-tab-loc" id="av-loc-tipo-gps" onclick="trocarModoLocAvistamento('gps')" style="flex:1; padding:9px 4px; font-size:11.5px; font-weight:800; border-radius:10px; border:1px solid #000000; background:#000000; color:#FFFFFF; cursor:pointer; transition:all 0.2s;">
             Meu GPS
           </button>
-          <button type="button" class="btn-tab-loc" id="av-loc-tipo-mapa" onclick="trocarModoLocAvistamento('mapa')" style="flex:1; padding:8px 4px; font-size:11px; font-weight:800; border-radius:10px; border:1px solid var(--border); background:var(--bg-elevated); color:var(--text); cursor:pointer;">
+          <button type="button" class="btn-tab-loc" id="av-loc-tipo-mapa" onclick="trocarModoLocAvistamento('mapa')" style="flex:1; padding:9px 4px; font-size:11.5px; font-weight:800; border-radius:10px; border:1px solid rgba(0,0,0,0.12); background:#E8E4DA; color:#1C1917; cursor:pointer; transition:all 0.2s;">
             Alfinete no Mapa
           </button>
-          <button type="button" class="btn-tab-loc" id="av-loc-tipo-end" onclick="trocarModoLocAvistamento('endereco')" style="flex:1; padding:8px 4px; font-size:11px; font-weight:800; border-radius:10px; border:1px solid var(--border); background:var(--bg-elevated); color:var(--text); cursor:pointer;">
+          <button type="button" class="btn-tab-loc" id="av-loc-tipo-end" onclick="trocarModoLocAvistamento('endereco')" style="flex:1; padding:9px 4px; font-size:11.5px; font-weight:800; border-radius:10px; border:1px solid rgba(0,0,0,0.12); background:#E8E4DA; color:#1C1917; cursor:pointer; transition:all 0.2s;">
             Digitar Endereço
           </button>
         </div>
 
-        <div id="av-painel-loc-gps" style="display:block; font-size:11.5px; color:var(--text-muted); background:rgba(0,155,58,0.08); padding:9px 12px; border-radius:12px; border:1px solid rgba(0,155,58,0.2);">
-          <span>Localização detectada automaticamente pelo seu GPS.</span>
+        <!-- Painel 1: GPS -->
+        <div id="av-painel-loc-gps" style="display:block; font-size:12px; color:#1C1917; background:#E8E4DA; padding:12px 14px; border-radius:12px; border:1px solid rgba(0,0,0,0.12);">
+          <div style="font-weight:800; margin-bottom:2px;">Localização pelo seu GPS</div>
+          <div style="font-size:11px; color:#57534E;">O ponto exato será capturado automaticamente ao confirmar.</div>
         </div>
 
+        <!-- Painel 2: Mapa com Alfinete Arrastável -->
         <div id="av-painel-loc-mapa" style="display:none;">
-          <div style="font-size:11px; color:var(--text-muted); margin-bottom:6px;">Arraste o alfinete ou toque no mapa para posicionar onde viu o pet:</div>
-          <div id="av-mini-mapa" style="width:100%; height:180px; border-radius:14px; overflow:hidden; border:1.5px solid var(--border); margin-bottom:6px;"></div>
-          <div style="font-size:11px; font-weight:800; color:#009B3A;" id="av-mapa-coords-txt">Alfinete pronto para mover</div>
+          <div style="font-size:11.5px; color:#57534E; margin-bottom:6px; font-weight:700;">Toque no mapa ou arraste o alfinete até onde viu o pet:</div>
+          <div id="av-mini-mapa" style="width:100%; height:220px; border-radius:14px; overflow:hidden; border:2px solid #000000; box-shadow:0 3px 10px rgba(0,0,0,0.1); margin-bottom:6px; background:#ECE8DF;"></div>
+          <div style="font-size:11.5px; font-weight:800; color:#009B3A; background:#E8E4DA; padding:7px 12px; border-radius:10px; border:1px solid rgba(0,0,0,0.08);" id="av-mapa-coords-txt">Alfinete pronto no mapa de Cascavel</div>
         </div>
 
+        <!-- Painel 3: Digitar Endereço -->
         <div id="av-painel-loc-endereco" style="display:none;">
-          <input type="text" class="form-input" id="av-input-endereco" placeholder="Ex: Av. Brasil, 4500 ou Rua Paraná esq. com Pio XII">
+          <label style="display:block; font-size:11px; font-weight:700; color:#57534E; margin-bottom:4px;">Digite a rua, cruzamento ou ponto conhecido:</label>
+          <input type="text" class="form-input" id="av-input-endereco" placeholder="Ex: Av. Brasil, 4500 ou Rua Paraná com Pio XII" style="background:#FFFFFF; color:#000000; border:1.5px solid rgba(0,0,0,0.2); border-radius:10px; padding:10px 12px; width:100%; font-size:13px; box-sizing:border-box;">
         </div>
       </div>
 
-      <div class="form-group">
-        <label class="form-label">Observação / Ponto de Referência</label>
-        <input type="text" class="form-input" id="av-obs" placeholder="Ex.: Visto correndo sentido Av. Brasil / Seguro comigo">
+      <!-- Observação -->
+      <div class="form-group" style="margin-bottom:14px;">
+        <label style="display:block; font-size:12px; font-weight:800; color:#1C1917; margin-bottom:6px; text-transform:uppercase; letter-spacing:0.5px;">Observação / Ponto de Referência</label>
+        <input type="text" class="form-input" id="av-obs" placeholder="Ex.: Visto correndo sentido Av. Brasil / Seguro comigo" style="background:#FFFFFF; color:#000000; border:1.5px solid rgba(0,0,0,0.2); border-radius:10px; padding:10px 12px; width:100%; font-size:13px; box-sizing:border-box;">
       </div>
-      <label class="lgpd-box">
-        <input type="checkbox" id="av-permitir-wa" onchange="document.getElementById('av-wa-wrap').style.display = this.checked ? 'block' : 'none'">
-        <span><b>Permitir contato do tutor:</b> Liberar meu WhatsApp <b>exclusivamente para o tutor</b> confirmar e combinar a entrega.</span>
+
+      <!-- Checkbox LGPD Contato com Tutor -->
+      <label style="display:flex; align-items:flex-start; gap:10px; background:#E8E4DA; border:1px solid rgba(0,0,0,0.12); padding:10px 12px; border-radius:12px; margin-bottom:14px; cursor:pointer;">
+        <input type="checkbox" id="av-permitir-wa" style="width:18px; height:18px; margin-top:2px;" onchange="document.getElementById('av-wa-wrap').style.display = this.checked ? 'block' : 'none'">
+        <span style="font-size:11.5px; color:#1C1917; line-height:1.4;"><b>Permitir contato do tutor:</b> Liberar meu WhatsApp <b>exclusivamente para o tutor</b> confirmar e combinar a entrega.</span>
       </label>
-      <div class="form-group" id="av-wa-wrap" style="display:none;">
-        <label class="form-label">Seu WhatsApp (visível apenas para o tutor)</label>
-        <input type="tel" class="form-input" id="av-wa-input" placeholder="(45) 99999-9999">
+
+      <!-- Campo de WhatsApp -->
+      <div class="form-group" id="av-wa-wrap" style="display:none; margin-bottom:14px;">
+        <label style="display:block; font-size:11.5px; font-weight:800; color:#1C1917; margin-bottom:4px;">Seu WhatsApp (visível apenas para o tutor)</label>
+        <input type="tel" class="form-input" id="av-wa-input" placeholder="(45) 99999-9999" style="background:#FFFFFF; color:#000000; border:1.5px solid rgba(0,0,0,0.2); border-radius:10px; padding:10px 12px; width:100%; font-size:13px; box-sizing:border-box;">
       </div>
-      <button type="button" class="btn-submit" id="btn-confirmar-av" onclick="confirmarAvistamentoModal()">Enviar "Visto Aqui" ao Tutor</button>
+
+      <!-- Botão de Confirmação -->
+      <button type="button" id="btn-confirmar-av" onclick="confirmarAvistamentoModal()" style="width:100%; background:#000000; color:#FFFFFF; border:none; border-radius:12px; padding:14px; font-size:14px; font-weight:900; cursor:pointer; box-shadow:0 4px 12px rgba(0,0,0,0.25); margin-top:6px;">
+        Enviar "Visto Aqui" ao Tutor
+      </button>
+
     </div>
   </div>
 
@@ -4869,10 +4917,10 @@
               <div class="pet-card-action-btns">
                 <button type="button" class="btn-pet-cta-primary" onclick="abrirModalAvistamento(${p.id}, false, 'avistamento')">
                   <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
-                  <span>Visto Aqui</span>
+                  <span>Marcar Onde Vi</span>
                 </button>
                 <button type="button" class="btn-pet-cta-secondary" onclick="abrirModalAvistamento(${p.id}, false, 'resgatado')">
-                  <span>Resgatei</span>
+                  <span>Pet Resgatado</span>
                 </button>
               </div>
             `;
@@ -5241,7 +5289,7 @@ Baixe o aplicativo gratuito Alerta Urbano:
         if (ehImprensaPet) {
           botoes += `<button type="button" class="btn-full" onclick="abrirModalAvistamento(${a.id}, true, 'avistamento')">Marcar no Mapa onde Vi este Pet</button>`;
         } else {
-          botoes += `<button type="button" class="btn-full pet" onclick="abrirModalAvistamento(${a.id}, false, 'avistamento')">🐾 Visto Aqui (Marcar na Trilha)</button>`;
+          botoes += `<button type="button" class="btn-full pet" onclick="abrirModalAvistamento(${a.id}, false, 'avistamento')">Marcar Onde Vi (Na Trilha do Mapa)</button>`;
           botoes += `<button type="button" class="btn-full whatsapp" onclick="abrirModalAvistamento(${a.id}, false, 'resgatado')">Pet Resgatado (Enviar Foto ao Tutor)</button>`;
         }
         botoes += `<button type="button" class="btn-full" onclick="verTrilhaPetNoMapa(${a.id})">Ver Trilha / Caminho no Mapa</button>`;
@@ -5610,26 +5658,44 @@ Baixe o aplicativo gratuito Alerta Urbano:
       const pMapa = document.getElementById('av-painel-loc-mapa');
       const pEnd = document.getElementById('av-painel-loc-endereco');
 
+      // Todos os botões não selecionados ficam BEGE com texto escuro
       [bGps, bMapa, bEnd].forEach(b => {
         if (!b) return;
-        b.style.background = 'var(--bg-elevated)';
-        b.style.color = 'var(--text)';
-        b.style.border = '1px solid var(--border)';
+        b.style.background = '#E8E4DA';
+        b.style.color = '#1C1917';
+        b.style.border = '1px solid rgba(0, 0, 0, 0.12)';
+        b.style.boxShadow = 'none';
       });
 
+      // O botão selecionado fica PRETO com letra BRANCA (sem amarelo)
       if (modo === 'gps') {
-        if (bGps) { bGps.style.background = '#000000'; bGps.style.color = '#FED700'; bGps.style.border = '1px solid #000'; }
+        if (bGps) {
+          bGps.style.background = '#000000';
+          bGps.style.color = '#FFFFFF';
+          bGps.style.border = '1px solid #000000';
+          bGps.style.boxShadow = '0 2px 6px rgba(0, 0, 0, 0.25)';
+        }
         if (pGps) pGps.style.display = 'block';
         if (pMapa) pMapa.style.display = 'none';
         if (pEnd) pEnd.style.display = 'none';
       } else if (modo === 'mapa') {
-        if (bMapa) { bMapa.style.background = '#000000'; bMapa.style.color = '#FED700'; bMapa.style.border = '1px solid #000'; }
+        if (bMapa) {
+          bMapa.style.background = '#000000';
+          bMapa.style.color = '#FFFFFF';
+          bMapa.style.border = '1px solid #000000';
+          bMapa.style.boxShadow = '0 2px 6px rgba(0, 0, 0, 0.25)';
+        }
         if (pGps) pGps.style.display = 'none';
         if (pMapa) pMapa.style.display = 'block';
         if (pEnd) pEnd.style.display = 'none';
         initMiniMapAvistamento();
       } else if (modo === 'endereco') {
-        if (bEnd) { bEnd.style.background = '#000000'; bEnd.style.color = '#FED700'; bEnd.style.border = '1px solid #000'; }
+        if (bEnd) {
+          bEnd.style.background = '#000000';
+          bEnd.style.color = '#FFFFFF';
+          bEnd.style.border = '1px solid #000000';
+          bEnd.style.boxShadow = '0 2px 6px rgba(0, 0, 0, 0.25)';
+        }
         if (pGps) pGps.style.display = 'none';
         if (pMapa) pMapa.style.display = 'none';
         if (pEnd) pEnd.style.display = 'block';
@@ -5637,94 +5703,150 @@ Baixe o aplicativo gratuito Alerta Urbano:
     }
 
     function initMiniMapAvistamento() {
-      setTimeout(() => {
-        const cLat = state.userLat || -24.9555;
-        const cLng = state.userLng || -53.4552;
-        if (!avMiniMap) {
-          avMiniMap = L.map('av-mini-mapa', { zoomControl: false }).setView([cLat, cLng], 15);
-          L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-            maxZoom: 19
-          }).addTo(avMiniMap);
+      const container = document.getElementById('av-mini-mapa');
+      if (!container) return;
 
-          const pinIcon = L.divIcon({
-            className: 'av-pin-icon',
-            html: '<div style="background:#dc2626; color:#fff; width:30px; height:30px; border-radius:50% 50% 50% 0; transform:rotate(-45deg); display:flex; align-items:center; justify-content:center; box-shadow:0 3px 10px rgba(0,0,0,0.3); border:2px solid #fff;"><div style="width:8px; height:8px; border-radius:50%; background:#fff; transform:rotate(45deg);"></div></div>',
-            iconSize: [30, 30],
-            iconAnchor: [15, 30]
-          });
+      const cLat = (typeof avSelectedLat === 'number' && !isNaN(avSelectedLat)) ? avSelectedLat : (state.userLat || CASCAVEL_CENTER[0] || -24.9555);
+      const cLng = (typeof avSelectedLng === 'number' && !isNaN(avSelectedLng)) ? avSelectedLng : (state.userLng || CASCAVEL_CENTER[1] || -53.4552);
 
-          avMarker = L.marker([cLat, cLng], { icon: pinIcon, draggable: true }).addTo(avMiniMap);
-          avSelectedLat = cLat;
-          avSelectedLng = cLng;
+      const atualizarTextoCoords = (lat, lng) => {
+        const t = document.getElementById('av-mapa-coords-txt');
+        if (t) t.textContent = `Alfinete fixado: ${lat.toFixed(5)}, ${lng.toFixed(5)}`;
+      };
 
-          avMarker.on('dragend', () => {
-            const p = avMarker.getLatLng();
-            avSelectedLat = p.lat;
-            avSelectedLng = p.lng;
-            const t = document.getElementById('av-mapa-coords-txt');
-            if (t) t.textContent = `Alfinete fixado: ${p.lat.toFixed(5)}, ${p.lng.toFixed(5)}`;
-          });
+      if (!avMiniMap) {
+        avMiniMap = L.map('av-mini-mapa', { zoomControl: true, attributionControl: false }).setView([cLat, cLng], 15);
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+          maxZoom: 19,
+          subdomains: 'abcd'
+        }).addTo(avMiniMap);
 
-          avMiniMap.on('click', (e) => {
-            avMarker.setLatLng(e.latlng);
-            avSelectedLat = e.latlng.lat;
-            avSelectedLng = e.latlng.lng;
-            const t = document.getElementById('av-mapa-coords-txt');
-            if (t) t.textContent = `Alfinete fixado: ${e.latlng.lat.toFixed(5)}, ${e.latlng.lng.toFixed(5)}`;
-          });
-        } else {
-          avMiniMap.invalidateSize();
-          avMiniMap.setView([cLat, cLng], 15);
-          if (avMarker) avMarker.setLatLng([cLat, cLng]);
-          avSelectedLat = cLat;
-          avSelectedLng = cLng;
-        }
-      }, 120);
+        const pinIcon = L.divIcon({
+          className: 'av-pin-icon',
+          html: '<div style="background:#DC2626; color:#FFFFFF; width:34px; height:34px; border-radius:50% 50% 50% 0; transform:rotate(-45deg); display:flex; align-items:center; justify-content:center; box-shadow:0 3px 10px rgba(0,0,0,0.4); border:2.5px solid #FFFFFF;"><div style="width:10px; height:10px; border-radius:50%; background:#FFFFFF; transform:rotate(45deg);"></div></div>',
+          iconSize: [34, 34],
+          iconAnchor: [17, 34]
+        });
+
+        avMarker = L.marker([cLat, cLng], { icon: pinIcon, draggable: true }).addTo(avMiniMap);
+        avSelectedLat = cLat;
+        avSelectedLng = cLng;
+        atualizarTextoCoords(cLat, cLng);
+
+        avMarker.on('dragend', () => {
+          const p = avMarker.getLatLng();
+          avSelectedLat = p.lat;
+          avSelectedLng = p.lng;
+          atualizarTextoCoords(p.lat, p.lng);
+        });
+
+        avMiniMap.on('click', (e) => {
+          avMarker.setLatLng(e.latlng);
+          avSelectedLat = e.latlng.lat;
+          avSelectedLng = e.latlng.lng;
+          atualizarTextoCoords(e.latlng.lat, e.latlng.lng);
+        });
+      } else {
+        avMiniMap.setView([cLat, cLng], 15);
+        if (avMarker) avMarker.setLatLng([cLat, cLng]);
+        avSelectedLat = cLat;
+        avSelectedLng = cLng;
+        atualizarTextoCoords(cLat, cLng);
+      }
+
+      // Redimensionamento garantido para renderizar os blocos de mapa perfeitamente
+      [50, 150, 300, 600].forEach(ms => {
+        setTimeout(() => {
+          if (avMiniMap) {
+            avMiniMap.invalidateSize();
+          }
+        }, ms);
+      });
     }
 
     function abrirModalAvistamento(petId, ehImprensa, subtipoInicial) {
       if (!verificarUsuarioLogado("marcar onde viu")) return;
       fecharModal('modal-detalhe');
-      avFotoUploadUrl = '';
+      limparFotoAvistamento();
       document.getElementById('av-pet-id').value = petId;
       document.getElementById('av-obs').value = '';
       const inpEnd = document.getElementById('av-input-endereco');
       if (inpEnd) inpEnd.value = '';
-      document.getElementById('av-foto-preview').style.display = 'none';
-      document.getElementById('av-foto-file').value = '';
-      document.getElementById('av-photo-hint').textContent = 'Toque para tirar foto e enviar ao tutor';
       document.getElementById('av-wa-input').value = (state.perfil && state.perfil.whatsapp) ? state.perfil.whatsapp : '';
       selecionarSubtipoAv(subtipoInicial || 'avistamento');
       trocarModoLocAvistamento('gps');
-      document.getElementById('modal-avistamento').classList.add('open');
+      const m = document.getElementById('modal-avistamento');
+      if (m) {
+        m.style.display = 'flex';
+        m.classList.add('open');
+      }
     }
 
     function selecionarSubtipoAv(subtipo) {
       const ehResg = subtipo === 'resgatado';
       document.getElementById('av-subtipo').value = subtipo;
-      document.getElementById('av-mode-visto').classList.toggle('active', !ehResg);
-      document.getElementById('av-mode-resgate').classList.toggle('active', ehResg);
-      document.getElementById('av-modal-title').textContent = ehResg ? 'Pet Resgatado' : '🐾 Visto Aqui';
+      
+      const bVisto = document.getElementById('av-mode-visto');
+      const bResg = document.getElementById('av-mode-resgate');
+
+      if (ehResg) {
+        if (bResg) {
+          bResg.style.background = '#000000';
+          bResg.style.color = '#FFFFFF';
+          bResg.style.boxShadow = '0 2px 8px rgba(0,0,0,0.25)';
+        }
+        if (bVisto) {
+          bVisto.style.background = '#E8E4DA';
+          bVisto.style.color = '#44403C';
+          bVisto.style.boxShadow = 'none';
+        }
+      } else {
+        if (bVisto) {
+          bVisto.style.background = '#000000';
+          bVisto.style.color = '#FFFFFF';
+          bVisto.style.boxShadow = '0 2px 8px rgba(0,0,0,0.25)';
+        }
+        if (bResg) {
+          bResg.style.background = '#E8E4DA';
+          bResg.style.color = '#44403C';
+          bResg.style.boxShadow = 'none';
+        }
+      }
+
+      document.getElementById('av-modal-title').textContent = ehResg ? 'Pet Resgatado' : 'Marcar Onde Vi';
       document.getElementById('av-modal-desc').innerHTML = ehResg
-        ? 'Tire uma <b>foto do animal que você resgatou</b>. Somente o tutor receberá a foto para confirmar se é o pet dele e entrar em contato.'
-        : 'Seu ponto GPS será marcado na trilha do mapa e o tutor será notificado. <b>Nenhum número de WhatsApp do tutor é exposto.</b>';
+        ? 'Tire uma foto do animal que você resgatou. Somente o tutor receberá a foto para confirmar se é o pet dele e entrar em contato.'
+        : 'Seu ponto será marcado na trilha do mapa e o tutor será notificado. Nenhum número de WhatsApp do tutor é exposto.';
       document.getElementById('av-foto-label').textContent = ehResg ? 'Foto do Animal Resgatado (Recomendado)' : 'Foto do Animal (Opcional)';
       document.getElementById('btn-confirmar-av').textContent = ehResg ? 'Enviar Foto de Resgate ao Tutor' : 'Enviar "Visto Aqui" ao Tutor';
-      document.getElementById('btn-confirmar-av').style.background = '#ffffff';
-      document.getElementById('btn-confirmar-av').style.color = '#09090b';
 
       const chk = document.getElementById('av-permitir-wa');
       chk.checked = ehResg;
       document.getElementById('av-wa-wrap').style.display = ehResg ? 'block' : 'none';
     }
 
+    function limparFotoAvistamento() {
+      avFotoUploadUrl = '';
+      const cam = document.getElementById('av-foto-camera');
+      if (cam) cam.value = '';
+      const gal = document.getElementById('av-foto-galeria');
+      if (gal) gal.value = '';
+      const prevWrap = document.getElementById('av-foto-preview-wrap');
+      if (prevWrap) prevWrap.style.display = 'none';
+      const prevImg = document.getElementById('av-foto-preview');
+      if (prevImg) prevImg.src = '';
+      const hint = document.getElementById('av-photo-hint');
+      if (hint) hint.textContent = 'Toque para tirar foto na hora ou escolher da galeria:';
+    }
+
     async function previewFotoAvistamento(input) {
       const file = input.files && input.files[0];
       if (!file) return;
+      const prevWrap = document.getElementById('av-foto-preview-wrap');
       const preview = document.getElementById('av-foto-preview');
       preview.src = URL.createObjectURL(file);
-      preview.style.display = 'block';
-      document.getElementById('av-photo-hint').textContent = 'Enviando foto...';
+      if (prevWrap) prevWrap.style.display = 'block';
+      document.getElementById('av-photo-hint').textContent = 'Enviando foto ao servidor...';
 
       const fd = new FormData();
       fd.append('foto', file);
