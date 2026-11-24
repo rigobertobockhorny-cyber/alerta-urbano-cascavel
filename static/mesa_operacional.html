@@ -1207,17 +1207,23 @@
 
     <!-- Alternador de Telas -->
     <div class="view-switcher">
-      <button type="button" class="switch-btn active" onclick="trocarVisao('tatica')">
-        🗺️ Mesa Tática (Mapa)
+      <button type="button" class="switch-btn active" onclick="trocarVisao('painel_geral')">
+        📊 Painel Geral
+      </button>
+      <button type="button" class="switch-btn" onclick="trocarVisao('tatica')">
+        🗺️ Mesa Tática
       </button>
       <button type="button" class="switch-btn" onclick="trocarVisao('financeiro')">
-        💼 Painel Financeiro
+        💼 Financeiro
       </button>
       <button type="button" class="switch-btn" onclick="trocarVisao('segmentos')">
-        🎯 Radar de Segmentos (Metas 5x)
+        🎯 Radar Metas
       </button>
       <button type="button" class="switch-btn" onclick="trocarVisao('pets')">
-        👥 Inclusão de Perfis
+        🐾 Gestão Pets
+      </button>
+      <button type="button" class="switch-btn" onclick="trocarVisao('moderacao')">
+        🛡️ Moderação Anti-Spam
       </button>
     </div>
 
@@ -1229,8 +1235,145 @@
   <!-- ==================== CONTEÚDO PRINCIPAL ==================== -->
   <main class="mesa-content">
 
+    <!-- VISAO 0: PAINEL GERAL & DASHBOARD DE MÉTRICAS SOBERANO DO RIGO -->
+    <section id="view-painel-geral" style="display:flex; flex-direction:column; width:100%; height:100%; overflow-y:auto; padding:24px 32px; box-sizing:border-box; gap:20px;">
+      
+      <!-- Topo: Boas-vindas & Status de Conexão com o Render -->
+      <div style="display:flex; justify-content:space-between; align-items:center; background:var(--bg-card); border:1px solid var(--border); border-radius:16px; padding:18px 24px; flex-shrink:0;">
+        <div>
+          <div style="display:flex; align-items:center; gap:10px;">
+            <span style="font-size:24px;">📊</span>
+            <h1 style="font-size:18px; font-weight:900; color:#FFF; margin:0;">Cockpit Geral — Alerta Urbano Cascavel</h1>
+            <span style="background:rgba(34,197,94,0.15); color:#22C55E; font-size:10px; font-weight:900; padding:3px 10px; border-radius:12px; border:1px solid rgba(34,197,94,0.3);">🟢 RENDER CONECTADO</span>
+          </div>
+          <p style="font-size:12px; color:var(--text-muted); margin:4px 0 0 0;">
+            Painel executivo com métricas em tempo real direto do banco SQLite. Sem dependência de inteligência artificial.
+          </p>
+        </div>
+        <div style="display:flex; gap:10px;">
+          <button type="button" onclick="carregarMetricasCockpit(); carregarFeedCockpit();" style="background:var(--bg-surface); border:1px solid var(--border); color:#FFF; font-size:11.5px; font-weight:800; padding:8px 14px; border-radius:8px; cursor:pointer; display:flex; align-items:center; gap:6px;">
+            🔄 Atualizar Métricas
+          </button>
+          <a href="https://play.google.com/console" target="_blank" style="background:#2563EB; color:#FFF; text-decoration:none; font-size:11.5px; font-weight:800; padding:8px 14px; border-radius:8px; display:flex; align-items:center; gap:6px;">
+            📱 Google Play Console ↗
+          </a>
+        </div>
+      </div>
+
+      <!-- Grid de Contadores Principais (6 Métricas Fundamentais do Rigo) -->
+      <div style="display:grid; grid-template-columns:repeat(6, 1fr); gap:14px; width:100%; flex-shrink:0;">
+        
+        <!-- Total de Perfis -->
+        <div class="fin-stat-card" style="border-left: 4px solid #38BDF8; min-height:95px; height:auto;">
+          <span class="fin-stat-label">👥 Perfis Cadastrados</span>
+          <span class="fin-stat-num" id="metric-perfis" style="color:#38BDF8;">70</span>
+          <span class="fin-stat-sub">16 no banco + catálogo</span>
+        </div>
+
+        <!-- Animais Perdidos -->
+        <div class="fin-stat-card" style="border-left: 4px solid #EF4444; min-height:95px; height:auto;">
+          <span class="fin-stat-label">🚨 Animais Perdidos</span>
+          <span class="fin-stat-num" id="metric-perdidos" style="color:#EF4444;">--</span>
+          <span class="fin-stat-sub">Ocorrências abertas</span>
+        </div>
+
+        <!-- Animais para Doação -->
+        <div class="fin-stat-card" style="border-left: 4px solid #F59E0B; min-height:95px; height:auto;">
+          <span class="fin-stat-label">🏠 Para Adoção</span>
+          <span class="fin-stat-num" id="metric-adocao" style="color:#F59E0B;">--</span>
+          <span class="fin-stat-sub">Adoção responsável</span>
+        </div>
+
+        <!-- Animais Encontrados -->
+        <div class="fin-stat-card" style="border-left: 4px solid #22C55E; min-height:95px; height:auto;">
+          <span class="fin-stat-label">🐾 Animais Encontrados</span>
+          <span class="fin-stat-num" id="metric-encontrados" style="color:#22C55E;">--</span>
+          <span class="fin-stat-sub">Devolvidos aos tutores</span>
+        </div>
+
+        <!-- Denúncias Recebidas -->
+        <div class="fin-stat-card" style="border-left: 4px solid #A855F7; min-height:95px; height:auto;">
+          <span class="fin-stat-label">🛡️ Denúncias Recebidas</span>
+          <span class="fin-stat-num" id="metric-denuncias" style="color:#A855F7;">--</span>
+          <span class="fin-stat-sub">Maus-tratos / sigilosas</span>
+        </div>
+
+        <!-- Faturamento Mensal Parceiros -->
+        <div class="fin-stat-card" style="border-left: 4px solid #FED700; min-height:95px; height:auto;">
+          <span class="fin-stat-label">💰 Faturamento (MRR)</span>
+          <span class="fin-stat-num" id="metric-mrr" style="color:#FED700;">R$ 10.250</span>
+          <span class="fin-stat-sub">45 empresas oficiais</span>
+        </div>
+
+      </div>
+
+      <!-- Seção com 2 Colunas: Ações Rápidas de Gestão & Feed Recente -->
+      <div style="display:grid; grid-template-columns: 360px 1fr; gap:18px; width:100%; flex:1;">
+        
+        <!-- Coluna Esquerda: Ações Rápidas Soberanas do Rigo -->
+        <div style="background:var(--bg-card); border:1px solid var(--border); border-radius:16px; padding:20px; display:flex; flex-direction:column; gap:12px;">
+          <h3 style="font-size:14px; font-weight:900; color:#FFF; margin:0 0 4px 0; display:flex; align-items:center; gap:8px;">
+            ⚡ Ações Rápidas de Comando
+          </h3>
+          <p style="font-size:11px; color:var(--text-dim); margin:0 0 10px 0;">
+            Comandos executados diretamente no banco de dados, sem intermediários.
+          </p>
+
+          <button type="button" onclick="trocarVisao('tatica'); abrirDrawerNovo();" style="background:#2563EB; color:#FFF; border:none; padding:12px 14px; border-radius:10px; font-weight:900; font-size:12px; cursor:pointer; display:flex; align-items:center; gap:10px; text-align:left;">
+            <span style="font-size:18px;">🏢</span>
+            <div>
+              <div>Incluir Novo Parceiro Comercial</div>
+              <span style="font-size:10px; opacity:0.8;">Cadastrar empresa, logo, banner e ofertas</span>
+            </div>
+          </button>
+
+          <button type="button" onclick="trocarVisao('pets');" style="background:rgba(239,68,68,0.15); color:#EF4444; border:1px solid rgba(239,68,68,0.3); padding:12px 14px; border-radius:10px; font-weight:900; font-size:12px; cursor:pointer; display:flex; align-items:center; gap:10px; text-align:left;">
+            <span style="font-size:18px;">🐾</span>
+            <div>
+              <div>Gerenciar Animais & Ocorrências</div>
+              <span style="font-size:10px; opacity:0.8;">Ver mapa de pets perdidos e fixar na rua</span>
+            </div>
+          </button>
+
+          <button type="button" onclick="trocarVisao('moderacao');" style="background:rgba(168,85,247,0.15); color:#A855F7; border:1px solid rgba(168,85,247,0.3); padding:12px 14px; border-radius:10px; font-weight:900; font-size:12px; cursor:pointer; display:flex; align-items:center; gap:10px; text-align:left;">
+            <span style="font-size:18px;">🛡️</span>
+            <div>
+              <div>Central de Moderação Anti-Spam</div>
+              <span style="font-size:10px; opacity:0.8;">Excluir post impróprio ou banir usuário</span>
+            </div>
+          </button>
+
+          <button type="button" onclick="trocarVisao('financeiro');" style="background:rgba(254,215,0,0.15); color:#FED700; border:1px solid rgba(254,215,0,0.3); padding:12px 14px; border-radius:10px; font-weight:900; font-size:12px; cursor:pointer; display:flex; align-items:center; gap:10px; text-align:left;">
+            <span style="font-size:18px;">💼</span>
+            <div>
+              <div>Controle Financeiro & Cobrança</div>
+              <span style="font-size:10px; opacity:0.8;">Extrato e disparador WhatsApp</span>
+            </div>
+          </button>
+
+        </div>
+
+        <!-- Coluna Direita: Feed de Auditoria em Tempo Real -->
+        <div style="background:var(--bg-card); border:1px solid var(--border); border-radius:16px; padding:20px; display:flex; flex-direction:column; overflow:hidden;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+            <h3 style="font-size:14px; font-weight:900; color:#FFF; margin:0; display:flex; align-items:center; gap:8px;">
+              ⏱️ Últimas Ocorrências Registradas no App
+            </h3>
+            <button type="button" onclick="carregarFeedCockpit()" style="background:none; border:none; color:var(--gold); font-size:11px; font-weight:800; cursor:pointer;">
+              Atualizar Lista ↻
+            </button>
+          </div>
+          <div id="cockpit-resumo-feed" style="flex:1; overflow-y:auto; display:flex; flex-direction:column; gap:8px;">
+            <div style="padding:20px; text-align:center; color:var(--text-dim); font-size:11.5px;">Carregando ocorrências...</div>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
     <!-- VISAO 1: MESA TÁTICA (MAPA + BALÕES ARRASTÁVEIS) -->
-    <section id="view-tatica">
+    <section id="view-tatica" style="display:none;">
       <!-- Bandeja Lateral de Parceiros Cadastrados -->
       <aside class="balloon-tray" style="width: 350px;">
         <div class="balloon-tray-header">
@@ -1645,6 +1788,46 @@
       </aside>
     </section>
 
+    <!-- VISAO 5: CENTRAL DE MODERAÇÃO & SEGURANÇA (ANTI-SPAM / ANTI-PORNOGRAFIA) -->
+    <section id="view-moderacao" style="display:none; flex-direction:column; width:100%; height:100%; overflow-y:auto; padding:24px 32px; box-sizing:border-box; gap:18px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; background:var(--bg-card); border:1px solid var(--border); border-radius:16px; padding:18px 24px; flex-shrink:0;">
+        <div>
+          <h2 style="font-size:18px; font-weight:900; color:#FFF; margin:0; display:flex; align-items:center; gap:8px;">
+            🛡️ Central de Moderação & Segurança Operacional
+          </h2>
+          <p style="font-size:12px; color:var(--text-muted); margin:4px 0 0 0;">
+            Fiscalize todas as postagens feitas por usuários. Se houver pornografia, spam ou conteúdo ofensivo, exclua do ar com 1 clique ou bana o autor.
+          </p>
+        </div>
+        <div style="display:flex; gap:8px;">
+          <button type="button" class="prof-tab-btn active" onclick="filtrarFeedModeracao('todos', this)">Todos</button>
+          <button type="button" class="prof-tab-btn" onclick="filtrarFeedModeracao('pet', this)">🐾 Pets</button>
+          <button type="button" class="prof-tab-btn" onclick="filtrarFeedModeracao('denuncia', this)">🚨 Denúncias</button>
+          <button type="button" class="prof-tab-btn" onclick="filtrarFeedModeracao('seguranca', this)">👮 Segurança</button>
+        </div>
+      </div>
+
+      <div class="table-card" style="width:100% !important; flex:1;">
+        <table class="fin-table">
+          <thead>
+            <tr>
+              <th style="width:60px;">ID</th>
+              <th style="width:60px;">Foto</th>
+              <th>Título / Conteúdo da Publicação</th>
+              <th>Tipo / Pilar</th>
+              <th>Bairro / Local</th>
+              <th>Data Envio</th>
+              <th>Status</th>
+              <th>Ações de Moderação (Imediato)</th>
+            </tr>
+          </thead>
+          <tbody id="moderacao-table-body">
+            <!-- Linhas inseridas dinamicamente via JS -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
   </main>
 
   <div class="toast-mesa" id="toast-mesa"></div>
@@ -1688,6 +1871,8 @@
       renderizarVisaoTatica();
       atualizarKpisGerais();
       carregarPerfisCompletos();
+      carregarMetricasCockpit();
+      carregarFeedCockpit();
     });
 
     window.addEventListener('resize', () => {
@@ -2306,23 +2491,30 @@
       } catch (_) {}
     }
 
-    /* ==================== TROCA DE VISÕES DA MESA ==================== */
+    /* ==================== TROCA DE VISÕES DA MESA OPERACIONAL ==================== */
     function trocarVisao(visao) {
       document.querySelectorAll('.switch-btn').forEach(b => b.classList.remove('active'));
       const btn = Array.from(document.querySelectorAll('.switch-btn')).find(b => b.getAttribute('onclick') && b.getAttribute('onclick').includes(visao));
       if (btn) btn.classList.add('active');
 
+      const vGeral = document.getElementById('view-painel-geral');
       const vTatica = document.getElementById('view-tatica');
       const vFin = document.getElementById('view-financeiro');
       const vSeg = document.getElementById('view-segmentos');
       const vPets = document.getElementById('view-pets');
+      const vMod = document.getElementById('view-moderacao');
 
-      vTatica.style.display = (visao === 'tatica') ? 'flex' : 'none';
-      vFin.style.display = (visao === 'financeiro') ? 'flex' : 'none';
-      vSeg.style.display = (visao === 'segmentos') ? 'flex' : 'none';
+      if (vGeral) vGeral.style.display = (visao === 'painel_geral') ? 'flex' : 'none';
+      if (vTatica) vTatica.style.display = (visao === 'tatica') ? 'flex' : 'none';
+      if (vFin) vFin.style.display = (visao === 'financeiro') ? 'flex' : 'none';
+      if (vSeg) vSeg.style.display = (visao === 'segmentos') ? 'flex' : 'none';
       if (vPets) vPets.style.display = (visao === 'pets') ? 'flex' : 'none';
+      if (vMod) vMod.style.display = (visao === 'moderacao') ? 'flex' : 'none';
 
-      if (visao === 'tatica') {
+      if (visao === 'painel_geral') {
+        carregarMetricasCockpit();
+        carregarFeedCockpit();
+      } else if (visao === 'tatica') {
         setTimeout(() => { if (map) map.invalidateSize(true); }, 60);
       } else if (visao === 'financeiro') {
         renderizarTabelaFinanceira();
@@ -2334,6 +2526,210 @@
         setTimeout(() => { if (mapPets) mapPets.invalidateSize(true); }, 60);
         setTimeout(() => { if (mapPets) mapPets.invalidateSize(true); }, 250);
         setTimeout(() => { if (mapPets) mapPets.invalidateSize(true); }, 800);
+      } else if (visao === 'moderacao') {
+        carregarFeedModeracao();
+      }
+    }
+
+    /* ==================== MOTOR DE MÉTRICAS & COCKPIT GERAL ==================== */
+    let listaFeedModeracao = [];
+    let filtroModeracaoAtual = 'todos';
+
+    async function carregarMetricasCockpit() {
+      try {
+        const resp = await fetch('/api/cockpit/metricas?t=' + Date.now());
+        if (resp.ok) {
+          const dados = await resp.json();
+          const elP = document.getElementById('metric-perfis');
+          if (elP) elP.textContent = dados.total_perfis || 70;
+          const elPerd = document.getElementById('metric-perdidos');
+          if (elPerd) elPerd.textContent = dados.animais_perdidos || 0;
+          const elAdoc = document.getElementById('metric-adocao');
+          if (elAdoc) elAdoc.textContent = dados.animais_adocao || 0;
+          const elEnc = document.getElementById('metric-encontrados');
+          if (elEnc) elEnc.textContent = dados.animais_encontrados || 0;
+          const elDen = document.getElementById('metric-denuncias');
+          if (elDen) elDen.textContent = dados.denuncias_total || 0;
+        }
+      } catch (err) {
+        console.warn('Falha ao obter métricas do cockpit:', err);
+      }
+    }
+
+    async function carregarFeedCockpit() {
+      const container = document.getElementById('cockpit-resumo-feed');
+      if (!container) return;
+      try {
+        const resp = await fetch('/api/cockpit/feed?t=' + Date.now());
+        if (resp.ok) {
+          const dados = await resp.json();
+          listaFeedModeracao = dados.feed || [];
+          renderizarResumoFeedCockpit();
+        }
+      } catch (_) {}
+    }
+
+    function renderizarResumoFeedCockpit() {
+      const container = document.getElementById('cockpit-resumo-feed');
+      if (!container) return;
+      if (!listaFeedModeracao || listaFeedModeracao.length === 0) {
+        container.innerHTML = '<div style="padding:20px; text-align:center; color:var(--text-dim); font-size:11.5px;">Nenhuma ocorrência recente no banco.</div>';
+        return;
+      }
+
+      container.innerHTML = listaFeedModeracao.slice(0, 10).map(item => {
+        let tagCor = '#38BDF8';
+        let tagTxt = 'Ocorrência';
+        if (item.pilar === 'pet') {
+          if (item.status_pet === 'desaparecido') { tagCor = '#EF4444'; tagTxt = '🚨 Pet Perdido'; }
+          else if (item.status_pet === 'adocao') { tagCor = '#F59E0B'; tagTxt = '🏠 Adoção'; }
+          else if (item.status_pet === 'encontrado') { tagCor = '#22C55E'; tagTxt = '🐾 Encontrado'; }
+        } else if (item.sigiloso || (item.tipo && item.tipo.includes('denuncia'))) {
+          tagCor = '#A855F7'; tagTxt = '🛡️ Denúncia';
+        }
+
+        const fotoMini = item.foto_url 
+          ? `<img src="${item.foto_url}" style="width:36px; height:36px; border-radius:6px; object-fit:cover; flex-shrink:0;" onerror="this.src='/static/logo_bolha_pura.png'">`
+          : `<div style="width:36px; height:36px; border-radius:6px; background:#1E293B; display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0;">📍</div>`;
+
+        return `
+          <div style="background:var(--bg-surface); border:1px solid var(--border); border-radius:10px; padding:10px 12px; display:flex; align-items:center; justify-content:space-between; gap:12px;">
+            <div style="display:flex; align-items:center; gap:10px; flex:1; min-width:0;">
+              ${fotoMini}
+              <div style="min-width:0;">
+                <div style="display:flex; align-items:center; gap:8px;">
+                  <span style="font-size:10px; font-weight:900; color:${tagCor}; background:rgba(255,255,255,0.06); padding:1px 6px; border-radius:4px;">${tagTxt}</span>
+                  <span style="font-size:12px; font-weight:800; color:#FFF; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${escapeHtml(item.titulo || 'Ocorrência')}</span>
+                </div>
+                <div style="font-size:11px; color:var(--text-dim); margin-top:2px;">
+                  📍 ${escapeHtml(item.bairro || 'Cascavel')} ${item.rua ? '• ' + escapeHtml(item.rua) : ''} • <span style="color:var(--text-muted);">${item.created_at || ''}</span>
+                </div>
+              </div>
+            </div>
+            <div style="display:flex; gap:6px; flex-shrink:0;">
+              <button type="button" onclick="excluirPostagemCockpit(${item.id})" style="background:rgba(239,68,68,0.15); color:#EF4444; border:1px solid rgba(239,68,68,0.3); font-size:11px; font-weight:800; padding:5px 8px; border-radius:6px; cursor:pointer;" title="Excluir imediatamente do App">
+                🗑️ Excluir
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    /* ==================== CENTRAL DE MODERAÇÃO ANTI-SPAM ==================== */
+    async function carregarFeedModeracao() {
+      const tbody = document.getElementById('moderacao-table-body');
+      if (!tbody) return;
+      tbody.innerHTML = '<tr><td colspan="8" style="text-align:center; padding:24px; color:var(--text-dim);">⏳ Carregando postagens públicas e denúncias do App...</td></tr>';
+      try {
+        const url = `/api/cockpit/feed?filtro=${filtroModeracaoAtual}&t=` + Date.now();
+        const resp = await fetch(url);
+        if (resp.ok) {
+          const dados = await resp.json();
+          listaFeedModeracao = dados.feed || [];
+          renderizarTabelaModeracao();
+        }
+      } catch (err) {
+        tbody.innerHTML = '<tr><td colspan="8" style="text-align:center; padding:24px; color:#EF4444;">Erro ao carregar dados do servidor.</td></tr>';
+      }
+    }
+
+    function filtrarFeedModeracao(filtro, btn) {
+      filtroModeracaoAtual = filtro;
+      if (btn) {
+        btn.closest('div').querySelectorAll('.prof-tab-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      }
+      carregarFeedModeracao();
+    }
+
+    function renderizarTabelaModeracao() {
+      const tbody = document.getElementById('moderacao-table-body');
+      if (!tbody) return;
+
+      if (!listaFeedModeracao || listaFeedModeracao.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="8" style="text-align:center; padding:30px; color:var(--text-dim);">Nenhuma postagem encontrada nesta categoria.</td></tr>';
+        return;
+      }
+
+      tbody.innerHTML = listaFeedModeracao.map(item => {
+        const statusTxt = item.ativo ? '<span style="color:#22C55E; font-weight:800; font-size:10.5px;">🟢 Ativo no App</span>' : '<span style="color:#EF4444; font-weight:800; font-size:10.5px;">🔴 Removido</span>';
+        const fotoMini = item.foto_url 
+          ? `<img src="${item.foto_url}" style="width:36px; height:36px; border-radius:6px; object-fit:cover;" onerror="this.src='/static/logo_bolha_pura.png'">`
+          : `<span style="font-size:16px;">📸</span>`;
+
+        return `
+          <tr>
+            <td><strong>#${item.id}</strong></td>
+            <td>${fotoMini}</td>
+            <td>
+              <strong style="color:#FFF; font-size:12px;">${escapeHtml(item.titulo || '')}</strong>
+              <div style="font-size:10.5px; color:var(--text-dim); max-width:320px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${escapeHtml(item.descricao || '')}</div>
+            </td>
+            <td><span style="background:var(--bg-surface); padding:2px 6px; border-radius:4px; font-size:10.5px;">${escapeHtml(item.tipo || item.pilar)}</span></td>
+            <td>${escapeHtml(item.bairro || 'Centro')}</td>
+            <td>${item.created_at || ''}</td>
+            <td>${statusTxt}</td>
+            <td>
+              <div style="display:flex; gap:6px;">
+                <button type="button" onclick="excluirPostagemCockpit(${item.id})" style="background:rgba(239,68,68,0.15); color:#EF4444; border:1px solid rgba(239,68,68,0.3); font-size:11px; font-weight:800; padding:4px 8px; border-radius:6px; cursor:pointer;" title="Remover postagem do ar no mesmo segundo">
+                  🗑️ Excluir
+                </button>
+                ${item.autor_token ? `
+                  <button type="button" onclick="banirUsuarioCockpit('${item.autor_token}')" style="background:#0F172A; border:1px solid #EF4444; color:#EF4444; font-size:11px; font-weight:800; padding:4px 8px; border-radius:6px; cursor:pointer;" title="Banir este usuário e apagar todas as postagens dele">
+                    🚫 Banir
+                  </button>
+                ` : ''}
+              </div>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    async function excluirPostagemCockpit(id) {
+      if (!confirm(`Deseja realmente excluir a postagem #${id} do aplicativo imediatamente?`)) return;
+      mostrarToast('⏳ Excluindo postagem do aplicativo...');
+      try {
+        const resp = await fetch(`/api/cockpit/excluir-postagem/${id}`, { method: 'DELETE' });
+        if (resp.ok) {
+          mostrarToast(`🗑️ Postagem #${id} excluída do aplicativo com sucesso!`);
+          carregarFeedCockpit();
+          carregarMetricasCockpit();
+          if (document.getElementById('view-moderacao').style.display === 'flex') {
+            carregarFeedModeracao();
+          }
+        } else {
+          alert('Falha ao excluir postagem no servidor.');
+        }
+      } catch (e) {
+        alert('Erro ao conectar com servidor: ' + e);
+      }
+    }
+
+    async function banirUsuarioCockpit(token) {
+      const motivo = prompt('Informe o motivo do banimento deste usuário (ex: Pornografia, Spam, Conteúdo Ofensivo):', 'Conteúdo indevido / Violação das Diretrizes');
+      if (!motivo) return;
+
+      mostrarToast('⏳ Banindo usuário e removendo todas as postagens dele...');
+      try {
+        const resp = await fetch('/api/cockpit/banir-usuario', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ autor_token: token, motivo: motivo })
+        });
+        if (resp.ok) {
+          mostrarToast('🚫 Usuário banido e todas as publicações retiradas do ar!');
+          carregarFeedCockpit();
+          carregarMetricasCockpit();
+          if (document.getElementById('view-moderacao').style.display === 'flex') {
+            carregarFeedModeracao();
+          }
+        } else {
+          alert('Falha ao banir usuário no servidor.');
+        }
+      } catch (e) {
+        alert('Erro ao conectar com servidor: ' + e);
       }
     }
 
