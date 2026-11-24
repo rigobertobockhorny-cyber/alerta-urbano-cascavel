@@ -1716,6 +1716,15 @@
             <button type="button" class="prof-tab-btn" onclick="filtrarPerfisView('adocao', this)">🏠 Adoção (<span id="count-prof-adoc">24</span>)</button>
             <button type="button" class="prof-tab-btn" onclick="filtrarPerfisView('fixado', this)">📍 No Mapa (<span id="count-prof-mapa">0</span>)</button>
           </div>
+
+          <div style="display:flex; flex-direction:column; gap:6px; margin-top:10px;">
+            <button type="button" class="btn-quick-15" onclick="fixarEmLote15Pets()" style="background:#22C55E; color:#FFF; border:none; border-radius:8px; padding:10px 12px; font-weight:900; font-size:11px; width:100%; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:6px; box-shadow:0 0 12px rgba(34,197,94,0.25);">
+              ⚡ Lançar 15 Animais Perdidos nas Vias de Cascavel
+            </button>
+            <button type="button" class="btn-new-pet" onclick="abrirDrawerNovoPet()" style="background:#EF4444; color:#FFF; border:none; border-radius:8px; padding:8px 12px; font-weight:800; font-size:10.5px; width:100%; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:6px;">
+              ➕ Cadastrar Novo Pet Desaparecido
+            </button>
+          </div>
         </div>
         <div class="profile-list" id="profile-list-tray">
           <!-- Inserido dinamicamente via JS -->
@@ -1736,6 +1745,7 @@
 
         <div class="drawer-body">
           <input type="hidden" id="perfil-edit-id">
+          <input type="file" id="file-upload-novopet" accept="image/*" style="display:none;" onchange="executarUploadArquivo('file-upload-novopet', 'novo-pet-fotourl', 'novo-pet-preview-img')">
 
           <!-- Card de Resumo do Tutor & Pet -->
           <div class="perfil-summary-card" id="perfil-summary-card">
@@ -1900,6 +1910,7 @@
       if (!input || !input.files || input.files.length === 0) return;
       const file = input.files[0];
       const formData = new FormData();
+      formData.append('foto', file);
       formData.append('file', file);
       mostrarToast('⏳ Fazendo upload de imagem para o servidor...');
       try {
@@ -1923,6 +1934,10 @@
         }
       } catch (err) {
         alert('Erro ao conectar com servidor de upload: ' + err.message);
+      } finally {
+        input.value = '';
+      }
+    }
       }
     }
 
@@ -3219,6 +3234,161 @@
       e.dataTransfer.setData('text/perfil-id', perfilId);
     }
 
+    function abrirDrawerNovoPet() {
+      const center = mapPets ? mapPets.getCenter() : { lat: CASCAVEL_CENTER[0], lng: CASCAVEL_CENTER[1] };
+      perfilSelecionado = {
+        id: 'prof_manual_' + Date.now(),
+        is_novo: true,
+        tutor: {
+          nome: 'Rigo (Vórtice Mídia)',
+          avatar: '/static/testadores/rigo.png',
+          telefone: '(45) 99999-0000',
+          bairro_origem: 'Centro'
+        },
+        pet: {
+          nome: 'Rex',
+          categoria: 'cao_macho',
+          raca: 'Vira-lata',
+          porte: 'médio',
+          sexo: 'macho',
+          tipo_ocorrencia: 'desaparecido',
+          foto_url: '/static/animais/cao_macho_1.png',
+          recompensa: 'R$ 300,00',
+          detalhes: 'Animal desaparecido para teste do Copilot no App Alerta Urbano.'
+        }
+      };
+
+      document.getElementById('perfil-edit-id').value = perfilSelecionado.id;
+      document.getElementById('perfil-drawer-title').textContent = '➕ Cadastrar Novo Pet Desaparecido';
+
+      const card = document.getElementById('perfil-summary-card');
+      card.innerHTML = `
+        <div style="width:100%;">
+          <div style="font-size:11px; font-weight:800; color:#EF4444; margin-bottom:8px;">🚨 Dados do Animal & Tutor</div>
+          <div class="form-group" style="margin-bottom:6px;">
+            <label>Nome do Animal</label>
+            <input type="text" class="form-input" id="novo-pet-nome" placeholder="Ex: Bob, Thor, Mel, Luna..." value="Rex">
+          </div>
+          <div class="form-row" style="margin-bottom:6px;">
+            <div class="form-group">
+              <label>Espécie / Tipo</label>
+              <select class="form-select" id="novo-pet-especie">
+                <option value="cao_macho">🐕 Cachorro Macho</option>
+                <option value="cadela_femea">🐩 Cadela Fêmea</option>
+                <option value="gato_macho">🐈 Gato Macho</option>
+                <option value="gata_femea">🐱 Gata Fêmea</option>
+                <option value="ave">🦜 Ave Doméstica</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Raça</label>
+              <input type="text" class="form-input" id="novo-pet-raca" placeholder="Ex: Shih-tzu, Labrador, SRD" value="Vira-lata">
+            </div>
+          </div>
+          <div class="form-row" style="margin-bottom:6px;">
+            <div class="form-group">
+              <label>Tutor(a)</label>
+              <input type="text" class="form-input" id="novo-pet-tutor" value="Rigo">
+            </div>
+            <div class="form-group">
+              <label>WhatsApp</label>
+              <input type="text" class="form-input" id="novo-pet-whats" value="(45) 99999-0000">
+            </div>
+          </div>
+          <div class="form-group" style="margin-top:6px;">
+            <label style="display:flex; justify-content:space-between; align-items:center;">
+              <span>Foto do Pet</span>
+              <button type="button" style="background:#22C55E; color:#fff; border:none; padding:2px 7px; border-radius:4px; font-size:9.5px; font-weight:800; cursor:pointer;" onclick="document.getElementById('file-upload-novopet').click()">
+                📤 Subir Foto
+              </button>
+            </label>
+            <div style="display:flex; gap:8px; align-items:center; margin-top:4px;">
+              <img id="novo-pet-preview-img" src="/static/animais/cao_macho_1.png" style="width:36px; height:36px; border-radius:6px; object-fit:cover; border:1px solid var(--border);" onerror="this.src='/static/logo_bolha_pura.png'">
+              <input type="text" class="form-input" id="novo-pet-fotourl" value="/static/animais/cao_macho_1.png" style="flex:1; font-size:10.5px;" onchange="document.getElementById('novo-pet-preview-img').src=this.value">
+            </div>
+          </div>
+        </div>
+      `;
+
+      document.getElementById('perfil-edit-lat').value = center.lat.toFixed(6);
+      document.getElementById('perfil-edit-lng').value = center.lng.toFixed(6);
+      document.getElementById('perfil-edit-endereco').value = 'Av. Brasil, Centro';
+      document.getElementById('perfil-edit-bairro').value = 'Centro';
+      document.getElementById('perfil-edit-referencia').value = 'Visto próximo à esquina';
+
+      posicionarAlfineteEdicaoPerfil(center.lat, center.lng, true);
+      document.getElementById('perfil-drawer').classList.remove('closed');
+      mostrarToast('🐾 Formulário aberto. Escolha a rua e clique em Fixar na Rua!');
+    }
+
+    async function fixarEmLote15Pets() {
+      const PONTOS_TESTE_CASCAVEL = [
+        { rua: "Av. Brasil, 4500", bairro: "Centro", lat: -24.9555, lng: -53.4565, ref: "Próximo à Catedral / Praça do Migrante" },
+        { rua: "Rua Paraná, 2800", bairro: "Centro", lat: -24.9530, lng: -53.4610, ref: "Perto do Teatro Municipal" },
+        { rua: "Rua São Paulo, 1200", bairro: "Centro", lat: -24.9575, lng: -53.4520, ref: "Esquina com Carlos de Carvalho" },
+        { rua: "Rua Rio Grande do Sul, 1850", bairro: "Centro", lat: -24.9590, lng: -53.4580, ref: "Próximo ao Calçadão" },
+        { rua: "Rua Minas Gerais, 900", bairro: "Centro", lat: -24.9515, lng: -53.4540, ref: "Sentido Cancelli" },
+        { rua: "Rua Jorge Lacerda, 750", bairro: "Claudete", lat: -24.9430, lng: -53.4680, ref: "Em frente ao Colégio Wilson Joffre" },
+        { rua: "Rua Antonina, 1100", bairro: "Cancelli", lat: -24.9460, lng: -53.4590, ref: "Próximo à rotatória" },
+        { rua: "Av. Carlos Gomes, 1600", bairro: "Maria Luiza", lat: -24.9650, lng: -53.4470, ref: "Próximo ao Parque Ecológico" },
+        { rua: "Rua da Lapa, 850", bairro: "Ciro Nardi", lat: -24.9620, lng: -53.4430, ref: "Perto do Centro Esportivo Ciro Nardi" },
+        { rua: "Rua Recife, 1400", bairro: "Coqueiral", lat: -24.9540, lng: -53.4750, ref: "Próximo à Prefeitura e Fórum" },
+        { rua: "Rua Presidente Kennedy, 1900", bairro: "Coqueiral", lat: -24.9510, lng: -53.4790, ref: "Perto da Rodoviária Velha" },
+        { rua: "Rua Vitória, 600", bairro: "Alto Alegre", lat: -24.9600, lng: -53.4830, ref: "Cruzamento com Av. Assunção" },
+        { rua: "Rua Barão do Cerro Azul, 1500", bairro: "São Cristóvão", lat: -24.9480, lng: -53.4350, ref: "Sentido Pacaembu" },
+        { rua: "Av. Piquiri, 1200", bairro: "Brasmadeira", lat: -24.9350, lng: -53.4480, ref: "Perto do Trevo Cataratas" },
+        { rua: "Rua Cuiabá, 2100", bairro: "Neva", lat: -24.9680, lng: -53.4620, ref: "Perto da Igreja São Pedro" }
+      ];
+
+      mostrarToast("⏳ Fixando 15 animais desaparecidos em tempo real nas ruas de Cascavel...");
+      const perdidos = perfisOcorrencias.filter(x => x.pet.tipo_ocorrencia === 'desaparecido').slice(0, 15);
+
+      for (let i = 0; i < perdidos.length; i++) {
+        const p = perdidos[i];
+        const pt = PONTOS_TESTE_CASCAVEL[i];
+        p.posicao_mapa = {
+          fixado: true,
+          lat: pt.lat,
+          lng: pt.lng,
+          rua: pt.rua,
+          bairro: pt.bairro,
+          referencia: pt.ref,
+          data_fixacao: new Date().toISOString()
+        };
+
+        try {
+          await fetch('/api/alertas', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              titulo: `${p.pet.nome} (${p.pet.raca})`,
+              tipo: 'pet_perdido',
+              pilar: 'pet',
+              lat: pt.lat,
+              lng: pt.lng,
+              rua: pt.rua,
+              bairro: pt.bairro,
+              cidade: 'Cascavel',
+              foto_url: p.pet.foto_url,
+              especie: p.pet.categoria.includes('gato') ? 'gato' : (p.pet.categoria.includes('ave') ? 'ave' : 'cao'),
+              porte: p.pet.porte,
+              sexo: p.pet.sexo,
+              descricao: `${p.pet.detalhes} Tutor: ${p.tutor.nome}. Ref: ${pt.ref}`,
+              contato: p.tutor.telefone.replace(/\D/g, ''),
+              autor_nome: p.tutor.nome,
+              consentimento_contato: 1
+            })
+          });
+        } catch (_) {}
+      }
+
+      localStorage.setItem('mesa_perfis_70_v1', JSON.stringify(perfisOcorrencias));
+      renderizarBandejaPerfis();
+      plotarTodosPerfisNoMapa();
+      atualizarContadoresPerfis();
+      mostrarToast("🎉 15 Animais Desaparecidos foram fixados nas ruas de Cascavel! O App já pode ser testado.");
+    }
+
     function abrirDrawerPerfil(perfilId, latOpcional, lngOpcional) {
       const p = perfisOcorrencias.find(x => x.id === perfilId);
       if (!p) return;
@@ -3369,8 +3539,37 @@
       }
 
       const rua = document.getElementById('perfil-edit-endereco').value.trim() || 'Rua em Cascavel';
-      const bairro = document.getElementById('perfil-edit-bairro').value.trim() || perfilSelecionado.tutor.bairro_origem;
+      const bairro = document.getElementById('perfil-edit-bairro').value.trim() || (perfilSelecionado.tutor && perfilSelecionado.tutor.bairro_origem) || 'Centro';
       const ref = document.getElementById('perfil-edit-referencia').value.trim();
+
+      if (perfilSelecionado.is_novo) {
+        const nomePet = document.getElementById('novo-pet-nome')?.value.trim() || 'Pet Sem Nome';
+        const esp = document.getElementById('novo-pet-especie')?.value || 'cao_macho';
+        const raca = document.getElementById('novo-pet-raca')?.value.trim() || 'SRD';
+        const tut = document.getElementById('novo-pet-tutor')?.value.trim() || 'Rigo';
+        const tel = document.getElementById('novo-pet-whats')?.value.trim() || '(45) 99999-0000';
+        const foto = document.getElementById('novo-pet-fotourl')?.value.trim() || '/static/animais/cao_macho_1.png';
+
+        perfilSelecionado.pet = {
+          nome: nomePet,
+          categoria: esp,
+          raca: raca,
+          porte: 'médio',
+          sexo: esp.includes('femea') ? 'femea' : 'macho',
+          tipo_ocorrencia: 'desaparecido',
+          foto_url: foto,
+          recompensa: 'R$ 300,00',
+          detalhes: 'Animal desaparecido para teste no App Alerta Urbano.'
+        };
+        perfilSelecionado.tutor = {
+          nome: tut,
+          avatar: '/static/testadores/rigo.png',
+          telefone: tel,
+          bairro_origem: bairro
+        };
+        perfilSelecionado.is_novo = false;
+        perfisOcorrencias.unshift(perfilSelecionado);
+      }
 
       perfilSelecionado.posicao_mapa = {
         fixado: true,

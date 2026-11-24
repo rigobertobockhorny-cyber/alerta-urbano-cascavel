@@ -561,17 +561,26 @@ def api_falar():
 
 @app.route("/api/upload", methods=["POST"])
 def upload_foto():
-    if "foto" not in request.files:
+    # Suporta qualquer chave: 'foto', 'file', 'imagem', 'banner', 'logo' ou o primeiro arquivo presente
+    file = None
+    for k in ["foto", "file", "imagem", "banner", "logo"]:
+        if k in request.files:
+            file = request.files[k]
+            break
+    if not file and request.files:
+        file = next(iter(request.files.values()), None)
+
+    if not file:
         return jsonify({"error": "Nenhum arquivo enviado"}), 400
-    file = request.files["foto"]
     if file.filename == "":
         return jsonify({"error": "Arquivo vazio"}), 400
     if file and allowed_file(file.filename):
-        filename = f"pet_{int(time.time())}_{secure_filename(file.filename)}"
+        os.makedirs(app.config["UPLOAD_FOLDER"], exist_ok=True)
+        filename = f"upload_{int(time.time())}_{secure_filename(file.filename)}"
         filepath = os.path.join(app.config["UPLOAD_FOLDER"], filename)
         file.save(filepath)
-        return jsonify({"url": f"/static/uploads/{filename}"}), 201
-    return jsonify({"error": "Formato de arquivo não suportado (use PNG, JPG ou WEBP)"}), 400
+        return jsonify({"ok": True, "url": f"/static/uploads/{filename}"}), 201
+    return jsonify({"error": "Formato de arquivo não suportado (use PNG, JPG, JPEG ou WEBP)"}), 400
 
 
 _CLIMA_CACHE = {"ts": 0, "data": None}
