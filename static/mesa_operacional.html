@@ -551,24 +551,26 @@
     .btn-del-parc:hover {
       background: rgba(239, 68, 68, 0.25);
     }
-      font-weight: 800;
-      cursor: pointer;
-    }
 
     /* PANE 2: GESTÃO FINANCEIRA */
     #view-financeiro {
       flex: 1;
+      width: 100%;
+      height: 100%;
       overflow-y: auto;
-      padding: 24px;
+      padding: 24px 32px;
+      box-sizing: border-box;
       display: none;
       flex-direction: column;
-      gap: 20px;
+      gap: 22px;
     }
 
     .fin-top-cards {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 14px;
+      gap: 16px;
+      width: 100%;
+      flex-shrink: 0;
     }
 
     .fin-stat-card {
@@ -852,313 +854,322 @@
       border-color: #10B981;
     }
 
-    /* ==================== ESTILOS DA ABA DE INCLUSÃO DE PETS ==================== */
+    /* ==================== ESTILOS DA ABA DE INCLUSÃO DE PERFIS & OCORRÊNCIAS ==================== */
     #view-pets {
       flex: 1;
       display: none;
       width: 100%;
       height: 100%;
       position: relative;
+      overflow: hidden;
     }
 
-    .pet-species-tray {
-      width: 290px;
+    #map-pets {
+      width: 100% !important;
+      height: 100% !important;
+      min-height: 100%;
+      background: #131A26;
+    }
+
+    /* Bandeja Lateral de Perfis Cadastrados */
+    .profile-tray {
+      width: 350px;
+      height: 100%;
       background: var(--bg-card);
       border-right: 1px solid var(--border);
       display: flex;
       flex-direction: column;
       z-index: 10;
       flex-shrink: 0;
+      overflow: hidden;
     }
 
-    .pet-balloon-item {
+    .profile-tray-header {
+      padding: 14px 16px 10px;
+      border-bottom: 1px solid var(--border);
+      background: var(--bg-card);
+      flex-shrink: 0;
+      user-select: none;
+    }
+
+    .profile-tray-header h2 {
+      font-size: 14px;
+      font-weight: 900;
+      color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .profile-tray-header p {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 3px;
+      line-height: 1.35;
+    }
+
+    .profile-filter-tabs {
+      display: flex;
+      gap: 4px;
+      margin-top: 10px;
+      background: var(--bg-surface);
+      padding: 3px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+
+    .prof-tab-btn {
+      flex: 1;
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 10px;
+      font-weight: 800;
+      padding: 5px 4px;
+      border-radius: 6px;
+      cursor: pointer;
+      text-align: center;
+      white-space: nowrap;
+      transition: all 0.15s ease;
+    }
+
+    .prof-tab-btn:hover {
+      color: #FFFFFF;
+    }
+
+    .prof-tab-btn.active {
+      background: var(--gold);
+      color: #000000;
+    }
+
+    .profile-list {
+      flex: 1;
+      height: calc(100% - 110px);
+      overflow-y: auto;
+      overflow-x: hidden;
+      padding: 10px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+    }
+
+    .profile-card {
       background: var(--bg-surface);
       border: 1px solid var(--border);
       border-radius: 12px;
       padding: 10px 12px;
       display: flex;
-      align-items: center;
-      gap: 12px;
-      cursor: grab;
+      flex-direction: column;
+      gap: 8px;
+      cursor: pointer;
       user-select: none;
       transition: all 0.2s ease;
+      position: relative;
     }
 
-    .pet-balloon-item:hover {
+    .profile-card:hover {
       background: var(--bg-card-hover);
-      border-color: rgba(245, 158, 11, 0.5);
-      transform: translateX(3px);
+      border-color: rgba(254, 215, 0, 0.4);
+      transform: translateX(2px);
     }
 
-    .pet-balloon-item:active {
-      cursor: grabbing;
-      opacity: 0.6;
+    .profile-card.no-mapa {
+      border-color: rgba(34, 197, 94, 0.45);
+      background: rgba(34, 197, 94, 0.05);
     }
 
-    .pet-gallery-picker {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 6px;
-      max-height: 160px;
-      overflow-y: auto;
-      padding: 6px;
-      background: rgba(0, 0, 0, 0.35);
-      border-radius: 10px;
-      border: 1px solid var(--border);
-      margin-top: 6px;
+    .profile-card-tutor {
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
 
-    .pet-gallery-thumb {
-      width: 100%;
-      aspect-ratio: 1;
+    .profile-tutor-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1.5px solid var(--border);
+    }
+
+    .profile-tutor-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .profile-tutor-name {
+      font-size: 11.5px;
+      font-weight: 800;
+      color: #FFFFFF;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .profile-tutor-sub {
+      font-size: 9.5px;
+      color: var(--text-dim);
+    }
+
+    .profile-card-pet {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.25);
+      padding: 7px 9px;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .profile-pet-thumb {
+      width: 44px;
+      height: 44px;
       border-radius: 8px;
       object-fit: cover;
-      cursor: pointer;
-      border: 2px solid transparent;
-      transition: all 0.15s ease;
-      background: #18181b;
+      flex-shrink: 0;
     }
 
-    .pet-gallery-thumb:hover, .pet-gallery-thumb.selected {
-      border-color: var(--gold);
-      transform: scale(1.04);
-      box-shadow: 0 0 12px rgba(254, 215, 0, 0.6);
+    .profile-pet-thumb.desaparecido {
+      border: 2px solid #EF4444;
     }
 
-    .btn-test-tts {
-      background: linear-gradient(135deg, #2563EB, #1D4ED8);
-      color: #FFFFFF;
-      border: none;
-      padding: 11px 14px;
-      border-radius: 10px;
+    .profile-pet-thumb.adocao {
+      border: 2px solid #38BDF8;
+    }
+
+    .profile-pet-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .profile-pet-name {
       font-size: 12px;
-      font-weight: 800;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      margin-top: 10px;
-      width: 100%;
-      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35);
-      transition: all 0.2s ease;
-    }
-
-    .btn-test-tts:hover {
-      background: #1D4ED8;
-      transform: translateY(-1px);
-    }
-
-    .btn-save-pet-db {
-      background: linear-gradient(135deg, #DC2626, #B91C1C);
-      color: #FFFFFF;
-      border: none;
-      padding: 13px 18px;
-      border-radius: 12px;
-      font-size: 13px;
       font-weight: 900;
+      color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .profile-badge-tipo {
+      font-size: 9px;
+      font-weight: 800;
+      padding: 2px 6px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+
+    .badge-desaparecido {
+      background: rgba(239, 68, 68, 0.2);
+      color: #EF4444;
+      border: 1px solid rgba(239, 68, 68, 0.4);
+    }
+
+    .badge-adocao {
+      background: rgba(56, 189, 248, 0.2);
+      color: #38BDF8;
+      border: 1px solid rgba(56, 189, 248, 0.4);
+    }
+
+    .profile-pet-desc {
+      font-size: 10px;
+      color: var(--text-muted);
+      margin-top: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .profile-card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 2px;
+    }
+
+    .profile-loc-status {
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    .profile-btn-action {
+      background: #FED700;
+      color: #000;
+      font-size: 10.5px;
+      font-weight: 900;
+      padding: 5px 10px;
+      border-radius: 6px;
+      border: none;
       cursor: pointer;
       display: flex;
       align-items: center;
-      justify-content: center;
-      gap: 8px;
-      width: 100%;
-      margin-top: 14px;
-      box-shadow: 0 4px 14px rgba(220, 38, 38, 0.45);
-      transition: all 0.2s ease;
+      gap: 4px;
+      transition: transform 0.1s ease;
     }
 
-    .btn-save-pet-db:hover {
-      background: #991B1B;
-      transform: translateY(-1px);
+    .profile-btn-action:hover {
+      filter: brightness(1.1);
+      transform: scale(1.03);
     }
 
-    .pet-custom-pin {
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      background: #DC2626;
-      border: 3px solid #FFFFFF;
+    /* Resumo no Drawer do Perfil */
+    .perfil-summary-card {
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 12px;
       display: flex;
+      gap: 12px;
       align-items: center;
-      justify-content: center;
-      font-size: 20px;
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.6);
+    }
+
+    /* Marcador Circular com Foto do Pet no Mapa */
+    .pet-map-avatar-marker {
+      position: relative;
+      width: 44px;
+      height: 44px;
       cursor: pointer;
       transition: transform 0.2s ease;
     }
 
-    .pet-custom-pin:hover {
-      transform: scale(1.15);
+    .pet-map-avatar-marker:hover {
+      transform: scale(1.18);
     }
 
-    /* Estilos de Tutores Dark Planner */
-    .tutor-avatar-chip {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 4px;
-      cursor: pointer;
-      flex-shrink: 0;
-      width: 68px;
-      padding: 6px 4px;
-      border-radius: 10px;
-      border: 1px solid var(--border);
-      background: var(--bg-surface);
-      transition: all 0.15s ease;
-      text-align: center;
-    }
-    .tutor-avatar-chip:hover, .tutor-avatar-chip.selected {
-      border-color: var(--gold);
-      background: rgba(254, 215, 0, 0.12);
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(254, 215, 0, 0.25);
-    }
-    .tutor-avatar-img {
+    .pet-map-avatar-img {
       width: 44px;
       height: 44px;
       border-radius: 50%;
       object-fit: cover;
-      border: 2px solid var(--border);
-    }
-    .tutor-avatar-chip.selected .tutor-avatar-img {
-      border-color: var(--gold);
-    }
-    .tutor-avatar-name {
-      font-size: 10px;
-      font-weight: 800;
-      color: var(--text);
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      width: 100%;
-    }
-    .tutor-avatar-sub {
-      font-size: 9px;
-      color: var(--text-muted);
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      width: 100%;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.6);
     }
 
-    /* Dock Inferior dos 4 Testadores de Campo Piloto */
-    .testadores-dock {
+    .pet-map-avatar-marker.desaparecido .pet-map-avatar-img {
+      border: 3px solid #EF4444;
+      box-shadow: 0 0 12px rgba(239, 68, 68, 0.75);
+    }
+
+    .pet-map-avatar-marker.adocao .pet-map-avatar-img {
+      border: 3px solid #38BDF8;
+      box-shadow: 0 0 12px rgba(56, 189, 248, 0.75);
+    }
+
+    .pet-map-badge-icon {
       position: absolute;
-      bottom: 14px;
-      left: 304px;
-      right: 14px;
-      background: rgba(18, 18, 20, 0.94);
-      backdrop-filter: blur(14px);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      border-radius: 14px;
-      padding: 10px 14px;
-      z-index: 500;
-      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.6);
-      transition: all 0.3s ease;
-    }
-    .testadores-dock.collapsed .testadores-grid {
-      display: none;
-    }
-    .testadores-dock-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      cursor: pointer;
-      user-select: none;
-    }
-    .testadores-dock-title {
-      font-size: 12px;
-      font-weight: 900;
-      color: #38BDF8;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      letter-spacing: 0.5px;
-    }
-    .testadores-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 10px;
-      margin-top: 8px;
-    }
-    .testador-card {
-      background: rgba(30, 30, 36, 0.85);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 10px;
-      padding: 8px 10px;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      transition: all 0.2s ease;
-    }
-    .testador-card:hover {
-      border-color: #38BDF8;
-      background: rgba(37, 99, 235, 0.15);
-    }
-    .testador-head {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .testador-avatar {
-      width: 36px;
-      height: 36px;
+      bottom: -2px;
+      right: -2px;
+      background: #000;
       border-radius: 50%;
-      object-fit: cover;
-      border: 2px solid #22C55E;
-    }
-    .testador-info {
-      min-width: 0;
-      flex: 1;
-    }
-    .testador-nome {
-      font-size: 12px;
-      font-weight: 800;
-      color: #FFFFFF;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-    .testador-rota {
-      font-size: 10px;
-      color: #94A3B8;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-    .testador-actions {
-      display: flex;
-      gap: 6px;
-      margin-top: 4px;
-    }
-    .btn-testador-acao {
-      flex: 1;
-      padding: 4px 6px;
-      border-radius: 6px;
-      font-size: 10px;
-      font-weight: 800;
-      border: none;
-      cursor: pointer;
+      width: 18px;
+      height: 18px;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 4px;
-      transition: all 0.15s ease;
-    }
-    .btn-testador-aproximar {
-      background: #2563EB;
-      color: #FFFFFF;
-    }
-    .btn-testador-aproximar:hover {
-      background: #1D4ED8;
-    }
-    .btn-testador-avistar {
-      background: #EAB308;
-      color: #000000;
-    }
-    .btn-testador-avistar:hover {
-      background: #CA8A04;
+      font-size: 10px;
+      border: 1.5px solid #fff;
     }
   </style>
 </head>
@@ -1206,7 +1217,7 @@
         🎯 Radar de Segmentos (Metas 5x)
       </button>
       <button type="button" class="switch-btn" onclick="trocarVisao('pets')">
-        🐾 Inclusão de Pets (GPS)
+        👥 Inclusão de Perfis
       </button>
     </div>
 
@@ -1456,150 +1467,88 @@
 
     <!-- VISAO 4: INCLUSÃO OPERACIONAL DE PETS (PONTOS DE GPS) -->
     <section id="view-pets">
-      <!-- Bandeja Lateral de Espécies e Ninhadas -->
-      <aside class="balloon-tray" style="width: 290px;">
-        <div class="balloon-tray-header">
-          <h2>🐾 Balões de Pets</h2>
-          <p>Selecione ou <strong>arraste a espécie</strong> diretamente para a rua ou esquina no mapa de Cascavel.</p>
+      <!-- Bandeja Lateral de Perfis Cadastrados -->
+      <aside class="profile-tray">
+        <div class="profile-tray-header">
+          <h2>👥 Perfis & Ocorrências</h2>
+          <p>Selecione ou <strong>arraste o perfil</strong> diretamente para a rua ou bairro no mapa de Cascavel.</p>
+          <div class="profile-filter-tabs">
+            <button type="button" class="prof-tab-btn active" onclick="filtrarPerfisView('todos', this)">Todos (<span id="count-prof-todos">70</span>)</button>
+            <button type="button" class="prof-tab-btn" onclick="filtrarPerfisView('desaparecido', this)">🚨 Perdidos (<span id="count-prof-desap">46</span>)</button>
+            <button type="button" class="prof-tab-btn" onclick="filtrarPerfisView('adocao', this)">🏠 Adoção (<span id="count-prof-adoc">24</span>)</button>
+            <button type="button" class="prof-tab-btn" onclick="filtrarPerfisView('fixado', this)">📍 No Mapa (<span id="count-prof-mapa">0</span>)</button>
+          </div>
         </div>
-        <div class="balloon-list" id="pet-species-tray-list">
+        <div class="profile-list" id="profile-list-tray">
           <!-- Inserido dinamicamente via JS -->
         </div>
       </aside>
 
-      <!-- Área do Mapa de Pets -->
+      <!-- Área do Mapa de Perfis -->
       <div class="map-container-wrap">
         <div id="map-pets"></div>
-
-        <!-- Dock Flutuante dos 4 Testadores de Campo Piloto -->
-        <div class="testadores-dock" id="testadores-dock">
-          <div class="testadores-dock-header" onclick="alternarDockTestadores()">
-            <div class="testadores-dock-title">
-              <span>👥</span>
-              <span>4 TESTADORES DE CAMPO PILOTO (CASCAVEL)</span>
-              <span style="font-size:10px; background:rgba(34,197,94,0.2); color:#22C55E; padding:2px 6px; border-radius:4px; font-weight:800;">4 ATIVOS NAS RUAS</span>
-            </div>
-            <button type="button" class="btn-slim" style="font-size:10px; background:transparent; border:none; color:#94A3B8; cursor:pointer;" id="btn-toggle-dock">Minimizar ▼</button>
-          </div>
-          <div class="testadores-grid" id="testadores-grid">
-            <!-- Inserido dinamicamente via JS -->
-          </div>
-        </div>
       </div>
 
-      <!-- Drawer Lateral de Cadastro de Pet com Galeria Dark Planner -->
-      <aside class="partner-drawer closed" id="pet-drawer" style="width: 380px;">
-        <div class="drawer-header" style="border-bottom-color: rgba(220, 38, 38, 0.3);">
-          <div class="drawer-title" id="pet-drawer-title">🐾 Cadastrar Pet em Ponto Exato</div>
-          <button type="button" class="btn-close-drawer" onclick="fecharPetDrawer()">✕</button>
+      <!-- Drawer Lateral de Posicionamento do Perfil -->
+      <aside class="partner-drawer closed" id="perfil-drawer" style="width: 375px; overflow-x: hidden !important;">
+        <div class="drawer-header" style="border-bottom-color: rgba(239, 68, 68, 0.4);">
+          <div class="drawer-title" id="perfil-drawer-title">📍 Fixar Ocorrência na Rua</div>
+          <button type="button" class="btn-close-drawer" onclick="fecharPerfilDrawer()">✕</button>
         </div>
 
         <div class="drawer-body">
-          <div class="drawer-section-title">1. Localização e Ponto no Mapa</div>
+          <input type="hidden" id="perfil-edit-id">
+
+          <!-- Card de Resumo do Tutor & Pet -->
+          <div class="perfil-summary-card" id="perfil-summary-card">
+            <!-- Preenchido dinamicamente via JS -->
+          </div>
+
+          <!-- Busca de Endereço com Botão Alfinete -->
+          <div class="form-group" style="margin-top: 14px;">
+            <label>Endereço em Cascavel (Rua, Número, Bairro)</label>
+            <div style="display: flex; gap: 6px;">
+              <input type="text" id="perfil-edit-endereco" class="form-input" placeholder="Ex: Av. Brasil, 4500, Centro" onkeydown="if(event.key==='Enter'){event.preventDefault();buscarEnderecoPerfil();}">
+              <button type="button" class="btn-slim" onclick="buscarEnderecoPerfil()" style="background: #FED700; color: #000; font-weight: 900; border: none; padding: 6px 12px; border-radius: 8px; cursor: pointer; white-space: nowrap;">📍 Buscar</button>
+            </div>
+            <span style="font-size: 10px; color: var(--text-muted); margin-top: 3px; display: block;">
+              💡 Digite a rua e clique em Buscar, ou clique diretamente na rua no mapa.
+            </span>
+          </div>
 
           <div class="form-row">
             <div class="form-group">
               <label>Latitude (GPS)</label>
-              <input type="text" class="form-input" id="pet-lat" placeholder="-24.9555" readonly>
+              <input type="text" class="form-input" id="perfil-edit-lat" placeholder="-24.9558" readonly>
             </div>
             <div class="form-group">
               <label>Longitude (GPS)</label>
-              <input type="text" class="form-input" id="pet-lng" placeholder="-53.4550" readonly>
+              <input type="text" class="form-input" id="perfil-edit-lng" placeholder="-53.4552" readonly>
             </div>
           </div>
 
           <div class="form-group">
-            <label>Rua / Avenida</label>
-            <input type="text" class="form-input" id="pet-rua" placeholder="Ex: Rua Paraná, 2800">
-          </div>
-
-          <div class="form-row">
-            <div class="form-group">
-              <label>Bairro</label>
-              <input type="text" class="form-input" id="pet-bairro" placeholder="Ex: Centro">
-            </div>
-            <div class="form-group">
-              <label>Tipo de Ocorrência</label>
-              <select class="form-select" id="pet-tipo">
-                <option value="pet_perdido" selected>🚨 Pet Desaparecido</option>
-                <option value="pet_avistado">👀 Animal Avistado</option>
-                <option value="pet_adocao">🏡 Para Adoção</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="drawer-section-title">2. Dados do Animal</div>
-
-          <div class="form-group">
-            <label>Nome do Animal / Apelido</label>
-            <input type="text" class="form-input" id="pet-nome" placeholder="Ex: Thor, Mel, Frajola">
-          </div>
-
-          <div class="form-row">
-            <div class="form-group">
-              <label>Espécie</label>
-              <select class="form-select" id="pet-especie" onchange="aoMudarEspeciePet()">
-                <option value="cachorro">🐶 Cachorro Macho</option>
-                <option value="cachorra">🐩 Cadela Fêmea</option>
-                <option value="gato">🐱 Gato Macho</option>
-                <option value="gata">🐈 Gata Fêmea</option>
-                <option value="ninhada_caes">🍼 Ninhada de Cãezinhos</option>
-                <option value="ninhada_gatos">🐾 Ninhada de Gatinhos</option>
-                <option value="ave">🦜 Ave Doméstica Legalizada</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label>Porte</label>
-              <select class="form-select" id="pet-porte">
-                <option value="pequeno">Pequeno</option>
-                <option value="medio" selected>Médio</option>
-                <option value="grande">Grande</option>
-              </select>
-            </div>
+            <label>Bairro de Cascavel</label>
+            <input type="text" class="form-input" id="perfil-edit-bairro" placeholder="Ex: Centro, Coqueiral, Neva...">
           </div>
 
           <div class="form-group">
-            <label>Galeria Dark Planner (1-Click Foto Oficial)</label>
-            <div style="font-size: 11px; color: var(--text-muted); margin-bottom: 4px;">Clique em uma foto realista gerada pelo Dark Planner:</div>
-            <div class="pet-gallery-picker" id="pet-gallery-picker">
-              <!-- Thumbnails das fotos do Dark Planner -->
-            </div>
-            <input type="hidden" id="pet-foto-url">
+            <label>Ponto de Referência / Detalhes</label>
+            <input type="text" class="form-input" id="perfil-edit-referencia" placeholder="Ex: Próximo à praça, visto correndo sentido parque...">
           </div>
 
-          <div class="form-group">
-            <label>Descrição / Características Físicas</label>
-            <textarea class="form-textarea" id="pet-desc" rows="2" placeholder="Ex: Pelagem caramelo com peito branco, usando coleira vermelha. Muito dócil."></textarea>
+          <!-- Teste de Áudio do Copiloto TTS -->
+          <div style="margin-top: 12px; padding: 10px; background: rgba(0,0,0,0.25); border-radius: 8px; border: 1px solid rgba(255,255,255,0.06);">
+            <div style="font-size: 10.5px; font-weight: 800; color: #FED700; margin-bottom: 4px;">🔊 Simulação Copiloto no Carro (Raio 450m)</div>
+            <button type="button" class="btn-test-tts" onclick="testarVozCopilotoPerfil()" style="padding: 7px 10px; font-size: 11px;">
+              Ouvir Alerta Falado do Copiloto
+            </button>
           </div>
 
-          <div class="drawer-section-title">3. Tutor Responsável (16 Perfis Dark Planner)</div>
-          <div style="font-size: 11px; color: var(--text-muted); margin-bottom: 6px;">Selecione o perfil para preencher automaticamente:</div>
-          <div class="tutor-picker-grid" id="tutor-picker-grid" style="display:flex; gap:8px; overflow-x:auto; padding-bottom:8px; margin-bottom:10px;">
-            <!-- Renderizado dinamicamente via JS -->
+          <div class="drawer-footer" style="padding: 16px 0 0 0; border-top: 1px solid var(--border); margin-top: 16px;">
+            <button type="button" class="btn-del-parc" onclick="removerPerfilDoMapaAtual()">Retirar do Mapa</button>
+            <button type="button" class="btn-save-parc" onclick="salvarPosicaoPerfilNoMapa()" style="background: #22C55E; color: #fff;">💾 Fixar na Rua</button>
           </div>
-
-          <div class="form-row">
-            <div class="form-group">
-              <label>Nome do Tutor / Responsável</label>
-              <input type="text" class="form-input" id="pet-tutor" placeholder="Ex: Carlos Oliveira">
-            </div>
-            <div class="form-group">
-              <label>WhatsApp</label>
-              <input type="text" class="form-input" id="pet-contato" placeholder="45999887766">
-            </div>
-          </div>
-
-          <div class="drawer-section-title">4. Teste de Áudio do Copiloto (TTS)</div>
-          <button type="button" class="btn-test-tts" onclick="testarVozCopilotoPet()">
-            🔊 Ouvir Alerta do Copiloto (Simulação 450m)
-          </button>
-          <div style="font-size: 11px; color: var(--text-dim); text-align: center; margin-top: 5px;">
-            Simula exatamente o que o motorista ou pedestre ouvirá ao se aproximar a 450m deste ponto.
-          </div>
-
-          <button type="button" class="btn-save-pet-db" onclick="salvarPetNoBancoApp()">
-            🚀 Inserir no Banco de Dados do App (Tempo Real)
-          </button>
         </div>
       </aside>
     </section>
@@ -1646,6 +1595,7 @@
       renderizarBandejaBaloes();
       renderizarVisaoTatica();
       atualizarKpisGerais();
+      carregarPerfisCompletos();
     });
 
     window.addEventListener('resize', () => {
@@ -2050,7 +2000,7 @@
     /* ==================== TROCA DE VISÕES DA MESA ==================== */
     function trocarVisao(visao) {
       document.querySelectorAll('.switch-btn').forEach(b => b.classList.remove('active'));
-      const btn = Array.from(document.querySelectorAll('.switch-btn')).find(b => b.textContent.toLowerCase().includes(visao));
+      const btn = Array.from(document.querySelectorAll('.switch-btn')).find(b => b.getAttribute('onclick') && b.getAttribute('onclick').includes(visao));
       if (btn) btn.classList.add('active');
 
       const vTatica = document.getElementById('view-tatica');
@@ -2064,17 +2014,17 @@
       if (vPets) vPets.style.display = (visao === 'pets') ? 'flex' : 'none';
 
       if (visao === 'tatica') {
-        setTimeout(() => { if (map) map.invalidateSize(); }, 50);
+        setTimeout(() => { if (map) map.invalidateSize(true); }, 60);
       } else if (visao === 'financeiro') {
         renderizarTabelaFinanceira();
       } else if (visao === 'segmentos') {
         renderizarRadarSegmentos();
       } else if (visao === 'pets') {
         inicializarMapaPets();
-        renderizarBandejaEspeciesPets();
-        carregarCatalogoDarkPlanner();
-        carregarPetsCadastradosMesa();
-        setTimeout(() => { if (mapPets) mapPets.invalidateSize(); }, 60);
+        carregarPerfisCompletos();
+        setTimeout(() => { if (mapPets) mapPets.invalidateSize(true); }, 60);
+        setTimeout(() => { if (mapPets) mapPets.invalidateSize(true); }, 250);
+        setTimeout(() => { if (mapPets) mapPets.invalidateSize(true); }, 800);
       }
     }
 
@@ -2279,30 +2229,21 @@
     }
 
     /* =====================================================================
-       MOTOR DE INCLUSÃO OPERACIONAL DE PETS (PONTOS DE GPS & DARK PLANNER)
+       MOTOR DE INCLUSÃO DE PERFIS & OCORRÊNCIAS (70 CASOS VINCULADOS 1:1)
        ===================================================================== */
     let mapPets = null;
-    let markerPetAtual = null;
-    let circlePetRaio = null;
-    let catalogoDarkPlanner = [];
-    let catalogoPessoasDarkPlanner = [];
-    let testadoresCampo = [];
-    let markersTestadores = [];
-    let petsCadastradosMesa = [];
-    let markersPetsCadastrados = [];
-
-    const ESPECIES_PETS_DEF = [
-      { id: "cachorro", nome: "Cachorro Macho", icone: "🐶", sub: "Gravatinha Borboleta", defaultPorte: "medio", defaultSexo: "macho" },
-      { id: "cachorra", nome: "Cadela Fêmea", icone: "🐩", sub: "Lacinho de Fita", defaultPorte: "medio", defaultSexo: "femea" },
-      { id: "gato", nome: "Gato Macho", icone: "🐱", sub: "Gravatinha Borboleta", defaultPorte: "pequeno", defaultSexo: "macho" },
-      { id: "gata", nome: "Gata Fêmea", icone: "🐈", sub: "Lacinho Delicado", defaultPorte: "pequeno", defaultSexo: "femea" },
-      { id: "ninhada_caes", nome: "Ninhada de Cães", icone: "🍼", sub: "4 a 5 filhotinhos", defaultPorte: "pequeno", defaultSexo: "macho" },
-      { id: "ninhada_gatos", nome: "Ninhada de Gatos", icone: "🐾", sub: "4 a 5 gatinhos", defaultPorte: "pequeno", defaultSexo: "femea" },
-      { id: "ave", nome: "Ave Doméstica", icone: "🦜", sub: "Calopsitas, Canários...", defaultPorte: "pequeno", defaultSexo: "macho" }
-    ];
+    let perfisOcorrencias = [];
+    let filtroPerfisAtivo = 'todos';
+    let perfilSelecionado = null;
+    let markerEdicaoPerfil = null;
+    let markersPerfisMap = {};
+    let circlesPerfisMap = {};
 
     function inicializarMapaPets() {
-      if (mapPets) return;
+      if (mapPets) {
+        setTimeout(() => mapPets.invalidateSize(true), 60);
+        return;
+      }
       const el = document.getElementById('map-pets');
       if (!el) return;
 
@@ -2312,107 +2253,298 @@
         zoomControl: true
       });
 
-      L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-        attribution: '&copy; CARTO &copy; OpenStreetMap',
+      // Camada oficial OpenStreetMap de alta resolução
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors',
         maxZoom: 19
       }).addTo(mapPets);
 
+      // Clique no mapa
       mapPets.on('click', (e) => {
-        posicionarPontoPet(e.latlng.lat, e.latlng.lng);
+        if (document.getElementById('perfil-drawer').classList.contains('closed')) {
+          // Se não há perfil em edição, pega o primeiro pendente de fixação
+          const pendente = perfisOcorrencias.find(p => !p.posicao_mapa.fixado);
+          if (pendente) {
+            abrirDrawerPerfil(pendente.id, e.latlng.lat, e.latlng.lng);
+          }
+        } else {
+          posicionarAlfineteEdicaoPerfil(e.latlng.lat, e.latlng.lng);
+        }
       });
 
+      // Suporte Drag-and-Drop de perfis diretamente para as ruas do mapa
       const container = mapPets.getContainer();
       container.addEventListener('dragover', (e) => e.preventDefault());
       container.addEventListener('drop', (e) => {
         e.preventDefault();
-        const especieId = e.dataTransfer.getData('text/pet-especie');
-        if (!especieId) return;
+        const perfilId = e.dataTransfer.getData('text/perfil-id');
+        if (!perfilId) return;
 
         const rect = container.getBoundingClientRect();
         const point = L.point(e.clientX - rect.left, e.clientY - rect.top);
         const latlng = mapPets.containerPointToLatLng(point);
 
-        posicionarPontoPet(latlng.lat, latlng.lng, especieId);
+        abrirDrawerPerfil(perfilId, latlng.lat, latlng.lng);
       });
 
-      carregarTestadoresCampo();
+      // Invalidação periódica para evitar tela preta
+      setTimeout(() => { if (mapPets) mapPets.invalidateSize(true); }, 100);
+      setTimeout(() => { if (mapPets) mapPets.invalidateSize(true); }, 350);
+      setTimeout(() => { if (mapPets) mapPets.invalidateSize(true); }, 800);
     }
 
-    function renderizarBandejaEspeciesPets() {
-      const el = document.getElementById('pet-species-tray-list');
-      if (!el) return;
-
-      el.innerHTML = ESPECIES_PETS_DEF.map(esp => `
-        <div class="pet-balloon-item" draggable="true" ondragstart="onPetDragStart(event, '${esp.id}')" onclick="selecionarEspeciePet('${esp.id}')">
-          <div class="balloon-icon-circle" style="border-color: rgba(220, 38, 38, 0.4); background: rgba(220, 38, 38, 0.15);">
-            ${esp.icone}
-          </div>
-          <div class="balloon-info">
-            <div class="balloon-name">${esp.nome}</div>
-            <div class="balloon-meta">
-              <span>${esp.sub}</span>
-            </div>
-          </div>
-          <span style="font-size: 11px; color: var(--gold); font-weight: 800;">Arrastar ➔</span>
-        </div>
-      `).join('');
-    }
-
-    function onPetDragStart(e, especieId) {
-      e.dataTransfer.setData('text/pet-especie', especieId);
-    }
-
-    function selecionarEspeciePet(especieId) {
-      document.getElementById('pet-especie').value = especieId;
-      aoMudarEspeciePet();
-      mostrarToast(`🐾 Espécie selecionada: ${especieId}. Clique em qualquer rua de Cascavel no mapa!`);
-    }
-
-    function posicionarPontoPet(lat, lng, especieOpcional) {
-      if (especieOpcional) {
-        document.getElementById('pet-especie').value = especieOpcional;
-        aoMudarEspeciePet();
+    async function carregarPerfisCompletos() {
+      try {
+        const resp = await fetch('/static/darkplanner_perfis_completos.json?t=' + Date.now());
+        if (resp.ok) {
+          perfisOcorrencias = await resp.json();
+          // Mescla com posições salvas pelo Rigo no localStorage
+          const salvosStr = localStorage.getItem('mesa_perfis_70_v1');
+          if (salvosStr) {
+            try {
+              const salvos = JSON.parse(salvosStr);
+              salvos.forEach(s => {
+                const idx = perfisOcorrencias.findIndex(p => p.id === s.id);
+                if (idx !== -1) {
+                  perfisOcorrencias[idx] = s;
+                }
+              });
+            } catch (_) {}
+          }
+        }
+      } catch (err) {
+        console.warn('Erro ao carregar catálogo 70 perfis:', err);
       }
 
-      document.getElementById('pet-lat').value = lat.toFixed(6);
-      document.getElementById('pet-lng').value = lng.toFixed(6);
-
-      if (markerPetAtual) mapPets.removeLayer(markerPetAtual);
-      if (circlePetRaio) mapPets.removeLayer(circlePetRaio);
-
-      const espDef = ESPECIES_PETS_DEF.find(e => e.id === document.getElementById('pet-especie').value) || ESPECIES_PETS_DEF[0];
-
-      const pinHtml = `<div class="pet-custom-pin">${espDef.icone}</div>`;
-      const icon = L.divIcon({
-        className: 'pet-pin-icon-wrap',
-        html: pinHtml,
-        iconSize: [42, 42],
-        iconAnchor: [21, 21]
-      });
-
-      markerPetAtual = L.marker([lat, lng], { icon, draggable: true }).addTo(mapPets);
-      markerPetAtual.on('dragend', (ev) => {
-        const pos = ev.target.getLatLng();
-        posicionarPontoPet(pos.lat, pos.lng);
-      });
-
-      // Círculo de 450 metros (raio de disparo exato do Copiloto TTS)
-      circlePetRaio = L.circle([lat, lng], {
-        radius: 450,
-        color: '#DC2626',
-        fillColor: '#DC2626',
-        fillOpacity: 0.14,
-        weight: 2,
-        dashArray: '6, 6'
-      }).addTo(mapPets);
-
-      buscarEnderecoReversoPet(lat, lng);
-
-      document.getElementById('pet-drawer').classList.remove('closed');
-      mostrarToast(`📍 Ponto fixado: [${lat.toFixed(4)}, ${lng.toFixed(4)}]. Raio de 450m ativo!`);
+      renderizarBandejaPerfis();
+      plotarTodosPerfisNoMapa();
+      atualizarContadoresPerfis();
     }
 
-    async function buscarEnderecoReversoPet(lat, lng) {
+    function atualizarContadoresPerfis() {
+      const todos = perfisOcorrencias.length;
+      const desap = perfisOcorrencias.filter(p => p.pet.tipo_ocorrencia === 'desaparecido').length;
+      const adoc = perfisOcorrencias.filter(p => p.pet.tipo_ocorrencia === 'adocao').length;
+      const noMapa = perfisOcorrencias.filter(p => p.posicao_mapa && p.posicao_mapa.fixado).length;
+
+      const elTodos = document.getElementById('count-prof-todos');
+      if (elTodos) elTodos.textContent = todos;
+      const elDesap = document.getElementById('count-prof-desap');
+      if (elDesap) elDesap.textContent = desap;
+      const elAdoc = document.getElementById('count-prof-adoc');
+      if (elAdoc) elAdoc.textContent = adoc;
+      const elMapa = document.getElementById('count-prof-mapa');
+      if (elMapa) elMapa.textContent = noMapa;
+    }
+
+    function filtrarPerfisView(tipo, btn) {
+      filtroPerfisAtivo = tipo;
+      document.querySelectorAll('.prof-tab-btn').forEach(b => b.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+      renderizarBandejaPerfis();
+    }
+
+    function renderizarBandejaPerfis() {
+      const tray = document.getElementById('profile-list-tray');
+      if (!tray) return;
+
+      let filtrados = perfisOcorrencias;
+      if (filtroPerfisAtivo === 'desaparecido') {
+        filtrados = perfisOcorrencias.filter(p => p.pet.tipo_ocorrencia === 'desaparecido');
+      } else if (filtroPerfisAtivo === 'adocao') {
+        filtrados = perfisOcorrencias.filter(p => p.pet.tipo_ocorrencia === 'adocao');
+      } else if (filtroPerfisAtivo === 'fixado') {
+        filtrados = perfisOcorrencias.filter(p => p.posicao_mapa && p.posicao_mapa.fixado);
+      }
+
+      if (!filtrados.length) {
+        tray.innerHTML = '<div style="padding: 24px 12px; text-align: center; color: var(--text-muted); font-size: 11px;">Nenhum perfil nesta categoria.</div>';
+        return;
+      }
+
+      tray.innerHTML = filtrados.map(p => {
+        const fixado = p.posicao_mapa && p.posicao_mapa.fixado;
+        const ehDesap = p.pet.tipo_ocorrencia === 'desaparecido';
+        const badgeClass = ehDesap ? 'badge-desaparecido' : 'badge-adocao';
+        const badgeTexto = ehDesap ? '🚨 Desaparecido' : '🏠 Para Adoção';
+        const cardClass = fixado ? 'profile-card no-mapa' : 'profile-card';
+
+        return `
+          <div class="${cardClass}" draggable="true" ondragstart="onPerfilDragStart(event, '${p.id}')" onclick="abrirDrawerPerfil('${p.id}')">
+            <!-- Tutor Responsável -->
+            <div class="profile-card-tutor">
+              <img class="profile-tutor-avatar" src="${p.tutor.avatar}" alt="${escapeHtml(p.tutor.nome)}" loading="lazy">
+              <div class="profile-tutor-info">
+                <div class="profile-tutor-name">${escapeHtml(p.tutor.nome)}</div>
+                <div class="profile-tutor-sub">📱 ${escapeHtml(p.tutor.telefone)} • 📍 ${escapeHtml(p.tutor.bairro_origem)}</div>
+              </div>
+            </div>
+
+            <!-- Pet Vinculado -->
+            <div class="profile-card-pet">
+              <img class="profile-pet-thumb ${p.pet.tipo_ocorrencia}" src="${p.pet.foto_url}" alt="${escapeHtml(p.pet.nome)}" loading="lazy">
+              <div class="profile-pet-info">
+                <div class="profile-pet-name">
+                  <span>${escapeHtml(p.pet.nome)}</span>
+                  <span class="profile-badge-tipo ${badgeClass}">${badgeTexto}</span>
+                </div>
+                <div class="profile-pet-desc">
+                  ${escapeHtml(p.pet.raca)} • ${escapeHtml(p.pet.sexo)} • ${escapeHtml(p.pet.porte)}
+                </div>
+                <div style="font-size: 10px; font-weight: 800; color: ${ehDesap ? 'var(--gold)' : '#38BDF8'}; margin-top: 2px;">
+                  ${escapeHtml(p.pet.recompensa)}
+                </div>
+              </div>
+            </div>
+
+            <!-- Rodapé / Status de Localização -->
+            <div class="profile-card-footer">
+              ${fixado ? `
+                <div class="profile-loc-status" style="color: #22C55E; display:flex; align-items:center; gap:4px;">
+                  <span>✅ No Mapa:</span>
+                  <span style="max-width:140px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${escapeHtml(p.posicao_mapa.rua || p.posicao_mapa.bairro || 'Cascavel')}</span>
+                </div>
+                <button type="button" class="profile-btn-action" style="background:#38BDF8; color:#000;" onclick="event.stopPropagation(); abrirDrawerPerfil('${p.id}')">
+                  ✏️ Ajustar
+                </button>
+              ` : `
+                <div class="profile-loc-status" style="color: var(--text-dim);">
+                  ⏳ Fora do mapa
+                </div>
+                <button type="button" class="profile-btn-action" onclick="event.stopPropagation(); abrirDrawerPerfil('${p.id}')">
+                  📍 Lançar no Mapa
+                </button>
+              `}
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function onPerfilDragStart(e, perfilId) {
+      e.dataTransfer.setData('text/perfil-id', perfilId);
+    }
+
+    function abrirDrawerPerfil(perfilId, latOpcional, lngOpcional) {
+      const p = perfisOcorrencias.find(x => x.id === perfilId);
+      if (!p) return;
+      perfilSelecionado = p;
+
+      document.getElementById('perfil-edit-id').value = p.id;
+
+      const ehDesap = p.pet.tipo_ocorrencia === 'desaparecido';
+      const badgeClass = ehDesap ? 'badge-desaparecido' : 'badge-adocao';
+      const badgeTexto = ehDesap ? '🚨 Desaparecido' : '🏠 Para Adoção';
+
+      // Resumo no topo do drawer
+      const card = document.getElementById('perfil-summary-card');
+      card.innerHTML = `
+        <div style="position:relative; flex-shrink:0;">
+          <img src="${p.pet.foto_url}" style="width:52px; height:52px; border-radius:10px; object-fit:cover; border:2px solid ${ehDesap ? '#EF4444' : '#38BDF8'};">
+          <img src="${p.tutor.avatar}" style="position:absolute; bottom:-4px; right:-4px; width:26px; height:26px; border-radius:50%; object-fit:cover; border:2px solid #000;">
+        </div>
+        <div style="flex:1; min-width:0;">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <span style="font-size:13px; font-weight:900; color:#fff;">${escapeHtml(p.pet.nome)}</span>
+            <span class="profile-badge-tipo ${badgeClass}">${badgeTexto}</span>
+          </div>
+          <div style="font-size:11px; color:#A1A1AA; margin-top:2px;">
+            Tutor(a): <strong style="color:#fff;">${escapeHtml(p.tutor.nome)}</strong> • 📱 ${escapeHtml(p.tutor.telefone)}
+          </div>
+          <div style="font-size:10.5px; color:${ehDesap ? 'var(--gold)' : '#38BDF8'}; font-weight:800; margin-top:2px;">
+            ${escapeHtml(p.pet.raca)} • ${escapeHtml(p.pet.recompensa)}
+          </div>
+        </div>
+      `;
+
+      // Preenchimento de coordenadas
+      let lat = latOpcional || (p.posicao_mapa && p.posicao_mapa.lat);
+      let lng = lngOpcional || (p.posicao_mapa && p.posicao_mapa.lng);
+
+      if (lat && lng) {
+        document.getElementById('perfil-edit-lat').value = Number(lat).toFixed(6);
+        document.getElementById('perfil-edit-lng').value = Number(lng).toFixed(6);
+        document.getElementById('perfil-edit-endereco').value = (p.posicao_mapa && p.posicao_mapa.rua) || '';
+        document.getElementById('perfil-edit-bairro').value = (p.posicao_mapa && p.posicao_mapa.bairro) || p.tutor.bairro_origem;
+        document.getElementById('perfil-edit-referencia').value = (p.posicao_mapa && p.posicao_mapa.referencia) || '';
+        posicionarAlfineteEdicaoPerfil(lat, lng, false);
+      } else {
+        // Padrão: centro de Cascavel
+        const center = CASCAVEL_CENTER;
+        document.getElementById('perfil-edit-lat').value = center[0].toFixed(6);
+        document.getElementById('perfil-edit-lng').value = center[1].toFixed(6);
+        document.getElementById('perfil-edit-endereco').value = '';
+        document.getElementById('perfil-edit-bairro').value = p.tutor.bairro_origem;
+        document.getElementById('perfil-edit-referencia').value = '';
+        posicionarAlfineteEdicaoPerfil(center[0], center[1], true);
+      }
+
+      document.getElementById('perfil-drawer').classList.remove('closed');
+    }
+
+    function fecharPerfilDrawer() {
+      document.getElementById('perfil-drawer').classList.add('closed');
+      if (markerEdicaoPerfil && mapPets) {
+        mapPets.removeLayer(markerEdicaoPerfil);
+        markerEdicaoPerfil = null;
+      }
+    }
+
+    function posicionarAlfineteEdicaoPerfil(lat, lng, reverso = true) {
+      if (!mapPets) return;
+      document.getElementById('perfil-edit-lat').value = Number(lat).toFixed(6);
+      document.getElementById('perfil-edit-lng').value = Number(lng).toFixed(6);
+
+      if (markerEdicaoPerfil) mapPets.removeLayer(markerEdicaoPerfil);
+
+      const icon = L.divIcon({
+        className: 'marker-edicao-pin-wrap',
+        html: `<div style="width:38px; height:38px; border-radius:50%; background:#EF4444; border:3px solid #fff; display:flex; align-items:center; justify-content:center; font-size:18px; box-shadow:0 8px 24px rgba(239,68,68,0.7); cursor:grab;">📍</div>`,
+        iconSize: [38, 38],
+        iconAnchor: [19, 19]
+      });
+
+      markerEdicaoPerfil = L.marker([lat, lng], { icon, draggable: true }).addTo(mapPets);
+      markerEdicaoPerfil.on('dragend', (ev) => {
+        const pos = ev.target.getLatLng();
+        posicionarAlfineteEdicaoPerfil(pos.lat, pos.lng, true);
+      });
+
+      mapPets.flyTo([lat, lng], 16, { duration: 0.8 });
+
+      if (reverso) {
+        buscarEnderecoReversoPerfil(lat, lng);
+      }
+    }
+
+    async function buscarEnderecoPerfil() {
+      const termo = document.getElementById('perfil-edit-endereco').value.trim();
+      if (!termo) {
+        alert('Digite o nome da rua ou avenida para buscar!');
+        return;
+      }
+
+      mostrarToast('🔎 Buscando endereço em Cascavel...');
+      try {
+        const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(termo + ', Cascavel, Paraná, Brasil')}&limit=1`;
+        const resp = await fetch(url, { headers: { 'Accept-Language': 'pt-BR' } });
+        if (resp.ok) {
+          const dados = await resp.json();
+          if (dados && dados.length > 0) {
+            const lat = parseFloat(dados[0].lat);
+            const lng = parseFloat(dados[0].lon);
+            posicionarAlfineteEdicaoPerfil(lat, lng, false);
+            mostrarToast('📍 Endereço localizado em Cascavel!');
+          } else {
+            alert('Endereço não encontrado em Cascavel. Tente especificar rua e bairro.');
+          }
+        }
+      } catch (e) {
+        alert('Falha na busca de endereço: ' + e);
+      }
+    }
+
+    async function buscarEnderecoReversoPerfil(lat, lng) {
       try {
         const resp = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}&zoom=18&addressdetails=1`, {
           headers: { 'Accept-Language': 'pt-BR' }
@@ -2424,460 +2556,227 @@
           const num = addr.house_number ? `, ${addr.house_number}` : '';
           const bairro = addr.suburb || addr.neighbourhood || addr.city_district || 'Cascavel';
 
-          if (rua) document.getElementById('pet-rua').value = `${rua}${num}`;
-          if (bairro) document.getElementById('pet-bairro').value = bairro;
+          if (rua && !document.getElementById('perfil-edit-endereco').value) {
+            document.getElementById('perfil-edit-endereco').value = `${rua}${num}`;
+          }
+          if (bairro) document.getElementById('perfil-edit-bairro').value = bairro;
         }
       } catch (_) {}
     }
 
-    function fecharPetDrawer() {
-      document.getElementById('pet-drawer').classList.add('closed');
-    }
+    async function salvarPosicaoPerfilNoMapa() {
+      if (!perfilSelecionado) return;
 
-    async function carregarCatalogoDarkPlanner() {
-      try {
-        const resp = await fetch('/static/darkplanner_pets/catalogo.json?t=' + Date.now());
-        if (resp.ok) {
-          catalogoDarkPlanner = await resp.json();
-          renderizarPickerFotosPet();
-        }
-      } catch (err) {
-        console.warn('Erro ao carregar catálogo Dark Planner:', err);
-      }
-      carregarCatalogoPessoasDarkPlanner();
-    }
-
-    async function carregarCatalogoPessoasDarkPlanner() {
-      try {
-        const resp = await fetch('/static/darkplanner_pessoas/catalogo_pessoas.json?t=' + Date.now());
-        if (resp.ok) {
-          catalogoPessoasDarkPlanner = await resp.json();
-          renderizarPickerTutores();
-        }
-      } catch (err) {
-        console.warn('Erro ao carregar catálogo de pessoas:', err);
-      }
-    }
-
-    function renderizarPickerTutores() {
-      const grid = document.getElementById('tutor-picker-grid');
-      if (!grid) return;
-
-      if (!catalogoPessoasDarkPlanner.length) {
-        grid.innerHTML = '<div style="font-size:11px; color:#94A3B8;">Carregando perfis...</div>';
-        return;
-      }
-
-      grid.innerHTML = catalogoPessoasDarkPlanner.map(p => `
-        <div class="tutor-avatar-chip" onclick="selecionarTutorPerfil('${p.id}', this)" title="${escapeHtml(p.nome)} (${escapeHtml(p.bairro)})">
-          <img class="tutor-avatar-img" src="${p.url}" alt="${escapeHtml(p.nome)}" loading="lazy">
-          <span class="tutor-avatar-name">${escapeHtml(p.nome.split(' ')[0])}</span>
-          <span class="tutor-avatar-sub">${escapeHtml(p.bairro)}</span>
-        </div>
-      `).join('');
-    }
-
-    function selecionarTutorPerfil(tutorId, el) {
-      const tutor = catalogoPessoasDarkPlanner.find(p => p.id === tutorId);
-      if (!tutor) return;
-
-      document.getElementById('pet-tutor').value = tutor.nome;
-      document.getElementById('pet-contato').value = tutor.whatsapp;
-      if (!document.getElementById('pet-bairro').value) {
-        document.getElementById('pet-bairro').value = tutor.bairro;
-      }
-
-      document.querySelectorAll('.tutor-avatar-chip').forEach(c => c.classList.remove('selected'));
-      if (el) el.classList.add('selected');
-      mostrarToast(`👤 Tutor ${tutor.nome} vinculado com sucesso!`);
-    }
-
-    function aoMudarEspeciePet() {
-      renderizarPickerFotosPet();
-      if (markerPetAtual) {
-        const espDef = ESPECIES_PETS_DEF.find(e => e.id === document.getElementById('pet-especie').value) || ESPECIES_PETS_DEF[0];
-        const pinHtml = `<div class="pet-custom-pin">${espDef.icone}</div>`;
-        const icon = L.divIcon({
-          className: 'pet-pin-icon-wrap',
-          html: pinHtml,
-          iconSize: [42, 42],
-          iconAnchor: [21, 21]
-        });
-        markerPetAtual.setIcon(icon);
-      }
-    }
-
-    function renderizarPickerFotosPet() {
-      const picker = document.getElementById('pet-gallery-picker');
-      if (!picker) return;
-
-      const esp = document.getElementById('pet-especie').value;
-      let fotosFiltradas = catalogoDarkPlanner.filter(f => f.categoria === esp);
-      if (!fotosFiltradas.length) {
-        fotosFiltradas = catalogoDarkPlanner;
-      }
-
-      if (!fotosFiltradas.length) {
-        picker.innerHTML = '<div style="grid-column:1/-1; font-size:11px; color:#A1A1AA; text-align:center; padding:10px;">Carregando fotos do Dark Planner...</div>';
-        return;
-      }
-
-      const fotoAtual = document.getElementById('pet-foto-url').value;
-
-      picker.innerHTML = fotosFiltradas.map((f, i) => {
-        const sel = (fotoAtual === f.url || (!fotoAtual && i === 0)) ? 'selected' : '';
-        if (!fotoAtual && i === 0) {
-          document.getElementById('pet-foto-url').value = f.url;
-        }
-        return `
-          <img class="pet-gallery-thumb ${sel}" src="${f.url}" title="${escapeHtml(f.nome)}" onclick="selecionarFotoPet('${f.url}', this)" loading="lazy">
-        `;
-      }).join('');
-    }
-
-    function selecionarFotoPet(url, el) {
-      document.getElementById('pet-foto-url').value = url;
-      document.querySelectorAll('.pet-gallery-thumb').forEach(img => img.classList.remove('selected'));
-      if (el) el.classList.add('selected');
-      mostrarToast('📸 Foto selecionada com sucesso!');
-    }
-
-    function testarVozCopilotoPet() {
-      const rua = document.getElementById('pet-rua').value || 'sua rua';
-      const bairro = document.getElementById('pet-bairro').value || 'Cascavel';
-      const nome = document.getElementById('pet-nome').value || 'animalzinho';
-      const espDef = ESPECIES_PETS_DEF.find(e => e.id === document.getElementById('pet-especie').value) || ESPECIES_PETS_DEF[0];
-
-      const texto = `Atenção motorista: animal desaparecido cadastrado a 400 metros na ${rua}, ${bairro}. ${espDef.nome} ${nome}.`;
-
-      if ('speechSynthesis' in window) {
-        window.speechSynthesis.cancel();
-        const utter = new SpeechSynthesisUtterance(texto);
-        utter.lang = 'pt-BR';
-        utter.rate = 1.05;
-        utter.pitch = 1.0;
-        window.speechSynthesis.speak(utter);
-        mostrarToast('🔊 Simulando áudio do Copiloto...');
-      } else {
-        alert(texto);
-      }
-    }
-
-    async function salvarPetNoBancoApp() {
-      const lat = parseFloat(document.getElementById('pet-lat').value);
-      const lng = parseFloat(document.getElementById('pet-lng').value);
+      const lat = parseFloat(document.getElementById('perfil-edit-lat').value);
+      const lng = parseFloat(document.getElementById('perfil-edit-lng').value);
       if (!lat || !lng) {
-        alert('Por favor, selecione primeiro um ponto no mapa de Cascavel!');
+        alert('Selecione primeiro uma localização no mapa!');
         return;
       }
 
-      const nome = document.getElementById('pet-nome').value.trim() || 'Pet Sem Nome';
-      const tipo = document.getElementById('pet-tipo').value;
-      const especie = document.getElementById('pet-especie').value;
-      const porte = document.getElementById('pet-porte').value;
-      const rua = document.getElementById('pet-rua').value.trim();
-      const bairro = document.getElementById('pet-bairro').value.trim() || 'Centro';
-      const fotoUrl = document.getElementById('pet-foto-url').value;
-      const desc = document.getElementById('pet-desc').value.trim();
-      const tutor = document.getElementById('pet-tutor').value.trim();
-      const contato = document.getElementById('pet-contato').value.trim();
+      const rua = document.getElementById('perfil-edit-endereco').value.trim() || 'Rua em Cascavel';
+      const bairro = document.getElementById('perfil-edit-bairro').value.trim() || perfilSelecionado.tutor.bairro_origem;
+      const ref = document.getElementById('perfil-edit-referencia').value.trim();
 
-      const espDef = ESPECIES_PETS_DEF.find(e => e.id === especie) || ESPECIES_PETS_DEF[0];
-
-      const payload = {
-        titulo: `${espDef.nome} ${nome}`,
-        tipo: tipo,
-        pilar: "pet",
+      perfilSelecionado.posicao_mapa = {
+        fixado: true,
         lat: lat,
         lng: lng,
         rua: rua,
         bairro: bairro,
-        cidade: "Cascavel",
-        foto_url: fotoUrl,
-        especie: (especie.includes('gato') || especie.includes('gata')) ? 'gato' : ((especie.includes('ave')) ? 'ave' : 'cao'),
-        porte: porte,
-        sexo: espDef.defaultSexo || 'macho',
-        descricao: desc || `Animal visto/desaparecido na ${rua}, ${bairro} em Cascavel.`,
-        contato: contato || '45999887766',
-        autor_nome: tutor || 'Tutor em Cascavel',
-        consentimento_contato: 1
+        referencia: ref,
+        data_fixacao: new Date().toISOString()
       };
 
+      // Salva no localStorage
+      localStorage.setItem('mesa_perfis_70_v1', JSON.stringify(perfisOcorrencias));
+
+      // Sincroniza com backend via /api/alertas para o app móvel receber
       try {
-        const resp = await fetch('/api/alertas', {
+        const payload = {
+          titulo: `${perfilSelecionado.pet.nome} (${perfilSelecionado.pet.raca})`,
+          tipo: perfilSelecionado.pet.tipo_ocorrencia === 'desaparecido' ? 'pet_perdido' : 'pet_adocao',
+          pilar: 'pet',
+          lat: lat,
+          lng: lng,
+          rua: rua,
+          bairro: bairro,
+          cidade: 'Cascavel',
+          foto_url: perfilSelecionado.pet.foto_url,
+          especie: perfilSelecionado.pet.categoria.includes('gato') || perfilSelecionado.pet.categoria.includes('gata') ? 'gato' : (perfilSelecionado.pet.categoria.includes('ave') ? 'ave' : 'cao'),
+          porte: perfilSelecionado.pet.porte,
+          sexo: perfilSelecionado.pet.sexo,
+          descricao: `${perfilSelecionado.pet.detalhes} Tutor: ${perfilSelecionado.tutor.nome}. ${ref ? 'Ref: ' + ref : ''}`,
+          contato: perfilSelecionado.tutor.telefone.replace(/\D/g, ''),
+          autor_nome: perfilSelecionado.tutor.nome,
+          consentimento_contato: 1
+        };
+
+        fetch('/api/alertas', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload)
-        });
-
-        const resData = await resp.json();
-        if (resp.ok && resData.ok) {
-          mostrarToast(`✅ ${nome} inserido com sucesso no banco de dados oficial (ID: ${resData.alerta_id || resData.id})!`);
-          fecharPetDrawer();
-          carregarPetsCadastradosMesa();
-        } else {
-          alert('Erro ao cadastrar animal: ' + (resData.erro || JSON.stringify(resData)));
-        }
-      } catch (err) {
-        alert('Falha na requisição com o servidor: ' + err);
-      }
-    }
-
-    async function carregarPetsCadastradosMesa() {
-      try {
-        const resp = await fetch('/api/alertas?cidade=Cascavel&pilar=pet&t=' + Date.now());
-        if (resp.ok) {
-          const list = await resp.json();
-          petsCadastradosMesa = list.filter(a => a.pilar === 'pet');
-          plotarPetsNoMapaMesa(petsCadastradosMesa);
-        }
+        }).catch(() => {});
       } catch (_) {}
+
+      fecharPerfilDrawer();
+      renderizarBandejaPerfis();
+      plotarTodosPerfisNoMapa();
+      atualizarContadoresPerfis();
+
+      mostrarToast(`🎉 Ocorrência de "${perfilSelecionado.pet.nome}" fixada com sucesso na ${rua}! Raio de 450m ativo.`);
     }
 
-    function plotarPetsNoMapaMesa(pets) {
+    function removerPerfilDoMapaAtual() {
+      if (!perfilSelecionado) return;
+      if (!confirm(`Deseja retirar a ocorrência de "${perfilSelecionado.pet.nome}" do mapa de Cascavel?`)) return;
+
+      perfilSelecionado.posicao_mapa = {
+        fixado: false,
+        lat: null,
+        lng: null,
+        rua: '',
+        bairro: '',
+        referencia: '',
+        data_fixacao: null
+      };
+
+      localStorage.setItem('mesa_perfis_70_v1', JSON.stringify(perfisOcorrencias));
+
+      fecharPerfilDrawer();
+      renderizarBandejaPerfis();
+      plotarTodosPerfisNoMapa();
+      atualizarContadoresPerfis();
+
+      mostrarToast(`🗑️ Ocorrência de "${perfilSelecionado.pet.nome}" retirada do mapa.`);
+    }
+
+    function plotarTodosPerfisNoMapa() {
       if (!mapPets) return;
-      markersPetsCadastrados.forEach(m => mapPets.removeLayer(m));
-      markersPetsCadastrados = [];
 
-      pets.forEach(p => {
-        if (!p.lat || !p.lng) return;
+      // Limpa marcadores e círculos anteriores
+      Object.values(markersPerfisMap).forEach(m => mapPets.removeLayer(m));
+      Object.values(circlesPerfisMap).forEach(c => mapPets.removeLayer(c));
+      markersPerfisMap = {};
+      circlesPerfisMap = {};
 
-        let cor = '#DC2626'; // Vermelho Desaparecido
-        let badge = '🚨 DESAPARECIDO';
-        let badgeBg = '#DC2626';
-        let iconeStr = '🐾';
+      perfisOcorrencias.forEach(p => {
+        if (!p.posicao_mapa || !p.posicao_mapa.fixado || !p.posicao_mapa.lat || !p.posicao_mapa.lng) return;
 
-        if (p.status_pet === 'encontrado' || (p.titulo && p.titulo.includes('RESGATADO'))) {
-          cor = '#009B3A';
-          badge = '🎉 RESGATADO / ENCONTRADO';
-          badgeBg = '#009B3A';
-          iconeStr = '🎉';
-        } else if (p.status_pet === 'avistado' || p.tipo === 'pet_avistado') {
-          cor = '#F59E0B';
-          badge = '👀 AVISTAMENTO ATIVO';
-          badgeBg = '#D97706';
-          iconeStr = '👀';
-        }
+        const lat = p.posicao_mapa.lat;
+        const lng = p.posicao_mapa.lng;
+        const ehDesap = p.pet.tipo_ocorrencia === 'desaparecido';
+        const corTema = ehDesap ? '#EF4444' : '#38BDF8';
+        const badgeTexto = ehDesap ? '🚨 DESAPARECIDO' : '🏠 PARA ADOÇÃO';
+
+        // Marcador Circular com Foto do Pet e Badge
+        const iconHtml = `
+          <div class="pet-map-avatar-marker ${p.pet.tipo_ocorrencia}">
+            <img class="pet-map-avatar-img" src="${p.pet.foto_url}" alt="${escapeHtml(p.pet.nome)}">
+            <div class="pet-map-badge-icon">${ehDesap ? '🚨' : '🏠'}</div>
+          </div>
+        `;
 
         const icon = L.divIcon({
-          className: 'pet-pin-icon-wrap',
-          html: `<div class="pet-custom-pin" style="background:${cor};">${iconeStr}</div>`,
-          iconSize: [38, 38],
-          iconAnchor: [19, 19]
-        });
-
-        const m = L.marker([p.lat, p.lng], { icon }).addTo(mapPets);
-        m.bindPopup(`
-          <div style="font-family:sans-serif; min-width:220px;">
-            <div style="margin-bottom:6px;">
-              <span style="background:${badgeBg}; color:#FFFFFF; font-size:9px; font-weight:900; padding:2px 7px; border-radius:4px; letter-spacing:0.5px;">${badge}</span>
-            </div>
-            <div style="font-weight:900; font-size:13px; color:#18181B; margin-bottom:4px;">${escapeHtml(p.titulo)}</div>
-            <div style="font-size:11px; color:#71717A; margin-bottom:6px;">${escapeHtml(p.rua || '')} - ${escapeHtml(p.bairro || 'Cascavel')}</div>
-            ${p.foto_url ? `<img src="${p.foto_url}" style="width:100%; height:96px; object-fit:cover; border-radius:6px; margin-bottom:6px; border:1px solid #E4E4E7;">` : ''}
-            
-            <div style="display:flex; flex-direction:column; gap:5px; margin-top:6px;">
-              <button type="button" style="background:#2563EB; color:#fff; border:none; padding:5px 8px; border-radius:5px; font-size:11px; font-weight:800; cursor:pointer;" onclick="falarPetCadastrado('${escapeAttr(p.titulo)}', '${escapeAttr(p.rua)}', '${escapeAttr(p.bairro)}')">🔊 Ouvir Copiloto (450m)</button>
-              
-              ${p.status_pet !== 'encontrado' ? `
-                <button type="button" style="background:#009B3A; color:#fff; border:none; padding:5px 8px; border-radius:5px; font-size:11px; font-weight:800; cursor:pointer;" onclick="marcarPetStatusMesa(${p.id}, 'encontrado')">🎉 Marcar como Encontrado</button>
-                <button type="button" style="background:#D97706; color:#fff; border:none; padding:5px 8px; border-radius:5px; font-size:11px; font-weight:800; cursor:pointer;" onclick="simularAvistamentoPetMesa(${p.id})">👀 Simular Avistamento na Rua</button>
-              ` : `
-                <div style="font-size:11px; color:#009B3A; font-weight:800; text-align:center;">Reencontro comemorado no App!</div>
-              `}
-              <button type="button" style="background:transparent; color:#EF4444; border:1px solid #EF4444; padding:3px 6px; border-radius:5px; font-size:10px; font-weight:700; cursor:pointer; margin-top:2px;" onclick="excluirPetMesa(${p.id})">🗑️ Excluir Ocorrência</button>
-            </div>
-          </div>
-        `);
-        markersPetsCadastrados.push(m);
-      });
-    }
-
-    async function marcarPetStatusMesa(petId, status) {
-      if (!confirm(`Deseja alterar o status desta ocorrência para "${status.toUpperCase()}"? O card mudará em tempo real no app dos usuários.`)) return;
-
-      try {
-        const resp = await fetch(`/api/pets/${petId}/status`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ status_pet: status, subtipo_evento: (status === 'encontrado' ? 'resgatado' : '') })
-        });
-        if (resp.ok) {
-          mostrarToast(`🎉 Status alterado para ${status.toUpperCase()}!`);
-          carregarPetsCadastradosMesa();
-        } else {
-          alert('Erro ao atualizar status.');
-        }
-      } catch (err) {
-        alert('Falha na comunicação: ' + err);
-      }
-    }
-
-    async function simularAvistamentoPetMesa(petId) {
-      const local = prompt('Informe a rua/ponto onde o animal foi visto em Cascavel:', 'Rua Paraná, esquina com Rua Castro Alves');
-      if (!local) return;
-
-      const pet = petsCadastradosMesa.find(p => p.id === petId);
-      const lat = pet ? pet.lat + 0.002 : -24.9550;
-      const lng = pet ? pet.lng + 0.002 : -53.4550;
-
-      try {
-        const resp = await fetch(`/api/pets/${petId}/avistamento`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            lat: lat,
-            lng: lng,
-            descricao: `Avistado por testador de campo na ${local}. Animal parecia atento e desorientado.`,
-            nome_avistador: 'Lucas Martins (Testador 01)',
-            contato_avistador: '45998223344',
-            autorizar_contato: 1
-          })
-        });
-        if (resp.ok) {
-          mostrarToast(`👀 Avistamento registrado! Trilha e ponto plotados no mapa.`);
-          carregarPetsCadastradosMesa();
-        } else {
-          alert('Erro ao registrar avistamento.');
-        }
-      } catch (err) {
-        alert('Falha: ' + err);
-      }
-    }
-
-    async function excluirPetMesa(petId) {
-      if (!confirm('Deseja excluir permanentemente esta ocorrência de teste?')) return;
-      try {
-        const resp = await fetch(`/api/alertas/${petId}`, { method: 'DELETE' });
-        if (resp.ok) {
-          mostrarToast('🗑️ Ocorrência excluída com sucesso.');
-          carregarPetsCadastradosMesa();
-        } else {
-          alert('Erro ao excluir.');
-        }
-      } catch (err) {
-        alert('Falha: ' + err);
-      }
-    }
-
-    /* =====================================================================
-       4 TESTADORES DE CAMPO PILOTO (CASCAVEL)
-       ===================================================================== */
-    async function carregarTestadoresCampo() {
-      try {
-        const resp = await fetch('/api/testadores?t=' + Date.now());
-        if (resp.ok) {
-          const data = await resp.json();
-          testadoresCampo = data.testadores || [];
-          renderizarDockTestadores();
-          plotarTestadoresNoMapa();
-        }
-      } catch (err) {
-        console.warn('Erro ao carregar testadores:', err);
-      }
-    }
-
-    function renderizarDockTestadores() {
-      const grid = document.getElementById('testadores-grid');
-      if (!grid) return;
-
-      grid.innerHTML = testadoresCampo.map(t => `
-        <div class="testador-card" id="card-${t.id}">
-          <div class="testador-head">
-            <img class="testador-avatar" src="${t.foto_url}" alt="${escapeHtml(t.nome)}">
-            <div class="testador-info">
-              <div class="testador-nome">${escapeHtml(t.nome)}</div>
-              <div class="testador-rota">📍 ${escapeHtml(t.funcao)}</div>
-            </div>
-          </div>
-          <div class="testador-actions">
-            <button type="button" class="btn-testador-acao btn-testador-aproximar" onclick="aproximarTestadorDoPet('${t.id}')" title="Move testador para 400m de um pet para disparar Copiloto">
-              📍 400m Copiloto
-            </button>
-            <button type="button" class="btn-testador-acao btn-testador-avistar" onclick="testadorGeraAvistamento('${t.id}')" title="Registra avistamento feito por este testador">
-              👀 Avistar
-            </button>
-          </div>
-        </div>
-      `).join('');
-    }
-
-    function plotarTestadoresNoMapa() {
-      if (!mapPets) return;
-      markersTestadores.forEach(m => mapPets.removeLayer(m));
-      markersTestadores = [];
-
-      testadoresCampo.forEach(t => {
-        const icon = L.divIcon({
-          className: 'testador-marker-wrap',
-          html: `
-            <div style="position:relative; width:44px; height:44px;">
-              <img src="${t.foto_url}" style="width:40px; height:40px; border-radius:50%; object-fit:cover; border:3px solid #38BDF8; box-shadow:0 6px 16px rgba(0,0,0,0.6);">
-              <div style="position:absolute; bottom:0; right:0; background:#22C55E; width:12px; height:12px; border-radius:50%; border:2px solid #fff;"></div>
-            </div>
-          `,
+          className: 'pet-avatar-divicon',
+          html: iconHtml,
           iconSize: [44, 44],
           iconAnchor: [22, 22]
         });
 
-        const m = L.marker([t.lat, t.lng], { icon }).addTo(mapPets);
+        const m = L.marker([lat, lng], { icon }).addTo(mapPets);
+
+        // Círculo de 450 metros (raio de disparo do Copiloto TTS)
+        const circle = L.circle([lat, lng], {
+          radius: 450,
+          color: corTema,
+          fillColor: corTema,
+          fillOpacity: 0.12,
+          weight: 2,
+          dashArray: '5, 5'
+        }).addTo(mapPets);
+
+        const cleanPhone = p.tutor.telefone.replace(/\D/g, '');
+
         m.bindPopup(`
-          <div style="font-family:sans-serif; min-width:190px;">
-            <div style="font-weight:900; font-size:13px; color:#18181B;">${escapeHtml(t.nome)} (${escapeHtml(t.codigo)})</div>
-            <div style="font-size:11px; color:#2563EB; font-weight:800; margin-bottom:4px;">${escapeHtml(t.funcao)}</div>
-            <div style="font-size:11px; color:#71717A; margin-bottom:6px;">Status: <strong>Ativo em Campo</strong></div>
-            <button type="button" style="background:#2563EB; color:#fff; border:none; padding:5px 8px; border-radius:4px; font-size:11px; font-weight:800; width:100%; cursor:pointer;" onclick="aproximarTestadorDoPet('${t.id}')">Simular Aproximação 400m</button>
+          <div style="font-family:sans-serif; min-width:240px; padding:4px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+              <span style="background:${corTema}; color:#fff; font-size:9.5px; font-weight:900; padding:2px 7px; border-radius:4px;">${badgeTexto}</span>
+              <span style="font-size:10.5px; font-weight:800; color:${corTema};">${escapeHtml(p.pet.recompensa)}</span>
+            </div>
+
+            <div style="display:flex; gap:10px; align-items:center; margin-bottom:10px;">
+              <img src="${p.pet.foto_url}" style="width:60px; height:60px; border-radius:8px; object-fit:cover; border:2px solid ${corTema};">
+              <div>
+                <div style="font-size:14px; font-weight:900; color:#18181B;">${escapeHtml(p.pet.nome)}</div>
+                <div style="font-size:11px; color:#52525B;">${escapeHtml(p.pet.raca)} • ${escapeHtml(p.pet.sexo)}</div>
+                <div style="font-size:10.5px; color:#71717A;">📍 ${escapeHtml(p.posicao_mapa.rua || '')}, ${escapeHtml(p.posicao_mapa.bairro || '')}</div>
+              </div>
+            </div>
+
+            <div style="background:#F4F4F5; border-radius:8px; padding:8px; margin-bottom:10px; display:flex; gap:8px; align-items:center;">
+              <img src="${p.tutor.avatar}" style="width:30px; height:30px; border-radius:50%; object-fit:cover;">
+              <div style="flex:1; min-width:0;">
+                <div style="font-size:11px; font-weight:800; color:#18181B;">${escapeHtml(p.tutor.nome)}</div>
+                <div style="font-size:10px; color:#71717A;">📱 ${escapeHtml(p.tutor.telefone)}</div>
+              </div>
+              <a href="https://wa.me/55${cleanPhone}?text=${encodeURIComponent('Olá ' + p.tutor.nome + ', vi seu alerta sobre o pet ' + p.pet.nome + ' no Alerta Urbano Cascavel!')}" target="_blank" style="background:#22C55E; color:#fff; text-decoration:none; padding:4px 8px; border-radius:6px; font-size:10.5px; font-weight:800; display:flex; align-items:center; gap:3px;">
+                💬 WhatsApp
+              </a>
+            </div>
+
+            <div style="display:flex; gap:6px;">
+              <button type="button" style="flex:1; background:#2563EB; color:#fff; border:none; padding:6px; border-radius:6px; font-size:11px; font-weight:800; cursor:pointer;" onclick="falarOcorrenciaPerfil('${escapeAttr(p.pet.nome)}', '${escapeAttr(p.pet.raca)}', '${escapeAttr(p.posicao_mapa.rua || '')}', '${escapeAttr(p.posicao_mapa.bairro || '')}')">
+                🔊 Ouvir 450m
+              </button>
+              <button type="button" style="background:#EF4444; color:#fff; border:none; padding:6px 10px; border-radius:6px; font-size:11px; font-weight:800; cursor:pointer;" onclick="retirarPerfilDoMapaDirect('${p.id}')">
+                🗑️ Retirar
+              </button>
+            </div>
           </div>
         `);
-        markersTestadores.push(m);
+
+        markersPerfisMap[p.id] = m;
+        circlesPerfisMap[p.id] = circle;
       });
     }
 
-    function alternarDockTestadores() {
-      const dock = document.getElementById('testadores-dock');
-      const btn = document.getElementById('btn-toggle-dock');
-      if (!dock) return;
-      dock.classList.toggle('collapsed');
-      if (btn) btn.textContent = dock.classList.contains('collapsed') ? 'Expandir ▲' : 'Minimizar ▼';
+    function retirarPerfilDoMapaDirect(perfilId) {
+      const p = perfisOcorrencias.find(x => x.id === perfilId);
+      if (!p) return;
+      if (!confirm(`Deseja retirar "${p.pet.nome}" do mapa de Cascavel?`)) return;
+
+      p.posicao_mapa = { fixado: false, lat: null, lng: null, rua: '', bairro: '', referencia: '', data_fixacao: null };
+      localStorage.setItem('mesa_perfis_70_v1', JSON.stringify(perfisOcorrencias));
+
+      renderizarBandejaPerfis();
+      plotarTodosPerfisNoMapa();
+      atualizarContadoresPerfis();
+      mostrarToast(`🗑️ Ocorrência de "${p.pet.nome}" retirada do mapa.`);
     }
 
-    function aproximarTestadorDoPet(testadorId) {
-      const t = testadoresCampo.find(x => x.id === testadorId);
-      if (!t || !petsCadastradosMesa.length) {
-        alert('Nenhum pet cadastrado para aproximar.');
-        return;
-      }
-
-      // Encontra um pet desaparecido
-      const pet = petsCadastradosMesa.find(p => p.status_pet === 'desaparecido') || petsCadastradosMesa[0];
-      const novaLat = pet.lat + 0.0028;
-      const novaLng = pet.lng + 0.0028;
-      t.lat = novaLat;
-      t.lng = novaLng;
-
-      plotarTestadoresNoMapa();
-      mapPets.flyTo([novaLat, novaLng], 16, { duration: 1.2 });
-
-      mostrarToast(`🚗 ${t.nome} aproximou-se a 380m de "${pet.titulo}"!`);
-      falarPetCadastrado(pet.titulo, pet.rua, pet.bairro);
+    function testarVozCopilotoPerfil() {
+      if (!perfilSelecionado) return;
+      const rua = document.getElementById('perfil-edit-endereco').value || 'sua rua';
+      const bairro = document.getElementById('perfil-edit-bairro').value || 'Cascavel';
+      falarOcorrenciaPerfil(perfilSelecionado.pet.nome, perfilSelecionado.pet.raca, rua, bairro);
     }
 
-    function testadorGeraAvistamento(testadorId) {
-      const t = testadoresCampo.find(x => x.id === testadorId);
-      if (!t || !petsCadastradosMesa.length) return;
-
-      const pet = petsCadastradosMesa.find(p => p.status_pet === 'desaparecido') || petsCadastradosMesa[0];
-      simularAvistamentoPetMesa(pet.id);
-    }
-
-    function falarPetCadastrado(titulo, rua, bairro) {
+    function falarOcorrenciaPerfil(nomePet, raca, rua, bairro) {
       if ('speechSynthesis' in window) {
         window.speechSynthesis.cancel();
-        const utter = new SpeechSynthesisUtterance(`Atenção motorista: animal desaparecido cadastrado a 400 metros na ${rua || 'via'}, ${bairro || 'Cascavel'}. ${titulo}.`);
+        const texto = `Atenção motorista: animal cadastrado a 400 metros na ${rua || 'via'}, ${bairro || 'Cascavel'}. ${nomePet}, ${raca}.`;
+        const utter = new SpeechSynthesisUtterance(texto);
         utter.lang = 'pt-BR';
         utter.rate = 1.05;
         window.speechSynthesis.speak(utter);
+        mostrarToast('🔊 Simulando áudio do Copiloto no veículo...');
       }
+    }
+
+    function escapeAttr(str) {
+      if (!str) return '';
+      return String(str).replace(/'/g, "\\'").replace(/"/g, '&quot;');
     }
 
     /* ==================== UTILITÁRIOS ==================== */
