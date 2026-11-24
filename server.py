@@ -381,10 +381,7 @@ def init_db():
         UPDATE alertas
         SET pilar = 'pet',
             cidade = COALESCE(NULLIF(cidade, ''), 'Cascavel'),
-            fonte_nome = CASE
-                WHEN fonte_tipo = 'imprensa' AND (fonte_nome IS NULL OR fonte_nome = '' OR fonte_nome = 'Comunidade') THEN 'CGN'
-                ELSE COALESCE(NULLIF(fonte_nome, ''), 'Comunidade')
-            END,
+            fonte_nome = 'Comunidade Pet',
             status_pet = CASE
                 WHEN status_pet IS NOT NULL AND status_pet != '' THEN status_pet
                 WHEN LOWER(tipo) = 'pet_avistado' OR LOWER(titulo) LIKE '%encontrado%' OR LOWER(titulo) LIKE '%avistado%' THEN 'avistado'
@@ -396,30 +393,23 @@ def init_db():
         UPDATE alertas
         SET pilar = 'seguranca',
             cidade = COALESCE(NULLIF(cidade, ''), 'Cascavel'),
-            fonte_nome = CASE
-                WHEN fonte_nome IS NOT NULL AND fonte_nome != '' AND fonte_nome != 'Comunidade' THEN fonte_nome
-                WHEN LOWER(COALESCE(descricao, '')) LIKE '%catve%' OR LOWER(COALESCE(link_noticia, '')) LIKE '%catve%' THEN 'CATVE'
-                ELSE 'CGN'
-            END
+            fonte_nome = 'Segurança Pública'
         WHERE LOWER(tipo) IN ('seguranca', 'assalto', 'furto', 'suspeito')
-          AND fonte_tipo IN ('imprensa', 'robo_oficial')
+          OR pilar = 'seguranca'
     """)
     cur.execute("""
         UPDATE alertas
         SET pilar = 'utilidade',
             cidade = COALESCE(NULLIF(cidade, ''), 'Cascavel'),
             fonte_nome = CASE
-                WHEN fonte_nome IS NOT NULL AND fonte_nome != '' AND fonte_nome != 'Comunidade' THEN fonte_nome
-                WHEN LOWER(COALESCE(descricao, '')) LIKE '%inmet%' THEN 'INMET'
-                WHEN LOWER(COALESCE(descricao, '')) LIKE '%sanepar%' THEN 'Sanepar'
-                WHEN LOWER(COALESCE(descricao, '')) LIKE '%copel%' THEN 'Copel'
-                WHEN LOWER(COALESCE(descricao, '')) LIKE '%transitar%' OR LOWER(COALESCE(descricao, '')) LIKE '%cettrans%' THEN 'Transitar'
-                WHEN LOWER(COALESCE(descricao, '')) LIKE '%prefeitura%' THEN 'Prefeitura'
-                WHEN LOWER(COALESCE(descricao, '')) LIKE '%catve%' THEN 'CATVE'
-                ELSE 'CGN'
+                WHEN LOWER(COALESCE(descricao, '')) LIKE '%inmet%' OR LOWER(COALESCE(titulo, '')) LIKE '%chuva%' OR LOWER(COALESCE(titulo, '')) LIKE '%alerta%' THEN 'Defesa Civil / Clima'
+                WHEN LOWER(COALESCE(descricao, '')) LIKE '%sanepar%' OR LOWER(COALESCE(titulo, '')) LIKE '%sanepar%' THEN 'Sanepar • Água'
+                WHEN LOWER(COALESCE(descricao, '')) LIKE '%copel%' OR LOWER(COALESCE(titulo, '')) LIKE '%copel%' THEN 'Copel • Energia'
+                WHEN LOWER(COALESCE(descricao, '')) LIKE '%transitar%' OR LOWER(COALESCE(descricao, '')) LIKE '%cettrans%' OR LOWER(COALESCE(titulo, '')) LIKE '%trânsito%' THEN 'Trânsito Cascavel'
+                WHEN LOWER(COALESCE(descricao, '')) LIKE '%prefeitura%' THEN 'Prefeitura Municipal'
+                ELSE 'Utilidade Pública'
             END
-        WHERE (LOWER(tipo) LIKE 'utilidade%' OR LOWER(tipo) = 'escuro')
-          AND fonte_tipo IN ('imprensa', 'robo_oficial')
+        WHERE (LOWER(tipo) LIKE 'utilidade%' OR LOWER(tipo) = 'escuro' OR pilar = 'utilidade')
     """)
 
     # LGPD: limpa telefones de registros já inativos/encerrados
@@ -1448,12 +1438,15 @@ def criar_alerta():
             status_pet = "avistado"
         else:
             status_pet = "desaparecido"
-        fonte_tipo = "imprensa" if eh_robo_autorizado and data.get("fonte_tipo") == "imprensa" else "comunidade_pet"
-        fonte_nome = (data.get("fonte_nome") or ("CGN" if fonte_tipo == "imprensa" else "Comunidade")).strip()
+        fonte_tipo = "comunidade_pet"
+        fonte_nome = (data.get("fonte_nome") or "Comunidade Pet").strip()
     else:
         status_pet = ""
         fonte_tipo = "robo_oficial"
-        fonte_nome = (data.get("fonte_nome") or "Imprensa Oficial").strip()
+        padrao_fonte = "Segurança Pública" if pilar == "seguranca" else "Utilidade Pública"
+        fonte_nome = (data.get("fonte_nome") or padrao_fonte).strip()
+        if "cgn" in fonte_nome.lower() or "catve" in fonte_nome.lower() or "imprensa" in fonte_nome.lower():
+            fonte_nome = padrao_fonte
 
     conn = get_db()
     cur = conn.cursor()

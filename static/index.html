@@ -848,19 +848,25 @@
       100% { transform: translateX(-50%); }
     }
 
-    /* Card de Pet na Home — Foto Full Bleed (100% Bloco, Zero Bordas Pretas) */
+    /* ==================== 3 ESTEIRAS UNIFICADAS DA HOME (PETS, UTILIDADE & SEGURANÇA, PARCEIROS) ==================== */
+    .unified-belt-card,
     .pet-belt-card {
-      width: 134px;
-      height: 150px;
+      width: 136px;
+      height: 152px;
       flex-shrink: 0;
       border-radius: 16px;
       position: relative;
       overflow: hidden;
-      background: #000000;
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: #18181B;
+      border: 1px solid rgba(0, 0, 0, 0.12);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.10);
       cursor: pointer;
+      box-sizing: border-box;
+      transition: transform 0.15s ease;
     }
+    .unified-belt-card:active,
     .pet-belt-card:active { transform: scale(0.97); }
+    .unified-belt-img,
     .pet-belt-img {
       position: absolute;
       inset: 0;
@@ -869,12 +875,34 @@
       object-fit: cover;
       object-position: center;
       display: block;
-      transform: scale(1.08); /* Expande a imagem para eliminar qualquer borda preta embutida */
+      transform: scale(1.05);
     }
+    .unified-belt-pill,
+    .pet-belt-badge {
+      position: absolute;
+      top: 7px;
+      left: 7px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      font-size: 8px;
+      font-weight: 900;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      background: #000000 !important;
+      color: #FFFFFF !important;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      z-index: 3;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+      white-space: nowrap;
+      overflow: hidden;
+      max-width: 120px;
+      text-overflow: ellipsis;
+    }
+    .unified-belt-grad,
     .pet-belt-grad {
       position: absolute;
       inset: 0;
-      background: linear-gradient(to top, rgba(0, 0, 0, 0.88) 0%, rgba(0, 0, 0, 0.38) 38%, transparent 70%);
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.94) 0%, rgba(0, 0, 0, 0.58) 42%, transparent 75%);
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
@@ -882,38 +910,24 @@
       z-index: 2;
       pointer-events: none;
     }
-    .pet-belt-badge {
-      position: absolute;
-      top: 7px;
-      left: 7px;
-      padding: 2.5px 8px;
-      border-radius: 999px;
-      font-size: 8.5px;
-      font-weight: 800;
-      letter-spacing: 0.6px;
-      text-transform: uppercase;
-      background: rgba(0, 0, 0, 0.68);
-      color: #ffffff;
-      backdrop-filter: blur(8px);
-      border: 1px solid rgba(255, 255, 255, 0.28);
-      z-index: 3;
-    }
+    .unified-belt-title,
     .pet-belt-name {
-      font-size: 12.5px;
+      font-size: 11.5px;
       font-weight: 800;
-      color: #ffffff;
-      white-space: nowrap;
+      color: #FFFFFF;
+      line-height: 1.22;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
       overflow: hidden;
-      text-overflow: ellipsis;
-      line-height: 1.2;
-      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.95);
     }
+    .unified-belt-sub,
     .pet-belt-loc {
-      font-size: 10px;
-      font-weight: 600;
-      color: #ffffff;
-      opacity: 0.9;
-      margin-top: 2px;
+      font-size: 9.5px;
+      font-weight: 700;
+      color: #FCD34D;
+      margin-top: 3px;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -3656,39 +3670,29 @@
             </div>
           </div>
 
-          <!-- Bloco 2: Esteira Utilidade Pública -->
+          <!-- Bloco 2: Esteira Unificada Utilidade Pública & Segurança -->
           <div class="belt-block">
             <div class="belt-head">
-              <div class="belt-title uti-title">
-                <span>Utilidade Pública</span>
+              <div class="belt-title uti-title" style="color:#0F172A; font-weight:900; font-size:12px; display:flex; align-items:center; gap:5px;">
+                <span style="font-size:14px;">🚨</span>
+                <span>Utilidade Pública & Segurança</span>
               </div>
             </div>
             <div class="belt-viewport">
-              <div class="belt-track" id="belt-utilidade-track"></div>
+              <div class="belt-track" id="belt-util-seg-track"></div>
             </div>
           </div>
 
-          <!-- Bloco 3: Esteira Segurança (Imprensa Oficial) -->
-          <div class="belt-block">
+          <!-- Bloco 3: Parceiros Oficiais de Cascavel -->
+          <div class="belt-block" style="margin-bottom:18px;">
             <div class="belt-head">
-              <div class="belt-title seg-title">
-                <span>Segurança</span>
+              <div class="belt-title" style="color:#0F172A; font-weight:900; font-size:12px; display:flex; align-items:center; gap:5px;">
+                <span style="font-size:14px;">🤝</span>
+                <span>Parceiros</span>
               </div>
             </div>
             <div class="belt-viewport">
-              <div class="belt-track" id="belt-seguranca-track"></div>
-            </div>
-          </div>
-
-          <!-- Bloco 4: Ofertas & Promoções no Comércio -->
-          <div class="belt-block">
-            <div class="belt-head">
-              <div class="belt-title" style="color:#009B3A; font-weight:900; font-size:12px; display:flex; align-items:center; gap:5px;">
-                <span>Ofertas & Promoções no Comércio</span>
-              </div>
-            </div>
-            <div class="deal-belt-viewport">
-              <div class="deal-belt-track" id="esteira-produtos-track-inicio"></div>
+              <div class="belt-track" id="belt-parceiros-home-track"></div>
             </div>
           </div>
         </div>
@@ -3848,7 +3852,7 @@
           <div class="setting-row">
             <div>
               <div class="setting-title">Segurança Hiperlocal</div>
-              <div class="setting-sub">Ocorrências CGN / CATVE na região (raio 250m)</div>
+              <div class="setting-sub">Ocorrências de segurança pública na região (raio 250m)</div>
             </div>
             <label class="switch"><input type="checkbox" id="pref-seg" checked onchange="salvarPrefsCopiloto()"><span class="slider"></span></label>
           </div>
@@ -5316,6 +5320,9 @@
       }
       const pets = petsIntercalados.slice(0, 36);
 
+      // =========================================================================
+      // ESTEIRA 1: CENTRAL PET DE CASCAVEL (Cards Unificados)
+      // =========================================================================
       const beltPets = document.getElementById('belt-pets-track');
       if (beltPets) {
         if (!pets.length) {
@@ -5326,15 +5333,15 @@
             const ehAdocao = (p.tipo === 'pet_adocao' || p.status_pet === 'adocao');
             const badgeText = ehAdocao ? 'Adoção' : 'Perdido';
             const img = p.foto_url
-              ? `<img class="pet-belt-img" src="${escapeAttr(p.foto_url)}" alt="${escapeAttr(p.titulo)}" loading="lazy">`
-              : `<div class="pet-belt-img" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#1c1917 0%,#0c0a09 100%);color:#a8a29e;"><svg width="38" height="38" viewBox="0 0 24 24" fill="currentColor" opacity="0.65"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg></div>`;
+              ? `<img class="unified-belt-img" src="${escapeAttr(p.foto_url)}" alt="${escapeAttr(p.titulo)}" loading="lazy">`
+              : `<div class="unified-belt-img" style="display:flex;align-items:center;justify-content:center;background:#18181B;color:#a8a29e;">🐾</div>`;
             return `
-              <div class="pet-belt-card" onclick="abrirDetalheById(${p.id})">
+              <div class="unified-belt-card" onclick="abrirDetalheById(${p.id})">
                 ${img}
-                <span class="pet-belt-badge ${ehAdocao ? 'adocao' : 'perdido'}">${badgeText}</span>
-                <div class="pet-belt-grad">
-                  <div class="pet-belt-name">${escapeHtml(p.titulo)}</div>
-                  <div class="pet-belt-loc">${escapeHtml(p.bairro || 'Cascavel')}</div>
+                <span class="unified-belt-pill">${badgeText}</span>
+                <div class="unified-belt-grad">
+                  <div class="unified-belt-title">${escapeHtml(p.titulo)}</div>
+                  <div class="unified-belt-sub">${escapeHtml(p.bairro || 'Cascavel')}</div>
                 </div>
               </div>
             `;
@@ -5347,48 +5354,157 @@
         }
       }
 
-      // 4. Esteira Utilidade Pública (estilo tático moderno)
-      renderizarEsteiraInfo('belt-utilidade-track', state.alertas.filter(a => a.pilar === 'utilidade').slice(0, 15), 'Sem comunicados de utilidade pública.', 'utilidade');
+      // =========================================================================
+      // ESTEIRA 2: UTILIDADE PÚBLICA & SEGURANÇA (Unificada - Cards Idênticos)
+      // =========================================================================
+      renderizarEsteiraUtilidadeSegurancaHome();
 
-      // 5. Esteira Segurança (estilo tático moderno)
-      renderizarEsteiraInfo('belt-seguranca-track', state.alertas.filter(a => a.pilar === 'seguranca').slice(0, 15), 'Sem ocorrências policiais recentes.', 'seguranca');
+      // =========================================================================
+      // ESTEIRA 3: PARCEIROS OFICIAIS DE CASCAVEL (Cards Idênticos)
+      // =========================================================================
+      renderizarEsteiraParceirosHome();
     }
 
-    function renderizarEsteiraInfo(elId, lista, vazioMsg, pilarTipo) {
-      const el = document.getElementById(elId);
-      if (!el) return;
-      if (!lista.length) {
-        el.className = 'belt-track static';
-        el.innerHTML = `<div class="empty-box" style="width:260px; padding:14px;">${escapeHtml(vazioMsg)}</div>`;
+    function selecionarImagemTematicaUtilSeg(a) {
+      const txt = `${a.titulo || ''} ${a.descricao || ''} ${a.tipo || ''}`.toLowerCase();
+      if (txt.includes('sanepar') || txt.includes('água') || txt.includes('esgoto') || txt.includes('vazamento') || txt.includes('abastecimento')) {
+        return '/static/darkplanner_seguranca_utilidade/utilidade_sanepar_1.jpg';
+      }
+      if (txt.includes('copel') || txt.includes('luz') || txt.includes('energia') || txt.includes('poste') || txt.includes('apagão')) {
+        return '/static/darkplanner_seguranca_utilidade/utilidade_copel_1.jpg';
+      }
+      if (txt.includes('chuva') || txt.includes('vento') || txt.includes('temporal') || txt.includes('granizo') || txt.includes('inmet') || txt.includes('clima') || txt.includes('alerta')) {
+        return '/static/darkplanner_seguranca_utilidade/utilidade_clima_1.jpg';
+      }
+      if (txt.includes('trânsito') || txt.includes('bloqueio') || txt.includes('interdição') || txt.includes('acidente') || txt.includes('colisão') || txt.includes('semáforo') || txt.includes('transitar')) {
+        return '/static/darkplanner_seguranca_utilidade/transito_obras_1.jpg';
+      }
+      if (txt.includes('obra') || txt.includes('asfalto') || txt.includes('recape') || txt.includes('buraco') || txt.includes('pavimentação')) {
+        return '/static/darkplanner_seguranca_utilidade/transito_obras_2.jpg';
+      }
+      if (txt.includes('droga') || txt.includes('tráfico') || txt.includes('flagrante') || txt.includes('mandado') || txt.includes('preso') || txt.includes('tático') || txt.includes('apreensão')) {
+        return '/static/darkplanner_seguranca_utilidade/seguranca_policia_2.jpg';
+      }
+      if (a.pilar === 'seguranca' || txt.includes('pm') || txt.includes('polícia') || txt.includes('furto') || txt.includes('roubo') || txt.includes('assalto') || txt.includes('arma')) {
+        return '/static/darkplanner_seguranca_utilidade/seguranca_policia_1.jpg';
+      }
+      if (txt.includes('saúde') || txt.includes('upa') || txt.includes('hospital') || txt.includes('dengue') || txt.includes('vacina')) {
+        return '/static/darkplanner_seguranca_utilidade/utilidade_saude_1.jpg';
+      }
+      return '/static/darkplanner_seguranca_utilidade/utilidade_geral_1.jpg';
+    }
+
+    function selecionarPillTematicaUtilSeg(a) {
+      const txt = `${a.titulo || ''} ${a.descricao || ''} ${a.tipo || ''}`.toLowerCase();
+      if (txt.includes('sanepar') || txt.includes('água') || txt.includes('esgoto')) return 'SANEPAR';
+      if (txt.includes('copel') || txt.includes('energia') || txt.includes('luz')) return 'COPEL';
+      if (txt.includes('chuva') || txt.includes('temporal') || txt.includes('clima') || txt.includes('inmet') || txt.includes('granizo')) return 'CLIMA';
+      if (txt.includes('trânsito') || txt.includes('interdição') || txt.includes('bloqueio') || txt.includes('transitar') || txt.includes('acidente')) return 'TRÂNSITO';
+      if (txt.includes('obra') || txt.includes('asfalto') || txt.includes('recape')) return 'OBRAS';
+      if (txt.includes('saúde') || txt.includes('dengue') || txt.includes('vacina') || txt.includes('upa')) return 'SAÚDE';
+      if (a.pilar === 'seguranca' || txt.includes('pm') || txt.includes('polícia') || txt.includes('preso') || txt.includes('furto') || txt.includes('droga') || txt.includes('assalto')) {
+        return 'SEGURANÇA';
+      }
+      return 'UTILIDADE';
+    }
+
+    function renderizarEsteiraUtilidadeSegurancaHome() {
+      const track = document.getElementById('belt-util-seg-track');
+      if (!track) return;
+
+      const utilSegAlertas = (state.alertas || []).filter(a => {
+        return a.pilar === 'seguranca' || a.pilar === 'utilidade' || a.pilar === 'transito';
+      });
+
+      if (!utilSegAlertas.length) {
+        track.className = 'belt-track static';
+        track.innerHTML = '<div class="empty-box" style="width:100%;">Nenhum comunicado no momento.</div>';
         return;
       }
-      const ehSeguranca = (pilarTipo === 'seguranca');
-      const cardThemeClass = ehSeguranca ? 'belt-card-seguranca' : 'belt-card-utilidade';
 
-      const html = lista.map(a => {
-        const tit = a.titulo || a.descricao || 'Comunicado';
+      const cardsHtml = utilSegAlertas.map(a => {
+        const foto = (a.foto_url && a.foto_url.trim() !== '' && !a.foto_url.includes('cgn') && !a.foto_url.includes('catve'))
+          ? a.foto_url
+          : selecionarImagemTematicaUtilSeg(a);
+        const pillText = selecionarPillTematicaUtilSeg(a);
+        const tit = a.titulo || a.descricao || 'Ocorrência Urbana';
         let bairroLimpo = (a.bairro || '').replace(/,\s*Cascavel/gi, '').replace(/Cascavel/gi, '').trim();
         if (!bairroLimpo) bairroLimpo = 'Cascavel';
         else if (!bairroLimpo.toLowerCase().startsWith('bairro') && !bairroLimpo.toLowerCase().startsWith('centro')) {
           bairroLimpo = `Bairro ${bairroLimpo}`;
         }
-        const tempo = tempoRelativo(a.created_at);
 
         return `
-          <div class="belt-info-card ${cardThemeClass}" onclick="abrirDetalheById(${a.id})">
-            <div class="belt-info-topbar">
-              <span class="belt-info-loc">${escapeHtml(bairroLimpo)}</span>
-              <span class="belt-info-time">${tempo}</span>
+          <div class="unified-belt-card" onclick="abrirDetalheById(${a.id})">
+            <img class="unified-belt-img" src="${escapeAttr(foto)}" alt="${escapeAttr(tit)}" loading="lazy">
+            <span class="unified-belt-pill">${escapeHtml(pillText)}</span>
+            <div class="unified-belt-grad">
+              <div class="unified-belt-title">${escapeHtml(tit)}</div>
+              <div class="unified-belt-sub">${escapeHtml(bairroLimpo)} • ${tempoRelativo(a.created_at)}</div>
             </div>
-            <div class="belt-info-title">${escapeHtml(tit)}</div>
           </div>
         `;
       }).join('');
-      let loopHtml = html;
-      while (loopHtml.length < 800) loopHtml += html;
-      el.className = 'belt-track';
-      el.innerHTML = loopHtml + loopHtml;
-      calibrarVelocidadeEsteira(el, 28);
+
+      let loopHtml = cardsHtml;
+      while (loopHtml.length < 800) loopHtml += cardsHtml;
+      track.className = 'belt-track';
+      track.innerHTML = loopHtml + loopHtml;
+      calibrarVelocidadeEsteira(track, 28);
+    }
+
+    function renderizarEsteiraParceirosHome() {
+      const track = document.getElementById('belt-parceiros-home-track');
+      if (!track) return;
+
+      const parceiros = state.parceiros || [];
+      if (!parceiros.length) {
+        track.className = 'belt-track static';
+        track.innerHTML = '<div class="empty-box" style="width:100%;">Carregando parceiros...</div>';
+        return;
+      }
+
+      const MAPA_PILL_PARCEIRO = {
+        'pet_vet': 'VET 24H',
+        'pet_shop': 'PET SHOP',
+        'banho_tosa': 'ESTÉTICA',
+        'auto_center': 'AUTO CENTER',
+        'borracharia': 'BORRACHARIA',
+        'posto': 'POSTO',
+        'moto_mecanica': 'MECÂNICA',
+        'carro_mecanica': 'MECÂNICA',
+        'alimentacao': 'LANCHONETE'
+      };
+
+      const cardsHtml = parceiros.map(p => {
+        const temProd = p.produtos && p.produtos.length > 0;
+        const primeiroProd = temProd ? p.produtos[0] : null;
+        const foto = (primeiroProd && primeiroProd.foto_url)
+          ? primeiroProd.foto_url
+          : (p.logo_url || '/static/brand/logo_rigo_amarela_ruas_pretas_pino_vermelho.png');
+        const pillText = MAPA_PILL_PARCEIRO[p.categoria] || 'PARCEIRO';
+        const tit = primeiroProd ? primeiroProd.titulo : p.nome;
+        const sub = primeiroProd
+          ? `${p.nome} • ${primeiroProd.preco_promocional || primeiroProd.preco || ''}`
+          : (p.bairro ? `Bairro ${p.bairro}` : 'Cascavel');
+
+        return `
+          <div class="unified-belt-card" onclick="abrirFolderParceiroById('${escapeAttr(p.id)}')">
+            <img class="unified-belt-img" src="${escapeAttr(foto)}" alt="${escapeAttr(p.nome)}" loading="lazy">
+            <span class="unified-belt-pill">${escapeHtml(pillText)}</span>
+            <div class="unified-belt-grad">
+              <div class="unified-belt-title">${escapeHtml(tit)}</div>
+              <div class="unified-belt-sub">${escapeHtml(sub)}</div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      let loopHtml = cardsHtml;
+      while (loopHtml.length < 800) loopHtml += cardsHtml;
+      track.className = 'belt-track';
+      track.innerHTML = loopHtml + loopHtml;
+      calibrarVelocidadeEsteira(track, 28);
     }
 
     function alternarPilarPet(pilar) {
@@ -6057,11 +6173,11 @@ Baixe o aplicativo gratuito Alerta Urbano:
         botoes += `<button type="button" class="btn-full" onclick="verTrilhaPetNoMapa(${a.id})">Ver Trilha / Caminho no Mapa</button>`;
       }
       if (a.link_noticia) {
-        const lbl = ehImprensaPet ? `Ver Contato na Matéria (${a.fonte_nome || 'CGN'})` : `Ler Matéria Completa (${a.fonte_nome || 'Fonte'})`;
+        const lbl = ehImprensaPet ? `Ver Contato da Ocorrência ↗` : `Ler Matéria Completa ↗`;
         botoes += `<a href="${escapeAttr(a.link_noticia)}" target="_blank" class="btn-full imprensa">${escapeHtml(lbl)}</a>`;
       }
       if (a.lat && a.lng && (!ehPet || ehAvistado)) {
-        botoes += `<button type="button" class="btn-full" onclick="focarPontoNoMapa(${a.lat}, ${a.lng})">Ver Região no Mapa</button>`;
+        botoes += `<button type="button" class="btn-full" onclick="focarPontoNoMapa(${a.lat}, ${a.lng}, '${escapeAttr(a.pilar)}')">Ver Região no Mapa</button>`;
       }
       if (ehPet && ehDono) {
         botoes += `<button type="button" class="btn-full" onclick="renovarMeuPet(${a.id})">Renovar por +48h</button>`;
@@ -6070,7 +6186,7 @@ Baixe o aplicativo gratuito Alerta Urbano:
 
       let notaTutorImprensa = ehImprensaPet
         ? `<div style="margin-top:12px; padding:10px 12px; border-radius:12px; background:var(--bg-subtle); border:1px solid var(--border); font-size:11px; color:var(--text-muted); line-height:1.4;">
-             <b>Aviso de Privacidade:</b> Este registro veio de notícia pública (${escapeHtml(a.fonte_nome || 'CGN')}). Não copiamos dados pessoais de terceiros. Se você é o tutor, cadastre direto pelo botão <b>+ Registrar Pet</b> para receber avistamentos e fotos de resgate.
+             <b>Aviso Comunitário:</b> Registro público de proteção animal em Cascavel. Se você é o tutor ou tem informações deste animal, cadastre avistamentos ou envie mensagem de resgate.
            </div>`
         : '';
 
@@ -6078,17 +6194,23 @@ Baixe o aplicativo gratuito Alerta Urbano:
         ? `<div id="detalhe-timeline-slot" class="timeline-box" style="display:none;"></div>`
         : '';
 
+      const descricaoLimpa = (a.descricao || 'Sem descrição adicional.')
+        .replace(/\s*O post.*?apareceu primeiro em.*$/gi, '')
+        .replace(/\s*apareceu primeiro em.*$/gi, '')
+        .replace(/\[…\]$/g, '')
+        .trim();
+
       box.innerHTML = `
         <div class="sheet-handle"></div>
         <div class="sheet-header">
-          <span class="source-tag ${a.pilar}">${escapeHtml(a.fonte_nome || 'Oficial')} • ${tagTexto}</span>
+          <span class="source-tag ${a.pilar}">${tagTexto}</span>
           <button type="button" class="sheet-close" onclick="fecharModal('modal-detalhe')">✕</button>
         </div>
         ${photoHtml}
         <div style="font-size:18px;font-weight:800;line-height:1.25;">${escapeHtml(a.titulo)}</div>
         <div style="font-size:12px;color:var(--text-muted);margin-top:4px;">${escapeHtml(a.bairro || 'Cascavel')} • ${tempoRelativo(a.created_at)}</div>
         ${extraMeta}
-        <div style="font-size:13px;color:var(--text);line-height:1.5;margin-top:10px;">${escapeHtml(a.descricao || 'Sem descrição adicional.')}</div>
+        <div style="font-size:13px;color:var(--text);line-height:1.5;margin-top:10px;">${escapeHtml(descricaoLimpa)}</div>
         ${timelineSlot}
         <div class="detail-actions">${botoes}</div>
         ${notaTutorImprensa}
@@ -6178,12 +6300,18 @@ Baixe o aplicativo gratuito Alerta Urbano:
       renderizarMapa();
     }
 
-    function focarPontoNoMapa(lat, lng) {
+    function focarPontoNoMapa(lat, lng, pilar) {
       fecharModal('modal-detalhe');
-      trocarAba('mapa');
+      let pilarNormalizado = (pilar || '').toLowerCase();
+      if (pilarNormalizado === 'utilidade') pilarNormalizado = 'transito';
+      if (['seguranca', 'transito', 'parceiros', 'pet'].includes(pilarNormalizado)) {
+        irParaMapaComFiltro(pilarNormalizado);
+      } else {
+        trocarAba('mapa');
+      }
       setTimeout(() => {
-        if (map) map.flyTo([lat, lng], 15, { duration: 0.6 });
-      }, 120);
+        if (map && lat && lng) map.flyTo([lat, lng], 16, { duration: 0.6 });
+      }, 160);
     }
 
     /* ==================== FORMULÁRIO + REGISTRAR PET ==================== */
@@ -7670,6 +7798,13 @@ Baixe o aplicativo gratuito Alerta Urbano:
           const btn = document.querySelector(`.map-pill[data-pilar="${mapaFilterParam}"]`);
           if (btn) filtrarMapa(mapaFilterParam, btn);
         }, 550);
+      }
+
+      const alertaParam = urlParams.get('alerta');
+      if (alertaParam) {
+        setTimeout(() => {
+          abrirDetalheById(Number(alertaParam));
+        }, 800);
       }
 
       // Atualiza automaticamente a cada 60s

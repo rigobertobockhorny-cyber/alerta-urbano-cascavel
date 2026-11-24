@@ -238,6 +238,10 @@ def minerar_cgn():
         for item in items:
             title = limpar_html(item.findtext("title", ""))
             desc = limpar_html(item.findtext("description", ""))
+            if desc:
+                desc = re.sub(r'\s*O post.*?apareceu primeiro em.*$', '', desc, flags=re.IGNORECASE).strip()
+                desc = re.sub(r'\s*apareceu primeiro em.*$', '', desc, flags=re.IGNORECASE).strip()
+                desc = re.sub(r'\[…\]$', '', desc).strip()
             link = (item.findtext("link", "") or "").strip()
             cats = " ".join(c.text for c in item.findall("category") if c.text)
             texto_full = f"{title} {desc} {cats}"
@@ -252,6 +256,7 @@ def minerar_cgn():
             pilar, tipo, titulo_curto, severidade, fonte_ov = clf
             bairro, lat, lng = identificar_local_cascavel(texto_full)
             titulo_manchete = title if len(title) <= 90 else (title[:87].rsplit(' ', 1)[0] + '...')
+            padrao_fonte = "Segurança Pública" if pilar == "seguranca" else "Utilidade Pública"
             alertas.append({
                 "pilar": pilar,
                 "tipo": tipo,
@@ -262,7 +267,7 @@ def minerar_cgn():
                 "lat": lat,
                 "lng": lng,
                 "link": link,
-                "fonte_nome": fonte_ov or "CGN",
+                "fonte_nome": fonte_ov or padrao_fonte,
                 "severidade": severidade,
                 "subtipo_evento": titulo_curto,
             })
@@ -309,7 +314,7 @@ def minerar_catve():
             "lat": lat,
             "lng": lng,
             "link": f"https://catve.com{path_url}",
-            "fonte_nome": fonte_ov or "CATVE",
+            "fonte_nome": fonte_ov or ("Segurança Pública" if pilar == "seguranca" else "Utilidade Pública"),
             "severidade": severidade,
             "subtipo_evento": titulo_curto,
         })
@@ -482,7 +487,7 @@ def minerar_cgn_pets():
                 "lng": lng,
                 "foto_url": "",
                 "link": item_url,
-                "fonte_nome": "CGN",
+                "fonte_nome": "Utilidade Pública",
                 "especie": "",
                 "status_pet": "",
                 "severidade": "normal",
@@ -509,7 +514,7 @@ def minerar_cgn_pets():
             "lng": lng,
             "foto_url": foto,
             "link": item_url,
-            "fonte_nome": "CGN",
+            "fonte_nome": "Comunidade Pet",
             "especie": especie,
             "status_pet": "avistado" if eh_avistado else "desaparecido",
             "severidade": "normal",
