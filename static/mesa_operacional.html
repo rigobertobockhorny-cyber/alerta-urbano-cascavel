@@ -1,0 +1,1770 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mesa Operacional — Alerta Urbano Cascavel | Vórtice Mídia</title>
+  <link rel="icon" type="image/png" href="/static/logo_bolha_pura.png">
+  <link rel="stylesheet" href="/static/vendor/leaflet.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-dark: #0B0F17;
+      --bg-card: #131A26;
+      --bg-card-hover: #1A2332;
+      --bg-surface: #1E293B;
+      --border: rgba(255, 255, 255, 0.08);
+      --border-focus: rgba(254, 215, 0, 0.45);
+      --text-main: #F8FAFC;
+      --text-muted: #94A3B8;
+      --text-dim: #64748B;
+      --gold: #FED700;
+      --gold-dark: #EAB308;
+      --green: #009B3A;
+      --green-light: #10B981;
+      --red: #EF4444;
+      --blue: #38BDF8;
+      --purple: #A855F7;
+      --orange: #F97316;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background: var(--bg-dark);
+      color: var(--text-main);
+      overflow-x: hidden;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ==================== TOPO EXECUTIVO / COCKPIT HEADER ==================== */
+    header.cockpit-header {
+      background: rgba(19, 26, 38, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .brand-block {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .brand-logo-img {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      border: 1.5px solid var(--gold);
+      box-shadow: 0 0 16px rgba(254, 215, 0, 0.25);
+    }
+
+    .brand-titles h1 {
+      font-size: 17px;
+      font-weight: 900;
+      letter-spacing: 0.5px;
+      color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .brand-tag {
+      font-size: 10px;
+      font-weight: 800;
+      background: rgba(0, 155, 58, 0.20);
+      color: #10B981;
+      padding: 2px 7px;
+      border-radius: 999px;
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .brand-sub {
+      font-size: 11px;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    /* KPIs Rápidos no Topo */
+    .kpi-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .kpi-pill {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      padding: 7px 14px;
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      min-width: 120px;
+    }
+
+    .kpi-pill-title {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .kpi-pill-val {
+      font-size: 15px;
+      font-weight: 900;
+      color: #FFFFFF;
+      margin-top: 1px;
+    }
+
+    .kpi-pill-val.gold { color: var(--gold); }
+    .kpi-pill-val.green { color: var(--green-light); }
+    .kpi-pill-val.orange { color: var(--orange); }
+
+    /* Navegação da Mesa */
+    .view-switcher {
+      display: flex;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 4px;
+      gap: 4px;
+    }
+
+    .switch-btn {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 12px;
+      font-weight: 800;
+      padding: 8px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      transition: all 0.2s ease;
+    }
+
+    .switch-btn:hover {
+      color: #FFFFFF;
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .switch-btn.active {
+      background: var(--gold);
+      color: #000000;
+      box-shadow: 0 2px 10px rgba(254, 215, 0, 0.3);
+    }
+
+    .btn-new-parc {
+      background: linear-gradient(135deg, #009B3A, #007A2E);
+      color: #FFFFFF;
+      border: none;
+      font-size: 12.5px;
+      font-weight: 900;
+      padding: 10px 18px;
+      border-radius: 12px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 4px 14px rgba(0, 155, 58, 0.35);
+      transition: transform 0.15s ease;
+    }
+
+    .btn-new-parc:active { transform: scale(0.97); }
+
+    /* ==================== CORPO PRINCIPAL ==================== */
+    main.mesa-content {
+      flex: 1;
+      display: flex;
+      position: relative;
+      height: calc(100vh - 72px);
+      overflow: hidden;
+    }
+
+    /* PANE 1: MESA TÁTICA (MAPA + BALÕES) */
+    #view-tatica {
+      flex: 1;
+      display: flex;
+      width: 100%;
+      height: 100%;
+      position: relative;
+    }
+
+    /* Bandeja Lateral de Balões Arrastáveis */
+    .balloon-tray {
+      width: 280px;
+      background: var(--bg-card);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      z-index: 10;
+      flex-shrink: 0;
+    }
+
+    .balloon-tray-header {
+      padding: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .balloon-tray-header h2 {
+      font-size: 13.5px;
+      font-weight: 900;
+      color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .balloon-tray-header p {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 4px;
+      line-height: 1.4;
+    }
+
+    .balloon-list {
+      flex: 1;
+      overflow-y: auto;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .balloon-item {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 10px 12px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: grab;
+      user-select: none;
+      transition: all 0.2s ease;
+    }
+
+    .balloon-item:hover {
+      background: var(--bg-card-hover);
+      border-color: rgba(254, 215, 0, 0.35);
+      transform: translateX(3px);
+    }
+
+    .balloon-item:active {
+      cursor: grabbing;
+      opacity: 0.6;
+    }
+
+    .balloon-icon-circle {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: rgba(0, 0, 0, 0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .balloon-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .balloon-name {
+      font-size: 12px;
+      font-weight: 800;
+      color: #FFFFFF;
+    }
+
+    .balloon-meta {
+      font-size: 10.5px;
+      color: var(--text-dim);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 2px;
+    }
+
+    .balloon-cota-tag {
+      font-size: 9.5px;
+      font-weight: 800;
+      padding: 1px 6px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .balloon-cota-tag.cheio {
+      background: rgba(16, 185, 129, 0.2);
+      color: #10B981;
+    }
+
+    .balloon-cota-tag.vazio {
+      background: rgba(239, 68, 68, 0.2);
+      color: #EF4444;
+    }
+
+    /* Área Central: Mapa de Cascavel */
+    .map-container-wrap {
+      flex: 1;
+      position: relative;
+      height: 100%;
+    }
+
+    #map-mesa {
+      width: 100%;
+      height: 100%;
+      background: #06090E;
+    }
+
+    /* Alerta de Drag & Drop sobre o mapa */
+    .map-drop-hint {
+      position: absolute;
+      top: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(19, 26, 38, 0.92);
+      border: 1px solid var(--gold);
+      color: #FFFFFF;
+      padding: 8px 18px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 800;
+      pointer-events: none;
+      z-index: 500;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4);
+    }
+
+    /* Drawer de Edição do Parceiro (Lado Direito) */
+    .partner-drawer {
+      width: 420px;
+      background: var(--bg-card);
+      border-left: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      z-index: 10;
+      flex-shrink: 0;
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .partner-drawer.closed {
+      display: none;
+    }
+
+    .drawer-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .drawer-title {
+      font-size: 15px;
+      font-weight: 900;
+      color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-close-drawer {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 20px;
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .drawer-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-group label {
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .form-input, .form-select, .form-textarea {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      color: #FFFFFF;
+      padding: 10px 12px;
+      border-radius: 10px;
+      font-size: 13px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .form-input:focus, .form-select:focus, .form-textarea:focus {
+      border-color: var(--gold);
+    }
+
+    .form-row {
+      display: flex;
+      gap: 10px;
+    }
+
+    .form-row .form-group {
+      flex: 1;
+    }
+
+    .drawer-section-title {
+      font-size: 12px;
+      font-weight: 900;
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-top: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Produtos Editor */
+    .drawer-prods-box {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .prod-item-row {
+      background: rgba(0, 0, 0, 0.25);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 8px 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .drawer-footer {
+      padding: 16px 20px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn-save-parc {
+      flex: 1;
+      background: var(--gold);
+      color: #000000;
+      border: none;
+      padding: 12px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .btn-del-parc {
+      background: rgba(239, 68, 68, 0.15);
+      color: #EF4444;
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      padding: 12px 14px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    /* PANE 2: GESTÃO FINANCEIRA */
+    #view-financeiro {
+      flex: 1;
+      overflow-y: auto;
+      padding: 24px;
+      display: none;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .fin-top-cards {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+
+    .fin-stat-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 18px 20px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .fin-stat-label {
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+    }
+
+    .fin-stat-num {
+      font-size: 26px;
+      font-weight: 900;
+      color: #FFFFFF;
+      margin-top: 6px;
+    }
+
+    .fin-stat-sub {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .table-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .table-head-bar {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .table-head-bar h3 {
+      font-size: 15px;
+      font-weight: 900;
+    }
+
+    .table-filters {
+      display: flex;
+      gap: 8px;
+    }
+
+    .table-filter-btn {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      font-size: 11.5px;
+      font-weight: 800;
+      padding: 6px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .table-filter-btn.active {
+      background: var(--gold);
+      color: #000;
+    }
+
+    table.fin-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+
+    table.fin-table th {
+      background: rgba(0, 0, 0, 0.2);
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 12px 18px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    table.fin-table td {
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--border);
+      font-size: 12.5px;
+      color: var(--text-main);
+    }
+
+    table.fin-table tr:hover td {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 10.5px;
+      font-weight: 800;
+      padding: 3px 9px;
+      border-radius: 999px;
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
+    }
+
+    .status-badge.pago {
+      background: rgba(16, 185, 129, 0.18);
+      color: #10B981;
+      border: 1px solid rgba(16, 185, 129, 0.35);
+    }
+
+    .status-badge.pendente {
+      background: rgba(245, 158, 11, 0.18);
+      color: #F59E0B;
+      border: 1px solid rgba(245, 158, 11, 0.35);
+    }
+
+    .status-badge.atrasado {
+      background: rgba(239, 68, 68, 0.18);
+      color: #EF4444;
+      border: 1px solid rgba(239, 68, 68, 0.35);
+    }
+
+    /* PANE 3: RADAR DE SEGMENTOS */
+    #view-segmentos {
+      flex: 1;
+      overflow-y: auto;
+      padding: 24px;
+      display: none;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .radar-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .segment-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 18px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .segment-card.full-cota {
+      border-color: rgba(16, 185, 129, 0.4);
+    }
+
+    .segment-card.empty-cota {
+      border-color: rgba(239, 68, 68, 0.35);
+    }
+
+    .segment-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .segment-title {
+      font-size: 14px;
+      font-weight: 900;
+      color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .cota-bubble {
+      font-size: 11px;
+      font-weight: 900;
+      padding: 3px 10px;
+      border-radius: 999px;
+      background: var(--bg-surface);
+      color: var(--gold);
+      border: 1px solid rgba(254, 215, 0, 0.25);
+    }
+
+    .cota-bar-wrap {
+      width: 100%;
+      height: 7px;
+      background: rgba(0, 0, 0, 0.35);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .cota-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #FED700, #10B981);
+      border-radius: 999px;
+      transition: width 0.3s ease;
+    }
+
+    .segment-rev-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11.5px;
+      color: var(--text-muted);
+    }
+
+    .segment-action-hint {
+      font-size: 11px;
+      font-weight: 800;
+      padding: 6px 10px;
+      border-radius: 8px;
+      margin-top: 4px;
+    }
+
+    .segment-action-hint.urgent {
+      background: rgba(239, 68, 68, 0.15);
+      color: #EF4444;
+      border: 1px solid rgba(239, 68, 68, 0.25);
+    }
+
+    .segment-action-hint.warn {
+      background: rgba(245, 158, 11, 0.15);
+      color: #F59E0B;
+      border: 1px solid rgba(245, 158, 11, 0.25);
+    }
+
+    .segment-action-hint.ok {
+      background: rgba(16, 185, 129, 0.15);
+      color: #10B981;
+      border: 1px solid rgba(16, 185, 129, 0.25);
+    }
+
+    /* Modal de Toast */
+    .toast-mesa {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: #10B981;
+      color: #FFFFFF;
+      padding: 12px 20px;
+      border-radius: 12px;
+      font-size: 13px;
+      font-weight: 800;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+      z-index: 2000;
+      display: none;
+      animation: fadeIn 0.2s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Custom Map Markers */
+    .mesa-custom-pin {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #000000;
+      border: 2px solid #FED700;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5);
+      font-size: 19px;
+      cursor: pointer;
+      transition: transform 0.15s ease;
+    }
+
+    .mesa-custom-pin:hover {
+      transform: scale(1.15);
+      border-color: #10B981;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==================== HEADER DA MESA OPERACIONAL ==================== -->
+  <header class="cockpit-header">
+    <div class="brand-block">
+      <img src="/static/logo_bolha_pura.png" class="brand-logo-img" alt="Logo">
+      <div class="brand-titles">
+        <h1>MESA OPERACIONAL <span class="brand-tag">Cascavel Cockpit</span></h1>
+        <div class="brand-sub">Central de Expansão de Parceiros & Gestão de Receitas • Vórtice Mídia</div>
+      </div>
+    </div>
+
+    <!-- KPIs Rápidos no Topo -->
+    <div class="kpi-row">
+      <div class="kpi-pill">
+        <span class="kpi-pill-title">MRR (Mensal)</span>
+        <span class="kpi-pill-val gold" id="kpi-mrr">R$ 0,00</span>
+      </div>
+      <div class="kpi-pill">
+        <span class="kpi-pill-title">Recebido (Mês)</span>
+        <span class="kpi-pill-val green" id="kpi-recebido">R$ 0,00</span>
+      </div>
+      <div class="kpi-pill">
+        <span class="kpi-pill-title">A Receber</span>
+        <span class="kpi-pill-val orange" id="kpi-pendente">R$ 0,00</span>
+      </div>
+      <div class="kpi-pill">
+        <span class="kpi-pill-title">Parceiros</span>
+        <span class="kpi-pill-val" id="kpi-total-parceiros">0</span>
+      </div>
+    </div>
+
+    <!-- Alternador de Telas -->
+    <div class="view-switcher">
+      <button type="button" class="switch-btn active" onclick="trocarVisao('tatica')">
+        🗺️ Mesa Tática (Mapa)
+      </button>
+      <button type="button" class="switch-btn" onclick="trocarVisao('financeiro')">
+        💼 Painel Financeiro
+      </button>
+      <button type="button" class="switch-btn" onclick="trocarVisao('segmentos')">
+        🎯 Radar de Segmentos (Metas 5x)
+      </button>
+    </div>
+
+    <button type="button" class="btn-new-parc" onclick="abrirDrawerNovo()">
+      + Novo Parceiro
+    </button>
+  </header>
+
+  <!-- ==================== CONTEÚDO PRINCIPAL ==================== -->
+  <main class="mesa-content">
+
+    <!-- VISAO 1: MESA TÁTICA (MAPA + BALÕES ARRASTÁVEIS) -->
+    <section id="view-tatica">
+      <!-- Bandeja Lateral de Balões Arrastáveis -->
+      <aside class="balloon-tray">
+        <div class="balloon-tray-header">
+          <h2>🎈 Segmentos do Negócio</h2>
+          <p>Selecione ou <strong>arraste o balão</strong> diretamente para a rua ou bairro no mapa de Cascavel.</p>
+        </div>
+        <div class="balloon-list" id="balloon-list-tray">
+          <!-- Inserido dinamicamente via JS -->
+        </div>
+      </aside>
+
+      <!-- Área do Mapa -->
+      <div class="map-container-wrap">
+        <div class="map-drop-hint">
+          📍 Dica: Arraste um balão da esquerda para o mapa ou clique em qualquer ponto de Cascavel!
+        </div>
+        <div id="map-mesa"></div>
+      </div>
+
+      <!-- Drawer Lateral de Edição do Parceiro -->
+      <aside class="partner-drawer closed" id="partner-drawer">
+        <div class="drawer-header">
+          <div class="drawer-title" id="drawer-title">🏢 Editar Parceiro</div>
+          <button type="button" class="btn-close-drawer" onclick="fecharDrawer()">✕</button>
+        </div>
+
+        <div class="drawer-body">
+          <input type="hidden" id="edit-id">
+
+          <div class="drawer-section-title">Dados Comerciais</div>
+
+          <div class="form-group">
+            <label>Nome Comercial da Empresa</label>
+            <input type="text" class="form-input" id="edit-nome" placeholder="Ex: Auto Center Cascavel">
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>Segmento de Atuação</label>
+              <select class="form-select" id="edit-categoria" onchange="atualizarIconeSegmento()">
+                <option value="pet_vet">🐾 Clínica Veterinária</option>
+                <option value="pet_shop">🐕 Pet Shop & Ração</option>
+                <option value="banho_tosa">🛁 Banho e Tosa</option>
+                <option value="auto_center">🚗 Auto Center & Pneus</option>
+                <option value="borracharia">🛞 Borracharia</option>
+                <option value="posto">⛽ Posto de Combustível</option>
+                <option value="moto_mecanica">🏍️ Mecânica de Moto</option>
+                <option value="carro_mecanica">🔧 Mecânica de Carro</option>
+                <option value="alimentacao">🍔 Lanchonete / Alimentação</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Bairro de Cascavel</label>
+              <input type="text" class="form-input" id="edit-bairro" placeholder="Ex: Centro">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Endereço Completo</label>
+            <input type="text" class="form-input" id="edit-endereco" placeholder="Ex: Av. Brasil, 4500">
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>WhatsApp de Contato</label>
+              <input type="text" class="form-input" id="edit-whats" placeholder="Ex: (45) 99999-0000">
+            </div>
+            <div class="form-group">
+              <label>Selo Oficial</label>
+              <select class="form-select" id="edit-selo">
+                <option value="ouro">⭐ Ouro (Amigo dos Animais)</option>
+                <option value="prata">🛡️ Cidadão (Empresa Amiga)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>Latitude GPS</label>
+              <input type="text" class="form-input" id="edit-lat" readonly>
+            </div>
+            <div class="form-group">
+              <label>Longitude GPS</label>
+              <input type="text" class="form-input" id="edit-lng" readonly>
+            </div>
+          </div>
+
+          <div class="drawer-section-title">Controle Financeiro & Mensalidade</div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>Mensalidade (R$)</label>
+              <input type="number" class="form-input" id="edit-mensalidade" placeholder="250.00" step="10">
+            </div>
+            <div class="form-group">
+              <label>Dia Vencimento</label>
+              <select class="form-select" id="edit-dia-venc">
+                <option value="5">Dia 05</option>
+                <option value="10" selected>Dia 10</option>
+                <option value="15">Dia 15</option>
+                <option value="20">Dia 20</option>
+                <option value="25">Dia 25</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>Status do Pagamento</label>
+              <select class="form-select" id="edit-status-pagamento">
+                <option value="pago">🟢 Pago (Em dia)</option>
+                <option value="pendente">🟡 Pendente / A Vencer</option>
+                <option value="atrasado">🔴 Em Atraso</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Total Já Pago (R$)</label>
+              <input type="number" class="form-input" id="edit-total-pago" placeholder="0.00">
+            </div>
+          </div>
+
+          <div class="drawer-section-title">Promoções & Produtos (Até 3 itens)</div>
+          
+          <div class="drawer-prods-box">
+            <div class="form-group">
+              <label>Item 1 (Principal)</label>
+              <input type="text" class="form-input" id="edit-prod1-nome" placeholder="Ex: Troca de Óleo + Filtro">
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>De (R$)</label>
+                <input type="number" class="form-input" id="edit-prod1-de" placeholder="180.00">
+              </div>
+              <div class="form-group">
+                <label>Por (R$)</label>
+                <input type="number" class="form-input" id="edit-prod1-por" placeholder="139.90">
+              </div>
+              <div class="form-group">
+                <label>Tag</label>
+                <input type="text" class="form-input" id="edit-prod1-tag" placeholder="22% OFF">
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label style="display:flex; align-items:center; gap:8px; cursor:pointer;">
+              <input type="checkbox" id="edit-destaque-esteira" checked>
+              <span>Exibir este parceiro na esteira rolante do App</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="drawer-footer">
+          <button type="button" class="btn-del-parc" onclick="excluirParceiroAtual()">Excluir</button>
+          <button type="button" class="btn-save-parc" onclick="salvarParceiroDrawer()">Salvar na Mesa</button>
+        </div>
+      </aside>
+    </section>
+
+    <!-- VISAO 2: PAINEL FINANCEIRO -->
+    <section id="view-financeiro">
+      <div class="fin-top-cards">
+        <div class="fin-stat-card">
+          <span class="fin-stat-label">MRR Estimado (Mensal)</span>
+          <span class="fin-stat-num" id="fin-card-mrr" style="color:var(--gold);">R$ 0,00</span>
+          <span class="fin-stat-sub">Soma de todas as assinaturas ativas</span>
+        </div>
+        <div class="fin-stat-card">
+          <span class="fin-stat-label">Total Recebido no Mês</span>
+          <span class="fin-stat-num" id="fin-card-recebido" style="color:var(--green-light);">R$ 0,00</span>
+          <span class="fin-stat-sub">Confirmado e liquidado</span>
+        </div>
+        <div class="fin-stat-card">
+          <span class="fin-stat-label">Pendente / A Receber</span>
+          <span class="fin-stat-num" id="fin-card-pendente" style="color:var(--orange);">R$ 0,00</span>
+          <span class="fin-stat-sub">Faturas aguardando pagamento</span>
+        </div>
+        <div class="fin-stat-card">
+          <span class="fin-stat-label">Total Histórico Acumulado</span>
+          <span class="fin-stat-num" id="fin-card-historico" style="color:#38BDF8;">R$ 0,00</span>
+          <span class="fin-stat-sub">Faturamento geral da rede</span>
+        </div>
+      </div>
+
+      <div class="table-card">
+        <div class="table-head-bar">
+          <h3>Extrato Geral de Parceiros & Cobranças</h3>
+          <div class="table-filters">
+            <button type="button" class="table-filter-btn active" onclick="filtrarTabelaFin('todos', this)">Todos</button>
+            <button type="button" class="table-filter-btn" onclick="filtrarTabelaFin('pago', this)">Pagos</button>
+            <button type="button" class="table-filter-btn" onclick="filtrarTabelaFin('pendente', this)">Pendentes</button>
+            <button type="button" class="table-filter-btn" onclick="filtrarTabelaFin('atrasado', this)">Em Atraso</button>
+          </div>
+        </div>
+
+        <table class="fin-table">
+          <thead>
+            <tr>
+              <th>Parceiro</th>
+              <th>Segmento</th>
+              <th>Bairro</th>
+              <th>Mensalidade</th>
+              <th>Vencimento</th>
+              <th>Status</th>
+              <th>Histórico Pago</th>
+              <th>Ações Rápidas</th>
+            </tr>
+          </thead>
+          <tbody id="fin-table-body">
+            <!-- Linhas inseridas via JS -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- VISAO 3: RADAR DE SEGMENTOS (METAS 5X) -->
+    <section id="view-segmentos">
+      <div style="background:var(--bg-card); border:1px solid var(--border); border-radius:16px; padding:18px 20px;">
+        <h2 style="font-size:16px; font-weight:900; color:#FFFFFF;">🎯 Estratégia de Captação Exclusiva de Cascavel</h2>
+        <p style="font-size:12px; color:var(--text-muted); margin-top:4px;">
+          Cada segmento possui cota máxima de <strong>5 patrocinadores</strong> para garantir exclusividade e alto valor percebido pelos comerciantes.
+        </p>
+      </div>
+
+      <div class="radar-grid" id="radar-segments-grid">
+        <!-- Cards gerados via JS -->
+      </div>
+    </section>
+
+  </main>
+
+  <div class="toast-mesa" id="toast-mesa"></div>
+
+  <script src="/static/vendor/leaflet.js"></script>
+
+  <script>
+    /* =====================================================================
+       MESA OPERACIONAL CASCAVEL — CORE JAVASCRIPT ENGINE
+       ===================================================================== */
+    const CASCAVEL_CENTER = [-24.9555, -53.4550];
+
+    // Definição dos 8 Segmentos Principais com meta de 5 empresas cada
+    const SEGMENTOS_DEF = {
+      pet_vet: { nome: "Clínica Veterinária", icone: "🐾", cota: 5, mensalidadeBase: 250 },
+      pet_shop: { nome: "Pet Shop & Ração", icone: "🐕", cota: 5, mensalidadeBase: 200 },
+      banho_tosa: { nome: "Banho e Tosa", icone: "🛁", cota: 5, mensalidadeBase: 150 },
+      auto_center: { nome: "Auto Center & Pneus", icone: "🚗", cota: 5, mensalidadeBase: 300 },
+      borracharia: { nome: "Borracharia", icone: "🛞", cota: 5, mensalidadeBase: 150 },
+      posto: { nome: "Posto de Combustível", icone: "⛽", cota: 5, mensalidadeBase: 350 },
+      moto_mecanica: { nome: "Mecânica de Moto", icone: "🏍️", cota: 5, mensalidadeBase: 180 },
+      carro_mecanica: { nome: "Mecânica de Carro", icone: "🔧", cota: 5, mensalidadeBase: 250 },
+      alimentacao: { nome: "Alimentação & Lanches", icone: "🍔", cota: 5, mensalidadeBase: 200 }
+    };
+
+    // Dados semente iniciais realistas de Cascavel
+    const DEFAULT_PARCEIROS = [
+      {
+        id: 1,
+        nome: "Hospital Veterinário 24h Cascavel",
+        categoria: "pet_vet",
+        bairro: "Centro",
+        endereco: "Rua Paraná, 2800",
+        lat: -24.9560,
+        lng: -53.4560,
+        telefone_whatsapp: "45999881122",
+        selo_tipo: "ouro",
+        destaque_esteira: 1,
+        mensalidade: 350.00,
+        dia_vencimento: 10,
+        status_pagamento: "pago",
+        total_pago: 2100.00,
+        produtos: [{ titulo: "Consulta Plantão Emergência", de: 220, por: 176, tag: "20% OFF" }]
+      },
+      {
+        id: 2,
+        nome: "Pet Shop & Estética Patinhas",
+        categoria: "pet_shop",
+        bairro: "Coqueiral",
+        endereco: "Rua Presidente Kennedy, 1420",
+        lat: -24.9620,
+        lng: -53.4810,
+        telefone_whatsapp: "45998772233",
+        selo_tipo: "ouro",
+        destaque_esteira: 1,
+        mensalidade: 200.00,
+        dia_vencimento: 10,
+        status_pagamento: "pago",
+        total_pago: 1200.00,
+        produtos: [{ titulo: "Ração Premium Especial 15kg", de: 249, por: 199.90, tag: "PROMOÇÃO" }]
+      },
+      {
+        id: 3,
+        nome: "Auto Center & Pneus Cascavel",
+        categoria: "auto_center",
+        bairro: "São Cristóvão",
+        endereco: "Av. Brasil, 1900",
+        lat: -24.9450,
+        lng: -53.4320,
+        telefone_whatsapp: "45997663344",
+        selo_tipo: "prata",
+        destaque_esteira: 1,
+        mensalidade: 300.00,
+        dia_vencimento: 5,
+        status_pagamento: "pendente",
+        total_pago: 1500.00,
+        produtos: [{ titulo: "Alinhamento 3D + Balanceamento 4 Rodas", de: 140, por: 99, tag: "28% OFF" }]
+      },
+      {
+        id: 4,
+        nome: "Posto & Conveniência Avenida",
+        categoria: "posto",
+        bairro: "Centro",
+        endereco: "Av. Tancredo Neves, 850",
+        lat: -24.9585,
+        lng: -53.4650,
+        telefone_whatsapp: "45996554455",
+        selo_tipo: "prata",
+        destaque_esteira: 1,
+        mensalidade: 350.00,
+        dia_vencimento: 15,
+        status_pagamento: "pago",
+        total_pago: 1750.00,
+        produtos: [{ titulo: "Ducha Ecológica Completa", de: 35, por: 20, tag: "42% OFF" }]
+      },
+      {
+        id: 5,
+        nome: "Clínica Vet Vida Animal",
+        categoria: "pet_vet",
+        bairro: "Neva",
+        endereco: "Rua Pio XII, 3100",
+        lat: -24.9680,
+        lng: -53.4600,
+        telefone_whatsapp: "45995445566",
+        selo_tipo: "ouro",
+        destaque_esteira: 1,
+        mensalidade: 250.00,
+        dia_vencimento: 10,
+        status_pagamento: "pago",
+        total_pago: 1000.00,
+        produtos: [{ titulo: "Castração Segura Cães e Gatos", de: 380, por: 290, tag: "SOCIAL" }]
+      },
+      {
+        id: 6,
+        nome: "Baterias & Auto Elétrica Neva",
+        categoria: "auto_center",
+        bairro: "Neva",
+        endereco: "Rua Salgado Filho, 1200",
+        lat: -24.9640,
+        lng: -53.4620,
+        telefone_whatsapp: "45994336677",
+        selo_tipo: "prata",
+        destaque_esteira: 1,
+        mensalidade: 250.00,
+        dia_vencimento: 20,
+        status_pagamento: "atrasado",
+        total_pago: 750.00,
+        produtos: [{ titulo: "Bateria Moura 60Ah com Instalação", de: 480, por: 419, tag: "OFERTA" }]
+      }
+    ];
+
+    // Estado da Aplicação Mesa
+    let parceiros = [];
+    let map = null;
+    let markersMap = {};
+    let parceiroSelecionadoId = null;
+
+    // Inicialização
+    window.addEventListener('DOMContentLoaded', () => {
+      carregarParceiros();
+      inicializarMapa();
+      renderizarBandejaBaloes();
+      renderizarVisaoTatica();
+      atualizarKpisGerais();
+    });
+
+    function carregarParceiros() {
+      try {
+        const saved = localStorage.getItem('mesa_parceiros_v1');
+        if (saved) {
+          parceiros = JSON.parse(saved);
+        } else {
+          parceiros = JSON.parse(JSON.stringify(DEFAULT_PARCEIROS));
+          salvarParceiros();
+        }
+      } catch(e) {
+        parceiros = JSON.parse(JSON.stringify(DEFAULT_PARCEIROS));
+      }
+    }
+
+    function salvarParceiros() {
+      localStorage.setItem('mesa_parceiros_v1', JSON.stringify(parceiros));
+      atualizarKpisGerais();
+    }
+
+    /* ==================== INICIALIZAÇÃO DO MAPA ==================== */
+    function inicializarMapa() {
+      map = L.map('map-mesa', {
+        center: CASCAVEL_CENTER,
+        zoom: 13,
+        zoomControl: true
+      });
+
+      // CartoDB Dark Matter / Positron
+      L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+        attribution: '&copy; OpenStreetMap &copy; CARTO',
+        maxZoom: 19
+      }).addTo(map);
+
+      // Clique direto no mapa para criar novo parceiro naquele ponto
+      map.on('click', (e) => {
+        abrirDrawerNovoComCoords(e.latlng.lat, e.latlng.lng);
+      });
+
+      // Suporte a HTML5 Drag & Drop de balões no container do mapa
+      const mapContainer = document.getElementById('map-mesa');
+      mapContainer.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        e.dataTransfer.dropEffect = 'copy';
+      });
+
+      mapContainer.addEventListener('drop', (e) => {
+        e.preventDefault();
+        const categoria = e.dataTransfer.getData('text/plain');
+        if (!categoria) return;
+
+        // Converte pixel da tela para coordenada GPS do Leaflet
+        const rect = mapContainer.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const latlng = map.containerPointToLatLng([x, y]);
+
+        abrirDrawerNovoComCoords(latlng.lat, latlng.lng, categoria);
+      });
+
+      renderizarMarcadoresMapa();
+    }
+
+    function renderizarMarcadoresMapa() {
+      // Limpa marcadores anteriores
+      Object.values(markersMap).forEach(m => map.removeLayer(m));
+      markersMap = {};
+
+      parceiros.forEach(p => {
+        const seg = SEGMENTOS_DEF[p.categoria] || { icone: '📍' };
+        const customIcon = L.divIcon({
+          className: 'mesa-custom-pin-wrap',
+          html: `<div class="mesa-custom-pin" title="${escapeHtml(p.nome)}">${seg.icone}</div>`,
+          iconSize: [40, 40],
+          iconAnchor: [20, 20]
+        });
+
+        const marker = L.marker([p.lat, p.lng], { icon: customIcon }).addTo(map);
+
+        marker.on('click', (e) => {
+          L.DomEvent.stopPropagation(e);
+          abrirDrawerEditar(p.id);
+        });
+
+        markersMap[p.id] = marker;
+      });
+    }
+
+    /* ==================== BANDEJA LATERAL DE BALÕES ==================== */
+    function renderizarBandejaBaloes() {
+      const container = document.getElementById('balloon-list-tray');
+      if (!container) return;
+
+      container.innerHTML = Object.entries(SEGMENTOS_DEF).map(([key, item]) => {
+        const count = parceiros.filter(p => p.categoria === key).length;
+        const cotaClass = count >= item.cota ? 'cheio' : (count === 0 ? 'vazio' : '');
+        const cotaTexto = `${count}/${item.cota}`;
+
+        return `
+          <div class="balloon-item" draggable="true" ondragstart="iniciarDragBalão(event, '${key}')" onclick="clicarBalãoParaCadastrar('${key}')">
+            <div class="balloon-icon-circle">${item.icone}</div>
+            <div class="balloon-info">
+              <div class="balloon-name">${item.nome}</div>
+              <div class="balloon-meta">
+                <span>Cota:</span>
+                <span class="balloon-cota-tag ${cotaClass}">${cotaTexto}</span>
+                <span>• R$ ${item.mensalidadeBase}/mês</span>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function iniciarDragBalão(e, categoria) {
+      e.dataTransfer.setData('text/plain', categoria);
+    }
+
+    function clicarBalãoParaCadastrar(categoria) {
+      // Se clicar no balão, abre novo parceiro no centro atual do mapa
+      const center = map.getCenter();
+      abrirDrawerNovoComCoords(center.lat, center.lng, categoria);
+    }
+
+    /* ==================== CONTROLE DO DRAWER ==================== */
+    function abrirDrawerNovo() {
+      const center = map ? map.getCenter() : { lat: CASCAVEL_CENTER[0], lng: CASCAVEL_CENTER[1] };
+      abrirDrawerNovoComCoords(center.lat, center.lng, 'pet_vet');
+    }
+
+    function abrirDrawerNovoComCoords(lat, lng, categoria = 'pet_vet') {
+      parceiroSelecionadoId = null;
+      document.getElementById('drawer-title').textContent = '➕ Novo Parceiro no Mapa';
+      document.getElementById('edit-id').value = '';
+      document.getElementById('edit-nome').value = '';
+      document.getElementById('edit-categoria').value = categoria;
+      document.getElementById('edit-bairro').value = 'Centro';
+      document.getElementById('edit-endereco').value = '';
+      document.getElementById('edit-whats').value = '';
+      document.getElementById('edit-selo').value = 'ouro';
+      document.getElementById('edit-lat').value = lat.toFixed(6);
+      document.getElementById('edit-lng').value = lng.toFixed(6);
+
+      const def = SEGMENTOS_DEF[categoria] || { mensalidadeBase: 250 };
+      document.getElementById('edit-mensalidade').value = def.mensalidadeBase;
+      document.getElementById('edit-dia-venc').value = '10';
+      document.getElementById('edit-status-pagamento').value = 'pago';
+      document.getElementById('edit-total-pago').value = '0.00';
+
+      document.getElementById('edit-prod1-nome').value = '';
+      document.getElementById('edit-prod1-de').value = '';
+      document.getElementById('edit-prod1-por').value = '';
+      document.getElementById('edit-prod1-tag').value = '';
+      document.getElementById('edit-destaque-esteira').checked = true;
+
+      document.getElementById('partner-drawer').classList.remove('closed');
+      mostrarToast(`📍 Ponto selecionado: [${lat.toFixed(4)}, ${lng.toFixed(4)}]. Preencha os dados.`);
+    }
+
+    function abrirDrawerEditar(id) {
+      const p = parceiros.find(item => item.id === id);
+      if (!p) return;
+
+      parceiroSelecionadoId = id;
+      document.getElementById('drawer-title').textContent = '🏢 Editar: ' + p.nome;
+      document.getElementById('edit-id').value = p.id;
+      document.getElementById('edit-nome').value = p.nome;
+      document.getElementById('edit-categoria').value = p.categoria;
+      document.getElementById('edit-bairro').value = p.bairro || 'Centro';
+      document.getElementById('edit-endereco').value = p.endereco || '';
+      document.getElementById('edit-whats').value = p.telefone_whatsapp || '';
+      document.getElementById('edit-selo').value = p.selo_tipo || 'ouro';
+      document.getElementById('edit-lat').value = p.lat.toFixed(6);
+      document.getElementById('edit-lng').value = p.lng.toFixed(6);
+
+      document.getElementById('edit-mensalidade').value = p.mensalidade || 250;
+      document.getElementById('edit-dia-venc').value = p.dia_vencimento || 10;
+      document.getElementById('edit-status-pagamento').value = p.status_pagamento || 'pago';
+      document.getElementById('edit-total-pago').value = p.total_pago || 0;
+
+      if (p.produtos && p.produtos.length > 0) {
+        document.getElementById('edit-prod1-nome').value = p.produtos[0].titulo || '';
+        document.getElementById('edit-prod1-de').value = p.produtos[0].de || '';
+        document.getElementById('edit-prod1-por').value = p.produtos[0].por || '';
+        document.getElementById('edit-prod1-tag').value = p.produtos[0].tag || '';
+      } else {
+        document.getElementById('edit-prod1-nome').value = '';
+        document.getElementById('edit-prod1-de').value = '';
+        document.getElementById('edit-prod1-por').value = '';
+        document.getElementById('edit-prod1-tag').value = '';
+      }
+
+      document.getElementById('edit-destaque-esteira').checked = (p.destaque_esteira !== 0);
+
+      document.getElementById('partner-drawer').classList.remove('closed');
+
+      // Pan suave para o pino no mapa
+      if (map) map.panTo([p.lat, p.lng], { animate: true });
+    }
+
+    function fecharDrawer() {
+      document.getElementById('partner-drawer').classList.add('closed');
+      parceiroSelecionadoId = null;
+    }
+
+    function salvarParceiroDrawer() {
+      const nome = document.getElementById('edit-nome').value.trim();
+      if (!nome) {
+        alert('Informe o nome da empresa parceira.');
+        return;
+      }
+
+      const idVal = document.getElementById('edit-id').value;
+      const categoria = document.getElementById('edit-categoria').value;
+      const bairro = document.getElementById('edit-bairro').value.trim() || 'Centro';
+      const endereco = document.getElementById('edit-endereco').value.trim();
+      const whats = document.getElementById('edit-whats').value.trim();
+      const selo = document.getElementById('edit-selo').value;
+      const lat = parseFloat(document.getElementById('edit-lat').value) || CASCAVEL_CENTER[0];
+      const lng = parseFloat(document.getElementById('edit-lng').value) || CASCAVEL_CENTER[1];
+
+      const mensalidade = parseFloat(document.getElementById('edit-mensalidade').value) || 0;
+      const diaVenc = parseInt(document.getElementById('edit-dia-venc').value) || 10;
+      const statusPag = document.getElementById('edit-status-pagamento').value;
+      const totalPago = parseFloat(document.getElementById('edit-total-pago').value) || 0;
+      const destaque = document.getElementById('edit-destaque-esteira').checked ? 1 : 0;
+
+      const prod1Nome = document.getElementById('edit-prod1-nome').value.trim();
+      const prods = [];
+      if (prod1Nome) {
+        prods.push({
+          titulo: prod1Nome,
+          de: parseFloat(document.getElementById('edit-prod1-de').value) || 0,
+          por: parseFloat(document.getElementById('edit-prod1-por').value) || 0,
+          tag: document.getElementById('edit-prod1-tag').value.trim() || 'OFERTA'
+        });
+      }
+
+      if (idVal) {
+        // Atualiza existente
+        const idx = parceiros.findIndex(p => p.id === parseInt(idVal));
+        if (idx !== -1) {
+          parceiros[idx] = {
+            ...parceiros[idx],
+            nome, categoria, bairro, endereco, telefone_whatsapp: whats, selo_tipo: selo,
+            lat, lng, mensalidade, dia_vencimento: diaVenc, status_pagamento: statusPag,
+            total_pago: totalPago, destaque_esteira: destaque, produtos: prods
+          };
+          mostrarToast(`✅ Parceiro "${nome}" atualizado com sucesso!`);
+        }
+      } else {
+        // Novo
+        const newId = Date.now();
+        const novo = {
+          id: newId,
+          nome, categoria, bairro, endereco, telefone_whatsapp: whats, selo_tipo: selo,
+          lat, lng, mensalidade, dia_vencimento: diaVenc, status_pagamento: statusPag,
+          total_pago: totalPago, destaque_esteira: destaque, produtos: prods
+        };
+        parceiros.push(novo);
+        mostrarToast(`🎉 Novo parceiro "${nome}" fixado no mapa de Cascavel!`);
+      }
+
+      salvarParceiros();
+      renderizarMarcadoresMapa();
+      renderizarBandejaBaloes();
+      fecharDrawer();
+      if (document.getElementById('view-financeiro').style.display === 'flex') renderizarTabelaFinanceira();
+      if (document.getElementById('view-segmentos').style.display === 'flex') renderizarRadarSegmentos();
+    }
+
+    function excluirParceiroAtual() {
+      if (!parceiroSelecionadoId) return;
+      if (!confirm('Deseja realmente remover este parceiro da mesa operacional?')) return;
+
+      parceiros = parceiros.filter(p => p.id !== parceiroSelecionadoId);
+      salvarParceiros();
+      renderizarMarcadoresMapa();
+      renderizarBandejaBaloes();
+      fecharDrawer();
+      mostrarToast('🗑️ Parceiro removido da mesa operacional.');
+      if (document.getElementById('view-financeiro').style.display === 'flex') renderizarTabelaFinanceira();
+      if (document.getElementById('view-segmentos').style.display === 'flex') renderizarRadarSegmentos();
+    }
+
+    /* ==================== TROCA DE VISÕES DA MESA ==================== */
+    function trocarVisao(visao) {
+      document.querySelectorAll('.switch-btn').forEach(b => b.classList.remove('active'));
+      const btn = Array.from(document.querySelectorAll('.switch-btn')).find(b => b.textContent.toLowerCase().includes(visao));
+      if (btn) btn.classList.add('active');
+
+      const vTatica = document.getElementById('view-tatica');
+      const vFin = document.getElementById('view-financeiro');
+      const vSeg = document.getElementById('view-segmentos');
+
+      vTatica.style.display = (visao === 'tatica') ? 'flex' : 'none';
+      vFin.style.display = (visao === 'financeiro') ? 'flex' : 'none';
+      vSeg.style.display = (visao === 'segmentos') ? 'flex' : 'none';
+
+      if (visao === 'tatica') {
+        setTimeout(() => { if (map) map.invalidateSize(); }, 50);
+      } else if (visao === 'financeiro') {
+        renderizarTabelaFinanceira();
+      } else if (visao === 'segmentos') {
+        renderizarRadarSegmentos();
+      }
+    }
+
+    /* ==================== KPIS DO TOPO ==================== */
+    function atualizarKpisGerais() {
+      let mrr = 0;
+      let recebido = 0;
+      let pendente = 0;
+
+      parceiros.forEach(p => {
+        const val = Number(p.mensalidade) || 0;
+        mrr += val;
+        if (p.status_pagamento === 'pago') {
+          recebido += val;
+        } else {
+          pendente += val;
+        }
+      });
+
+      document.getElementById('kpi-mrr').textContent = 'R$ ' + mrr.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+      document.getElementById('kpi-recebido').textContent = 'R$ ' + recebido.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+      document.getElementById('kpi-pendente').textContent = 'R$ ' + pendente.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+      document.getElementById('kpi-total-parceiros').textContent = parceiros.length;
+
+      // Cards da visão financeira
+      const elFinMrr = document.getElementById('fin-card-mrr');
+      if (elFinMrr) elFinMrr.textContent = 'R$ ' + mrr.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+      const elFinRec = document.getElementById('fin-card-recebido');
+      if (elFinRec) elFinRec.textContent = 'R$ ' + recebido.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+      const elFinPen = document.getElementById('fin-card-pendente');
+      if (elFinPen) elFinPen.textContent = 'R$ ' + pendente.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+
+      let historicoTotal = parceiros.reduce((acc, cur) => acc + (Number(cur.total_pago) || 0), 0);
+      const elFinHist = document.getElementById('fin-card-historico');
+      if (elFinHist) elFinHist.textContent = 'R$ ' + historicoTotal.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+    }
+
+    /* ==================== VISÃO 2: TABELA FINANCEIRA ==================== */
+    let filtroTabelaStatus = 'todos';
+
+    function filtrarTabelaFin(status, el) {
+      filtroTabelaStatus = status;
+      document.querySelectorAll('.table-filter-btn').forEach(b => b.classList.remove('active'));
+      if (el) el.classList.add('active');
+      renderizarTabelaFinanceira();
+    }
+
+    function renderizarTabelaFinanceira() {
+      const tbody = document.getElementById('fin-table-body');
+      if (!tbody) return;
+
+      let lista = parceiros;
+      if (filtroTabelaStatus !== 'todos') {
+        lista = parceiros.filter(p => p.status_pagamento === filtroTabelaStatus);
+      }
+
+      if (!lista.length) {
+        tbody.innerHTML = `<tr><td colspan="8" style="text-align:center; padding:30px; color:var(--text-dim);">Nenhum parceiro encontrado nesta classificação.</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = lista.map(p => {
+        const seg = SEGMENTOS_DEF[p.categoria] || { nome: p.categoria, icone: '📍' };
+        const statusClass = p.status_pagamento || 'pendente';
+        const statusTexto = statusClass === 'pago' ? '🟢 Pago' : (statusClass === 'atrasado' ? '🔴 Em Atraso' : '🟡 A Vencer');
+
+        return `
+          <tr>
+            <td>
+              <strong style="color:#FFF;">${escapeHtml(p.nome)}</strong>
+              <div style="font-size:11px; color:var(--text-dim);">${escapeHtml(p.endereco || '')}</div>
+            </td>
+            <td>${seg.icone} ${seg.nome}</td>
+            <td>${escapeHtml(p.bairro || 'Centro')}</td>
+            <td><strong style="color:var(--gold);">R$ ${(Number(p.mensalidade) || 0).toFixed(2).replace('.', ',')}</strong></td>
+            <td>Dia ${p.dia_vencimento || 10}</td>
+            <td><span class="status-badge ${statusClass}">${statusTexto}</span></td>
+            <td>R$ ${(Number(p.total_pago) || 0).toFixed(2).replace('.', ',')}</td>
+            <td>
+              <div style="display:flex; gap:6px;">
+                <button type="button" onclick="alternarStatusPagamento(${p.id})" style="background:var(--bg-surface); border:1px solid var(--border); color:#FFF; font-size:11px; padding:4px 8px; border-radius:6px; cursor:pointer;" title="Alternar Status">
+                  🔄 Status
+                </button>
+                <button type="button" onclick="enviarCobrancaWhats(${p.id})" style="background:#009B3A; color:#FFF; border:none; font-size:11px; padding:4px 8px; border-radius:6px; cursor:pointer; font-weight:800;" title="Abrir WhatsApp">
+                  💬 Cobrança
+                </button>
+                <button type="button" onclick="abrirDrawerEditar(${p.id})" style="background:var(--bg-surface); border:1px solid var(--border); color:#FFF; font-size:11px; padding:4px 8px; border-radius:6px; cursor:pointer;" title="Editar">
+                  ✏️
+                </button>
+              </div>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function alternarStatusPagamento(id) {
+      const p = parceiros.find(item => item.id === id);
+      if (!p) return;
+
+      if (p.status_pagamento === 'pago') {
+        p.status_pagamento = 'pendente';
+      } else if (p.status_pagamento === 'pendente') {
+        p.status_pagamento = 'atrasado';
+      } else {
+        p.status_pagamento = 'pago';
+        p.total_pago = (Number(p.total_pago) || 0) + (Number(p.mensalidade) || 0);
+      }
+
+      salvarParceiros();
+      renderizarTabelaFinanceira();
+      mostrarToast(`Status financeiro de "${p.nome}" atualizado!`);
+    }
+
+    function enviarCobrancaWhats(id) {
+      const p = parceiros.find(item => item.id === id);
+      if (!p || !p.telefone_whatsapp) {
+        alert('Telefone de WhatsApp não cadastrado para esta empresa.');
+        return;
+      }
+      const num = p.telefone_whatsapp.replace(/\D/g, '');
+      const dddNum = num.length <= 11 ? ('55' + num) : num;
+      const msg = encodeURIComponent(`Olá, equipe da ${p.nome}! Aqui é o Rigo da Vórtice Mídia / Alerta Urbano Cascavel. Passando para confirmar o fechamento da assinatura mensal do seu patrocínio no app (R$ ${Number(p.mensalidade).toFixed(2)}). Segue a chave PIX da Vórtice Mídia. Qualquer dúvida estamos à disposição!`);
+      window.open(`https://wa.me/${dddNum}?text=${msg}`, '_blank');
+    }
+
+    /* ==================== VISÃO 3: RADAR DE SEGMENTOS ==================== */
+    function renderizarRadarSegmentos() {
+      const grid = document.getElementById('radar-segments-grid');
+      if (!grid) return;
+
+      grid.innerHTML = Object.entries(SEGMENTOS_DEF).map(([key, def]) => {
+        const empresas = parceiros.filter(p => p.categoria === key);
+        const count = empresas.length;
+        const pct = Math.min(100, Math.round((count / def.cota) * 100));
+        const revTotal = empresas.reduce((acc, cur) => acc + (Number(cur.mensalidade) || 0), 0);
+        const revPotencial = def.cota * def.mensalidadeBase;
+
+        let hintClass = 'warn';
+        let hintText = `🟡 Faltam ${def.cota - count} patrocinadores para completar a cota!`;
+        if (count === 0) {
+          hintClass = 'urgent';
+          hintText = `🚨 URGENTE: Zero parceiros neste nicho! Correr atrás de 5 empresas!`;
+        } else if (count >= def.cota) {
+          hintClass = 'ok';
+          hintText = `🟢 COTA MÁXIMA ESGOTADA! Segmento 100% preenchido.`;
+        }
+
+        const empresasNomes = empresas.map(e => `
+          <div style="font-size:11px; color:#E2E8F0; display:flex; justify-content:space-between; padding:3px 0; border-bottom:1px dashed rgba(255,255,255,0.06);">
+            <span>• ${escapeHtml(e.nome)} (${escapeHtml(e.bairro)})</span>
+            <strong style="color:var(--gold);">R$ ${(Number(e.mensalidade) || 0).toFixed(0)}</strong>
+          </div>
+        `).join('') || '<div style="font-size:11px; color:var(--text-dim); font-style:italic;">Nenhuma empresa cadastrada ainda.</div>';
+
+        return `
+          <div class="segment-card ${count >= def.cota ? 'full-cota' : (count === 0 ? 'empty-cota' : '')}">
+            <div class="segment-top">
+              <div class="segment-title">
+                <span style="font-size:22px;">${def.icone}</span>
+                <span>${def.nome}</span>
+              </div>
+              <span class="cota-bubble">${count} / ${def.cota}</span>
+            </div>
+
+            <div class="cota-bar-wrap">
+              <div class="cota-bar-fill" style="width:${pct}%;"></div>
+            </div>
+
+            <div class="segment-rev-row">
+              <span>Receita Atual: <strong>R$ ${revTotal.toFixed(2)}</strong></span>
+              <span>Potencial Cota: <strong>R$ ${revPotencial.toFixed(2)}</strong></span>
+            </div>
+
+            <div class="segment-action-hint ${hintClass}">
+              ${hintText}
+            </div>
+
+            <div style="margin-top:8px;">
+              <div style="font-size:10px; font-weight:800; color:var(--text-dim); text-transform:uppercase; margin-bottom:4px;">Empresas na Rede:</div>
+              <div style="max-height:90px; overflow-y:auto;">
+                ${empresasNomes}
+              </div>
+            </div>
+
+            <button type="button" onclick="adicionarEmpresaNoSegmento('${key}')" style="margin-top:6px; background:var(--bg-surface); border:1px solid var(--border); color:#FFF; font-size:11px; font-weight:800; padding:8px; border-radius:8px; cursor:pointer;">
+              + Adicionar ${def.nome}
+            </button>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function adicionarEmpresaNoSegmento(categoria) {
+      trocarVisao('tatica');
+      const center = map.getCenter();
+      abrirDrawerNovoComCoords(center.lat, center.lng, categoria);
+    }
+
+    function renderizarVisaoTatica() {
+      // Já inicializado pelo map
+    }
+
+    /* ==================== UTILITÁRIOS ==================== */
+    function mostrarToast(msg) {
+      const t = document.getElementById('toast-mesa');
+      if (!t) return;
+      t.textContent = msg;
+      t.style.display = 'block';
+      setTimeout(() => { t.style.display = 'none'; }, 3200);
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str).replace(/[&<>"']/g, m => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+      })[m]);
+    }
+  </script>
+</body>
+</html>

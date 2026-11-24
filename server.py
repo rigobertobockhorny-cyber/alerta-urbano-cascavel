@@ -460,6 +460,15 @@ def termos_uso():
     return send_from_directory("static", "termos_uso.html")
 
 
+@app.route("/mesa")
+@app.route("/mesa-operacional")
+@app.route("/admin/mesa")
+def mesa_operacional():
+    resp = make_response(send_from_directory("static", "mesa_operacional.html"))
+    resp.headers["Cache-Control"] = "no-cache, no-store, must-revalidate, max-age=0"
+    return resp
+
+
 @app.route("/manifest.json")
 def manifest():
     return send_from_directory("static", "manifest.json", mimetype="application/manifest+json")
