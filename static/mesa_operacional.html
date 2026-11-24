@@ -1244,9 +1244,14 @@
       </button>
     </div>
 
-    <button type="button" class="btn-new-parc" onclick="abrirDrawerNovo()">
-      + Novo Parceiro
-    </button>
+    <div style="display:flex; align-items:center; gap:8px;">
+      <button type="button" onclick="forcarAtualizacaoMesa()" style="background:rgba(239,68,68,0.15); border:1px solid rgba(239,68,68,0.3); color:#EF4444; font-size:11px; font-weight:800; padding:8px 12px; border-radius:8px; cursor:pointer; display:flex; align-items:center; gap:5px;" title="Recarregar e limpar cache local">
+        🔄 Recarregar Mesa
+      </button>
+      <button type="button" class="btn-new-parc" onclick="abrirDrawerNovo()">
+        + Novo Parceiro
+      </button>
+    </div>
   </header>
 
   <!-- ==================== CONTEÚDO PRINCIPAL ==================== -->
@@ -1651,7 +1656,7 @@
     </section>
 
     <!-- VISAO 2: PAINEL FINANCEIRO -->
-    <section id="view-financeiro" style="display:none; flex-direction:column !important; width:100% !important; flex:1; overflow-y:auto; padding:24px 32px; box-sizing:border-box;">
+    <section id="view-financeiro" style="display:none; flex-direction:column; width:100%; height:100%; overflow-y:auto; padding:24px 32px; box-sizing:border-box; gap:20px;">
       <div class="fin-top-cards" style="display:grid; grid-template-columns:repeat(4, 1fr); gap:16px; width:100% !important; flex-shrink:0;">
         <div class="fin-stat-card" style="min-height:95px; height:auto;">
           <span class="fin-stat-label">MRR Estimado (Mensal)</span>
@@ -1877,6 +1882,81 @@
   <script src="/static/vendor/leaflet.js"></script>
 
   <script>
+
+    /* =====================================================================
+       MOTOR SOBERANO DE NAVEGAÇÃO ENTRE TELAS (JOHAN / VÓRTICE MÍDIA)
+       ===================================================================== */
+    window.trocarVisao = function(visao) {
+      console.log('🔄 trocarVisao executado para:', visao);
+      try {
+        const viewIds = {
+          'painel_geral': 'view-painel-geral',
+          'tatica': 'view-tatica',
+          'financeiro': 'view-financeiro',
+          'segmentos': 'view-segmentos',
+          'pets': 'view-pets',
+          'moderacao': 'view-moderacao'
+        };
+
+        // 1. Oculta categoricamente todas as seções
+        Object.values(viewIds).forEach(id => {
+          const el = document.getElementById(id);
+          if (el) {
+            el.style.setProperty('display', 'none', 'important');
+          }
+        });
+
+        // 2. Exibe com display:flex !important a seção selecionada
+        const targetId = viewIds[visao] || 'view-painel-geral';
+        const targetEl = document.getElementById(targetId);
+        if (targetEl) {
+          targetEl.style.setProperty('display', 'flex', 'important');
+          console.log('✅ Seção ativada:', targetId);
+        } else {
+          console.warn('⚠️ Seção não encontrada no DOM:', targetId);
+        }
+
+        // 3. Atualiza estado visual dos botões do topo
+        document.querySelectorAll('.switch-btn').forEach(b => b.classList.remove('active'));
+        const activeBtn = Array.from(document.querySelectorAll('.switch-btn')).find(b => {
+          const attr = b.getAttribute('onclick') || '';
+          return attr.includes(`'${visao}'`) || attr.includes(`"${visao}"`);
+        });
+        if (activeBtn) activeBtn.classList.add('active');
+
+        // 4. Gatilhos de renderização sob demanda
+        if (visao === 'painel_geral') {
+          try { if (typeof carregarMetricasCockpit === 'function') carregarMetricasCockpit(); } catch (_) {}
+          try { if (typeof carregarFeedCockpit === 'function') carregarFeedCockpit(); } catch (_) {}
+        } else if (visao === 'tatica') {
+          setTimeout(() => { if (typeof map !== 'undefined' && map) map.invalidateSize(true); }, 50);
+          setTimeout(() => { if (typeof map !== 'undefined' && map) map.invalidateSize(true); }, 200);
+        } else if (visao === 'financeiro') {
+          try { if (typeof renderizarTabelaFinanceira === 'function') renderizarTabelaFinanceira(); } catch (_) {}
+        } else if (visao === 'segmentos') {
+          try { if (typeof renderizarRadarSegmentos === 'function') renderizarRadarSegmentos(); } catch (_) {}
+        } else if (visao === 'pets') {
+          try { if (typeof inicializarMapaPets === 'function') inicializarMapaPets(); } catch (_) {}
+          try { if (typeof carregarPerfisCompletos === 'function') carregarPerfisCompletos(); } catch (_) {}
+          setTimeout(() => { if (typeof mapPets !== 'undefined' && mapPets) mapPets.invalidateSize(true); }, 50);
+          setTimeout(() => { if (typeof mapPets !== 'undefined' && mapPets) mapPets.invalidateSize(true); }, 250);
+          setTimeout(() => { if (typeof mapPets !== 'undefined' && mapPets) mapPets.invalidateSize(true); }, 600);
+        } else if (visao === 'moderacao') {
+          try { if (typeof carregarFeedModeracao === 'function') carregarFeedModeracao(); } catch (_) {}
+        }
+      } catch (err) {
+        console.error('Falha crítica em trocarVisao:', err);
+      }
+    };
+
+    window.forcarAtualizacaoMesa = function() {
+      localStorage.removeItem('mesa_parceiros_v1');
+      localStorage.removeItem('mesa_parceiros_v2');
+      localStorage.removeItem('mesa_perfis_70_v1');
+      const ts = Date.now();
+      window.location.href = window.location.pathname + '?v=3.10.2&nocache=' + ts;
+    };
+
     /* =====================================================================
        MESA OPERACIONAL CASCAVEL — CORE JAVASCRIPT ENGINE
        ===================================================================== */
@@ -2629,44 +2709,6 @@
     }
 
     /* ==================== TROCA DE VISÕES DA MESA OPERACIONAL ==================== */
-    function trocarVisao(visao) {
-      document.querySelectorAll('.switch-btn').forEach(b => b.classList.remove('active'));
-      const btn = Array.from(document.querySelectorAll('.switch-btn')).find(b => b.getAttribute('onclick') && b.getAttribute('onclick').includes(visao));
-      if (btn) btn.classList.add('active');
-
-      const vGeral = document.getElementById('view-painel-geral');
-      const vTatica = document.getElementById('view-tatica');
-      const vFin = document.getElementById('view-financeiro');
-      const vSeg = document.getElementById('view-segmentos');
-      const vPets = document.getElementById('view-pets');
-      const vMod = document.getElementById('view-moderacao');
-
-      if (vGeral) vGeral.style.display = (visao === 'painel_geral') ? 'flex' : 'none';
-      if (vTatica) vTatica.style.display = (visao === 'tatica') ? 'flex' : 'none';
-      if (vFin) vFin.style.display = (visao === 'financeiro') ? 'flex' : 'none';
-      if (vSeg) vSeg.style.display = (visao === 'segmentos') ? 'flex' : 'none';
-      if (vPets) vPets.style.display = (visao === 'pets') ? 'flex' : 'none';
-      if (vMod) vMod.style.display = (visao === 'moderacao') ? 'flex' : 'none';
-
-      if (visao === 'painel_geral') {
-        carregarMetricasCockpit();
-        carregarFeedCockpit();
-      } else if (visao === 'tatica') {
-        setTimeout(() => { if (map) map.invalidateSize(true); }, 60);
-      } else if (visao === 'financeiro') {
-        renderizarTabelaFinanceira();
-      } else if (visao === 'segmentos') {
-        renderizarRadarSegmentos();
-      } else if (visao === 'pets') {
-        inicializarMapaPets();
-        carregarPerfisCompletos();
-        setTimeout(() => { if (mapPets) mapPets.invalidateSize(true); }, 60);
-        setTimeout(() => { if (mapPets) mapPets.invalidateSize(true); }, 250);
-        setTimeout(() => { if (mapPets) mapPets.invalidateSize(true); }, 800);
-      } else if (visao === 'moderacao') {
-        carregarFeedModeracao();
-      }
-    }
 
     /* ==================== MOTOR DE MÉTRICAS & COCKPIT GERAL ==================== */
     let listaFeedModeracao = [];
