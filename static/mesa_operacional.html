@@ -39,13 +39,20 @@
       -webkit-tap-highlight-color: transparent;
     }
 
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+
     body {
       background: var(--bg-dark);
       color: var(--text-main);
-      overflow-x: hidden;
-      min-height: 100vh;
+      height: 100vh;
       display: flex;
       flex-direction: column;
+      overflow: hidden;
     }
 
     /* ==================== TOPO EXECUTIVO / COCKPIT HEADER ==================== */
@@ -215,17 +222,22 @@
     /* Bandeja Lateral de Balões Arrastáveis */
     .balloon-tray {
       width: 280px;
+      height: 100%;
       background: var(--bg-card);
       border-right: 1px solid var(--border);
       display: flex;
       flex-direction: column;
       z-index: 10;
       flex-shrink: 0;
+      overflow: hidden;
     }
 
     .balloon-tray-header {
-      padding: 16px;
+      padding: 14px 16px;
       border-bottom: 1px solid var(--border);
+      background: var(--bg-card);
+      flex-shrink: 0;
+      user-select: none;
     }
 
     .balloon-tray-header h2 {
@@ -246,11 +258,15 @@
 
     .balloon-list {
       flex: 1;
+      height: calc(100% - 68px);
       overflow-y: auto;
-      padding: 12px;
+      overflow-x: hidden;
+      padding: 10px 12px;
       display: flex;
       flex-direction: column;
       gap: 8px;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
     }
 
     .balloon-item {
@@ -333,45 +349,34 @@
       flex: 1;
       position: relative;
       height: 100%;
+      min-height: 100%;
+      width: 100%;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
     }
 
     #map-mesa {
-      width: 100%;
-      height: 100%;
-      background: #06090E;
-    }
-
-    /* Alerta de Drag & Drop sobre o mapa */
-    .map-drop-hint {
-      position: absolute;
-      top: 16px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: rgba(19, 26, 38, 0.92);
-      border: 1px solid var(--gold);
-      color: #FFFFFF;
-      padding: 8px 18px;
-      border-radius: 999px;
-      font-size: 12px;
-      font-weight: 800;
-      pointer-events: none;
-      z-index: 500;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4);
+      width: 100% !important;
+      height: 100% !important;
+      min-height: 100%;
+      flex: 1;
+      background: #131A26;
     }
 
     /* Drawer de Edição do Parceiro (Lado Direito) */
     .partner-drawer {
-      width: 420px;
+      width: 370px;
+      max-width: 370px;
       background: var(--bg-card);
       border-left: 1px solid var(--border);
       display: flex;
       flex-direction: column;
       z-index: 10;
       flex-shrink: 0;
-      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      overflow-x: hidden !important;
+      box-shadow: -8px 0 24px rgba(0, 0, 0, 0.4);
+      transition: transform 0.25s ease;
     }
 
     .partner-drawer.closed {
@@ -379,50 +384,63 @@
     }
 
     .drawer-header {
-      padding: 16px 20px;
+      padding: 12px 16px;
       border-bottom: 1px solid var(--border);
       display: flex;
       justify-content: space-between;
       align-items: center;
+      flex-shrink: 0;
+      background: rgba(19, 26, 38, 0.95);
     }
 
     .drawer-title {
-      font-size: 15px;
+      font-size: 13.5px;
       font-weight: 900;
       color: #FFFFFF;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
     }
 
     .btn-close-drawer {
       background: none;
       border: none;
       color: var(--text-muted);
-      font-size: 20px;
+      font-size: 18px;
       cursor: pointer;
-      padding: 4px;
+      padding: 2px 6px;
+      border-radius: 6px;
+      line-height: 1;
+    }
+    .btn-close-drawer:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: #FFFFFF;
     }
 
     .drawer-body {
       flex: 1;
       overflow-y: auto;
-      padding: 20px;
+      overflow-x: hidden !important;
+      padding: 12px 14px;
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 7px;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
     }
 
     .form-group {
       display: flex;
       flex-direction: column;
-      gap: 6px;
+      gap: 3px;
+      margin-bottom: 2px;
+      min-width: 0;
     }
 
     .form-group label {
-      font-size: 11px;
+      font-size: 10px;
       font-weight: 800;
-      color: var(--text-muted);
+      color: #94A3B8;
       text-transform: uppercase;
       letter-spacing: 0.5px;
     }
@@ -431,11 +449,13 @@
       background: var(--bg-surface);
       border: 1px solid var(--border);
       color: #FFFFFF;
-      padding: 10px 12px;
-      border-radius: 10px;
-      font-size: 13px;
+      padding: 6px 10px;
+      border-radius: 8px;
+      font-size: 12px;
       outline: none;
       transition: border-color 0.2s;
+      width: 100%;
+      box-sizing: border-box;
     }
 
     .form-input:focus, .form-select:focus, .form-textarea:focus {
@@ -444,41 +464,47 @@
 
     .form-row {
       display: flex;
-      gap: 10px;
+      gap: 8px;
+      min-width: 0;
     }
 
     .form-row .form-group {
       flex: 1;
+      min-width: 0;
     }
 
     .drawer-section-title {
-      font-size: 12px;
+      font-size: 10.5px;
       font-weight: 900;
       color: var(--gold);
       text-transform: uppercase;
-      letter-spacing: 0.8px;
-      margin-top: 10px;
+      letter-spacing: 0.7px;
+      margin-top: 6px;
+      margin-bottom: 2px;
+      padding-bottom: 3px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 5px;
     }
 
     /* Produtos Editor */
     .drawer-prods-box {
       background: var(--bg-surface);
       border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 12px;
+      border-radius: 10px;
+      padding: 8px 10px;
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 6px;
+      min-width: 0;
     }
 
     .prod-item-row {
       background: rgba(0, 0, 0, 0.25);
       border: 1px solid var(--border);
       border-radius: 8px;
-      padding: 8px 10px;
+      padding: 6px 8px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -486,10 +512,12 @@
     }
 
     .drawer-footer {
-      padding: 16px 20px;
+      padding: 10px 14px;
       border-top: 1px solid var(--border);
       display: flex;
-      gap: 10px;
+      gap: 8px;
+      flex-shrink: 0;
+      background: rgba(19, 26, 38, 0.95);
     }
 
     .btn-save-parc {
@@ -497,20 +525,32 @@
       background: var(--gold);
       color: #000000;
       border: none;
-      padding: 12px;
-      border-radius: 10px;
-      font-size: 13px;
+      padding: 9px 14px;
+      border-radius: 8px;
+      font-size: 12px;
       font-weight: 900;
       cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .btn-save-parc:hover {
+      background: #FED700;
+      filter: brightness(1.1);
     }
 
     .btn-del-parc {
       background: rgba(239, 68, 68, 0.15);
       color: #EF4444;
       border: 1px solid rgba(239, 68, 68, 0.3);
-      padding: 12px 14px;
-      border-radius: 10px;
-      font-size: 13px;
+      padding: 9px 12px;
+      border-radius: 8px;
+      font-size: 11.5px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .btn-del-parc:hover {
+      background: rgba(239, 68, 68, 0.25);
+    }
       font-weight: 800;
       cursor: pointer;
     }
@@ -1193,9 +1233,6 @@
 
       <!-- Área do Mapa -->
       <div class="map-container-wrap">
-        <div class="map-drop-hint">
-          📍 Dica: Arraste um balão da esquerda para o mapa ou clique em qualquer ponto de Cascavel!
-        </div>
         <div id="map-mesa"></div>
       </div>
 
@@ -1239,7 +1276,15 @@
 
           <div class="form-group">
             <label>Endereço Completo</label>
-            <input type="text" class="form-input" id="edit-endereco" placeholder="Ex: Av. Brasil, 4500">
+            <div style="display:flex; gap:6px;">
+              <input type="text" class="form-input" id="edit-endereco" placeholder="Ex: Av. Brasil, 4500" style="flex:1;" onkeydown="if(event.key==='Enter'){event.preventDefault(); buscarEnderecoDigitado();}">
+              <button type="button" onclick="buscarEnderecoDigitado()" style="background:#2563EB; color:#fff; border:none; padding:0 10px; border-radius:8px; font-weight:800; font-size:11px; cursor:pointer; display:flex; align-items:center; gap:4px; white-space:nowrap;" title="Localizar endereço e marcar alfinete no mapa">
+                📍 Buscar
+              </button>
+            </div>
+            <span style="font-size:9.5px; color:var(--text-dim); margin-top:2px;">
+              Digite a rua e clique em <strong>📍 Buscar</strong> ou clique direto na rua no mapa.
+            </span>
           </div>
 
           <div class="form-row">
@@ -1587,116 +1632,14 @@
       alimentacao: { nome: "Alimentação & Lanches", icone: "🍔", cota: 5, mensalidadeBase: 200 }
     };
 
-    // Dados semente iniciais realistas de Cascavel
-    const DEFAULT_PARCEIROS = [
-      {
-        id: 1,
-        nome: "Hospital Veterinário 24h Cascavel",
-        categoria: "pet_vet",
-        bairro: "Centro",
-        endereco: "Rua Paraná, 2800",
-        lat: -24.9560,
-        lng: -53.4560,
-        telefone_whatsapp: "45999881122",
-        selo_tipo: "ouro",
-        destaque_esteira: 1,
-        mensalidade: 350.00,
-        dia_vencimento: 10,
-        status_pagamento: "pago",
-        total_pago: 2100.00,
-        produtos: [{ titulo: "Consulta Plantão Emergência", de: 220, por: 176, tag: "20% OFF" }]
-      },
-      {
-        id: 2,
-        nome: "Pet Shop & Estética Patinhas",
-        categoria: "pet_shop",
-        bairro: "Coqueiral",
-        endereco: "Rua Presidente Kennedy, 1420",
-        lat: -24.9620,
-        lng: -53.4810,
-        telefone_whatsapp: "45998772233",
-        selo_tipo: "ouro",
-        destaque_esteira: 1,
-        mensalidade: 200.00,
-        dia_vencimento: 10,
-        status_pagamento: "pago",
-        total_pago: 1200.00,
-        produtos: [{ titulo: "Ração Premium Especial 15kg", de: 249, por: 199.90, tag: "PROMOÇÃO" }]
-      },
-      {
-        id: 3,
-        nome: "Auto Center & Pneus Cascavel",
-        categoria: "auto_center",
-        bairro: "São Cristóvão",
-        endereco: "Av. Brasil, 1900",
-        lat: -24.9450,
-        lng: -53.4320,
-        telefone_whatsapp: "45997663344",
-        selo_tipo: "prata",
-        destaque_esteira: 1,
-        mensalidade: 300.00,
-        dia_vencimento: 5,
-        status_pagamento: "pendente",
-        total_pago: 1500.00,
-        produtos: [{ titulo: "Alinhamento 3D + Balanceamento 4 Rodas", de: 140, por: 99, tag: "28% OFF" }]
-      },
-      {
-        id: 4,
-        nome: "Posto & Conveniência Avenida",
-        categoria: "posto",
-        bairro: "Centro",
-        endereco: "Av. Tancredo Neves, 850",
-        lat: -24.9585,
-        lng: -53.4650,
-        telefone_whatsapp: "45996554455",
-        selo_tipo: "prata",
-        destaque_esteira: 1,
-        mensalidade: 350.00,
-        dia_vencimento: 15,
-        status_pagamento: "pago",
-        total_pago: 1750.00,
-        produtos: [{ titulo: "Ducha Ecológica Completa", de: 35, por: 20, tag: "42% OFF" }]
-      },
-      {
-        id: 5,
-        nome: "Clínica Vet Vida Animal",
-        categoria: "pet_vet",
-        bairro: "Neva",
-        endereco: "Rua Pio XII, 3100",
-        lat: -24.9680,
-        lng: -53.4600,
-        telefone_whatsapp: "45995445566",
-        selo_tipo: "ouro",
-        destaque_esteira: 1,
-        mensalidade: 250.00,
-        dia_vencimento: 10,
-        status_pagamento: "pago",
-        total_pago: 1000.00,
-        produtos: [{ titulo: "Castração Segura Cães e Gatos", de: 380, por: 290, tag: "SOCIAL" }]
-      },
-      {
-        id: 6,
-        nome: "Baterias & Auto Elétrica Neva",
-        categoria: "auto_center",
-        bairro: "Neva",
-        endereco: "Rua Salgado Filho, 1200",
-        lat: -24.9640,
-        lng: -53.4620,
-        telefone_whatsapp: "45994336677",
-        selo_tipo: "prata",
-        destaque_esteira: 1,
-        mensalidade: 250.00,
-        dia_vencimento: 20,
-        status_pagamento: "atrasado",
-        total_pago: 750.00,
-        produtos: [{ titulo: "Bateria Moura 60Ah com Instalação", de: 480, por: 419, tag: "OFERTA" }]
-      }
-    ];
+    // Começa 100% limpo para criação dos parceiros oficiais do Rigo (Auto Center 01..05, Banho e Tosa 01..05)
+    const DEFAULT_PARCEIROS = [];
 
     // Estado da Aplicação Mesa
     let parceiros = [];
     let map = null;
     let markersMap = {};
+    let markerEdicaoAtual = null;
     let parceiroSelecionadoId = null;
 
     // Inicialização
@@ -1708,42 +1651,60 @@
       atualizarKpisGerais();
     });
 
+    window.addEventListener('resize', () => {
+      if (map) map.invalidateSize();
+      if (mapPets) mapPets.invalidateSize();
+    });
+
     function carregarParceiros() {
       try {
-        const saved = localStorage.getItem('mesa_parceiros_v1');
+        const saved = localStorage.getItem('mesa_parceiros_v2');
         if (saved) {
           parceiros = JSON.parse(saved);
         } else {
-          parceiros = JSON.parse(JSON.stringify(DEFAULT_PARCEIROS));
+          parceiros = [];
+          localStorage.removeItem('mesa_parceiros_v1');
           salvarParceiros();
         }
       } catch(e) {
-        parceiros = JSON.parse(JSON.stringify(DEFAULT_PARCEIROS));
+        parceiros = [];
       }
     }
 
     function salvarParceiros() {
-      localStorage.setItem('mesa_parceiros_v1', JSON.stringify(parceiros));
+      localStorage.setItem('mesa_parceiros_v2', JSON.stringify(parceiros));
       atualizarKpisGerais();
     }
 
     /* ==================== INICIALIZAÇÃO DO MAPA ==================== */
     function inicializarMapa() {
+      if (map) return;
+      const el = document.getElementById('map-mesa');
+      if (!el) return;
+
       map = L.map('map-mesa', {
         center: CASCAVEL_CENTER,
-        zoom: 13,
+        zoom: 14,
         zoomControl: true
       });
 
-      // CartoDB Dark Matter / Positron
-      L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-        attribution: '&copy; OpenStreetMap &copy; CARTO',
+      // Camada oficial e nítida OpenStreetMap
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors',
         maxZoom: 19
       }).addTo(map);
 
-      // Clique direto no mapa para criar novo parceiro naquele ponto
+      // Clique no mapa: cria novo parceiro ou move o alfinete do formulário aberto
       map.on('click', (e) => {
-        abrirDrawerNovoComCoords(e.latlng.lat, e.latlng.lng);
+        const drawerClosed = document.getElementById('partner-drawer').classList.contains('closed');
+        if (drawerClosed) {
+          abrirDrawerNovoComCoords(e.latlng.lat, e.latlng.lng);
+        } else {
+          document.getElementById('edit-lat').value = e.latlng.lat.toFixed(6);
+          document.getElementById('edit-lng').value = e.latlng.lng.toFixed(6);
+          posicionarMarcadorEdicaoNoMapa(e.latlng.lat, e.latlng.lng);
+          buscarEnderecoReverso(e.latlng.lat, e.latlng.lng);
+        }
       });
 
       // Suporte a HTML5 Drag & Drop de balões no container do mapa
@@ -1758,7 +1719,6 @@
         const categoria = e.dataTransfer.getData('text/plain');
         if (!categoria) return;
 
-        // Converte pixel da tela para coordenada GPS do Leaflet
         const rect = mapContainer.getBoundingClientRect();
         const x = e.clientX - rect.left;
         const y = e.clientY - rect.top;
@@ -1768,6 +1728,11 @@
       });
 
       renderizarMarcadoresMapa();
+
+      // Forçar cálculo de dimensões do Leaflet em flexbox
+      setTimeout(() => { if (map) map.invalidateSize(true); }, 80);
+      setTimeout(() => { if (map) map.invalidateSize(true); }, 250);
+      setTimeout(() => { if (map) map.invalidateSize(true); }, 800);
     }
 
     function renderizarMarcadoresMapa() {
@@ -1780,8 +1745,8 @@
         const customIcon = L.divIcon({
           className: 'mesa-custom-pin-wrap',
           html: `<div class="mesa-custom-pin" title="${escapeHtml(p.nome)}">${seg.icone}</div>`,
-          iconSize: [40, 40],
-          iconAnchor: [20, 20]
+          iconSize: [38, 38],
+          iconAnchor: [19, 19]
         });
 
         const marker = L.marker([p.lat, p.lng], { icon: customIcon }).addTo(map);
@@ -1826,12 +1791,12 @@
     }
 
     function clicarBalãoParaCadastrar(categoria) {
-      // Se clicar no balão, abre novo parceiro no centro atual do mapa
-      const center = map.getCenter();
+      // Clicou no balão da esquerda: abre na direita para cadastrar com aquela categoria pré-selecionada!
+      const center = map ? map.getCenter() : { lat: CASCAVEL_CENTER[0], lng: CASCAVEL_CENTER[1] };
       abrirDrawerNovoComCoords(center.lat, center.lng, categoria);
     }
 
-    /* ==================== CONTROLE DO DRAWER ==================== */
+    /* ==================== CONTROLE DO DRAWER & ALFINETE ==================== */
     function abrirDrawerNovo() {
       const center = map ? map.getCenter() : { lat: CASCAVEL_CENTER[0], lng: CASCAVEL_CENTER[1] };
       abrirDrawerNovoComCoords(center.lat, center.lng, 'pet_vet');
@@ -1839,7 +1804,8 @@
 
     function abrirDrawerNovoComCoords(lat, lng, categoria = 'pet_vet') {
       parceiroSelecionadoId = null;
-      document.getElementById('drawer-title').textContent = '➕ Novo Parceiro no Mapa';
+      const def = SEGMENTOS_DEF[categoria] || { nome: 'Parceiro', mensalidadeBase: 250 };
+      document.getElementById('drawer-title').textContent = '➕ Novo: ' + def.nome;
       document.getElementById('edit-id').value = '';
       document.getElementById('edit-nome').value = '';
       document.getElementById('edit-categoria').value = categoria;
@@ -1850,7 +1816,6 @@
       document.getElementById('edit-lat').value = lat.toFixed(6);
       document.getElementById('edit-lng').value = lng.toFixed(6);
 
-      const def = SEGMENTOS_DEF[categoria] || { mensalidadeBase: 250 };
       document.getElementById('edit-mensalidade').value = def.mensalidadeBase;
       document.getElementById('edit-dia-venc').value = '10';
       document.getElementById('edit-status-pagamento').value = 'pago';
@@ -1863,7 +1828,95 @@
       document.getElementById('edit-destaque-esteira').checked = true;
 
       document.getElementById('partner-drawer').classList.remove('closed');
-      mostrarToast(`📍 Ponto selecionado: [${lat.toFixed(4)}, ${lng.toFixed(4)}]. Preencha os dados.`);
+
+      // Posiciona o alfinete dourado interativo no mapa
+      posicionarMarcadorEdicaoNoMapa(lat, lng);
+      buscarEnderecoReverso(lat, lng);
+
+      mostrarToast(`📍 Alfinete posicionado: [${lat.toFixed(4)}, ${lng.toFixed(4)}]. Preencha os dados.`);
+    }
+
+    function posicionarMarcadorEdicaoNoMapa(lat, lng) {
+      if (!map) return;
+      const cat = document.getElementById('edit-categoria').value || 'pet_vet';
+      const seg = SEGMENTOS_DEF[cat] || { icone: '📍' };
+
+      if (markerEdicaoAtual) {
+        map.removeLayer(markerEdicaoAtual);
+      }
+
+      const customIcon = L.divIcon({
+        className: 'mesa-edicao-pin-wrap',
+        html: `<div class="mesa-custom-pin" style="border: 3px solid #FED700; box-shadow: 0 0 18px rgba(254, 215, 0, 0.85);">${seg.icone}</div>`,
+        iconSize: [42, 42],
+        iconAnchor: [21, 21]
+      });
+
+      markerEdicaoAtual = L.marker([lat, lng], { icon: customIcon, draggable: true }).addTo(map);
+
+      markerEdicaoAtual.on('dragend', (ev) => {
+        const p = ev.target.getLatLng();
+        document.getElementById('edit-lat').value = p.lat.toFixed(6);
+        document.getElementById('edit-lng').value = p.lng.toFixed(6);
+        buscarEnderecoReverso(p.lat, p.lng);
+      });
+    }
+
+    async function buscarEnderecoReverso(lat, lng) {
+      try {
+        const resp = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}&zoom=18&addressdetails=1`, {
+          headers: { 'Accept-Language': 'pt-BR' }
+        });
+        if (resp.ok) {
+          const data = await resp.json();
+          const addr = data.address || {};
+          const rua = addr.road || addr.street || addr.pedestrian || addr.suburb || '';
+          const num = addr.house_number ? `, ${addr.house_number}` : '';
+          const bairro = addr.suburb || addr.neighbourhood || addr.city_district || 'Centro';
+
+          if (rua && !document.getElementById('edit-endereco').value) {
+            document.getElementById('edit-endereco').value = `${rua}${num}`;
+          }
+          if (bairro) document.getElementById('edit-bairro').value = bairro;
+        }
+      } catch (_) {}
+    }
+
+    async function buscarEnderecoDigitado() {
+      const end = document.getElementById('edit-endereco').value.trim();
+      if (!end) {
+        alert('Por favor, digite o endereço ou rua antes de buscar.');
+        return;
+      }
+      mostrarToast(`🔍 Localizando "${end}" em Cascavel...`);
+
+      try {
+        const query = `${end}, Cascavel, Paraná, Brasil`;
+        const resp = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}&limit=1`, {
+          headers: { 'Accept-Language': 'pt-BR' }
+        });
+        if (resp.ok) {
+          const results = await resp.json();
+          if (results && results.length > 0) {
+            const r = results[0];
+            const lat = parseFloat(r.lat);
+            const lng = parseFloat(r.lon);
+
+            document.getElementById('edit-lat').value = lat.toFixed(6);
+            document.getElementById('edit-lng').value = lng.toFixed(6);
+
+            posicionarMarcadorEdicaoNoMapa(lat, lng);
+            if (map) {
+              map.flyTo([lat, lng], 16, { duration: 1.2 });
+            }
+            mostrarToast(`📍 Localizado: [${lat.toFixed(4)}, ${lng.toFixed(4)}]! Alfinete posicionado no mapa.`);
+          } else {
+            alert(`Endereço "${end}" não foi localizado exatamente em Cascavel. Tente digitar apenas o nome da rua (ex: Rua Paraná).`);
+          }
+        }
+      } catch (err) {
+        alert('Falha ao conectar com o serviço de mapa: ' + err);
+      }
     }
 
     function abrirDrawerEditar(id) {
@@ -1903,13 +1956,18 @@
 
       document.getElementById('partner-drawer').classList.remove('closed');
 
-      // Pan suave para o pino no mapa
+      posicionarMarcadorEdicaoNoMapa(p.lat, p.lng);
+
       if (map) map.panTo([p.lat, p.lng], { animate: true });
     }
 
     function fecharDrawer() {
       document.getElementById('partner-drawer').classList.add('closed');
       parceiroSelecionadoId = null;
+      if (markerEdicaoAtual && map) {
+        map.removeLayer(markerEdicaoAtual);
+        markerEdicaoAtual = null;
+      }
     }
 
     function salvarParceiroDrawer() {
