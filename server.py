@@ -1069,6 +1069,28 @@ def cockpit_excluir_postagem(alerta_id):
     return jsonify({"ok": True, "id": alerta_id, "mensagem": f"Postagem #{alerta_id} excluída com sucesso do aplicativo."})
 
 
+@app.route("/api/cockpit/excluir-por-pet", methods=["DELETE", "POST"])
+def cockpit_excluir_por_pet():
+    """
+    Exclui ocorrências de um pet específico pelo nome (ex: Mel, Rex) quando retirado da Mesa.
+    Garante sincronização total entre o mapa de GPS e o Painel Geral.
+    """
+    nome = request.args.get("nome", "").strip()
+    if not nome:
+        data = request.get_json(force=True, silent=True) or {}
+        nome = (data.get("nome") or "").strip()
+    if not nome:
+        return jsonify({"error": "Nome do pet obrigatório."}), 400
+
+    conn = get_db()
+    cur = conn.cursor()
+    cur.execute("DELETE FROM alertas WHERE titulo LIKE ? OR descricao LIKE ?", (f"%{nome}%", f"%{nome}%"))
+    qtd = cur.rowcount
+    conn.commit()
+    conn.close()
+    return jsonify({"ok": True, "removidos": qtd, "mensagem": f"Ocorrências de '{nome}' excluídas com sucesso."})
+
+
 @app.route("/api/cockpit/banir-usuario", methods=["POST"])
 def cockpit_banir_usuario():
     """
@@ -1293,9 +1315,6 @@ def criar_alerta():
     conn.close()
 
     return jsonify({"status": "ok", "id": novo_id, "pilar": pilar, "tipo": tipo, "sigiloso": sigiloso}), 201
-    conn.close()
-
-    return jsonify({"status": "ok", "id": novo_id, "pilar": pilar, "tipo": tipo}), 201
 
 
 def enviar_push_firebase(fcm_token, titulo, corpo, dados=None):

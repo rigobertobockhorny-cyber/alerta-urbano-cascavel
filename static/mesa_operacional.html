@@ -3520,7 +3520,7 @@
           const num = addr.house_number ? `, ${addr.house_number}` : '';
           const bairro = addr.suburb || addr.neighbourhood || addr.city_district || 'Cascavel';
 
-          if (rua && !document.getElementById('perfil-edit-endereco').value) {
+          if (rua) {
             document.getElementById('perfil-edit-endereco').value = `${rua}${num}`;
           }
           if (bairro) document.getElementById('perfil-edit-bairro').value = bairro;
@@ -3605,24 +3605,36 @@
           consentimento_contato: 1
         };
 
-        fetch('/api/alertas', {
+        const respAlert = await fetch('/api/alertas', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload)
-        }).catch(() => {});
+        });
+        if (respAlert.ok) {
+          const resJson = await respAlert.json();
+          if (resJson && resJson.id) {
+            perfilSelecionado.alerta_id = resJson.id;
+            localStorage.setItem('mesa_perfis_70_v1', JSON.stringify(perfisOcorrencias));
+          }
+        }
       } catch (_) {}
 
       fecharPerfilDrawer();
       renderizarBandejaPerfis();
       plotarTodosPerfisNoMapa();
       atualizarContadoresPerfis();
+      carregarFeedCockpit();
+      carregarMetricasCockpit();
 
       mostrarToast(`🎉 Ocorrência de "${perfilSelecionado.pet.nome}" fixada com sucesso na ${rua}! Raio de 450m ativo.`);
     }
 
-    function removerPerfilDoMapaAtual() {
+    async function removerPerfilDoMapaAtual() {
       if (!perfilSelecionado) return;
-      if (!confirm(`Deseja retirar a ocorrência de "${perfilSelecionado.pet.nome}" do mapa de Cascavel?`)) return;
+      const petNome = perfilSelecionado.pet ? perfilSelecionado.pet.nome : 'Pet';
+      if (!confirm(`Deseja retirar a ocorrência de "${petNome}" do mapa de Cascavel?`)) return;
+
+      const alertaId = perfilSelecionado.alerta_id;
 
       perfilSelecionado.posicao_mapa = {
         fixado: false,
@@ -3633,15 +3645,27 @@
         referencia: '',
         data_fixacao: null
       };
+      perfilSelecionado.alerta_id = null;
 
       localStorage.setItem('mesa_perfis_70_v1', JSON.stringify(perfisOcorrencias));
+
+      // Sincroniza exclusão atômica no banco SQLite para sumir do Painel Geral e do Feed
+      try {
+        if (alertaId) {
+          await fetch(`/api/cockpit/excluir-postagem/${alertaId}`, { method: 'DELETE' });
+        } else {
+          await fetch(`/api/cockpit/excluir-por-pet?nome=${encodeURIComponent(petNome)}`, { method: 'DELETE' });
+        }
+      } catch (_) {}
 
       fecharPerfilDrawer();
       renderizarBandejaPerfis();
       plotarTodosPerfisNoMapa();
       atualizarContadoresPerfis();
+      carregarFeedCockpit();
+      carregarMetricasCockpit();
 
-      mostrarToast(`🗑️ Ocorrência de "${perfilSelecionado.pet.nome}" retirada do mapa.`);
+      mostrarToast(`🗑️ Ocorrência de "${petNome}" retirada do mapa e excluída do aplicativo.`);
     }
 
     function plotarTodosPerfisNoMapa() {
