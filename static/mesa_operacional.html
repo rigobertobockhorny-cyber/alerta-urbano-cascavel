@@ -1915,6 +1915,13 @@
       carregarPerfisCompletos();
       carregarMetricasCockpit();
       carregarFeedCockpit();
+
+      // Suporte a abertura direta de abas por parâmetro na URL
+      const urlParams = new URLSearchParams(window.location.search);
+      const tabParam = urlParams.get('tab');
+      if (tabParam) {
+        trocarVisao(tabParam);
+      }
     });
 
     window.addEventListener('resize', () => {
@@ -1967,8 +1974,6 @@
         input.value = '';
       }
     }
-      }
-    }
 
     async function carregarParceiros() {
       // Limpeza de caches legados para forçar catálogo oficial de 45 parceiros a R$ 300
@@ -2013,22 +2018,6 @@
       atualizarKpisGerais();
       renderizarTabelaFinanceira();
       renderizarRadarSegmentos();
-    }
-              });
-            } catch (_) {}
-          }
-        } else {
-          const saved = localStorage.getItem('mesa_parceiros_v2');
-          if (saved) parceiros = JSON.parse(saved);
-        }
-      } catch(e) {
-        const saved = localStorage.getItem('mesa_parceiros_v2');
-        if (saved) parceiros = JSON.parse(saved);
-      }
-
-      renderizarBandejaBaloes();
-      renderizarMarcadoresMapa();
-      atualizarKpisGerais();
     }
 
     async function salvarParceiros() {
@@ -3068,50 +3057,6 @@
       }).join('');
     }
 
-        const empresasNomes = empresas.map(e => `
-          <div style="font-size:11px; color:#E2E8F0; display:flex; justify-content:space-between; padding:3px 0; border-bottom:1px dashed rgba(255,255,255,0.06);">
-            <span>• ${escapeHtml(e.nome)} (${escapeHtml(e.bairro)})</span>
-            <strong style="color:var(--gold);">R$ ${(Number(e.mensalidade) || 0).toFixed(0)}</strong>
-          </div>
-        `).join('') || '<div style="font-size:11px; color:var(--text-dim); font-style:italic;">Nenhuma empresa cadastrada ainda.</div>';
-
-        return `
-          <div class="segment-card ${count >= def.cota ? 'full-cota' : (count === 0 ? 'empty-cota' : '')}">
-            <div class="segment-top">
-              <div class="segment-title">
-                <span style="font-size:22px;">${def.icone}</span>
-                <span>${def.nome}</span>
-              </div>
-              <span class="cota-bubble">${count} / ${def.cota}</span>
-            </div>
-
-            <div class="cota-bar-wrap">
-              <div class="cota-bar-fill" style="width:${pct}%;"></div>
-            </div>
-
-            <div class="segment-rev-row">
-              <span>Receita Atual: <strong>R$ ${revTotal.toFixed(2)}</strong></span>
-              <span>Potencial Cota: <strong>R$ ${revPotencial.toFixed(2)}</strong></span>
-            </div>
-
-            <div class="segment-action-hint ${hintClass}">
-              ${hintText}
-            </div>
-
-            <div style="margin-top:8px;">
-              <div style="font-size:10px; font-weight:800; color:var(--text-dim); text-transform:uppercase; margin-bottom:4px;">Empresas na Rede:</div>
-              <div style="max-height:90px; overflow-y:auto;">
-                ${empresasNomes}
-              </div>
-            </div>
-
-            <button type="button" onclick="adicionarEmpresaNoSegmento('${key}')" style="margin-top:6px; background:var(--bg-surface); border:1px solid var(--border); color:#FFF; font-size:11px; font-weight:800; padding:8px; border-radius:8px; cursor:pointer;">
-              + Adicionar ${def.nome}
-            </button>
-          </div>
-        `;
-      }).join('');
-    }
 
     function adicionarEmpresaNoSegmento(categoria) {
       trocarVisao('tatica');
@@ -3286,11 +3231,13 @@
       }
 
       if (!filtrados.length) {
-        tray.innerHTML = '<div style="padding: 32px 16px; text-align: center; color: var(--text-muted);">
-          <div style="font-size: 32px; margin-bottom: 8px;">🐾</div>
-          <div style="font-weight: 800; color: #FFF; font-size: 13px; margin-bottom: 4px;">Nenhum Pet Cadastrado</div>
-          <div style="font-size: 11px; line-height: 1.4;">Tudo pronto para cadastros reais.<br>Clique no botão vermelho acima para incluir o primeiro pet.</div>
-        </div>';
+        tray.innerHTML = `
+          <div style="padding: 32px 16px; text-align: center; color: var(--text-muted);">
+            <div style="font-size: 32px; margin-bottom: 8px;">🐾</div>
+            <div style="font-weight: 800; color: #FFF; font-size: 13px; margin-bottom: 4px;">Nenhum Pet Cadastrado</div>
+            <div style="font-size: 11px; line-height: 1.4;">Tudo pronto para cadastros reais.<br>Clique no botão vermelho acima para incluir o primeiro pet.</div>
+          </div>
+        `;
         return;
       }
 
