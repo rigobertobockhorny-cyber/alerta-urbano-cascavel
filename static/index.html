@@ -913,56 +913,146 @@
       text-shadow: 0 1px 2px rgba(0, 0, 0, 0.9);
     }
 
-    /* Cards Robustos e Elegantes — Alto Contraste (Branco no Diurno, Grafite no Noturno) */
+    /* Cards Táticos e Modernos de Segurança e Utilidade */
     .belt-info-card {
-      width: 252px;
-      height: 88px; /* Mais gordinho para reduzir o suspiro entre utilidade e segurança */
+      width: 268px;
+      height: 94px;
       flex-shrink: 0;
       border-radius: 14px;
-      padding: 10px 14px;
+      padding: 10px 12px;
       cursor: pointer;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      transition: transform 0.15s ease;
+      transition: transform 0.15s ease, box-shadow 0.2s ease;
+      box-sizing: border-box;
+      position: relative;
+      overflow: hidden;
     }
     .belt-info-card:active { transform: scale(0.97); }
 
-    [data-theme="light"] .belt-info-card {
-      background: #FFFFFF !important;
-      border: 1.5px solid rgba(0, 0, 0, 0.16) !important;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+    .belt-info-topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
     }
-    [data-theme="light"] .belt-info-title {
+    .belt-badge-tag {
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 0.3px;
+      padding: 2px 7px;
+      border-radius: 999px;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    /* SEGURANÇA: Vermelho tático com alto contraste */
+    .belt-info-card.belt-card-seguranca {
+      background: #181216 !important;
+      border: 1px solid rgba(239, 68, 68, 0.45) !important;
+      border-left: 5px solid #EF4444 !important;
+      box-shadow: 0 4px 14px rgba(239, 68, 68, 0.20) !important;
+    }
+    .belt-card-seguranca .belt-badge-tag {
+      background: rgba(239, 68, 68, 0.25);
+      color: #FCA5A5;
+      border: 1px solid rgba(239, 68, 68, 0.5);
+    }
+    .belt-card-seguranca .belt-info-title {
+      color: #FFFFFF !important;
       font-size: 12.5px;
       font-weight: 800;
-      color: #000000 !important;
       line-height: 1.35;
       overflow: hidden;
       display: -webkit-box;
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
     }
-    [data-theme="light"] .belt-info-meta {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 6px;
-      margin-top: 4px;
-    }
-    [data-theme="light"] .belt-info-loc {
+    .belt-card-seguranca .belt-info-loc {
+      color: #FED700 !important;
       font-size: 11px;
       font-weight: 800;
-      color: #000000 !important;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
     }
-    [data-theme="light"] .belt-info-time {
-      font-size: 10.5px;
+    .belt-card-seguranca .belt-info-time {
+      color: #CBD5E1 !important;
+      font-size: 10px;
       font-weight: 700;
-      color: #52525B !important;
-      white-space: nowrap;
+    }
+
+    /* UTILIDADE: Esmeralda tático com alto contraste */
+    .belt-info-card.belt-card-utilidade {
+      background: #0B1C16 !important;
+      border: 1px solid rgba(16, 185, 129, 0.45) !important;
+      border-left: 5px solid #10B981 !important;
+      box-shadow: 0 4px 14px rgba(16, 185, 129, 0.20) !important;
+    }
+    .belt-card-utilidade .belt-badge-tag {
+      background: rgba(16, 185, 129, 0.25);
+      color: #6EE7B7;
+      border: 1px solid rgba(16, 185, 129, 0.5);
+    }
+    .belt-card-utilidade .belt-info-title {
+      color: #FFFFFF !important;
+      font-size: 12.5px;
+      font-weight: 800;
+      line-height: 1.35;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+    }
+    .belt-card-utilidade .belt-info-loc {
+      color: #FED700 !important;
+      font-size: 11px;
+      font-weight: 800;
+    }
+    .belt-card-utilidade .belt-info-time {
+      color: #CBD5E1 !important;
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    /* ESTEIRA FIXA DE PARCEIROS (CONGELADA NO RODAPÉ) */
+    .esteira-parceiros-docked {
+      position: fixed;
+      bottom: 56px;
+      left: 0;
+      right: 0;
+      z-index: 99;
+      background: #09090b;
+      border-top: 1.5px solid rgba(254, 215, 0, 0.5);
+      box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.55);
+      padding: 4px 8px 6px;
+    }
+    .esteira-docked-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 4px 3px;
+    }
+    .esteira-docked-title {
+      font-size: 9.5px;
+      font-weight: 900;
+      letter-spacing: 0.6px;
+      color: #FED700;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .esteira-docked-link {
+      background: none;
+      border: none;
+      color: #38BDF8;
+      font-size: 10px;
+      font-weight: 800;
+      cursor: pointer;
+      padding: 0;
+    }
+    .esteira-docked-viewport {
+      overflow: hidden;
+      width: 100%;
     }
 
     [data-theme="dark"] .belt-info-title {
@@ -2586,22 +2676,23 @@
     .pet-card {
       background: #EAE0FF !important;
       border: 1.5px solid rgba(0, 0, 0, 0.10) !important;
-      border-radius: 22px !important;
+      border-radius: 20px !important;
       position: relative;
       overflow: hidden;
       isolation: isolate;
-      margin-bottom: 18px;
+      margin-bottom: 14px;
       display: flex !important;
       flex-direction: column !important;
       padding: 0 !important;
       gap: 0 !important;
       transition: transform 0.15s ease, box-shadow 0.2s ease;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08) !important;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08) !important;
       cursor: default;
       width: 100%;
-      max-width: 580px;
+      max-width: 540px;
       margin-left: auto;
       margin-right: auto;
+      scroll-snap-align: start;
     }
 
     /* BLOCOS SÓLIDOS COLORIDOS (ROXO, ROSA, AZUL) */
@@ -2830,7 +2921,7 @@
       position: relative;
       z-index: 2;
       width: 100%;
-      height: 200px;
+      height: 160px; /* Enquadramento perfeito para caber o bloco inteiro na tela do celular */
       background: #000000;
       overflow: hidden;
       cursor: pointer;
@@ -3521,89 +3612,26 @@
       </section>
 
       <!-- ABA 3: PETS (ARQUITETURA DE 3 PILARES HIERÁRQUICOS) -->
-      <section class="tab-pane" id="tab-pets">
-        <!-- BLOCO 1: CENTRAL DE REGISTRO DE OCORRÊNCIAS -->
-        <div class="pet-nav-card" style="margin-bottom:14px;">
-          <div class="pet-river-banner">
-            <div class="pet-river-badge">REDE DE PROTEÇÃO E ALERTA URBANO</div>
-            <div class="pet-river-headline">Central de Ocorrências Pet</div>
-            <svg class="pet-river-wave" viewBox="0 0 500 40" preserveAspectRatio="none">
-              <path d="M 0,10 C 140,35 250,-5 380,25 C 430,35 470,15 500,20 L 500,40 L 0,40 Z" fill="#EDE8DF"/>
-            </svg>
+      <section class="tab-pane" id="tab-pets" style="padding-bottom:140px;">
+        <!-- BLOCO 1: CENTRAL SLIM DE REGISTRO DE OCORRÊNCIAS (COMPACTO - PEDIDO DO RIGO) -->
+        <div style="margin-bottom:12px; background:#ffffff; border-radius:16px; padding:10px 12px; border:1px solid rgba(0,0,0,0.08); box-shadow:0 3px 10px rgba(0,0,0,0.04);">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+            <div style="font-size:10.5px; font-weight:900; letter-spacing:0.5px; color:#009B3A; text-transform:uppercase;">🐾 Central Pet de Cascavel</div>
+            <div style="font-size:10px; color:#71717A; font-weight:700;">Toque para registrar</div>
           </div>
-
-          <!-- Registro 1: Pet Desaparecido -->
-          <div class="pet-nav-row" onclick="abrirModalPet('pet_perdido')">
-            <div class="pet-nav-left">
-              <div class="pet-nav-icon red">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
-                  <circle cx="11" cy="11" r="8"></circle>
-                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                </svg>
-              </div>
-              <div class="pet-nav-text">
-                <span class="pet-nav-title">Cadastrar Pet Desaparecido</span>
-                <span class="pet-nav-sub">Perdeu seu pet? Publique para a cidade ajudar nas buscas</span>
-              </div>
-            </div>
-            <div class="pet-nav-chevron">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="9 18 15 12 9 6"></polyline></svg>
-            </div>
-          </div>
-
-          <!-- Registro 2: Pet Encontrado / Visto -->
-          <div class="pet-nav-row" onclick="abrirModalPet('pet_avistado')">
-            <div class="pet-nav-left">
-              <div class="pet-nav-icon amber">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
-                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                  <circle cx="12" cy="12" r="3"></circle>
-                </svg>
-              </div>
-              <div class="pet-nav-text">
-                <span class="pet-nav-title">Cadastrar Pet Encontrado ou Visto</span>
-                <span class="pet-nav-sub">Viu ou recolheu um animal na rua? Ajude o tutor a localizar</span>
-              </div>
-            </div>
-            <div class="pet-nav-chevron">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="9 18 15 12 9 6"></polyline></svg>
-            </div>
-          </div>
-
-          <!-- Registro 3: Pet para Adoção -->
-          <div class="pet-nav-row" onclick="abrirModalPet('pet_adocao')">
-            <div class="pet-nav-left">
-              <div class="pet-nav-icon green">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
-                  <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-                </svg>
-              </div>
-              <div class="pet-nav-text">
-                <span class="pet-nav-title">Cadastrar Pet para Adoção</span>
-                <span class="pet-nav-sub">Resgatou um animal e busca um tutor responsável em Cascavel</span>
-              </div>
-            </div>
-            <div class="pet-nav-chevron">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="9 18 15 12 9 6"></polyline></svg>
-            </div>
-          </div>
-
-          <!-- Registro 4: Denúncia Sigilosa de Maus-Tratos -->
-          <div class="pet-nav-row" onclick="abrirModalPet('pet_denuncia_maustratos')">
-            <div class="pet-nav-left">
-              <div class="pet-nav-icon red">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
-                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-                </svg>
-              </div>
-              <div class="pet-nav-text">
-                <span class="pet-nav-title">Registrar Denúncia Sigilosa</span>
-                <span class="pet-nav-sub">Relato de maus-tratos enviado sob sigilo à SEMA e autoridades</span>
-              </div>
-            </div>
-            <div class="pet-nav-chevron">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="9 18 15 12 9 6"></polyline></svg>
-            </div>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px;">
+            <button type="button" onclick="abrirModalPet('pet_perdido')" style="background:#FEF2F2; border:1px solid #FCA5A5; color:#DC2626; border-radius:10px; padding:8px 6px; font-size:11px; font-weight:900; display:flex; align-items:center; gap:5px; cursor:pointer;">
+              <span style="font-size:13px;">🔍</span> Perdi meu Pet
+            </button>
+            <button type="button" onclick="abrirModalPet('pet_avistado')" style="background:#FFFBEB; border:1px solid #FCD34D; color:#D97706; border-radius:10px; padding:8px 6px; font-size:11px; font-weight:900; display:flex; align-items:center; gap:5px; cursor:pointer;">
+              <span style="font-size:13px;">👀</span> Vi um Animal
+            </button>
+            <button type="button" onclick="abrirModalPet('pet_adocao')" style="background:#ECFDF5; border:1px solid #6EE7B7; color:#059669; border-radius:10px; padding:8px 6px; font-size:11px; font-weight:900; display:flex; align-items:center; gap:5px; cursor:pointer;">
+              <span style="font-size:13px;">🏠</span> Para Adoção
+            </button>
+            <button type="button" onclick="abrirModalPet('pet_denuncia_maustratos')" style="background:#F4F4F5; border:1px solid #E4E4E7; color:#52525B; border-radius:10px; padding:8px 6px; font-size:11px; font-weight:800; display:flex; align-items:center; gap:5px; cursor:pointer;">
+              <span style="font-size:13px;">🛡️</span> SOS / Sigiloso
+            </button>
           </div>
         </div>
 
@@ -3634,7 +3662,7 @@
       </section>
 
       <!-- ABA 4: PARCEIROS (EMPRESAS AMIGAS & PROMOÇÕES DE CASCAVEL) -->
-      <section class="tab-pane" id="tab-parceiros" style="padding-bottom:100px;">
+      <section class="tab-pane" id="tab-parceiros" style="padding-bottom:140px;">
         <!-- Header da Aba Parceiros -->
         <div style="background:#ffffff; border-radius:18px; padding:18px 16px; margin-bottom:14px; border:1px solid rgba(0,0,0,0.08); box-shadow:0 4px 14px rgba(0,0,0,0.04);">
           <div style="display:flex; justify-content:space-between; align-items:center;">
@@ -3714,6 +3742,17 @@
         <path d="M 0,14 C 120,22 230,2 350,14 C 420,20 470,6 500,8 L 500,20 L 0,20 Z" fill="#009B3A"/>
       </svg>
     </div>
+    <!-- ==================== ESTEIRA FIXA DE PARCEIROS (CONGELADA NO RODAPÉ) ==================== -->
+    <div id="esteira-parceiros-docked" class="esteira-parceiros-docked" style="display:none;">
+      <div class="esteira-docked-header">
+        <span class="esteira-docked-title">⭐ REDE DE PARCEIROS DE CASCAVEL</span>
+        <button type="button" class="esteira-docked-link" onclick="trocarAba('parceiros')">Ver Guia ↗</button>
+      </div>
+      <div class="esteira-docked-viewport">
+        <div class="esteira-parceiros-track" id="esteira-parceiros-track-docked"></div>
+      </div>
+    </div>
+
     <!-- ==================== NAVEGAÇÃO INFERIOR SLIM (4 ABAS) ==================== -->
     <nav class="bottom-nav">
       <button type="button" class="nav-item active" id="nav-inicio" onclick="trocarAba('inicio')">
@@ -4609,6 +4648,11 @@
       if (pane) pane.classList.add('active');
       if (nav) nav.classList.add('active');
 
+      const docked = document.getElementById('esteira-parceiros-docked');
+      if (docked) {
+        docked.style.display = (aba === 'pets' || aba === 'parceiros') ? 'block' : 'none';
+      }
+
       if (aba === 'mapa') {
         initMapIfNeeded();
         setTimeout(() => {
@@ -4735,9 +4779,15 @@
       });
 
       // 1. Marcadores de Pets: Bolinha com Foto e Borda Preta (Em 'pet' e em 'todos')
-      // PETS NUNCA ENTRAM EM MAPA DE CALOR!
+      // NO FILTRO 'TODOS', EXIBE APENAS ANIMAIS PERDIDOS (SEM ADOÇÃO PARA NÃO POLUIR)
       if (state.mapaFilter === 'pet' || state.mapaFilter === 'todos') {
-        const petsParaMarcar = filtrados.filter(p => p.pilar === 'pet');
+        const petsParaMarcar = filtrados.filter(p => {
+          if (p.pilar !== 'pet') return false;
+          if (state.mapaFilter === 'todos') {
+            return p.tipo !== 'pet_adocao' && p.status_pet !== 'adocao';
+          }
+          return true;
+        });
         petsParaMarcar.forEach(p => {
           if (!p.lat || !p.lng) return;
           if (p.sigiloso || p.tipo === 'pet_denuncia_maustratos') return;
@@ -4792,11 +4842,11 @@
         }
       }
 
-      // 3. Marcadores de Empresas Parceiras (Em 'parceiros' e em 'todos')
-      if (state.mapaFilter === 'parceiros' || state.mapaFilter === 'todos') {
+      // 3. Marcadores de Empresas Parceiras (Apenas em 'parceiros', NUNCA em 'todos' para não poluir)
+      if (state.mapaFilter === 'parceiros') {
         const parceirosParaMarcar = state.parceiros || [];
         parceirosParaMarcar.forEach(parc => {
-          if (!parc.lat || !parc.lng) return;
+          if (!parc.lat || !parc.lng || Number(parc.lat) === 0 || Number(parc.lng) === 0) return;
           const ehOuro = parc.selo_tipo === 'ouro';
           const borderColor = ehOuro ? '#FED700' : '#009B3A';
           const badgeIcon = (parc.categoria === 'pet_vet' || parc.categoria === 'pet_shop') ? '🐾' : (parc.categoria === 'auto_center' ? '🚗' : '⛽');
@@ -4819,9 +4869,7 @@
         });
 
         // Se o filtro for estritamente 'parceiros', encerra sem mapa de calor
-        if (state.mapaFilter === 'parceiros') {
-          return;
-        }
+        return;
       }
 
       // 2. Heatmap Exclusivo para Segurança (Zero arco-íris, zero azul estranho)
@@ -5075,8 +5123,8 @@
         }
       }
 
-      // 3. Esteira Pets: Foto Full Bleed (100% bloco) + Perdidos e Adoção + Pílula Perdido / Adoção
-      const pets = state.alertas.filter(a =>
+      // 3. Esteira Pets Diversificada: Intercala 2 Perdidos, 1 Adoção, variando Cão, Gato e Ave
+      const todosPets = state.alertas.filter(a =>
         a.pilar === 'pet' &&
         a.status_pet !== 'avistado' &&
         a.status_pet !== 'encontrado' &&
@@ -5084,7 +5132,43 @@
         a.tipo !== 'pet_denuncia_maustratos' &&
         !a.sigiloso &&
         !((a.titulo || '').toLowerCase().includes('encontrad'))
-      ).slice(0, 15);
+      );
+
+      const perdidos = todosPets.filter(p => p.tipo !== 'pet_adocao' && p.status_pet !== 'adocao');
+      const adocoes = todosPets.filter(p => p.tipo === 'pet_adocao' || p.status_pet === 'adocao');
+
+      // Distribui alternando espécies (cão, gato, ave)
+      function distribuirPorEspecie(arr) {
+        const caes = arr.filter(x => (x.especie || '').toLowerCase().includes('c') || (x.titulo || '').toLowerCase().includes('cachorr') || (x.titulo || '').toLowerCase().includes('cão'));
+        const gatos = arr.filter(x => (x.especie || '').toLowerCase().includes('gat') || (x.titulo || '').toLowerCase().includes('gato') || (x.titulo || '').toLowerCase().includes('gata'));
+        const aves = arr.filter(x => (x.especie || '').toLowerCase().includes('ave') || (x.especie || '').toLowerCase().includes('passar') || (x.titulo || '').toLowerCase().includes('calopsita') || (x.titulo || '').toLowerCase().includes('tico'));
+        const outros = arr.filter(x => !caes.includes(x) && !gatos.includes(x) && !aves.includes(x));
+        
+        const res = [];
+        let i = 0, maxLen = Math.max(caes.length, gatos.length, aves.length, outros.length);
+        while (i < maxLen) {
+          if (i < caes.length) res.push(caes[i]);
+          if (i < gatos.length) res.push(gatos[i]);
+          if (i < aves.length) res.push(aves[i]);
+          if (i < outros.length) res.push(outros[i]);
+          i++;
+        }
+        return res;
+      }
+
+      const perdidosDistrib = distribuirPorEspecie(perdidos);
+      const adocoesDistrib = distribuirPorEspecie(adocoes);
+
+      // Intercala: 2 perdidos, 1 adoção, 2 perdidos, 1 adoção
+      const petsIntercalados = [];
+      let pIdx = 0, aIdx = 0;
+      while (pIdx < perdidosDistrib.length || aIdx < adocoesDistrib.length) {
+        if (pIdx < perdidosDistrib.length) petsIntercalados.push(perdidosDistrib[pIdx++]);
+        if (pIdx < perdidosDistrib.length) petsIntercalados.push(perdidosDistrib[pIdx++]);
+        if (aIdx < adocoesDistrib.length) petsIntercalados.push(adocoesDistrib[aIdx++]);
+      }
+      const pets = petsIntercalados.slice(0, 36);
+
       const beltPets = document.getElementById('belt-pets-track');
       if (beltPets) {
         if (!pets.length) {
@@ -5116,14 +5200,14 @@
         }
       }
 
-      // 4. Esteira Utilidade Pública (mesma velocidade exata: 28 px/s)
-      renderizarEsteiraInfo('belt-utilidade-track', state.alertas.filter(a => a.pilar === 'utilidade').slice(0, 12), 'Sem comunicados de utilidade pública.');
+      // 4. Esteira Utilidade Pública (estilo tático moderno)
+      renderizarEsteiraInfo('belt-utilidade-track', state.alertas.filter(a => a.pilar === 'utilidade').slice(0, 15), 'Sem comunicados de utilidade pública.', 'utilidade');
 
-      // 5. Esteira Segurança (mesma velocidade exata: 28 px/s)
-      renderizarEsteiraInfo('belt-seguranca-track', state.alertas.filter(a => a.pilar === 'seguranca').slice(0, 12), 'Sem ocorrências policiais recentes.');
+      // 5. Esteira Segurança (estilo tático moderno)
+      renderizarEsteiraInfo('belt-seguranca-track', state.alertas.filter(a => a.pilar === 'seguranca').slice(0, 15), 'Sem ocorrências policiais recentes.', 'seguranca');
     }
 
-    function renderizarEsteiraInfo(elId, lista, vazioMsg) {
+    function renderizarEsteiraInfo(elId, lista, vazioMsg, pilarTipo) {
       const el = document.getElementById(elId);
       if (!el) return;
       if (!lista.length) {
@@ -5131,14 +5215,29 @@
         el.innerHTML = `<div class="empty-box" style="width:260px; padding:14px;">${escapeHtml(vazioMsg)}</div>`;
         return;
       }
+      const ehSeguranca = (pilarTipo === 'seguranca');
+      const badgeIcon = ehSeguranca ? '🚨' : '📢';
+      const badgeLabel = ehSeguranca ? 'Segurança' : 'Utilidade';
+      const cardThemeClass = ehSeguranca ? 'belt-card-seguranca' : 'belt-card-utilidade';
+
       const html = lista.map(a => {
         const tit = a.titulo || a.descricao || 'Comunicado';
+        let bairroLimpo = (a.bairro || '').replace(/,\s*Cascavel/gi, '').replace(/Cascavel/gi, '').trim();
+        if (!bairroLimpo) bairroLimpo = 'Cascavel';
+        else if (!bairroLimpo.toLowerCase().startsWith('bairro') && !bairroLimpo.toLowerCase().startsWith('centro')) {
+          bairroLimpo = `Bairro ${bairroLimpo}`;
+        }
+        const tempo = tempoRelativo(a.created_at);
+
         return `
-          <div class="belt-info-card" onclick="abrirDetalheById(${a.id})">
+          <div class="belt-info-card ${cardThemeClass}" onclick="abrirDetalheById(${a.id})">
+            <div class="belt-info-topbar">
+              <span class="belt-badge-tag">${badgeIcon} ${badgeLabel}</span>
+              <span class="belt-info-time">${tempo}</span>
+            </div>
             <div class="belt-info-title">${escapeHtml(tit)}</div>
             <div class="belt-info-meta">
-              <span class="belt-info-loc">${escapeHtml(a.bairro || 'Cascavel')}</span>
-              <span class="belt-info-time">${tempoRelativo(a.created_at)}</span>
+              <span class="belt-info-loc">📍 ${escapeHtml(bairroLimpo)}</span>
             </div>
           </div>
         `;
@@ -5390,15 +5489,13 @@
           statusPillClass = 'avistado';
         }
 
-        // Foto com fundo preto de letterbox (com pílula oficial destacada flutuante)
+        // Foto com fundo preto de letterbox (SEM pílula tampando a imagem - pedido do Rigo)
         const mediaHtml = p.foto_url
           ? `<div class="pet-card-media" style="position:relative; z-index:2; background:#000000;" onclick="abrirFotoZoom('${escapeAttr(p.foto_url)}', '${escapeAttr(p.titulo)}')">
-               <span class="pet-badge-overlay ${statusPillClass}">${statusPillLabel}</span>
                <img src="${escapeAttr(p.foto_url)}" alt="${escapeAttr(p.titulo)}" style="width:100%; height:100%; object-fit:contain;" loading="lazy">
                ${distTxt ? `<div class="pet-card-dist-badge">${distTxt}</div>` : ''}
              </div>`
           : `<div class="pet-card-media" style="position:relative; z-index:2; display:flex;align-items:center;justify-content:center;background:#18181b;color:#71717a;" onclick="abrirDetalheById(${p.id})">
-               <span class="pet-badge-overlay ${statusPillClass}">${statusPillLabel}</span>
                <svg width="44" height="44" viewBox="0 0 24 24" fill="currentColor" opacity="0.4"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
              </div>`;
 
@@ -7059,13 +7156,16 @@ Baixe o aplicativo gratuito Alerta Urbano:
 
         return `
           <div class="card-parceiro-item" style="background:#ffffff; border-radius:18px; padding:16px; border:1px solid rgba(0,0,0,0.08); box-shadow:0 4px 14px rgba(0,0,0,0.05); color:#18181B;">
-            <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:10px;">
+            <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:12px;">
+              <div style="width:54px; height:54px; border-radius:12px; background:#F8FAFC; border:1.5px solid rgba(0,0,0,0.1); overflow:hidden; flex-shrink:0; display:flex; align-items:center; justify-content:center; box-shadow:0 2px 6px rgba(0,0,0,0.06);">
+                ${p.logo_url ? `<img src="${escapeAttr(p.logo_url)}" alt="${escapeAttr(p.nome)}" style="width:100%; height:100%; object-fit:contain;" onerror="this.onerror=null; this.src='/static/parceiros/pet_vet/pet_vet_01_vv/logo.png'">` : `<span style="font-size:24px;">🏢</span>`}
+              </div>
               <div style="min-width:0; flex:1;">
-                <div style="display:inline-block; background:${seloBg}; color:${seloColor}; border:1px solid ${seloBorder}; font-weight:800; font-size:10.5px; padding:3px 8px; border-radius:999px; margin-bottom:6px;">
+                <div style="display:inline-block; background:${seloBg}; color:${seloColor}; border:1px solid ${seloBorder}; font-weight:800; font-size:10px; padding:2px 8px; border-radius:999px; margin-bottom:4px;">
                   ${seloTexto}
                 </div>
-                <div style="font-size:16px; font-weight:900; color:#18181B; line-height:1.25;">${escapeHtml(p.nome)}</div>
-                ${p.subtitulo ? `<div style="font-size:11.5px; font-weight:700; color:#009B3A; margin-top:2px;">${escapeHtml(p.subtitulo)}</div>` : ''}
+                <div style="font-size:15.5px; font-weight:900; color:#18181B; line-height:1.25;">${escapeHtml(p.nome)}</div>
+                ${p.subtitulo ? `<div style="font-size:11px; font-weight:700; color:#009B3A; margin-top:2px;">${escapeHtml(p.subtitulo)}</div>` : ''}
               </div>
             </div>
 
@@ -7110,9 +7210,11 @@ Baixe o aplicativo gratuito Alerta Urbano:
       const lista = (state.parceiros || []).filter(p => p.destaque_esteira === 1);
       const boxPets = document.getElementById('esteira-parceiros-box');
       const boxTab = document.getElementById('esteira-parceiros-tab-box');
+      const boxDocked = document.getElementById('esteira-parceiros-docked');
       if (!lista.length) {
         if (boxPets) boxPets.style.display = 'none';
         if (boxTab) boxTab.style.display = 'none';
+        if (boxDocked) boxDocked.style.display = 'none';
         return;
       }
       if (boxPets) boxPets.style.display = 'block';
@@ -7124,9 +7226,13 @@ Baixe o aplicativo gratuito Alerta Urbano:
           ? `<span class="esteira-parceiro-tag promo">🏷️ ${escapeHtml(p.produtos[0].titulo.slice(0, 18))}</span>`
           : `<span class="esteira-parceiro-tag">${ehOuro ? 'Amigo Pet' : 'Parceiro'}</span>`;
 
+        const logoImg = p.logo_url
+          ? `<img src="${escapeAttr(p.logo_url)}" style="width:18px; height:18px; border-radius:4px; object-fit:contain; margin-right:4px;" onerror="this.style.display='none'">`
+          : `<span class="esteira-parceiro-star">⭐</span>`;
+
         return `
           <div class="esteira-parceiro-pill" onclick="abrirFolderParceiroById(${p.id})">
-            <span class="esteira-parceiro-star">⭐</span>
+            ${logoImg}
             <span class="esteira-parceiro-nome">${escapeHtml(p.nome)}</span>
             ${tag}
           </div>
@@ -7146,6 +7252,12 @@ Baixe o aplicativo gratuito Alerta Urbano:
       if (trackParc) {
         trackParc.innerHTML = loopHtml;
         ativarEsteiraArrastavel(trackParc, 24);
+      }
+
+      const trackDocked = document.getElementById('esteira-parceiros-track-docked');
+      if (trackDocked) {
+        trackDocked.innerHTML = loopHtml;
+        ativarEsteiraArrastavel(trackDocked, 24);
       }
     }
 
@@ -7253,7 +7365,11 @@ Baixe o aplicativo gratuito Alerta Urbano:
         msg = `Olá! Encontrei sua empresa no aplicativo Alerta Urbano Cascavel e gostaria de atendimento.`;
       }
 
-      window.open(`https://wa.me/${fone}?text=${encodeURIComponent(msg)}`, '_blank');
+      if (window.AndroidAlerta && typeof window.AndroidAlerta.abrirWhatsApp === 'function') {
+        window.AndroidAlerta.abrirWhatsApp(fone, msg);
+      } else {
+        window.open(`https://wa.me/${fone}?text=${encodeURIComponent(msg)}`, '_blank');
+      }
     }
 
     function verParceiroNoMapa(parcId, lat, lng) {
@@ -7311,6 +7427,13 @@ Baixe o aplicativo gratuito Alerta Urbano:
 
       // Estado inicial da navegação
       document.body.classList.add('tab-inicio');
+
+      // Suporte a aba direta via URL (?tab=pets ou #pets)
+      const urlParams = new URLSearchParams(window.location.search);
+      const tabParam = urlParams.get('tab') || window.location.hash.replace('#', '');
+      if (tabParam && ['inicio', 'mapa', 'pets', 'parceiros', 'copiloto'].includes(tabParam)) {
+        setTimeout(() => trocarAba(tabParam), 350);
+      }
 
       // Atualiza automaticamente a cada 60s
       setInterval(carregarDados, 60000);

@@ -428,6 +428,57 @@ def init_db():
     cur.execute("DELETE FROM usuarios WHERE autor_token LIKE 'token_ficticio%'")
     cur.execute("DELETE FROM alertas WHERE status_pet = 'encontrado' OR titulo LIKE '%RESGATADO%'")
     cur.execute("UPDATE alertas SET recompensa = ''")
+    
+    # Sincronização dos 72 perfis reais de animais de Cascavel no banco de alertas
+    cur.execute("SELECT COUNT(*) FROM alertas WHERE pilar = 'pet'")
+    count_pets_db = cur.fetchone()[0]
+    if count_pets_db < 72:
+        caminho_perfis = os.path.join(os.path.dirname(__file__), "static", "darkplanner_perfis_completos.json")
+        if os.path.exists(caminho_perfis):
+            try:
+                with open(caminho_perfis, "r", encoding="utf-8") as f_perfis:
+                    perfis_data = json.load(f_perfis)
+                    cur.execute("DELETE FROM alertas WHERE pilar = 'pet'")
+                    for idx_p, p in enumerate(perfis_data):
+                        pet_info = p.get("pet", {})
+                        tutor_info = p.get("tutor", {})
+                        pos = p.get("posicao_mapa", {})
+                        nome_pet = pet_info.get("nome", "Pet")
+                        raca = pet_info.get("raca", "")
+                        titulo = f"{nome_pet} • {raca}" if raca else nome_pet
+                        eh_adocao = (pet_info.get("tipo_ocorrencia") == "adocao")
+                        tipo = "pet_adocao" if eh_adocao else "pet_perdido"
+                        status_pet = "adocao" if eh_adocao else "desaparecido"
+                        lat = pos.get("lat") or -24.9555
+                        lng = pos.get("lng") or -53.4610
+                        rua = pos.get("rua") or "Cascavel"
+                        bairro = pos.get("bairro") or tutor_info.get("bairro_origem") or "Cascavel"
+                        
+                        cur.execute("""
+                            INSERT INTO alertas (
+                                id, tipo, pilar, cidade, titulo, descricao, rua, bairro, lat, lng,
+                                peso, confirmacoes, ativo, created_at, foto_url, contato, recompensa,
+                                fonte_tipo, fonte_nome, especie, porte, status_pet
+                            ) VALUES (?, ?, 'pet', 'Cascavel', ?, ?, ?, ?, ?, ?, 1, 1, 1, datetime('now'), ?, ?, '', 'comunidade_pet', ?, ?, ?, ?)
+                        """, (
+                            5500 + idx_p + 1,
+                            tipo,
+                            titulo,
+                            pet_info.get("detalhes", ""),
+                            rua,
+                            bairro,
+                            lat,
+                            lng,
+                            pet_info.get("foto_url", ""),
+                            tutor_info.get("telefone", ""),
+                            tutor_info.get("nome", "Tutor"),
+                            pet_info.get("categoria", "cachorro"),
+                            pet_info.get("porte", "Médio"),
+                            status_pet
+                        ))
+            except Exception as e_perfis:
+                print("Erro ao sincronizar perfis de pets:", e_perfis)
+
     cur.execute("SELECT COUNT(*) FROM parceiros WHERE ativo = 1")
     count_parc = cur.fetchone()[0]
     if count_parc < 45:
@@ -438,8 +489,9 @@ def init_db():
                     parcs_cat = json.load(f_cat)
                     cur.execute("DELETE FROM parceiros")
                     for idx_p, p in enumerate(parcs_cat):
-                        lat = p.get('posicao_mapa', {}).get('lat') or (-24.9570 + (idx_p * 0.002 % 0.04 - 0.02))
-                        lng = p.get('posicao_mapa', {}).get('lng') or (-53.4580 + (idx_p * 0.003 % 0.04 - 0.02))
+                        pos = p.get('posicao_mapa') or {}
+                        lat = float(pos.get('lat')) if (pos.get('fixado') and pos.get('lat')) else 0.0
+                        lng = float(pos.get('lng')) if (pos.get('fixado') and pos.get('lng')) else 0.0
                         cur.execute("""
                             INSERT INTO parceiros (
                                 id, nome, categoria, subtitulo, descricao, bairro, endereco, cidade,
