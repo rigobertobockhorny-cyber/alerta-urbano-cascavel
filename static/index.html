@@ -2341,6 +2341,10 @@
       from { transform: translateY(36px); opacity: 0; }
       to { transform: translateY(0); opacity: 1; }
     }
+    @keyframes slideDownRadar {
+      from { transform: translateY(-120%); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
     .sheet-handle {
       width: 38px;
       height: 4px;
@@ -7030,12 +7034,168 @@ Baixe o aplicativo gratuito Alerta Urbano:
     }
 
     /* ==================== GPS & BRIDGE ANDROID ==================== */
+    let _ultimoRadarCheck = 0;
+    let _ultimoAvisoVozGlobalMs = 0;
+    let _audioRadarAtual = null;
+
     function receberGpsNativo(lat, lng, acc) {
       if (!lat || !lng) return;
       state.userLat = Number(lat);
       state.userLng = Number(lng);
       atualizarStatusGps('ok', `Conectado (±${Math.round(acc || 15)}m)`);
       atualizarMarcadorUsuario();
+      verificarRadarProximidadeWeb(state.userLat, state.userLng);
+    }
+
+    function verificarRadarProximidadeWeb(lat, lng) {
+      const agora = Date.now();
+      if (agora - _ultimoRadarCheck < 2500) return;
+      _ultimoRadarCheck = agora;
+
+      if (!state.alertas || !state.alertas.length || !lat || !lng) return;
+
+      const petsPerdidos = state.alertas.filter(a => {
+        if (a.pilar !== 'pet') return false;
+        if (a.tipo === 'pet_adocao' || a.status_pet === 'adocao') return false;
+        if (a.tipo === 'pet_sos_rua' || a.status_pet === 'sos_rua') return false;
+        if (a.status_pet === 'avistado' || a.status_pet === 'encontrado' || a.tipo === 'pet_avistado' || a.tipo === 'pet_encontrado') return false;
+        if (a.sigiloso || a.tipo === 'pet_denuncia_maustratos') return false;
+        return a.lat != null && a.lng != null && !isNaN(Number(a.lat)) && !isNaN(Number(a.lng));
+      });
+
+      if (!petsPerdidos.length) return;
+
+      let petMaisProximo = null;
+      let menorDist = 500; // 500m
+
+      for (const pet of petsPerdidos) {
+        const d = calcularDistanciaM(lat, lng, Number(pet.lat), Number(pet.lng));
+        if (d != null && d <= 500 && d < menorDist) {
+          const cdKey = 'radar_pet_cd_' + pet.id;
+          const ultimoAvisoPet = Number(localStorage.getItem(cdKey) || 0);
+          if (agora - ultimoAvisoPet >= 600000) { // 10 min por pet
+            menorDist = d;
+            petMaisProximo = { ...pet, distM: Math.round(d) };
+          }
+        }
+      }
+
+      if (petMaisProximo && (agora - _ultimoAvisoVozGlobalMs >= 45000)) {
+        _ultimoAvisoVozGlobalMs = agora;
+        localStorage.setItem('radar_pet_cd_' + petMaisProximo.id, agora);
+        dispararAlertaRadarWeb(petMaisProximo);
+      }
+    }
+
+    function dispararAlertaRadarWeb(pet) {
+      tocarVinhetaExclusiva();
+
+      const esp = ((pet.especie || '') + ' ' + (pet.titulo || '')).toLowerCase();
+      let bicho = 'cachorro';
+      if (esp.includes('gato') || esp.includes('gata')) bicho = 'gato';
+      else if (esp.includes('ave') || esp.includes('passaro') || esp.includes('calopsita') || esp.includes('tico')) bicho = 'ave';
+
+      const frase = `Atenção: ${bicho} perdido na região. Fique atento. Clique no card para ver detalhes.`;
+      tocarVozNeuralOuTTS(frase);
+      mostrarCardAlertaTopoWeb(pet);
+    }
+
+    function tocarVozNeuralOuTTS(frase) {
+      try {
+        if (_audioRadarAtual) {
+          _audioRadarAtual.pause();
+          _audioRadarAtual = null;
+        }
+        const url = `/api/falar?voz=masculina&texto=${encodeURIComponent(frase)}`;
+        _audioRadarAtual = new Audio(url);
+        _audioRadarAtual.play().catch(() => {
+          falarTtsNavegador(frase);
+        });
+      } catch (_) {
+        falarTtsNavegador(frase);
+      }
+    }
+
+    function falarTtsNavegador(frase) {
+      try {
+        if ('speechSynthesis' in window) {
+          window.speechSynthesis.cancel();
+          const ut = new SpeechSynthesisUtterance(frase);
+          ut.lang = 'pt-BR';
+          ut.rate = 1.05;
+          window.speechSynthesis.speak(ut);
+        }
+      } catch (_) {}
+    }
+
+    function mostrarCardAlertaTopoWeb(pet) {
+      let card = document.getElementById('card-radar-topo-web');
+      if (!card) {
+        card = document.createElement('div');
+        card.id = 'card-radar-topo-web';
+        card.style.cssText = `
+          position: fixed;
+          top: 14px;
+          left: 14px;
+          right: 14px;
+          z-index: 99999;
+          background: #111827;
+          border: 2px solid #F59E0B;
+          border-radius: 18px;
+          box-shadow: 0 16px 36px rgba(0,0,0,0.7), 0 0 15px rgba(245, 158, 11, 0.35);
+          padding: 12px 14px;
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          color: #FFFFFF;
+          animation: slideDownRadar 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+          font-family: inherit;
+        `;
+        document.body.appendChild(card);
+      }
+
+      const foto = pet.foto_url ? pet.foto_url : '/static/logo_vortice.png';
+      const recompensaHtml = pet.recompensa ? `<span style="color: #22C55E; font-weight: 700; margin-left: 6px;">• Recompensa R$ ${pet.recompensa}</span>` : '';
+
+      card.innerHTML = `
+        <img src="${foto}" alt="${pet.titulo || 'Pet'}" style="width: 58px; height: 58px; border-radius: 12px; object-fit: cover; border: 2px solid #F59E0B; flex-shrink: 0;" onerror="this.src='/static/logo_vortice.png'">
+        <div style="flex: 1; min-width: 0;">
+          <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 2px;">
+            <span style="background: #F59E0B; color: #000; font-size: 9px; font-weight: 900; padding: 2px 6px; border-radius: 4px; letter-spacing: 0.5px;">ALERTA DE PROXIMIDADE</span>
+            <span style="font-size: 11px; color: #FBBF24; font-weight: 700;">a ${pet.distM}m</span>
+          </div>
+          <div style="font-size: 14px; font-weight: 800; color: #FFFFFF; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${pet.titulo || 'Pet Desaparecido'}</div>
+          <div style="font-size: 11px; color: #9CA3AF; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+            ${pet.bairro || pet.rua || 'Cascavel'}${recompensaHtml}
+          </div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 6px; flex-shrink: 0;">
+          <button onclick="verPetNoMapaWeb(${pet.lat}, ${pet.lng}, ${pet.id})" style="background: #F59E0B; color: #000; border: none; font-weight: 800; font-size: 11px; padding: 6px 10px; border-radius: 8px; cursor: pointer;">VER</button>
+          <button onclick="fecharCardRadarTopoWeb()" style="background: rgba(255,255,255,0.1); color: #9CA3AF; border: none; font-size: 11px; padding: 4px; border-radius: 6px; cursor: pointer;">✕</button>
+        </div>
+      `;
+
+      card.style.display = 'flex';
+
+      clearTimeout(card._timerFechar);
+      card._timerFechar = setTimeout(() => {
+        fecharCardRadarTopoWeb();
+      }, 18000);
+    }
+
+    function fecharCardRadarTopoWeb() {
+      const card = document.getElementById('card-radar-topo-web');
+      if (card) card.style.display = 'none';
+    }
+
+    function verPetNoMapaWeb(lat, lng, id) {
+      fecharCardRadarTopoWeb();
+      trocarAba('mapa');
+      setTimeout(() => {
+        if (state.map) {
+          state.map.setView([lat, lng], 17);
+        }
+      }, 300);
     }
 
     function tentarReconectarGPS(mostrarAviso) {
