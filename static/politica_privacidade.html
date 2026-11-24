@@ -3,141 +3,378 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Política de Privacidade e Proteção de Dados — Alerta Urbano Cascavel (Vórtice Mídia)</title>
+  <title>Política de Privacidade e Governança LGPD — Alerta Urbano Cascavel</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Chakra+Petch:wght@700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Chakra+Petch:wght@700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-dark: #0a0b0e;
-      --card-bg: #12141a;
-      --border-color: #1f242e;
-      --accent-color: #10b981;
-      --accent-glow: rgba(16, 185, 129, 0.2);
-      --text-white: #ffffff;
-      --text-silver: #d1d5db;
-      --text-muted: #9ca3af;
+      --bg: #090a0f;
+      --card-bg: #12151f;
+      --border: #1e2433;
+      --accent: #009B3A;
+      --accent-gold: #FED700;
+      --accent-info: #0284c7;
+      --accent-danger: #dc2626;
+      --text: #e2e8f0;
+      --text-muted: #94a3b8;
+      --heading: #ffffff;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      background-color: var(--bg-dark);
-      color: var(--text-silver);
-      font-family: 'Inter', sans-serif;
-      line-height: 1.7;
-      padding: 30px 16px 80px;
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.75;
+      padding: 32px 16px 80px;
     }
     .container {
-      max-width: 900px;
+      max-width: 940px;
       margin: 0 auto;
       background: var(--card-bg);
-      border: 1px solid var(--border-color);
-      border-radius: 16px;
-      padding: 32px 28px;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.7);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 36px 30px;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.7);
     }
     .header {
-      border-bottom: 1px solid var(--border-color);
-      padding-bottom: 20px;
-      margin-bottom: 24px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 24px;
+      margin-bottom: 28px;
     }
-    h1 {
-      font-family: 'Chakra Petch', sans-serif;
-      font-size: 26px;
-      color: var(--text-white);
-      margin-bottom: 8px;
+    .badge-bar {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
     }
     .badge {
       display: inline-block;
-      background: var(--accent-glow);
-      color: var(--accent-color);
-      padding: 4px 10px;
-      border-radius: 6px;
-      font-size: 13px;
-      font-weight: 600;
+      background: rgba(0, 155, 58, 0.15);
+      color: var(--accent);
+      border: 1px solid rgba(0, 155, 58, 0.35);
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-size: 12.5px;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+    }
+    .badge-gold {
+      background: rgba(254, 215, 0, 0.12);
+      color: var(--accent-gold);
+      border: 1px solid rgba(254, 215, 0, 0.35);
+    }
+    .badge-info {
+      background: rgba(2, 132, 199, 0.15);
+      color: var(--accent-info);
+      border: 1px solid rgba(2, 132, 199, 0.35);
+    }
+    h1 {
+      font-family: 'Chakra Petch', 'Inter', sans-serif;
+      font-size: 28px;
+      color: var(--heading);
+      margin-bottom: 10px;
+      letter-spacing: -0.5px;
+    }
+    .subhead {
+      color: var(--text-muted);
+      font-size: 14px;
     }
     h2 {
-      font-size: 18px;
-      color: var(--text-white);
-      margin-top: 28px;
-      margin-bottom: 10px;
+      font-size: 19px;
+      font-weight: 800;
+      color: var(--heading);
+      margin-top: 36px;
+      margin-bottom: 14px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
     }
-    p, ul {
+    h3 {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--accent-gold);
+      margin-top: 22px;
+      margin-bottom: 8px;
+    }
+    p {
       margin-bottom: 14px;
-      font-size: 15px;
-      color: var(--text-silver);
+      font-size: 14.5px;
+      color: var(--text);
     }
-    ul { padding-left: 20px; }
-    li { margin-bottom: 6px; }
-    .highlight-box {
-      background: #181b22;
-      border-left: 4px solid var(--accent-color);
-      padding: 14px 18px;
-      border-radius: 6px;
-      margin: 18px 0;
+    ul, ol {
+      margin-bottom: 16px;
+      padding-left: 24px;
+    }
+    li {
+      margin-bottom: 8px;
+      font-size: 14.5px;
+      color: var(--text);
+    }
+    strong {
+      color: #ffffff;
+      font-weight: 700;
+    }
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 18px 0 24px;
+      font-size: 13.5px;
+    }
+    .data-table th, .data-table td {
+      border: 1px solid var(--border);
+      padding: 12px 14px;
+      text-align: left;
+    }
+    .data-table th {
+      background: rgba(255,255,255,0.05);
+      color: #ffffff;
+      font-weight: 700;
+    }
+    .data-table tr:nth-child(even) td {
+      background: rgba(255,255,255,0.02);
+    }
+    .highlight-card {
+      background: rgba(0, 155, 58, 0.08);
+      border-left: 4px solid var(--accent);
+      padding: 18px 20px;
+      border-radius: 8px;
+      margin: 20px 0;
+      font-size: 14px;
+    }
+    .card-info {
+      background: rgba(2, 132, 199, 0.08);
+      border-left-color: var(--accent-info);
+    }
+    .card-gold {
+      background: rgba(254, 215, 0, 0.08);
+      border-left-color: var(--accent-gold);
+    }
+    .nav-links {
+      display: flex;
+      gap: 12px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+    .nav-links a {
+      color: var(--accent-gold);
+      text-decoration: underline;
+      font-size: 13.5px;
+      font-weight: 600;
     }
     footer {
-      margin-top: 40px;
-      padding-top: 20px;
-      border-top: 1px solid var(--border-color);
+      margin-top: 48px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
       text-align: center;
       font-size: 13px;
       color: var(--text-muted);
+    }
+    @media (max-width: 600px) {
+      .container { padding: 24px 18px; border-radius: 14px; }
+      h1 { font-size: 22px; }
+      h2 { font-size: 17px; }
+      .data-table { display: block; overflow-x: auto; }
     }
   </style>
 </head>
 <body>
   <div class="container">
     <div class="header">
-      <span class="badge">Vórtice Mídia • Governança de Dados 2026</span>
-      <h1 style="margin-top: 10px;">Política de Privacidade e Proteção de Dados (LGPD)</h1>
-      <p style="color: var(--text-muted); font-size: 14px;">Aplicativo: <strong>Alerta Urbano Cascavel</strong> | Última atualização: Novembro de 2026</p>
+      <div class="badge-bar">
+        <span class="badge">Vórtice Mídia • LGPD 2026</span>
+        <span class="badge badge-gold">Lei Federal nº 13.709/2018</span>
+        <span class="badge badge-info">Google Play Data Safety Compliant</span>
+      </div>
+      <h1>Política de Privacidade e Governança de Dados</h1>
+      <p class="subhead">
+        Aplicativo: <strong>Alerta Urbano Cascavel</strong> (Pacote: <code>com.alertaurbano.app</code>)<br>
+        Controladora dos Dados: <strong>Vórtice Mídia</strong> | Cascavel, Paraná, Brasil<br>
+        Encarregado de Proteção de Dados (DPO): <code>rigobertobockhorny@gmail.com</code><br>
+        Data da Última Atualização e Entrada em Vigor: 24 de Novembro de 2026.
+      </p>
+      <div class="nav-links">
+        <a href="/termos_uso.html">Consultar Termos de Uso (EULA)</a>
+        <a href="#direitos-titular">Como Excluir Minha Conta e Meus Dados</a>
+      </div>
     </div>
 
-    <h2>1. Visão Geral e Finalidade</h2>
-    <p>O <strong>Alerta Urbano</strong> (lançamento inicial: <strong>Alerta Urbano Cascavel</strong>) é um aplicativo de utilidade pública, segurança comunitária e rede solidária desenvolvido pela <strong>Vórtice Mídia</strong>.</p>
-    <p>O aplicativo tem como finalidade informar a população e motoristas sobre três pilares exclusivos: <strong>(1) Rede Solidária de Pets Desaparecidos e Avistados</strong>, <strong>(2) Segurança Hiperlocal</strong> (alimentada exclusivamente por portais de imprensa oficial) e <strong>(3) Utilidade Pública</strong> (alertas meteorológicos oficiais do INMET, comunicados públicos de abastecimento de água, energia elétrica e interdições de vias).</p>
+    <div class="highlight-card">
+      <strong>Compromisso de Transparência da Vórtice Mídia:</strong> A presente Política de Privacidade regula de maneira exaustiva o tratamento de todas as informações e dados pessoais coletados pelo aplicativo <strong>Alerta Urbano Cascavel</strong>. Nosso modelo operacional é estruturado sobre o princípio do <em>Privacy by Design</em> e Minimização de Dados: tratamos estritamente os dados essenciais para o socorro e localização ágil de animais desaparecidos e a salvaguarda da comunidade urbana em Cascavel - PR. <strong>Nunca comercializamos nem monetizamos dados pessoais de usuários.</strong>
+    </div>
 
-    <h2>2. Dados Coletados e Uso da Localização (GPS)</h2>
-    <div class="highlight-box">
-      <strong>⚠️ Declaração de Uso de Localização em Primeiro e Segundo Plano:</strong><br>
-      Para cumprir sua finalidade de copiloto urbano e rede de busca comunitária, o <strong>Alerta Urbano</strong> utiliza dados de localização precisa (GPS):
-      <ul style="margin-top: 8px;">
-        <li><strong>Em Primeiro Plano:</strong> Quando o aplicativo está aberto na tela, para centralizar o mapa de calor, exibir pets desaparecidos na região e registrar pontos de avistamento.</li>
-        <li><strong>Em Segundo Plano (Modo Copiloto Flutuante):</strong> Quando ativado voluntariamente pelo usuário, o aplicativo utiliza um serviço em primeiro plano (Foreground Service com notificação persistente) para emitir alertas sonoros ao entrar em regiões com pets desaparecidos, avisos de segurança ou utilidade pública, mesmo enquanto o usuário utiliza seu navegador GPS preferido (como Waze, Google Maps, Uber ou 99).</li>
+    <h2>1. Identificação do Controlador e do Encarregado (DPO)</h2>
+    <p>
+      <strong>1.1. Controlador do Tratamento:</strong> A pessoa jurídica responsável pelas decisões relativas ao tratamento de dados pessoais no âmbito da plataforma é a <strong>Vórtice Mídia</strong>, sediada no Município de Cascavel, Estado do Paraná, Brasil.
+    </p>
+    <p>
+      <strong>1.2. Encarregado de Proteção de Dados (DPO):</strong> O Encarregado pelo Tratamento de Dados Pessoais designado pela Vórtice Mídia, nos termos do Artigo 41 da Lei nº 13.709/2018 (LGPD), é o desenvolvedor <strong>Rigoberto Bockhorny</strong>. Quaisquer solicitações, requerimentos de esclarecimento, denúncias ou exercício de direitos dos titulares devem ser remetidos diretamente ao canal oficial exclusivo:
+    </p>
+    <p style="padding-left:14px; font-weight:700; color:var(--accent-gold);">
+      E-mail do DPO: <a href="mailto:rigobertobockhorny@gmail.com" style="color:var(--accent-gold);">rigobertobockhorny@gmail.com</a>
+    </p>
+
+    <h2>2. Dados Pessoais Coletados e Finalidades do Tratamento</h2>
+    <p>
+      Coletamos exclusivamente as categorias de informações voluntariamente fornecidas pelo usuário ou estritamente geradas pela execução técnica dos serviços, divididas conforme a tabela abaixo:
+    </p>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th style="width:24%;">Categoria do Dado</th>
+          <th style="width:40%;">Dados Específicos Coletados</th>
+          <th style="width:36%;">Finalidade Estrita do Tratamento</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Identificação e Cadastro</strong></td>
+          <td>Nome completo, Bairro de residência em Cascavel, identificador do perfil e credenciais do Provedor Social (Google Sign-In, quando optado pelo usuário).</td>
+          <td>Identificar o munícipe na comunidade, exibir a autoria de publicações de pets e permitir a gestão autônoma do perfil pelo titular.</td>
+        </tr>
+        <tr>
+          <td><strong>Contato de Resgate (Opcional / Consentido)</strong></td>
+          <td>Número de telefone celular / WhatsApp com código de área.</td>
+          <td>Viabilizar que o cidadão que avistou o pet desaparecido entre em contato direto e imediato com o tutor para efetivar o resgate. <em>Nunca é utilizado para disparos publicitários.</em></td>
+        </tr>
+        <tr>
+          <td><strong>Registros de Pets e Ocorrências</strong></td>
+          <td>Fotos do animal, espécie (cão/gato), nome, raça, porte, pelagem, data do desaparecimento, características visuais, recompensa opcional e ponto de referência.</td>
+          <td>Alimentar o catálogo cívico geolocalizado de animais desaparecidos e disponibilizar aos munícipes informações para reconhecimento visual nas ruas.</td>
+        </tr>
+        <tr>
+          <td><strong>Avistamentos Colaborativos</strong></td>
+          <td>Fotografia capturada na câmera ou selecionada da galeria, coordenadas geográficas aproximadas da visualização, horário do avistamento e descrição da situação física do pet.</td>
+          <td>Construir a trilha cronológica hiperlocal no mapa urbano de Cascavel, reduzindo o tempo de resgate e direcionando as buscas do tutor.</td>
+        </tr>
+        <tr>
+          <td><strong>Localização em Primeiro Plano (GPS Ativo)</strong></td>
+          <td>Coordenadas de latitude e longitude obtidas com o aplicativo em execução visual na tela.</td>
+          <td>Centralizar o mapa dinâmico na vizinhança do munícipe, calcular a distância em metros até os animais perdidos e plotar o ponto exato de um novo avistamento.</td>
+        </tr>
+        <tr>
+          <td><strong>Localização em Segundo Plano (Copiloto Flutuante)</strong></td>
+          <td>Coordenadas periódicas de deslocamento processadas pelo <em>Foreground Service</em> persistente nativo do Android.</td>
+          <td>Emitir avisos sonoros e visuais em tempo real quando o condutor se aproxima do raio geográfico de um pet desaparecido ou de um bloqueio viário crítico, mesmo enquanto utiliza navegadores terceiros (ex.: Waze, Google Maps, Uber, 99). <em>Não guarda histórico de rotas.</em></td>
+        </tr>
+        <tr>
+          <td><strong>Registros Técnicos e Segurança</strong></td>
+          <td>Endereço IP de origem, identificador criptográfico de sessão (<code>autor_token</code>), versão do aplicativo Android, modelo do aparelho e timestamps de requisição.</td>
+          <td>Prevenção ativa contra fraudes, trotes, ataques cibernéticos e cumprimento do dever legal de guarda de registros de acesso a aplicações de internet (Art. 15 do Marco Civil da Internet).</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="highlight-card card-gold">
+      <h3>Declaração Específica sobre o Uso de Geolocalização (GPS) e Bolinha Flutuante</h3>
+      <p>
+        Para atender com máxima segurança aos padrões do Google Play Console e às diretrizes da LGPD:
+      </p>
+      <ul style="margin-bottom:0;">
+        <li><strong>Sem Gravação de Trajetos Contínuos:</strong> O Alerta Urbano Cascavel <strong>NÃO grava, NÃO traça e NÃO comercializa históricos de itinerário</strong> dos cidadãos. O cálculo de proximidade é efetuado pontualmente e comparado contra as coordenadas públicas das ocorrências ativas. Encerrado o ciclo do alerta, a coordenada transitória é descartada da memória operacional.</li>
+        <li><strong>Bolinha Flutuante (Permissão SYSTEM_ALERT_WINDOW):</strong> A funcionalidade de bolha sobreposta na tela do Android tem como único objetivo permitir que condutores e entregadores registrem um animal avistado em 1 toque ou recebam alertas sonoros sem desviar a atenção do trânsito. O aplicativo <strong>não monitora telas de terceiros, não realiza capturas de vídeo (screen-recording) e não lê notificações de outros aplicativos</strong>.</li>
       </ul>
-      <strong>Nenhum histórico de trajeto ou rota individual é armazenado, vendido ou compartilhado com terceiros.</strong> Os cálculos de proximidade ocorrem localmente no dispositivo.
     </div>
 
-    <h2>3. Permissão de Sobreposição de Tela (Bolinha Flutuante)</h2>
-    <p>O aplicativo oferece um modo opcional de bolinha flutuante discreta sobre a tela para que o usuário receba alertas sonoros e visuais ou registre o avistamento de um pet em 1 toque sem precisar sair do seu aplicativo de navegação. O aplicativo <strong>não lê a tela nem captura dados de outros aplicativos</strong>.</p>
-
-    <h2>4. Registro de Pets e Proteção de Telefone / WhatsApp (LGPD)</h2>
-    <p>A colaboração pública no aplicativo é restrita exclusivamente ao módulo de <strong>Pets Desaparecidos e Avistados</strong> (alertas de segurança e utilidade pública são alimentados exclusivamente por fontes oficiais e imprensa). Ao cadastrar um pet, o usuário pode informar voluntariamente foto, localização aproximada e, caso deseje e marque o consentimento expresso, um número de WhatsApp para contato.</p>
+    <h2>3. Bases Legais Autorizadoras do Tratamento (Artigo 7º da LGPD)</h2>
+    <p>
+      Todo e qualquer tratamento de dados pessoais no âmbito do Alerta Urbano Cascavel está estritamente fundamentado nas seguintes hipóteses legais previstas na Lei Geral de Proteção de Dados:
+    </p>
     <ul>
-      <li><strong>Consentimento Expresso:</strong> O número de telefone somente é armazenado mediante autorização explícita no formulário.</li>
-      <li><strong>Minimização e Auto-Exclusão:</strong> Assim que o autor encerra o caso ("Marcar como Encontrado" ou "Encerrar") ou o registro expira, o número de telefone é <strong>removido automaticamente</strong> da base ativa.</li>
-      <li><strong>Controle Total:</strong> Somente o dispositivo autor do cadastro pode renovar ou encerrar a publicação a qualquer momento.</li>
+      <li><strong>Execução de Contrato e Diligências Preliminares (Art. 7º, Inciso V):</strong> Tratamento essencial para o fornecimento das funcionalidades do aplicativo, publicação das fichas de animais, visualização no mapa de Cascavel e conexão entre moradores e tutores.</li>
+      <li><strong>Consentimento do Titular (Art. 7º, Inciso I):</strong> Aplicado à inserção voluntária do número de telefone / WhatsApp de contato e concessão das permissões de hardware no Android (câmera, galeria de imagens e localização precisa). O titular pode revogar seu consentimento a qualquer instante.</li>
+      <li><strong>Legítimo Interesse da Controladora e da Comunidade (Art. 7º, Inciso IX):</strong> Aplicado para fins de segurança cibernética, prevenção contra fraudes, proteção contra trotes criminosos, auditoria de publicações reportadas e garantia da estabilidade e integridade da rede cívica.</li>
+      <li><strong>Cumprimento de Obrigação Legal ou Regulatória (Art. 7º, Inciso II):</strong> Guarda de registros de acesso a aplicações de internet pelo prazo mínimo de 6 (seis) meses, em estrito cumprimento ao Artigo 15 da Lei nº 12.965/2014 (Marco Civil da Internet).</li>
+      <li><strong>Exercício Regular de Direitos em Processo Judicial ou Administrativo (Art. 7º, Inciso VI):</strong> Guarda de evidências técnicas para resposta a ordens judiciais expedidas por autoridades públicas competentes.</li>
     </ul>
 
-    <h2>5. Compartilhamento de Dados e Segurança</h2>
-    <p>A Vórtice Mídia adota padrões rigorosos de segurança e criptografia HTTPS/TLS:</p>
+    <h2>4. Compartilhamento Restrito de Dados com Terceiros</h2>
+    <p>
+      A Vórtice Mídia <strong>NÃO comercializa, NÃO aluga, NÃO repassa e NÃO transfere</strong> seus dados pessoais para <em>data brokers</em>, empresas de publicidade programática invasiva ou parceiros comerciais de marketing direto.
+    </p>
+    <p>
+      O compartilhamento restringe-se única e exclusivamente aos seguintes agentes estritamente operacionais:
+    </p>
+    <ol>
+      <li><strong>Comunidade e Munícipes de Cascavel (Dados Públicos Autorizados):</strong> O nome do autor, foto do pet, descrição e o ponto no mapa tornam-se visíveis no feed público do aplicativo. O WhatsApp do tutor só é disponibilizado para contato de resgate caso expressamente autorizado no cadastro da ocorrência.</li>
+      <li><strong>Provedores de Nuvem e Infraestrutura Operacional (Operadores):</strong> Nossos bancos de dados e microsserviços são hospedados sob padrões corporativos de criptografia de ponta a ponta (TLS 1.3 / HTTPS) em servidores de alta disponibilidade (Render Inc., Estados Unidos/União Europeia) e servidores de mapas cartográficos (ESRI ArcGIS / OpenStreetMap), os quais atuam na estrita condição de operadores e sob dever de confidencialidade técnica.</li>
+      <li><strong>Provedores de Autenticação Social (Google LLC):</strong> Caso o usuário opte voluntariamente pelo login com conta Google, o identificador de autenticação é transmitido de forma criptografada para validação da sessão conforme as políticas de segurança da Google Inc.</li>
+      <li><strong>Autoridades Judiciais e Policiais:</strong> Em atendimento a ordens judiciais fundamentadas ou requisições formais expedidas pelo Ministério Público, Polícia Civil do Paraná (15ª SDP) ou Delegacia Eletrônica, dados de IP e conexão poderão ser compartilhados nos limites precisos da determinação judicial.</li>
+    </ol>
+
+    <h2>5. Ciclo de Vida dos Dados e Retenção</h2>
+    <p>
+      <strong>5.1. Regra de Auto-Encerramento e Ocultação Imediata:</strong> No instante em que o tutor do pet clica no botão <em>"Finalizar / Pet Encontrado"</em>, o status da ocorrência é atualizado no banco de dados e todos os dados de contato telefônico e canais diretos são <strong>imediatamente ocultados e expurgados</strong> das visualizações públicas.
+    </p>
+    <p>
+      <strong>5.2. Registros Transitórios de Avistamento:</strong> Os pontos de avistamento registrados na comunidade são preservados enquanto durar a busca ativa pelo animal. Solucionado o caso, os dados agregam-se a estatísticas urbanas de forma totalmente anonimizada (desprovida de vínculo com pessoas físicas).
+    </p>
+    <p>
+      <strong>5.3. Logs de Acesso:</strong> Os logs técnicos contendo endereço IP, data e hora de conexão são mantidos sob sigilo pelo período legal obrigatório de 6 (seis) meses, findo o qual são automaticamente excluídos dos servidores.
+    </p>
+
+    <h2 id="direitos-titular">6. Direitos dos Titulares de Dados e Exclusão de Conta</h2>
+    <p>
+      Em conformidade com o Artigo 18 da Lei Geral de Proteção de Dados (LGPD) e com as diretrizes de segurança da Google Play Store, garantimos aos usuários o exercício integral e simplificado dos seguintes direitos:
+    </p>
     <ul>
-      <li><strong>Não vendemos nem cedemos</strong> dados de localização ou hábitos de navegação a empresas de marketing ou corretoras de dados.</li>
-      <li><strong>Não exibimos anúncios invasivos</strong> de redes terceiras baseados em rastreamento de perfil (zero AdMob/zero tracking de publicidade comportamental).</li>
+      <li><strong>Confirmação e Acesso:</strong> Saber se tratamos seus dados pessoais e obter cópia clara das informações cadastradas;</li>
+      <li><strong>Correção:</strong> Solicitar a alteração de dados incompletos, inexatos ou desatualizados diretamente na aba de Perfil;</li>
+      <li><strong>Anonimização ou Bloqueio:</strong> Requerer a desassociação de registros desnecessários ou tratados em desconformidade com a lei;</li>
+      <li><strong>Revogação do Consentimento:</strong> Desativar permissões de localização ou retirar o número de WhatsApp a qualquer momento;</li>
+      <li><strong>Eliminação Integral dos Dados e Exclusão de Conta:</strong> O cidadão tem o direito irrevogável de solicitar a exclusão definitiva de sua conta, de todas as suas publicações, avistamentos e dados pessoais armazenados.</li>
     </ul>
 
-    <h2>6. Direitos do Usuário (LGPD) e Contato</h2>
-    <p>Em conformidade com a Lei Geral de Proteção de Dados (Lei nº 13.709/2018 - LGPD), o usuário tem total liberdade de desativar as permissões de localização nas configurações do Android a qualquer momento.</p>
-    <p>Para dúvidas, sugestões ou solicitações relativas a esta política, entre em contato diretamente com o responsável de desenvolvimento da Vórtice Mídia:</p>
-    <p><strong>E-mail de Contato:</strong> <code>rigobertobockhorny@gmail.com</code><br>
-    <strong>Desenvolvedor Responsável:</strong> Vórtice Mídia<br>
-    <strong>Jurisdição:</strong> Cascavel, Paraná, Brasil</p>
+    <div class="highlight-card card-info">
+      <h3>Procedimento Direto para Exclusão de Conta e Dados (Diretiva Google Play)</h3>
+      <p style="margin-bottom:8px;">O usuário pode eliminar integralmente sua conta e registros por dois canais simples e imediatos:</p>
+      <ol style="margin-bottom:8px;">
+        <li><strong>Diretamente no Aplicativo:</strong> Acesse o aplicativo Alerta Urbano Cascavel → Toque no ícone de <strong>Perfil / Configurações</strong> no canto superior direito → Role até a seção de Conta → Toque em <strong>"Excluir Minha Conta e Meus Dados"</strong> → Confirme a operação. Seus dados, publicações ativas e tokens serão expurgados instantaneamente do banco de dados em produção.</li>
+        <li><strong>Por E-mail ao Encarregado (DPO):</strong> Encaminhe uma solicitação com o assunto <em>"Exclusão de Conta e Dados LGPD"</em> para o e-mail oficial: <strong><a href="mailto:rigobertobockhorny@gmail.com" style="color:var(--accent-gold);">rigobertobockhorny@gmail.com</a></strong> informando o nome e WhatsApp cadastrados. O pedido é processado e confirmado em até 48 horas úteis.</li>
+      </ol>
+      <p style="margin-bottom:0; font-size:13px; color:var(--text-muted);">
+        A exclusão da conta acarreta a perda definitiva do histórico de publicações do usuário, sem possibilidade de recuperação.
+      </p>
+    </div>
+
+    <h2>7. Medidas de Segurança da Informação</h2>
+    <p>
+      A Vórtice Mídia emprega rigorosos controles técnicos e organizacionais para resguardar a integridade e confidencialidade dos dados tratados:
+    </p>
+    <ul>
+      <li>Criptografia de transporte obrigatória em todos os endpoints através de protocolo HTTPS / TLS 1.3 de alta segurança;</li>
+      <li>Armazenamento de senhas e tokens de sessão em formato unidirecional e com salt criptográfico;</li>
+      <li>Isolamento de privilégios de banco de dados e rotinas de backup criptografado;</li>
+      <li>Mecanismos nativos no aplicativo Android via <code>FileProvider</code> para proteção do sistema de arquivos e isolamento contra acessos indevidos de outros aplicativos à câmera e à memória interna do smartphone.</li>
+    </ul>
+
+    <h2>8. Proteção Especial de Crianças e Adolescentes</h2>
+    <p>
+      O Alerta Urbano Cascavel não é direcionado a crianças menores de 13 (treze) anos. Não coletamos intencionalmente dados pessoais de menores sem a assistência ou o consentimento expresso dos pais ou responsáveis legais, em atendimento ao Artigo 14 da LGPD. Caso seja constatado o cadastro inadvertido de dados de menores de 13 anos sem a devida autorização, as informações serão sumariamente deletadas de nossos bancos de dados.
+    </p>
+
+    <h2>9. Atualizações desta Política de Privacidade</h2>
+    <p>
+      Esta Política poderá ser revisada periodicamente para refletir adequações legislativas ou inovações tecnológicas no aplicativo. Qualquer modificação substancial será informada com destaque na tela inicial do aplicativo antes da entrada em vigência.
+    </p>
+
+    <h2>10. Canal Direto de Contato com a Vórtice Mídia</h2>
+    <p>
+      Para requisições relativas à LGPD, exercício de direitos ou esclarecimentos institucionais:
+    </p>
+    <div style="background:#181b26; border:1px solid var(--border); border-radius:12px; padding:18px 20px; margin-top:12px;">
+      <p style="margin-bottom:6px;"><strong>Controlador:</strong> Vórtice Mídia</p>
+      <p style="margin-bottom:6px;"><strong>Encarregado pelo Tratamento de Dados (DPO):</strong> Rigoberto Bockhorny</p>
+      <p style="margin-bottom:6px;"><strong>E-mail Oficial:</strong> <a href="mailto:rigobertobockhorny@gmail.com" style="color:var(--accent-gold); font-weight:700;">rigobertobockhorny@gmail.com</a></p>
+      <p style="margin-bottom:0;"><strong>Comarca de Jurisdição:</strong> Cascavel, Estado do Paraná, Brasil</p>
+    </div>
 
     <footer>
-      © 2026 Vórtice Mídia — Alerta Urbano Cascavel. Todos os direitos reservados.
+      © 2026 Vórtice Mídia — Alerta Urbano Cascavel. Todos os direitos reservados.<br>
+      Governança, conformidade com a LGPD e respeito integral à privacidade do cidadão.
     </footer>
   </div>
 </body>

@@ -274,6 +274,14 @@ def politica_privacidade():
     return send_from_directory("static", "politica_privacidade.html")
 
 
+@app.route("/termos")
+@app.route("/termos-de-uso")
+@app.route("/termos_uso.html")
+@app.route("/diretrizes")
+def termos_uso():
+    return send_from_directory("static", "termos_uso.html")
+
+
 @app.route("/manifest.json")
 def manifest():
     return send_from_directory("static", "manifest.json", mimetype="application/manifest+json")

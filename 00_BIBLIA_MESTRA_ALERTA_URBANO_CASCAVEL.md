@@ -188,4 +188,27 @@ O **Alerta Urbano Cascavel** (`com.alertaurbano.app`) é a plataforma cívica e 
    * Atualizar este documento com a nova versão.
 
 ---
-**Fim da Bíblia Mestra — Alerta Urbano Cascavel v3.7.4**
+
+## 7. GOVERNANÇA JURÍDICA INTEGRAL, LGPD E DIRETRIZES DE COMUNIDADE (UGC)
+
+### 7.1. Marco Regulatório e Proteção Institucional (Vórtice Mídia)
+A plataforma opera sob estrita conformidade com a legislação federal brasileira e diretrizes do Google Play Console:
+1. **Marco Civil da Internet (Lei nº 12.965/2014):** Guarda obrigatória de registros de conexão por 6 meses (Art. 15) e qualificação da Vórtice Mídia como provedora de aplicações de internet (Art. 5º, VII e Art. 19).
+2. **Lei Geral de Proteção de Dados (Lei nº 13.709/2018 - LGPD):** Controlador definido como Vórtice Mídia; DPO/Encarregado formal (`rigobertobockhorny@gmail.com`); bases legais aplicadas (Art. 7º, I, II, V, VI e IX); e garantia dos direitos de exclusão e portabilidade (Art. 18).
+3. **Código de Proteção e Defesa do Consumidor (Lei nº 8.078/1990):** Transparência inequívoca sobre serviços e limitações de responsabilidade.
+4. **Legislação Ambiental e Animal:** Lei Federal nº 9.605/1998 e Lei Sansão nº 14.064/2020 — proibição irrestrita de comércio de animais, criadouros clandestinos, abuso e crueldade.
+5. **Código Penal Brasileiro:** Advertência expressa quanto aos crimes de Falsidade Ideológica (Art. 299) e Falsa Comunicação de Crime ou Contravenção (Art. 340).
+
+### 7.2. Estrutura de Documentos no Sistema
+* **Modal Nativo no App (`#modal-termos` em `static/index.html`):**
+  * Aba 1: `Termos de Uso` (`#painel-termos-uso`) — Objeto, 3 pilares cívicos, elegibilidade (13+ anos), proibição absoluta de comércio de animais, isenção por encontros presenciais de devolução, propriedade intelectual da Vórtice Mídia e foro em Cascavel - PR.
+  * Aba 2: `Privacidade LGPD` (`#painel-privacidade-lgpd`) — Controlador e DPO, dados coletados com minimização, declaração formal de uso de GPS em primeiro plano e segundo plano (copiloto persistente sem gravação de itinerário), retenção, auto-ocultação instantânea do WhatsApp ao marcar "Pet Encontrado", e passo a passo de exclusão de conta.
+  * Aba 3: `Tolerância Zero (UGC)` (`#painel-tolerancia-zero`) — Diretrizes Google Play UGC, tolerância zero contra pornografia, ódio, maus-tratos e golpes; botão "Reportar Conteúdo" em todas as fichas; SLA de análise e remoção humana em até 24 horas; e bloqueio de hardware (`autor_token`).
+* **Páginas Estáticas Públicas Standalone:**
+  * `static/termos_uso.html` (acessível via rotas `/termos`, `/termos-de-uso`, `/termos_uso.html`, `/diretrizes`).
+  * `static/politica_privacidade.html` (acessível via rotas `/privacidade`, `/politica-privacidade`, `/politica_privacidade.html` e vinculada à ficha na Google Play Store).
+* **Acessibilidade no Perfil do Cidadão (`modal-perfil`):**
+  * Linhas de navegação direta para `Termos de Uso & Diretrizes`, `Política de Privacidade & LGPD`, `Tolerância Zero & Conduta (UGC)` e botão de `Excluir Minha Conta`.
+
+---
+**Fim da Bíblia Mestra — Alerta Urbano Cascavel v3.8.0**
