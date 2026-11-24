@@ -1682,7 +1682,7 @@
 
       <div class="table-card" style="width:100% !important; margin-top:20px; flex:1;">
         <div class="table-head-bar">
-          <h3>Extrato Geral de Parceiros & Cobranças</h3>
+          <h3>Extrato Geral de Parceiros & Cobranças <span style="font-size:12px; color:var(--gold); font-weight:800; background:rgba(217,119,6,0.15); padding:2px 8px; border-radius:6px; border:1px solid rgba(217,119,6,0.3); margin-left:6px;" id="fin-table-count">45 Empresas</span></h3>
           <div class="table-filters">
             <button type="button" class="table-filter-btn active" onclick="filtrarTabelaFin('todos', this)">Todos</button>
             <button type="button" class="table-filter-btn" onclick="filtrarTabelaFin('pago', this)">Pagos</button>
@@ -2756,7 +2756,7 @@
         return;
       }
 
-      container.innerHTML = listaFeedModeracao.slice(0, 10).map(item => {
+      container.innerHTML = listaFeedModeracao.map(item => {
         let tagCor = '#38BDF8';
         let tagTxt = 'Ocorrência';
         if (item.pilar === 'pet') {
@@ -3204,31 +3204,74 @@
     }
 
     async function carregarPerfisCompletos() {
-      // Limpeza imediata de massa mock de 70 perfis
-      localStorage.removeItem('mesa_perfis_v2');
-      localStorage.removeItem('mesa_ocorrencias_pets_v1');
-
       try {
         const resp = await fetch('/static/darkplanner_perfis_completos.json?t=' + Date.now());
         if (resp.ok) {
           perfisOcorrencias = await resp.json();
-          const salvosStr = localStorage.getItem('mesa_perfis_v2');
-          if (salvosStr) {
-            try {
-              const salvos = JSON.parse(salvosStr);
-              salvos.forEach(s => {
-                const idx = perfisOcorrencias.findIndex(p => p.id === s.id);
-                if (idx !== -1) {
-                  perfisOcorrencias[idx] = s;
-                } else {
-                  perfisOcorrencias.push(s);
-                }
-              });
-            } catch (_) {}
-          }
         }
       } catch (err) {
         console.warn('Erro ao carregar catálogo perfis:', err);
+      }
+
+      // Sincroniza em tempo real com as ocorrências oficiais salvas no banco do Render
+      try {
+        const respAlertas = await fetch('/api/alertas?cidade=Cascavel&t=' + Date.now());
+        if (respAlertas.ok) {
+          const alertasDb = await respAlertas.json();
+          const petsDb = alertasDb.filter(a => a.pilar === 'pet' && a.ativo == 1);
+          
+          petsDb.forEach(a => {
+            const nomeAlert = (a.titulo || '').toLowerCase();
+            const pExistente = perfisOcorrencias.find(p => {
+              const pNome = (p.pet?.nome || '').toLowerCase();
+              return pNome && (nomeAlert.includes(pNome) || pNome.includes(nomeAlert));
+            });
+
+            if (pExistente) {
+              pExistente.posicao_mapa = {
+                fixado: true,
+                lat: a.lat,
+                lng: a.lng,
+                rua: a.rua,
+                bairro: a.bairro,
+                data_fixacao: a.created_at,
+                alerta_id: a.id
+              };
+            } else {
+              perfisOcorrencias.push({
+                id: 'alerta_' + a.id,
+                tutor: {
+                  nome: a.contato || 'Tutor em Cascavel',
+                  avatar: '/static/logo_bolha_pura.png',
+                  telefone: '(45) 99999-0000',
+                  bairro_origem: a.bairro
+                },
+                pet: {
+                  nome: a.titulo,
+                  categoria: a.especie || 'cao',
+                  raca: a.especie || 'Pet Comunitário',
+                  porte: a.porte || 'médio',
+                  sexo: 'indefinido',
+                  tipo_ocorrencia: a.status_pet || 'desaparecido',
+                  foto_url: a.foto_url || '/static/logo_bolha_pura.png',
+                  recompensa: '',
+                  detalhes: a.descricao || 'Ocorrência registrada no app.'
+                },
+                posicao_mapa: {
+                  fixado: true,
+                  lat: a.lat,
+                  lng: a.lng,
+                  rua: a.rua,
+                  bairro: a.bairro,
+                  data_fixacao: a.created_at,
+                  alerta_id: a.id
+                }
+              });
+            }
+          });
+        }
+      } catch (errDb) {
+        console.warn('Sincronização com /api/alertas:', errDb);
       }
 
       renderizarBandejaPerfis();

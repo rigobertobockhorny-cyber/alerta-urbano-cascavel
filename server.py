@@ -426,6 +426,8 @@ def init_db():
 
     # Sincronização dos 45 parceiros comerciais e limpeza de usuários fictícios
     cur.execute("DELETE FROM usuarios WHERE autor_token LIKE 'token_ficticio%'")
+    cur.execute("DELETE FROM alertas WHERE status_pet = 'encontrado' OR titulo LIKE '%RESGATADO%'")
+    cur.execute("UPDATE alertas SET recompensa = ''")
     cur.execute("SELECT COUNT(*) FROM parceiros WHERE ativo = 1")
     count_parc = cur.fetchone()[0]
     if count_parc < 45:

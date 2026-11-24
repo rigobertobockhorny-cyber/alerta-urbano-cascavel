@@ -16,17 +16,18 @@
       "sexo": "Fêmea",
       "raca": "Siamês Legítimo",
       "porte": "Pequeno",
-      "recompensa": "R$ 200,00",
+      "recompensa": "",
       "foto_url": "/static/darkplanner_pets/gata_01_siamesa.jpg",
       "detalhes": "Desapareceu no bairro Centro. Muito dócil, atende pelo nome. Família e crianças desesperadas procurando."
     },
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
-      "bairro": "",
-      "data_fixacao": null
+      "fixado": true,
+      "lat": -24.949745,
+      "lng": -53.427724,
+      "rua": "Avenida Brasil",
+      "bairro": "Vila Militar",
+      "data_fixacao": "2026-11-24 17:38:25",
+      "alerta_id": 5549
     }
   },
   {
@@ -46,17 +47,18 @@
       "sexo": "Fêmea",
       "raca": "Persa Fofo",
       "porte": "Pequeno",
-      "recompensa": "R$ 800,00",
+      "recompensa": "",
       "foto_url": "/static/darkplanner_pets/gata_02_branca.jpg",
       "detalhes": "Desapareceu no bairro Coqueiral. Muito dócil, atende pelo nome. Família e crianças desesperadas procurando."
     },
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
-      "bairro": "",
-      "data_fixacao": null
+      "fixado": true,
+      "lat": -24.986272,
+      "lng": -53.4849,
+      "rua": "Estrada da Pedreira",
+      "bairro": "14 de Novembro",
+      "data_fixacao": "2026-11-24 17:49:30",
+      "alerta_id": 5584
     }
   },
   {
@@ -76,17 +78,18 @@
       "sexo": "Fêmea",
       "raca": "Frajola Dócil",
       "porte": "Pequeno",
-      "recompensa": "R$ 200,00",
+      "recompensa": "",
       "foto_url": "/static/darkplanner_pets/gata_03_calico_tricolor.jpg",
       "detalhes": "Desapareceu no bairro Neva. Muito dócil, atende pelo nome. Família e crianças desesperadas procurando."
     },
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
-      "bairro": "",
-      "data_fixacao": null
+      "fixado": true,
+      "lat": -24.952542,
+      "lng": -53.508289,
+      "rua": "Avenida Brasil",
+      "bairro": "FAG",
+      "data_fixacao": "2026-11-24 17:36:08",
+      "alerta_id": 5541
     }
   },
   {
@@ -106,17 +109,18 @@
       "sexo": "Fêmea",
       "raca": "Azul Russo",
       "porte": "Pequeno",
-      "recompensa": "R$ 800,00",
+      "recompensa": "",
       "foto_url": "/static/darkplanner_pets/gata_04_preta.jpg",
       "detalhes": "Desapareceu no bairro Cancelli. Muito dócil, atende pelo nome. Família e crianças desesperadas procurando."
     },
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
-      "bairro": "",
-      "data_fixacao": null
+      "fixado": true,
+      "lat": -24.928901,
+      "lng": -53.474922,
+      "rua": "Rua Jorge Lacerda",
+      "bairro": "Claudete",
+      "data_fixacao": "2026-11-24 17:36:23",
+      "alerta_id": 5542
     }
   },
   {
@@ -136,17 +140,18 @@
       "sexo": "Fêmea",
       "raca": "Tricolor Calico",
       "porte": "Pequeno",
-      "recompensa": "Adoção Responsável Gratuita",
+      "recompensa": "",
       "foto_url": "/static/darkplanner_pets/gata_05_frajola.jpg",
       "detalhes": "Resgatados no bairro Parque São Paulo, vermifugados e comendo ração úmida. Para doação responsável e com termo de posse."
     },
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
-      "bairro": "",
-      "data_fixacao": null
+      "fixado": true,
+      "lat": -24.947639,
+      "lng": -53.474793,
+      "rua": "Rua Nereu Ramos",
+      "bairro": "Claudete",
+      "data_fixacao": "2026-11-24 17:36:37",
+      "alerta_id": 5543
     }
   },
   {
@@ -166,17 +171,18 @@
       "sexo": "Fêmea",
       "raca": "Maine Coon Gigante",
       "porte": "Pequeno",
-      "recompensa": "Sem Recompensa (Gratidão)",
+      "recompensa": "",
       "foto_url": "/static/darkplanner_pets/gata_06_persa_creme.jpg",
       "detalhes": "Desapareceu no bairro Santa Cruz. Muito dócil, atende pelo nome. Família e crianças desesperadas procurando."
     },
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
-      "bairro": "",
-      "data_fixacao": null
+      "fixado": true,
+      "lat": -24.96009,
+      "lng": -53.507452,
+      "rua": "Avenida Tito Muffato",
+      "bairro": "Esmeralda",
+      "data_fixacao": "2026-11-24 17:37:12",
+      "alerta_id": 5544
     }
   },
   {
@@ -196,17 +202,18 @@
       "sexo": "Fêmea",
       "raca": "Gato Laranjinha",
       "porte": "Pequeno",
-      "recompensa": "R$ 200,00",
+      "recompensa": "",
       "foto_url": "/static/darkplanner_pets/gata_07_ruiva_laranja.jpg",
       "detalhes": "Desapareceu no bairro Claudete. Muito dócil, atende pelo nome. Família e crianças desesperadas procurando."
     },
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
-      "bairro": "",
-      "data_fixacao": null
+      "fixado": true,
+      "lat": -24.941812,
+      "lng": -53.45517,
+      "rua": "Rua Di Cavalcante, 1524",
+      "bairro": "Country",
+      "data_fixacao": "2026-11-24 17:37:23",
+      "alerta_id": 5545
     }
   },
   {
@@ -226,17 +233,18 @@
       "sexo": "Fêmea",
       "raca": "Angorá Branco",
       "porte": "Pequeno",
-      "recompensa": "R$ 300,00",
+      "recompensa": "",
       "foto_url": "/static/darkplanner_pets/gata_08_cinza_tigrada.jpg",
       "detalhes": "Desapareceu no bairro Cascavel Velho. Muito dócil, atende pelo nome. Família e crianças desesperadas procurando."
     },
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
-      "bairro": "",
-      "data_fixacao": null
+      "fixado": true,
+      "lat": -24.962172,
+      "lng": -53.464687,
+      "rua": "Rua Curitiba",
+      "bairro": "Vila Tolentino",
+      "data_fixacao": "2026-11-24 17:37:36",
+      "alerta_id": 5546
     }
   },
   {
@@ -256,17 +264,18 @@
       "sexo": "Fêmea",
       "raca": "Gato Preto Sólido",
       "porte": "Pequeno",
-      "recompensa": "R$ 200,00",
+      "recompensa": "",
       "foto_url": "/static/darkplanner_pets/gata_09_angora_branca.jpg",
       "detalhes": "Desapareceu no bairro Canadá. Muito dócil, atende pelo nome. Família e crianças desesperadas procurando."
     },
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
-      "bairro": "",
-      "data_fixacao": null
+      "fixado": true,
+      "lat": -24.950888,
+      "lng": -53.459151,
+      "rua": "Rua Presidente Kennedy",
+      "bairro": "Coqueiral",
+      "data_fixacao": "2026-11-24 17:37:50",
+      "alerta_id": 5547
     }
   },
   {
@@ -286,17 +295,18 @@
       "sexo": "Fêmea",
       "raca": "Bengal Oncinha",
       "porte": "Pequeno",
-      "recompensa": "R$ 300,00",
+      "recompensa": "",
       "foto_url": "/static/darkplanner_pets/gata_10_tortoiseshell.jpg",
       "detalhes": "Desapareceu no bairro Country. Muito dócil, atende pelo nome. Família e crianças desesperadas procurando."
     },
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
-      "bairro": "",
-      "data_fixacao": null
+      "fixado": true,
+      "lat": -24.977208,
+      "lng": -53.452671,
+      "rua": "Rua Alexandre de Gusmão",
+      "bairro": "Maria Luiza",
+      "data_fixacao": "2026-11-24 17:38:07",
+      "alerta_id": 5548
     }
   },
   {
@@ -316,17 +326,18 @@
       "sexo": "Macho",
       "raca": "Siamês Legítimo",
       "porte": "Pequeno",
-      "recompensa": "R$ 800,00",
+      "recompensa": "",
       "foto_url": "/static/darkplanner_pets/gato_01_frajola.jpg",
       "detalhes": "Desapareceu no bairro Maria Luíza. Muito dócil, atende pelo nome. Família e crianças desesperadas procurando."
     },
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
-      "bairro": "",
-      "data_fixacao": null
+      "fixado": true,
+      "lat": -24.949745,
+      "lng": -53.427724,
+      "rua": "Avenida Brasil",
+      "bairro": "Vila Militar",
+      "data_fixacao": "2026-11-24 17:38:25",
+      "alerta_id": 5549
     }
   },
   {
@@ -346,17 +357,18 @@
       "sexo": "Macho",
       "raca": "Persa Fofo",
       "porte": "Pequeno",
-      "recompensa": "Sem Recompensa (Gratidão)",
+      "recompensa": "",
       "foto_url": "/static/darkplanner_pets/gato_02_laranjinha.jpg",
       "detalhes": "Desapareceu no bairro Brasmadeira. Muito dócil, atende pelo nome. Família e crianças desesperadas procurando."
     },
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
-      "bairro": "",
-      "data_fixacao": null
+      "fixado": true,
+      "lat": -24.941121,
+      "lng": -53.421879,
+      "rua": "Rua Europa",
+      "bairro": "Brasília",
+      "data_fixacao": "2026-11-24 17:38:48",
+      "alerta_id": 5550
     }
   },
   {
@@ -376,17 +388,18 @@
       "sexo": "Macho",
       "raca": "Frajola Dócil",
       "porte": "Pequeno",
-      "recompensa": "R$ 800,00",
+      "recompensa": "",
       "foto_url": "/static/darkplanner_pets/gato_03_russian_blue.jpg",
       "detalhes": "Desapareceu no bairro Pacaembu. Muito dócil, atende pelo nome. Família e crianças desesperadas procurando."
     },
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
-      "bairro": "",
-      "data_fixacao": null
+      "fixado": true,
+      "lat": -24.974349,
+      "lng": -53.433123,
+      "rua": "Rua Pedro Baú",
+      "bairro": "Cascavel Velho",
+      "data_fixacao": "2026-11-24 17:38:59",
+      "alerta_id": 5551
     }
   },
   {
@@ -406,17 +419,18 @@
       "sexo": "Macho",
       "raca": "Azul Russo",
       "porte": "Pequeno",
-      "recompensa": "Sem Recompensa (Gratidão)",
+      "recompensa": "",
       "foto_url": "/static/darkplanner_pets/gato_04_preto_solido.jpg",
       "detalhes": "Desapareceu no bairro Floresta. Muito dócil, atende pelo nome. Família e crianças desesperadas procurando."
     },
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
-      "bairro": "",
-      "data_fixacao": null
+      "fixado": true,
+      "lat": -24.941219,
+      "lng": -53.409938,
+      "rua": "Rua Europa",
+      "bairro": "Periolo",
+      "data_fixacao": "2026-11-24 17:39:15",
+      "alerta_id": 5552
     }
   },
   {
@@ -436,17 +450,18 @@
       "sexo": "Macho",
       "raca": "Tricolor Calico",
       "porte": "Pequeno",
-      "recompensa": "Adoção Responsável Gratuita",
+      "recompensa": "",
       "foto_url": "/static/darkplanner_pets/gato_05_tigrado_marrom.jpg",
       "detalhes": "Resgatados no bairro Morumbi, vermifugados e comendo ração úmida. Para doação responsável e com termo de posse."
     },
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
-      "bairro": "",
-      "data_fixacao": null
+      "fixado": true,
+      "lat": -24.930576,
+      "lng": -53.46252,
+      "rua": "Rua Marechal Cândido Rondon",
+      "bairro": "Canadá",
+      "data_fixacao": "2026-11-24 17:39:27",
+      "alerta_id": 5553
     }
   },
   {
@@ -466,17 +481,18 @@
       "sexo": "Macho",
       "raca": "Maine Coon Gigante",
       "porte": "Pequeno",
-      "recompensa": "R$ 800,00",
+      "recompensa": "",
       "foto_url": "/static/darkplanner_pets/gato_06_siamês.jpg",
       "detalhes": "Desapareceu no bairro Santo Onofre. Muito dócil, atende pelo nome. Família e crianças desesperadas procurando."
     },
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
-      "bairro": "",
-      "data_fixacao": null
+      "fixado": true,
+      "lat": -24.917499,
+      "lng": -53.433208,
+      "rua": "Rua Leonardo da Vinci",
+      "bairro": "Barcelona",
+      "data_fixacao": "2026-11-24 17:39:50",
+      "alerta_id": 5554
     }
   },
   {
@@ -496,17 +512,18 @@
       "sexo": "Macho",
       "raca": "Gato Laranjinha",
       "porte": "Pequeno",
-      "recompensa": "Sem Recompensa (Gratidão)",
+      "recompensa": "",
       "foto_url": "/static/darkplanner_pets/gato_07_branco_olhos_azuis.jpg",
       "detalhes": "Desapareceu no bairro Alto Alegre. Muito dócil, atende pelo nome. Família e crianças desesperadas procurando."
     },
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
-      "bairro": "",
-      "data_fixacao": null
+      "fixado": true,
+      "lat": -24.939157,
+      "lng": -53.461812,
+      "rua": "Rua Visconde de Guarapuava",
+      "bairro": "Independência",
+      "data_fixacao": "2026-11-24 17:49:45",
+      "alerta_id": 5585
     }
   },
   {
@@ -526,17 +543,18 @@
       "sexo": "Macho",
       "raca": "Angorá Branco",
       "porte": "Pequeno",
-      "recompensa": "R$ 1.000,00",
+      "recompensa": "",
       "foto_url": "/static/darkplanner_pets/gato_08_bengal_onca.jpg",
       "detalhes": "Desapareceu no bairro Recanto Tropical. Muito dócil, atende pelo nome. Família e crianças desesperadas procurando."
     },
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
-      "bairro": "",
-      "data_fixacao": null
+      "fixado": true,
+      "lat": -24.949702,
+      "lng": -53.437543,
+      "rua": "Rua Machado de Assis",
+      "bairro": "Vila Militar",
+      "data_fixacao": "2026-11-24 17:40:48",
+      "alerta_id": 5556
     }
   },
   {
@@ -556,17 +574,18 @@
       "sexo": "Macho",
       "raca": "Gato Preto Sólido",
       "porte": "Pequeno",
-      "recompensa": "R$ 200,00",
+      "recompensa": "",
       "foto_url": "/static/darkplanner_pets/gato_09_maine_coon.jpg",
       "detalhes": "Desapareceu no bairro Ciro Nardi. Muito dócil, atende pelo nome. Família e crianças desesperadas procurando."
     },
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
-      "bairro": "",
-      "data_fixacao": null
+      "fixado": true,
+      "lat": -24.904187,
+      "lng": -53.437757,
+      "rua": "Avenida Piquiri",
+      "bairro": "Barcelona",
+      "data_fixacao": "2026-11-24 17:41:09",
+      "alerta_id": 5557
     }
   },
   {
@@ -586,17 +605,18 @@
       "sexo": "Macho",
       "raca": "Bengal Oncinha",
       "porte": "Pequeno",
-      "recompensa": "R$ 200,00",
+      "recompensa": "",
       "foto_url": "/static/darkplanner_pets/gato_10_amarelo_claro.jpg",
       "detalhes": "Desapareceu no bairro Pioneiros Catarinenses. Muito dócil, atende pelo nome. Família e crianças desesperadas procurando."
     },
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
-      "bairro": "",
-      "data_fixacao": null
+      "fixado": true,
+      "lat": -24.919991,
+      "lng": -53.458228,
+      "rua": "PR-486",
+      "bairro": "Brasmadeira",
+      "data_fixacao": "2026-11-24 17:41:23",
+      "alerta_id": 5558
     }
   },
   {
@@ -616,17 +636,18 @@
       "sexo": "Fêmea",
       "raca": "Vira-lata Caramelo",
       "porte": "Pequeno",
-      "recompensa": "R$ 800,00",
+      "recompensa": "",
       "foto_url": "/static/darkplanner_pets/cachorra_01_shih_tzu.jpg",
       "detalhes": "Desapareceu no bairro Guarujá. Muito dócil, atende pelo nome. Família e crianças desesperadas procurando."
     },
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
-      "bairro": "",
-      "data_fixacao": null
+      "fixado": true,
+      "lat": -24.949745,
+      "lng": -53.427724,
+      "rua": "Avenida Brasil",
+      "bairro": "Vila Militar",
+      "data_fixacao": "2026-11-24 17:38:25",
+      "alerta_id": 5549
     }
   },
   {
@@ -646,17 +667,18 @@
       "sexo": "Fêmea",
       "raca": "Pastor Alemão",
       "porte": "Médio",
-      "recompensa": "R$ 300,00",
+      "recompensa": "",
       "foto_url": "/static/darkplanner_pets/cachorra_02_caramelo.jpg",
       "detalhes": "Desapareceu no bairro 14 de Novembro. Muito dócil, atende pelo nome. Família e crianças desesperadas procurando."
     },
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
-      "bairro": "",
-      "data_fixacao": null
+      "fixado": true,
+      "lat": -24.986272,
+      "lng": -53.4849,
+      "rua": "Estrada da Pedreira",
+      "bairro": "14 de Novembro",
+      "data_fixacao": "2026-11-24 17:49:30",
+      "alerta_id": 5584
     }
   },
   {
@@ -676,17 +698,18 @@
       "sexo": "Fêmea",
       "raca": "Shih Tzu",
       "porte": "Pequeno",
-      "recompensa": "R$ 300,00",
+      "recompensa": "",
       "foto_url": "/static/darkplanner_pets/cachorra_03_golden_retriever.jpg",
       "detalhes": "Desapareceu no bairro Santa Felicidade. Muito dócil, atende pelo nome. Família e crianças desesperadas procurando."
     },
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
-      "bairro": "",
-      "data_fixacao": null
+      "fixado": true,
+      "lat": -24.952542,
+      "lng": -53.508289,
+      "rua": "Avenida Brasil",
+      "bairro": "FAG",
+      "data_fixacao": "2026-11-24 17:36:08",
+      "alerta_id": 5541
     }
   },
   {
@@ -706,17 +729,18 @@
       "sexo": "Fêmea",
       "raca": "Poodle Toy",
       "porte": "Pequeno",
-      "recompensa": "R$ 500,00",
+      "recompensa": "",
       "foto_url": "/static/darkplanner_pets/cachorra_04_poodle.jpg",
       "detalhes": "Desapareceu no bairro Interlagos. Muito dócil, atende pelo nome. Família e crianças desesperadas procurando."
     },
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
-      "bairro": "",
-      "data_fixacao": null
+      "fixado": true,
+      "lat": -24.928901,
+      "lng": -53.474922,
+      "rua": "Rua Jorge Lacerda",
+      "bairro": "Claudete",
+      "data_fixacao": "2026-11-24 17:36:23",
+      "alerta_id": 5542
     }
   },
   {
@@ -736,17 +760,18 @@
       "sexo": "Fêmea",
       "raca": "Golden Retriever",
       "porte": "Médio",
-      "recompensa": "Adoção Responsável Gratuita",
+      "recompensa": "",
       "foto_url": "/static/darkplanner_pets/cachorra_05_pinscher.jpg",
       "detalhes": "Resgatados no bairro Jardim Mantovani, vermifugados e comendo ração úmida. Para doação responsável e com termo de posse."
     },
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
-      "bairro": "",
-      "data_fixacao": null
+      "fixado": true,
+      "lat": -24.947639,
+      "lng": -53.474793,
+      "rua": "Rua Nereu Ramos",
+      "bairro": "Claudete",
+      "data_fixacao": "2026-11-24 17:36:37",
+      "alerta_id": 5543
     }
   },
   {
@@ -766,17 +791,18 @@
       "sexo": "Fêmea",
       "raca": "Labrador Amarelo",
       "porte": "Médio",
-      "recompensa": "R$ 1.000,00",
+      "recompensa": "",
       "foto_url": "/static/darkplanner_pets/cachorra_06_yorkshire.jpg",
       "detalhes": "Desapareceu no bairro Centro. Muito dócil, atende pelo nome. Família e crianças desesperadas procurando."
     },
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
-      "bairro": "",
-      "data_fixacao": null
+      "fixado": true,
+      "lat": -24.96009,
+      "lng": -53.507452,
+      "rua": "Avenida Tito Muffato",
+      "bairro": "Esmeralda",
+      "data_fixacao": "2026-11-24 17:37:12",
+      "alerta_id": 5544
     }
   },
   {
@@ -796,17 +822,18 @@
       "sexo": "Fêmea",
       "raca": "Beagle",
       "porte": "Pequeno",
-      "recompensa": "Sem Recompensa (Gratidão)",
+      "recompensa": "",
       "foto_url": "/static/darkplanner_pets/cachorra_07_beagle.jpg",
       "detalhes": "Desapareceu no bairro Coqueiral. Muito dócil, atende pelo nome. Família e crianças desesperadas procurando."
     },
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
-      "bairro": "",
-      "data_fixacao": null
+      "fixado": true,
+      "lat": -24.941812,
+      "lng": -53.45517,
+      "rua": "Rua Di Cavalcante, 1524",
+      "bairro": "Country",
+      "data_fixacao": "2026-11-24 17:37:23",
+      "alerta_id": 5545
     }
   },
   {
@@ -826,17 +853,18 @@
       "sexo": "Fêmea",
       "raca": "Pinscher Mini",
       "porte": "Pequeno",
-      "recompensa": "R$ 800,00",
+      "recompensa": "",
       "foto_url": "/static/darkplanner_pets/cachorra_08_spitz_alemao.jpg",
       "detalhes": "Desapareceu no bairro Neva. Muito dócil, atende pelo nome. Família e crianças desesperadas procurando."
     },
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
-      "bairro": "",
-      "data_fixacao": null
+      "fixado": true,
+      "lat": -24.962172,
+      "lng": -53.464687,
+      "rua": "Rua Curitiba",
+      "bairro": "Vila Tolentino",
+      "data_fixacao": "2026-11-24 17:37:36",
+      "alerta_id": 5546
     }
   },
   {
@@ -856,17 +884,18 @@
       "sexo": "Fêmea",
       "raca": "Buldogue Francês",
       "porte": "Pequeno",
-      "recompensa": "R$ 1.000,00",
+      "recompensa": "",
       "foto_url": "/static/darkplanner_pets/cachorra_09_dachshund.jpg",
       "detalhes": "Desapareceu no bairro Cancelli. Muito dócil, atende pelo nome. Família e crianças desesperadas procurando."
     },
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
-      "bairro": "",
-      "data_fixacao": null
+      "fixado": true,
+      "lat": -24.950888,
+      "lng": -53.459151,
+      "rua": "Rua Presidente Kennedy",
+      "bairro": "Coqueiral",
+      "data_fixacao": "2026-11-24 17:37:50",
+      "alerta_id": 5547
     }
   },
   {
@@ -886,17 +915,18 @@
       "sexo": "Fêmea",
       "raca": "Border Collie",
       "porte": "Grande",
-      "recompensa": "R$ 200,00",
+      "recompensa": "",
       "foto_url": "/static/darkplanner_pets/cachorra_10_labradora_chocolate.jpg",
       "detalhes": "Desapareceu no bairro Parque São Paulo. Muito dócil, atende pelo nome. Família e crianças desesperadas procurando."
     },
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
-      "bairro": "",
-      "data_fixacao": null
+      "fixado": true,
+      "lat": -24.977208,
+      "lng": -53.452671,
+      "rua": "Rua Alexandre de Gusmão",
+      "bairro": "Maria Luiza",
+      "data_fixacao": "2026-11-24 17:38:07",
+      "alerta_id": 5548
     }
   },
   {
@@ -916,17 +946,18 @@
       "sexo": "Macho",
       "raca": "Vira-lata Caramelo",
       "porte": "Pequeno",
-      "recompensa": "R$ 200,00",
+      "recompensa": "",
       "foto_url": "/static/darkplanner_pets/cachorro_01_caramelo_macho.jpg",
       "detalhes": "Desapareceu no bairro Santa Cruz. Muito dócil, atende pelo nome. Família e crianças desesperadas procurando."
     },
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
-      "bairro": "",
-      "data_fixacao": null
+      "fixado": true,
+      "lat": -24.949745,
+      "lng": -53.427724,
+      "rua": "Avenida Brasil",
+      "bairro": "Vila Militar",
+      "data_fixacao": "2026-11-24 17:38:25",
+      "alerta_id": 5549
     }
   },
   {
@@ -946,17 +977,18 @@
       "sexo": "Macho",
       "raca": "Pastor Alemão",
       "porte": "Médio",
-      "recompensa": "R$ 500,00",
+      "recompensa": "",
       "foto_url": "/static/darkplanner_pets/cachorro_02_pastor_alemao.jpg",
       "detalhes": "Desapareceu no bairro Claudete. Muito dócil, atende pelo nome. Família e crianças desesperadas procurando."
     },
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
-      "bairro": "",
-      "data_fixacao": null
+      "fixado": true,
+      "lat": -24.941121,
+      "lng": -53.421879,
+      "rua": "Rua Europa",
+      "bairro": "Brasília",
+      "data_fixacao": "2026-11-24 17:38:48",
+      "alerta_id": 5550
     }
   },
   {
@@ -976,17 +1008,18 @@
       "sexo": "Macho",
       "raca": "Shih Tzu",
       "porte": "Pequeno",
-      "recompensa": "R$ 500,00",
+      "recompensa": "",
       "foto_url": "/static/darkplanner_pets/cachorro_03_buldogue_frances.jpg",
       "detalhes": "Desapareceu no bairro Cascavel Velho. Muito dócil, atende pelo nome. Família e crianças desesperadas procurando."
     },
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
-      "bairro": "",
-      "data_fixacao": null
+      "fixado": true,
+      "lat": -24.974349,
+      "lng": -53.433123,
+      "rua": "Rua Pedro Baú",
+      "bairro": "Cascavel Velho",
+      "data_fixacao": "2026-11-24 17:38:59",
+      "alerta_id": 5551
     }
   },
   {
@@ -1006,17 +1039,18 @@
       "sexo": "Macho",
       "raca": "Poodle Toy",
       "porte": "Pequeno",
-      "recompensa": "Sem Recompensa (Gratidão)",
+      "recompensa": "",
       "foto_url": "/static/darkplanner_pets/cachorro_04_border_collie.jpg",
       "detalhes": "Desapareceu no bairro Canadá. Muito dócil, atende pelo nome. Família e crianças desesperadas procurando."
     },
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
-      "bairro": "",
-      "data_fixacao": null
+      "fixado": true,
+      "lat": -24.941219,
+      "lng": -53.409938,
+      "rua": "Rua Europa",
+      "bairro": "Periolo",
+      "data_fixacao": "2026-11-24 17:39:15",
+      "alerta_id": 5552
     }
   },
   {
@@ -1036,17 +1070,18 @@
       "sexo": "Macho",
       "raca": "Golden Retriever",
       "porte": "Médio",
-      "recompensa": "Adoção Responsável Gratuita",
+      "recompensa": "",
       "foto_url": "/static/darkplanner_pets/cachorro_05_rottweiler_jovem.jpg",
       "detalhes": "Resgatados no bairro Country, vermifugados e comendo ração úmida. Para doação responsável e com termo de posse."
     },
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
-      "bairro": "",
-      "data_fixacao": null
+      "fixado": true,
+      "lat": -24.930576,
+      "lng": -53.46252,
+      "rua": "Rua Marechal Cândido Rondon",
+      "bairro": "Canadá",
+      "data_fixacao": "2026-11-24 17:39:27",
+      "alerta_id": 5553
     }
   },
   {
@@ -1066,17 +1101,18 @@
       "sexo": "Macho",
       "raca": "Labrador Amarelo",
       "porte": "Médio",
-      "recompensa": "R$ 300,00",
+      "recompensa": "",
       "foto_url": "/static/darkplanner_pets/cachorro_06_pug.jpg",
       "detalhes": "Desapareceu no bairro Maria Luíza. Muito dócil, atende pelo nome. Família e crianças desesperadas procurando."
     },
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
-      "bairro": "",
-      "data_fixacao": null
+      "fixado": true,
+      "lat": -24.917499,
+      "lng": -53.433208,
+      "rua": "Rua Leonardo da Vinci",
+      "bairro": "Barcelona",
+      "data_fixacao": "2026-11-24 17:39:50",
+      "alerta_id": 5554
     }
   },
   {
@@ -1096,17 +1132,18 @@
       "sexo": "Macho",
       "raca": "Beagle",
       "porte": "Pequeno",
-      "recompensa": "R$ 300,00",
+      "recompensa": "",
       "foto_url": "/static/darkplanner_pets/cachorro_07_husky_siberiano.jpg",
       "detalhes": "Desapareceu no bairro Brasmadeira. Muito dócil, atende pelo nome. Família e crianças desesperadas procurando."
     },
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
-      "bairro": "",
-      "data_fixacao": null
+      "fixado": true,
+      "lat": -24.939157,
+      "lng": -53.461812,
+      "rua": "Rua Visconde de Guarapuava",
+      "bairro": "Independência",
+      "data_fixacao": "2026-11-24 17:49:45",
+      "alerta_id": 5585
     }
   },
   {
@@ -1126,17 +1163,18 @@
       "sexo": "Macho",
       "raca": "Pinscher Mini",
       "porte": "Pequeno",
-      "recompensa": "R$ 200,00",
+      "recompensa": "",
       "foto_url": "/static/darkplanner_pets/cachorro_08_schnauzer.jpg",
       "detalhes": "Desapareceu no bairro Pacaembu. Muito dócil, atende pelo nome. Família e crianças desesperadas procurando."
     },
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
-      "bairro": "",
-      "data_fixacao": null
+      "fixado": true,
+      "lat": -24.949702,
+      "lng": -53.437543,
+      "rua": "Rua Machado de Assis",
+      "bairro": "Vila Militar",
+      "data_fixacao": "2026-11-24 17:40:48",
+      "alerta_id": 5556
     }
   },
   {
@@ -1156,17 +1194,18 @@
       "sexo": "Macho",
       "raca": "Buldogue Francês",
       "porte": "Pequeno",
-      "recompensa": "R$ 500,00",
+      "recompensa": "",
       "foto_url": "/static/darkplanner_pets/cachorro_09_pitbull_docil.jpg",
       "detalhes": "Desapareceu no bairro Floresta. Muito dócil, atende pelo nome. Família e crianças desesperadas procurando."
     },
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
-      "bairro": "",
-      "data_fixacao": null
+      "fixado": true,
+      "lat": -24.904187,
+      "lng": -53.437757,
+      "rua": "Avenida Piquiri",
+      "bairro": "Barcelona",
+      "data_fixacao": "2026-11-24 17:41:09",
+      "alerta_id": 5557
     }
   },
   {
@@ -1186,17 +1225,18 @@
       "sexo": "Macho",
       "raca": "Border Collie",
       "porte": "Grande",
-      "recompensa": "R$ 200,00",
+      "recompensa": "",
       "foto_url": "/static/darkplanner_pets/cachorro_10_boxer.jpg",
       "detalhes": "Desapareceu no bairro Morumbi. Muito dócil, atende pelo nome. Família e crianças desesperadas procurando."
     },
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
-      "bairro": "",
-      "data_fixacao": null
+      "fixado": true,
+      "lat": -24.919991,
+      "lng": -53.458228,
+      "rua": "PR-486",
+      "bairro": "Brasmadeira",
+      "data_fixacao": "2026-11-24 17:41:23",
+      "alerta_id": 5558
     }
   },
   {
@@ -1216,17 +1256,18 @@
       "sexo": "Machos e Fêmeas",
       "raca": "Siamês Legítimo",
       "porte": "Pequeno",
-      "recompensa": "Adoção Responsável Gratuita",
+      "recompensa": "",
       "foto_url": "/static/darkplanner_pets/ninhada_gatos_01_cesto.jpg",
       "detalhes": "Resgatados no bairro Santo Onofre, vermifugados e comendo ração úmida. Para doação responsável e com termo de posse."
     },
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
-      "bairro": "",
-      "data_fixacao": null
+      "fixado": true,
+      "lat": -24.987787,
+      "lng": -53.493685,
+      "rua": "Avenida Gralha Azul",
+      "bairro": "Guarujá",
+      "data_fixacao": "2026-11-24 17:43:16",
+      "alerta_id": 5564
     }
   },
   {
@@ -1246,17 +1287,18 @@
       "sexo": "Machos e Fêmeas",
       "raca": "Persa Fofo",
       "porte": "Pequeno",
-      "recompensa": "Adoção Responsável Gratuita",
+      "recompensa": "",
       "foto_url": "/static/darkplanner_pets/ninhada_gatos_02_manta_azul.jpg",
       "detalhes": "Resgatados no bairro Alto Alegre, vermifugados e comendo ração úmida. Para doação responsável e com termo de posse."
     },
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
-      "bairro": "",
-      "data_fixacao": null
+      "fixado": true,
+      "lat": -24.953904,
+      "lng": -53.412888,
+      "rua": "Rodovia José Neves Formighieri",
+      "bairro": "Cataratas",
+      "data_fixacao": "2026-11-24 17:43:31",
+      "alerta_id": 5565
     }
   },
   {
@@ -1276,17 +1318,18 @@
       "sexo": "Machos e Fêmeas",
       "raca": "Frajola Dócil",
       "porte": "Pequeno",
-      "recompensa": "Adoção Responsável Gratuita",
+      "recompensa": "",
       "foto_url": "/static/darkplanner_pets/ninhada_gatos_03_gramado.jpg",
       "detalhes": "Resgatados no bairro Recanto Tropical, vermifugados e comendo ração úmida. Para doação responsável e com termo de posse."
     },
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
-      "bairro": "",
-      "data_fixacao": null
+      "fixado": true,
+      "lat": -24.966253,
+      "lng": -53.403552,
+      "rua": "BR-277",
+      "bairro": "Colméia",
+      "data_fixacao": "2026-11-24 17:43:52",
+      "alerta_id": 5566
     }
   },
   {
@@ -1306,17 +1349,18 @@
       "sexo": "Machos e Fêmeas",
       "raca": "Azul Russo",
       "porte": "Pequeno",
-      "recompensa": "Adoção Responsável Gratuita",
+      "recompensa": "",
       "foto_url": "/static/darkplanner_pets/ninhada_gatos_04_caixa.jpg",
       "detalhes": "Resgatados no bairro Ciro Nardi, vermifugados e comendo ração úmida. Para doação responsável e com termo de posse."
     },
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
-      "bairro": "",
-      "data_fixacao": null
+      "fixado": true,
+      "lat": -24.934528,
+      "lng": -53.405495,
+      "rua": "Rua Serra de Santana",
+      "bairro": "Jardim Mantovani",
+      "data_fixacao": "2026-11-24 17:44:11",
+      "alerta_id": 5567
     }
   },
   {
@@ -1336,17 +1380,18 @@
       "sexo": "Machos e Fêmeas",
       "raca": "Tricolor Calico",
       "porte": "Pequeno",
-      "recompensa": "Adoção Responsável Gratuita",
+      "recompensa": "",
       "foto_url": "/static/darkplanner_pets/ninhada_gatos_05_tapete.jpg",
       "detalhes": "Resgatados no bairro Pioneiros Catarinenses, vermifugados e comendo ração úmida. Para doação responsável e com termo de posse."
     },
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
-      "bairro": "",
-      "data_fixacao": null
+      "fixado": true,
+      "lat": -24.970906,
+      "lng": -53.395464,
+      "rua": "BR-277",
+      "bairro": "Jardim Veneza",
+      "data_fixacao": "2026-11-24 17:44:25",
+      "alerta_id": 5568
     }
   },
   {
@@ -1366,17 +1411,18 @@
       "sexo": "Machos e Fêmeas",
       "raca": "Maine Coon Gigante",
       "porte": "Pequeno",
-      "recompensa": "Adoção Responsável Gratuita",
+      "recompensa": "",
       "foto_url": "/static/darkplanner_pets/ninhada_gatos_06_laranjinhas.jpg",
       "detalhes": "Resgatados no bairro Guarujá, vermifugados e comendo ração úmida. Para doação responsável e com termo de posse."
     },
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
-      "bairro": "",
-      "data_fixacao": null
+      "fixado": true,
+      "lat": -24.987787,
+      "lng": -53.493685,
+      "rua": "Avenida Gralha Azul",
+      "bairro": "Guarujá",
+      "data_fixacao": "2026-11-24 17:43:16",
+      "alerta_id": 5564
     }
   },
   {
@@ -1396,17 +1442,18 @@
       "sexo": "Machos e Fêmeas",
       "raca": "Gato Laranjinha",
       "porte": "Pequeno",
-      "recompensa": "Adoção Responsável Gratuita",
+      "recompensa": "",
       "foto_url": "/static/darkplanner_pets/ninhada_gatos_07_siameses.jpg",
       "detalhes": "Resgatados no bairro 14 de Novembro, vermifugados e comendo ração úmida. Para doação responsável e com termo de posse."
     },
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
-      "bairro": "",
-      "data_fixacao": null
+      "fixado": true,
+      "lat": -24.953904,
+      "lng": -53.412888,
+      "rua": "Rodovia José Neves Formighieri",
+      "bairro": "Cataratas",
+      "data_fixacao": "2026-11-24 17:43:31",
+      "alerta_id": 5565
     }
   },
   {
@@ -1426,17 +1473,18 @@
       "sexo": "Machos e Fêmeas",
       "raca": "Angorá Branco",
       "porte": "Pequeno",
-      "recompensa": "Adoção Responsável Gratuita",
+      "recompensa": "",
       "foto_url": "/static/darkplanner_pets/ninhada_gatos_08_coloridos.jpg",
       "detalhes": "Resgatados no bairro Santa Felicidade, vermifugados e comendo ração úmida. Para doação responsável e com termo de posse."
     },
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
-      "bairro": "",
-      "data_fixacao": null
+      "fixado": true,
+      "lat": -24.966253,
+      "lng": -53.403552,
+      "rua": "BR-277",
+      "bairro": "Colméia",
+      "data_fixacao": "2026-11-24 17:43:52",
+      "alerta_id": 5566
     }
   },
   {
@@ -1456,17 +1504,18 @@
       "sexo": "Machos e Fêmeas",
       "raca": "Gato Preto Sólido",
       "porte": "Pequeno",
-      "recompensa": "Adoção Responsável Gratuita",
+      "recompensa": "",
       "foto_url": "/static/darkplanner_pets/ninhada_gatos_09_peludos.jpg",
       "detalhes": "Resgatados no bairro Interlagos, vermifugados e comendo ração úmida. Para doação responsável e com termo de posse."
     },
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
-      "bairro": "",
-      "data_fixacao": null
+      "fixado": true,
+      "lat": -24.934528,
+      "lng": -53.405495,
+      "rua": "Rua Serra de Santana",
+      "bairro": "Jardim Mantovani",
+      "data_fixacao": "2026-11-24 17:44:11",
+      "alerta_id": 5567
     }
   },
   {
@@ -1486,17 +1535,18 @@
       "sexo": "Machos e Fêmeas",
       "raca": "Bengal Oncinha",
       "porte": "Pequeno",
-      "recompensa": "Adoção Responsável Gratuita",
+      "recompensa": "",
       "foto_url": "/static/darkplanner_pets/ninhada_gatos_10_sofa.jpg",
       "detalhes": "Resgatados no bairro Jardim Mantovani, vermifugados e comendo ração úmida. Para doação responsável e com termo de posse."
     },
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
-      "bairro": "",
-      "data_fixacao": null
+      "fixado": true,
+      "lat": -24.970906,
+      "lng": -53.395464,
+      "rua": "BR-277",
+      "bairro": "Jardim Veneza",
+      "data_fixacao": "2026-11-24 17:44:25",
+      "alerta_id": 5568
     }
   },
   {
@@ -1516,17 +1566,18 @@
       "sexo": "Machos e Fêmeas",
       "raca": "Filhotes Puros / Mestiços Dóceis",
       "porte": "Filhotes Pequenos",
-      "recompensa": "Adoção Responsável Gratuita",
+      "recompensa": "",
       "foto_url": "/static/darkplanner_pets/ninhada_caes_01_gramado.jpg",
       "detalhes": "Resgatados no bairro Centro, vermifugados e comendo ração úmida. Para doação responsável e com termo de posse."
     },
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
-      "bairro": "",
-      "data_fixacao": null
+      "fixado": true,
+      "lat": -24.912381,
+      "lng": -53.4431,
+      "rua": "Avenida Piquiri",
+      "bairro": "Barcelona",
+      "data_fixacao": "2026-11-24 17:46:05",
+      "alerta_id": 5574
     }
   },
   {
@@ -1546,17 +1597,18 @@
       "sexo": "Machos e Fêmeas",
       "raca": "Filhotes Puros / Mestiços Dóceis",
       "porte": "Filhotes Pequenos",
-      "recompensa": "Adoção Responsável Gratuita",
+      "recompensa": "",
       "foto_url": "/static/darkplanner_pets/ninhada_caes_02_cesto.jpg",
       "detalhes": "Resgatados no bairro Coqueiral, vermifugados e comendo ração úmida. Para doação responsável e com termo de posse."
     },
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
-      "bairro": "",
-      "data_fixacao": null
+      "fixado": true,
+      "lat": -24.929632,
+      "lng": -53.441995,
+      "rua": "Avenida Piquiri",
+      "bairro": "Brasmadeira",
+      "data_fixacao": "2026-11-24 17:46:32",
+      "alerta_id": 5575
     }
   },
   {
@@ -1576,17 +1628,18 @@
       "sexo": "Machos e Fêmeas",
       "raca": "Filhotes Puros / Mestiços Dóceis",
       "porte": "Filhotes Pequenos",
-      "recompensa": "Adoção Responsável Gratuita",
+      "recompensa": "",
       "foto_url": "/static/darkplanner_pets/ninhada_caes_03_golden_filhotes.jpg",
       "detalhes": "Resgatados no bairro Neva, vermifugados e comendo ração úmida. Para doação responsável e com termo de posse."
     },
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
-      "bairro": "",
-      "data_fixacao": null
+      "fixado": true,
+      "lat": -24.98073,
+      "lng": -53.426621,
+      "rua": "Estrada Alto São Salvador",
+      "bairro": "Jardim Veneza",
+      "data_fixacao": "2026-11-24 17:46:47",
+      "alerta_id": 5576
     }
   },
   {
@@ -1606,17 +1659,18 @@
       "sexo": "Machos e Fêmeas",
       "raca": "Filhotes Puros / Mestiços Dóceis",
       "porte": "Filhotes Pequenos",
-      "recompensa": "Adoção Responsável Gratuita",
+      "recompensa": "",
       "foto_url": "/static/darkplanner_pets/ninhada_caes_04_poodle_fofos.jpg",
       "detalhes": "Resgatados no bairro Cancelli, vermifugados e comendo ração úmida. Para doação responsável e com termo de posse."
     },
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
-      "bairro": "",
-      "data_fixacao": null
+      "fixado": true,
+      "lat": -24.967074,
+      "lng": -53.447156,
+      "rua": "Rua da Lapa",
+      "bairro": "Vila Militar",
+      "data_fixacao": "2026-11-24 17:47:06",
+      "alerta_id": 5577
     }
   },
   {
@@ -1636,17 +1690,18 @@
       "sexo": "Machos e Fêmeas",
       "raca": "Filhotes Puros / Mestiços Dóceis",
       "porte": "Filhotes Pequenos",
-      "recompensa": "Adoção Responsável Gratuita",
+      "recompensa": "",
       "foto_url": "/static/darkplanner_pets/ninhada_caes_05_beagles_filhotes.jpg",
       "detalhes": "Resgatados no bairro Parque São Paulo, vermifugados e comendo ração úmida. Para doação responsável e com termo de posse."
     },
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
-      "bairro": "",
-      "data_fixacao": null
+      "fixado": true,
+      "lat": -24.938145,
+      "lng": -53.480222,
+      "rua": "Rua Jequitibá",
+      "bairro": "Recanto Tropical",
+      "data_fixacao": "2026-11-24 17:47:19",
+      "alerta_id": 5578
     }
   },
   {
@@ -1666,17 +1721,18 @@
       "sexo": "Machos e Fêmeas",
       "raca": "Filhotes Puros / Mestiços Dóceis",
       "porte": "Filhotes Pequenos",
-      "recompensa": "Adoção Responsável Gratuita",
+      "recompensa": "",
       "foto_url": "/static/darkplanner_pets/ninhada_caes_06_vira_latinhas.jpg",
       "detalhes": "Resgatados no bairro Santa Cruz, vermifugados e comendo ração úmida. Para doação responsável e com termo de posse."
     },
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
-      "bairro": "",
-      "data_fixacao": null
+      "fixado": true,
+      "lat": -24.912381,
+      "lng": -53.4431,
+      "rua": "Avenida Piquiri",
+      "bairro": "Barcelona",
+      "data_fixacao": "2026-11-24 17:46:05",
+      "alerta_id": 5574
     }
   },
   {
@@ -1696,17 +1752,18 @@
       "sexo": "Machos e Fêmeas",
       "raca": "Filhotes Puros / Mestiços Dóceis",
       "porte": "Filhotes Pequenos",
-      "recompensa": "Adoção Responsável Gratuita",
+      "recompensa": "",
       "foto_url": "/static/darkplanner_pets/ninhada_caes_07_pastor_filhotes.jpg",
       "detalhes": "Resgatados no bairro Claudete, vermifugados e comendo ração úmida. Para doação responsável e com termo de posse."
     },
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
-      "bairro": "",
-      "data_fixacao": null
+      "fixado": true,
+      "lat": -24.929632,
+      "lng": -53.441995,
+      "rua": "Avenida Piquiri",
+      "bairro": "Brasmadeira",
+      "data_fixacao": "2026-11-24 17:46:32",
+      "alerta_id": 5575
     }
   },
   {
@@ -1726,17 +1783,18 @@
       "sexo": "Machos e Fêmeas",
       "raca": "Filhotes Puros / Mestiços Dóceis",
       "porte": "Filhotes Pequenos",
-      "recompensa": "Adoção Responsável Gratuita",
+      "recompensa": "",
       "foto_url": "/static/darkplanner_pets/ninhada_caes_08_labradores.jpg",
       "detalhes": "Resgatados no bairro Cascavel Velho, vermifugados e comendo ração úmida. Para doação responsável e com termo de posse."
     },
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
-      "bairro": "",
-      "data_fixacao": null
+      "fixado": true,
+      "lat": -24.98073,
+      "lng": -53.426621,
+      "rua": "Estrada Alto São Salvador",
+      "bairro": "Jardim Veneza",
+      "data_fixacao": "2026-11-24 17:46:47",
+      "alerta_id": 5576
     }
   },
   {
@@ -1756,17 +1814,18 @@
       "sexo": "Machos e Fêmeas",
       "raca": "Filhotes Puros / Mestiços Dóceis",
       "porte": "Filhotes Pequenos",
-      "recompensa": "Adoção Responsável Gratuita",
+      "recompensa": "",
       "foto_url": "/static/darkplanner_pets/ninhada_caes_09_dormindo.jpg",
       "detalhes": "Resgatados no bairro Canadá, vermifugados e comendo ração úmida. Para doação responsável e com termo de posse."
     },
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
-      "bairro": "",
-      "data_fixacao": null
+      "fixado": true,
+      "lat": -24.967074,
+      "lng": -53.447156,
+      "rua": "Rua da Lapa",
+      "bairro": "Vila Militar",
+      "data_fixacao": "2026-11-24 17:47:06",
+      "alerta_id": 5577
     }
   },
   {
@@ -1786,17 +1845,18 @@
       "sexo": "Machos e Fêmeas",
       "raca": "Filhotes Puros / Mestiços Dóceis",
       "porte": "Filhotes Pequenos",
-      "recompensa": "Adoção Responsável Gratuita",
+      "recompensa": "",
       "foto_url": "/static/darkplanner_pets/ninhada_caes_10_brincalhoes.jpg",
       "detalhes": "Resgatados no bairro Country, vermifugados e comendo ração úmida. Para doação responsável e com termo de posse."
     },
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
-      "bairro": "",
-      "data_fixacao": null
+      "fixado": true,
+      "lat": -24.938145,
+      "lng": -53.480222,
+      "rua": "Rua Jequitibá",
+      "bairro": "Recanto Tropical",
+      "data_fixacao": "2026-11-24 17:47:19",
+      "alerta_id": 5578
     }
   },
   {
@@ -1816,17 +1876,18 @@
       "sexo": "Macho",
       "raca": "Ave / Calopsita Mansa",
       "porte": "Pequeno",
-      "recompensa": "R$ 300,00",
+      "recompensa": "",
       "foto_url": "/static/darkplanner_pets/ave_01_calopsita_amarela.jpg",
       "detalhes": "Desapareceu no bairro Maria Luíza. Muito dócil, atende pelo nome. Família e crianças desesperadas procurando."
     },
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
-      "bairro": "",
-      "data_fixacao": null
+      "fixado": true,
+      "lat": -24.995374,
+      "lng": -53.454602,
+      "rua": "Rua Rio da Paz",
+      "bairro": "Nova Cidade",
+      "data_fixacao": "2026-11-24 17:48:22",
+      "alerta_id": 5581
     }
   },
   {
@@ -1846,17 +1907,18 @@
       "sexo": "Macho",
       "raca": "Ave / Calopsita Mansa",
       "porte": "Pequeno",
-      "recompensa": "Sem Recompensa (Gratidão)",
+      "recompensa": "",
       "foto_url": "/static/darkplanner_pets/ave_02_calopsita_cinza.jpg",
       "detalhes": "Desapareceu no bairro Brasmadeira. Muito dócil, atende pelo nome. Família e crianças desesperadas procurando."
     },
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
-      "bairro": "",
-      "data_fixacao": null
+      "fixado": true,
+      "lat": -24.934935,
+      "lng": -53.416171,
+      "rua": "Rua Serra da Borborema",
+      "bairro": "Brasília",
+      "data_fixacao": "2026-11-24 17:50:00",
+      "alerta_id": 5586
     }
   },
   {
@@ -1876,17 +1938,18 @@
       "sexo": "Macho",
       "raca": "Ave / Calopsita Mansa",
       "porte": "Pequeno",
-      "recompensa": "Sem Recompensa (Gratidão)",
+      "recompensa": "",
       "foto_url": "/static/darkplanner_pets/ave_03_periquito_verde.jpg",
       "detalhes": "Desapareceu no bairro Pacaembu. Muito dócil, atende pelo nome. Família e crianças desesperadas procurando."
     },
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
-      "bairro": "",
-      "data_fixacao": null
+      "fixado": true,
+      "lat": -24.995374,
+      "lng": -53.454602,
+      "rua": "Rua Rio da Paz",
+      "bairro": "Nova Cidade",
+      "data_fixacao": "2026-11-24 17:48:22",
+      "alerta_id": 5581
     }
   },
   {
@@ -1906,17 +1969,18 @@
       "sexo": "Macho",
       "raca": "Ave / Calopsita Mansa",
       "porte": "Pequeno",
-      "recompensa": "R$ 500,00",
+      "recompensa": "",
       "foto_url": "/static/darkplanner_pets/ave_04_periquito_azul.jpg",
       "detalhes": "Desapareceu no bairro Floresta. Muito dócil, atende pelo nome. Família e crianças desesperadas procurando."
     },
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
-      "bairro": "",
-      "data_fixacao": null
+      "fixado": true,
+      "lat": -24.986272,
+      "lng": -53.4849,
+      "rua": "Estrada da Pedreira",
+      "bairro": "14 de Novembro",
+      "data_fixacao": "2026-11-24 17:49:30",
+      "alerta_id": 5584
     }
   },
   {
@@ -1936,17 +2000,18 @@
       "sexo": "Macho",
       "raca": "Ave / Calopsita Mansa",
       "porte": "Pequeno",
-      "recompensa": "Sem Recompensa (Gratidão)",
+      "recompensa": "",
       "foto_url": "/static/darkplanner_pets/ave_05_canario_belga_amarelo.jpg",
       "detalhes": "Desapareceu no bairro Morumbi. Muito dócil, atende pelo nome. Família e crianças desesperadas procurando."
     },
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
-      "bairro": "",
-      "data_fixacao": null
+      "fixado": true,
+      "lat": -24.934935,
+      "lng": -53.416171,
+      "rua": "Rua Serra da Borborema",
+      "bairro": "Brasília",
+      "data_fixacao": "2026-11-24 17:50:00",
+      "alerta_id": 5586
     }
   },
   {
@@ -1966,17 +2031,18 @@
       "sexo": "Macho",
       "raca": "Ave / Calopsita Mansa",
       "porte": "Pequeno",
-      "recompensa": "R$ 800,00",
+      "recompensa": "",
       "foto_url": "/static/darkplanner_pets/ave_06_canario_da_terra.jpg",
       "detalhes": "Desapareceu no bairro Santo Onofre. Muito dócil, atende pelo nome. Família e crianças desesperadas procurando."
     },
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
-      "bairro": "",
-      "data_fixacao": null
+      "fixado": true,
+      "lat": -24.986272,
+      "lng": -53.4849,
+      "rua": "Estrada da Pedreira",
+      "bairro": "14 de Novembro",
+      "data_fixacao": "2026-11-24 17:49:30",
+      "alerta_id": 5584
     }
   },
   {
@@ -1996,17 +2062,18 @@
       "sexo": "Macho",
       "raca": "Ave / Calopsita Mansa",
       "porte": "Pequeno",
-      "recompensa": "R$ 800,00",
+      "recompensa": "",
       "foto_url": "/static/darkplanner_pets/ave_07_agapornis_fisher.jpg",
       "detalhes": "Desapareceu no bairro Alto Alegre. Muito dócil, atende pelo nome. Família e crianças desesperadas procurando."
     },
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
-      "bairro": "",
-      "data_fixacao": null
+      "fixado": true,
+      "lat": -24.939157,
+      "lng": -53.461812,
+      "rua": "Rua Visconde de Guarapuava",
+      "bairro": "Independência",
+      "data_fixacao": "2026-11-24 17:49:45",
+      "alerta_id": 5585
     }
   },
   {
@@ -2026,17 +2093,18 @@
       "sexo": "Macho",
       "raca": "Ave / Calopsita Mansa",
       "porte": "Pequeno",
-      "recompensa": "R$ 500,00",
+      "recompensa": "",
       "foto_url": "/static/darkplanner_pets/ave_08_agapornis_azul.jpg",
       "detalhes": "Desapareceu no bairro Recanto Tropical. Muito dócil, atende pelo nome. Família e crianças desesperadas procurando."
     },
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
-      "bairro": "",
-      "data_fixacao": null
+      "fixado": true,
+      "lat": -24.934935,
+      "lng": -53.416171,
+      "rua": "Rua Serra da Borborema",
+      "bairro": "Brasília",
+      "data_fixacao": "2026-11-24 17:50:00",
+      "alerta_id": 5586
     }
   },
   {
@@ -2056,17 +2124,18 @@
       "sexo": "Macho",
       "raca": "Ave / Calopsita Mansa",
       "porte": "Pequeno",
-      "recompensa": "R$ 300,00",
+      "recompensa": "",
       "foto_url": "/static/darkplanner_pets/ave_09_diamante_de_gould.jpg",
       "detalhes": "Desapareceu no bairro Ciro Nardi. Muito dócil, atende pelo nome. Família e crianças desesperadas procurando."
     },
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
-      "bairro": "",
-      "data_fixacao": null
+      "fixado": true,
+      "lat": -24.944228,
+      "lng": -53.417456,
+      "rua": "Rua Romeu Caponi",
+      "bairro": "Periolo",
+      "data_fixacao": "2026-11-24 17:51:18",
+      "alerta_id": 5588
     },
     "is_manual_slot": true
   },
@@ -2087,18 +2156,77 @@
       "sexo": "Macho",
       "raca": "Ave / Calopsita Mansa",
       "porte": "Pequeno",
-      "recompensa": "R$ 200,00",
+      "recompensa": "",
       "foto_url": "/static/darkplanner_pets/ave_10_papagaio_domestico.jpg",
       "detalhes": "Desapareceu no bairro Pioneiros Catarinenses. Muito dócil, atende pelo nome. Família e crianças desesperadas procurando."
     },
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
-      "bairro": "",
-      "data_fixacao": null
+      "fixado": true,
+      "lat": -24.944228,
+      "lng": -53.417456,
+      "rua": "Rua Romeu Caponi",
+      "bairro": "Periolo",
+      "data_fixacao": "2026-11-24 17:51:18",
+      "alerta_id": 5588
     },
     "is_manual_slot": true
+  },
+  {
+    "id": "prof_db_5509",
+    "tutor": {
+      "nome": "Tutor em Cascavel",
+      "avatar": "/static/logo_bolha_pura.png",
+      "telefone": "(45) 99999-0000",
+      "bairro_origem": "Centro"
+    },
+    "pet": {
+      "nome": "Thor • Golden Retriever Dócil",
+      "categoria": "cachorro",
+      "raca": "cachorro",
+      "porte": "medio",
+      "sexo": "indefinido",
+      "tipo_ocorrencia": "desaparecido",
+      "foto_url": "/static/darkplanner_pets/cachorro_01.jpg",
+      "recompensa": "",
+      "detalhes": "Fugiu pelo portão eletrônico na manhã de ontem. Muito dócil, atende pelo nome. Coleira azul sem identificação."
+    },
+    "posicao_mapa": {
+      "fixado": true,
+      "lat": -24.9555,
+      "lng": -53.461,
+      "rua": "Rua Paraná, 2800",
+      "bairro": "Centro",
+      "data_fixacao": "2026-11-24 10:19:59",
+      "alerta_id": 5509
+    }
+  },
+  {
+    "id": "prof_db_5513",
+    "tutor": {
+      "nome": "Tutor em Cascavel",
+      "avatar": "/static/logo_bolha_pura.png",
+      "telefone": "(45) 99999-0000",
+      "bairro_origem": "São Cristóvão"
+    },
+    "pet": {
+      "nome": "Bob • Vira-lata Caramelo Amigo [RESGATADO 🎉]",
+      "categoria": "cachorro",
+      "raca": "cachorro",
+      "porte": "medio",
+      "sexo": "indefinido",
+      "tipo_ocorrencia": "encontrado",
+      "foto_url": "/static/darkplanner_pets/cachorro_02.jpg",
+      "recompensa": "",
+      "detalhes": "BOB FOI ENCONTRADO E RESGATADO! Agradecemos de coração a toda a comunidade de Cascavel e aos alertas em tempo real. Bob já está seguro e em casa!"
+    },
+    "posicao_mapa": {
+      "fixado": true,
+      "lat": -24.948,
+      "lng": -53.438,
+      "rua": "Avenida Brasil, 4500",
+      "bairro": "São Cristóvão",
+      "data_fixacao": "2026-11-24 10:19:59",
+      "alerta_id": 5513
+    }
   }
 ]
