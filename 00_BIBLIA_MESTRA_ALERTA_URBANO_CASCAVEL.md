@@ -2,7 +2,7 @@
 ## Manual Supremo de Engenharia, Governança, Design System, Fluxos de Tela e Pipeline de Publicação
 **Documento Soberano e Obrigatório de Referência Contínua para Engenharia e IAs**
 **Autoridade e Direção:** Rigo | **Engenheiro/Arquiteto de Sistemas:** Johan
-**Data da Última Atualização:** 24/11/2026 | **Versão Corrente:** 3.9.2 (versionCode 20)
+**Data da Última Atualização:** 24/11/2026 | **Versão Corrente:** 3.9.4 (versionCode 20)
 
 ---
 
@@ -412,4 +412,32 @@ A **Mesa Operacional** (`/mesa` e `/admin/mesa`) é a estação de trabalho exec
 * **Ações em 1 Clique no Mapa da Mesa:** Popups com pílula de status cromática, botão para ouvir o Copiloto, botão para marcar como Encontrado (`POST /api/pets/<id>/status`), botão para simular avistamento e botão para exclusão.
 
 ---
-**Fim da Bíblia Mestra — Alerta Urbano Cascavel v3.9.2**
+
+## 17. REFORMULAÇÃO DA MESA OPERACIONAL v3.9.4: PAINEL FINANCEIRO HORIZONTAL E HUB DE 70 PERFIS & OCORRÊNCIAS
+
+### 17.1. Redesenho Executivo do Painel Financeiro
+* **Eliminação de Colunas Verticais Esticadas:** Corrigido erro de parsing de CSS que colapsava o grid em flexbox colunar.
+* **Layout Horizontal Padrão de Cockpit:**
+  * Topo: 4 Cards de Métricas em Grid Horizontal (`MRR Estimado`, `Total Recebido no Mês`, `Pendente / A Receber`, `Total Histórico Acumulado`).
+  * Corpo: Tabela de Extrato Geral de Parceiros & Cobranças em largura total (full-width) com filtros de status e busca rápida.
+
+### 17.2. Nova Arquitetura de "Inclusão de Perfis" (Regra Estrita 1 Tutor : 1 Pet)
+* **Princípio Cívico do Rigo:** Nenhuma pessoa real perde múltiplos animais simultaneamente. Cada ocorrência deve possuir um tutor e perfil único, simulando fielmente o comportamento dos cidadãos de Cascavel.
+* **Catálogo de 70 Perfis Completos (`static/darkplanner_perfis_completos.json`):**
+  * 70 Tutores distintos (nomes brasileiros realistas, telefones/WhatsApp formatados, bairros de Cascavel e avatares oficiais).
+  * 70 Animais correspondentes vinculados 1:1:
+    * 46 Ocorrências de Pets Desaparecidos (`tipo_ocorrencia: 'desaparecido'`).
+    * 24 Ocorrências para Adoção Responsável (`tipo_ocorrencia: 'adocao'`, incluindo 10 ninhadas de cães e 10 ninhadas de gatos).
+* **Bandeja Lateral Esquerda com Rolagem Suave:** Filtros rápidos `Todos (70)`, `🚨 Perdidos (46)`, `🏠 Adoção (24)` e `📍 No Mapa`. Cards com dados de contato, foto do tutor e do animal, e botão direto `📍 Lançar no Mapa`.
+* **Remoção Definitiva do Dock de Testadores Fictícios:** Eliminados os 4 testadores fictícios do código. Os testes em campo são conduzidos exclusivamente pela equipe real (Rigo, André e irmão).
+
+### 17.3. Mapa Leaflet de Perfis com Renderização Nítida e Geocodificação
+* **Eliminação da Tela Preta:** Contêiner `#map-pets` corrigido com altura/largura 100% e OpenStreetMap oficial em alta resolução. Múltiplos triggers de `invalidateSize(true)` ao alternar de aba.
+* **Drawer Lateral de Fixação com Geocodificação Automática:** Campo de endereço com botão `📍 Buscar` (Nominatim) e suporte a arraste e clique no mapa.
+* **Marcadores Personalizados com Foto e Raio do Copiloto (450m):**
+  * Bordas cromáticas: Vermelho pulsante para Desaparecidos e Azul ciano para Adoção.
+  * Círculo tático tracejado de 450 metros marcando o perímetro em que o motorista no veículo ouvirá a voz do Copiloto.
+  * Popup completo com link direto para simulação de WhatsApp (`https://wa.me/...`) e botão para remoção do mapa.
+
+---
+**Fim da Bíblia Mestra — Alerta Urbano Cascavel v3.9.4**
