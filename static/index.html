@@ -3613,12 +3613,12 @@
   </div>
 
   <!-- ==================== TELA COMPLETA: MARCAR ONDE VI / PET RESGATADO ==================== -->
-  <div class="full-screen-view" id="modal-avistamento" style="background:#FAF7F0 !important; z-index:2600; display:none; flex-direction:column;">
-    <div class="fs-header" style="background:#FAF7F0 !important; border-bottom:1px solid rgba(0,0,0,0.1); padding:calc(env(safe-area-inset-top, 0px) + 10px) 16px 12px; display:flex; align-items:center; justify-content:space-between; flex-shrink:0;">
-      <button type="button" class="fs-back" onclick="fecharModal('modal-avistamento')" style="background:#E8E4DA !important; color:#000000 !important; border:1px solid rgba(0,0,0,0.15) !important; font-weight:800; border-radius:999px; padding:7px 14px; cursor:pointer;">‹ Voltar</button>
+  <div class="full-screen-view" id="modal-avistamento" style="background:#E4D5BC !important; z-index:2600; display:none; flex-direction:column;">
+    <div class="fs-header" style="background:#E4D5BC !important; border-bottom:1px solid rgba(0,0,0,0.14); padding:calc(env(safe-area-inset-top, 0px) + 10px) 16px 12px; display:flex; align-items:center; justify-content:space-between; flex-shrink:0;">
+      <button type="button" class="fs-back" onclick="fecharModal('modal-avistamento')" style="background:#EDE8DF !important; color:#000000 !important; border:1px solid rgba(0,0,0,0.18) !important; font-weight:800; border-radius:999px; padding:7px 14px; cursor:pointer;">‹ Voltar</button>
       <div style="text-align:center;">
         <div style="font-size:16px; font-weight:900; color:#000000;" id="av-modal-title">Marcar Onde Vi</div>
-        <div style="font-size:10.5px; font-weight:800; color:#78716C; letter-spacing:0.5px;">Alerta Urbano Cascavel</div>
+        <div style="font-size:10.5px; font-weight:800; color:#6B655B; letter-spacing:0.5px;">Alerta Urbano Cascavel</div>
       </div>
       <div style="width:48px;"></div>
     </div>
@@ -3626,32 +3626,32 @@
     <div class="fs-body" style="flex:1; overflow-y:auto; -webkit-overflow-scrolling:touch; padding:16px; max-width:540px; margin:0 auto; width:100%; box-sizing:border-box;">
       
       <!-- Alternador de Ação Superior: Apenas Avistei | Pet Resgatado -->
-      <div style="display:flex; gap:8px; margin-bottom:14px; background:#E8E4DA; padding:4px; border-radius:14px; border:1px solid rgba(0,0,0,0.08);">
+      <div style="display:flex; gap:8px; margin-bottom:14px; background:#EDE8DF; padding:4px; border-radius:14px; border:1px solid rgba(0,0,0,0.12);">
         <button type="button" id="av-mode-visto" onclick="selecionarSubtipoAv('avistamento')" style="flex:1; padding:10px 6px; font-size:13px; font-weight:800; border-radius:10px; border:none; cursor:pointer; background:#000000; color:#FFFFFF; transition:all 0.2s;">
           Apenas Avistei
         </button>
-        <button type="button" id="av-mode-resgate" onclick="selecionarSubtipoAv('resgatado')" style="flex:1; padding:10px 6px; font-size:13px; font-weight:800; border-radius:10px; border:none; cursor:pointer; background:#E8E4DA; color:#44403C; transition:all 0.2s;">
+        <button type="button" id="av-mode-resgate" onclick="selecionarSubtipoAv('resgatado')" style="flex:1; padding:10px 6px; font-size:13px; font-weight:800; border-radius:10px; border:none; cursor:pointer; background:#EDE8DF; color:#44403C; transition:all 0.2s;">
           Pet Resgatado
         </button>
       </div>
 
-      <div id="av-modal-desc" style="font-size:12px; color:#57534E; line-height:1.45; margin-bottom:14px; font-weight:600; background:#E8E4DA; padding:10px 12px; border-radius:12px; border:1px solid rgba(0,0,0,0.08);">
+      <div id="av-modal-desc" style="font-size:12px; color:#44403C; line-height:1.45; margin-bottom:14px; font-weight:600; background:#EDE8DF; padding:10px 12px; border-radius:12px; border:1px solid rgba(0,0,0,0.12);">
         Seu ponto será marcado na trilha do mapa e o tutor será notificado. Nenhum número de WhatsApp do tutor é exposto.
       </div>
 
       <input type="hidden" id="av-pet-id" value="">
       <input type="hidden" id="av-subtipo" value="avistamento">
 
-      <!-- Bloco de Foto: Tirar Foto na Câmera OU Escolher da Galeria -->
+      <!-- Bloco de Foto: Tirar Foto OU Escolher da Galeria (Bloco Cinzinha com 2 Botões Bege/Cinza Uniformes) -->
       <div class="form-group" style="margin-bottom:14px;">
         <label style="display:block; font-size:12px; font-weight:800; color:#1C1917; margin-bottom:6px; text-transform:uppercase; letter-spacing:0.5px;" id="av-foto-label">Foto do Animal (Opcional)</label>
         
-        <div style="background:#E8E4DA; border:1.5px dashed rgba(0,0,0,0.22); border-radius:14px; padding:14px; text-align:center;">
+        <div style="background:#EDE8DF; border:1.5px dashed rgba(0,0,0,0.25); border-radius:14px; padding:14px; text-align:center;">
           <!-- Preview da imagem caso anexada -->
           <div id="av-foto-preview-wrap" style="display:none; margin-bottom:10px;">
             <img id="av-foto-preview" src="" alt="Foto" style="max-width:100%; max-height:200px; border-radius:10px; border:2px solid #000000; object-fit:contain; background:#FFFFFF;">
             <div style="margin-top:6px;">
-              <button type="button" onclick="limparFotoAvistamento()" style="background:#DC2626; color:#FFFFFF; border:none; border-radius:8px; padding:5px 12px; font-size:11px; font-weight:800; cursor:pointer;">Remover Foto</button>
+              <button type="button" onclick="limparFotoAvistamento()" style="background:#DC2626; color:#FFFFFF; border:none; border-radius:8px; padding:6px 14px; font-size:11px; font-weight:800; cursor:pointer;">Remover Foto</button>
             </div>
           </div>
 
@@ -3660,18 +3660,18 @@
             Toque para tirar foto na hora ou escolher da galeria:
           </div>
 
-          <!-- 2 Botões de Ação para Fotos -->
+          <!-- 2 Botões de Ação para Fotos (Ambos Bege/Cinza Uniformes, ZERO PRETO) -->
           <div style="display:flex; gap:8px; justify-content:center;">
-            <button type="button" onclick="document.getElementById('av-foto-camera').click()" style="flex:1; background:#000000; color:#FFFFFF; border:none; border-radius:10px; padding:10px 6px; font-size:12px; font-weight:800; cursor:pointer; box-shadow:0 2px 6px rgba(0,0,0,0.2);">
+            <button type="button" onclick="acionarFotoAvistamento('camera')" style="flex:1; background:#DFD5C2; color:#1C1917; border:1.5px solid rgba(0,0,0,0.22); border-radius:10px; padding:11px 6px; font-size:12.5px; font-weight:800; cursor:pointer; box-shadow:0 1px 4px rgba(0,0,0,0.08);">
               Tirar Foto
             </button>
-            <button type="button" onclick="document.getElementById('av-foto-galeria').click()" style="flex:1; background:#E8E4DA; color:#1C1917; border:1.5px solid #000000; border-radius:10px; padding:10px 6px; font-size:12px; font-weight:800; cursor:pointer;">
+            <button type="button" onclick="acionarFotoAvistamento('galeria')" style="flex:1; background:#DFD5C2; color:#1C1917; border:1.5px solid rgba(0,0,0,0.22); border-radius:10px; padding:11px 6px; font-size:12.5px; font-weight:800; cursor:pointer; box-shadow:0 1px 4px rgba(0,0,0,0.08);">
               Escolher da Galeria
             </button>
           </div>
         </div>
 
-        <input type="file" id="av-foto-camera" accept="image/*" capture="environment" style="display:none" onchange="previewFotoAvistamento(this)">
+        <input type="file" id="av-foto-camera" accept="image/*" style="display:none" onchange="previewFotoAvistamento(this)">
         <input type="file" id="av-foto-galeria" accept="image/*" style="display:none" onchange="previewFotoAvistamento(this)">
       </div>
 
@@ -3682,42 +3682,42 @@
           <button type="button" class="btn-tab-loc" id="av-loc-tipo-gps" onclick="trocarModoLocAvistamento('gps')" style="flex:1; padding:9px 4px; font-size:11.5px; font-weight:800; border-radius:10px; border:1px solid #000000; background:#000000; color:#FFFFFF; cursor:pointer; transition:all 0.2s;">
             Meu GPS
           </button>
-          <button type="button" class="btn-tab-loc" id="av-loc-tipo-mapa" onclick="trocarModoLocAvistamento('mapa')" style="flex:1; padding:9px 4px; font-size:11.5px; font-weight:800; border-radius:10px; border:1px solid rgba(0,0,0,0.12); background:#E8E4DA; color:#1C1917; cursor:pointer; transition:all 0.2s;">
+          <button type="button" class="btn-tab-loc" id="av-loc-tipo-mapa" onclick="trocarModoLocAvistamento('mapa')" style="flex:1; padding:9px 4px; font-size:11.5px; font-weight:800; border-radius:10px; border:1px solid rgba(0,0,0,0.14); background:#EDE8DF; color:#1C1917; cursor:pointer; transition:all 0.2s;">
             Alfinete no Mapa
           </button>
-          <button type="button" class="btn-tab-loc" id="av-loc-tipo-end" onclick="trocarModoLocAvistamento('endereco')" style="flex:1; padding:9px 4px; font-size:11.5px; font-weight:800; border-radius:10px; border:1px solid rgba(0,0,0,0.12); background:#E8E4DA; color:#1C1917; cursor:pointer; transition:all 0.2s;">
+          <button type="button" class="btn-tab-loc" id="av-loc-tipo-end" onclick="trocarModoLocAvistamento('endereco')" style="flex:1; padding:9px 4px; font-size:11.5px; font-weight:800; border-radius:10px; border:1px solid rgba(0,0,0,0.14); background:#EDE8DF; color:#1C1917; cursor:pointer; transition:all 0.2s;">
             Digitar Endereço
           </button>
         </div>
 
-        <!-- Painel 1: GPS -->
-        <div id="av-painel-loc-gps" style="display:block; font-size:12px; color:#1C1917; background:#E8E4DA; padding:12px 14px; border-radius:12px; border:1px solid rgba(0,0,0,0.12);">
+        <!-- Painel 1: GPS (Bloco Cinzinha) -->
+        <div id="av-painel-loc-gps" style="display:block; font-size:12px; color:#1C1917; background:#EDE8DF; padding:12px 14px; border-radius:12px; border:1px solid rgba(0,0,0,0.14);">
           <div style="font-weight:800; margin-bottom:2px;">Localização pelo seu GPS</div>
           <div style="font-size:11px; color:#57534E;">O ponto exato será capturado automaticamente ao confirmar.</div>
         </div>
 
         <!-- Painel 2: Mapa com Alfinete Arrastável -->
         <div id="av-painel-loc-mapa" style="display:none;">
-          <div style="font-size:11.5px; color:#57534E; margin-bottom:6px; font-weight:700;">Toque no mapa ou arraste o alfinete até onde viu o pet:</div>
-          <div id="av-mini-mapa" style="width:100%; height:220px; border-radius:14px; overflow:hidden; border:2px solid #000000; box-shadow:0 3px 10px rgba(0,0,0,0.1); margin-bottom:6px; background:#ECE8DF;"></div>
-          <div style="font-size:11.5px; font-weight:800; color:#009B3A; background:#E8E4DA; padding:7px 12px; border-radius:10px; border:1px solid rgba(0,0,0,0.08);" id="av-mapa-coords-txt">Alfinete pronto no mapa de Cascavel</div>
+          <div style="font-size:11.5px; color:#44403C; margin-bottom:6px; font-weight:700;">Toque no mapa ou arraste o alfinete até onde viu o pet:</div>
+          <div id="av-mini-mapa" style="width:100%; height:220px; border-radius:14px; overflow:hidden; border:2px solid #000000; box-shadow:0 3px 10px rgba(0,0,0,0.12); margin-bottom:6px; background:#ECE8DF;"></div>
+          <div style="font-size:11.5px; font-weight:800; color:#009B3A; background:#EDE8DF; padding:8px 12px; border-radius:10px; border:1px solid rgba(0,0,0,0.14);" id="av-mapa-coords-txt">Alfinete pronto no mapa de Cascavel</div>
         </div>
 
         <!-- Painel 3: Digitar Endereço -->
         <div id="av-painel-loc-endereco" style="display:none;">
-          <label style="display:block; font-size:11px; font-weight:700; color:#57534E; margin-bottom:4px;">Digite a rua, cruzamento ou ponto conhecido:</label>
-          <input type="text" class="form-input" id="av-input-endereco" placeholder="Ex: Av. Brasil, 4500 ou Rua Paraná com Pio XII" style="background:#FFFFFF; color:#000000; border:1.5px solid rgba(0,0,0,0.2); border-radius:10px; padding:10px 12px; width:100%; font-size:13px; box-sizing:border-box;">
+          <label style="display:block; font-size:11px; font-weight:700; color:#44403C; margin-bottom:4px;">Digite a rua, cruzamento ou ponto conhecido:</label>
+          <input type="text" class="form-input" id="av-input-endereco" placeholder="Ex: Av. Brasil, 4500 ou Rua Paraná com Pio XII" style="background:#EDE8DF; color:#000000; border:1.5px solid rgba(0,0,0,0.22); border-radius:10px; padding:10px 12px; width:100%; font-size:13px; box-sizing:border-box;">
         </div>
       </div>
 
       <!-- Observação -->
       <div class="form-group" style="margin-bottom:14px;">
         <label style="display:block; font-size:12px; font-weight:800; color:#1C1917; margin-bottom:6px; text-transform:uppercase; letter-spacing:0.5px;">Observação / Ponto de Referência</label>
-        <input type="text" class="form-input" id="av-obs" placeholder="Ex.: Visto correndo sentido Av. Brasil / Seguro comigo" style="background:#FFFFFF; color:#000000; border:1.5px solid rgba(0,0,0,0.2); border-radius:10px; padding:10px 12px; width:100%; font-size:13px; box-sizing:border-box;">
+        <input type="text" class="form-input" id="av-obs" placeholder="Ex.: Visto correndo sentido Av. Brasil / Seguro comigo" style="background:#EDE8DF; color:#000000; border:1.5px solid rgba(0,0,0,0.22); border-radius:10px; padding:10px 12px; width:100%; font-size:13px; box-sizing:border-box;">
       </div>
 
       <!-- Checkbox LGPD Contato com Tutor -->
-      <label style="display:flex; align-items:flex-start; gap:10px; background:#E8E4DA; border:1px solid rgba(0,0,0,0.12); padding:10px 12px; border-radius:12px; margin-bottom:14px; cursor:pointer;">
+      <label style="display:flex; align-items:flex-start; gap:10px; background:#EDE8DF; border:1px solid rgba(0,0,0,0.14); padding:10px 12px; border-radius:12px; margin-bottom:14px; cursor:pointer;">
         <input type="checkbox" id="av-permitir-wa" style="width:18px; height:18px; margin-top:2px;" onchange="document.getElementById('av-wa-wrap').style.display = this.checked ? 'block' : 'none'">
         <span style="font-size:11.5px; color:#1C1917; line-height:1.4;"><b>Permitir contato do tutor:</b> Liberar meu WhatsApp <b>exclusivamente para o tutor</b> confirmar e combinar a entrega.</span>
       </label>
@@ -3725,8 +3725,16 @@
       <!-- Campo de WhatsApp -->
       <div class="form-group" id="av-wa-wrap" style="display:none; margin-bottom:14px;">
         <label style="display:block; font-size:11.5px; font-weight:800; color:#1C1917; margin-bottom:4px;">Seu WhatsApp (visível apenas para o tutor)</label>
-        <input type="tel" class="form-input" id="av-wa-input" placeholder="(45) 99999-9999" style="background:#FFFFFF; color:#000000; border:1.5px solid rgba(0,0,0,0.2); border-radius:10px; padding:10px 12px; width:100%; font-size:13px; box-sizing:border-box;">
+        <input type="tel" class="form-input" id="av-wa-input" placeholder="(45) 99999-9999" style="background:#EDE8DF; color:#000000; border:1.5px solid rgba(0,0,0,0.22); border-radius:10px; padding:10px 12px; width:100%; font-size:13px; box-sizing:border-box;">
       </div>
+
+      <!-- Botão de Confirmação -->
+      <button type="button" id="btn-confirmar-av" onclick="confirmarAvistamentoModal()" style="width:100%; background:#000000; color:#FFFFFF; border:none; border-radius:12px; padding:14px; font-size:14px; font-weight:900; cursor:pointer; box-shadow:0 4px 12px rgba(0,0,0,0.25); margin-top:6px;">
+        Enviar "Visto Aqui" ao Tutor
+      </button>
+
+    </div>
+  </div>
 
       <!-- Botão de Confirmação -->
       <button type="button" id="btn-confirmar-av" onclick="confirmarAvistamentoModal()" style="width:100%; background:#000000; color:#FFFFFF; border:none; border-radius:12px; padding:14px; font-size:14px; font-weight:900; cursor:pointer; box-shadow:0 4px 12px rgba(0,0,0,0.25); margin-top:6px;">
@@ -5658,12 +5666,12 @@ Baixe o aplicativo gratuito Alerta Urbano:
       const pMapa = document.getElementById('av-painel-loc-mapa');
       const pEnd = document.getElementById('av-painel-loc-endereco');
 
-      // Todos os botões não selecionados ficam BEGE com texto escuro
+      // Todos os botões não selecionados ficam Bege/Cinzinha com texto escuro
       [bGps, bMapa, bEnd].forEach(b => {
         if (!b) return;
-        b.style.background = '#E8E4DA';
+        b.style.background = '#EDE8DF';
         b.style.color = '#1C1917';
-        b.style.border = '1px solid rgba(0, 0, 0, 0.12)';
+        b.style.border = '1px solid rgba(0, 0, 0, 0.14)';
         b.style.boxShadow = 'none';
       });
 
@@ -5699,6 +5707,16 @@ Baixe o aplicativo gratuito Alerta Urbano:
         if (pGps) pGps.style.display = 'none';
         if (pMapa) pMapa.style.display = 'none';
         if (pEnd) pEnd.style.display = 'block';
+      }
+    }
+
+    function acionarFotoAvistamento(tipo) {
+      const cam = document.getElementById('av-foto-camera');
+      const gal = document.getElementById('av-foto-galeria');
+      if (tipo === 'camera' && cam) {
+        cam.click();
+      } else if (gal) {
+        gal.click();
       }
     }
 
@@ -5796,7 +5814,7 @@ Baixe o aplicativo gratuito Alerta Urbano:
           bResg.style.boxShadow = '0 2px 8px rgba(0,0,0,0.25)';
         }
         if (bVisto) {
-          bVisto.style.background = '#E8E4DA';
+          bVisto.style.background = '#EDE8DF';
           bVisto.style.color = '#44403C';
           bVisto.style.boxShadow = 'none';
         }
@@ -5807,7 +5825,7 @@ Baixe o aplicativo gratuito Alerta Urbano:
           bVisto.style.boxShadow = '0 2px 8px rgba(0,0,0,0.25)';
         }
         if (bResg) {
-          bResg.style.background = '#E8E4DA';
+          bResg.style.background = '#EDE8DF';
           bResg.style.color = '#44403C';
           bResg.style.boxShadow = 'none';
         }
