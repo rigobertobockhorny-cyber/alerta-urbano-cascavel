@@ -436,6 +436,18 @@ def add_header(response):
     return response
 
 
+@app.route("/api/ping", methods=["GET"])
+@app.route("/health", methods=["GET"])
+def api_ping():
+    return jsonify({
+        "status": "ok",
+        "app": "Alerta Urbano Cascavel",
+        "timestamp": int(time.time()),
+        "cidade": "Cascavel",
+        "versao": "3.9.1"
+    })
+
+
 @app.route("/")
 def index():
     resp = make_response(send_from_directory("static", "index.html"))

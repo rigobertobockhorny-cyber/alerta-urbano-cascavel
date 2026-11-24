@@ -237,3 +237,146 @@ A plataforma opera sob estrita conformidade com a legislação federal brasileir
 
 ---
 **Fim da Bíblia Mestra — Alerta Urbano Cascavel v3.8.2**
+
+
+---
+
+## 9. BLINDAGEM DE COLD START DO RENDER NO APP NATIVO (v3.8.3)
+
+### 9.1. O Problema Identificado
+Em momentos de inatividade, o servidor do Render entra em modo *cold start* (sleep). Ao ser reativado pelo primeiro acesso do app, o Render retornava uma página intermediária crua em fundo preto com o texto `"APPLICATION LOADING ... INCOMING HTTP REQUEST DETECTED ... START BUILDING ON RENDER TODAY"`. No app nativo Android, essa tela preta do provedor de nuvem vazava para a visão do cidadão, violando a identidade cívica do aplicativo.
+
+### 9.2. A Solução Arquitetural no `MainActivity.kt`
+1. **Adição Obrigatória da `loadingOverlay` no Topo do `rootLayout`:**
+   * A camada nativa cívica (`#009B3A` Verde & `#FED700` Amarelo Ouro) é adicionada ao `FrameLayout` raiz acima do `WebView` e do `errorOverlay`.
+   * Cobre 100% da viewport desde o milissegundo zero de abertura do aplicativo.
+2. **Inspeção Ativa via JavaScript (`jsCheck`):**
+   * Antes de descartar a tela de abertura, o app executa verificação no DOM do WebView:
+     * Se o corpo ou título contiver `"Render"`, `"APPLICATION LOADING"` ou `"INCOMING HTTP REQUEST"`, o app detecta estado de *cold start*.
+     * A tela nativa Alerta Urbano permanece 100% visível, atualizando a mensagem de status: *"Sincronizando com a central de Cascavel..."*.
+     * Uma rotina de verificação/recarregamento é disparada a cada 2,5 segundos.
+3. **Liberação Suave Exclusiva após Inicialização Real:**
+   * Somente quando elementos vitais da aplicação (`#tab-inicio`, `#tab-mapa`, `#map` ou `state`) estiverem ativos no DOM é que a splash nativa realiza um `fade-out` suave (350ms, `alpha: 0f`) e é ocultada (`View.GONE`).
+   * **Garantia Absoluta:** O cidadão cascavelense NUNCA visualiza páginas pretas ou referências técnicas ao Render.
+
+---
+
+## 10. CALIBRAÇÃO CROMÁTICA DA PÍLULA CLIMÁTICA DA HOME (v3.8.3)
+
+### 10.1. Regra de Cores Estrita
+A pílula horizontal de alertas e condições meteorológicas (`#alert-ticker`) no topo da tela inicial segue a convenção cívica:
+* **Tempo Estável / Sem Alertas Ativos:** Fundo **Branco (`#FFFFFF`)**, tipografia escura nítida (`#18181B`), borda sutil verde-cívica (`1px solid rgba(0, 155, 58, 0.35)`) e sombra suave. O fundo preto padrão foi completamente eliminado.
+* **Alerta Amarelo (Atenção):** Fundo `#FED700`, texto `#000000`, borda dourada.
+* **Alerta Laranja (Perigo Potencial):** Fundo `#EA580C`, texto `#FFFFFF`, borda alaranjada.
+* **Alerta Vermelho (Grande Perigo):** Fundo `#DC2626`, texto `#FFFFFF`, borda vermelha intensa.
+
+---
+
+## 11. DESBLOQUEIO E DINÂMICA FLUIDA DAS ESTEIRAS DA HOME (v3.8.3)
+
+### 11.1. Causa Raiz do Bloqueio das Esteiras
+A função `ativarEsteiraArrastavel` desativava a animação CSS (`el.style.animation = 'none'`) e calculava a meia-largura do carrossel (`el.scrollWidth / 2`) uma única vez durante o primeiro ciclo de renderização. Como os dados e imagens carregam de forma assíncrona (ou quando a aba está oculta), `scrollWidth` resultava em `0` ou valor residual minúsculo. Com `halfWidth <= 0`, o loop JS de translação ficava travado em `translate3d(0, 0, 0)`, congelando as 3 esteiras da tela principal (Pets, Utilidade e Segurança).
+
+### 11.2. Motor de Arrasto e Loop Fluido Recalibrado
+* **Auto-Recalibração Dinâmica por Frame:** No loop `requestAnimationFrame`, a meia-largura (`halfWidth`) é recalculada continuamente assim que o layout estabiliza e as imagens carregam (`Math.abs(sc.halfWidth - hw) > 8`).
+* **Detecção Inteligente de Gesto:** O manipulador de toque diferencia rolagem vertical de arrasto horizontal (`Math.abs(deltaY) > Math.abs(deltaX) * 1.4`), permitindo rolagem fluida da página sem travar o dedo do usuário.
+* **Retomada Automática do Fluxo:** Após o cidadão arrastar manualmente uma esteira e soltar o dedo, o fluxo suave retoma automaticamente em 1,4 segundos (velocidade calibrada de 28 px/s).
+
+---
+
+## 12. PÍLULA DISCRETA DE STATUS NOS CARDS DE PETS (v3.8.3)
+
+### 12.1. Posicionamento e Estética
+* **Localização:** Posicionada **abaixo da foto**, diretamente ao lado do nome do animal no bloco de conteúdo (`pet-card-content`).
+* **Design Discreto (Subtle/Clean):** Fundo neutro cinza-claro (`#F4F4F5`), borda fina (`#D4D4D8`) e texto escuro de alta legibilidade (`#18181B`). Não compete visualmente com a foto nem utiliza tons berrantes.
+* **Classificações Suportadas:**
+  * `DESAPARECIDO` (`.pet-status-pill.desaparecido`)
+  * `ANIMAL AVISTADO` (`.pet-status-pill.avistado`)
+  * `PARA ADOÇÃO` (`.pet-status-pill.adocao`)
+  * `ENCONTRADO` (`.pet-status-pill.encontrado`)
+* **Altura Otimizada da Foto:** Redução proporcional de `230px` para `200px` no container da imagem (`.pet-card-media`), gerando uma visualização mais compacta e ergonômica na rolagem vertical da aba Pets.
+
+---
+
+## 13. ESTEIRAS PADRONIZADAS DE PARCEIROS (ABA PETS & ABA PARCEIROS)
+
+### 13.1. Especificações Técnicas Unificadas
+1. **Dimensões e Estilo (Narrow & Slim):**
+   * Altura compacta tipo fita comercial (`padding: 10px 12px`, cantos arredondados de `16px`, borda sutil `1px solid rgba(0,0,0,0.09)`).
+   * Pílulas deslizantes elegantes com estrela dourada (`⭐`), nome da empresa e tag de benefício/oferta (ex.: `⭐ Vet 24h Cascavel [🏷️ 15% OFF]`).
+2. **Posicionamento Idêntico nas Duas Abas:**
+   * **Na Aba Pets (`#esteira-parceiros-box`):** Localizada logo abaixo da listagem de blocos de pets e imediatamente acima do rodapé/menu inferior.
+   * **Na Aba Parceiros (`#esteira-parceiros-tab-box`):** Localizada no final da lista de parceiros, logo acima do rodapé/menu inferior.
+3. **Velocidade e Interação:**
+   * Ambas rodam no mesmo motor contínuo (`ativarEsteiraArrastavel`) a 24 px/s com suporte a toque/arrasto manual.
+   * Clique em qualquer pílula abre o Folder Comercial Completo (`abrirFolderParceiroById(id)`).
+4. **Limpeza de Filtros na Aba Parceiros:**
+   * Os botões de filtro por categoria da aba Parceiros foram removidos provisoriamente, mantendo o feed limpo e direto.
+
+---
+**Fim da Bíblia Mestra — Alerta Urbano Cascavel v3.8.3**
+
+
+---
+
+## 14. MESA OPERACIONAL: COCKPIT DE PARCEIROS, FATURAMENTO E RADAR DE EXPANSÃO (v3.9.0)
+
+### 14.1. Objetivo Estratégico (Vórtice Mídia)
+A **Mesa Operacional** (`/mesa` e `/admin/mesa`) é a estação de trabalho executiva e tática projetada especificamente para o Diretor (Rigo) gerenciar a expansão territorial, o mapa de balões, o faturamento recorrente (MRR) e o preenchimento de cotas exclusivas de patrocinadores em Cascavel.
+
+### 14.2. Módulos Operacionais Integrados
+1. **Mesa Tática (Mapa Interativo de Cascavel com Balões Arrastáveis):**
+   * **Bandeja de Balões por Segmento:** Menu lateral com os balões de cada nicho (Clínicas Veterinárias 🐾, Pet Shops 🐕, Banho e Tosa 🛁, Auto Centers 🚗, Borracharias 🛞, Postos de Combustível ⛽, Mecânicas de Moto 🏍️, Mecânicas de Carro 🔧 e Alimentação 🍔).
+   * **Drag & Drop Direto no Mapa:** O Diretor pode arrastar qualquer balão da bandeja e soltá-lo sobre a rua/bairro desejado em Cascavel, capturando as coordenadas GPS instantaneamente e abrindo o formulário comercial.
+   * **Drawer de Edição e Cadastro:** Painel lateral direito para inserir/editar Razão Social, Bairro, Endereço, WhatsApp direto, Selo (Ouro ou Cidadão), Mensalidade Contratada, Dia de Vencimento, Status de Cobrança e até 3 produtos/ofertas com cálculo automático de desconto.
+2. **Painel Financeiro & Controle de Faturamento:**
+   * **KPIs Executivos em Tempo Real:** MRR Estimado (Mensal Recorrente), Total Recebido no Mês, Faturas a Receber / Pendentes e Total Histórico Liquidado.
+   * **Extrato e Gestão de Cobranças:** Tabela detalhada de todos os parceiros com status de pagamento dinâmico (`🟢 Pago`, `🟡 Pendente / A Vencer`, `🔴 Em Atraso`).
+   * **Ações de 1 Clique:** Alternância instantânea de status financeiro e botão de cobrança via WhatsApp com mensagem executiva personalizada pré-formatada.
+3. **Radar de Segmentos (Metas de 5 Parceiros por Nicho):**
+   * **Regra de Exclusividade Comercial:** Cota máxima fixada em **5 patrocinadores** por segmento.
+   * **Monitoramento Visual de Ocupação:** Barra de progresso percentual (`X / 5`), cálculo de receita mensal gerada por aquele segmento e receita potencial máxima com a cota cheia.
+   * **Alertas Comerciais Inteligentes:**
+     * `🚨 Urgente:` Destaque em vermelho para segmentos com 0 parceiros (prioridade de prospecção imediata);
+     * `🟡 Atenção:` Segmentos com vagas abertas (`Faltam X patrocinadores para fechar a cota`);
+     * `🟢 Cota Esgotada:` Segmentos com 5/5 parceiros preenchidos.
+4. **Armazenamento e Operação:**
+   * Opera de forma autônoma e segura no navegador (`localStorage` com sementes comerciais realistas de Cascavel), com acesso via `http://localhost:5000/mesa` e na nuvem `https://alerta-urbano-cascavel.onrender.com/mesa`.
+
+---
+
+## 15. BLINDAGEM COLD-START RENDER, GOVERNANÇA DE PÍLULAS E MESA DE INCLUSÃO DE PETS (v3.9.1)
+
+### 15.1. Blindagem Total Contra a Tela Crua do Render
+* **Causa do Problema:** Servidores na camada gratuita do Render hibernam após 15 minutos sem requisições. Ao acordar, o Render interceptava a requisição HTTP e servia diretamente sua página HTML preta interna (`APPLICATION LOADING ... INCOMING HTTP REQUEST DETECTED ...`).
+* **Solução em Camada Dupla (Impenetrável):**
+  1. **Service Worker (`static/sw.js`):** Intercepta requisições de navegação antes de chegarem à tela do usuário. Se a resposta contiver `APPLICATION LOADING`, `Render` ou status 502/503, o Service Worker descarta o HTML cru do Render e entrega instantaneamente a tela de boot cívica do Alerta Urbano em Verde e Amarelo, com barra de progresso animada (0% a 100%) e polling automático em `/api/ping` a cada 1.6s, recarregando a página assim que o backend estiver pronto. O usuário NUNCA mais vê a tela preta do Render.
+  2. **Android WebView (`MainActivity.kt`):** A camada nativa de overlay (`loadingOverlay`) permanece 100% opaca e visível até que o JavaScript da página confirme explicitamente a presença física dos elementos DOM `#tab-inicio` ou `#tab-mapa` e o estado da aplicação. Zero vazamento de tela de carregamento externo.
+  3. **Keep-Alive Server:** Adicionado endpoint ultraleve `/api/ping` e `/health` em `server.py` que responde com confirmação JSON de alta performance.
+
+### 15.2. Governança Cromática das Pílulas (Eliminação Total do Preto)
+* **Padrão Oficial de Cores:**
+  * **Alerta Crítico / Máximo:** Pílula **VERMELHA** (`#DC2626`) com tipografia branca de alto contraste;
+  * **Alerta Moderado / Atenção:** Pílula **LARANJA** (`#EA580C`) com tipografia branca;
+  * **Sem Alerta / Clima Estável:** Pílula **BRANCA** (`#FFFFFF`) com borda e tipografia no Verde Bandeira Oficial (`#009B3A`), **JAMAIS PRETO**.
+* **Correção no Dark Mode:** Eliminada regra legada que forçava `background: #27272A` em `.pet-status-pill.desaparecido`. O status "Desaparecido" agora é estritamente **VERMELHO SANGUE VIBRANTE** (`#DC2626`) em qualquer modo de tema.
+
+### 15.3. Pílula Flutuante nos Blocos Pet (`.pet-badge-overlay`)
+* **Destaque Visual nos Blocos da Aba Pets:** Cada card de animal na aba Pets agora ostenta uma pílula flutuante diretamente sobreposta à fotografia no canto superior esquerdo (`position: absolute; top: 10px; left: 10px; z-index: 10;`):
+  * `🚨 DESAPARECIDO`: Fundo vermelho `#DC2626`, borda branca 1.5px, sombra 3D;
+  * `🏡 PARA ADOÇÃO`: Fundo verde esmeralda `#059669`, borda branca 1.5px;
+  * `👀 ANIMAL AVISTADO`: Fundo âmbar alaranjado `#D97706`, borda branca 1.5px;
+  * `🎉 RESGATADO / ENCONTRADO`: Fundo verde `#10B981`, borda branca 1.5px.
+* E também mantida a pílula de apoio alinhada ao nome do animal logo abaixo da mídia.
+
+### 15.4. Mesa Operacional: Módulo "Inclusão de Pets (Pontos de GPS)"
+* **Bandeja de Balões de Animais:** Permite arrastar espécies pré-configuradas (🐶 Cão Macho com gravatinha, 🐩 Cadela Fêmea com lacinho, 🐱 Gato Macho com gravatinha, 🐈 Gata Fêmea com lacinho, 🍼 Ninhada de Cãezinhos, 🐾 Ninhada de Gatinhos e 🦜 Ave Doméstica) diretamente para a rua ou esquina desejada em Cascavel.
+* **Georreferenciamento Reverso:** Ao soltar o balão ou clicar na via, captura Latitude e Longitude exatas com 6 casas decimais e busca automaticamente o nome da Rua e Bairro via Nominatim.
+* **Raio Tático de 450 Metros:** Desenha no mapa um círculo vermelho translúcido de 450 metros de raio ao redor do animal, indicando a zona exata de geofencing auditivo do Copiloto.
+* **Galeria Dark Planner Integrada (1-Click Foto):** Conectada a `/static/darkplanner_pets/catalogo.json`, exibe miniaturas das 70 fotografias de alta qualidade geradas localmente pelo Dark Planner. Com 1 clique, o Diretor seleciona a foto desejada sem precisar fazer upload manual.
+* **Simulador de Áudio do Copiloto (TTS):** Botão que reproduz por síntese de voz nativa (`window.speechSynthesis`) a frase exata que o motorista ou pedestre escutará na rua:
+  * *"Atenção motorista: animal desaparecido cadastrado a 400 metros na [Rua], [Bairro]. [Espécie/Sexo] [Nome]."*
+* **Inserção Direta no Banco:** Botão que executa `POST /api/alertas` e grava o registro instantaneamente no SQLite (`alertas_cascavel.db`), refletindo no aplicativo e no mapa geral em tempo real.
+
+---
+**Fim da Bíblia Mestra — Alerta Urbano Cascavel v3.9.1**
