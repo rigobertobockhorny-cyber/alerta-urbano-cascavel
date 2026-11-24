@@ -1623,9 +1623,12 @@
           </div>
         </div>
 
-        <div class="drawer-footer">
+        <div class="drawer-footer" style="display:flex; gap:8px; align-items:center;">
           <button type="button" class="btn-del-parc" onclick="excluirParceiroAtual()">Excluir</button>
-          <button type="button" class="btn-save-parc" onclick="salvarParceiroDrawer()" style="background:#22C55E; color:#fff;">💾 Salvar na Mesa & Sincronizar App</button>
+          <button type="button" id="btn-toggle-visivel-mapa" onclick="alternarVisibilidadeMapaAtual()" style="background:rgba(239,68,68,0.15); color:#EF4444; border:1px solid rgba(239,68,68,0.3); padding:10px 12px; border-radius:8px; font-weight:800; font-size:11px; cursor:pointer; display:flex; align-items:center; gap:6px; white-space:nowrap;">
+            👁️ Ocultar do Mapa
+          </button>
+          <button type="button" class="btn-save-parc" onclick="salvarParceiroDrawer()" style="background:#22C55E; color:#fff; flex:1;">💾 Salvar na Mesa & Sincronizar App</button>
         </div>
       </aside>
     </section>
@@ -1957,9 +1960,18 @@
       atualizarKpisGerais();
     }
 
-    function salvarParceiros() {
+    async function salvarParceiros() {
       localStorage.setItem('mesa_parceiros_v2', JSON.stringify(parceiros));
       atualizarKpisGerais();
+      try {
+        await fetch('/api/mesa/salvar-catalogo', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ parceiros: parceiros })
+        });
+      } catch (err) {
+        console.warn('Persistência em background no servidor:', err);
+      }
     }
 
     /* ==================== INICIALIZAÇÃO DO MAPA ==================== */
@@ -2031,6 +2043,9 @@
       markersMap = {};
 
       parceiros.forEach(p => {
+        // Se oculto pelo Rigo, preserva o cadastro e posição mas não plota o alfinete no mapa
+        if (p.posicao_mapa && p.posicao_mapa.oculto === true) return;
+
         const isFixado = (p.posicao_mapa && p.posicao_mapa.fixado && p.posicao_mapa.lat && p.posicao_mapa.lng) ||
                          (p.lat && p.lng && p.posicao_mapa?.fixado !== false);
         if (!isFixado) return;
@@ -2050,11 +2065,23 @@
           iconAnchor: [20, 20]
         });
 
-        const marker = L.marker([lat, lng], { icon: customIcon }).addTo(map);
+        const marker = L.marker([lat, lng], { icon: customIcon, draggable: true }).addTo(map);
 
         marker.on('click', (e) => {
           L.DomEvent.stopPropagation(e);
           abrirDrawerEditar(p.id);
+        });
+
+        // Permite ao Rigo arrastar o alfinete diretamente no mapa para ajuste fino
+        marker.on('dragend', async (e) => {
+          const newPos = e.target.getLatLng();
+          if (!p.posicao_mapa) p.posicao_mapa = { fixado: true };
+          p.posicao_mapa.lat = newPos.lat;
+          p.posicao_mapa.lng = newPos.lng;
+          p.lat = newPos.lat;
+          p.lng = newPos.lng;
+          salvarParceiros();
+          mostrarToast(`📍 Posição de "${p.nome}" atualizada no mapa!`);
         });
 
         markersMap[p.id] = marker;
@@ -2090,10 +2117,13 @@
 
       container.innerHTML = lista.map(p => {
         const seg = SEGMENTOS_DEF[p.categoria] || { nome: p.categoria_nome || 'Parceiro', icone: '🏢' };
+        const isOculto = p.posicao_mapa && p.posicao_mapa.oculto === true;
         const isFixado = (p.posicao_mapa && p.posicao_mapa.fixado) || (p.lat && p.lng && p.posicao_mapa?.fixado !== false);
-        const statusBadge = isFixado
-          ? '<span style="font-size:9.5px; color:#22C55E; font-weight:800; background:rgba(34,197,94,0.15); padding:2px 6px; border-radius:4px; flex-shrink:0;">📍 No Mapa</span>'
-          : '<span style="font-size:9.5px; color:#F59E0B; font-weight:800; background:rgba(245,158,11,0.15); padding:2px 6px; border-radius:4px; flex-shrink:0;">⏱️ Na Esteira</span>';
+        const statusBadge = isOculto
+          ? '<span style="font-size:9.5px; color:#94A3B8; font-weight:800; background:rgba(148,163,184,0.15); padding:2px 6px; border-radius:4px; flex-shrink:0;">⏸️ Oculto (Salvo)</span>'
+          : (isFixado
+            ? '<span style="font-size:9.5px; color:#22C55E; font-weight:800; background:rgba(34,197,94,0.15); padding:2px 6px; border-radius:4px; flex-shrink:0;">📍 No Mapa</span>'
+            : '<span style="font-size:9.5px; color:#F59E0B; font-weight:800; background:rgba(245,158,11,0.15); padding:2px 6px; border-radius:4px; flex-shrink:0;">⏱️ Na Esteira</span>');
 
         const logoHtml = p.logo_url
           ? `<img src="${p.logo_url}" style="width:100%; height:100%; object-fit:cover;" onerror="this.onerror=null; this.src='/static/logo_bolha_pura.png';">`
@@ -2182,6 +2212,8 @@
       document.getElementById('edit-prod1-por').value = '';
       document.getElementById('edit-prod1-tag').value = '';
       document.getElementById('edit-destaque-esteira').checked = true;
+
+      atualizarBotaoOcultarDrawer(null);
 
       document.getElementById('partner-drawer').classList.remove('closed');
 
@@ -2324,6 +2356,8 @@
       document.getElementById('edit-total-pago').value = p.total_pago || 0;
       document.getElementById('edit-destaque-esteira').checked = (p.destaque_esteira !== 0);
 
+      atualizarBotaoOcultarDrawer(p);
+
       document.getElementById('partner-drawer').classList.remove('closed');
 
       posicionarMarcadorEdicaoNoMapa(lat, lng);
@@ -2399,11 +2433,12 @@
       const idx = parceiros.findIndex(p => String(p.id) === String(idVal));
       let partnerUpdated = null;
       if (idx !== -1) {
+        const wasOculto = parceiros[idx]?.posicao_mapa?.oculto === true;
         parceiros[idx] = {
           ...parceiros[idx],
           nome, categoria, bairro, endereco, telefone_whatsapp: whats, telefone: whats, selo_tipo: selo,
           lat, lng,
-          posicao_mapa: { fixado: true, lat, lng, endereco, bairro },
+          posicao_mapa: { fixado: true, lat, lng, endereco, bairro, oculto: wasOculto },
           logo_url: logoUrl, banner_url: bannerUrl,
           mensalidade, dia_vencimento: diaVenc, status_pagamento: statusPag,
           total_pago: totalPago, destaque_esteira: destaque, produtos: prods,
@@ -2417,7 +2452,7 @@
           id: newId,
           nome, categoria, bairro, endereco, telefone_whatsapp: whats, telefone: whats, selo_tipo: selo,
           lat, lng,
-          posicao_mapa: { fixado: true, lat, lng, endereco, bairro },
+          posicao_mapa: { fixado: true, lat, lng, endereco, bairro, oculto: false },
           logo_url: logoUrl, banner_url: bannerUrl,
           mensalidade, dia_vencimento: diaVenc, status_pagamento: statusPag,
           total_pago: totalPago, destaque_esteira: destaque, produtos: prods,
@@ -2489,6 +2524,48 @@
           await fetch(`/api/parceiros/${pId}`, { method: 'DELETE' });
         }
       } catch (_) {}
+    }
+
+    function alternarVisibilidadeMapaAtual() {
+      if (!parceiroSelecionadoId) return;
+      const p = parceiros.find(item => String(item.id) === String(parceiroSelecionadoId));
+      if (!p) return;
+      if (!p.posicao_mapa) p.posicao_mapa = { fixado: true, lat: p.lat, lng: p.lng };
+      p.posicao_mapa.oculto = !p.posicao_mapa.oculto;
+
+      salvarParceiros();
+      renderizarMarcadoresMapa();
+      renderizarBandejaBaloes();
+      atualizarBotaoOcultarDrawer(p);
+
+      if (p.posicao_mapa.oculto) {
+        mostrarToast(`⏸️ "${p.nome}" ocultado do mapa. Cadastro, endereço e dados financeiros preservados!`);
+      } else {
+        mostrarToast(`📍 "${p.nome}" reexibido no mapa de Cascavel!`);
+      }
+    }
+
+    function atualizarBotaoOcultarDrawer(p) {
+      const btn = document.getElementById('btn-toggle-visivel-mapa');
+      if (!btn) return;
+      if (!p || !p.id) {
+        btn.style.display = 'none';
+        return;
+      }
+      btn.style.display = 'flex';
+      if (p.posicao_mapa && p.posicao_mapa.oculto === true) {
+        btn.innerHTML = '📍 Reexibir no Mapa';
+        btn.style.background = 'rgba(34,197,94,0.15)';
+        btn.style.color = '#22C55E';
+        btn.style.borderColor = 'rgba(34,197,94,0.3)';
+        btn.title = 'Reexibir este parceiro no mapa oficial de Cascavel';
+      } else {
+        btn.innerHTML = '👁️ Ocultar do Mapa';
+        btn.style.background = 'rgba(239,68,68,0.15)';
+        btn.style.color = '#EF4444';
+        btn.style.borderColor = 'rgba(239,68,68,0.3)';
+        btn.title = 'Ocultar temporariamente do mapa mantendo todo o cadastro salvo';
+      }
     }
 
     /* ==================== TROCA DE VISÕES DA MESA OPERACIONAL ==================== */

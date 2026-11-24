@@ -894,6 +894,65 @@ def excluir_parceiro(parceiro_id):
     return jsonify({"ok": True, "mensagem": "Parceiro excluído com sucesso."})
 
 
+@app.route("/api/mesa/salvar-catalogo", methods=["POST"])
+def salvar_catalogo_mesa():
+    """
+    Grava as coordenadas e dados dos parceiros diretamente no disco do servidor
+    (static/darkplanner_parceiros_completos.json) e sincroniza as coordenadas com o banco SQLite.
+    Garante persistência permanente mesmo se o cache for limpo ou se o servidor reiniciar.
+    """
+    try:
+        data = request.get_json(force=True, silent=True) or {}
+        parceiros = data.get("parceiros", [])
+        if not parceiros:
+            return jsonify({"error": "Lista de parceiros vazia."}), 400
+
+        caminho_json = os.path.join(os.path.dirname(__file__), "static", "darkplanner_parceiros_completos.json")
+        with open(caminho_json, "w", encoding="utf-8") as f:
+            json.dump(parceiros, f, ensure_ascii=False, indent=2)
+
+        # Sincroniza posições no banco SQLite
+        conn = get_db()
+        cur = conn.cursor()
+        for p in parceiros:
+            nome = (p.get("nome") or "").strip()
+            pos = p.get("posicao_mapa") or {}
+            lat = pos.get("lat") or p.get("lat")
+            lng = pos.get("lng") or p.get("lng")
+            bairro = pos.get("bairro") or p.get("bairro") or "Centro"
+            endereco = pos.get("endereco") or p.get("endereco") or ""
+            categoria = p.get("categoria") or "geral"
+            whats = p.get("telefone_whatsapp") or p.get("telefone") or ""
+            ativo = 0 if pos.get("oculto") else 1
+
+            if nome and lat and lng:
+                try:
+                    cur.execute("SELECT id FROM parceiros WHERE nome = ?", (nome,))
+                    row = cur.fetchone()
+                    if row:
+                        cur.execute("""
+                            UPDATE parceiros
+                            SET lat = ?, lng = ?, bairro = ?, endereco = ?, telefone_whatsapp = ?, categoria = ?, ativo = ?
+                            WHERE id = ?
+                        """, (float(lat), float(lng), bairro, endereco, whats, categoria, ativo, row["id"]))
+                    else:
+                        cur.execute("""
+                            INSERT INTO parceiros (nome, categoria, bairro, endereco, telefone_whatsapp, lat, lng, ativo)
+                            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                        """, (nome, categoria, bairro, endereco, whats, float(lat), float(lng), ativo))
+                except Exception as sql_err:
+                    print(f"[MESA] Aviso ao sincronizar parceiro {nome} no SQLite: {sql_err}")
+
+        conn.commit()
+        conn.close()
+
+        print(f"[MESA] Catálogo de parceiros salvo com sucesso: {len(parceiros)} registros.")
+        return jsonify({"ok": True, "total": len(parceiros), "mensagem": "Catálogo salvo permanentemente no disco e no banco!"})
+    except Exception as e:
+        print(f"[MESA] Erro ao salvar catálogo no servidor: {e}")
+        return jsonify({"error": str(e)}), 500
+
+
 # ============================================================================
 # COCKPIT EXECUTIVO & PAINEL DE CONTROLE DIRETO DO RIGO (SEM DEPENDÊNCIA DE IA)
 # ============================================================================
