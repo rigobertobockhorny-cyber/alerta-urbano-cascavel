@@ -12,18 +12,19 @@
     "endereco": "Avenida Brasil, 6200",
     "cidade": "Cascavel",
     "telefone": "(45) 99801-3456",
-    "mensalidade": 300.0,
+    "mensalidade": 300,
     "status_pagamento": "pago",
-    "total_pago": 300.0,
+    "total_pago": 300,
     "logo_url": "/static/parceiros/pet_vet/pet_vet_01_vv/logo.png",
     "banner_url": "/static/parceiros/pet_vet/pet_vet_01_vv/banner.png",
     "destaque_esteira": 1,
     "posicao_mapa": {
       "fixado": true,
-      "lat": -24.9555,
-      "lng": -53.456,
+      "lat": -24.92057211810327,
+      "lng": -53.442649841308594,
       "endereco": "Avenida Brasil, 6200",
-      "bairro": "Centro"
+      "bairro": "Centro",
+      "rua": "Avenida Brasil, 6200"
     },
     "produtos": [
       {
@@ -47,8 +48,8 @@
     ],
     "dia_vencimento": 10,
     "vencimento": "10/12/2026",
-    "lat": -24.9555,
-    "lng": -53.456
+    "lat": -24.92057211810327,
+    "lng": -53.442649841308594
   },
   {
     "id": "parc_02",
@@ -63,18 +64,19 @@
     "endereco": "Rua Manaus, 1420",
     "cidade": "Cascavel",
     "telefone": "(45) 99802-3456",
-    "mensalidade": 300.0,
+    "mensalidade": 300,
     "status_pagamento": "pago",
-    "total_pago": 300.0,
+    "total_pago": 300,
     "logo_url": "/static/parceiros/pet_vet/pet_vet_02_sf/logo.png",
     "banner_url": "/static/parceiros/pet_vet/pet_vet_02_sf/banner.png",
     "destaque_esteira": 1,
     "posicao_mapa": {
       "fixado": true,
-      "lat": -24.945,
-      "lng": -53.475,
+      "lat": -24.91497856723889,
+      "lng": -53.432586193084724,
       "endereco": "Rua Manaus, 1420",
-      "bairro": "Cancelli"
+      "bairro": "Cancelli",
+      "rua": "Rua Manaus, 1420"
     },
     "produtos": [
       {
@@ -98,8 +100,8 @@
     ],
     "dia_vencimento": 10,
     "vencimento": "10/12/2026",
-    "lat": -24.945,
-    "lng": -53.475
+    "lat": -24.91497856723889,
+    "lng": -53.432586193084724
   },
   {
     "id": "parc_03",
@@ -114,18 +116,19 @@
     "endereco": "Rua Presidente Kennedy, 1850",
     "cidade": "Cascavel",
     "telefone": "(45) 99803-3456",
-    "mensalidade": 300.0,
+    "mensalidade": 300,
     "status_pagamento": "pago",
-    "total_pago": 300.0,
+    "total_pago": 300,
     "logo_url": "/static/parceiros/pet_vet/pet_vet_03_cv/logo.png",
     "banner_url": "/static/parceiros/pet_vet/pet_vet_03_cv/banner.png",
     "destaque_esteira": 1,
     "posicao_mapa": {
       "fixado": true,
-      "lat": -24.9515,
-      "lng": -53.482,
+      "lat": -24.951277406358148,
+      "lng": -53.475759029388435,
       "endereco": "Rua Presidente Kennedy, 1850",
-      "bairro": "Coqueiral"
+      "bairro": "Coqueiral",
+      "rua": "Rua Presidente Kennedy, 1850"
     },
     "produtos": [
       {
@@ -149,8 +152,8 @@
     ],
     "dia_vencimento": 10,
     "vencimento": "10/12/2026",
-    "lat": -24.9515,
-    "lng": -53.482
+    "lat": -24.951277406358148,
+    "lng": -53.475759029388435
   },
   {
     "id": "parc_04",
@@ -165,18 +168,19 @@
     "endereco": "Rua Cuiabá, 2900",
     "cidade": "Cascavel",
     "telefone": "(45) 99804-3456",
-    "mensalidade": 300.0,
+    "mensalidade": 300,
     "status_pagamento": "pago",
-    "total_pago": 300.0,
+    "total_pago": 300,
     "logo_url": "/static/parceiros/pet_vet/pet_vet_04_ea/logo.png",
     "banner_url": "/static/parceiros/pet_vet/pet_vet_04_ea/banner.png",
     "destaque_esteira": 1,
     "posicao_mapa": {
       "fixado": true,
-      "lat": -24.966,
-      "lng": -53.468,
+      "lat": -24.966218031753836,
+      "lng": -53.46791625022889,
       "endereco": "Rua Cuiabá, 2900",
-      "bairro": "Neva"
+      "bairro": "Neva",
+      "rua": "Rua Cuiabá, 2900"
     },
     "produtos": [
       {
@@ -200,8 +204,8 @@
     ],
     "dia_vencimento": 10,
     "vencimento": "10/12/2026",
-    "lat": -24.966,
-    "lng": -53.468
+    "lat": -24.966218031753836,
+    "lng": -53.46791625022889
   },
   {
     "id": "parc_05",
@@ -216,18 +220,19 @@
     "endereco": "Avenida Piquiri, 1200",
     "cidade": "Cascavel",
     "telefone": "(45) 99805-3456",
-    "mensalidade": 300.0,
+    "mensalidade": 300,
     "status_pagamento": "pago",
-    "total_pago": 300.0,
+    "total_pago": 300,
     "logo_url": "/static/parceiros/pet_vet/pet_vet_05_pv/logo.png",
     "banner_url": "/static/parceiros/pet_vet/pet_vet_05_pv/banner.png",
     "destaque_esteira": 1,
     "posicao_mapa": {
       "fixado": true,
-      "lat": -24.938,
-      "lng": -53.431,
+      "lat": -24.93214687495979,
+      "lng": -53.42075765132905,
       "endereco": "Avenida Piquiri, 1200",
-      "bairro": "São Cristóvão"
+      "bairro": "São Cristóvão",
+      "rua": "Avenida Piquiri, 1200"
     },
     "produtos": [
       {
@@ -251,8 +256,8 @@
     ],
     "dia_vencimento": 10,
     "vencimento": "10/12/2026",
-    "lat": -24.938,
-    "lng": -53.431
+    "lat": -24.93214687495979,
+    "lng": -53.42075765132905
   },
   {
     "id": "parc_06",
@@ -267,18 +272,19 @@
     "endereco": "Rua Paraná, 2840",
     "cidade": "Cascavel",
     "telefone": "(45) 99806-3456",
-    "mensalidade": 300.0,
+    "mensalidade": 300,
     "status_pagamento": "pago",
-    "total_pago": 300.0,
+    "total_pago": 300,
     "logo_url": "/static/parceiros/pet_shop/pet_shop_01_bm/logo.png",
     "banner_url": "/static/parceiros/pet_shop/pet_shop_01_bm/banner.png",
     "destaque_esteira": 1,
     "posicao_mapa": {
       "fixado": true,
-      "lat": -24.954,
-      "lng": -53.458,
+      "lat": -24.95507143364067,
+      "lng": -53.463592529296875,
       "endereco": "Rua Paraná, 2840",
-      "bairro": "Centro"
+      "bairro": "Centro",
+      "rua": "Rua Paraná, 2840"
     },
     "produtos": [
       {
@@ -302,8 +308,8 @@
     ],
     "dia_vencimento": 10,
     "vencimento": "10/12/2026",
-    "lat": -24.954,
-    "lng": -53.458
+    "lat": -24.95507143364067,
+    "lng": -53.463592529296875
   },
   {
     "id": "parc_07",
@@ -318,18 +324,19 @@
     "endereco": "Rua Recife, 2400",
     "cidade": "Cascavel",
     "telefone": "(45) 99807-3456",
-    "mensalidade": 300.0,
+    "mensalidade": 300,
     "status_pagamento": "pago",
-    "total_pago": 300.0,
+    "total_pago": 300,
     "logo_url": "/static/parceiros/pet_shop/pet_shop_02_mp/logo.png",
     "banner_url": "/static/parceiros/pet_shop/pet_shop_02_mp/banner.png",
     "destaque_esteira": 1,
     "posicao_mapa": {
       "fixado": true,
-      "lat": -24.9535,
-      "lng": -53.4795,
+      "lat": -24.953573153980226,
+      "lng": -53.492474555969245,
       "endereco": "Rua Recife, 2400",
-      "bairro": "Coqueiral"
+      "bairro": "Coqueiral",
+      "rua": "Rua Recife, 2400"
     },
     "produtos": [
       {
@@ -353,8 +360,8 @@
     ],
     "dia_vencimento": 10,
     "vencimento": "10/12/2026",
-    "lat": -24.9535,
-    "lng": -53.4795
+    "lat": -24.953573153980226,
+    "lng": -53.492474555969245
   },
   {
     "id": "parc_08",
@@ -369,18 +376,19 @@
     "endereco": "Avenida Rocha Pombo, 1500",
     "cidade": "Cascavel",
     "telefone": "(45) 99808-3456",
-    "mensalidade": 300.0,
+    "mensalidade": 300,
     "status_pagamento": "pago",
-    "total_pago": 300.0,
+    "total_pago": 300,
     "logo_url": "/static/parceiros/pet_shop/pet_shop_03_ca/logo.png",
     "banner_url": "/static/parceiros/pet_shop/pet_shop_03_ca/banner.png",
     "destaque_esteira": 1,
     "posicao_mapa": {
       "fixado": true,
-      "lat": -24.972,
-      "lng": -53.456,
+      "lat": -24.97160611054238,
+      "lng": -53.45483779907227,
       "endereco": "Avenida Rocha Pombo, 1500",
-      "bairro": "Parque São Paulo"
+      "bairro": "Parque São Paulo",
+      "rua": "Avenida Rocha Pombo, 1500"
     },
     "produtos": [
       {
@@ -404,8 +412,8 @@
     ],
     "dia_vencimento": 10,
     "vencimento": "10/12/2026",
-    "lat": -24.972,
-    "lng": -53.456
+    "lat": -24.97160611054238,
+    "lng": -53.45483779907227
   },
   {
     "id": "parc_09",
@@ -420,9 +428,9 @@
     "endereco": "Avenida Tito Muffato, 1600",
     "cidade": "Cascavel",
     "telefone": "(45) 99809-3456",
-    "mensalidade": 300.0,
+    "mensalidade": 300,
     "status_pagamento": "pago",
-    "total_pago": 300.0,
+    "total_pago": 300,
     "logo_url": "/static/parceiros/pet_shop/pet_shop_04_af/logo.png",
     "banner_url": "/static/parceiros/pet_shop/pet_shop_04_af/banner.png",
     "destaque_esteira": 1,
@@ -431,7 +439,8 @@
       "lat": -24.965,
       "lng": -53.505,
       "endereco": "Avenida Tito Muffato, 1600",
-      "bairro": "Santa Cruz"
+      "bairro": "Santa Cruz",
+      "rua": "Avenida Tito Muffato, 1600"
     },
     "produtos": [
       {
@@ -471,9 +480,9 @@
     "endereco": "Rua Marechal Cândido Rondon, 2200",
     "cidade": "Cascavel",
     "telefone": "(45) 99810-3456",
-    "mensalidade": 300.0,
+    "mensalidade": 300,
     "status_pagamento": "pago",
-    "total_pago": 300.0,
+    "total_pago": 300,
     "logo_url": "/static/parceiros/pet_shop/pet_shop_05_pf/logo.png",
     "banner_url": "/static/parceiros/pet_shop/pet_shop_05_pf/banner.png",
     "destaque_esteira": 1,
@@ -482,7 +491,8 @@
       "lat": -24.932,
       "lng": -53.458,
       "endereco": "Rua Marechal Cândido Rondon, 2200",
-      "bairro": "Canadá"
+      "bairro": "Canadá",
+      "rua": "Rua Marechal Cândido Rondon, 2200"
     },
     "produtos": [
       {
@@ -522,18 +532,19 @@
     "endereco": "Rua Rio Grande do Sul, 1250",
     "cidade": "Cascavel",
     "telefone": "(45) 99811-3456",
-    "mensalidade": 300.0,
+    "mensalidade": 300,
     "status_pagamento": "pago",
-    "total_pago": 300.0,
+    "total_pago": 300,
     "logo_url": "/static/parceiros/banho_tosa/banho_tosa_01_gc/logo.png",
     "banner_url": "/static/parceiros/banho_tosa/banho_tosa_01_gc/banner.png",
     "destaque_esteira": 1,
     "posicao_mapa": {
       "fixado": true,
-      "lat": -24.9568,
-      "lng": -53.4542,
+      "lat": -24.95143379983503,
+      "lng": -53.44805717468262,
       "endereco": "Rua Rio Grande do Sul, 1250",
-      "bairro": "Centro"
+      "bairro": "Centro",
+      "rua": "Rua Rio Grande do Sul, 1250"
     },
     "produtos": [
       {
@@ -557,8 +568,8 @@
     ],
     "dia_vencimento": 10,
     "vencimento": "10/12/2026",
-    "lat": -24.9568,
-    "lng": -53.4542
+    "lat": -24.95143379983503,
+    "lng": -53.44805717468262
   },
   {
     "id": "parc_12",
@@ -573,18 +584,19 @@
     "endereco": "Rua Pio XII, 1600",
     "cidade": "Cascavel",
     "telefone": "(45) 99812-3456",
-    "mensalidade": 300.0,
+    "mensalidade": 300,
     "status_pagamento": "pago",
-    "total_pago": 300.0,
+    "total_pago": 300,
     "logo_url": "/static/parceiros/banho_tosa/banho_tosa_02_ep/logo.png",
     "banner_url": "/static/parceiros/banho_tosa/banho_tosa_02_ep/banner.png",
     "destaque_esteira": 1,
     "posicao_mapa": {
       "fixado": true,
-      "lat": -24.9645,
-      "lng": -53.465,
+      "lat": -24.96473963095285,
+      "lng": -53.4596872329712,
       "endereco": "Rua Pio XII, 1600",
-      "bairro": "Neva"
+      "bairro": "Neva",
+      "rua": "Rua Pio XII, 1600"
     },
     "produtos": [
       {
@@ -608,8 +620,8 @@
     ],
     "dia_vencimento": 10,
     "vencimento": "10/12/2026",
-    "lat": -24.9645,
-    "lng": -53.465
+    "lat": -24.96473963095285,
+    "lng": -53.4596872329712
   },
   {
     "id": "parc_13",
@@ -624,18 +636,19 @@
     "endereco": "Rua Presidente Bernardes, 2100",
     "cidade": "Cascavel",
     "telefone": "(45) 99813-3456",
-    "mensalidade": 300.0,
+    "mensalidade": 300,
     "status_pagamento": "pago",
-    "total_pago": 300.0,
+    "total_pago": 300,
     "logo_url": "/static/parceiros/banho_tosa/banho_tosa_03_cp/logo.png",
     "banner_url": "/static/parceiros/banho_tosa/banho_tosa_03_cp/banner.png",
     "destaque_esteira": 1,
     "posicao_mapa": {
       "fixado": true,
-      "lat": -24.9435,
-      "lng": -53.4735,
+      "lat": -24.94372877906867,
+      "lng": -53.466789722442634,
       "endereco": "Rua Presidente Bernardes, 2100",
-      "bairro": "Cancelli"
+      "bairro": "Cancelli",
+      "rua": "Rua Presidente Bernardes, 2100"
     },
     "produtos": [
       {
@@ -659,8 +672,8 @@
     ],
     "dia_vencimento": 10,
     "vencimento": "10/12/2026",
-    "lat": -24.9435,
-    "lng": -53.4735
+    "lat": -24.94372877906867,
+    "lng": -53.466789722442634
   },
   {
     "id": "parc_14",
@@ -675,9 +688,9 @@
     "endereco": "Rua Londrina, 1650",
     "cidade": "Cascavel",
     "telefone": "(45) 99814-3456",
-    "mensalidade": 300.0,
+    "mensalidade": 300,
     "status_pagamento": "pago",
-    "total_pago": 300.0,
+    "total_pago": 300,
     "logo_url": "/static/parceiros/banho_tosa/banho_tosa_04_sa/logo.png",
     "banner_url": "/static/parceiros/banho_tosa/banho_tosa_04_sa/banner.png",
     "destaque_esteira": 1,
@@ -686,7 +699,8 @@
       "lat": -24.938,
       "lng": -53.448,
       "endereco": "Rua Londrina, 1650",
-      "bairro": "Country"
+      "bairro": "Country",
+      "rua": "Rua Londrina, 1650"
     },
     "produtos": [
       {
@@ -726,18 +740,19 @@
     "endereco": "Rua Alexandre de Gusmão, 1400",
     "cidade": "Cascavel",
     "telefone": "(45) 99815-3456",
-    "mensalidade": 300.0,
+    "mensalidade": 300,
     "status_pagamento": "pago",
-    "total_pago": 300.0,
+    "total_pago": 300,
     "logo_url": "/static/parceiros/banho_tosa/banho_tosa_05_tv/logo.png",
     "banner_url": "/static/parceiros/banho_tosa/banho_tosa_05_tv/banner.png",
     "destaque_esteira": 1,
     "posicao_mapa": {
       "fixado": true,
-      "lat": -24.968,
-      "lng": -53.448,
+      "lat": -24.969019403019598,
+      "lng": -53.44771385192871,
       "endereco": "Rua Alexandre de Gusmão, 1400",
-      "bairro": "Maria Luíza"
+      "bairro": "Maria Luíza",
+      "rua": "Rua Alexandre de Gusmão, 1400"
     },
     "produtos": [
       {
@@ -761,8 +776,8 @@
     ],
     "dia_vencimento": 10,
     "vencimento": "10/12/2026",
-    "lat": -24.968,
-    "lng": -53.448
+    "lat": -24.969019403019598,
+    "lng": -53.44771385192871
   },
   {
     "id": "parc_16",
@@ -777,18 +792,19 @@
     "endereco": "Rua Minas Gerais, 1920",
     "cidade": "Cascavel",
     "telefone": "(45) 99816-3456",
-    "mensalidade": 300.0,
+    "mensalidade": 300,
     "status_pagamento": "pago",
-    "total_pago": 300.0,
+    "total_pago": 300,
     "logo_url": "/static/parceiros/auto_center/auto_center_01_pp/logo.png",
     "banner_url": "/static/parceiros/auto_center/auto_center_01_pp/banner.png",
     "destaque_esteira": 1,
     "posicao_mapa": {
       "fixado": true,
-      "lat": -24.9525,
-      "lng": -53.4575,
+      "lat": -24.9519582331337,
+      "lng": -53.45573902130127,
       "endereco": "Rua Minas Gerais, 1920",
-      "bairro": "Centro"
+      "bairro": "Centro",
+      "rua": "Rua Minas Gerais, 1920"
     },
     "produtos": [
       {
@@ -812,8 +828,8 @@
     ],
     "dia_vencimento": 10,
     "vencimento": "10/12/2026",
-    "lat": -24.9525,
-    "lng": -53.4575
+    "lat": -24.9519582331337,
+    "lng": -53.45573902130127
   },
   {
     "id": "parc_17",
@@ -828,18 +844,19 @@
     "endereco": "Rua Jacarezinho, 1540",
     "cidade": "Cascavel",
     "telefone": "(45) 99817-3456",
-    "mensalidade": 300.0,
+    "mensalidade": 300,
     "status_pagamento": "pago",
-    "total_pago": 300.0,
+    "total_pago": 300,
     "logo_url": "/static/parceiros/auto_center/auto_center_02_ce/logo.png",
     "banner_url": "/static/parceiros/auto_center/auto_center_02_ce/banner.png",
     "destaque_esteira": 1,
     "posicao_mapa": {
       "fixado": true,
-      "lat": -24.9405,
-      "lng": -53.4335,
+      "lat": -24.941665750658682,
+      "lng": -53.43363761901856,
       "endereco": "Rua Jacarezinho, 1540",
-      "bairro": "São Cristóvão"
+      "bairro": "São Cristóvão",
+      "rua": "Rua Jacarezinho, 1540"
     },
     "produtos": [
       {
@@ -863,8 +880,8 @@
     ],
     "dia_vencimento": 10,
     "vencimento": "10/12/2026",
-    "lat": -24.9405,
-    "lng": -53.4335
+    "lat": -24.941665750658682,
+    "lng": -53.43363761901856
   },
   {
     "id": "parc_18",
@@ -879,18 +896,19 @@
     "endereco": "Avenida Brasil, 8500",
     "cidade": "Cascavel",
     "telefone": "(45) 99818-3456",
-    "mensalidade": 300.0,
+    "mensalidade": 300,
     "status_pagamento": "pago",
-    "total_pago": 300.0,
+    "total_pago": 300,
     "logo_url": "/static/parceiros/auto_center/auto_center_03_f1/logo.png",
     "banner_url": "/static/parceiros/auto_center/auto_center_03_f1/banner.png",
     "destaque_esteira": 1,
     "posicao_mapa": {
       "fixado": true,
-      "lat": -24.9545,
-      "lng": -53.4835,
+      "lat": -24.95411774747056,
+      "lng": -53.48183155059815,
       "endereco": "Avenida Brasil, 8500",
-      "bairro": "Coqueiral"
+      "bairro": "Coqueiral",
+      "rua": "Avenida Brasil, 8500"
     },
     "produtos": [
       {
@@ -914,8 +932,8 @@
     ],
     "dia_vencimento": 10,
     "vencimento": "10/12/2026",
-    "lat": -24.9545,
-    "lng": -53.4835
+    "lat": -24.95411774747056,
+    "lng": -53.48183155059815
   },
   {
     "id": "parc_19",
@@ -930,9 +948,9 @@
     "endereco": "Rua Tupiniquins, 950",
     "cidade": "Cascavel",
     "telefone": "(45) 99819-3456",
-    "mensalidade": 300.0,
+    "mensalidade": 300,
     "status_pagamento": "pago",
-    "total_pago": 300.0,
+    "total_pago": 300,
     "logo_url": "/static/parceiros/auto_center/auto_center_04_ro/logo.png",
     "banner_url": "/static/parceiros/auto_center/auto_center_04_ro/banner.png",
     "destaque_esteira": 1,
@@ -941,7 +959,8 @@
       "lat": -24.962,
       "lng": -53.501,
       "endereco": "Rua Tupiniquins, 950",
-      "bairro": "Santa Cruz"
+      "bairro": "Santa Cruz",
+      "rua": "Rua Tupiniquins, 950"
     },
     "produtos": [
       {
@@ -981,18 +1000,19 @@
     "endereco": "Rua Alexandre de Gusmão, 1400",
     "cidade": "Cascavel",
     "telefone": "(45) 99820-3456",
-    "mensalidade": 300.0,
+    "mensalidade": 300,
     "status_pagamento": "pago",
-    "total_pago": 300.0,
+    "total_pago": 300,
     "logo_url": "/static/parceiros/auto_center/auto_center_05_vp/logo.png",
     "banner_url": "/static/parceiros/auto_center/auto_center_05_vp/banner.png",
     "destaque_esteira": 1,
     "posicao_mapa": {
       "fixado": true,
-      "lat": -24.9668,
-      "lng": -53.4492,
+      "lat": -24.965809180308536,
+      "lng": -53.44958066940308,
       "endereco": "Rua Alexandre de Gusmão, 1400",
-      "bairro": "Maria Luíza"
+      "bairro": "Maria Luíza",
+      "rua": "Rua Alexandre de Gusmão, 1400"
     },
     "produtos": [
       {
@@ -1016,8 +1036,8 @@
     ],
     "dia_vencimento": 10,
     "vencimento": "10/12/2026",
-    "lat": -24.9668,
-    "lng": -53.4492
+    "lat": -24.965809180308536,
+    "lng": -53.44958066940308
   },
   {
     "id": "parc_21",
@@ -1032,18 +1052,19 @@
     "endereco": "Avenida Barão do Rio Branco, 850",
     "cidade": "Cascavel",
     "telefone": "(45) 99821-3456",
-    "mensalidade": 300.0,
+    "mensalidade": 300,
     "status_pagamento": "pago",
-    "total_pago": 300.0,
+    "total_pago": 300,
     "logo_url": "/static/parceiros/borracharia/borracharia_01_sc/logo.png",
     "banner_url": "/static/parceiros/borracharia/borracharia_01_sc/banner.png",
     "destaque_esteira": 1,
     "posicao_mapa": {
       "fixado": true,
-      "lat": -24.936,
-      "lng": -53.442,
+      "lat": -24.935945988599492,
+      "lng": -53.441641330719,
       "endereco": "Avenida Barão do Rio Branco, 850",
-      "bairro": "São Cristóvão"
+      "bairro": "São Cristóvão",
+      "rua": "Avenida Barão do Rio Branco, 850"
     },
     "produtos": [
       {
@@ -1067,8 +1088,8 @@
     ],
     "dia_vencimento": 10,
     "vencimento": "10/12/2026",
-    "lat": -24.936,
-    "lng": -53.442
+    "lat": -24.935945988599492,
+    "lng": -53.441641330719
   },
   {
     "id": "parc_22",
@@ -1083,18 +1104,19 @@
     "endereco": "Rua Presidente Kennedy, 1850",
     "cidade": "Cascavel",
     "telefone": "(45) 99822-3456",
-    "mensalidade": 300.0,
+    "mensalidade": 300,
     "status_pagamento": "pago",
-    "total_pago": 300.0,
+    "total_pago": 300,
     "logo_url": "/static/parceiros/borracharia/borracharia_02_bc/logo.png",
     "banner_url": "/static/parceiros/borracharia/borracharia_02_bc/banner.png",
     "destaque_esteira": 1,
     "posicao_mapa": {
       "fixado": true,
-      "lat": -24.9503,
-      "lng": -53.4832,
+      "lat": -24.94275373369195,
+      "lng": -53.482089042663574,
       "endereco": "Rua Presidente Kennedy, 1850",
-      "bairro": "Coqueiral"
+      "bairro": "Coqueiral",
+      "rua": "Rua Presidente Kennedy, 1850"
     },
     "produtos": [
       {
@@ -1118,8 +1140,8 @@
     ],
     "dia_vencimento": 10,
     "vencimento": "10/12/2026",
-    "lat": -24.9503,
-    "lng": -53.4832
+    "lat": -24.94275373369195,
+    "lng": -53.482089042663574
   },
   {
     "id": "parc_23",
@@ -1134,9 +1156,9 @@
     "endereco": "Rua Pedro Baú, 1100",
     "cidade": "Cascavel",
     "telefone": "(45) 99823-3456",
-    "mensalidade": 300.0,
+    "mensalidade": 300,
     "status_pagamento": "pago",
-    "total_pago": 300.0,
+    "total_pago": 300,
     "logo_url": "/static/parceiros/borracharia/borracharia_03_bt/logo.png",
     "banner_url": "/static/parceiros/borracharia/borracharia_03_bt/banner.png",
     "destaque_esteira": 1,
@@ -1145,7 +1167,8 @@
       "lat": -24.978,
       "lng": -53.428,
       "endereco": "Rua Pedro Baú, 1100",
-      "bairro": "Cascavel Velho"
+      "bairro": "Cascavel Velho",
+      "rua": "Rua Pedro Baú, 1100"
     },
     "produtos": [
       {
@@ -1185,18 +1208,19 @@
     "endereco": "Rua São Paulo, 1400",
     "cidade": "Cascavel",
     "telefone": "(45) 99824-3456",
-    "mensalidade": 300.0,
+    "mensalidade": 300,
     "status_pagamento": "pago",
-    "total_pago": 300.0,
+    "total_pago": 300,
     "logo_url": "/static/parceiros/borracharia/borracharia_04_cc/logo.png",
     "banner_url": "/static/parceiros/borracharia/borracharia_04_cc/banner.png",
     "destaque_esteira": 1,
     "posicao_mapa": {
       "fixado": true,
-      "lat": -24.9575,
-      "lng": -53.453,
+      "lat": -24.949147145225336,
+      "lng": -53.44114780426026,
       "endereco": "Rua São Paulo, 1400",
-      "bairro": "Centro"
+      "bairro": "Centro",
+      "rua": "Rua São Paulo, 1400"
     },
     "produtos": [
       {
@@ -1220,8 +1244,8 @@
     ],
     "dia_vencimento": 10,
     "vencimento": "10/12/2026",
-    "lat": -24.9575,
-    "lng": -53.453
+    "lat": -24.949147145225336,
+    "lng": -53.44114780426026
   },
   {
     "id": "parc_25",
@@ -1236,18 +1260,19 @@
     "endereco": "Rua Olindo Periollo, 850",
     "cidade": "Cascavel",
     "telefone": "(45) 99825-3456",
-    "mensalidade": 300.0,
+    "mensalidade": 300,
     "status_pagamento": "pago",
-    "total_pago": 300.0,
+    "total_pago": 300,
     "logo_url": "/static/parceiros/borracharia/borracharia_05_br/logo.png",
     "banner_url": "/static/parceiros/borracharia/borracharia_05_br/banner.png",
     "destaque_esteira": 1,
     "posicao_mapa": {
       "fixado": true,
-      "lat": -24.965,
-      "lng": -53.435,
+      "lat": -24.95555477061829,
+      "lng": -53.424153327941895,
       "endereco": "Rua Olindo Periollo, 850",
-      "bairro": "Pacaembu"
+      "bairro": "Pacaembu",
+      "rua": "Rua Olindo Periollo, 850"
     },
     "produtos": [
       {
@@ -1271,8 +1296,8 @@
     ],
     "dia_vencimento": 10,
     "vencimento": "10/12/2026",
-    "lat": -24.965,
-    "lng": -53.435
+    "lat": -24.95555477061829,
+    "lng": -53.424153327941895
   },
   {
     "id": "parc_26",
@@ -1287,18 +1312,19 @@
     "endereco": "Calçadão da Avenida Brasil, 5000",
     "cidade": "Cascavel",
     "telefone": "(45) 99826-3456",
-    "mensalidade": 300.0,
+    "mensalidade": 300,
     "status_pagamento": "pago",
-    "total_pago": 300.0,
+    "total_pago": 300,
     "logo_url": "/static/parceiros/posto/posto_01_pi/logo.png",
     "banner_url": "/static/parceiros/posto/posto_01_pi/banner.png",
     "destaque_esteira": 1,
     "posicao_mapa": {
       "fixado": true,
-      "lat": -24.9548,
-      "lng": -53.4552,
+      "lat": -24.91093094253583,
+      "lng": -53.41544151306152,
       "endereco": "Calçadão da Avenida Brasil, 5000",
-      "bairro": "Centro"
+      "bairro": "Centro",
+      "rua": "Calçadão da Avenida Brasil, 5000"
     },
     "produtos": [
       {
@@ -1322,8 +1348,8 @@
     ],
     "dia_vencimento": 10,
     "vencimento": "10/12/2026",
-    "lat": -24.9548,
-    "lng": -53.4552
+    "lat": -24.91093094253583,
+    "lng": -53.41544151306152
   },
   {
     "id": "parc_27",
@@ -1338,18 +1364,19 @@
     "endereco": "Rua Pedro Baú, 1100",
     "cidade": "Cascavel",
     "telefone": "(45) 99827-3456",
-    "mensalidade": 300.0,
+    "mensalidade": 300,
     "status_pagamento": "pago",
-    "total_pago": 300.0,
+    "total_pago": 300,
     "logo_url": "/static/parceiros/posto/posto_02_tc/logo.png",
     "banner_url": "/static/parceiros/posto/posto_02_tc/banner.png",
     "destaque_esteira": 1,
     "posicao_mapa": {
       "fixado": true,
-      "lat": -24.9768,
-      "lng": -53.4292,
+      "lat": -24.96302374938878,
+      "lng": -53.43011856079102,
       "endereco": "Rua Pedro Baú, 1100",
-      "bairro": "Cascavel Velho"
+      "bairro": "Cascavel Velho",
+      "rua": "Rua Pedro Baú, 1100"
     },
     "produtos": [
       {
@@ -1373,8 +1400,8 @@
     ],
     "dia_vencimento": 10,
     "vencimento": "10/12/2026",
-    "lat": -24.9768,
-    "lng": -53.4292
+    "lat": -24.96302374938878,
+    "lng": -53.43011856079102
   },
   {
     "id": "parc_28",
@@ -1389,18 +1416,19 @@
     "endereco": "Avenida Brasil, 6200",
     "cidade": "Cascavel",
     "telefone": "(45) 99828-3456",
-    "mensalidade": 300.0,
+    "mensalidade": 300,
     "status_pagamento": "pago",
-    "total_pago": 300.0,
+    "total_pago": 300,
     "logo_url": "/static/parceiros/posto/posto_03_pc/logo.png",
     "banner_url": "/static/parceiros/posto/posto_03_pc/banner.png",
     "destaque_esteira": 1,
     "posicao_mapa": {
       "fixado": true,
-      "lat": -24.9543,
-      "lng": -53.4572,
+      "lat": -24.972073024168644,
+      "lng": -53.49039316177369,
       "endereco": "Avenida Brasil, 6200",
-      "bairro": "Centro"
+      "bairro": "Centro",
+      "rua": "Avenida Brasil, 6200"
     },
     "produtos": [
       {
@@ -1424,8 +1452,8 @@
     ],
     "dia_vencimento": 10,
     "vencimento": "10/12/2026",
-    "lat": -24.9543,
-    "lng": -53.4572
+    "lat": -24.972073024168644,
+    "lng": -53.49039316177369
   },
   {
     "id": "parc_29",
@@ -1440,9 +1468,9 @@
     "endereco": "Rua Manaus, 1420",
     "cidade": "Cascavel",
     "telefone": "(45) 99829-3456",
-    "mensalidade": 300.0,
+    "mensalidade": 300,
     "status_pagamento": "pago",
-    "total_pago": 300.0,
+    "total_pago": 300,
     "logo_url": "/static/parceiros/posto/posto_04_ro/logo.png",
     "banner_url": "/static/parceiros/posto/posto_04_ro/banner.png",
     "destaque_esteira": 1,
@@ -1451,7 +1479,8 @@
       "lat": -24.9438,
       "lng": -53.4762,
       "endereco": "Rua Manaus, 1420",
-      "bairro": "Cancelli"
+      "bairro": "Cancelli",
+      "rua": "Rua Manaus, 1420"
     },
     "produtos": [
       {
@@ -1491,18 +1520,19 @@
     "endereco": "Rua Olindo Periollo, 850",
     "cidade": "Cascavel",
     "telefone": "(45) 99830-3456",
-    "mensalidade": 300.0,
+    "mensalidade": 300,
     "status_pagamento": "pago",
-    "total_pago": 300.0,
+    "total_pago": 300,
     "logo_url": "/static/parceiros/posto/posto_05_pd/logo.png",
     "banner_url": "/static/parceiros/posto/posto_05_pd/banner.png",
     "destaque_esteira": 1,
     "posicao_mapa": {
       "fixado": true,
-      "lat": -24.9638,
-      "lng": -53.4362,
+      "lat": -24.955555116840788,
+      "lng": -53.42737197875977,
       "endereco": "Rua Olindo Periollo, 850",
-      "bairro": "Pacaembu"
+      "bairro": "Pacaembu",
+      "rua": "Rua Olindo Periollo, 850"
     },
     "produtos": [
       {
@@ -1526,8 +1556,8 @@
     ],
     "dia_vencimento": 10,
     "vencimento": "10/12/2026",
-    "lat": -24.9638,
-    "lng": -53.4362
+    "lat": -24.955555116840788,
+    "lng": -53.42737197875977
   },
   {
     "id": "parc_31",
@@ -1542,18 +1572,19 @@
     "endereco": "Rua Paraná, 2840",
     "cidade": "Cascavel",
     "telefone": "(45) 99831-3456",
-    "mensalidade": 300.0,
+    "mensalidade": 300,
     "status_pagamento": "pago",
-    "total_pago": 300.0,
+    "total_pago": 300,
     "logo_url": "/static/parceiros/moto_mecanica/moto_mecanica_01_dr/logo.png",
     "banner_url": "/static/parceiros/moto_mecanica/moto_mecanica_01_dr/banner.png",
     "destaque_esteira": 1,
     "posicao_mapa": {
       "fixado": true,
-      "lat": -24.9528,
-      "lng": -53.4592,
+      "lat": -24.958068574853574,
+      "lng": -53.459300994873054,
       "endereco": "Rua Paraná, 2840",
-      "bairro": "Centro"
+      "bairro": "Centro",
+      "rua": "Rua Paraná, 2840"
     },
     "produtos": [
       {
@@ -1577,8 +1608,8 @@
     ],
     "dia_vencimento": 10,
     "vencimento": "10/12/2026",
-    "lat": -24.9528,
-    "lng": -53.4592
+    "lat": -24.958068574853574,
+    "lng": -53.459300994873054
   },
   {
     "id": "parc_32",
@@ -1593,9 +1624,9 @@
     "endereco": "Avenida Piquiri, 1200",
     "cidade": "Cascavel",
     "telefone": "(45) 99832-3456",
-    "mensalidade": 300.0,
+    "mensalidade": 300,
     "status_pagamento": "pago",
-    "total_pago": 300.0,
+    "total_pago": 300,
     "logo_url": "/static/parceiros/moto_mecanica/moto_mecanica_02_cm/logo.png",
     "banner_url": "/static/parceiros/moto_mecanica/moto_mecanica_02_cm/banner.png",
     "destaque_esteira": 1,
@@ -1604,7 +1635,8 @@
       "lat": -24.9368,
       "lng": -53.4322,
       "endereco": "Avenida Piquiri, 1200",
-      "bairro": "São Cristóvão"
+      "bairro": "São Cristóvão",
+      "rua": "Avenida Piquiri, 1200"
     },
     "produtos": [
       {
@@ -1644,18 +1676,19 @@
     "endereco": "Rua Recife, 2400",
     "cidade": "Cascavel",
     "telefone": "(45) 99833-3456",
-    "mensalidade": 300.0,
+    "mensalidade": 300,
     "status_pagamento": "pago",
-    "total_pago": 300.0,
+    "total_pago": 300,
     "logo_url": "/static/parceiros/moto_mecanica/moto_mecanica_03_gm/logo.png",
     "banner_url": "/static/parceiros/moto_mecanica/moto_mecanica_03_gm/banner.png",
     "destaque_esteira": 1,
     "posicao_mapa": {
       "fixado": true,
-      "lat": -24.9523,
-      "lng": -53.4807,
+      "lat": -24.957465469382036,
+      "lng": -53.47914934158326,
       "endereco": "Rua Recife, 2400",
-      "bairro": "Coqueiral"
+      "bairro": "Coqueiral",
+      "rua": "Rua Recife, 2400"
     },
     "produtos": [
       {
@@ -1679,8 +1712,8 @@
     ],
     "dia_vencimento": 10,
     "vencimento": "10/12/2026",
-    "lat": -24.9523,
-    "lng": -53.4807
+    "lat": -24.957465469382036,
+    "lng": -53.47914934158326
   },
   {
     "id": "parc_34",
@@ -1695,9 +1728,9 @@
     "endereco": "Avenida Tito Muffato, 1600",
     "cidade": "Cascavel",
     "telefone": "(45) 99834-3456",
-    "mensalidade": 300.0,
+    "mensalidade": 300,
     "status_pagamento": "pago",
-    "total_pago": 300.0,
+    "total_pago": 300,
     "logo_url": "/static/parceiros/moto_mecanica/moto_mecanica_04_sm/logo.png",
     "banner_url": "/static/parceiros/moto_mecanica/moto_mecanica_04_sm/banner.png",
     "destaque_esteira": 1,
@@ -1706,7 +1739,8 @@
       "lat": -24.9638,
       "lng": -53.5062,
       "endereco": "Avenida Tito Muffato, 1600",
-      "bairro": "Santa Cruz"
+      "bairro": "Santa Cruz",
+      "rua": "Avenida Tito Muffato, 1600"
     },
     "produtos": [
       {
@@ -1746,18 +1780,19 @@
     "endereco": "Rua Presidente Bernardes, 2100",
     "cidade": "Cascavel",
     "telefone": "(45) 99835-3456",
-    "mensalidade": 300.0,
+    "mensalidade": 300,
     "status_pagamento": "pago",
-    "total_pago": 300.0,
+    "total_pago": 300,
     "logo_url": "/static/parceiros/moto_mecanica/moto_mecanica_05_om/logo.png",
     "banner_url": "/static/parceiros/moto_mecanica/moto_mecanica_05_om/banner.png",
     "destaque_esteira": 1,
     "posicao_mapa": {
       "fixado": true,
-      "lat": -24.9423,
-      "lng": -53.4747,
+      "lat": -24.937481743791736,
+      "lng": -53.47543716430665,
       "endereco": "Rua Presidente Bernardes, 2100",
-      "bairro": "Cancelli"
+      "bairro": "Cancelli",
+      "rua": "Rua Presidente Bernardes, 2100"
     },
     "produtos": [
       {
@@ -1781,8 +1816,8 @@
     ],
     "dia_vencimento": 10,
     "vencimento": "10/12/2026",
-    "lat": -24.9423,
-    "lng": -53.4747
+    "lat": -24.937481743791736,
+    "lng": -53.47543716430665
   },
   {
     "id": "parc_36",
@@ -1797,18 +1832,19 @@
     "endereco": "Rua Rio Grande do Sul, 1250",
     "cidade": "Cascavel",
     "telefone": "(45) 99836-3456",
-    "mensalidade": 300.0,
+    "mensalidade": 300,
     "status_pagamento": "pago",
-    "total_pago": 300.0,
+    "total_pago": 300,
     "logo_url": "/static/parceiros/carro_mecanica/carro_mecanica_01_pa/logo.png",
     "banner_url": "/static/parceiros/carro_mecanica/carro_mecanica_01_pa/banner.png",
     "destaque_esteira": 1,
     "posicao_mapa": {
       "fixado": true,
-      "lat": -24.9556,
-      "lng": -53.4554,
+      "lat": -24.941218803755056,
+      "lng": -53.425097465515144,
       "endereco": "Rua Rio Grande do Sul, 1250",
-      "bairro": "Centro"
+      "bairro": "Centro",
+      "rua": "Rua Rio Grande do Sul, 1250"
     },
     "produtos": [
       {
@@ -1832,8 +1868,8 @@
     ],
     "dia_vencimento": 10,
     "vencimento": "10/12/2026",
-    "lat": -24.9556,
-    "lng": -53.4554
+    "lat": -24.941218803755056,
+    "lng": -53.425097465515144
   },
   {
     "id": "parc_37",
@@ -1848,18 +1884,19 @@
     "endereco": "Rua Manaus, 1420",
     "cidade": "Cascavel",
     "telefone": "(45) 99837-3456",
-    "mensalidade": 300.0,
+    "mensalidade": 300,
     "status_pagamento": "pago",
-    "total_pago": 300.0,
+    "total_pago": 300,
     "logo_url": "/static/parceiros/carro_mecanica/carro_mecanica_02_mc/logo.png",
     "banner_url": "/static/parceiros/carro_mecanica/carro_mecanica_02_mc/banner.png",
     "destaque_esteira": 1,
     "posicao_mapa": {
       "fixado": true,
-      "lat": -24.9426,
-      "lng": -53.4774,
+      "lat": -24.937715212480235,
+      "lng": -53.46543788909913,
       "endereco": "Rua Manaus, 1420",
-      "bairro": "Cancelli"
+      "bairro": "Cancelli",
+      "rua": "Rua Manaus, 1420"
     },
     "produtos": [
       {
@@ -1883,8 +1920,8 @@
     ],
     "dia_vencimento": 10,
     "vencimento": "10/12/2026",
-    "lat": -24.9426,
-    "lng": -53.4774
+    "lat": -24.937715212480235,
+    "lng": -53.46543788909913
   },
   {
     "id": "parc_38",
@@ -1899,18 +1936,19 @@
     "endereco": "Rua Cuiabá, 2900",
     "cidade": "Cascavel",
     "telefone": "(45) 99838-3456",
-    "mensalidade": 300.0,
+    "mensalidade": 300,
     "status_pagamento": "pago",
-    "total_pago": 300.0,
+    "total_pago": 300,
     "logo_url": "/static/parceiros/carro_mecanica/carro_mecanica_03_mt/logo.png",
     "banner_url": "/static/parceiros/carro_mecanica/carro_mecanica_03_mt/banner.png",
     "destaque_esteira": 1,
     "posicao_mapa": {
       "fixado": true,
-      "lat": -24.9648,
-      "lng": -53.4692,
+      "lat": -24.96429200280779,
+      "lng": -53.470008373260505,
       "endereco": "Rua Cuiabá, 2900",
-      "bairro": "Neva"
+      "bairro": "Neva",
+      "rua": "Rua Cuiabá, 2900"
     },
     "produtos": [
       {
@@ -1934,8 +1972,8 @@
     ],
     "dia_vencimento": 10,
     "vencimento": "10/12/2026",
-    "lat": -24.9648,
-    "lng": -53.4692
+    "lat": -24.96429200280779,
+    "lng": -53.470008373260505
   },
   {
     "id": "parc_39",
@@ -1950,18 +1988,19 @@
     "endereco": "Rua General Osório, 2800",
     "cidade": "Cascavel",
     "telefone": "(45) 99839-3456",
-    "mensalidade": 300.0,
+    "mensalidade": 300,
     "status_pagamento": "pago",
-    "total_pago": 300.0,
+    "total_pago": 300,
     "logo_url": "/static/parceiros/carro_mecanica/carro_mecanica_04_cc/logo.png",
     "banner_url": "/static/parceiros/carro_mecanica/carro_mecanica_04_cc/banner.png",
     "destaque_esteira": 1,
     "posicao_mapa": {
       "fixado": true,
-      "lat": -24.9705,
-      "lng": -53.4585,
+      "lat": -24.970186147155268,
+      "lng": -53.458786010742195,
       "endereco": "Rua General Osório, 2800",
-      "bairro": "Parque São Paulo"
+      "bairro": "Parque São Paulo",
+      "rua": "Rua General Osório, 2800"
     },
     "produtos": [
       {
@@ -1985,8 +2024,8 @@
     ],
     "dia_vencimento": 10,
     "vencimento": "10/12/2026",
-    "lat": -24.9705,
-    "lng": -53.4585
+    "lat": -24.970186147155268,
+    "lng": -53.458786010742195
   },
   {
     "id": "parc_40",
@@ -2001,18 +2040,19 @@
     "endereco": "Avenida Brasil, 8500",
     "cidade": "Cascavel",
     "telefone": "(45) 99840-3456",
-    "mensalidade": 300.0,
+    "mensalidade": 300,
     "status_pagamento": "pago",
-    "total_pago": 300.0,
+    "total_pago": 300,
     "logo_url": "/static/parceiros/carro_mecanica/carro_mecanica_05_ga/logo.png",
     "banner_url": "/static/parceiros/carro_mecanica/carro_mecanica_05_ga/banner.png",
     "destaque_esteira": 1,
     "posicao_mapa": {
       "fixado": true,
-      "lat": -24.9533,
-      "lng": -53.4847,
+      "lat": -24.96081218448612,
+      "lng": -53.48912715911866,
       "endereco": "Avenida Brasil, 8500",
-      "bairro": "Coqueiral"
+      "bairro": "Coqueiral",
+      "rua": "Avenida Brasil, 8500"
     },
     "produtos": [
       {
@@ -2036,8 +2076,8 @@
     ],
     "dia_vencimento": 10,
     "vencimento": "10/12/2026",
-    "lat": -24.9533,
-    "lng": -53.4847
+    "lat": -24.96081218448612,
+    "lng": -53.48912715911866
   },
   {
     "id": "parc_41",
@@ -2052,18 +2092,19 @@
     "endereco": "Rua Minas Gerais, 1920",
     "cidade": "Cascavel",
     "telefone": "(45) 99841-3456",
-    "mensalidade": 300.0,
+    "mensalidade": 300,
     "status_pagamento": "pago",
-    "total_pago": 300.0,
+    "total_pago": 300,
     "logo_url": "/static/parceiros/alimentacao/alimentacao_01_bc/logo.png",
     "banner_url": "/static/parceiros/alimentacao/alimentacao_01_bc/banner.png",
     "destaque_esteira": 1,
     "posicao_mapa": {
       "fixado": true,
-      "lat": -24.9513,
-      "lng": -53.4587,
+      "lat": -24.947560442163216,
+      "lng": -53.4507179260254,
       "endereco": "Rua Minas Gerais, 1920",
-      "bairro": "Centro"
+      "bairro": "Centro",
+      "rua": "Rua Minas Gerais, 1920"
     },
     "produtos": [
       {
@@ -2087,8 +2128,8 @@
     ],
     "dia_vencimento": 10,
     "vencimento": "10/12/2026",
-    "lat": -24.9513,
-    "lng": -53.4587
+    "lat": -24.947560442163216,
+    "lng": -53.4507179260254
   },
   {
     "id": "parc_42",
@@ -2103,18 +2144,19 @@
     "endereco": "Rua Vicente Machado, 2100",
     "cidade": "Cascavel",
     "telefone": "(45) 99842-3456",
-    "mensalidade": 300.0,
+    "mensalidade": 300,
     "status_pagamento": "pago",
-    "total_pago": 300.0,
+    "total_pago": 300,
     "logo_url": "/static/parceiros/alimentacao/alimentacao_02_pi/logo.png",
     "banner_url": "/static/parceiros/alimentacao/alimentacao_02_pi/banner.png",
     "destaque_esteira": 1,
     "posicao_mapa": {
       "fixado": true,
-      "lat": -24.94,
-      "lng": -53.446,
+      "lat": -24.940265546468268,
+      "lng": -53.44646930694581,
       "endereco": "Rua Vicente Machado, 2100",
-      "bairro": "Country"
+      "bairro": "Country",
+      "rua": "Rua Vicente Machado, 2100"
     },
     "produtos": [
       {
@@ -2138,8 +2180,8 @@
     ],
     "dia_vencimento": 10,
     "vencimento": "10/12/2026",
-    "lat": -24.94,
-    "lng": -53.446
+    "lat": -24.940265546468268,
+    "lng": -53.44646930694581
   },
   {
     "id": "parc_43",
@@ -2154,18 +2196,19 @@
     "endereco": "Rua São Paulo, 1400",
     "cidade": "Cascavel",
     "telefone": "(45) 99843-3456",
-    "mensalidade": 300.0,
+    "mensalidade": 300,
     "status_pagamento": "pago",
-    "total_pago": 300.0,
+    "total_pago": 300,
     "logo_url": "/static/parceiros/alimentacao/alimentacao_03_pc/logo.png",
     "banner_url": "/static/parceiros/alimentacao/alimentacao_03_pc/banner.png",
     "destaque_esteira": 1,
     "posicao_mapa": {
       "fixado": true,
-      "lat": -24.9563,
-      "lng": -53.4542,
+      "lat": -24.950051771298376,
+      "lng": -53.42612206935883,
       "endereco": "Rua São Paulo, 1400",
-      "bairro": "Centro"
+      "bairro": "Centro",
+      "rua": "Rua São Paulo, 1400"
     },
     "produtos": [
       {
@@ -2189,8 +2232,8 @@
     ],
     "dia_vencimento": 10,
     "vencimento": "10/12/2026",
-    "lat": -24.9563,
-    "lng": -53.4542
+    "lat": -24.950051771298376,
+    "lng": -53.42612206935883
   },
   {
     "id": "parc_44",
@@ -2205,25 +2248,26 @@
     "endereco": "Rua Presidente Kennedy, 1850",
     "cidade": "Cascavel",
     "telefone": "(45) 99844-3456",
-    "mensalidade": 300.0,
+    "mensalidade": 300,
     "status_pagamento": "pago",
-    "total_pago": 300.0,
+    "total_pago": 300,
     "logo_url": "",
     "banner_url": "",
     "destaque_esteira": 1,
     "posicao_mapa": {
       "fixado": true,
-      "lat": -24.9491,
-      "lng": -53.4844,
+      "lat": -24.950382904959746,
+      "lng": -53.468120098114014,
       "endereco": "Rua Presidente Kennedy, 1850",
-      "bairro": "Coqueiral"
+      "bairro": "Coqueiral",
+      "rua": "Rua Presidente Kennedy, 1850"
     },
     "produtos": [],
     "is_manual_slot": true,
     "dia_vencimento": 10,
     "vencimento": "10/12/2026",
-    "lat": -24.9491,
-    "lng": -53.4844
+    "lat": -24.950382904959746,
+    "lng": -53.468120098114014
   },
   {
     "id": "parc_45",
@@ -2238,24 +2282,25 @@
     "endereco": "Rua Pio XII, 1600",
     "cidade": "Cascavel",
     "telefone": "(45) 99845-3456",
-    "mensalidade": 300.0,
+    "mensalidade": 300,
     "status_pagamento": "pago",
-    "total_pago": 300.0,
+    "total_pago": 300,
     "logo_url": "",
     "banner_url": "",
     "destaque_esteira": 1,
     "posicao_mapa": {
       "fixado": true,
-      "lat": -24.9633,
-      "lng": -53.4662,
+      "lat": -24.966831739113378,
+      "lng": -53.45759510993958,
       "endereco": "Rua Pio XII, 1600",
-      "bairro": "Neva"
+      "bairro": "Neva",
+      "rua": "Rua Pio XII, 1600"
     },
     "produtos": [],
     "is_manual_slot": true,
     "dia_vencimento": 10,
     "vencimento": "10/12/2026",
-    "lat": -24.9633,
-    "lng": -53.4662
+    "lat": -24.966831739113378,
+    "lng": -53.45759510993958
   }
 ]
