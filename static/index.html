@@ -4884,8 +4884,6 @@
           markersLayer.addLayer(m);
         });
       }
-        return;
-      }
 
       // 2. Heatmap Exclusivo para Segurança (Zero arco-íris, zero azul estranho)
       const heatPoints = [];
@@ -7109,6 +7107,36 @@ Baixe o aplicativo gratuito Alerta Urbano:
     }
 
     /* ==================== MÓDULO PARCEIROS & PROMOÇÕES DE CASCAVEL ==================== */
+    function formatarPrecoHtml(prod) {
+      if (!prod) return '';
+      const toNum = (v) => {
+        if (typeof v === 'number') return v;
+        if (!v) return 0;
+        const n = parseFloat(String(v).replace(/[^\d.,]/g, '').replace(',', '.'));
+        return isNaN(n) ? 0 : n;
+      };
+      const toStr = (v) => {
+        if (v === null || v === undefined || v === '') return '';
+        if (typeof v === 'number') return 'R$ ' + v.toFixed(2).replace('.', ',');
+        let s = String(v).trim();
+        if (!s.toLowerCase().startsWith('r$')) s = 'R$ ' + s;
+        return s;
+      };
+      const numOrig = toNum(prod.preco_original);
+      const numPromo = toNum(prod.preco_promocional);
+      const strOrig = toStr(prod.preco_original);
+      const strPromo = toStr(prod.preco_promocional);
+
+      let html = '';
+      if (numOrig > numPromo && strOrig) {
+        html += `<span style="font-size:11px; color:#94A3B8; text-decoration:line-through;">${escapeHtml(strOrig)}</span> `;
+      }
+      if (strPromo) {
+        html += `<span style="font-size:13.5px; font-weight:900; color:#009B3A;">${escapeHtml(strPromo)}</span>`;
+      }
+      return html;
+    }
+
     function renderizarAbaParceiros() {
       const container = document.getElementById('parceiros-lista-container');
       if (!container) return;
@@ -7153,8 +7181,7 @@ Baixe o aplicativo gratuito Alerta Urbano:
                       </div>
                       ${prod.descricao ? `<div style="font-size:11px; color:#64748B; margin-top:2px; line-height:1.3;">${escapeHtml(prod.descricao)}</div>` : ''}
                       <div style="margin-top:4px; display:flex; align-items:baseline; gap:6px;">
-                        ${prod.preco_original > prod.preco_promocional ? `<span style="font-size:11px; color:#94A3B8; text-decoration:line-through;">R$ ${prod.preco_original.toFixed(2).replace('.', ',')}</span>` : ''}
-                        <span style="font-size:13.5px; font-weight:900; color:#009B3A;">R$ ${prod.preco_promocional.toFixed(2).replace('.', ',')}</span>
+                        ${formatarPrecoHtml(prod)}
                       </div>
                     </div>
                     <button type="button" onclick="abrirWhatsappParceiroById('${escapeAttr(p.id)}', '${escapeAttr(prod.titulo)}')" style="background:#009B3A; color:#ffffff; border:none; border-radius:10px; padding:8px 10px; font-size:11px; font-weight:800; cursor:pointer; white-space:nowrap; box-shadow:0 2px 6px rgba(0,155,58,0.3);">
@@ -7306,8 +7333,7 @@ Baixe o aplicativo gratuito Alerta Urbano:
                     </div>
                     ${prod.descricao ? `<div style="font-size:11px; color:#64748B; margin-top:2px;">${escapeHtml(prod.descricao)}</div>` : ''}
                     <div style="margin-top:4px; display:flex; align-items:baseline; gap:6px;">
-                      ${prod.preco_original > prod.preco_promocional ? `<span style="font-size:11px; color:#94A3B8; text-decoration:line-through;">R$ ${prod.preco_original.toFixed(2).replace('.', ',')}</span>` : ''}
-                      <span style="font-size:14px; font-weight:900; color:#009B3A;">R$ ${prod.preco_promocional.toFixed(2).replace('.', ',')}</span>
+                      ${formatarPrecoHtml(prod)}
                     </div>
                   </div>
                   <button type="button" onclick="abrirWhatsappParceiroById('${escapeAttr(parc.id)}', '${escapeAttr(prod.titulo)}')" style="background:#009B3A; color:#ffffff; border:none; border-radius:10px; padding:8px 12px; font-size:11px; font-weight:800; cursor:pointer;">
