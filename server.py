@@ -814,6 +814,86 @@ def listar_parceiros():
     return jsonify(parceiros)
 
 
+@app.route("/api/parceiros", methods=["POST"])
+def salvar_parceiro():
+    """
+    Cadastra ou atualiza parceiro comercial de Cascavel e seus produtos promocionais.
+    Sincroniza imediatamente com a esteira do app e o mapa tático.
+    """
+    data = request.json or {}
+    nome = (data.get("nome") or "").strip()
+    if not nome:
+        return jsonify({"error": "Nome do parceiro é obrigatório."}), 400
+
+    categoria = (data.get("categoria") or "auto_center").strip().lower()
+    subtitulo = (data.get("subtitulo") or "").strip()
+    descricao = (data.get("descricao") or "").strip()
+    bairro = (data.get("bairro") or "Centro").strip()
+    endereco = (data.get("endereco") or "").strip()
+    cidade = (data.get("cidade") or "Cascavel").strip()
+    lat = float(data.get("lat") or -24.9555)
+    lng = float(data.get("lng") or -53.4550)
+    telefone = (data.get("telefone_whatsapp") or data.get("telefone") or "").strip()
+    logo_url = (data.get("logo_url") or "").strip()
+    foto_capa = (data.get("foto_capa") or data.get("banner_url") or "").strip()
+    selo_tipo = (data.get("selo_tipo") or "oficial").strip()
+    destaque_esteira = 1 if data.get("destaque_esteira", 1) else 0
+    parceiro_id = data.get("id")
+
+    conn = get_db()
+    cur = conn.cursor()
+
+    # Verifica se já existe por id
+    if parceiro_id and str(parceiro_id).isdigit():
+        cur.execute("""
+            UPDATE parceiros
+            SET nome=?, categoria=?, subtitulo=?, descricao=?, bairro=?, endereco=?, cidade=?,
+                lat=?, lng=?, telefone_whatsapp=?, logo_url=?, foto_capa=?, selo_tipo=?, destaque_esteira=?, ativo=1
+            WHERE id=?
+        """, (nome, categoria, subtitulo, descricao, bairro, endereco, cidade, lat, lng, telefone, logo_url, foto_capa, selo_tipo, destaque_esteira, int(parceiro_id)))
+        pid = int(parceiro_id)
+        cur.execute("DELETE FROM parceiro_produtos WHERE parceiro_id=?", (pid,))
+    else:
+        cur.execute("""
+            INSERT INTO parceiros (nome, categoria, subtitulo, descricao, bairro, endereco, cidade, lat, lng, telefone_whatsapp, logo_url, foto_capa, selo_tipo, destaque_esteira, ativo, ordem)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1, 0)
+        """, (nome, categoria, subtitulo, descricao, bairro, endereco, cidade, lat, lng, telefone, logo_url, foto_capa, selo_tipo, destaque_esteira))
+        pid = cur.lastrowid
+
+    # Salva produtos promocionais
+    produtos = data.get("produtos") or []
+    for prod in produtos:
+        p_tit = (prod.get("titulo") or "").strip()
+        if not p_tit:
+            continue
+        p_desc = (prod.get("descricao") or "").strip()
+        p_orig = (prod.get("preco_original") or "").strip()
+        p_promo = (prod.get("preco_promocional") or "").strip()
+        p_tag = (prod.get("tag_desconto") or "").strip()
+        p_foto = (prod.get("foto_url") or "").strip()
+
+        cur.execute("""
+            INSERT INTO parceiro_produtos (parceiro_id, titulo, descricao, preco_original, preco_promocional, tag_desconto, foto_url, ativo)
+            VALUES (?, ?, ?, ?, ?, ?, ?, 1)
+        """, (pid, p_tit, p_desc, p_orig, p_promo, p_tag, p_foto))
+
+    conn.commit()
+    conn.close()
+
+    return jsonify({"ok": True, "id": pid, "nome": nome, "mensagem": f"Parceiro {nome} salvo com sucesso!"}), 201
+
+
+@app.route("/api/parceiros/<int:parceiro_id>", methods=["DELETE"])
+def excluir_parceiro(parceiro_id):
+    conn = get_db()
+    cur = conn.cursor()
+    cur.execute("DELETE FROM parceiro_produtos WHERE parceiro_id=?", (parceiro_id,))
+    cur.execute("DELETE FROM parceiros WHERE id=?", (parceiro_id,))
+    conn.commit()
+    conn.close()
+    return jsonify({"ok": True, "mensagem": "Parceiro excluído com sucesso."})
+
+
 @app.route("/api/alertas", methods=["GET"])
 def listar_alertas():
     """

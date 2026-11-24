@@ -1231,11 +1231,18 @@
 
     <!-- VISAO 1: MESA TÁTICA (MAPA + BALÕES ARRASTÁVEIS) -->
     <section id="view-tatica">
-      <!-- Bandeja Lateral de Balões Arrastáveis -->
-      <aside class="balloon-tray">
+      <!-- Bandeja Lateral de Parceiros Cadastrados -->
+      <aside class="balloon-tray" style="width: 350px;">
         <div class="balloon-tray-header">
-          <h2>🎈 Segmentos do Negócio</h2>
-          <p>Selecione ou <strong>arraste o balão</strong> diretamente para a rua ou bairro no mapa de Cascavel.</p>
+          <h2>🏢 Parceiros Cadastrados (<span id="count-parc-total">45</span>)</h2>
+          <p>Selecione ou <strong>arraste a empresa</strong> diretamente para a rua ou bairro no mapa de Cascavel.</p>
+          <div class="profile-filter-tabs" style="margin-top: 8px;">
+            <button type="button" class="prof-tab-btn active" onclick="filtrarParceirosView('todos', this)">Todos (<span id="tab-parc-todos">45</span>)</button>
+            <button type="button" class="prof-tab-btn" onclick="filtrarParceirosView('pet', this)">🐾 Pet (15)</button>
+            <button type="button" class="prof-tab-btn" onclick="filtrarParceirosView('auto', this)">🚗 Auto (20)</button>
+            <button type="button" class="prof-tab-btn" onclick="filtrarParceirosView('outros', this)">🍔 Outros (10)</button>
+            <button type="button" class="prof-tab-btn" onclick="filtrarParceirosView('fixado', this)">📍 No Mapa</button>
+          </div>
         </div>
         <div class="balloon-list" id="balloon-list-tray">
           <!-- Inserido dinamicamente via JS -->
@@ -1248,16 +1255,22 @@
       </div>
 
       <!-- Drawer Lateral de Edição do Parceiro -->
-      <aside class="partner-drawer closed" id="partner-drawer">
+      <aside class="partner-drawer closed" id="partner-drawer" style="width: 385px; overflow-x: hidden !important;">
         <div class="drawer-header">
-          <div class="drawer-title" id="drawer-title">🏢 Editar Parceiro</div>
+          <div class="drawer-title" id="drawer-title">🏢 Editar Parceiro Comercial</div>
           <button type="button" class="btn-close-drawer" onclick="fecharDrawer()">✕</button>
         </div>
 
         <div class="drawer-body">
           <input type="hidden" id="edit-id">
 
-          <div class="drawer-section-title">Dados Comerciais</div>
+          <!-- Inputs Ocultos de Upload de Arquivos -->
+          <input type="file" id="file-upload-logo" accept="image/*" style="display:none;" onchange="executarUploadArquivo('file-upload-logo', 'edit-logo-url', 'preview-logo-img')">
+          <input type="file" id="file-upload-banner" accept="image/*" style="display:none;" onchange="executarUploadArquivo('file-upload-banner', 'edit-banner-url', 'preview-banner-img')">
+          <input type="file" id="file-upload-prod1" accept="image/*" style="display:none;" onchange="executarUploadArquivo('file-upload-prod1', 'edit-prod1-foto', 'preview-prod1-img')">
+          <input type="file" id="file-upload-prod2" accept="image/*" style="display:none;" onchange="executarUploadArquivo('file-upload-prod2', 'edit-prod2-foto', 'preview-prod2-img')">
+
+          <div class="drawer-section-title">1. Dados Comerciais</div>
 
           <div class="form-group">
             <label>Nome Comercial da Empresa</label>
@@ -1276,7 +1289,7 @@
                 <option value="posto">⛽ Posto de Combustível</option>
                 <option value="moto_mecanica">🏍️ Mecânica de Moto</option>
                 <option value="carro_mecanica">🔧 Mecânica de Carro</option>
-                <option value="alimentacao">🍔 Lanchonete / Alimentação</option>
+                <option value="alimentacao">🍔 Lanches & Alimentação</option>
               </select>
             </div>
             <div class="form-group">
@@ -1301,13 +1314,13 @@
           <div class="form-row">
             <div class="form-group">
               <label>WhatsApp de Contato</label>
-              <input type="text" class="form-input" id="edit-whats" placeholder="Ex: (45) 99999-0000">
+              <input type="text" class="form-input" id="edit-whats" placeholder="(45) 99999-0000">
             </div>
             <div class="form-group">
               <label>Selo Oficial</label>
               <select class="form-select" id="edit-selo">
-                <option value="ouro">⭐ Ouro (Amigo dos Animais)</option>
-                <option value="prata">🛡️ Cidadão (Empresa Amiga)</option>
+                <option value="ouro">⭐ Ouro (Amigo da Cidade)</option>
+                <option value="prata">🛡️ Prata (Empresa Confiável)</option>
               </select>
             </div>
           </div>
@@ -1323,7 +1336,109 @@
             </div>
           </div>
 
-          <div class="drawer-section-title">Controle Financeiro & Mensalidade</div>
+          <div class="drawer-section-title">2. Identidade Visual (Logo e Banner)</div>
+
+          <!-- Logo do Parceiro -->
+          <div class="form-group" style="background: rgba(0,0,0,0.2); padding: 8px; border-radius: 8px; border: 1px solid var(--border);">
+            <label style="display:flex; justify-content:space-between; align-items:center;">
+              <span>Logo da Empresa</span>
+              <button type="button" style="background:#FED700; color:#000; border:none; padding:3px 8px; border-radius:4px; font-size:10px; font-weight:900; cursor:pointer;" onclick="document.getElementById('file-upload-logo').click()">
+                📤 Subir Logo
+              </button>
+            </label>
+            <div style="display:flex; gap:10px; align-items:center; margin-top:6px;">
+              <img id="preview-logo-img" src="/static/logo_bolha_pura.png" style="width:48px; height:48px; border-radius:10px; object-fit:cover; border:2px solid var(--border); background:#18181b;" onerror="this.src='/static/logo_bolha_pura.png'">
+              <input type="text" class="form-input" id="edit-logo-url" placeholder="/static/parceiros/.../logo.png" style="flex:1; font-size:11px;" onchange="document.getElementById('preview-logo-img').src=this.value">
+            </div>
+          </div>
+
+          <!-- Banner Promocional -->
+          <div class="form-group" style="background: rgba(0,0,0,0.2); padding: 8px; border-radius: 8px; border: 1px solid var(--border); margin-top:8px;">
+            <label style="display:flex; justify-content:space-between; align-items:center;">
+              <span>Banner Promocional</span>
+              <button type="button" style="background:#FED700; color:#000; border:none; padding:3px 8px; border-radius:4px; font-size:10px; font-weight:900; cursor:pointer;" onclick="document.getElementById('file-upload-banner').click()">
+                📤 Subir Banner
+              </button>
+            </label>
+            <div style="display:flex; gap:10px; align-items:center; margin-top:6px;">
+              <img id="preview-banner-img" src="/static/logo_bolha_pura.png" style="width:80px; height:40px; border-radius:6px; object-fit:cover; border:2px solid var(--border); background:#18181b;" onerror="this.src='/static/logo_bolha_pura.png'">
+              <input type="text" class="form-input" id="edit-banner-url" placeholder="/static/parceiros/.../banner.png" style="flex:1; font-size:11px;" onchange="document.getElementById('preview-banner-img').src=this.value">
+            </div>
+          </div>
+
+          <div class="drawer-section-title">3. Produtos & Ofertas em Promoção (App)</div>
+
+          <!-- Produto 1 -->
+          <div class="drawer-prods-box" style="background: rgba(0,0,0,0.25); padding: 10px; border-radius: 8px; border: 1px solid var(--border); margin-bottom: 10px;">
+            <div style="font-size:11px; font-weight:800; color:#FED700; margin-bottom:6px;">Oferta 01</div>
+            <div class="form-group">
+              <label>Nome do Produto / Serviço</label>
+              <input type="text" class="form-input" id="edit-prod1-nome" placeholder="Ex: Ração Premier 15kg">
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>De (R$)</label>
+                <input type="text" class="form-input" id="edit-prod1-de" placeholder="R$ 250,00">
+              </div>
+              <div class="form-group">
+                <label>Por (R$)</label>
+                <input type="text" class="form-input" id="edit-prod1-por" placeholder="R$ 199,90">
+              </div>
+              <div class="form-group">
+                <label>Tag</label>
+                <input type="text" class="form-input" id="edit-prod1-tag" placeholder="20% OFF">
+              </div>
+            </div>
+            <div class="form-group" style="margin-top:6px;">
+              <label style="display:flex; justify-content:space-between; align-items:center;">
+                <span>Foto do Produto 01</span>
+                <button type="button" style="background:#22C55E; color:#fff; border:none; padding:2px 7px; border-radius:4px; font-size:9.5px; font-weight:800; cursor:pointer;" onclick="document.getElementById('file-upload-prod1').click()">
+                  📤 Subir Foto
+                </button>
+              </label>
+              <div style="display:flex; gap:8px; align-items:center; margin-top:4px;">
+                <img id="preview-prod1-img" src="/static/logo_bolha_pura.png" style="width:36px; height:36px; border-radius:6px; object-fit:cover; border:1px solid var(--border);" onerror="this.src='/static/logo_bolha_pura.png'">
+                <input type="text" class="form-input" id="edit-prod1-foto" placeholder="/static/parceiros/.../produto_01.png" style="flex:1; font-size:10.5px;" onchange="document.getElementById('preview-prod1-img').src=this.value">
+              </div>
+            </div>
+          </div>
+
+          <!-- Produto 2 -->
+          <div class="drawer-prods-box" style="background: rgba(0,0,0,0.25); padding: 10px; border-radius: 8px; border: 1px solid var(--border);">
+            <div style="font-size:11px; font-weight:800; color:#38BDF8; margin-bottom:6px;">Oferta 02</div>
+            <div class="form-group">
+              <label>Nome do Produto / Serviço</label>
+              <input type="text" class="form-input" id="edit-prod2-nome" placeholder="Ex: Vacina V10 Importada">
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>De (R$)</label>
+                <input type="text" class="form-input" id="edit-prod2-de" placeholder="R$ 150,00">
+              </div>
+              <div class="form-group">
+                <label>Por (R$)</label>
+                <input type="text" class="form-input" id="edit-prod2-por" placeholder="R$ 119,00">
+              </div>
+              <div class="form-group">
+                <label>Tag</label>
+                <input type="text" class="form-input" id="edit-prod2-tag" placeholder="PROMO">
+              </div>
+            </div>
+            <div class="form-group" style="margin-top:6px;">
+              <label style="display:flex; justify-content:space-between; align-items:center;">
+                <span>Foto do Produto 02</span>
+                <button type="button" style="background:#22C55E; color:#fff; border:none; padding:2px 7px; border-radius:4px; font-size:9.5px; font-weight:800; cursor:pointer;" onclick="document.getElementById('file-upload-prod2').click()">
+                  📤 Subir Foto
+                </button>
+              </label>
+              <div style="display:flex; gap:8px; align-items:center; margin-top:4px;">
+                <img id="preview-prod2-img" src="/static/logo_bolha_pura.png" style="width:36px; height:36px; border-radius:6px; object-fit:cover; border:1px solid var(--border);" onerror="this.src='/static/logo_bolha_pura.png'">
+                <input type="text" class="form-input" id="edit-prod2-foto" placeholder="/static/parceiros/.../produto_02.png" style="flex:1; font-size:10.5px;" onchange="document.getElementById('preview-prod2-img').src=this.value">
+              </div>
+            </div>
+          </div>
+
+          <div class="drawer-section-title" style="margin-top:14px;">4. Controle Financeiro & Mensalidade</div>
 
           <div class="form-row">
             <div class="form-group">
@@ -1357,30 +1472,7 @@
             </div>
           </div>
 
-          <div class="drawer-section-title">Promoções & Produtos (Até 3 itens)</div>
-          
-          <div class="drawer-prods-box">
-            <div class="form-group">
-              <label>Item 1 (Principal)</label>
-              <input type="text" class="form-input" id="edit-prod1-nome" placeholder="Ex: Troca de Óleo + Filtro">
-            </div>
-            <div class="form-row">
-              <div class="form-group">
-                <label>De (R$)</label>
-                <input type="number" class="form-input" id="edit-prod1-de" placeholder="180.00">
-              </div>
-              <div class="form-group">
-                <label>Por (R$)</label>
-                <input type="number" class="form-input" id="edit-prod1-por" placeholder="139.90">
-              </div>
-              <div class="form-group">
-                <label>Tag</label>
-                <input type="text" class="form-input" id="edit-prod1-tag" placeholder="22% OFF">
-              </div>
-            </div>
-          </div>
-
-          <div class="form-group">
+          <div class="form-group" style="margin-top:10px;">
             <label style="display:flex; align-items:center; gap:8px; cursor:pointer;">
               <input type="checkbox" id="edit-destaque-esteira" checked>
               <span>Exibir este parceiro na esteira rolante do App</span>
@@ -1390,37 +1482,37 @@
 
         <div class="drawer-footer">
           <button type="button" class="btn-del-parc" onclick="excluirParceiroAtual()">Excluir</button>
-          <button type="button" class="btn-save-parc" onclick="salvarParceiroDrawer()">Salvar na Mesa</button>
+          <button type="button" class="btn-save-parc" onclick="salvarParceiroDrawer()" style="background:#22C55E; color:#fff;">💾 Salvar na Mesa & Sincronizar App</button>
         </div>
       </aside>
     </section>
 
     <!-- VISAO 2: PAINEL FINANCEIRO -->
-    <section id="view-financeiro">
-      <div class="fin-top-cards">
-        <div class="fin-stat-card">
+    <section id="view-financeiro" style="display:none; flex-direction:column !important; width:100% !important; flex:1; overflow-y:auto; padding:24px 32px; box-sizing:border-box;">
+      <div class="fin-top-cards" style="display:grid; grid-template-columns:repeat(4, 1fr); gap:16px; width:100% !important; flex-shrink:0;">
+        <div class="fin-stat-card" style="min-height:95px; height:auto;">
           <span class="fin-stat-label">MRR Estimado (Mensal)</span>
           <span class="fin-stat-num" id="fin-card-mrr" style="color:var(--gold);">R$ 0,00</span>
           <span class="fin-stat-sub">Soma de todas as assinaturas ativas</span>
         </div>
-        <div class="fin-stat-card">
+        <div class="fin-stat-card" style="min-height:95px; height:auto;">
           <span class="fin-stat-label">Total Recebido no Mês</span>
           <span class="fin-stat-num" id="fin-card-recebido" style="color:var(--green-light);">R$ 0,00</span>
           <span class="fin-stat-sub">Confirmado e liquidado</span>
         </div>
-        <div class="fin-stat-card">
+        <div class="fin-stat-card" style="min-height:95px; height:auto;">
           <span class="fin-stat-label">Pendente / A Receber</span>
           <span class="fin-stat-num" id="fin-card-pendente" style="color:var(--orange);">R$ 0,00</span>
           <span class="fin-stat-sub">Faturas aguardando pagamento</span>
         </div>
-        <div class="fin-stat-card">
+        <div class="fin-stat-card" style="min-height:95px; height:auto;">
           <span class="fin-stat-label">Total Histórico Acumulado</span>
           <span class="fin-stat-num" id="fin-card-historico" style="color:#38BDF8;">R$ 0,00</span>
           <span class="fin-stat-sub">Faturamento geral da rede</span>
         </div>
       </div>
 
-      <div class="table-card">
+      <div class="table-card" style="width:100% !important; margin-top:20px; flex:1;">
         <div class="table-head-bar">
           <h3>Extrato Geral de Parceiros & Cobranças</h3>
           <div class="table-filters">
@@ -1603,19 +1695,81 @@
       if (mapPets) mapPets.invalidateSize();
     });
 
-    function carregarParceiros() {
+    let filtroParceiroAtual = 'todos';
+
+    function filtrarParceirosView(categoria, btn) {
+      filtroParceiroAtual = categoria;
+      if (btn) {
+        const wrap = btn.closest('.profile-filter-tabs');
+        if (wrap) wrap.querySelectorAll('.prof-tab-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      }
+      renderizarBandejaBaloes();
+    }
+
+    async function executarUploadArquivo(fileInputId, targetUrlInputId, previewImgId) {
+      const input = document.getElementById(fileInputId);
+      if (!input || !input.files || input.files.length === 0) return;
+      const file = input.files[0];
+      const formData = new FormData();
+      formData.append('file', file);
+      mostrarToast('⏳ Fazendo upload de imagem para o servidor...');
       try {
-        const saved = localStorage.getItem('mesa_parceiros_v2');
-        if (saved) {
-          parceiros = JSON.parse(saved);
+        const resp = await fetch('/api/upload', {
+          method: 'POST',
+          body: formData
+        });
+        const data = await resp.json();
+        if (resp.ok && data.url) {
+          if (targetUrlInputId) {
+            const urlInput = document.getElementById(targetUrlInputId);
+            if (urlInput) urlInput.value = data.url;
+          }
+          if (previewImgId) {
+            const imgEl = document.getElementById(previewImgId);
+            if (imgEl) imgEl.src = data.url;
+          }
+          mostrarToast('✅ Imagem salva e vinculada com sucesso!');
         } else {
-          parceiros = [];
-          localStorage.removeItem('mesa_parceiros_v1');
-          salvarParceiros();
+          alert('Erro no upload: ' + (data.error || 'Falha ao processar arquivo no servidor.'));
+        }
+      } catch (err) {
+        alert('Erro ao conectar com servidor de upload: ' + err.message);
+      }
+    }
+
+    async function carregarParceiros() {
+      try {
+        const resp = await fetch('/static/darkplanner_parceiros_completos.json?t=' + Date.now());
+        if (resp.ok) {
+          parceiros = await resp.json();
+          // Mescla com alterações salvas no localStorage
+          const saved = localStorage.getItem('mesa_parceiros_v2');
+          if (saved) {
+            try {
+              const salvos = JSON.parse(saved);
+              salvos.forEach(s => {
+                const idx = parceiros.findIndex(p => String(p.id) === String(s.id));
+                if (idx !== -1) {
+                  parceiros[idx] = { ...parceiros[idx], ...s };
+                } else {
+                  parceiros.push(s);
+                }
+              });
+            } catch (_) {}
+          }
+        } else {
+          const saved = localStorage.getItem('mesa_parceiros_v2');
+          if (saved) parceiros = JSON.parse(saved);
         }
       } catch(e) {
-        parceiros = [];
+        const saved = localStorage.getItem('mesa_parceiros_v2');
+        if (saved) parceiros = JSON.parse(saved);
       }
+
+      renderizarBandejaBaloes();
+      renderizarMarcadoresMapa();
+      atualizarKpisGerais();
     }
 
     function salvarParceiros() {
@@ -1663,15 +1817,19 @@
 
       mapContainer.addEventListener('drop', (e) => {
         e.preventDefault();
-        const categoria = e.dataTransfer.getData('text/plain');
-        if (!categoria) return;
+        const payload = e.dataTransfer.getData('text/plain');
+        if (!payload) return;
 
         const rect = mapContainer.getBoundingClientRect();
         const x = e.clientX - rect.left;
         const y = e.clientY - rect.top;
         const latlng = map.containerPointToLatLng([x, y]);
 
-        abrirDrawerNovoComCoords(latlng.lat, latlng.lng, categoria);
+        if (payload.startsWith('parc_') || parceiros.some(p => String(p.id) === String(payload))) {
+          abrirDrawerEditar(payload, latlng.lat, latlng.lng);
+        } else {
+          abrirDrawerNovoComCoords(latlng.lat, latlng.lng, payload);
+        }
       });
 
       renderizarMarcadoresMapa();
@@ -1683,20 +1841,31 @@
     }
 
     function renderizarMarcadoresMapa() {
-      // Limpa marcadores anteriores
+      if (!map) return;
       Object.values(markersMap).forEach(m => map.removeLayer(m));
       markersMap = {};
 
       parceiros.forEach(p => {
-        const seg = SEGMENTOS_DEF[p.categoria] || { icone: '📍' };
+        const isFixado = (p.posicao_mapa && p.posicao_mapa.fixado && p.posicao_mapa.lat && p.posicao_mapa.lng) ||
+                         (p.lat && p.lng && p.posicao_mapa?.fixado !== false);
+        if (!isFixado) return;
+
+        const lat = p.posicao_mapa?.lat || p.lat;
+        const lng = p.posicao_mapa?.lng || p.lng;
+        const seg = SEGMENTOS_DEF[p.categoria] || { icone: '📍', nome: 'Parceiro' };
+
+        const pinHtml = p.logo_url
+          ? `<div class="mesa-custom-pin" style="background:#0F172A; border:2.5px solid #FED700; border-radius:50%; box-shadow:0 0 10px rgba(254,215,0,0.5); overflow:hidden; width:38px; height:38px; display:flex; align-items:center; justify-content:center;" title="${escapeHtml(p.nome)}"><img src="${p.logo_url}" style="width:100%; height:100%; object-fit:cover;" onerror="this.onerror=null; this.src='/static/logo_bolha_pura.png';"></div>`
+          : `<div class="mesa-custom-pin" style="border:2px solid #FED700; background:#0F172A;" title="${escapeHtml(p.nome)}">${seg.icone}</div>`;
+
         const customIcon = L.divIcon({
           className: 'mesa-custom-pin-wrap',
-          html: `<div class="mesa-custom-pin" title="${escapeHtml(p.nome)}">${seg.icone}</div>`,
-          iconSize: [38, 38],
-          iconAnchor: [19, 19]
+          html: pinHtml,
+          iconSize: [40, 40],
+          iconAnchor: [20, 20]
         });
 
-        const marker = L.marker([p.lat, p.lng], { icon: customIcon }).addTo(map);
+        const marker = L.marker([lat, lng], { icon: customIcon }).addTo(map);
 
         marker.on('click', (e) => {
           L.DomEvent.stopPropagation(e);
@@ -1707,30 +1876,86 @@
       });
     }
 
-    /* ==================== BANDEJA LATERAL DE BALÕES ==================== */
+    /* ==================== BANDEJA LATERAL DE EMPRESAS ==================== */
     function renderizarBandejaBaloes() {
       const container = document.getElementById('balloon-list-tray');
       if (!container) return;
 
-      container.innerHTML = Object.entries(SEGMENTOS_DEF).map(([key, item]) => {
-        const count = parceiros.filter(p => p.categoria === key).length;
-        const cotaClass = count >= item.cota ? 'cheio' : (count === 0 ? 'vazio' : '');
-        const cotaTexto = `${count}/${item.cota}`;
+      const totalCount = parceiros.length;
+      const countEl = document.getElementById('count-parc-total');
+      if (countEl) countEl.textContent = totalCount;
+      const tabTodos = document.getElementById('tab-parc-todos');
+      if (tabTodos) tabTodos.textContent = totalCount;
+
+      let lista = parceiros;
+      if (filtroParceiroAtual === 'pet') {
+        lista = parceiros.filter(p => ['pet_vet', 'pet_shop', 'banho_tosa'].includes(p.categoria));
+      } else if (filtroParceiroAtual === 'auto') {
+        lista = parceiros.filter(p => ['auto_center', 'borracharia', 'posto', 'moto_mecanica', 'carro_mecanica'].includes(p.categoria));
+      } else if (filtroParceiroAtual === 'outros') {
+        lista = parceiros.filter(p => ['alimentacao'].includes(p.categoria));
+      } else if (filtroParceiroAtual === 'fixado') {
+        lista = parceiros.filter(p => (p.posicao_mapa && p.posicao_mapa.fixado) || (p.lat && p.lng && p.posicao_mapa?.fixado !== false));
+      }
+
+      if (!lista || lista.length === 0) {
+        container.innerHTML = '<div style="padding:24px 16px; text-align:center; color:var(--text-dim); font-size:11px;">Nenhuma empresa cadastrada nesta categoria.</div>';
+        return;
+      }
+
+      container.innerHTML = lista.map(p => {
+        const seg = SEGMENTOS_DEF[p.categoria] || { nome: p.categoria_nome || 'Parceiro', icone: '🏢' };
+        const isFixado = (p.posicao_mapa && p.posicao_mapa.fixado) || (p.lat && p.lng && p.posicao_mapa?.fixado !== false);
+        const statusBadge = isFixado
+          ? '<span style="font-size:9.5px; color:#22C55E; font-weight:800; background:rgba(34,197,94,0.15); padding:2px 6px; border-radius:4px; flex-shrink:0;">📍 No Mapa</span>'
+          : '<span style="font-size:9.5px; color:#F59E0B; font-weight:800; background:rgba(245,158,11,0.15); padding:2px 6px; border-radius:4px; flex-shrink:0;">⏱️ Na Esteira</span>';
+
+        const logoHtml = p.logo_url
+          ? `<img src="${p.logo_url}" style="width:100%; height:100%; object-fit:cover;" onerror="this.onerror=null; this.src='/static/logo_bolha_pura.png';">`
+          : `<span style="font-size:18px;">${seg.icone}</span>`;
+
+        const prodsQtd = (p.produtos && p.produtos.length) ? `${p.produtos.length} ofertas ativas` : 'Sem promoções';
 
         return `
-          <div class="balloon-item" draggable="true" ondragstart="iniciarDragBalão(event, '${key}')" onclick="clicarBalãoParaCadastrar('${key}')">
-            <div class="balloon-icon-circle">${item.icone}</div>
-            <div class="balloon-info">
-              <div class="balloon-name">${item.nome}</div>
-              <div class="balloon-meta">
-                <span>Cota:</span>
-                <span class="balloon-cota-tag ${cotaClass}">${cotaTexto}</span>
-                <span>• R$ ${item.mensalidadeBase}/mês</span>
+          <div class="balloon-item ${p.is_manual_slot ? 'manual-slot' : ''}"
+               draggable="true"
+               ondragstart="iniciarDragParceiro(event, '${p.id}')"
+               onclick="abrirDrawerEditar('${p.id}')"
+               style="${p.is_manual_slot ? 'border: 2px dashed #FED700 !important; background: rgba(254, 215, 0, 0.08) !important;' : ''}">
+            <div style="display:flex; align-items:center; gap:10px; width:100%;">
+              <div class="balloon-icon-circle" style="background:#0F172A; border:1px solid var(--border); overflow:hidden; flex-shrink:0; display:flex; align-items:center; justify-content:center;">
+                ${logoHtml}
               </div>
+              <div class="balloon-info" style="flex:1; min-width:0;">
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                  <span class="balloon-name" style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:170px;" title="${escapeHtml(p.nome)}">${escapeHtml(p.nome)}</span>
+                  ${statusBadge}
+                </div>
+                <div class="balloon-meta" style="margin-top:2px;">
+                  <span>${seg.icone} ${seg.nome}</span>
+                  <span>• ${escapeHtml(p.bairro || 'Cascavel')}</span>
+                </div>
+                ${p.is_manual_slot ? '<div style="font-size:9.5px; color:#FED700; font-weight:900; margin-top:2px;">✨ TESTE MANUAL DO RIGO</div>' : ''}
+              </div>
+            </div>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-top:6px; padding-top:6px; border-top:1px dashed rgba(255,255,255,0.06); font-size:10.5px;">
+              <span style="color:var(--text-dim); font-size:10px;">${prodsQtd}</span>
+              <button type="button" onclick="event.stopPropagation(); posicionarParceiroNoCentro('${p.id}')" style="background:#2563EB; color:#fff; border:none; padding:3px 8px; border-radius:5px; font-weight:800; font-size:10px; cursor:pointer;" title="Lançar este parceiro no centro do mapa">
+                📍 Lançar no Mapa
+              </button>
             </div>
           </div>
         `;
       }).join('');
+    }
+
+    function iniciarDragParceiro(e, id) {
+      e.dataTransfer.setData('text/plain', id);
+    }
+
+    function posicionarParceiroNoCentro(id) {
+      const center = map ? map.getCenter() : { lat: CASCAVEL_CENTER[0], lng: CASCAVEL_CENTER[1] };
+      abrirDrawerEditar(id, center.lat, center.lng);
     }
 
     function iniciarDragBalão(e, categoria) {
@@ -1738,7 +1963,6 @@
     }
 
     function clicarBalãoParaCadastrar(categoria) {
-      // Clicou no balão da esquerda: abre na direita para cadastrar com aquela categoria pré-selecionada!
       const center = map ? map.getCenter() : { lat: CASCAVEL_CENTER[0], lng: CASCAVEL_CENTER[1] };
       abrirDrawerNovoComCoords(center.lat, center.lng, categoria);
     }
@@ -1866,46 +2090,64 @@
       }
     }
 
-    function abrirDrawerEditar(id) {
-      const p = parceiros.find(item => item.id === id);
+    function abrirDrawerEditar(id, latDrop, lngDrop) {
+      const p = parceiros.find(item => String(item.id) === String(id));
       if (!p) return;
 
-      parceiroSelecionadoId = id;
-      document.getElementById('drawer-title').textContent = '🏢 Editar: ' + p.nome;
+      parceiroSelecionadoId = p.id;
+      document.getElementById('drawer-title').textContent = (p.is_manual_slot ? '✨ [SLOT MANUAL] ' : '🏢 Editar: ') + p.nome;
       document.getElementById('edit-id').value = p.id;
       document.getElementById('edit-nome').value = p.nome;
-      document.getElementById('edit-categoria').value = p.categoria;
+      document.getElementById('edit-categoria').value = p.categoria || 'auto_center';
       document.getElementById('edit-bairro').value = p.bairro || 'Centro';
       document.getElementById('edit-endereco').value = p.endereco || '';
-      document.getElementById('edit-whats').value = p.telefone_whatsapp || '';
+      document.getElementById('edit-whats').value = p.telefone_whatsapp || p.telefone || '';
       document.getElementById('edit-selo').value = p.selo_tipo || 'ouro';
-      document.getElementById('edit-lat').value = p.lat.toFixed(6);
-      document.getElementById('edit-lng').value = p.lng.toFixed(6);
 
-      document.getElementById('edit-mensalidade').value = p.mensalidade || 250;
+      const lat = (latDrop !== undefined) ? latDrop : (p.posicao_mapa?.lat || p.lat || CASCAVEL_CENTER[0]);
+      const lng = (lngDrop !== undefined) ? lngDrop : (p.posicao_mapa?.lng || p.lng || CASCAVEL_CENTER[1]);
+      document.getElementById('edit-lat').value = Number(lat).toFixed(6);
+      document.getElementById('edit-lng').value = Number(lng).toFixed(6);
+
+      // Identidade visual
+      document.getElementById('edit-logo-url').value = p.logo_url || '';
+      document.getElementById('preview-logo-img').src = p.logo_url || '/static/logo_bolha_pura.png';
+      document.getElementById('edit-banner-url').value = p.banner_url || '';
+      document.getElementById('preview-banner-img').src = p.banner_url || '/static/logo_bolha_pura.png';
+
+      // Produtos promocionais
+      const prod1 = (p.produtos && p.produtos[0]) || {};
+      document.getElementById('edit-prod1-nome').value = prod1.titulo || '';
+      document.getElementById('edit-prod1-de').value = prod1.preco_original || prod1.de || '';
+      document.getElementById('edit-prod1-por').value = prod1.preco_promocional || prod1.por || '';
+      document.getElementById('edit-prod1-tag').value = prod1.tag_desconto || prod1.tag || '';
+      document.getElementById('edit-prod1-foto').value = prod1.foto_url || '';
+      document.getElementById('preview-prod1-img').src = prod1.foto_url || '/static/logo_bolha_pura.png';
+
+      const prod2 = (p.produtos && p.produtos[1]) || {};
+      document.getElementById('edit-prod2-nome').value = prod2.titulo || '';
+      document.getElementById('edit-prod2-de').value = prod2.preco_original || prod2.de || '';
+      document.getElementById('edit-prod2-por').value = prod2.preco_promocional || prod2.por || '';
+      document.getElementById('edit-prod2-tag').value = prod2.tag_desconto || prod2.tag || '';
+      document.getElementById('edit-prod2-foto').value = prod2.foto_url || '';
+      document.getElementById('preview-prod2-img').src = prod2.foto_url || '/static/logo_bolha_pura.png';
+
+      // Dados financeiros
+      document.getElementById('edit-mensalidade').value = p.mensalidade || (SEGMENTOS_DEF[p.categoria]?.mensalidadeBase) || 200;
       document.getElementById('edit-dia-venc').value = p.dia_vencimento || 10;
       document.getElementById('edit-status-pagamento').value = p.status_pagamento || 'pago';
       document.getElementById('edit-total-pago').value = p.total_pago || 0;
-
-      if (p.produtos && p.produtos.length > 0) {
-        document.getElementById('edit-prod1-nome').value = p.produtos[0].titulo || '';
-        document.getElementById('edit-prod1-de').value = p.produtos[0].de || '';
-        document.getElementById('edit-prod1-por').value = p.produtos[0].por || '';
-        document.getElementById('edit-prod1-tag').value = p.produtos[0].tag || '';
-      } else {
-        document.getElementById('edit-prod1-nome').value = '';
-        document.getElementById('edit-prod1-de').value = '';
-        document.getElementById('edit-prod1-por').value = '';
-        document.getElementById('edit-prod1-tag').value = '';
-      }
-
       document.getElementById('edit-destaque-esteira').checked = (p.destaque_esteira !== 0);
 
       document.getElementById('partner-drawer').classList.remove('closed');
 
-      posicionarMarcadorEdicaoNoMapa(p.lat, p.lng);
+      posicionarMarcadorEdicaoNoMapa(lat, lng);
 
-      if (map) map.panTo([p.lat, p.lng], { animate: true });
+      if (latDrop !== undefined) {
+        buscarEnderecoReverso(lat, lng);
+      }
+
+      if (map) map.panTo([lat, lng], { animate: true });
     }
 
     function fecharDrawer() {
@@ -1917,7 +2159,7 @@
       }
     }
 
-    function salvarParceiroDrawer() {
+    async function salvarParceiroDrawer() {
       const nome = document.getElementById('edit-nome').value.trim();
       if (!nome) {
         alert('Informe o nome da empresa parceira.');
@@ -1933,45 +2175,70 @@
       const lat = parseFloat(document.getElementById('edit-lat').value) || CASCAVEL_CENTER[0];
       const lng = parseFloat(document.getElementById('edit-lng').value) || CASCAVEL_CENTER[1];
 
+      const logoUrl = document.getElementById('edit-logo-url').value.trim();
+      const bannerUrl = document.getElementById('edit-banner-url').value.trim();
+
       const mensalidade = parseFloat(document.getElementById('edit-mensalidade').value) || 0;
       const diaVenc = parseInt(document.getElementById('edit-dia-venc').value) || 10;
       const statusPag = document.getElementById('edit-status-pagamento').value;
       const totalPago = parseFloat(document.getElementById('edit-total-pago').value) || 0;
       const destaque = document.getElementById('edit-destaque-esteira').checked ? 1 : 0;
 
-      const prod1Nome = document.getElementById('edit-prod1-nome').value.trim();
       const prods = [];
+      const prod1Nome = document.getElementById('edit-prod1-nome').value.trim();
       if (prod1Nome) {
         prods.push({
+          id: 1,
           titulo: prod1Nome,
-          de: parseFloat(document.getElementById('edit-prod1-de').value) || 0,
-          por: parseFloat(document.getElementById('edit-prod1-por').value) || 0,
-          tag: document.getElementById('edit-prod1-tag').value.trim() || 'OFERTA'
+          descricao: 'Oferta exclusiva no App Alerta Urbano em Cascavel',
+          preco_original: document.getElementById('edit-prod1-de').value.trim(),
+          preco_promocional: document.getElementById('edit-prod1-por').value.trim(),
+          tag_desconto: document.getElementById('edit-prod1-tag').value.trim() || 'PROMO',
+          foto_url: document.getElementById('edit-prod1-foto').value.trim()
         });
       }
 
-      if (idVal) {
-        // Atualiza existente
-        const idx = parceiros.findIndex(p => p.id === parseInt(idVal));
-        if (idx !== -1) {
-          parceiros[idx] = {
-            ...parceiros[idx],
-            nome, categoria, bairro, endereco, telefone_whatsapp: whats, selo_tipo: selo,
-            lat, lng, mensalidade, dia_vencimento: diaVenc, status_pagamento: statusPag,
-            total_pago: totalPago, destaque_esteira: destaque, produtos: prods
-          };
-          mostrarToast(`✅ Parceiro "${nome}" atualizado com sucesso!`);
-        }
-      } else {
-        // Novo
-        const newId = Date.now();
-        const novo = {
-          id: newId,
-          nome, categoria, bairro, endereco, telefone_whatsapp: whats, selo_tipo: selo,
-          lat, lng, mensalidade, dia_vencimento: diaVenc, status_pagamento: statusPag,
-          total_pago: totalPago, destaque_esteira: destaque, produtos: prods
+      const prod2Nome = document.getElementById('edit-prod2-nome').value.trim();
+      if (prod2Nome) {
+        prods.push({
+          id: 2,
+          titulo: prod2Nome,
+          descricao: 'Oferta exclusiva no App Alerta Urbano em Cascavel',
+          preco_original: document.getElementById('edit-prod2-de').value.trim(),
+          preco_promocional: document.getElementById('edit-prod2-por').value.trim(),
+          tag_desconto: document.getElementById('edit-prod2-tag').value.trim() || 'OFERTA',
+          foto_url: document.getElementById('edit-prod2-foto').value.trim()
+        });
+      }
+
+      const idx = parceiros.findIndex(p => String(p.id) === String(idVal));
+      let partnerUpdated = null;
+      if (idx !== -1) {
+        parceiros[idx] = {
+          ...parceiros[idx],
+          nome, categoria, bairro, endereco, telefone_whatsapp: whats, telefone: whats, selo_tipo: selo,
+          lat, lng,
+          posicao_mapa: { fixado: true, lat, lng, endereco, bairro },
+          logo_url: logoUrl, banner_url: bannerUrl,
+          mensalidade, dia_vencimento: diaVenc, status_pagamento: statusPag,
+          total_pago: totalPago, destaque_esteira: destaque, produtos: prods,
+          is_manual_slot: false
         };
-        parceiros.push(novo);
+        partnerUpdated = parceiros[idx];
+        mostrarToast(`✅ Parceiro "${nome}" atualizado na Mesa!`);
+      } else {
+        const newId = 'parc_' + Date.now();
+        partnerUpdated = {
+          id: newId,
+          nome, categoria, bairro, endereco, telefone_whatsapp: whats, telefone: whats, selo_tipo: selo,
+          lat, lng,
+          posicao_mapa: { fixado: true, lat, lng, endereco, bairro },
+          logo_url: logoUrl, banner_url: bannerUrl,
+          mensalidade, dia_vencimento: diaVenc, status_pagamento: statusPag,
+          total_pago: totalPago, destaque_esteira: destaque, produtos: prods,
+          is_manual_slot: false
+        };
+        parceiros.push(partnerUpdated);
         mostrarToast(`🎉 Novo parceiro "${nome}" fixado no mapa de Cascavel!`);
       }
 
@@ -1981,13 +2248,49 @@
       fecharDrawer();
       if (document.getElementById('view-financeiro').style.display === 'flex') renderizarTabelaFinanceira();
       if (document.getElementById('view-segmentos').style.display === 'flex') renderizarRadarSegmentos();
+
+      // Sincroniza via POST /api/parceiros com o banco SQLite
+      try {
+        const payloadApi = {
+          id: idVal,
+          nome: nome,
+          categoria: categoria,
+          subtitulo: partnerUpdated.subtitulo || `Parceiro Oficial ${SEGMENTOS_DEF[categoria]?.nome || ''}`,
+          descricao: partnerUpdated.descricao || `Empresa parceira oficial do Alerta Urbano em Cascavel no bairro ${bairro}`,
+          bairro: bairro,
+          endereco: endereco,
+          cidade: 'Cascavel',
+          lat: lat,
+          lng: lng,
+          telefone_whatsapp: whats,
+          telefone: whats,
+          logo_url: logoUrl,
+          banner_url: bannerUrl,
+          foto_capa: bannerUrl,
+          selo_tipo: selo,
+          destaque_esteira: destaque,
+          produtos: prods
+        };
+
+        const res = await fetch('/api/parceiros', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payloadApi)
+        });
+        if (res.ok) {
+          mostrarToast(`🚀 "${nome}" sincronizado em tempo real com o App!`);
+        }
+      } catch (e) {
+        console.warn('Erro ao sincronizar com backend SQLite:', e);
+      }
     }
 
-    function excluirParceiroAtual() {
+    async function excluirParceiroAtual() {
       if (!parceiroSelecionadoId) return;
       if (!confirm('Deseja realmente remover este parceiro da mesa operacional?')) return;
 
-      parceiros = parceiros.filter(p => p.id !== parceiroSelecionadoId);
+      const pId = parceiroSelecionadoId;
+      parceiros = parceiros.filter(p => String(p.id) !== String(pId));
       salvarParceiros();
       renderizarMarcadoresMapa();
       renderizarBandejaBaloes();
@@ -1995,6 +2298,12 @@
       mostrarToast('🗑️ Parceiro removido da mesa operacional.');
       if (document.getElementById('view-financeiro').style.display === 'flex') renderizarTabelaFinanceira();
       if (document.getElementById('view-segmentos').style.display === 'flex') renderizarRadarSegmentos();
+
+      try {
+        if (String(pId).match(/^\d+$/)) {
+          await fetch(`/api/parceiros/${pId}`, { method: 'DELETE' });
+        }
+      } catch (_) {}
     }
 
     /* ==================== TROCA DE VISÕES DA MESA ==================== */
@@ -2091,11 +2400,22 @@
         const statusClass = p.status_pagamento || 'pendente';
         const statusTexto = statusClass === 'pago' ? '🟢 Pago' : (statusClass === 'atrasado' ? '🔴 Em Atraso' : '🟡 A Vencer');
 
+        const logoMini = p.logo_url
+          ? `<img src="${p.logo_url}" style="width:100%; height:100%; object-fit:cover;" onerror="this.onerror=null; this.src='/static/logo_bolha_pura.png';">`
+          : `<span style="font-size:13px;">${seg.icone}</span>`;
+
         return `
           <tr>
             <td>
-              <strong style="color:#FFF;">${escapeHtml(p.nome)}</strong>
-              <div style="font-size:11px; color:var(--text-dim);">${escapeHtml(p.endereco || '')}</div>
+              <div style="display:flex; align-items:center; gap:8px;">
+                <div style="width:28px; height:28px; border-radius:6px; overflow:hidden; background:#0F172A; border:1px solid var(--border); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                  ${logoMini}
+                </div>
+                <div>
+                  <strong style="color:#FFF; font-size:12px;">${escapeHtml(p.nome)}</strong>
+                  <div style="font-size:10.5px; color:var(--text-dim);">${escapeHtml(p.endereco || '')}</div>
+                </div>
+              </div>
             </td>
             <td>${seg.icone} ${seg.nome}</td>
             <td>${escapeHtml(p.bairro || 'Centro')}</td>
@@ -2105,13 +2425,13 @@
             <td>R$ ${(Number(p.total_pago) || 0).toFixed(2).replace('.', ',')}</td>
             <td>
               <div style="display:flex; gap:6px;">
-                <button type="button" onclick="alternarStatusPagamento(${p.id})" style="background:var(--bg-surface); border:1px solid var(--border); color:#FFF; font-size:11px; padding:4px 8px; border-radius:6px; cursor:pointer;" title="Alternar Status">
+                <button type="button" onclick="alternarStatusPagamento('${p.id}')" style="background:var(--bg-surface); border:1px solid var(--border); color:#FFF; font-size:11px; padding:4px 8px; border-radius:6px; cursor:pointer;" title="Alternar Status">
                   🔄 Status
                 </button>
-                <button type="button" onclick="enviarCobrancaWhats(${p.id})" style="background:#009B3A; color:#FFF; border:none; font-size:11px; padding:4px 8px; border-radius:6px; cursor:pointer; font-weight:800;" title="Abrir WhatsApp">
+                <button type="button" onclick="enviarCobrancaWhats('${p.id}')" style="background:#009B3A; color:#FFF; border:none; font-size:11px; padding:4px 8px; border-radius:6px; cursor:pointer; font-weight:800;" title="Abrir WhatsApp">
                   💬 Cobrança
                 </button>
-                <button type="button" onclick="abrirDrawerEditar(${p.id})" style="background:var(--bg-surface); border:1px solid var(--border); color:#FFF; font-size:11px; padding:4px 8px; border-radius:6px; cursor:pointer;" title="Editar">
+                <button type="button" onclick="abrirDrawerEditar('${p.id}')" style="background:var(--bg-surface); border:1px solid var(--border); color:#FFF; font-size:11px; padding:4px 8px; border-radius:6px; cursor:pointer;" title="Editar">
                   ✏️
                 </button>
               </div>
@@ -2122,7 +2442,7 @@
     }
 
     function alternarStatusPagamento(id) {
-      const p = parceiros.find(item => item.id === id);
+      const p = parceiros.find(item => String(item.id) === String(id));
       if (!p) return;
 
       if (p.status_pagamento === 'pago') {
@@ -2140,12 +2460,13 @@
     }
 
     function enviarCobrancaWhats(id) {
-      const p = parceiros.find(item => item.id === id);
-      if (!p || !p.telefone_whatsapp) {
+      const p = parceiros.find(item => String(item.id) === String(id));
+      const tel = p ? (p.telefone_whatsapp || p.telefone) : '';
+      if (!p || !tel) {
         alert('Telefone de WhatsApp não cadastrado para esta empresa.');
         return;
       }
-      const num = p.telefone_whatsapp.replace(/\D/g, '');
+      const num = tel.replace(/\D/g, '');
       const dddNum = num.length <= 11 ? ('55' + num) : num;
       const msg = encodeURIComponent(`Olá, equipe da ${p.nome}! Aqui é o Rigo da Vórtice Mídia / Alerta Urbano Cascavel. Passando para confirmar o fechamento da assinatura mensal do seu patrocínio no app (R$ ${Number(p.mensalidade).toFixed(2)}). Segue a chave PIX da Vórtice Mídia. Qualquer dúvida estamos à disposição!`);
       window.open(`https://wa.me/${dddNum}?text=${msg}`, '_blank');

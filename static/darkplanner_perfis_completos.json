@@ -2042,15 +2042,15 @@
   {
     "id": "perfil_69",
     "tutor": {
-      "nome": "Marcelo Rossi Fagundes",
+      "nome": "[TESTE RIGO 01] Tutor em Aberto",
       "sexo": "M",
       "avatar": "/static/darkplanner_pessoas/homem_05_rodrigo.jpg",
-      "telefone": "(45) 99934-1659",
+      "telefone": "(45) 99800-0001",
       "bairro_origem": "Ciro Nardi"
     },
     "pet": {
       "id": "pet_69",
-      "nome": "Calopsita Lili",
+      "nome": "Pet em Aberto",
       "categoria": "ave",
       "tipo_ocorrencia": "desaparecido",
       "sexo": "Macho",
@@ -2067,20 +2067,21 @@
       "endereco": "",
       "bairro": "",
       "data_fixacao": null
-    }
+    },
+    "is_manual_slot": true
   },
   {
     "id": "perfil_70",
     "tutor": {
-      "nome": "Helena Ranaldi Fagundes",
+      "nome": "[TESTE RIGO 02] Tutora em Aberto",
       "sexo": "F",
       "avatar": "/static/darkplanner_pessoas/mulher_06_ana_paula.jpg",
-      "telefone": "(45) 99927-3114",
+      "telefone": "(45) 99800-0002",
       "bairro_origem": "Pioneiros Catarinenses"
     },
     "pet": {
       "id": "pet_70",
-      "nome": "Calopsita Chico",
+      "nome": "Pet em Aberto",
       "categoria": "ave",
       "tipo_ocorrencia": "desaparecido",
       "sexo": "Macho",
@@ -2097,6 +2098,7 @@
       "endereco": "",
       "bairro": "",
       "data_fixacao": null
-    }
+    },
+    "is_manual_slot": true
   }
 ]

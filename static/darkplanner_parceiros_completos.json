@@ -1,0 +1,2081 @@
+[
+  {
+    "id": "parc_01",
+    "nome": "VetVida Clínica 24h",
+    "categoria": "pet_vet",
+    "categoria_nome": "Clínica Veterinária",
+    "icone": "🐾",
+    "sigla": "VV",
+    "subtitulo": "Atendimento de urgência e UTI pet 24h em Cascavel",
+    "descricao": "Empresa parceira oficial do Alerta Urbano em Cascavel. Especialidade em clínica veterinária no bairro Centro.",
+    "bairro": "Centro",
+    "endereco": "Rua em Cascavel, Centro",
+    "cidade": "Cascavel",
+    "telefone": "(45) 99801-3456",
+    "mensalidade": 250,
+    "status_pagamento": "pendente",
+    "total_pago": 0,
+    "logo_url": "/static/parceiros/pet_vet/pet_vet_01_vv/logo.png",
+    "banner_url": "/static/parceiros/pet_vet/pet_vet_01_vv/banner.png",
+    "destaque_esteira": 1,
+    "posicao_mapa": {
+      "fixado": false,
+      "lat": null,
+      "lng": null,
+      "endereco": "",
+      "bairro": "Centro"
+    },
+    "produtos": [
+      {
+        "id": 1,
+        "titulo": "Consulta Veterinária Geral",
+        "descricao": "Oferta especial de VetVida Clínica 24h em Cascavel. Apresente no balcão e garanta o preço de aplicativo.",
+        "preco_original": "R$ 180,00",
+        "preco_promocional": "R$ 129,90",
+        "tag_desconto": "28% OFF",
+        "foto_url": "/static/parceiros/pet_vet/pet_vet_01_vv/produtos/produto_01.png"
+      },
+      {
+        "id": 2,
+        "titulo": "Vacina V10 Importada + Antirrábica",
+        "descricao": "Oferta especial de VetVida Clínica 24h em Cascavel. Apresente no balcão e garanta o preço de aplicativo.",
+        "preco_original": "R$ 160,00",
+        "preco_promocional": "R$ 119,00",
+        "tag_desconto": "25% OFF",
+        "foto_url": "/static/parceiros/pet_vet/pet_vet_01_vv/produtos/produto_02.png"
+      }
+    ]
+  },
+  {
+    "id": "parc_02",
+    "nome": "Hospital São Francisco",
+    "categoria": "pet_vet",
+    "categoria_nome": "Clínica Veterinária",
+    "icone": "🐾",
+    "sigla": "SF",
+    "subtitulo": "Especialidades cirúrgicas e exames de imagem",
+    "descricao": "Empresa parceira oficial do Alerta Urbano em Cascavel. Especialidade em clínica veterinária no bairro Cancelli.",
+    "bairro": "Cancelli",
+    "endereco": "Rua em Cascavel, Cancelli",
+    "cidade": "Cascavel",
+    "telefone": "(45) 99802-3456",
+    "mensalidade": 350,
+    "status_pagamento": "pago",
+    "total_pago": 1050,
+    "logo_url": "/static/parceiros/pet_vet/pet_vet_02_sf/logo.png",
+    "banner_url": "/static/parceiros/pet_vet/pet_vet_02_sf/banner.png",
+    "destaque_esteira": 1,
+    "posicao_mapa": {
+      "fixado": false,
+      "lat": null,
+      "lng": null,
+      "endereco": "",
+      "bairro": "Cancelli"
+    },
+    "produtos": [
+      {
+        "id": 1,
+        "titulo": "Ultrassonografia Abdominal Pet",
+        "descricao": "Oferta especial de Hospital São Francisco em Cascavel. Apresente no balcão e garanta o preço de aplicativo.",
+        "preco_original": "R$ 220,00",
+        "preco_promocional": "R$ 169,00",
+        "tag_desconto": "23% OFF",
+        "foto_url": "/static/parceiros/pet_vet/pet_vet_02_sf/produtos/produto_01.png"
+      },
+      {
+        "id": 2,
+        "titulo": "Hemograma Completo Veterinário",
+        "descricao": "Oferta especial de Hospital São Francisco em Cascavel. Apresente no balcão e garanta o preço de aplicativo.",
+        "preco_original": "R$ 90,00",
+        "preco_promocional": "R$ 65,00",
+        "tag_desconto": "27% OFF",
+        "foto_url": "/static/parceiros/pet_vet/pet_vet_02_sf/produtos/produto_02.png"
+      }
+    ]
+  },
+  {
+    "id": "parc_03",
+    "nome": "Cascavel Vet Emergências",
+    "categoria": "pet_vet",
+    "categoria_nome": "Clínica Veterinária",
+    "icone": "🐾",
+    "sigla": "CV",
+    "subtitulo": "Plantão 24h com centro cirúrgico completo",
+    "descricao": "Empresa parceira oficial do Alerta Urbano em Cascavel. Especialidade em clínica veterinária no bairro Coqueiral.",
+    "bairro": "Coqueiral",
+    "endereco": "Rua em Cascavel, Coqueiral",
+    "cidade": "Cascavel",
+    "telefone": "(45) 99803-3456",
+    "mensalidade": 250,
+    "status_pagamento": "pendente",
+    "total_pago": 0,
+    "logo_url": "/static/parceiros/pet_vet/pet_vet_03_cv/logo.png",
+    "banner_url": "/static/parceiros/pet_vet/pet_vet_03_cv/banner.png",
+    "destaque_esteira": 1,
+    "posicao_mapa": {
+      "fixado": false,
+      "lat": null,
+      "lng": null,
+      "endereco": "",
+      "bairro": "Coqueiral"
+    },
+    "produtos": [
+      {
+        "id": 1,
+        "titulo": "Atendimento Noturno e Triagem",
+        "descricao": "Oferta especial de Cascavel Vet Emergências em Cascavel. Apresente no balcão e garanta o preço de aplicativo.",
+        "preco_original": "R$ 200,00",
+        "preco_promocional": "R$ 149,00",
+        "tag_desconto": "25% OFF",
+        "foto_url": "/static/parceiros/pet_vet/pet_vet_03_cv/produtos/produto_01.png"
+      },
+      {
+        "id": 2,
+        "titulo": "Limpeza de Tártaro Canina",
+        "descricao": "Oferta especial de Cascavel Vet Emergências em Cascavel. Apresente no balcão e garanta o preço de aplicativo.",
+        "preco_original": "R$ 350,00",
+        "preco_promocional": "R$ 279,00",
+        "tag_desconto": "20% OFF",
+        "foto_url": "/static/parceiros/pet_vet/pet_vet_03_cv/produtos/produto_02.png"
+      }
+    ]
+  },
+  {
+    "id": "parc_04",
+    "nome": "Espaço Animal Integrado",
+    "categoria": "pet_vet",
+    "categoria_nome": "Clínica Veterinária",
+    "icone": "🐾",
+    "sigla": "EA",
+    "subtitulo": "Dermatologia, oftalmologia e acupuntura pet",
+    "descricao": "Empresa parceira oficial do Alerta Urbano em Cascavel. Especialidade em clínica veterinária no bairro Neva.",
+    "bairro": "Neva",
+    "endereco": "Rua em Cascavel, Neva",
+    "cidade": "Cascavel",
+    "telefone": "(45) 99804-3456",
+    "mensalidade": 250,
+    "status_pagamento": "pago",
+    "total_pago": 750,
+    "logo_url": "/static/parceiros/pet_vet/pet_vet_04_ea/logo.png",
+    "banner_url": "/static/parceiros/pet_vet/pet_vet_04_ea/banner.png",
+    "destaque_esteira": 1,
+    "posicao_mapa": {
+      "fixado": false,
+      "lat": null,
+      "lng": null,
+      "endereco": "",
+      "bairro": "Neva"
+    },
+    "produtos": [
+      {
+        "id": 1,
+        "titulo": "Microchipagem com Registro Oficial",
+        "descricao": "Oferta especial de Espaço Animal Integrado em Cascavel. Apresente no balcão e garanta o preço de aplicativo.",
+        "preco_original": "R$ 120,00",
+        "preco_promocional": "R$ 79,90",
+        "tag_desconto": "33% OFF",
+        "foto_url": "/static/parceiros/pet_vet/pet_vet_04_ea/produtos/produto_01.png"
+      },
+      {
+        "id": 2,
+        "titulo": "Consulta Preventiva Filhote",
+        "descricao": "Oferta especial de Espaço Animal Integrado em Cascavel. Apresente no balcão e garanta o preço de aplicativo.",
+        "preco_original": "R$ 150,00",
+        "preco_promocional": "R$ 99,00",
+        "tag_desconto": "34% OFF",
+        "foto_url": "/static/parceiros/pet_vet/pet_vet_04_ea/produtos/produto_02.png"
+      }
+    ]
+  },
+  {
+    "id": "parc_05",
+    "nome": "ProntoVet Oeste 24 Horas",
+    "categoria": "pet_vet",
+    "categoria_nome": "Clínica Veterinária",
+    "icone": "🐾",
+    "sigla": "PV",
+    "subtitulo": "Pronto-socorro veterinário e internação",
+    "descricao": "Empresa parceira oficial do Alerta Urbano em Cascavel. Especialidade em clínica veterinária no bairro São Cristóvão.",
+    "bairro": "São Cristóvão",
+    "endereco": "Rua em Cascavel, São Cristóvão",
+    "cidade": "Cascavel",
+    "telefone": "(45) 99805-3456",
+    "mensalidade": 250,
+    "status_pagamento": "pendente",
+    "total_pago": 0,
+    "logo_url": "/static/parceiros/pet_vet/pet_vet_05_pv/logo.png",
+    "banner_url": "/static/parceiros/pet_vet/pet_vet_05_pv/banner.png",
+    "destaque_esteira": 1,
+    "posicao_mapa": {
+      "fixado": false,
+      "lat": null,
+      "lng": null,
+      "endereco": "",
+      "bairro": "São Cristóvão"
+    },
+    "produtos": [
+      {
+        "id": 1,
+        "titulo": "Castração Segura Canina/Felina",
+        "descricao": "Oferta especial de ProntoVet Oeste 24 Horas em Cascavel. Apresente no balcão e garanta o preço de aplicativo.",
+        "preco_original": "R$ 450,00",
+        "preco_promocional": "R$ 349,00",
+        "tag_desconto": "22% OFF",
+        "foto_url": "/static/parceiros/pet_vet/pet_vet_05_pv/produtos/produto_01.png"
+      },
+      {
+        "id": 2,
+        "titulo": "Check-up Geriátrico Pet",
+        "descricao": "Oferta especial de ProntoVet Oeste 24 Horas em Cascavel. Apresente no balcão e garanta o preço de aplicativo.",
+        "preco_original": "R$ 280,00",
+        "preco_promocional": "R$ 199,00",
+        "tag_desconto": "28% OFF",
+        "foto_url": "/static/parceiros/pet_vet/pet_vet_05_pv/produtos/produto_02.png"
+      }
+    ]
+  },
+  {
+    "id": "parc_06",
+    "nome": "Bicho Mimado Pet Store",
+    "categoria": "pet_shop",
+    "categoria_nome": "Pet Shop & Ração",
+    "icone": "🐕",
+    "sigla": "BM",
+    "subtitulo": "As melhores marcas de ração e farmácia veterinária",
+    "descricao": "Empresa parceira oficial do Alerta Urbano em Cascavel. Especialidade em pet shop & ração no bairro Centro.",
+    "bairro": "Centro",
+    "endereco": "Rua em Cascavel, Centro",
+    "cidade": "Cascavel",
+    "telefone": "(45) 99806-3456",
+    "mensalidade": 200,
+    "status_pagamento": "pago",
+    "total_pago": 600,
+    "logo_url": "/static/parceiros/pet_shop/pet_shop_01_bm/logo.png",
+    "banner_url": "/static/parceiros/pet_shop/pet_shop_01_bm/banner.png",
+    "destaque_esteira": 1,
+    "posicao_mapa": {
+      "fixado": false,
+      "lat": null,
+      "lng": null,
+      "endereco": "",
+      "bairro": "Centro"
+    },
+    "produtos": [
+      {
+        "id": 1,
+        "titulo": "Ração Premier Formula Adultos 15kg",
+        "descricao": "Oferta especial de Bicho Mimado Pet Store em Cascavel. Apresente no balcão e garanta o preço de aplicativo.",
+        "preco_original": "R$ 269,90",
+        "preco_promocional": "R$ 219,90",
+        "tag_desconto": "R$ 50 OFF",
+        "foto_url": "/static/parceiros/pet_shop/pet_shop_01_bm/produtos/produto_01.png"
+      },
+      {
+        "id": 2,
+        "titulo": "Antipulgas Simparic 10 a 20kg",
+        "descricao": "Oferta especial de Bicho Mimado Pet Store em Cascavel. Apresente no balcão e garanta o preço de aplicativo.",
+        "preco_original": "R$ 115,00",
+        "preco_promocional": "R$ 89,90",
+        "tag_desconto": "22% OFF",
+        "foto_url": "/static/parceiros/pet_shop/pet_shop_01_bm/produtos/produto_02.png"
+      }
+    ]
+  },
+  {
+    "id": "parc_07",
+    "nome": "Mundo Pet Ração & Acessórios",
+    "categoria": "pet_shop",
+    "categoria_nome": "Pet Shop & Ração",
+    "icone": "🐕",
+    "sigla": "MP",
+    "subtitulo": "Variedade em petiscos, brinquedos e caminhas",
+    "descricao": "Empresa parceira oficial do Alerta Urbano em Cascavel. Especialidade em pet shop & ração no bairro Coqueiral.",
+    "bairro": "Coqueiral",
+    "endereco": "Rua em Cascavel, Coqueiral",
+    "cidade": "Cascavel",
+    "telefone": "(45) 99807-3456",
+    "mensalidade": 200,
+    "status_pagamento": "pendente",
+    "total_pago": 0,
+    "logo_url": "/static/parceiros/pet_shop/pet_shop_02_mp/logo.png",
+    "banner_url": "/static/parceiros/pet_shop/pet_shop_02_mp/banner.png",
+    "destaque_esteira": 1,
+    "posicao_mapa": {
+      "fixado": false,
+      "lat": null,
+      "lng": null,
+      "endereco": "",
+      "bairro": "Coqueiral"
+    },
+    "produtos": [
+      {
+        "id": 1,
+        "titulo": "Ração Golden Special Frango 15kg",
+        "descricao": "Oferta especial de Mundo Pet Ração & Acessórios em Cascavel. Apresente no balcão e garanta o preço de aplicativo.",
+        "preco_original": "R$ 189,90",
+        "preco_promocional": "R$ 149,90",
+        "tag_desconto": "21% OFF",
+        "foto_url": "/static/parceiros/pet_shop/pet_shop_02_mp/produtos/produto_01.png"
+      },
+      {
+        "id": 2,
+        "titulo": "Caminha Ortopédica Tamanho G",
+        "descricao": "Oferta especial de Mundo Pet Ração & Acessórios em Cascavel. Apresente no balcão e garanta o preço de aplicativo.",
+        "preco_original": "R$ 140,00",
+        "preco_promocional": "R$ 99,90",
+        "tag_desconto": "28% OFF",
+        "foto_url": "/static/parceiros/pet_shop/pet_shop_02_mp/produtos/produto_02.png"
+      }
+    ]
+  },
+  {
+    "id": "parc_08",
+    "nome": "Cascavel Pet & Agro",
+    "categoria": "pet_shop",
+    "categoria_nome": "Pet Shop & Ração",
+    "icone": "🐕",
+    "sigla": "CA",
+    "subtitulo": "Alimentação animal premium com entrega rápida",
+    "descricao": "Empresa parceira oficial do Alerta Urbano em Cascavel. Especialidade em pet shop & ração no bairro Parque São Paulo.",
+    "bairro": "Parque São Paulo",
+    "endereco": "Rua em Cascavel, Parque São Paulo",
+    "cidade": "Cascavel",
+    "telefone": "(45) 99808-3456",
+    "mensalidade": 200,
+    "status_pagamento": "pago",
+    "total_pago": 600,
+    "logo_url": "/static/parceiros/pet_shop/pet_shop_03_ca/logo.png",
+    "banner_url": "/static/parceiros/pet_shop/pet_shop_03_ca/banner.png",
+    "destaque_esteira": 1,
+    "posicao_mapa": {
+      "fixado": false,
+      "lat": null,
+      "lng": null,
+      "endereco": "",
+      "bairro": "Parque São Paulo"
+    },
+    "produtos": [
+      {
+        "id": 1,
+        "titulo": "Ração Royal Canin Mini Adult 7,5kg",
+        "descricao": "Oferta especial de Cascavel Pet & Agro em Cascavel. Apresente no balcão e garanta o preço de aplicativo.",
+        "preco_original": "R$ 219,00",
+        "preco_promocional": "R$ 179,00",
+        "tag_desconto": "18% OFF",
+        "foto_url": "/static/parceiros/pet_shop/pet_shop_03_ca/produtos/produto_01.png"
+      },
+      {
+        "id": 2,
+        "titulo": "Comedouro Automático Digital",
+        "descricao": "Oferta especial de Cascavel Pet & Agro em Cascavel. Apresente no balcão e garanta o preço de aplicativo.",
+        "preco_original": "R$ 190,00",
+        "preco_promocional": "R$ 139,00",
+        "tag_desconto": "26% OFF",
+        "foto_url": "/static/parceiros/pet_shop/pet_shop_03_ca/produtos/produto_02.png"
+      }
+    ]
+  },
+  {
+    "id": "parc_09",
+    "nome": "Amigo Fiel Pet Shop",
+    "categoria": "pet_shop",
+    "categoria_nome": "Pet Shop & Ração",
+    "icone": "🐕",
+    "sigla": "AF",
+    "subtitulo": "Preço imbatível e atendimento especializado",
+    "descricao": "Empresa parceira oficial do Alerta Urbano em Cascavel. Especialidade em pet shop & ração no bairro Santa Cruz.",
+    "bairro": "Santa Cruz",
+    "endereco": "Rua em Cascavel, Santa Cruz",
+    "cidade": "Cascavel",
+    "telefone": "(45) 99809-3456",
+    "mensalidade": 200,
+    "status_pagamento": "pendente",
+    "total_pago": 0,
+    "logo_url": "/static/parceiros/pet_shop/pet_shop_04_af/logo.png",
+    "banner_url": "/static/parceiros/pet_shop/pet_shop_04_af/banner.png",
+    "destaque_esteira": 1,
+    "posicao_mapa": {
+      "fixado": false,
+      "lat": null,
+      "lng": null,
+      "endereco": "",
+      "bairro": "Santa Cruz"
+    },
+    "produtos": [
+      {
+        "id": 1,
+        "titulo": "Ração Guabi Natural Cães 12kg",
+        "descricao": "Oferta especial de Amigo Fiel Pet Shop em Cascavel. Apresente no balcão e garanta o preço de aplicativo.",
+        "preco_original": "R$ 240,00",
+        "preco_promocional": "R$ 189,90",
+        "tag_desconto": "20% OFF",
+        "foto_url": "/static/parceiros/pet_shop/pet_shop_04_af/produtos/produto_01.png"
+      },
+      {
+        "id": 2,
+        "titulo": "Arranhador Torre para Gatos 1,20m",
+        "descricao": "Oferta especial de Amigo Fiel Pet Shop em Cascavel. Apresente no balcão e garanta o preço de aplicativo.",
+        "preco_original": "R$ 210,00",
+        "preco_promocional": "R$ 159,00",
+        "tag_desconto": "24% OFF",
+        "foto_url": "/static/parceiros/pet_shop/pet_shop_04_af/produtos/produto_02.png"
+      }
+    ]
+  },
+  {
+    "id": "parc_10",
+    "nome": "Patinhas & Focinhos Pet",
+    "categoria": "pet_shop",
+    "categoria_nome": "Pet Shop & Ração",
+    "icone": "🐕",
+    "sigla": "PF",
+    "subtitulo": "Tudo para o conforto e nutrição do seu melhor amigo",
+    "descricao": "Empresa parceira oficial do Alerta Urbano em Cascavel. Especialidade em pet shop & ração no bairro Canadá.",
+    "bairro": "Canadá",
+    "endereco": "Rua em Cascavel, Canadá",
+    "cidade": "Cascavel",
+    "telefone": "(45) 99810-3456",
+    "mensalidade": 200,
+    "status_pagamento": "pago",
+    "total_pago": 600,
+    "logo_url": "/static/parceiros/pet_shop/pet_shop_05_pf/logo.png",
+    "banner_url": "/static/parceiros/pet_shop/pet_shop_05_pf/banner.png",
+    "destaque_esteira": 1,
+    "posicao_mapa": {
+      "fixado": false,
+      "lat": null,
+      "lng": null,
+      "endereco": "",
+      "bairro": "Canadá"
+    },
+    "produtos": [
+      {
+        "id": 1,
+        "titulo": "Ração Special Cat Prime Castrados 10kg",
+        "descricao": "Oferta especial de Patinhas & Focinhos Pet em Cascavel. Apresente no balcão e garanta o preço de aplicativo.",
+        "preco_original": "R$ 160,00",
+        "preco_promocional": "R$ 124,90",
+        "tag_desconto": "22% OFF",
+        "foto_url": "/static/parceiros/pet_shop/pet_shop_05_pf/produtos/produto_01.png"
+      },
+      {
+        "id": 2,
+        "titulo": "Peitoral Anti-Puxão com Guia",
+        "descricao": "Oferta especial de Patinhas & Focinhos Pet em Cascavel. Apresente no balcão e garanta o preço de aplicativo.",
+        "preco_original": "R$ 85,00",
+        "preco_promocional": "R$ 59,90",
+        "tag_desconto": "29% OFF",
+        "foto_url": "/static/parceiros/pet_shop/pet_shop_05_pf/produtos/produto_02.png"
+      }
+    ]
+  },
+  {
+    "id": "parc_11",
+    "nome": "Glamour Canino Estética",
+    "categoria": "banho_tosa",
+    "categoria_nome": "Banho e Tosa",
+    "icone": "🛁",
+    "sigla": "GC",
+    "subtitulo": "Banho com toalhas esterilizadas e produtos hipoalergênicos",
+    "descricao": "Empresa parceira oficial do Alerta Urbano em Cascavel. Especialidade em banho e tosa no bairro Centro.",
+    "bairro": "Centro",
+    "endereco": "Rua em Cascavel, Centro",
+    "cidade": "Cascavel",
+    "telefone": "(45) 99811-3456",
+    "mensalidade": 150,
+    "status_pagamento": "pendente",
+    "total_pago": 0,
+    "logo_url": "/static/parceiros/banho_tosa/banho_tosa_01_gc/logo.png",
+    "banner_url": "/static/parceiros/banho_tosa/banho_tosa_01_gc/banner.png",
+    "destaque_esteira": 1,
+    "posicao_mapa": {
+      "fixado": false,
+      "lat": null,
+      "lng": null,
+      "endereco": "",
+      "bairro": "Centro"
+    },
+    "produtos": [
+      {
+        "id": 1,
+        "titulo": "Pacote Mensal 4 Banhos + Hidratação",
+        "descricao": "Oferta especial de Glamour Canino Estética em Cascavel. Apresente no balcão e garanta o preço de aplicativo.",
+        "preco_original": "R$ 220,00",
+        "preco_promocional": "R$ 169,00",
+        "tag_desconto": "23% OFF",
+        "foto_url": "/static/parceiros/banho_tosa/banho_tosa_01_gc/produtos/produto_01.png"
+      },
+      {
+        "id": 2,
+        "titulo": "Tosa Higiênica + Corte de Unhas",
+        "descricao": "Oferta especial de Glamour Canino Estética em Cascavel. Apresente no balcão e garanta o preço de aplicativo.",
+        "preco_original": "R$ 60,00",
+        "preco_promocional": "R$ 39,90",
+        "tag_desconto": "33% OFF",
+        "foto_url": "/static/parceiros/banho_tosa/banho_tosa_01_gc/produtos/produto_02.png"
+      }
+    ]
+  },
+  {
+    "id": "parc_12",
+    "nome": "Estilo Pet Spa & Grooming",
+    "categoria": "banho_tosa",
+    "categoria_nome": "Banho e Tosa",
+    "icone": "🛁",
+    "sigla": "EP",
+    "subtitulo": "Especialistas em tosa na tesoura e desembolo",
+    "descricao": "Empresa parceira oficial do Alerta Urbano em Cascavel. Especialidade em banho e tosa no bairro Neva.",
+    "bairro": "Neva",
+    "endereco": "Rua em Cascavel, Neva",
+    "cidade": "Cascavel",
+    "telefone": "(45) 99812-3456",
+    "mensalidade": 150,
+    "status_pagamento": "pago",
+    "total_pago": 450,
+    "logo_url": "/static/parceiros/banho_tosa/banho_tosa_02_ep/logo.png",
+    "banner_url": "/static/parceiros/banho_tosa/banho_tosa_02_ep/banner.png",
+    "destaque_esteira": 1,
+    "posicao_mapa": {
+      "fixado": false,
+      "lat": null,
+      "lng": null,
+      "endereco": "",
+      "bairro": "Neva"
+    },
+    "produtos": [
+      {
+        "id": 1,
+        "titulo": "Banho com Ozonioterapia Pet",
+        "descricao": "Oferta especial de Estilo Pet Spa & Grooming em Cascavel. Apresente no balcão e garanta o preço de aplicativo.",
+        "preco_original": "R$ 95,00",
+        "preco_promocional": "R$ 69,90",
+        "tag_desconto": "26% OFF",
+        "foto_url": "/static/parceiros/banho_tosa/banho_tosa_02_ep/produtos/produto_01.png"
+      },
+      {
+        "id": 2,
+        "titulo": "Tosa na Tesoura Raças Pequenas",
+        "descricao": "Oferta especial de Estilo Pet Spa & Grooming em Cascavel. Apresente no balcão e garanta o preço de aplicativo.",
+        "preco_original": "R$ 90,00",
+        "preco_promocional": "R$ 69,00",
+        "tag_desconto": "23% OFF",
+        "foto_url": "/static/parceiros/banho_tosa/banho_tosa_02_ep/produtos/produto_02.png"
+      }
+    ]
+  },
+  {
+    "id": "parc_13",
+    "nome": "Cheiroso Pet Banho & Tosa",
+    "categoria": "banho_tosa",
+    "categoria_nome": "Banho e Tosa",
+    "icone": "🛁",
+    "sigla": "CP",
+    "subtitulo": "Carinho e paciência no cuidado do seu peludinho",
+    "descricao": "Empresa parceira oficial do Alerta Urbano em Cascavel. Especialidade em banho e tosa no bairro Cancelli.",
+    "bairro": "Cancelli",
+    "endereco": "Rua em Cascavel, Cancelli",
+    "cidade": "Cascavel",
+    "telefone": "(45) 99813-3456",
+    "mensalidade": 150,
+    "status_pagamento": "pendente",
+    "total_pago": 0,
+    "logo_url": "/static/parceiros/banho_tosa/banho_tosa_03_cp/logo.png",
+    "banner_url": "/static/parceiros/banho_tosa/banho_tosa_03_cp/banner.png",
+    "destaque_esteira": 1,
+    "posicao_mapa": {
+      "fixado": false,
+      "lat": null,
+      "lng": null,
+      "endereco": "",
+      "bairro": "Cancelli"
+    },
+    "produtos": [
+      {
+        "id": 1,
+        "titulo": "Banho Antipulgas + Escovação Dental",
+        "descricao": "Oferta especial de Cheiroso Pet Banho & Tosa em Cascavel. Apresente no balcão e garanta o preço de aplicativo.",
+        "preco_original": "R$ 75,00",
+        "preco_promocional": "R$ 54,90",
+        "tag_desconto": "27% OFF",
+        "foto_url": "/static/parceiros/banho_tosa/banho_tosa_03_cp/produtos/produto_01.png"
+      },
+      {
+        "id": 2,
+        "titulo": "Tosa da Raça Spitz / Poodle",
+        "descricao": "Oferta especial de Cheiroso Pet Banho & Tosa em Cascavel. Apresente no balcão e garanta o preço de aplicativo.",
+        "preco_original": "R$ 110,00",
+        "preco_promocional": "R$ 85,00",
+        "tag_desconto": "22% OFF",
+        "foto_url": "/static/parceiros/banho_tosa/banho_tosa_03_cp/produtos/produto_02.png"
+      }
+    ]
+  },
+  {
+    "id": "parc_14",
+    "nome": "Spa Animal Cascavel",
+    "categoria": "banho_tosa",
+    "categoria_nome": "Banho e Tosa",
+    "icone": "🛁",
+    "sigla": "SA",
+    "subtitulo": "Ambiente climatizado e banho relaxante",
+    "descricao": "Empresa parceira oficial do Alerta Urbano em Cascavel. Especialidade em banho e tosa no bairro Country.",
+    "bairro": "Country",
+    "endereco": "Rua em Cascavel, Country",
+    "cidade": "Cascavel",
+    "telefone": "(45) 99814-3456",
+    "mensalidade": 150,
+    "status_pagamento": "pago",
+    "total_pago": 450,
+    "logo_url": "/static/parceiros/banho_tosa/banho_tosa_04_sa/logo.png",
+    "banner_url": "/static/parceiros/banho_tosa/banho_tosa_04_sa/banner.png",
+    "destaque_esteira": 1,
+    "posicao_mapa": {
+      "fixado": false,
+      "lat": null,
+      "lng": null,
+      "endereco": "",
+      "bairro": "Country"
+    },
+    "produtos": [
+      {
+        "id": 1,
+        "titulo": "Banho Relaxante com Cromoterapia",
+        "descricao": "Oferta especial de Spa Animal Cascavel em Cascavel. Apresente no balcão e garanta o preço de aplicativo.",
+        "preco_original": "R$ 100,00",
+        "preco_promocional": "R$ 75,00",
+        "tag_desconto": "25% OFF",
+        "foto_url": "/static/parceiros/banho_tosa/banho_tosa_04_sa/produtos/produto_01.png"
+      },
+      {
+        "id": 2,
+        "titulo": "Hidratação Profunda de Pelagem",
+        "descricao": "Oferta especial de Spa Animal Cascavel em Cascavel. Apresente no balcão e garanta o preço de aplicativo.",
+        "preco_original": "R$ 50,00",
+        "preco_promocional": "R$ 35,00",
+        "tag_desconto": "30% OFF",
+        "foto_url": "/static/parceiros/banho_tosa/banho_tosa_04_sa/produtos/produto_02.png"
+      }
+    ]
+  },
+  {
+    "id": "parc_15",
+    "nome": "Tosa VIP Centro Estético",
+    "categoria": "banho_tosa",
+    "categoria_nome": "Banho e Tosa",
+    "icone": "🛁",
+    "sigla": "TV",
+    "subtitulo": "Tosa padrão de exposição e hidratação marroquina",
+    "descricao": "Empresa parceira oficial do Alerta Urbano em Cascavel. Especialidade em banho e tosa no bairro Maria Luíza.",
+    "bairro": "Maria Luíza",
+    "endereco": "Rua em Cascavel, Maria Luíza",
+    "cidade": "Cascavel",
+    "telefone": "(45) 99815-3456",
+    "mensalidade": 150,
+    "status_pagamento": "pendente",
+    "total_pago": 0,
+    "logo_url": "/static/parceiros/banho_tosa/banho_tosa_05_tv/logo.png",
+    "banner_url": "/static/parceiros/banho_tosa/banho_tosa_05_tv/banner.png",
+    "destaque_esteira": 1,
+    "posicao_mapa": {
+      "fixado": false,
+      "lat": null,
+      "lng": null,
+      "endereco": "",
+      "bairro": "Maria Luíza"
+    },
+    "produtos": [
+      {
+        "id": 1,
+        "titulo": "Plano Trimestral Banho Semanal",
+        "descricao": "Oferta especial de Tosa VIP Centro Estético em Cascavel. Apresente no balcão e garanta o preço de aplicativo.",
+        "preco_original": "R$ 480,00",
+        "preco_promocional": "R$ 369,00",
+        "tag_desconto": "23% OFF",
+        "foto_url": "/static/parceiros/banho_tosa/banho_tosa_05_tv/produtos/produto_01.png"
+      },
+      {
+        "id": 2,
+        "titulo": "Banho Seco Especial para Felinos",
+        "descricao": "Oferta especial de Tosa VIP Centro Estético em Cascavel. Apresente no balcão e garanta o preço de aplicativo.",
+        "preco_original": "R$ 70,00",
+        "preco_promocional": "R$ 49,90",
+        "tag_desconto": "28% OFF",
+        "foto_url": "/static/parceiros/banho_tosa/banho_tosa_05_tv/produtos/produto_02.png"
+      }
+    ]
+  },
+  {
+    "id": "parc_16",
+    "nome": "Pampa Pneus & Auto Center",
+    "categoria": "auto_center",
+    "categoria_nome": "Auto Center & Pneus",
+    "icone": "🚗",
+    "sigla": "PP",
+    "subtitulo": "Geometria 3D, suspensão e as melhores marcas de pneus",
+    "descricao": "Empresa parceira oficial do Alerta Urbano em Cascavel. Especialidade em auto center & pneus no bairro Centro.",
+    "bairro": "Centro",
+    "endereco": "Rua em Cascavel, Centro",
+    "cidade": "Cascavel",
+    "telefone": "(45) 99816-3456",
+    "mensalidade": 300,
+    "status_pagamento": "pago",
+    "total_pago": 900,
+    "logo_url": "/static/parceiros/auto_center/auto_center_01_pp/logo.png",
+    "banner_url": "/static/parceiros/auto_center/auto_center_01_pp/banner.png",
+    "destaque_esteira": 1,
+    "posicao_mapa": {
+      "fixado": false,
+      "lat": null,
+      "lng": null,
+      "endereco": "",
+      "bairro": "Centro"
+    },
+    "produtos": [
+      {
+        "id": 1,
+        "titulo": "Pneu 175/70 R14 Pirelli Cinturato",
+        "descricao": "Oferta especial de Pampa Pneus & Auto Center em Cascavel. Apresente no balcão e garanta o preço de aplicativo.",
+        "preco_original": "R$ 420,00",
+        "preco_promocional": "R$ 339,90",
+        "tag_desconto": "19% OFF",
+        "foto_url": "/static/parceiros/auto_center/auto_center_01_pp/produtos/produto_01.png"
+      },
+      {
+        "id": 2,
+        "titulo": "Alinhamento 3D + Balanceamento 4 Rodas",
+        "descricao": "Oferta especial de Pampa Pneus & Auto Center em Cascavel. Apresente no balcão e garanta o preço de aplicativo.",
+        "preco_original": "R$ 120,00",
+        "preco_promocional": "R$ 79,90",
+        "tag_desconto": "33% OFF",
+        "foto_url": "/static/parceiros/auto_center/auto_center_01_pp/produtos/produto_02.png"
+      }
+    ]
+  },
+  {
+    "id": "parc_17",
+    "nome": "Cascavel Auto Center Express",
+    "categoria": "auto_center",
+    "categoria_nome": "Auto Center & Pneus",
+    "icone": "🚗",
+    "sigla": "CE",
+    "subtitulo": "Rapidez e precisão em pneus e freios automotivos",
+    "descricao": "Empresa parceira oficial do Alerta Urbano em Cascavel. Especialidade em auto center & pneus no bairro São Cristóvão.",
+    "bairro": "São Cristóvão",
+    "endereco": "Rua em Cascavel, São Cristóvão",
+    "cidade": "Cascavel",
+    "telefone": "(45) 99817-3456",
+    "mensalidade": 300,
+    "status_pagamento": "pendente",
+    "total_pago": 0,
+    "logo_url": "/static/parceiros/auto_center/auto_center_02_ce/logo.png",
+    "banner_url": "/static/parceiros/auto_center/auto_center_02_ce/banner.png",
+    "destaque_esteira": 1,
+    "posicao_mapa": {
+      "fixado": false,
+      "lat": null,
+      "lng": null,
+      "endereco": "",
+      "bairro": "São Cristóvão"
+    },
+    "produtos": [
+      {
+        "id": 1,
+        "titulo": "Pneu 205/55 R16 Continental",
+        "descricao": "Oferta especial de Cascavel Auto Center Express em Cascavel. Apresente no balcão e garanta o preço de aplicativo.",
+        "preco_original": "R$ 490,00",
+        "preco_promocional": "R$ 399,00",
+        "tag_desconto": "18% OFF",
+        "foto_url": "/static/parceiros/auto_center/auto_center_02_ce/produtos/produto_01.png"
+      },
+      {
+        "id": 2,
+        "titulo": "Troca de Pastilhas de Freio Dianteiras",
+        "descricao": "Oferta especial de Cascavel Auto Center Express em Cascavel. Apresente no balcão e garanta o preço de aplicativo.",
+        "preco_original": "R$ 180,00",
+        "preco_promocional": "R$ 129,00",
+        "tag_desconto": "28% OFF",
+        "foto_url": "/static/parceiros/auto_center/auto_center_02_ce/produtos/produto_02.png"
+      }
+    ]
+  },
+  {
+    "id": "parc_18",
+    "nome": "Fórmula 1 Centro Automotivo",
+    "categoria": "auto_center",
+    "categoria_nome": "Auto Center & Pneus",
+    "icone": "🚗",
+    "sigla": "F1",
+    "subtitulo": "Revisão completa de suspensão e freios computadorizada",
+    "descricao": "Empresa parceira oficial do Alerta Urbano em Cascavel. Especialidade em auto center & pneus no bairro Coqueiral.",
+    "bairro": "Coqueiral",
+    "endereco": "Rua em Cascavel, Coqueiral",
+    "cidade": "Cascavel",
+    "telefone": "(45) 99818-3456",
+    "mensalidade": 300,
+    "status_pagamento": "pago",
+    "total_pago": 900,
+    "logo_url": "/static/parceiros/auto_center/auto_center_03_f1/logo.png",
+    "banner_url": "/static/parceiros/auto_center/auto_center_03_f1/banner.png",
+    "destaque_esteira": 1,
+    "posicao_mapa": {
+      "fixado": false,
+      "lat": null,
+      "lng": null,
+      "endereco": "",
+      "bairro": "Coqueiral"
+    },
+    "produtos": [
+      {
+        "id": 1,
+        "titulo": "Pneu 185/65 R15 Goodyear Direction",
+        "descricao": "Oferta especial de Fórmula 1 Centro Automotivo em Cascavel. Apresente no balcão e garanta o preço de aplicativo.",
+        "preco_original": "R$ 440,00",
+        "preco_promocional": "R$ 359,00",
+        "tag_desconto": "18% OFF",
+        "foto_url": "/static/parceiros/auto_center/auto_center_03_f1/produtos/produto_01.png"
+      },
+      {
+        "id": 2,
+        "titulo": "Higienização de Ar Condicionado Ozônio",
+        "descricao": "Oferta especial de Fórmula 1 Centro Automotivo em Cascavel. Apresente no balcão e garanta o preço de aplicativo.",
+        "preco_original": "R$ 110,00",
+        "preco_promocional": "R$ 69,90",
+        "tag_desconto": "36% OFF",
+        "foto_url": "/static/parceiros/auto_center/auto_center_03_f1/produtos/produto_02.png"
+      }
+    ]
+  },
+  {
+    "id": "parc_19",
+    "nome": "Rota Oeste Pneus e Suspensão",
+    "categoria": "auto_center",
+    "categoria_nome": "Auto Center & Pneus",
+    "icone": "🚗",
+    "sigla": "RO",
+    "subtitulo": "Centro especializado em utilitários, SUVs e importados",
+    "descricao": "Empresa parceira oficial do Alerta Urbano em Cascavel. Especialidade em auto center & pneus no bairro Santa Cruz.",
+    "bairro": "Santa Cruz",
+    "endereco": "Rua em Cascavel, Santa Cruz",
+    "cidade": "Cascavel",
+    "telefone": "(45) 99819-3456",
+    "mensalidade": 300,
+    "status_pagamento": "pendente",
+    "total_pago": 0,
+    "logo_url": "/static/parceiros/auto_center/auto_center_04_ro/logo.png",
+    "banner_url": "/static/parceiros/auto_center/auto_center_04_ro/banner.png",
+    "destaque_esteira": 1,
+    "posicao_mapa": {
+      "fixado": false,
+      "lat": null,
+      "lng": null,
+      "endereco": "",
+      "bairro": "Santa Cruz"
+    },
+    "produtos": [
+      {
+        "id": 1,
+        "titulo": "Amortecedores Dianteiros Par",
+        "descricao": "Oferta especial de Rota Oeste Pneus e Suspensão em Cascavel. Apresente no balcão e garanta o preço de aplicativo.",
+        "preco_original": "R$ 550,00",
+        "preco_promocional": "R$ 429,00",
+        "tag_desconto": "22% OFF",
+        "foto_url": "/static/parceiros/auto_center/auto_center_04_ro/produtos/produto_01.png"
+      },
+      {
+        "id": 2,
+        "titulo": "Revisão de Suspensão 20 Itens",
+        "descricao": "Oferta especial de Rota Oeste Pneus e Suspensão em Cascavel. Apresente no balcão e garanta o preço de aplicativo.",
+        "preco_original": "R$ 150,00",
+        "preco_promocional": "R$ 0,00",
+        "tag_desconto": "GRÁTIS NA TROCA",
+        "foto_url": "/static/parceiros/auto_center/auto_center_04_ro/produtos/produto_02.png"
+      }
+    ]
+  },
+  {
+    "id": "parc_20",
+    "nome": "VIP Pneus Auto Center",
+    "categoria": "auto_center",
+    "categoria_nome": "Auto Center & Pneus",
+    "icone": "🚗",
+    "sigla": "VP",
+    "subtitulo": "Atendimento premium e garantia estendida de rodagem",
+    "descricao": "Empresa parceira oficial do Alerta Urbano em Cascavel. Especialidade em auto center & pneus no bairro Maria Luíza.",
+    "bairro": "Maria Luíza",
+    "endereco": "Rua em Cascavel, Maria Luíza",
+    "cidade": "Cascavel",
+    "telefone": "(45) 99820-3456",
+    "mensalidade": 300,
+    "status_pagamento": "pago",
+    "total_pago": 900,
+    "logo_url": "/static/parceiros/auto_center/auto_center_05_vp/logo.png",
+    "banner_url": "/static/parceiros/auto_center/auto_center_05_vp/banner.png",
+    "destaque_esteira": 1,
+    "posicao_mapa": {
+      "fixado": false,
+      "lat": null,
+      "lng": null,
+      "endereco": "",
+      "bairro": "Maria Luíza"
+    },
+    "produtos": [
+      {
+        "id": 1,
+        "titulo": "Pneu 195/60 R15 Michelin Primacy",
+        "descricao": "Oferta especial de VIP Pneus Auto Center em Cascavel. Apresente no balcão e garanta o preço de aplicativo.",
+        "preco_original": "R$ 510,00",
+        "preco_promocional": "R$ 419,00",
+        "tag_desconto": "18% OFF",
+        "foto_url": "/static/parceiros/auto_center/auto_center_05_vp/produtos/produto_01.png"
+      },
+      {
+        "id": 2,
+        "titulo": "Desempeno de Rodas de Liga Leve",
+        "descricao": "Oferta especial de VIP Pneus Auto Center em Cascavel. Apresente no balcão e garanta o preço de aplicativo.",
+        "preco_original": "R$ 120,00",
+        "preco_promocional": "R$ 89,00",
+        "tag_desconto": "26% OFF",
+        "foto_url": "/static/parceiros/auto_center/auto_center_05_vp/produtos/produto_02.png"
+      }
+    ]
+  },
+  {
+    "id": "parc_21",
+    "nome": "Borracharia São Cristóvão 24h",
+    "categoria": "borracharia",
+    "categoria_nome": "Borracharia",
+    "icone": "🛞",
+    "sigla": "SC",
+    "subtitulo": "Conserto de pneus sem câmara e socorro móvel 24h",
+    "descricao": "Empresa parceira oficial do Alerta Urbano em Cascavel. Especialidade em borracharia no bairro São Cristóvão.",
+    "bairro": "São Cristóvão",
+    "endereco": "Rua em Cascavel, São Cristóvão",
+    "cidade": "Cascavel",
+    "telefone": "(45) 99821-3456",
+    "mensalidade": 150,
+    "status_pagamento": "pendente",
+    "total_pago": 0,
+    "logo_url": "/static/parceiros/borracharia/borracharia_01_sc/logo.png",
+    "banner_url": "/static/parceiros/borracharia/borracharia_01_sc/banner.png",
+    "destaque_esteira": 1,
+    "posicao_mapa": {
+      "fixado": false,
+      "lat": null,
+      "lng": null,
+      "endereco": "",
+      "bairro": "São Cristóvão"
+    },
+    "produtos": [
+      {
+        "id": 1,
+        "titulo": "Vulcanização a Frio Reforçada",
+        "descricao": "Oferta especial de Borracharia São Cristóvão 24h em Cascavel. Apresente no balcão e garanta o preço de aplicativo.",
+        "preco_original": "R$ 50,00",
+        "preco_promocional": "R$ 35,00",
+        "tag_desconto": "30% OFF",
+        "foto_url": "/static/parceiros/borracharia/borracharia_01_sc/produtos/produto_01.png"
+      },
+      {
+        "id": 2,
+        "titulo": "Troca de Válvula Bico sem Câmara",
+        "descricao": "Oferta especial de Borracharia São Cristóvão 24h em Cascavel. Apresente no balcão e garanta o preço de aplicativo.",
+        "preco_original": "R$ 25,00",
+        "preco_promocional": "R$ 15,00",
+        "tag_desconto": "40% OFF",
+        "foto_url": "/static/parceiros/borracharia/borracharia_01_sc/produtos/produto_02.png"
+      }
+    ]
+  },
+  {
+    "id": "parc_22",
+    "nome": "Borracharia Coqueiral Express",
+    "categoria": "borracharia",
+    "categoria_nome": "Borracharia",
+    "icone": "🛞",
+    "sigla": "BC",
+    "subtitulo": "Agilidade no atendimento com macaco pneumático",
+    "descricao": "Empresa parceira oficial do Alerta Urbano em Cascavel. Especialidade em borracharia no bairro Coqueiral.",
+    "bairro": "Coqueiral",
+    "endereco": "Rua em Cascavel, Coqueiral",
+    "cidade": "Cascavel",
+    "telefone": "(45) 99822-3456",
+    "mensalidade": 150,
+    "status_pagamento": "pago",
+    "total_pago": 450,
+    "logo_url": "/static/parceiros/borracharia/borracharia_02_bc/logo.png",
+    "banner_url": "/static/parceiros/borracharia/borracharia_02_bc/banner.png",
+    "destaque_esteira": 1,
+    "posicao_mapa": {
+      "fixado": false,
+      "lat": null,
+      "lng": null,
+      "endereco": "",
+      "bairro": "Coqueiral"
+    },
+    "produtos": [
+      {
+        "id": 1,
+        "titulo": "Remendo Rápido de Pneu",
+        "descricao": "Oferta especial de Borracharia Coqueiral Express em Cascavel. Apresente no balcão e garanta o preço de aplicativo.",
+        "preco_original": "R$ 35,00",
+        "preco_promocional": "R$ 25,00",
+        "tag_desconto": "28% OFF",
+        "foto_url": "/static/parceiros/borracharia/borracharia_02_bc/produtos/produto_01.png"
+      },
+      {
+        "id": 2,
+        "titulo": "Rodízio de Pneus com Calibragem Nitrogênio",
+        "descricao": "Oferta especial de Borracharia Coqueiral Express em Cascavel. Apresente no balcão e garanta o preço de aplicativo.",
+        "preco_original": "R$ 60,00",
+        "preco_promocional": "R$ 39,90",
+        "tag_desconto": "33% OFF",
+        "foto_url": "/static/parceiros/borracharia/borracharia_02_bc/produtos/produto_02.png"
+      }
+    ]
+  },
+  {
+    "id": "parc_23",
+    "nome": "Borracharia do Trevo 24 Horas",
+    "categoria": "borracharia",
+    "categoria_nome": "Borracharia",
+    "icone": "🛞",
+    "sigla": "BT",
+    "subtitulo": "Ponto estratégico na BR-277 para socorro imediato",
+    "descricao": "Empresa parceira oficial do Alerta Urbano em Cascavel. Especialidade em borracharia no bairro Cascavel Velho.",
+    "bairro": "Cascavel Velho",
+    "endereco": "Rua em Cascavel, Cascavel Velho",
+    "cidade": "Cascavel",
+    "telefone": "(45) 99823-3456",
+    "mensalidade": 150,
+    "status_pagamento": "pendente",
+    "total_pago": 0,
+    "logo_url": "/static/parceiros/borracharia/borracharia_03_bt/logo.png",
+    "banner_url": "/static/parceiros/borracharia/borracharia_03_bt/banner.png",
+    "destaque_esteira": 1,
+    "posicao_mapa": {
+      "fixado": false,
+      "lat": null,
+      "lng": null,
+      "endereco": "",
+      "bairro": "Cascavel Velho"
+    },
+    "produtos": [
+      {
+        "id": 1,
+        "titulo": "Socorro Móvel na Cidade",
+        "descricao": "Oferta especial de Borracharia do Trevo 24 Horas em Cascavel. Apresente no balcão e garanta o preço de aplicativo.",
+        "preco_original": "R$ 80,00",
+        "preco_promocional": "R$ 59,90",
+        "tag_desconto": "25% OFF",
+        "foto_url": "/static/parceiros/borracharia/borracharia_03_bt/produtos/produto_01.png"
+      },
+      {
+        "id": 2,
+        "titulo": "Desempeno de Roda de Ferro",
+        "descricao": "Oferta especial de Borracharia do Trevo 24 Horas em Cascavel. Apresente no balcão e garanta o preço de aplicativo.",
+        "preco_original": "R$ 60,00",
+        "preco_promocional": "R$ 45,00",
+        "tag_desconto": "25% OFF",
+        "foto_url": "/static/parceiros/borracharia/borracharia_03_bt/produtos/produto_02.png"
+      }
+    ]
+  },
+  {
+    "id": "parc_24",
+    "nome": "Borracharia Central Cascavel",
+    "categoria": "borracharia",
+    "categoria_nome": "Borracharia",
+    "icone": "🛞",
+    "sigla": "CC",
+    "subtitulo": "Calibragem digital precisa e selagem antifuro",
+    "descricao": "Empresa parceira oficial do Alerta Urbano em Cascavel. Especialidade em borracharia no bairro Centro.",
+    "bairro": "Centro",
+    "endereco": "Rua em Cascavel, Centro",
+    "cidade": "Cascavel",
+    "telefone": "(45) 99824-3456",
+    "mensalidade": 150,
+    "status_pagamento": "pago",
+    "total_pago": 450,
+    "logo_url": "/static/parceiros/borracharia/borracharia_04_cc/logo.png",
+    "banner_url": "/static/parceiros/borracharia/borracharia_04_cc/banner.png",
+    "destaque_esteira": 1,
+    "posicao_mapa": {
+      "fixado": false,
+      "lat": null,
+      "lng": null,
+      "endereco": "",
+      "bairro": "Centro"
+    },
+    "produtos": [
+      {
+        "id": 1,
+        "titulo": "Selagem Preventiva Antifuro Par",
+        "descricao": "Oferta especial de Borracharia Central Cascavel em Cascavel. Apresente no balcão e garanta o preço de aplicativo.",
+        "preco_original": "R$ 70,00",
+        "preco_promocional": "R$ 49,90",
+        "tag_desconto": "28% OFF",
+        "foto_url": "/static/parceiros/borracharia/borracharia_04_cc/produtos/produto_01.png"
+      },
+      {
+        "id": 2,
+        "titulo": "Troca de Pneu Estepe no Balcão",
+        "descricao": "Oferta especial de Borracharia Central Cascavel em Cascavel. Apresente no balcão e garanta o preço de aplicativo.",
+        "preco_original": "R$ 30,00",
+        "preco_promocional": "R$ 19,90",
+        "tag_desconto": "33% OFF",
+        "foto_url": "/static/parceiros/borracharia/borracharia_04_cc/produtos/produto_02.png"
+      }
+    ]
+  },
+  {
+    "id": "parc_25",
+    "nome": "Borracharia Rápida Cascavel",
+    "categoria": "borracharia",
+    "categoria_nome": "Borracharia",
+    "icone": "🛞",
+    "sigla": "BR",
+    "subtitulo": "Atendimento expresso para frotas e motoristas de app",
+    "descricao": "Empresa parceira oficial do Alerta Urbano em Cascavel. Especialidade em borracharia no bairro Pacaembu.",
+    "bairro": "Pacaembu",
+    "endereco": "Rua em Cascavel, Pacaembu",
+    "cidade": "Cascavel",
+    "telefone": "(45) 99825-3456",
+    "mensalidade": 150,
+    "status_pagamento": "pendente",
+    "total_pago": 0,
+    "logo_url": "/static/parceiros/borracharia/borracharia_05_br/logo.png",
+    "banner_url": "/static/parceiros/borracharia/borracharia_05_br/banner.png",
+    "destaque_esteira": 1,
+    "posicao_mapa": {
+      "fixado": false,
+      "lat": null,
+      "lng": null,
+      "endereco": "",
+      "bairro": "Pacaembu"
+    },
+    "produtos": [
+      {
+        "id": 1,
+        "titulo": "Conserto Duplo de Pneus",
+        "descricao": "Oferta especial de Borracharia Rápida Cascavel em Cascavel. Apresente no balcão e garanta o preço de aplicativo.",
+        "preco_original": "R$ 70,00",
+        "preco_promocional": "R$ 49,90",
+        "tag_desconto": "28% OFF",
+        "foto_url": "/static/parceiros/borracharia/borracharia_05_br/produtos/produto_01.png"
+      },
+      {
+        "id": 2,
+        "titulo": "Balanceamento Dinâmico de Roda",
+        "descricao": "Oferta especial de Borracharia Rápida Cascavel em Cascavel. Apresente no balcão e garanta o preço de aplicativo.",
+        "preco_original": "R$ 35,00",
+        "preco_promocional": "R$ 25,00",
+        "tag_desconto": "28% OFF",
+        "foto_url": "/static/parceiros/borracharia/borracharia_05_br/produtos/produto_02.png"
+      }
+    ]
+  },
+  {
+    "id": "parc_26",
+    "nome": "Auto Posto Iguaçu",
+    "categoria": "posto",
+    "categoria_nome": "Posto de Combustível",
+    "icone": "⛽",
+    "sigla": "PI",
+    "subtitulo": "Combustível com controle rigoroso de qualidade e conveniência",
+    "descricao": "Empresa parceira oficial do Alerta Urbano em Cascavel. Especialidade em posto de combustível no bairro Centro.",
+    "bairro": "Centro",
+    "endereco": "Rua em Cascavel, Centro",
+    "cidade": "Cascavel",
+    "telefone": "(45) 99826-3456",
+    "mensalidade": 350,
+    "status_pagamento": "pago",
+    "total_pago": 1050,
+    "logo_url": "/static/parceiros/posto/posto_01_pi/logo.png",
+    "banner_url": "/static/parceiros/posto/posto_01_pi/banner.png",
+    "destaque_esteira": 1,
+    "posicao_mapa": {
+      "fixado": false,
+      "lat": null,
+      "lng": null,
+      "endereco": "",
+      "bairro": "Centro"
+    },
+    "produtos": [
+      {
+        "id": 1,
+        "titulo": "Gasolina Aditivada Grid (Desconto por Litro)",
+        "descricao": "Oferta especial de Auto Posto Iguaçu em Cascavel. Apresente no balcão e garanta o preço de aplicativo.",
+        "preco_original": "R$ 6,29",
+        "preco_promocional": "R$ 6,09",
+        "tag_desconto": "R$ 0,20 OFF/L",
+        "foto_url": "/static/parceiros/posto/posto_01_pi/produtos/produto_01.png"
+      },
+      {
+        "id": 2,
+        "titulo": "Ducha Completa com Cera Líquida",
+        "descricao": "Oferta especial de Auto Posto Iguaçu em Cascavel. Apresente no balcão e garanta o preço de aplicativo.",
+        "preco_original": "R$ 35,00",
+        "preco_promocional": "R$ 19,90",
+        "tag_desconto": "43% OFF",
+        "foto_url": "/static/parceiros/posto/posto_01_pi/produtos/produto_02.png"
+      }
+    ]
+  },
+  {
+    "id": "parc_27",
+    "nome": "Posto Tanque Cheio 277",
+    "categoria": "posto",
+    "categoria_nome": "Posto de Combustível",
+    "icone": "⛽",
+    "sigla": "TC",
+    "subtitulo": "Parada oficial do motorista com troca de óleo completa",
+    "descricao": "Empresa parceira oficial do Alerta Urbano em Cascavel. Especialidade em posto de combustível no bairro Cascavel Velho.",
+    "bairro": "Cascavel Velho",
+    "endereco": "Rua em Cascavel, Cascavel Velho",
+    "cidade": "Cascavel",
+    "telefone": "(45) 99827-3456",
+    "mensalidade": 350,
+    "status_pagamento": "pendente",
+    "total_pago": 0,
+    "logo_url": "/static/parceiros/posto/posto_02_tc/logo.png",
+    "banner_url": "/static/parceiros/posto/posto_02_tc/banner.png",
+    "destaque_esteira": 1,
+    "posicao_mapa": {
+      "fixado": false,
+      "lat": null,
+      "lng": null,
+      "endereco": "",
+      "bairro": "Cascavel Velho"
+    },
+    "produtos": [
+      {
+        "id": 1,
+        "titulo": "Etanol Hidratado de Alta Performance",
+        "descricao": "Oferta especial de Posto Tanque Cheio 277 em Cascavel. Apresente no balcão e garanta o preço de aplicativo.",
+        "preco_original": "R$ 4,19",
+        "preco_promocional": "R$ 4,04",
+        "tag_desconto": "R$ 0,15 OFF/L",
+        "foto_url": "/static/parceiros/posto/posto_02_tc/produtos/produto_01.png"
+      },
+      {
+        "id": 2,
+        "titulo": "Troca de Filtro de Combustível + Óleo",
+        "descricao": "Oferta especial de Posto Tanque Cheio 277 em Cascavel. Apresente no balcão e garanta o preço de aplicativo.",
+        "preco_original": "R$ 210,00",
+        "preco_promocional": "R$ 169,00",
+        "tag_desconto": "20% OFF",
+        "foto_url": "/static/parceiros/posto/posto_02_tc/produtos/produto_02.png"
+      }
+    ]
+  },
+  {
+    "id": "parc_28",
+    "nome": "Posto Central Cascavel",
+    "categoria": "posto",
+    "categoria_nome": "Posto de Combustível",
+    "icone": "⛽",
+    "sigla": "PC",
+    "subtitulo": "Localização privilegiada e loja de conveniência 24h",
+    "descricao": "Empresa parceira oficial do Alerta Urbano em Cascavel. Especialidade em posto de combustível no bairro Centro.",
+    "bairro": "Centro",
+    "endereco": "Rua em Cascavel, Centro",
+    "cidade": "Cascavel",
+    "telefone": "(45) 99828-3456",
+    "mensalidade": 350,
+    "status_pagamento": "pago",
+    "total_pago": 1050,
+    "logo_url": "/static/parceiros/posto/posto_03_pc/logo.png",
+    "banner_url": "/static/parceiros/posto/posto_03_pc/banner.png",
+    "destaque_esteira": 1,
+    "posicao_mapa": {
+      "fixado": false,
+      "lat": null,
+      "lng": null,
+      "endereco": "",
+      "bairro": "Centro"
+    },
+    "produtos": [
+      {
+        "id": 1,
+        "titulo": "Café Expresso + Pão de Queijo",
+        "descricao": "Oferta especial de Posto Central Cascavel em Cascavel. Apresente no balcão e garanta o preço de aplicativo.",
+        "preco_original": "R$ 15,00",
+        "preco_promocional": "R$ 9,90",
+        "tag_desconto": "34% OFF",
+        "foto_url": "/static/parceiros/posto/posto_03_pc/produtos/produto_01.png"
+      },
+      {
+        "id": 2,
+        "titulo": "Aditivo de Combustível STP Flex",
+        "descricao": "Oferta especial de Posto Central Cascavel em Cascavel. Apresente no balcão e garanta o preço de aplicativo.",
+        "preco_original": "R$ 38,00",
+        "preco_promocional": "R$ 28,00",
+        "tag_desconto": "26% OFF",
+        "foto_url": "/static/parceiros/posto/posto_03_pc/produtos/produto_02.png"
+      }
+    ]
+  },
+  {
+    "id": "parc_29",
+    "nome": "Auto Posto Rota Oeste",
+    "categoria": "posto",
+    "categoria_nome": "Posto de Combustível",
+    "icone": "⛽",
+    "sigla": "RO",
+    "subtitulo": "Ponto de encontro com diesel S10 de alta filtragem",
+    "descricao": "Empresa parceira oficial do Alerta Urbano em Cascavel. Especialidade em posto de combustível no bairro Cancelli.",
+    "bairro": "Cancelli",
+    "endereco": "Rua em Cascavel, Cancelli",
+    "cidade": "Cascavel",
+    "telefone": "(45) 99829-3456",
+    "mensalidade": 350,
+    "status_pagamento": "pendente",
+    "total_pago": 0,
+    "logo_url": "/static/parceiros/posto/posto_04_ro/logo.png",
+    "banner_url": "/static/parceiros/posto/posto_04_ro/banner.png",
+    "destaque_esteira": 1,
+    "posicao_mapa": {
+      "fixado": false,
+      "lat": null,
+      "lng": null,
+      "endereco": "",
+      "bairro": "Cancelli"
+    },
+    "produtos": [
+      {
+        "id": 1,
+        "titulo": "Diesel S10 Filtrado Triplo",
+        "descricao": "Oferta especial de Auto Posto Rota Oeste em Cascavel. Apresente no balcão e garanta o preço de aplicativo.",
+        "preco_original": "R$ 6,19",
+        "preco_promocional": "R$ 6,01",
+        "tag_desconto": "R$ 0,18 OFF/L",
+        "foto_url": "/static/parceiros/posto/posto_04_ro/produtos/produto_01.png"
+      },
+      {
+        "id": 2,
+        "titulo": "Água Desmineralizada + Aditivo Radiador",
+        "descricao": "Oferta especial de Auto Posto Rota Oeste em Cascavel. Apresente no balcão e garanta o preço de aplicativo.",
+        "preco_original": "R$ 45,00",
+        "preco_promocional": "R$ 29,90",
+        "tag_desconto": "33% OFF",
+        "foto_url": "/static/parceiros/posto/posto_04_ro/produtos/produto_02.png"
+      }
+    ]
+  },
+  {
+    "id": "parc_30",
+    "nome": "Posto Portal da Cidade",
+    "categoria": "posto",
+    "categoria_nome": "Posto de Combustível",
+    "icone": "⛽",
+    "sigla": "PD",
+    "subtitulo": "Garantia de procedência e atendimento nota 10",
+    "descricao": "Empresa parceira oficial do Alerta Urbano em Cascavel. Especialidade em posto de combustível no bairro Pacaembu.",
+    "bairro": "Pacaembu",
+    "endereco": "Rua em Cascavel, Pacaembu",
+    "cidade": "Cascavel",
+    "telefone": "(45) 99830-3456",
+    "mensalidade": 350,
+    "status_pagamento": "pago",
+    "total_pago": 1050,
+    "logo_url": "/static/parceiros/posto/posto_05_pd/logo.png",
+    "banner_url": "/static/parceiros/posto/posto_05_pd/banner.png",
+    "destaque_esteira": 1,
+    "posicao_mapa": {
+      "fixado": false,
+      "lat": null,
+      "lng": null,
+      "endereco": "",
+      "bairro": "Pacaembu"
+    },
+    "produtos": [
+      {
+        "id": 1,
+        "titulo": "Gasolina Comum Filtrada",
+        "descricao": "Oferta especial de Posto Portal da Cidade em Cascavel. Apresente no balcão e garanta o preço de aplicativo.",
+        "preco_original": "R$ 6,15",
+        "preco_promocional": "R$ 5,99",
+        "tag_desconto": "R$ 0,16 OFF/L",
+        "foto_url": "/static/parceiros/posto/posto_05_pd/produtos/produto_01.png"
+      },
+      {
+        "id": 2,
+        "titulo": "Lavagem de Chassi Completa",
+        "descricao": "Oferta especial de Posto Portal da Cidade em Cascavel. Apresente no balcão e garanta o preço de aplicativo.",
+        "preco_original": "R$ 70,00",
+        "preco_promocional": "R$ 49,90",
+        "tag_desconto": "28% OFF",
+        "foto_url": "/static/parceiros/posto/posto_05_pd/produtos/produto_02.png"
+      }
+    ]
+  },
+  {
+    "id": "parc_31",
+    "nome": "Duas Rodas Moto Center",
+    "categoria": "moto_mecanica",
+    "categoria_nome": "Mecânica de Moto",
+    "icone": "🏍️",
+    "sigla": "DR",
+    "subtitulo": "Manutenção preventiva e corretiva para todas as marcas",
+    "descricao": "Empresa parceira oficial do Alerta Urbano em Cascavel. Especialidade em mecânica de moto no bairro Centro.",
+    "bairro": "Centro",
+    "endereco": "Rua em Cascavel, Centro",
+    "cidade": "Cascavel",
+    "telefone": "(45) 99831-3456",
+    "mensalidade": 180,
+    "status_pagamento": "pendente",
+    "total_pago": 0,
+    "logo_url": "/static/parceiros/moto_mecanica/moto_mecanica_01_dr/logo.png",
+    "banner_url": "/static/parceiros/moto_mecanica/moto_mecanica_01_dr/banner.png",
+    "destaque_esteira": 1,
+    "posicao_mapa": {
+      "fixado": false,
+      "lat": null,
+      "lng": null,
+      "endereco": "",
+      "bairro": "Centro"
+    },
+    "produtos": [
+      {
+        "id": 1,
+        "titulo": "Troca de Óleo Mobil 10W30 + Lubrificação Corrente",
+        "descricao": "Oferta especial de Duas Rodas Moto Center em Cascavel. Apresente no balcão e garanta o preço de aplicativo.",
+        "preco_original": "R$ 55,00",
+        "preco_promocional": "R$ 39,90",
+        "tag_desconto": "27% OFF",
+        "foto_url": "/static/parceiros/moto_mecanica/moto_mecanica_01_dr/produtos/produto_01.png"
+      },
+      {
+        "id": 2,
+        "titulo": "Kit Relação Completo Honda CG 160",
+        "descricao": "Oferta especial de Duas Rodas Moto Center em Cascavel. Apresente no balcão e garanta o preço de aplicativo.",
+        "preco_original": "R$ 180,00",
+        "preco_promocional": "R$ 139,00",
+        "tag_desconto": "22% OFF",
+        "foto_url": "/static/parceiros/moto_mecanica/moto_mecanica_01_dr/produtos/produto_02.png"
+      }
+    ]
+  },
+  {
+    "id": "parc_32",
+    "nome": "Cascavel Motos & Peças",
+    "categoria": "moto_mecanica",
+    "categoria_nome": "Mecânica de Moto",
+    "icone": "🏍️",
+    "sigla": "CM",
+    "subtitulo": "Oficina completa com peças originais e paralelas de qualidade",
+    "descricao": "Empresa parceira oficial do Alerta Urbano em Cascavel. Especialidade em mecânica de moto no bairro São Cristóvão.",
+    "bairro": "São Cristóvão",
+    "endereco": "Rua em Cascavel, São Cristóvão",
+    "cidade": "Cascavel",
+    "telefone": "(45) 99832-3456",
+    "mensalidade": 180,
+    "status_pagamento": "pago",
+    "total_pago": 540,
+    "logo_url": "/static/parceiros/moto_mecanica/moto_mecanica_02_cm/logo.png",
+    "banner_url": "/static/parceiros/moto_mecanica/moto_mecanica_02_cm/banner.png",
+    "destaque_esteira": 1,
+    "posicao_mapa": {
+      "fixado": false,
+      "lat": null,
+      "lng": null,
+      "endereco": "",
+      "bairro": "São Cristóvão"
+    },
+    "produtos": [
+      {
+        "id": 1,
+        "titulo": "Regulagem de Válvulas e Injeção",
+        "descricao": "Oferta especial de Cascavel Motos & Peças em Cascavel. Apresente no balcão e garanta o preço de aplicativo.",
+        "preco_original": "R$ 130,00",
+        "preco_promocional": "R$ 89,90",
+        "tag_desconto": "30% OFF",
+        "foto_url": "/static/parceiros/moto_mecanica/moto_mecanica_02_cm/produtos/produto_01.png"
+      },
+      {
+        "id": 2,
+        "titulo": "Pneu Traseiro 90/90-18 Instalado",
+        "descricao": "Oferta especial de Cascavel Motos & Peças em Cascavel. Apresente no balcão e garanta o preço de aplicativo.",
+        "preco_original": "R$ 210,00",
+        "preco_promocional": "R$ 169,00",
+        "tag_desconto": "20% OFF",
+        "foto_url": "/static/parceiros/moto_mecanica/moto_mecanica_02_cm/produtos/produto_02.png"
+      }
+    ]
+  },
+  {
+    "id": "parc_33",
+    "nome": "Grau Mecânica Especializada",
+    "categoria": "moto_mecanica",
+    "categoria_nome": "Mecânica de Moto",
+    "icone": "🏍️",
+    "sigla": "GM",
+    "subtitulo": "Preparação, elétrica e mecânica pesada de motos",
+    "descricao": "Empresa parceira oficial do Alerta Urbano em Cascavel. Especialidade em mecânica de moto no bairro Coqueiral.",
+    "bairro": "Coqueiral",
+    "endereco": "Rua em Cascavel, Coqueiral",
+    "cidade": "Cascavel",
+    "telefone": "(45) 99833-3456",
+    "mensalidade": 180,
+    "status_pagamento": "pendente",
+    "total_pago": 0,
+    "logo_url": "/static/parceiros/moto_mecanica/moto_mecanica_03_gm/logo.png",
+    "banner_url": "/static/parceiros/moto_mecanica/moto_mecanica_03_gm/banner.png",
+    "destaque_esteira": 1,
+    "posicao_mapa": {
+      "fixado": false,
+      "lat": null,
+      "lng": null,
+      "endereco": "",
+      "bairro": "Coqueiral"
+    },
+    "produtos": [
+      {
+        "id": 1,
+        "titulo": "Revisão Geral da Moto 35 Itens",
+        "descricao": "Oferta especial de Grau Mecânica Especializada em Cascavel. Apresente no balcão e garanta o preço de aplicativo.",
+        "preco_original": "R$ 220,00",
+        "preco_promocional": "R$ 159,00",
+        "tag_desconto": "27% OFF",
+        "foto_url": "/static/parceiros/moto_mecanica/moto_mecanica_03_gm/produtos/produto_01.png"
+      },
+      {
+        "id": 2,
+        "titulo": "Troca de Lonas e Pastilhas de Freio Moto",
+        "descricao": "Oferta especial de Grau Mecânica Especializada em Cascavel. Apresente no balcão e garanta o preço de aplicativo.",
+        "preco_original": "R$ 85,00",
+        "preco_promocional": "R$ 59,90",
+        "tag_desconto": "30% OFF",
+        "foto_url": "/static/parceiros/moto_mecanica/moto_mecanica_03_gm/produtos/produto_02.png"
+      }
+    ]
+  },
+  {
+    "id": "parc_34",
+    "nome": "Super Moto VIP Racing",
+    "categoria": "moto_mecanica",
+    "categoria_nome": "Mecânica de Moto",
+    "icone": "🏍️",
+    "sigla": "SM",
+    "subtitulo": "Mecânica de alta cilindrada e scooter",
+    "descricao": "Empresa parceira oficial do Alerta Urbano em Cascavel. Especialidade em mecânica de moto no bairro Santa Cruz.",
+    "bairro": "Santa Cruz",
+    "endereco": "Rua em Cascavel, Santa Cruz",
+    "cidade": "Cascavel",
+    "telefone": "(45) 99834-3456",
+    "mensalidade": 180,
+    "status_pagamento": "pago",
+    "total_pago": 540,
+    "logo_url": "/static/parceiros/moto_mecanica/moto_mecanica_04_sm/logo.png",
+    "banner_url": "/static/parceiros/moto_mecanica/moto_mecanica_04_sm/banner.png",
+    "destaque_esteira": 1,
+    "posicao_mapa": {
+      "fixado": false,
+      "lat": null,
+      "lng": null,
+      "endereco": "",
+      "bairro": "Santa Cruz"
+    },
+    "produtos": [
+      {
+        "id": 1,
+        "titulo": "Alinhamento de Mesa e Bengala",
+        "descricao": "Oferta especial de Super Moto VIP Racing em Cascavel. Apresente no balcão e garanta o preço de aplicativo.",
+        "preco_original": "R$ 140,00",
+        "preco_promocional": "R$ 99,00",
+        "tag_desconto": "29% OFF",
+        "foto_url": "/static/parceiros/moto_mecanica/moto_mecanica_04_sm/produtos/produto_01.png"
+      },
+      {
+        "id": 2,
+        "titulo": "Bateria Moura para Moto Selada",
+        "descricao": "Oferta especial de Super Moto VIP Racing em Cascavel. Apresente no balcão e garanta o preço de aplicativo.",
+        "preco_original": "R$ 195,00",
+        "preco_promocional": "R$ 159,00",
+        "tag_desconto": "18% OFF",
+        "foto_url": "/static/parceiros/moto_mecanica/moto_mecanica_04_sm/produtos/produto_02.png"
+      }
+    ]
+  },
+  {
+    "id": "parc_35",
+    "nome": "Oficina do Motoboy Cascavel",
+    "categoria": "moto_mecanica",
+    "categoria_nome": "Mecânica de Moto",
+    "icone": "🏍️",
+    "sigla": "OM",
+    "subtitulo": "Preço amigo e rapidez no socorro para entregadores",
+    "descricao": "Empresa parceira oficial do Alerta Urbano em Cascavel. Especialidade em mecânica de moto no bairro Cancelli.",
+    "bairro": "Cancelli",
+    "endereco": "Rua em Cascavel, Cancelli",
+    "cidade": "Cascavel",
+    "telefone": "(45) 99835-3456",
+    "mensalidade": 180,
+    "status_pagamento": "pendente",
+    "total_pago": 0,
+    "logo_url": "/static/parceiros/moto_mecanica/moto_mecanica_05_om/logo.png",
+    "banner_url": "/static/parceiros/moto_mecanica/moto_mecanica_05_om/banner.png",
+    "destaque_esteira": 1,
+    "posicao_mapa": {
+      "fixado": false,
+      "lat": null,
+      "lng": null,
+      "endereco": "",
+      "bairro": "Cancelli"
+    },
+    "produtos": [
+      {
+        "id": 1,
+        "titulo": "Troca Rápida de Cabo de Embreagem",
+        "descricao": "Oferta especial de Oficina do Motoboy Cascavel em Cascavel. Apresente no balcão e garanta o preço de aplicativo.",
+        "preco_original": "R$ 45,00",
+        "preco_promocional": "R$ 29,90",
+        "tag_desconto": "33% OFF",
+        "foto_url": "/static/parceiros/moto_mecanica/moto_mecanica_05_om/produtos/produto_01.png"
+      },
+      {
+        "id": 2,
+        "titulo": "Limpeza de Carburador / TBI",
+        "descricao": "Oferta especial de Oficina do Motoboy Cascavel em Cascavel. Apresente no balcão e garanta o preço de aplicativo.",
+        "preco_original": "R$ 90,00",
+        "preco_promocional": "R$ 65,00",
+        "tag_desconto": "27% OFF",
+        "foto_url": "/static/parceiros/moto_mecanica/moto_mecanica_05_om/produtos/produto_02.png"
+      }
+    ]
+  },
+  {
+    "id": "parc_36",
+    "nome": "Precisão Auto Mecânica",
+    "categoria": "carro_mecanica",
+    "categoria_nome": "Mecânica de Carro",
+    "icone": "🔧",
+    "sigla": "PA",
+    "subtitulo": "Injeção eletrônica, motor, câmbio e suspensão",
+    "descricao": "Empresa parceira oficial do Alerta Urbano em Cascavel. Especialidade em mecânica de carro no bairro Centro.",
+    "bairro": "Centro",
+    "endereco": "Rua em Cascavel, Centro",
+    "cidade": "Cascavel",
+    "telefone": "(45) 99836-3456",
+    "mensalidade": 250,
+    "status_pagamento": "pago",
+    "total_pago": 750,
+    "logo_url": "/static/parceiros/carro_mecanica/carro_mecanica_01_pa/logo.png",
+    "banner_url": "/static/parceiros/carro_mecanica/carro_mecanica_01_pa/banner.png",
+    "destaque_esteira": 1,
+    "posicao_mapa": {
+      "fixado": false,
+      "lat": null,
+      "lng": null,
+      "endereco": "",
+      "bairro": "Centro"
+    },
+    "produtos": [
+      {
+        "id": 1,
+        "titulo": "Troca de Óleo 5W30 Sintético + Filtro",
+        "descricao": "Oferta especial de Precisão Auto Mecânica em Cascavel. Apresente no balcão e garanta o preço de aplicativo.",
+        "preco_original": "R$ 240,00",
+        "preco_promocional": "R$ 179,90",
+        "tag_desconto": "25% OFF",
+        "foto_url": "/static/parceiros/carro_mecanica/carro_mecanica_01_pa/produtos/produto_01.png"
+      },
+      {
+        "id": 2,
+        "titulo": "Diagnóstico Computadorizado Scanner",
+        "descricao": "Oferta especial de Precisão Auto Mecânica em Cascavel. Apresente no balcão e garanta o preço de aplicativo.",
+        "preco_original": "R$ 120,00",
+        "preco_promocional": "R$ 69,90",
+        "tag_desconto": "41% OFF",
+        "foto_url": "/static/parceiros/carro_mecanica/carro_mecanica_01_pa/produtos/produto_02.png"
+      }
+    ]
+  },
+  {
+    "id": "parc_37",
+    "nome": "Oficina Mecânica Central",
+    "categoria": "carro_mecanica",
+    "categoria_nome": "Mecânica de Carro",
+    "icone": "🔧",
+    "sigla": "MC",
+    "subtitulo": "Mais de 20 anos de tradição em motores em Cascavel",
+    "descricao": "Empresa parceira oficial do Alerta Urbano em Cascavel. Especialidade em mecânica de carro no bairro Cancelli.",
+    "bairro": "Cancelli",
+    "endereco": "Rua em Cascavel, Cancelli",
+    "cidade": "Cascavel",
+    "telefone": "(45) 99837-3456",
+    "mensalidade": 250,
+    "status_pagamento": "pendente",
+    "total_pago": 0,
+    "logo_url": "/static/parceiros/carro_mecanica/carro_mecanica_02_mc/logo.png",
+    "banner_url": "/static/parceiros/carro_mecanica/carro_mecanica_02_mc/banner.png",
+    "destaque_esteira": 1,
+    "posicao_mapa": {
+      "fixado": false,
+      "lat": null,
+      "lng": null,
+      "endereco": "",
+      "bairro": "Cancelli"
+    },
+    "produtos": [
+      {
+        "id": 1,
+        "titulo": "Troca de Correia Dentada e Tensor",
+        "descricao": "Oferta especial de Oficina Mecânica Central em Cascavel. Apresente no balcão e garanta o preço de aplicativo.",
+        "preco_original": "R$ 450,00",
+        "preco_promocional": "R$ 349,00",
+        "tag_desconto": "22% OFF",
+        "foto_url": "/static/parceiros/carro_mecanica/carro_mecanica_02_mc/produtos/produto_01.png"
+      },
+      {
+        "id": 2,
+        "titulo": "Limpeza de Bicos Injetores Ultrassom",
+        "descricao": "Oferta especial de Oficina Mecânica Central em Cascavel. Apresente no balcão e garanta o preço de aplicativo.",
+        "preco_original": "R$ 180,00",
+        "preco_promocional": "R$ 129,00",
+        "tag_desconto": "28% OFF",
+        "foto_url": "/static/parceiros/carro_mecanica/carro_mecanica_02_mc/produtos/produto_02.png"
+      }
+    ]
+  },
+  {
+    "id": "parc_38",
+    "nome": "Motor Tech Serviços Automotivos",
+    "categoria": "carro_mecanica",
+    "categoria_nome": "Mecânica de Carro",
+    "icone": "🔧",
+    "sigla": "MT",
+    "subtitulo": "Tecnologia de ponta e peças com garantia de 1 ano",
+    "descricao": "Empresa parceira oficial do Alerta Urbano em Cascavel. Especialidade em mecânica de carro no bairro Neva.",
+    "bairro": "Neva",
+    "endereco": "Rua em Cascavel, Neva",
+    "cidade": "Cascavel",
+    "telefone": "(45) 99838-3456",
+    "mensalidade": 250,
+    "status_pagamento": "pago",
+    "total_pago": 750,
+    "logo_url": "/static/parceiros/carro_mecanica/carro_mecanica_03_mt/logo.png",
+    "banner_url": "/static/parceiros/carro_mecanica/carro_mecanica_03_mt/banner.png",
+    "destaque_esteira": 1,
+    "posicao_mapa": {
+      "fixado": false,
+      "lat": null,
+      "lng": null,
+      "endereco": "",
+      "bairro": "Neva"
+    },
+    "produtos": [
+      {
+        "id": 1,
+        "titulo": "Troca de Fluido de Arrefecimento com Máquina",
+        "descricao": "Oferta especial de Motor Tech Serviços Automotivos em Cascavel. Apresente no balcão e garanta o preço de aplicativo.",
+        "preco_original": "R$ 190,00",
+        "preco_promocional": "R$ 139,00",
+        "tag_desconto": "26% OFF",
+        "foto_url": "/static/parceiros/carro_mecanica/carro_mecanica_03_mt/produtos/produto_01.png"
+      },
+      {
+        "id": 2,
+        "titulo": "Kit de Embreagem Completo Instalado",
+        "descricao": "Oferta especial de Motor Tech Serviços Automotivos em Cascavel. Apresente no balcão e garanta o preço de aplicativo.",
+        "preco_original": "R$ 750,00",
+        "preco_promocional": "R$ 599,00",
+        "tag_desconto": "20% OFF",
+        "foto_url": "/static/parceiros/carro_mecanica/carro_mecanica_03_mt/produtos/produto_02.png"
+      }
+    ]
+  },
+  {
+    "id": "parc_39",
+    "nome": "Cascavel Motores & Câmbio",
+    "categoria": "carro_mecanica",
+    "categoria_nome": "Mecânica de Carro",
+    "icone": "🔧",
+    "sigla": "CC",
+    "subtitulo": "Especialistas em transmissão manual e automática",
+    "descricao": "Empresa parceira oficial do Alerta Urbano em Cascavel. Especialidade em mecânica de carro no bairro Parque São Paulo.",
+    "bairro": "Parque São Paulo",
+    "endereco": "Rua em Cascavel, Parque São Paulo",
+    "cidade": "Cascavel",
+    "telefone": "(45) 99839-3456",
+    "mensalidade": 250,
+    "status_pagamento": "pendente",
+    "total_pago": 0,
+    "logo_url": "/static/parceiros/carro_mecanica/carro_mecanica_04_cc/logo.png",
+    "banner_url": "/static/parceiros/carro_mecanica/carro_mecanica_04_cc/banner.png",
+    "destaque_esteira": 1,
+    "posicao_mapa": {
+      "fixado": false,
+      "lat": null,
+      "lng": null,
+      "endereco": "",
+      "bairro": "Parque São Paulo"
+    },
+    "produtos": [
+      {
+        "id": 1,
+        "titulo": "Manutenção Preventiva de Freios e Sangria",
+        "descricao": "Oferta especial de Cascavel Motores & Câmbio em Cascavel. Apresente no balcão e garanta o preço de aplicativo.",
+        "preco_original": "R$ 210,00",
+        "preco_promocional": "R$ 149,00",
+        "tag_desconto": "29% OFF",
+        "foto_url": "/static/parceiros/carro_mecanica/carro_mecanica_04_cc/produtos/produto_01.png"
+      },
+      {
+        "id": 2,
+        "titulo": "Descarbonização de Admissão",
+        "descricao": "Oferta especial de Cascavel Motores & Câmbio em Cascavel. Apresente no balcão e garanta o preço de aplicativo.",
+        "preco_original": "R$ 280,00",
+        "preco_promocional": "R$ 199,00",
+        "tag_desconto": "28% OFF",
+        "foto_url": "/static/parceiros/carro_mecanica/carro_mecanica_04_cc/produtos/produto_02.png"
+      }
+    ]
+  },
+  {
+    "id": "parc_40",
+    "nome": "Garagem do Alemão Mecânica",
+    "categoria": "carro_mecanica",
+    "categoria_nome": "Mecânica de Carro",
+    "icone": "🔧",
+    "sigla": "GA",
+    "subtitulo": "Confiança total e orçamento transparente e detalhado",
+    "descricao": "Empresa parceira oficial do Alerta Urbano em Cascavel. Especialidade em mecânica de carro no bairro Coqueiral.",
+    "bairro": "Coqueiral",
+    "endereco": "Rua em Cascavel, Coqueiral",
+    "cidade": "Cascavel",
+    "telefone": "(45) 99840-3456",
+    "mensalidade": 250,
+    "status_pagamento": "pago",
+    "total_pago": 750,
+    "logo_url": "/static/parceiros/carro_mecanica/carro_mecanica_05_ga/logo.png",
+    "banner_url": "/static/parceiros/carro_mecanica/carro_mecanica_05_ga/banner.png",
+    "destaque_esteira": 1,
+    "posicao_mapa": {
+      "fixado": false,
+      "lat": null,
+      "lng": null,
+      "endereco": "",
+      "bairro": "Coqueiral"
+    },
+    "produtos": [
+      {
+        "id": 1,
+        "titulo": "Revisão de Férias 40 Itens de Segurança",
+        "descricao": "Oferta especial de Garagem do Alemão Mecânica em Cascavel. Apresente no balcão e garanta o preço de aplicativo.",
+        "preco_original": "R$ 180,00",
+        "preco_promocional": "R$ 99,00",
+        "tag_desconto": "45% OFF",
+        "foto_url": "/static/parceiros/carro_mecanica/carro_mecanica_05_ga/produtos/produto_01.png"
+      },
+      {
+        "id": 2,
+        "titulo": "Regulagem de Ignição e Velas Iridium",
+        "descricao": "Oferta especial de Garagem do Alemão Mecânica em Cascavel. Apresente no balcão e garanta o preço de aplicativo.",
+        "preco_original": "R$ 160,00",
+        "preco_promocional": "R$ 119,00",
+        "tag_desconto": "25% OFF",
+        "foto_url": "/static/parceiros/carro_mecanica/carro_mecanica_05_ga/produtos/produto_02.png"
+      }
+    ]
+  },
+  {
+    "id": "parc_41",
+    "nome": "Burger Cascavel Artesanal",
+    "categoria": "alimentacao",
+    "categoria_nome": "Alimentação & Lanches",
+    "icone": "🍔",
+    "sigla": "BC",
+    "subtitulo": "Burgers grelhados no fogo com queijo derretido e bacon crocante",
+    "descricao": "Empresa parceira oficial do Alerta Urbano em Cascavel. Especialidade em alimentação & lanches no bairro Centro.",
+    "bairro": "Centro",
+    "endereco": "Rua em Cascavel, Centro",
+    "cidade": "Cascavel",
+    "telefone": "(45) 99841-3456",
+    "mensalidade": 200,
+    "status_pagamento": "pendente",
+    "total_pago": 0,
+    "logo_url": "/static/parceiros/alimentacao/alimentacao_01_bc/logo.png",
+    "banner_url": "/static/parceiros/alimentacao/alimentacao_01_bc/banner.png",
+    "destaque_esteira": 1,
+    "posicao_mapa": {
+      "fixado": false,
+      "lat": null,
+      "lng": null,
+      "endereco": "",
+      "bairro": "Centro"
+    },
+    "produtos": [
+      {
+        "id": 1,
+        "titulo": "Combo Smash Burger Duplo + Batata",
+        "descricao": "Oferta especial de Burger Cascavel Artesanal em Cascavel. Apresente no balcão e garanta o preço de aplicativo.",
+        "preco_original": "R$ 44,00",
+        "preco_promocional": "R$ 32,90",
+        "tag_desconto": "25% OFF",
+        "foto_url": "/static/parceiros/alimentacao/alimentacao_01_bc/produtos/produto_01.png"
+      },
+      {
+        "id": 2,
+        "titulo": "Milkshake Nutella com Ninho 500ml",
+        "descricao": "Oferta especial de Burger Cascavel Artesanal em Cascavel. Apresente no balcão e garanta o preço de aplicativo.",
+        "preco_original": "R$ 22,00",
+        "preco_promocional": "R$ 15,90",
+        "tag_desconto": "27% OFF",
+        "foto_url": "/static/parceiros/alimentacao/alimentacao_01_bc/produtos/produto_02.png"
+      }
+    ]
+  },
+  {
+    "id": "parc_42",
+    "nome": "Cantina & Pizzaria Bella Cascavel",
+    "categoria": "alimentacao",
+    "categoria_nome": "Alimentação & Lanches",
+    "icone": "🍔",
+    "sigla": "PI",
+    "subtitulo": "Pizzas de fermentação natural assadas no forno à lenha",
+    "descricao": "Empresa parceira oficial do Alerta Urbano em Cascavel. Especialidade em alimentação & lanches no bairro Country.",
+    "bairro": "Country",
+    "endereco": "Rua em Cascavel, Country",
+    "cidade": "Cascavel",
+    "telefone": "(45) 99842-3456",
+    "mensalidade": 200,
+    "status_pagamento": "pago",
+    "total_pago": 600,
+    "logo_url": "/static/parceiros/alimentacao/alimentacao_02_pi/logo.png",
+    "banner_url": "/static/parceiros/alimentacao/alimentacao_02_pi/banner.png",
+    "destaque_esteira": 1,
+    "posicao_mapa": {
+      "fixado": false,
+      "lat": null,
+      "lng": null,
+      "endereco": "",
+      "bairro": "Country"
+    },
+    "produtos": [
+      {
+        "id": 1,
+        "titulo": "Pizza Grande 8 Pedaços Tradicional",
+        "descricao": "Oferta especial de Cantina & Pizzaria Bella Cascavel em Cascavel. Apresente no balcão e garanta o preço de aplicativo.",
+        "preco_original": "R$ 69,00",
+        "preco_promocional": "R$ 49,90",
+        "tag_desconto": "27% OFF",
+        "foto_url": "/static/parceiros/alimentacao/alimentacao_02_pi/produtos/produto_01.png"
+      },
+      {
+        "id": 2,
+        "titulo": "Lasanha Bolonhesa Especial 2 Pessoas",
+        "descricao": "Oferta especial de Cantina & Pizzaria Bella Cascavel em Cascavel. Apresente no balcão e garanta o preço de aplicativo.",
+        "preco_original": "R$ 58,00",
+        "preco_promocional": "R$ 42,90",
+        "tag_desconto": "26% OFF",
+        "foto_url": "/static/parceiros/alimentacao/alimentacao_02_pi/produtos/produto_02.png"
+      }
+    ]
+  },
+  {
+    "id": "parc_43",
+    "nome": "Pastelaria Central do Calçadão",
+    "categoria": "alimentacao",
+    "categoria_nome": "Alimentação & Lanches",
+    "icone": "🍔",
+    "sigla": "PC",
+    "subtitulo": "O pastel mais recheado e crocante de Cascavel com caldo de cana",
+    "descricao": "Empresa parceira oficial do Alerta Urbano em Cascavel. Especialidade em alimentação & lanches no bairro Centro.",
+    "bairro": "Centro",
+    "endereco": "Rua em Cascavel, Centro",
+    "cidade": "Cascavel",
+    "telefone": "(45) 99843-3456",
+    "mensalidade": 200,
+    "status_pagamento": "pendente",
+    "total_pago": 0,
+    "logo_url": "/static/parceiros/alimentacao/alimentacao_03_pc/logo.png",
+    "banner_url": "/static/parceiros/alimentacao/alimentacao_03_pc/banner.png",
+    "destaque_esteira": 1,
+    "posicao_mapa": {
+      "fixado": false,
+      "lat": null,
+      "lng": null,
+      "endereco": "",
+      "bairro": "Centro"
+    },
+    "produtos": [
+      {
+        "id": 1,
+        "titulo": "Pastel Gigante 30cm Carne com Queijo",
+        "descricao": "Oferta especial de Pastelaria Central do Calçadão em Cascavel. Apresente no balcão e garanta o preço de aplicativo.",
+        "preco_original": "R$ 20,00",
+        "preco_promocional": "R$ 14,90",
+        "tag_desconto": "25% OFF",
+        "foto_url": "/static/parceiros/alimentacao/alimentacao_03_pc/produtos/produto_01.png"
+      },
+      {
+        "id": 2,
+        "titulo": "Caldo de Cana Gelado 500ml",
+        "descricao": "Oferta especial de Pastelaria Central do Calçadão em Cascavel. Apresente no balcão e garanta o preço de aplicativo.",
+        "preco_original": "R$ 10,00",
+        "preco_promocional": "R$ 6,90",
+        "tag_desconto": "31% OFF",
+        "foto_url": "/static/parceiros/alimentacao/alimentacao_03_pc/produtos/produto_02.png"
+      }
+    ]
+  },
+  {
+    "id": "parc_44",
+    "nome": "[TESTE RIGO 01] Parceiro em Aberto",
+    "categoria": "alimentacao",
+    "categoria_nome": "Alimentação & Lanches",
+    "icone": "🍔",
+    "sigla": "SO",
+    "subtitulo": "Slot reservado para cadastro manual pelo Rigo",
+    "descricao": "Empresa parceira oficial do Alerta Urbano em Cascavel. Especialidade em alimentação & lanches no bairro Coqueiral.",
+    "bairro": "Coqueiral",
+    "endereco": "Rua em Cascavel, Coqueiral",
+    "cidade": "Cascavel",
+    "telefone": "(45) 99844-3456",
+    "mensalidade": 200,
+    "status_pagamento": "pago",
+    "total_pago": 600,
+    "logo_url": "",
+    "banner_url": "",
+    "destaque_esteira": 1,
+    "posicao_mapa": {
+      "fixado": false,
+      "lat": null,
+      "lng": null,
+      "endereco": "",
+      "bairro": "Coqueiral"
+    },
+    "produtos": [],
+    "is_manual_slot": true
+  },
+  {
+    "id": "parc_45",
+    "nome": "[TESTE RIGO 02] Parceiro em Aberto",
+    "categoria": "alimentacao",
+    "categoria_nome": "Alimentação & Lanches",
+    "icone": "🍔",
+    "sigla": "EG",
+    "subtitulo": "Slot reservado para cadastro manual pelo Rigo",
+    "descricao": "Empresa parceira oficial do Alerta Urbano em Cascavel. Especialidade em alimentação & lanches no bairro Neva.",
+    "bairro": "Neva",
+    "endereco": "Rua em Cascavel, Neva",
+    "cidade": "Cascavel",
+    "telefone": "(45) 99845-3456",
+    "mensalidade": 200,
+    "status_pagamento": "pendente",
+    "total_pago": 0,
+    "logo_url": "",
+    "banner_url": "",
+    "destaque_esteira": 1,
+    "posicao_mapa": {
+      "fixado": false,
+      "lat": null,
+      "lng": null,
+      "endereco": "",
+      "bairro": "Neva"
+    },
+    "produtos": [],
+    "is_manual_slot": true
+  }
+]
