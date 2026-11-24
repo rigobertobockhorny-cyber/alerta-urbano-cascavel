@@ -176,8 +176,8 @@
     "destaque_esteira": 1,
     "posicao_mapa": {
       "fixado": true,
-      "lat": -24.966218031753836,
-      "lng": -53.46791625022889,
+      "lat": -24.929018994142147,
+      "lng": -53.43360543251038,
       "endereco": "Rua Cuiabá, 2900",
       "bairro": "Neva",
       "rua": "Rua Cuiabá, 2900"
@@ -204,8 +204,8 @@
     ],
     "dia_vencimento": 10,
     "vencimento": "10/12/2026",
-    "lat": -24.966218031753836,
-    "lng": -53.46791625022889
+    "lat": -24.929018994142147,
+    "lng": -53.43360543251038
   },
   {
     "id": "parc_05",
@@ -228,8 +228,8 @@
     "destaque_esteira": 1,
     "posicao_mapa": {
       "fixado": true,
-      "lat": -24.93214687495979,
-      "lng": -53.42075765132905,
+      "lat": -24.924095884956184,
+      "lng": -53.4176516532898,
       "endereco": "Avenida Piquiri, 1200",
       "bairro": "São Cristóvão",
       "rua": "Avenida Piquiri, 1200"
@@ -256,8 +256,8 @@
     ],
     "dia_vencimento": 10,
     "vencimento": "10/12/2026",
-    "lat": -24.93214687495979,
-    "lng": -53.42075765132905
+    "lat": -24.924095884956184,
+    "lng": -53.4176516532898
   },
   {
     "id": "parc_06",
@@ -436,8 +436,8 @@
     "destaque_esteira": 1,
     "posicao_mapa": {
       "fixado": true,
-      "lat": -24.965,
-      "lng": -53.505,
+      "lat": -24.971471919218164,
+      "lng": -53.505949974060066,
       "endereco": "Avenida Tito Muffato, 1600",
       "bairro": "Santa Cruz",
       "rua": "Avenida Tito Muffato, 1600"
@@ -464,8 +464,8 @@
     ],
     "dia_vencimento": 10,
     "vencimento": "10/12/2026",
-    "lat": -24.965,
-    "lng": -53.505
+    "lat": -24.971471919218164,
+    "lng": -53.505949974060066
   },
   {
     "id": "parc_10",
@@ -592,8 +592,8 @@
     "destaque_esteira": 1,
     "posicao_mapa": {
       "fixado": true,
-      "lat": -24.96473963095285,
-      "lng": -53.4596872329712,
+      "lat": -24.928104450811283,
+      "lng": -53.42443227767945,
       "endereco": "Rua Pio XII, 1600",
       "bairro": "Neva",
       "rua": "Rua Pio XII, 1600"
@@ -620,8 +620,8 @@
     ],
     "dia_vencimento": 10,
     "vencimento": "10/12/2026",
-    "lat": -24.96473963095285,
-    "lng": -53.4596872329712
+    "lat": -24.928104450811283,
+    "lng": -53.42443227767945
   },
   {
     "id": "parc_13",
@@ -696,8 +696,8 @@
     "destaque_esteira": 1,
     "posicao_mapa": {
       "fixado": true,
-      "lat": -24.938,
-      "lng": -53.448,
+      "lat": -24.945956580498507,
+      "lng": -53.4336268901825,
       "endereco": "Rua Londrina, 1650",
       "bairro": "Country",
       "rua": "Rua Londrina, 1650"
@@ -724,8 +724,8 @@
     ],
     "dia_vencimento": 10,
     "vencimento": "10/12/2026",
-    "lat": -24.938,
-    "lng": -53.448
+    "lat": -24.945956580498507,
+    "lng": -53.4336268901825
   },
   {
     "id": "parc_15",
@@ -852,8 +852,8 @@
     "destaque_esteira": 1,
     "posicao_mapa": {
       "fixado": true,
-      "lat": -24.941665750658682,
-      "lng": -53.43363761901856,
+      "lat": -24.919824016426592,
+      "lng": -53.4216320514679,
       "endereco": "Rua Jacarezinho, 1540",
       "bairro": "São Cristóvão",
       "rua": "Rua Jacarezinho, 1540"
@@ -880,8 +880,8 @@
     ],
     "dia_vencimento": 10,
     "vencimento": "10/12/2026",
-    "lat": -24.941665750658682,
-    "lng": -53.43363761901856
+    "lat": -24.919824016426592,
+    "lng": -53.4216320514679
   },
   {
     "id": "parc_18",
@@ -956,8 +956,8 @@
     "destaque_esteira": 1,
     "posicao_mapa": {
       "fixado": true,
-      "lat": -24.962,
-      "lng": -53.501,
+      "lat": -24.95388207614568,
+      "lng": -53.50940465927125,
       "endereco": "Rua Tupiniquins, 950",
       "bairro": "Santa Cruz",
       "rua": "Rua Tupiniquins, 950"
@@ -984,8 +984,8 @@
     ],
     "dia_vencimento": 10,
     "vencimento": "10/12/2026",
-    "lat": -24.962,
-    "lng": -53.501
+    "lat": -24.95388207614568,
+    "lng": -53.50940465927125
   },
   {
     "id": "parc_20",
@@ -1268,8 +1268,8 @@
     "destaque_esteira": 1,
     "posicao_mapa": {
       "fixado": true,
-      "lat": -24.95555477061829,
-      "lng": -53.424153327941895,
+      "lat": -24.94255489250158,
+      "lng": -53.41763019561768,
       "endereco": "Rua Olindo Periollo, 850",
       "bairro": "Pacaembu",
       "rua": "Rua Olindo Periollo, 850"
@@ -1296,8 +1296,8 @@
     ],
     "dia_vencimento": 10,
     "vencimento": "10/12/2026",
-    "lat": -24.95555477061829,
-    "lng": -53.424153327941895
+    "lat": -24.94255489250158,
+    "lng": -53.41763019561768
   },
   {
     "id": "parc_26",
@@ -1528,8 +1528,8 @@
     "destaque_esteira": 1,
     "posicao_mapa": {
       "fixado": true,
-      "lat": -24.955555116840788,
-      "lng": -53.42737197875977,
+      "lat": -24.935198412469454,
+      "lng": -53.42381000518799,
       "endereco": "Rua Olindo Periollo, 850",
       "bairro": "Pacaembu",
       "rua": "Rua Olindo Periollo, 850"
@@ -1556,8 +1556,8 @@
     ],
     "dia_vencimento": 10,
     "vencimento": "10/12/2026",
-    "lat": -24.955555116840788,
-    "lng": -53.42737197875977
+    "lat": -24.935198412469454,
+    "lng": -53.42381000518799
   },
   {
     "id": "parc_31",
@@ -1632,8 +1632,8 @@
     "destaque_esteira": 1,
     "posicao_mapa": {
       "fixado": true,
-      "lat": -24.9368,
-      "lng": -53.4322,
+      "lat": -24.937186383428784,
+      "lng": -53.4336268901825,
       "endereco": "Avenida Piquiri, 1200",
       "bairro": "São Cristóvão",
       "rua": "Avenida Piquiri, 1200"
@@ -1660,8 +1660,8 @@
     ],
     "dia_vencimento": 10,
     "vencimento": "10/12/2026",
-    "lat": -24.9368,
-    "lng": -53.4322
+    "lat": -24.937186383428784,
+    "lng": -53.4336268901825
   },
   {
     "id": "parc_33",
@@ -1736,8 +1736,8 @@
     "destaque_esteira": 1,
     "posicao_mapa": {
       "fixado": true,
-      "lat": -24.9638,
-      "lng": -53.5062,
+      "lat": -24.963202607488746,
+      "lng": -53.50702285766602,
       "endereco": "Avenida Tito Muffato, 1600",
       "bairro": "Santa Cruz",
       "rua": "Avenida Tito Muffato, 1600"
@@ -1764,8 +1764,8 @@
     ],
     "dia_vencimento": 10,
     "vencimento": "10/12/2026",
-    "lat": -24.9638,
-    "lng": -53.5062
+    "lat": -24.963202607488746,
+    "lng": -53.50702285766602
   },
   {
     "id": "parc_35",
@@ -1996,8 +1996,8 @@
     "destaque_esteira": 1,
     "posicao_mapa": {
       "fixado": true,
-      "lat": -24.970186147155268,
-      "lng": -53.458786010742195,
+      "lat": -24.978766677682685,
+      "lng": -53.46792161464692,
       "endereco": "Rua General Osório, 2800",
       "bairro": "Parque São Paulo",
       "rua": "Rua General Osório, 2800"
@@ -2024,8 +2024,8 @@
     ],
     "dia_vencimento": 10,
     "vencimento": "10/12/2026",
-    "lat": -24.970186147155268,
-    "lng": -53.458786010742195
+    "lat": -24.978766677682685,
+    "lng": -53.46792161464692
   },
   {
     "id": "parc_40",
@@ -2048,8 +2048,8 @@
     "destaque_esteira": 1,
     "posicao_mapa": {
       "fixado": true,
-      "lat": -24.96081218448612,
-      "lng": -53.48912715911866,
+      "lat": -24.96066409736393,
+      "lng": -53.48919689655305,
       "endereco": "Avenida Brasil, 8500",
       "bairro": "Coqueiral",
       "rua": "Avenida Brasil, 8500"
@@ -2076,8 +2076,8 @@
     ],
     "dia_vencimento": 10,
     "vencimento": "10/12/2026",
-    "lat": -24.96081218448612,
-    "lng": -53.48912715911866
+    "lat": -24.96066409736393,
+    "lng": -53.48919689655305
   },
   {
     "id": "parc_41",
@@ -2204,8 +2204,8 @@
     "destaque_esteira": 1,
     "posicao_mapa": {
       "fixado": true,
-      "lat": -24.950051771298376,
-      "lng": -53.42612206935883,
+      "lat": -24.95003963625901,
+      "lng": -53.4262964129448,
       "endereco": "Rua São Paulo, 1400",
       "bairro": "Centro",
       "rua": "Rua São Paulo, 1400"
@@ -2232,8 +2232,8 @@
     ],
     "dia_vencimento": 10,
     "vencimento": "10/12/2026",
-    "lat": -24.950051771298376,
-    "lng": -53.42612206935883
+    "lat": -24.95003963625901,
+    "lng": -53.4262964129448
   },
   {
     "id": "parc_44",
@@ -2290,8 +2290,8 @@
     "destaque_esteira": 1,
     "posicao_mapa": {
       "fixado": true,
-      "lat": -24.966831739113378,
-      "lng": -53.45759510993958,
+      "lat": -24.966840451918294,
+      "lng": -53.45771312713624,
       "endereco": "Rua Pio XII, 1600",
       "bairro": "Neva",
       "rua": "Rua Pio XII, 1600"
@@ -2300,7 +2300,7 @@
     "is_manual_slot": true,
     "dia_vencimento": 10,
     "vencimento": "10/12/2026",
-    "lat": -24.966831739113378,
-    "lng": -53.45759510993958
+    "lat": -24.966840451918294,
+    "lng": -53.45771312713624
   }
 ]
