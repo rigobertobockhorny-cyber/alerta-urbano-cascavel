@@ -2,7 +2,7 @@
 ## Manual Supremo de Engenharia, Governança, Design System, Fluxos de Tela e Pipeline de Publicação
 **Documento Soberano e Obrigatório de Referência Contínua para Engenharia e IAs**
 **Autoridade e Direção:** Rigo | **Engenheiro/Arquiteto de Sistemas:** Johan
-**Data da Última Atualização:** 24/11/2026 | **Versão Corrente:** 3.7.4 (versionCode 18)
+**Data da Última Atualização:** 24/11/2026 | **Versão Corrente:** 3.9.2 (versionCode 20)
 
 ---
 
@@ -379,4 +379,37 @@ A **Mesa Operacional** (`/mesa` e `/admin/mesa`) é a estação de trabalho exec
 * **Inserção Direta no Banco:** Botão que executa `POST /api/alertas` e grava o registro instantaneamente no SQLite (`alertas_cascavel.db`), refletindo no aplicativo e no mapa geral em tempo real.
 
 ---
-**Fim da Bíblia Mestra — Alerta Urbano Cascavel v3.9.1**
+
+## 16. ESTRUTURA DE TESTES DE CAMPO, PERFIS FICTÍCIOS DARK PLANNER E 4 TESTADORES PILOTO (v3.9.2)
+
+### 16.1. Blindagem Tripla Anti-Cold Start (Eliminação Definitiva da Tela do Render)
+* **Camada 1: Guardião Keep-Alive 24/7 (`scratch/keep_alive_render.py`):** Processo em segundo plano que dispara um ping autenticado a cada 7 minutos em `https://alerta-urbano-cascavel.onrender.com/api/ping`. Como a inatividade do Render ocorre após 15 minutos, a instância web permanece permanentemente acordada e responde em menos de 2 segundos.
+* **Camada 2: Service Worker Registrado (`static/sw.js` e `static/index.html`):** Registrado oficialmente no carregamento da página. Intercepta requisições de navegação e substitui qualquer página crua do Render (`APPLICATION LOADING` / 502 / 503) pela tela oficial cívica Verde & Amarela do Alerta Urbano com barra de progresso (0% a 100%) e polling automático.
+* **Camada 3: Overlay Nativo Android (`MainActivity.kt`):** Shell Kotlin com overlay impenetrável que só revela a WebView após a renderização física dos elementos cívicos do app. Compilado no APK `v3.9.2` (versionCode 20).
+
+### 16.2. 16 Perfis Oficiais de Pessoas (Dark Planner)
+* **Geração Local em Alta Definição:** 16 retratos realistas gerados pelo Dark Planner em iluminação de estúdio e luz natural, salvos em `/static/darkplanner_pessoas/` e mapeados no `catalogo_pessoas.json`:
+  * **8 Mulheres (Tutoras e Testadoras):** Mariana Souza (Centro), Camila Rocha (Coqueiral), Fernanda Lima (Parque São Paulo), Beatriz Alves (Neva), Juliana Mendes (Cancelli), Ana Paula Costa (São Cristóvão), Patrícia Ribeiro (Cascavel Velho), Larissa Duarte (Santa Cruz).
+  * **8 Homens (Tutores e Testadores):** Carlos Eduardo (Centro), Lucas Martins (Centro), Roberto Silveira (São Cristóvão), Felipe Santos (Neva), Rodrigo Nogueira (Coqueiral), Marcos Vinicius (Cancelli), Diego Ferreira (Pacaembu), Gabriel Toledo (Maria Luiza).
+* **Sincronização no Banco:** Todos os 16 perfis registrados na tabela `usuarios` com nome, WhatsApp válido formatado, bairro de Cascavel e URL da foto.
+
+### 16.3. Dock dos 4 Testadores de Campo Piloto (Mesa Operacional)
+* **Painel Tático Inferior:** Adicionado na aba `🐾 Inclusão de Pets (GPS)` da Mesa Operacional:
+  * 1. **Lucas Martins (TESTADOR-01):** Rota Centro / Neva — `homem_02_lucas.jpg`
+  * 2. **Camila Rocha (TESTADORA-02):** Rota Coqueiral / Cancelli — `mulher_02_camila.jpg`
+  * 3. **Roberto Silveira (TESTADOR-03):** Rota São Cristóvão / Pacaembu — `homem_03_roberto.jpg`
+  * 4. **Fernanda Lima (TESTADORA-04):** Rota Parque São Paulo / Maria Luiza — `mulher_03_fernanda.jpg`
+* **Botões Táticos de Simulação:**
+  * `📍 400m Copiloto:` Reposiciona o testador a 380m do pet desaparecido mais próximo, faz voo de câmera no mapa e dispara o áudio TTS do Copiloto instantaneamente.
+  * `👀 Avistar:` Registra avistamento em nome do testador na via correspondente com coordenadas exatas.
+
+### 16.4. Ciclo de Vida Completo do Pet & Limpeza de Dados
+* **Limpeza e Reset:** Removidos todos os alertas de pets anteriores.
+* **8 Casos de Teste Estruturados com Coordenadas Reais de Cascavel:**
+  * 4 Pets Desaparecidos (`status_pet: 'desaparecido'`) — Thor (Centro), Mia (Cancelli), Pingo (Coqueiral), Tico (Centro).
+  * 2 Pets Avistados com Trilha Ativa (`status_pet: 'avistado'`) — Pipoca (Neva) avistado por Lucas Martins; Fred (Coqueiral) avistado por Camila Rocha.
+  * 2 Pets Encontrados e Resgatados (`status_pet: 'encontrado'`) — Bob (São Cristóvão) e Luna (Parque São Paulo), com cards comemorativos verdes.
+* **Ações em 1 Clique no Mapa da Mesa:** Popups com pílula de status cromática, botão para ouvir o Copiloto, botão para marcar como Encontrado (`POST /api/pets/<id>/status`), botão para simular avistamento e botão para exclusão.
+
+---
+**Fim da Bíblia Mestra — Alerta Urbano Cascavel v3.9.2**
