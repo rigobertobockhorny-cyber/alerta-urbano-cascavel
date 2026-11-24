@@ -5,7 +5,7 @@
     "prompt": "Foto de estúdio de uma linda gatinha siamesa fêmea com olhos azuis profundos, usando um lacinho rosa delicado na orelha, pelagem creme e marrom suave, foco nítido, iluminação suave, retrato profissional",
     "arquivo": "gata_01_siamesa.jpg",
     "url": "/static/darkplanner_pets/gata_01_siamesa.jpg",
-    "timestamp": 1795523078
+    "dp_original": "2_Foto_de_estúdio_de_uma_linda_gatinha_siamesa_fêmea.jpg"
   },
   {
     "nome": "gata_02_branca",
@@ -13,7 +13,7 @@
     "prompt": "Foto realista de uma gatinha fêmea branca felpuda e elegante com um lacinho lilás de cetim, olhos verdes brilhantes, fundo neutro aconchegante, hiper realista",
     "arquivo": "gata_02_branca.jpg",
     "url": "/static/darkplanner_pets/gata_02_branca.jpg",
-    "timestamp": 1795523098
+    "dp_original": "3_Foto_realista_de_uma_gatinha_fêmea_branca_felpuda.jpg"
   },
   {
     "nome": "gata_03_calico_tricolor",
@@ -21,7 +21,7 @@
     "prompt": "Retrato aproximado de uma gata fêmea tricolor calico (branco, preto e laranja) usando um lacinho vermelho suave na orelha, focinho fofo, alta definição",
     "arquivo": "gata_03_calico_tricolor.jpg",
     "url": "/static/darkplanner_pets/gata_03_calico_tricolor.jpg",
-    "timestamp": 1795523118
+    "dp_original": "4_Retrato_aproximado_de_uma_gata_fêmea_tricolor_cali.jpg"
   },
   {
     "nome": "gata_04_preta",
@@ -29,7 +29,7 @@
     "prompt": "Foto de estúdio de uma linda gata fêmea preta brilhante com olhos amarelos dourados expressivos, usando lacinho rosa choque, iluminação profissional",
     "arquivo": "gata_04_preta.jpg",
     "url": "/static/darkplanner_pets/gata_04_preta.jpg",
-    "timestamp": 1795523149
+    "dp_original": "5_Foto_de_estúdio_de_uma_linda_gata_fêmea_preta_bril.jpg"
   },
   {
     "nome": "gata_05_frajola",
@@ -37,7 +37,7 @@
     "prompt": "Retrato de gata fêmea frajola preto e branco com mancha charmosa no nariz, lacinho azul claro no topo da cabeça, pelo macio, iluminação natural",
     "arquivo": "gata_05_frajola.jpg",
     "url": "/static/darkplanner_pets/gata_05_frajola.jpg",
-    "timestamp": 1795523169
+    "dp_original": "6_Retrato_de_gata_fêmea_frajola_preto_e_branco_com_m.jpg"
   },
   {
     "nome": "gata_06_persa_creme",
@@ -45,7 +45,7 @@
     "prompt": "Foto de uma gatinha fêmea persa felpuda de cor creme com carinha fofa e lacinho amarelo, olhar doce, close-up nítido",
     "arquivo": "gata_06_persa_creme.jpg",
     "url": "/static/darkplanner_pets/gata_06_persa_creme.jpg",
-    "timestamp": 1795523193
+    "dp_original": "7_Foto_de_uma_gatinha_fêmea_persa_felpuda_de_cor_cre.jpg"
   },
   {
     "nome": "gata_07_ruiva_laranja",
@@ -53,7 +53,7 @@
     "prompt": "Foto de gatinha fêmea ruiva cor de abóbora com listras claras, usando lacinho verde esmeralda na orelhinha, olhar curioso, hiper detalhado",
     "arquivo": "gata_07_ruiva_laranja.jpg",
     "url": "/static/darkplanner_pets/gata_07_ruiva_laranja.jpg",
-    "timestamp": 1795523218
+    "dp_original": "8_Foto_de_gatinha_fêmea_ruiva_cor_de_abóbora_com_lis.jpg"
   },
   {
     "nome": "gata_08_cinza_tigrada",
@@ -61,7 +61,7 @@
     "prompt": "Foto de estúdio de uma gata fêmea cinza tigrada (tabby cinza) com olhos verdes e lacinho rosa bebê, postura nobre e carinhosa",
     "arquivo": "gata_08_cinza_tigrada.jpg",
     "url": "/static/darkplanner_pets/gata_08_cinza_tigrada.jpg",
-    "timestamp": 1795523233
+    "dp_original": "9_Foto_de_estúdio_de_uma_gata_fêmea_cinza_tigrada_(t.jpg"
   },
   {
     "nome": "gata_09_angora_branca",
@@ -69,7 +69,7 @@
     "prompt": "Foto de gata fêmea angorá branca de pelos longos e sedosos com um laço dourado acetinado, olhos azuis turquesa, perfeita e saudável",
     "arquivo": "gata_09_angora_branca.jpg",
     "url": "/static/darkplanner_pets/gata_09_angora_branca.jpg",
-    "timestamp": 1795523259
+    "dp_original": "10_Foto_de_gata_fêmea_angorá_branca_de_pelos_longos_e.jpg"
   },
   {
     "nome": "gata_10_tortoiseshell",
@@ -77,7 +77,7 @@
     "prompt": "Retrato de gata fêmea de pelagem escama de tartaruga mesclada com lacinho rosa fúcsia, expressão carismática, luz natural",
     "arquivo": "gata_10_tortoiseshell.jpg",
     "url": "/static/darkplanner_pets/gata_10_tortoiseshell.jpg",
-    "timestamp": 1795523294
+    "dp_original": "11_Retrato_de_gata_fêmea_de_pelagem_escama_de_tartaru.jpg"
   },
   {
     "nome": "gato_01_frajola",
@@ -85,7 +85,7 @@
     "prompt": "Foto de um elegante gato macho frajola preto e branco usando uma gravatinha borboleta preta, porte imponente e olhar penetrante, estúdio fotográfico",
     "arquivo": "gato_01_frajola.jpg",
     "url": "/static/darkplanner_pets/gato_01_frajola.jpg",
-    "timestamp": 1795523323
+    "dp_original": "12_Foto_de_um_elegante_gato_macho_frajola_preto_e_bra.jpg"
   },
   {
     "nome": "gato_02_laranjinha",
@@ -93,7 +93,7 @@
     "prompt": "Foto de um simpático gato macho laranja malhado (garfield) usando gravata borboleta azul marinho com bolinhas brancas, feliz e gordinho",
     "arquivo": "gato_02_laranjinha.jpg",
     "url": "/static/darkplanner_pets/gato_02_laranjinha.jpg",
-    "timestamp": 1795523353
+    "dp_original": "13_Foto_de_um_simpático_gato_macho_laranja_malhado_(g.jpg"
   },
   {
     "nome": "gato_03_russian_blue",
@@ -101,7 +101,7 @@
     "prompt": "Foto de gato macho cinza chumbo russo azul com pelos curtos sedosos e gravatinha borboleta vinho bordô, olhos verdes, muito elegante",
     "arquivo": "gato_03_russian_blue.jpg",
     "url": "/static/darkplanner_pets/gato_03_russian_blue.jpg",
-    "timestamp": 1795523368
+    "dp_original": "14_Foto_de_gato_macho_cinza_chumbo_russo_azul_com_pel.jpg"
   },
   {
     "nome": "gato_04_preto_solido",
@@ -109,7 +109,7 @@
     "prompt": "Retrato de gato macho preto pantera com olhos âmbar brilhantes usando uma estilosa gravata borboleta amarela ouro, pose majestosa",
     "arquivo": "gato_04_preto_solido.jpg",
     "url": "/static/darkplanner_pets/gato_04_preto_solido.jpg",
-    "timestamp": 1795523384
+    "dp_original": "15_Retrato_de_gato_macho_preto_pantera_com_olhos_âmba.jpg"
   },
   {
     "nome": "gato_05_tigrado_marrom",
@@ -117,7 +117,7 @@
     "prompt": "Foto de gato macho rajado marrom com peito branco usando gravatinha borboleta verde esmeralda, bigodes longos, olhar expressivo",
     "arquivo": "gato_05_tigrado_marrom.jpg",
     "url": "/static/darkplanner_pets/gato_05_tigrado_marrom.jpg",
-    "timestamp": 1795523404
+    "dp_original": "16_Foto_de_gato_macho_rajado_marrom_com_peito_branco.jpg"
   },
   {
     "nome": "gato_06_siamês",
@@ -125,7 +125,7 @@
     "prompt": "Foto de gato macho siamês clássico com máscara escura e olhos azuis cristalinos usando gravatinha vermelha de alfaiataria, hiper realista",
     "arquivo": "gato_06_siamês.jpg",
     "url": "/static/darkplanner_pets/gato_06_siamês.jpg",
-    "timestamp": 1795523433
+    "dp_original": "17_Foto_de_gato_macho_siamês_clássico_com_máscara_esc.jpg"
   },
   {
     "nome": "gato_07_branco_olhos_azuis",
@@ -133,7 +133,7 @@
     "prompt": "Foto de gato macho todo branco de pelos macios usando gravatinha azul royal, olhos azuis brilhantes, iluminação suave",
     "arquivo": "gato_07_branco_olhos_azuis.jpg",
     "url": "/static/darkplanner_pets/gato_07_branco_olhos_azuis.jpg",
-    "timestamp": 1795523458
+    "dp_original": "18_Foto_de_gato_macho_todo_branco_de_pelos_macios_usa.jpg"
   },
   {
     "nome": "gato_08_bengal_onca",
@@ -141,7 +141,7 @@
     "prompt": "Foto de gato macho raça bengal com manchas de leopardo douradas usando uma charmosa gravata preta fina, atlético e nobre",
     "arquivo": "gato_08_bengal_onca.jpg",
     "url": "/static/darkplanner_pets/gato_08_bengal_onca.jpg",
-    "timestamp": 1795523473
+    "dp_original": "19_Foto_de_gato_macho_raça_bengal_com_manchas_de_leop.jpg"
   },
   {
     "nome": "gato_09_maine_coon",
@@ -149,7 +149,7 @@
     "prompt": "Foto de imponente gato macho maine coon cinza peludo e barbudo usando gravata borboleta xadrez, porte majestoso de leãozinho",
     "arquivo": "gato_09_maine_coon.jpg",
     "url": "/static/darkplanner_pets/gato_09_maine_coon.jpg",
-    "timestamp": 1795523503
+    "dp_original": "20_Foto_de_imponente_gato_macho_maine_coon_cinza_pelu.jpg"
   },
   {
     "nome": "gato_10_amarelo_claro",
@@ -157,7 +157,7 @@
     "prompt": "Foto de gato macho amarelo champanhe de focinho rosado usando gravatinha azul piscina, olhar dócil e amigável",
     "arquivo": "gato_10_amarelo_claro.jpg",
     "url": "/static/darkplanner_pets/gato_10_amarelo_claro.jpg",
-    "timestamp": 1795523513
+    "dp_original": "21_Foto_de_gato_macho_amarelo_champanhe_de_focinho_ro.jpg"
   },
   {
     "nome": "cachorra_01_shih_tzu",
@@ -165,7 +165,7 @@
     "prompt": "Foto de estúdio de uma cadelinha shih tzu fêmea branca e dourada com pelinho escovado e um lacinho duplo rosa no topete, olhos expressivos carinhosos",
     "arquivo": "cachorra_01_shih_tzu.jpg",
     "url": "/static/darkplanner_pets/cachorra_01_shih_tzu.jpg",
-    "timestamp": 1795523538
+    "dp_original": "22_Foto_de_estúdio_de_uma_cadelinha_shih_tzu_fêmea_br.jpg"
   },
   {
     "nome": "cachorra_02_caramelo",
@@ -173,7 +173,7 @@
     "prompt": "Foto de uma cadela fêmea vira-lata caramelo muito simpática de orelhas empinadas com um laço vermelho charmoso, focinho molhado e sorriso canino",
     "arquivo": "cachorra_02_caramelo.jpg",
     "url": "/static/darkplanner_pets/cachorra_02_caramelo.jpg",
-    "timestamp": 1795523568
+    "dp_original": "23_Foto_de_uma_cadela_fêmea_vira-lata_caramelo_muito.jpg"
   },
   {
     "nome": "cachorra_03_golden_retriever",
@@ -181,7 +181,7 @@
     "prompt": "Foto de uma linda cadela fêmea golden retriever dourada e dócil usando um laço lilás delicado na orelha, expressão alegre e leal",
     "arquivo": "cachorra_03_golden_retriever.jpg",
     "url": "/static/darkplanner_pets/cachorra_03_golden_retriever.jpg",
-    "timestamp": 1795523588
+    "dp_original": "24_Foto_de_uma_linda_cadela_fêmea_golden_retriever_do.jpg"
   },
   {
     "nome": "cachorra_04_poodle",
@@ -189,7 +189,7 @@
     "prompt": "Foto de cadelinha poodle toy fêmea branca como algodão com lacinhos rosa pink nas orelhas, tosada perfeitamente, estúdio pet",
     "arquivo": "cachorra_04_poodle.jpg",
     "url": "/static/darkplanner_pets/cachorra_04_poodle.jpg",
-    "timestamp": 1795523613
+    "dp_original": "25_Foto_de_cadelinha_poodle_toy_fêmea_branca_como_alg.jpg"
   },
   {
     "nome": "cachorra_05_pinscher",
@@ -197,7 +197,7 @@
     "prompt": "Foto de uma cadela pinscher fêmea preta e canela pequena com lacinho amarelo ouro, atenta e fofa, fundo aconchegante",
     "arquivo": "cachorra_05_pinscher.jpg",
     "url": "/static/darkplanner_pets/cachorra_05_pinscher.jpg",
-    "timestamp": 1795523638
+    "dp_original": "26_Foto_de_uma_cadela_pinscher_fêmea_preta_e_canela_p.jpg"
   },
   {
     "nome": "cachorra_06_yorkshire",
@@ -205,7 +205,7 @@
     "prompt": "Foto de cadela fêmea yorkshire terrier de pelos longos sedosos com laço vermelho no topete, olhar curioso e brilhante",
     "arquivo": "cachorra_06_yorkshire.jpg",
     "url": "/static/darkplanner_pets/cachorra_06_yorkshire.jpg",
-    "timestamp": 1795523668
+    "dp_original": "27_Foto_de_cadela_fêmea_yorkshire_terrier_de_pelos_lo.jpg"
   },
   {
     "nome": "cachorra_07_beagle",
@@ -213,7 +213,7 @@
     "prompt": "Foto de uma cadela beagle fêmea tricolor de orelhas caídas usando lacinho verde água, olhar meigo e carismático",
     "arquivo": "cachorra_07_beagle.jpg",
     "url": "/static/darkplanner_pets/cachorra_07_beagle.jpg",
-    "timestamp": 1795523683
+    "dp_original": "28_Foto_de_uma_cadela_beagle_fêmea_tricolor_de_orelha.jpg"
   },
   {
     "nome": "cachorra_08_spitz_alemao",
@@ -221,7 +221,7 @@
     "prompt": "Foto de cadela spitz alemão (lulu da pomerânia) fêmea cor laranja fofinha como pompom com lacinho azul bebê, focinho de ursinha",
     "arquivo": "cachorra_08_spitz_alemao.jpg",
     "url": "/static/darkplanner_pets/cachorra_08_spitz_alemao.jpg",
-    "timestamp": 1795523708
+    "dp_original": "29_Foto_de_cadela_spitz_alemão_(lulu_da_pomerânia)_fê.jpg"
   },
   {
     "nome": "cachorra_09_dachshund",
@@ -229,7 +229,7 @@
     "prompt": "Foto de cadela dachshund salsicha fêmea marrom chocolate de orelhas compridas com lacinho amarelo, pose charmosa",
     "arquivo": "cachorra_09_dachshund.jpg",
     "url": "/static/darkplanner_pets/cachorra_09_dachshund.jpg",
-    "timestamp": 1795523728
+    "dp_original": "30_Foto_de_cadela_dachshund_salsicha_fêmea_marrom_cho.jpg"
   },
   {
     "nome": "cachorra_10_labradora_chocolate",
@@ -237,7 +237,7 @@
     "prompt": "Foto de cadela labradora fêmea marrom chocolate com olhos amendoados e um grande laço rosa, sentada educadamente",
     "arquivo": "cachorra_10_labradora_chocolate.jpg",
     "url": "/static/darkplanner_pets/cachorra_10_labradora_chocolate.jpg",
-    "timestamp": 1795523738
+    "dp_original": "31_Foto_de_cadela_labradora_fêmea_marrom_chocolate_co.jpg"
   },
   {
     "nome": "cachorro_01_caramelo_macho",
@@ -245,7 +245,7 @@
     "prompt": "Foto de um clássico cão vira-lata caramelo macho brasileiro usando uma gravata borboleta preta elegante, olhar esperto e feliz, iluminação natural",
     "arquivo": "cachorro_01_caramelo_macho.jpg",
     "url": "/static/darkplanner_pets/cachorro_01_caramelo_macho.jpg",
-    "timestamp": 1795523773
+    "dp_original": "32_Foto_de_um_clássico_cão_vira-lata_caramelo_macho_b.jpg"
   },
   {
     "nome": "cachorro_02_pastor_alemao",
@@ -253,7 +253,7 @@
     "prompt": "Foto de cão pastor alemão macho jovem e atento usando gravata vermelha estilosa, postura altiva e nobre, estúdio",
     "arquivo": "cachorro_02_pastor_alemao.jpg",
     "url": "/static/darkplanner_pets/cachorro_02_pastor_alemao.jpg",
-    "timestamp": 1795523793
+    "dp_original": "33_Foto_de_cão_pastor_alemão_macho_jovem_e_atento_usa.jpg"
   },
   {
     "nome": "cachorro_03_buldogue_frances",
@@ -261,7 +261,7 @@
     "prompt": "Foto de cão buldogue francês macho preto com gravatinha borboleta amarela ouro, orelhas de morcego, expressão engraçada e amável",
     "arquivo": "cachorro_03_buldogue_frances.jpg",
     "url": "/static/darkplanner_pets/cachorro_03_buldogue_frances.jpg",
-    "timestamp": 1795523823
+    "dp_original": "34_Foto_de_cão_buldogue_francês_macho_preto_com_grava.jpg"
   },
   {
     "nome": "cachorro_04_border_collie",
@@ -269,7 +269,7 @@
     "prompt": "Foto de cão border collie macho preto e branco de olhos brilhantes e gravata borboleta azul marinho, inteligente e focado",
     "arquivo": "cachorro_04_border_collie.jpg",
     "url": "/static/darkplanner_pets/cachorro_04_border_collie.jpg",
-    "timestamp": 1795523838
+    "dp_original": "35_Foto_de_cão_border_collie_macho_preto_e_branco_de.jpg"
   },
   {
     "nome": "cachorro_05_rottweiler_jovem",
@@ -277,7 +277,7 @@
     "prompt": "Foto de um cão rottweiler macho jovem e dócil com focinho canela usando gravata borboleta verde, olhar meigo e brincalhão",
     "arquivo": "cachorro_05_rottweiler_jovem.jpg",
     "url": "/static/darkplanner_pets/cachorro_05_rottweiler_jovem.jpg",
-    "timestamp": 1795523888
+    "dp_original": "36_Foto_de_um_cão_rottweiler_macho_jovem_e_dócil_com.jpg"
   },
   {
     "nome": "cachorro_06_pug",
@@ -285,7 +285,7 @@
     "prompt": "Foto de cão pug macho cor abricot com máscara preta usando gravatinha borboleta xadrez, carinha fofa e enrugada",
     "arquivo": "cachorro_06_pug.jpg",
     "url": "/static/darkplanner_pets/cachorro_06_pug.jpg",
-    "timestamp": 1795523918
+    "dp_original": "37_Foto_de_cão_pug_macho_cor_abricot_com_máscara_pret.jpg"
   },
   {
     "nome": "cachorro_07_husky_siberiano",
@@ -293,7 +293,7 @@
     "prompt": "Foto de imponente cão husky siberiano macho de olhos azuis gélidos usando gravatinha cinza de seda, pelagem densa e limpa",
     "arquivo": "cachorro_07_husky_siberiano.jpg",
     "url": "/static/darkplanner_pets/cachorro_07_husky_siberiano.jpg",
-    "timestamp": 1795523958
+    "dp_original": "38_Foto_de_imponente_cão_husky_siberiano_macho_de_olh.jpg"
   },
   {
     "nome": "cachorro_08_schnauzer",
@@ -301,7 +301,7 @@
     "prompt": "Foto de cão schnauzer macho sal e pimenta com sobrancelhas e bigode marcantes usando gravata borboleta vinho",
     "arquivo": "cachorro_08_schnauzer.jpg",
     "url": "/static/darkplanner_pets/cachorro_08_schnauzer.jpg",
-    "timestamp": 1795523978
+    "dp_original": "39_Foto_de_cão_schnauzer_macho_sal_e_pimenta_com_sobr.jpg"
   },
   {
     "nome": "cachorro_09_pitbull_docil",
@@ -309,7 +309,7 @@
     "prompt": "Foto de cão pitbull macho cor champanhe com peito branco usando gravatinha borboleta azul royal, sorriso aberto e olhar super dócil",
     "arquivo": "cachorro_09_pitbull_docil.jpg",
     "url": "/static/darkplanner_pets/cachorro_09_pitbull_docil.jpg",
-    "timestamp": 1795523998
+    "dp_original": "40_Foto_de_cão_pitbull_macho_cor_champanhe_com_peito.jpg"
   },
   {
     "nome": "cachorro_10_boxer",
@@ -317,7 +317,7 @@
     "prompt": "Foto de cão boxer macho tigrado dourado com peito branco e gravata preta fina, porte atlético e expressão amigável",
     "arquivo": "cachorro_10_boxer.jpg",
     "url": "/static/darkplanner_pets/cachorro_10_boxer.jpg",
-    "timestamp": 1795524033
+    "dp_original": "41_Foto_de_cão_boxer_macho_tigrado_dourado_com_peito.jpg"
   },
   {
     "nome": "ninhada_gatos_01_cesto",
@@ -325,7 +325,7 @@
     "prompt": "Foto fofíssima de uma ninhada com 4 filhotes de gatinhos pequenos juntos dentro de uma cesta de vime com cobertor macio, cores variadas (um frajola, um laranja, um siamês e um branco), olhos abertos recém-nascidos",
     "arquivo": "ninhada_gatos_01_cesto.jpg",
     "url": "/static/darkplanner_pets/ninhada_gatos_01_cesto.jpg",
-    "timestamp": 1795524058
+    "dp_original": "42_Foto_fofíssima_de_uma_ninhada_com_4_filhotes_de_ga.jpg"
   },
   {
     "nome": "ninhada_gatos_02_manta_azul",
@@ -333,7 +333,7 @@
     "prompt": "Foto de ninhada de 5 gatinhos filhotes dormindo abraçadinhos em cima de uma manta de lã azul felpuda, patinhas visíveis, cena de pura fofura",
     "arquivo": "ninhada_gatos_02_manta_azul.jpg",
     "url": "/static/darkplanner_pets/ninhada_gatos_02_manta_azul.jpg",
-    "timestamp": 1795524078
+    "dp_original": "43_Foto_de_ninhada_de_5_gatinhos_filhotes_dormindo_ab.jpg"
   },
   {
     "nome": "ninhada_gatos_03_gramado",
@@ -341,7 +341,7 @@
     "prompt": "Foto de 4 gatinhos filhotinhos de 40 dias brincando juntos na grama verde, gatinhos malhados e brancos curiosos olhando para a câmera",
     "arquivo": "ninhada_gatos_03_gramado.jpg",
     "url": "/static/darkplanner_pets/ninhada_gatos_03_gramado.jpg",
-    "timestamp": 1795524093
+    "dp_original": "44_Foto_de_4_gatinhos_filhotinhos_de_40_dias_brincand.jpg"
   },
   {
     "nome": "ninhada_gatos_04_caixa",
@@ -349,7 +349,7 @@
     "prompt": "Foto de ninhada com 5 gatinhos filhotes de várias cores espiando juntos por cima da borda de uma caixa acolchoada, orelhinhas em pé, luz suave",
     "arquivo": "ninhada_gatos_04_caixa.jpg",
     "url": "/static/darkplanner_pets/ninhada_gatos_04_caixa.jpg",
-    "timestamp": 1795524124
+    "dp_original": "45_Foto_de_ninhada_com_5_gatinhos_filhotes_de_várias.jpg"
   },
   {
     "nome": "ninhada_gatos_05_tapete",
@@ -357,7 +357,7 @@
     "prompt": "Foto de close-up de 4 filhotinhos de gato dormindo em formato de caracol aconchegados em um tapete felpudo branco, focinhos rosados",
     "arquivo": "ninhada_gatos_05_tapete.jpg",
     "url": "/static/darkplanner_pets/ninhada_gatos_05_tapete.jpg",
-    "timestamp": 1795524154
+    "dp_original": "46_Foto_de_close-up_de_4_filhotinhos_de_gato_dormindo.jpg"
   },
   {
     "nome": "ninhada_gatos_06_laranjinhas",
@@ -365,7 +365,7 @@
     "prompt": "Foto de ninhada de 4 gatinhos filhotes ruivinhos cor de abóbora juntos em uma caminha amarela de tecido, olhos azuis brilhantes de filhote",
     "arquivo": "ninhada_gatos_06_laranjinhas.jpg",
     "url": "/static/darkplanner_pets/ninhada_gatos_06_laranjinhas.jpg",
-    "timestamp": 1795524183
+    "dp_original": "47_Foto_de_ninhada_de_4_gatinhos_filhotes_ruivinhos_c.jpg"
   },
   {
     "nome": "ninhada_gatos_07_siameses",
@@ -373,7 +373,7 @@
     "prompt": "Foto de ninhada com 4 filhotinhos siameses de orelhas escuras e olhos azuis agrupados juntos sobre cobertor creme, delicados e fofos",
     "arquivo": "ninhada_gatos_07_siameses.jpg",
     "url": "/static/darkplanner_pets/ninhada_gatos_07_siameses.jpg",
-    "timestamp": 1795524213
+    "dp_original": "48_Foto_de_ninhada_com_4_filhotinhos_siameses_de_orel.jpg"
   },
   {
     "nome": "ninhada_gatos_08_coloridos",
@@ -381,7 +381,7 @@
     "prompt": "Foto de ninhada de 5 gatinhos filhotes super coloridos (tricolor, preto, tigrado, amarelo e branco) brincando juntos em almofada macia",
     "arquivo": "ninhada_gatos_08_coloridos.jpg",
     "url": "/static/darkplanner_pets/ninhada_gatos_08_coloridos.jpg",
-    "timestamp": 1795524233
+    "dp_original": "49_Foto_de_ninhada_de_5_gatinhos_filhotes_super_color.jpg"
   },
   {
     "nome": "ninhada_gatos_09_peludos",
@@ -389,7 +389,7 @@
     "prompt": "Foto de 4 filhotes de gatos persas muito peludinhos como bolinhas de pelo aconchegados juntos em cesto de palha, super meigos",
     "arquivo": "ninhada_gatos_09_peludos.jpg",
     "url": "/static/darkplanner_pets/ninhada_gatos_09_peludos.jpg",
-    "timestamp": 1795524274
+    "dp_original": "50_Foto_de_4_filhotes_de_gatos_persas_muito_peludinho.jpg"
   },
   {
     "nome": "ninhada_gatos_10_sofa",
@@ -397,7 +397,7 @@
     "prompt": "Foto de ninhada de 4 gatinhos pequeninos sentadinhos lado a lado em um mini sofá pet, todos olhando atentos para a foto",
     "arquivo": "ninhada_gatos_10_sofa.jpg",
     "url": "/static/darkplanner_pets/ninhada_gatos_10_sofa.jpg",
-    "timestamp": 1795524284
+    "dp_original": "51_Foto_de_ninhada_de_4_gatinhos_pequeninos_sentadinh.jpg"
   },
   {
     "nome": "ninhada_caes_01_gramado",
@@ -405,7 +405,7 @@
     "prompt": "Foto encantadora de uma ninhada com 4 filhotes de cachorrinho vira-lata caramelo e preto sentados juntos na grama verdinha, orelhinhas caídas e rabinhos abanando",
     "arquivo": "ninhada_caes_01_gramado.jpg",
     "url": "/static/darkplanner_pets/ninhada_caes_01_gramado.jpg",
-    "timestamp": 1795524313
+    "dp_original": "52_Foto_encantadora_de_uma_ninhada_com_4_filhotes_de.jpg"
   },
   {
     "nome": "ninhada_caes_02_cesto",
@@ -413,7 +413,7 @@
     "prompt": "Foto de ninhada de 5 filhotinhos de cachorro dormindo amontoados em um cesto forrado com tecido xadrez vermelho, focinhos pretos reluzentes",
     "arquivo": "ninhada_caes_02_cesto.jpg",
     "url": "/static/darkplanner_pets/ninhada_caes_02_cesto.jpg",
-    "timestamp": 1795524333
+    "dp_original": "53_Foto_de_ninhada_de_5_filhotinhos_de_cachorro_dormi.jpg"
   },
   {
     "nome": "ninhada_caes_03_golden_filhotes",
@@ -421,7 +421,7 @@
     "prompt": "Foto de 4 filhotes de golden retriever bem pequenos e gordinhos de pelos dourados aconchegados juntos em um tapete fofo, muita ternura",
     "arquivo": "ninhada_caes_03_golden_filhotes.jpg",
     "url": "/static/darkplanner_pets/ninhada_caes_03_golden_filhotes.jpg",
-    "timestamp": 1795524353
+    "dp_original": "54_Foto_de_4_filhotes_de_golden_retriever_bem_pequeno.jpg"
   },
   {
     "nome": "ninhada_caes_04_poodle_fofos",
@@ -429,7 +429,7 @@
     "prompt": "Foto de ninhada de 4 cachorrinhos filhotes de poodle/bichon como bolinhas de algodão brancas e bege brincando juntos",
     "arquivo": "ninhada_caes_04_poodle_fofos.jpg",
     "url": "/static/darkplanner_pets/ninhada_caes_04_poodle_fofos.jpg",
-    "timestamp": 1795524378
+    "dp_original": "55_Foto_de_ninhada_de_4_cachorrinhos_filhotes_de_pood.jpg"
   },
   {
     "nome": "ninhada_caes_05_beagles_filhotes",
@@ -437,6 +437,126 @@
     "prompt": "Foto de 4 filhotes de beagle gordinhos de orelhas compridas sentados juntos lado a lado olhando curiosos para a câmera",
     "arquivo": "ninhada_caes_05_beagles_filhotes.jpg",
     "url": "/static/darkplanner_pets/ninhada_caes_05_beagles_filhotes.jpg",
-    "timestamp": 1795524399
+    "dp_original": "56_Foto_de_4_filhotes_de_beagle_gordinhos_de_orelhas.jpg"
+  },
+  {
+    "nome": "ninhada_caes_06_vira_latinhas",
+    "categoria": "ninhada_caes",
+    "prompt": "Foto de ninhada de 5 cachorrinhos vira-latas de pelagens diferentes (preto com branco, manchado, caramelo e chocolate) juntos numa manta amarela",
+    "arquivo": "ninhada_caes_06_vira_latinhas.jpg",
+    "url": "/static/darkplanner_pets/ninhada_caes_06_vira_latinhas.jpg",
+    "dp_original": "57_Foto_de_ninhada_de_5_cachorrinhos_vira-latas_de_pe.jpg"
+  },
+  {
+    "nome": "ninhada_caes_07_pastor_filhotes",
+    "categoria": "ninhada_caes",
+    "prompt": "Foto de 4 filhotes de cão pastor alemão pequenos de patinhas gordinhas e orelhinhas dobradas juntos em tapete marrom",
+    "arquivo": "ninhada_caes_07_pastor_filhotes.jpg",
+    "url": "/static/darkplanner_pets/ninhada_caes_07_pastor_filhotes.jpg",
+    "dp_original": "58_Foto_de_4_filhotes_de_cão_pastor_alemão_pequenos_d.jpg"
+  },
+  {
+    "nome": "ninhada_caes_08_labradores",
+    "categoria": "ninhada_caes",
+    "prompt": "Foto de ninhada de 4 filhotes de labrador (dois amarelos e dois pretos) abraçadinhos dormindo juntos, cena emocionante",
+    "arquivo": "ninhada_caes_08_labradores.jpg",
+    "url": "/static/darkplanner_pets/ninhada_caes_08_labradores.jpg",
+    "dp_original": "59_Foto_de_ninhada_de_4_filhotes_de_labrador_(dois_am.jpg"
+  },
+  {
+    "nome": "ninhada_caes_09_dormindo",
+    "categoria": "ninhada_caes",
+    "prompt": "Foto de close de 5 filhotinhos de cão de 30 dias todos dormindo em pilha sobre um edredom aconchegante, bochechas fofas",
+    "arquivo": "ninhada_caes_09_dormindo.jpg",
+    "url": "/static/darkplanner_pets/ninhada_caes_09_dormindo.jpg",
+    "dp_original": "60_Foto_de_close_de_5_filhotinhos_de_cão_de_30_dias_t.jpg"
+  },
+  {
+    "nome": "ninhada_caes_10_brincalhoes",
+    "categoria": "ninhada_caes",
+    "prompt": "Foto de 4 filhotes de cachorrinho brincalhões com linguinhas de fora sentados juntos em um fundo de estúdio claro e iluminado",
+    "arquivo": "ninhada_caes_10_brincalhoes.jpg",
+    "url": "/static/darkplanner_pets/ninhada_caes_10_brincalhoes.jpg",
+    "dp_original": "61_Foto_de_4_filhotes_de_cachorrinho_brincalhões_com.jpg"
+  },
+  {
+    "nome": "ave_01_calopsita_amarela",
+    "categoria": "ave",
+    "prompt": "Foto nítida em alta definição de uma calopsita doméstica amarela com crista empinada e bochechas alaranjadas brilhantes, pousada em galho natural",
+    "arquivo": "ave_01_calopsita_amarela.jpg",
+    "url": "/static/darkplanner_pets/ave_01_calopsita_amarela.jpg",
+    "dp_original": "62_Foto_nítida_em_alta_definição_de_uma_calopsita_dom.jpg"
+  },
+  {
+    "nome": "ave_02_calopsita_cinza",
+    "categoria": "ave",
+    "prompt": "Foto de calopsita doméstica cinza e branca com topete amarelo elegante e bochechas cor de pêssego, olhar curioso, iluminação de estúdio",
+    "arquivo": "ave_02_calopsita_cinza.jpg",
+    "url": "/static/darkplanner_pets/ave_02_calopsita_cinza.jpg",
+    "dp_original": "63_Foto_de_calopsita_doméstica_cinza_e_branca_com_top.jpg"
+  },
+  {
+    "nome": "ave_03_periquito_verde",
+    "categoria": "ave",
+    "prompt": "Foto de lindo periquito australiano doméstico verde claro com bochechas azuis e listras pretas nas asas, penas perfeitas e brilhantes",
+    "arquivo": "ave_03_periquito_verde.jpg",
+    "url": "/static/darkplanner_pets/ave_03_periquito_verde.jpg",
+    "dp_original": "64_Foto_de_lindo_periquito_australiano_doméstico_verd.jpg"
+  },
+  {
+    "nome": "ave_04_periquito_azul",
+    "categoria": "ave",
+    "prompt": "Foto de periquito australiano azul celeste vibrante com peito branco e máscara amarela, bico limpo, foco macro nas penas",
+    "arquivo": "ave_04_periquito_azul.jpg",
+    "url": "/static/darkplanner_pets/ave_04_periquito_azul.jpg",
+    "dp_original": "65_Foto_de_periquito_australiano_azul_celeste_vibrant.jpg"
+  },
+  {
+    "nome": "ave_05_canario_belga_amarelo",
+    "categoria": "ave",
+    "prompt": "Foto de belo canário belga doméstico amarelo canário intenso com plumagem perfeita e olhos negros expressivos, pousado em poleiro",
+    "arquivo": "ave_05_canario_belga_amarelo.jpg",
+    "url": "/static/darkplanner_pets/ave_05_canario_belga_amarelo.jpg",
+    "dp_original": "66_Foto_de_belo_canário_belga_doméstico_amarelo_canár.jpg"
+  },
+  {
+    "nome": "ave_06_canario_da_terra",
+    "categoria": "ave",
+    "prompt": "Foto de canário da terra doméstico legalizado com peito alaranjado e dorso esverdeado, canto alegre, nitidez profissional",
+    "arquivo": "ave_06_canario_da_terra.jpg",
+    "url": "/static/darkplanner_pets/ave_06_canario_da_terra.jpg",
+    "dp_original": "67_Foto_de_canário_da_terra_doméstico_legalizado_com.jpg"
+  },
+  {
+    "nome": "ave_07_agapornis_fisher",
+    "categoria": "ave",
+    "prompt": "Foto de pássaro agapornis (inseparável) colorido com cabeça laranja avermelhada e corpo verde esmeralda, olhos redondos expressivos",
+    "arquivo": "ave_07_agapornis_fisher.jpg",
+    "url": "/static/darkplanner_pets/ave_07_agapornis_fisher.jpg",
+    "dp_original": "68_Foto_de_pássaro_agapornis_(inseparável)_colorido_c.jpg"
+  },
+  {
+    "nome": "ave_08_agapornis_azul",
+    "categoria": "ave",
+    "prompt": "Foto de pássaro agapornis azul pastel com máscara branca e bico cinza, penas impecáveis e brilhantes, estúdio de fotografia de aves",
+    "arquivo": "ave_08_agapornis_azul.jpg",
+    "url": "/static/darkplanner_pets/ave_08_agapornis_azul.jpg",
+    "dp_original": "69_Foto_de_pássaro_agapornis_azul_pastel_com_máscara.jpg"
+  },
+  {
+    "nome": "ave_09_diamante_de_gould",
+    "categoria": "ave",
+    "prompt": "Foto deslumbrante de um pássaro diamante de gould doméstico multicolorido com cabeça vermelha, peito roxo e dorso verde limão",
+    "arquivo": "ave_09_diamante_de_gould.jpg",
+    "url": "/static/darkplanner_pets/ave_09_diamante_de_gould.jpg",
+    "dp_original": "70_Foto_deslumbrante_de_um_pássaro_diamante_de_gould.jpg"
+  },
+  {
+    "nome": "ave_10_papagaio_domestico",
+    "categoria": "ave",
+    "prompt": "Foto de papagaio doméstico legalizado verde com detalhes em azul e amarelo na testa, olhar inteligente e penas vívidas",
+    "arquivo": "ave_10_papagaio_domestico.jpg",
+    "url": "/static/darkplanner_pets/ave_10_papagaio_domestico.jpg",
+    "dp_original": "71_Foto_de_papagaio_doméstico_legalizado_verde_com_de.jpg"
   }
 ]
