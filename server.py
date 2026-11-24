@@ -424,6 +424,46 @@ def init_db():
     # LGPD: limpa telefones de registros já inativos/encerrados
     cur.execute("UPDATE alertas SET contato = '' WHERE ativo = 0 AND contato IS NOT NULL AND contato != ''")
 
+    # Sincronização dos 45 parceiros comerciais e limpeza de usuários fictícios
+    cur.execute("DELETE FROM usuarios WHERE autor_token LIKE 'token_ficticio%'")
+    cur.execute("SELECT COUNT(*) FROM parceiros WHERE ativo = 1")
+    count_parc = cur.fetchone()[0]
+    if count_parc < 45:
+        caminho_cat = os.path.join(os.path.dirname(__file__), "static", "darkplanner_parceiros_completos.json")
+        if os.path.exists(caminho_cat):
+            try:
+                with open(caminho_cat, "r", encoding="utf-8") as f_cat:
+                    parcs_cat = json.load(f_cat)
+                    cur.execute("DELETE FROM parceiros")
+                    for idx_p, p in enumerate(parcs_cat):
+                        lat = p.get('posicao_mapa', {}).get('lat') or (-24.9570 + (idx_p * 0.002 % 0.04 - 0.02))
+                        lng = p.get('posicao_mapa', {}).get('lng') or (-53.4580 + (idx_p * 0.003 % 0.04 - 0.02))
+                        cur.execute("""
+                            INSERT INTO parceiros (
+                                id, nome, categoria, subtitulo, descricao, bairro, endereco, cidade,
+                                lat, lng, telefone_whatsapp, logo_url, foto_capa, selo_tipo, destaque_esteira, ativo, ordem
+                            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1, ?)
+                        """, (
+                            idx_p + 1,
+                            p.get('nome', ''),
+                            p.get('categoria', 'pet_vet'),
+                            p.get('subtitulo', ''),
+                            p.get('descricao', ''),
+                            p.get('bairro', 'Centro'),
+                            p.get('endereco', ''),
+                            'Cascavel',
+                            lat,
+                            lng,
+                            p.get('telefone', ''),
+                            p.get('logo_url', ''),
+                            p.get('banner_url', ''),
+                            'ouro',
+                            1,
+                            idx_p + 1
+                        ))
+            except Exception as e_cat:
+                print("Erro ao sincronizar catalogo de parceiros:", e_cat)
+
     conn.commit()
     conn.close()
 
@@ -1009,7 +1049,7 @@ def cockpit_metricas():
     return jsonify({
         "ok": True,
         "cidade": cidade,
-        "total_perfis": max(total_usuarios_db, 70),
+        "total_perfis": total_usuarios_db,
         "perfis_cadastrados_app": total_usuarios_db,
         "animais_perdidos": int(row_alertas.get("pets_desaparecidos") or 0),
         "animais_adocao": int(row_alertas.get("pets_adocao") or 0),
@@ -1726,59 +1766,46 @@ def atualizar_status_pet(pet_id):
 
 @app.route("/api/testadores", methods=["GET"])
 def listar_testadores():
-    """Retorna a escala e rotas dos 4 testadores de campo piloto de Cascavel."""
+    """Retorna a escala e rotas dos testadores de campo oficiais de Cascavel (Equipe Real)."""
     testadores = [
         {
-            "id": "testador_01_lucas",
-            "nome": "Lucas Martins",
+            "id": "testador_01_rigo",
+            "nome": "Rigo",
             "codigo": "TESTADOR-01",
-            "funcao": "Patrulha Rápida (Centro / Neva)",
+            "funcao": "Direção Geral & Operações de Campo",
             "status": "online",
             "bairro_base": "Centro",
             "lat": -24.9570,
             "lng": -53.4580,
-            "foto_url": "/static/darkplanner_pessoas/homem_02_lucas.jpg",
-            "whatsapp": "45998223344",
-            "rotas_frequentes": ["Rua Paraná", "Rua Rio de Janeiro", "Rua Cuiabá", "Rua Salgado Filho"]
+            "foto_url": "/static/testadores/rigo.png",
+            "whatsapp": "45999990000",
+            "rotas_frequentes": ["Av. Brasil", "Rua Paraná", "Rua Rio de Janeiro", "Centro"]
         },
         {
-            "id": "testadora_02_camila",
-            "nome": "Camila Rocha",
-            "codigo": "TESTADORA-02",
-            "funcao": "Monitoramento Norte (Coqueiral / Cancelli)",
+            "id": "testador_02_andre",
+            "nome": "André",
+            "codigo": "TESTADOR-02",
+            "funcao": "Coordenação de Campo & Monitoramento",
             "status": "online",
             "bairro_base": "Coqueiral",
             "lat": -24.9490,
             "lng": -53.4760,
-            "foto_url": "/static/darkplanner_pessoas/mulher_02_camila.jpg",
-            "whatsapp": "45999822030",
-            "rotas_frequentes": ["Av. Brasil Oeste", "Rua Presidente Kennedy", "Rua Antonina", "Rua das Palmeiras"]
+            "foto_url": "/static/testadores/andre.png",
+            "whatsapp": "45999990001",
+            "rotas_frequentes": ["Av. Brasil Oeste", "Presidente Kennedy", "Coqueiral", "Cancelli"]
         },
         {
-            "id": "testador_03_roberto",
-            "nome": "Roberto Silveira",
+            "id": "testador_03_irmao",
+            "nome": "Irmão do Rigo",
             "codigo": "TESTADOR-03",
-            "funcao": "Patrulha Leste (São Cristóvão / Pacaembu)",
+            "funcao": "Apoio Tático & Resposta Rápida",
             "status": "online",
             "bairro_base": "São Cristóvão",
             "lat": -24.9460,
             "lng": -53.4350,
-            "foto_url": "/static/darkplanner_pessoas/homem_03_roberto.jpg",
-            "whatsapp": "45999844050",
-            "rotas_frequentes": ["Av. Brasil Leste", "Rua Jacarezinho", "Rua Doutor Colares"]
-        },
-        {
-            "id": "testadora_04_fernanda",
-            "nome": "Fernanda Lima",
-            "codigo": "TESTADORA-04",
-            "funcao": "Monitoramento Sul (Parque São Paulo / Maria Luiza)",
-            "status": "online",
-            "bairro_base": "Parque São Paulo",
-            "lat": -24.9660,
-            "lng": -53.4490,
-            "foto_url": "/static/darkplanner_pessoas/mulher_03_fernanda.jpg",
-            "whatsapp": "45999833040",
-            "rotas_frequentes": ["Rua Carlos Gomes", "Rua General Osório", "Av. Carlos Gomes"]
+            "foto_url": "/static/testadores/irmao.png",
+            "whatsapp": "45999990002",
+            "rotas_frequentes": ["Av. Brasil Leste", "São Cristóvão", "Pacaembu", "Região Leste"]
         }
     ]
     return jsonify({"ok": True, "testadores": testadores})

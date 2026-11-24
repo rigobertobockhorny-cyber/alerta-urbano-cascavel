@@ -12,9 +12,9 @@
     "endereco": "Rua em Cascavel, Centro",
     "cidade": "Cascavel",
     "telefone": "(45) 99801-3456",
-    "mensalidade": 250,
-    "status_pagamento": "pendente",
-    "total_pago": 0,
+    "mensalidade": 300.0,
+    "status_pagamento": "pago",
+    "total_pago": 300.0,
     "logo_url": "/static/parceiros/pet_vet/pet_vet_01_vv/logo.png",
     "banner_url": "/static/parceiros/pet_vet/pet_vet_01_vv/banner.png",
     "destaque_esteira": 1,
@@ -44,7 +44,9 @@
         "tag_desconto": "25% OFF",
         "foto_url": "/static/parceiros/pet_vet/pet_vet_01_vv/produtos/produto_02.png"
       }
-    ]
+    ],
+    "dia_vencimento": 10,
+    "vencimento": "10/12/2026"
   },
   {
     "id": "parc_02",
@@ -59,9 +61,9 @@
     "endereco": "Rua em Cascavel, Cancelli",
     "cidade": "Cascavel",
     "telefone": "(45) 99802-3456",
-    "mensalidade": 350,
+    "mensalidade": 300.0,
     "status_pagamento": "pago",
-    "total_pago": 1050,
+    "total_pago": 300.0,
     "logo_url": "/static/parceiros/pet_vet/pet_vet_02_sf/logo.png",
     "banner_url": "/static/parceiros/pet_vet/pet_vet_02_sf/banner.png",
     "destaque_esteira": 1,
@@ -91,7 +93,9 @@
         "tag_desconto": "27% OFF",
         "foto_url": "/static/parceiros/pet_vet/pet_vet_02_sf/produtos/produto_02.png"
       }
-    ]
+    ],
+    "dia_vencimento": 10,
+    "vencimento": "10/12/2026"
   },
   {
     "id": "parc_03",
@@ -106,9 +110,9 @@
     "endereco": "Rua em Cascavel, Coqueiral",
     "cidade": "Cascavel",
     "telefone": "(45) 99803-3456",
-    "mensalidade": 250,
-    "status_pagamento": "pendente",
-    "total_pago": 0,
+    "mensalidade": 300.0,
+    "status_pagamento": "pago",
+    "total_pago": 300.0,
     "logo_url": "/static/parceiros/pet_vet/pet_vet_03_cv/logo.png",
     "banner_url": "/static/parceiros/pet_vet/pet_vet_03_cv/banner.png",
     "destaque_esteira": 1,
@@ -138,7 +142,9 @@
         "tag_desconto": "20% OFF",
         "foto_url": "/static/parceiros/pet_vet/pet_vet_03_cv/produtos/produto_02.png"
       }
-    ]
+    ],
+    "dia_vencimento": 10,
+    "vencimento": "10/12/2026"
   },
   {
     "id": "parc_04",
@@ -153,9 +159,9 @@
     "endereco": "Rua em Cascavel, Neva",
     "cidade": "Cascavel",
     "telefone": "(45) 99804-3456",
-    "mensalidade": 250,
+    "mensalidade": 300.0,
     "status_pagamento": "pago",
-    "total_pago": 750,
+    "total_pago": 300.0,
     "logo_url": "/static/parceiros/pet_vet/pet_vet_04_ea/logo.png",
     "banner_url": "/static/parceiros/pet_vet/pet_vet_04_ea/banner.png",
     "destaque_esteira": 1,
@@ -185,7 +191,9 @@
         "tag_desconto": "34% OFF",
         "foto_url": "/static/parceiros/pet_vet/pet_vet_04_ea/produtos/produto_02.png"
       }
-    ]
+    ],
+    "dia_vencimento": 10,
+    "vencimento": "10/12/2026"
   },
   {
     "id": "parc_05",
@@ -200,9 +208,9 @@
     "endereco": "Rua em Cascavel, São Cristóvão",
     "cidade": "Cascavel",
     "telefone": "(45) 99805-3456",
-    "mensalidade": 250,
-    "status_pagamento": "pendente",
-    "total_pago": 0,
+    "mensalidade": 300.0,
+    "status_pagamento": "pago",
+    "total_pago": 300.0,
     "logo_url": "/static/parceiros/pet_vet/pet_vet_05_pv/logo.png",
     "banner_url": "/static/parceiros/pet_vet/pet_vet_05_pv/banner.png",
     "destaque_esteira": 1,
@@ -232,7 +240,9 @@
         "tag_desconto": "28% OFF",
         "foto_url": "/static/parceiros/pet_vet/pet_vet_05_pv/produtos/produto_02.png"
       }
-    ]
+    ],
+    "dia_vencimento": 10,
+    "vencimento": "10/12/2026"
   },
   {
     "id": "parc_06",
@@ -247,9 +257,9 @@
     "endereco": "Rua em Cascavel, Centro",
     "cidade": "Cascavel",
     "telefone": "(45) 99806-3456",
-    "mensalidade": 200,
+    "mensalidade": 300.0,
     "status_pagamento": "pago",
-    "total_pago": 600,
+    "total_pago": 300.0,
     "logo_url": "/static/parceiros/pet_shop/pet_shop_01_bm/logo.png",
     "banner_url": "/static/parceiros/pet_shop/pet_shop_01_bm/banner.png",
     "destaque_esteira": 1,
@@ -279,7 +289,9 @@
         "tag_desconto": "22% OFF",
         "foto_url": "/static/parceiros/pet_shop/pet_shop_01_bm/produtos/produto_02.png"
       }
-    ]
+    ],
+    "dia_vencimento": 10,
+    "vencimento": "10/12/2026"
   },
   {
     "id": "parc_07",
@@ -294,9 +306,9 @@
     "endereco": "Rua em Cascavel, Coqueiral",
     "cidade": "Cascavel",
     "telefone": "(45) 99807-3456",
-    "mensalidade": 200,
-    "status_pagamento": "pendente",
-    "total_pago": 0,
+    "mensalidade": 300.0,
+    "status_pagamento": "pago",
+    "total_pago": 300.0,
     "logo_url": "/static/parceiros/pet_shop/pet_shop_02_mp/logo.png",
     "banner_url": "/static/parceiros/pet_shop/pet_shop_02_mp/banner.png",
     "destaque_esteira": 1,
@@ -326,7 +338,9 @@
         "tag_desconto": "28% OFF",
         "foto_url": "/static/parceiros/pet_shop/pet_shop_02_mp/produtos/produto_02.png"
       }
-    ]
+    ],
+    "dia_vencimento": 10,
+    "vencimento": "10/12/2026"
   },
   {
     "id": "parc_08",
@@ -341,9 +355,9 @@
     "endereco": "Rua em Cascavel, Parque São Paulo",
     "cidade": "Cascavel",
     "telefone": "(45) 99808-3456",
-    "mensalidade": 200,
+    "mensalidade": 300.0,
     "status_pagamento": "pago",
-    "total_pago": 600,
+    "total_pago": 300.0,
     "logo_url": "/static/parceiros/pet_shop/pet_shop_03_ca/logo.png",
     "banner_url": "/static/parceiros/pet_shop/pet_shop_03_ca/banner.png",
     "destaque_esteira": 1,
@@ -373,7 +387,9 @@
         "tag_desconto": "26% OFF",
         "foto_url": "/static/parceiros/pet_shop/pet_shop_03_ca/produtos/produto_02.png"
       }
-    ]
+    ],
+    "dia_vencimento": 10,
+    "vencimento": "10/12/2026"
   },
   {
     "id": "parc_09",
@@ -388,9 +404,9 @@
     "endereco": "Rua em Cascavel, Santa Cruz",
     "cidade": "Cascavel",
     "telefone": "(45) 99809-3456",
-    "mensalidade": 200,
-    "status_pagamento": "pendente",
-    "total_pago": 0,
+    "mensalidade": 300.0,
+    "status_pagamento": "pago",
+    "total_pago": 300.0,
     "logo_url": "/static/parceiros/pet_shop/pet_shop_04_af/logo.png",
     "banner_url": "/static/parceiros/pet_shop/pet_shop_04_af/banner.png",
     "destaque_esteira": 1,
@@ -420,7 +436,9 @@
         "tag_desconto": "24% OFF",
         "foto_url": "/static/parceiros/pet_shop/pet_shop_04_af/produtos/produto_02.png"
       }
-    ]
+    ],
+    "dia_vencimento": 10,
+    "vencimento": "10/12/2026"
   },
   {
     "id": "parc_10",
@@ -435,9 +453,9 @@
     "endereco": "Rua em Cascavel, Canadá",
     "cidade": "Cascavel",
     "telefone": "(45) 99810-3456",
-    "mensalidade": 200,
+    "mensalidade": 300.0,
     "status_pagamento": "pago",
-    "total_pago": 600,
+    "total_pago": 300.0,
     "logo_url": "/static/parceiros/pet_shop/pet_shop_05_pf/logo.png",
     "banner_url": "/static/parceiros/pet_shop/pet_shop_05_pf/banner.png",
     "destaque_esteira": 1,
@@ -467,7 +485,9 @@
         "tag_desconto": "29% OFF",
         "foto_url": "/static/parceiros/pet_shop/pet_shop_05_pf/produtos/produto_02.png"
       }
-    ]
+    ],
+    "dia_vencimento": 10,
+    "vencimento": "10/12/2026"
   },
   {
     "id": "parc_11",
@@ -482,9 +502,9 @@
     "endereco": "Rua em Cascavel, Centro",
     "cidade": "Cascavel",
     "telefone": "(45) 99811-3456",
-    "mensalidade": 150,
-    "status_pagamento": "pendente",
-    "total_pago": 0,
+    "mensalidade": 300.0,
+    "status_pagamento": "pago",
+    "total_pago": 300.0,
     "logo_url": "/static/parceiros/banho_tosa/banho_tosa_01_gc/logo.png",
     "banner_url": "/static/parceiros/banho_tosa/banho_tosa_01_gc/banner.png",
     "destaque_esteira": 1,
@@ -514,7 +534,9 @@
         "tag_desconto": "33% OFF",
         "foto_url": "/static/parceiros/banho_tosa/banho_tosa_01_gc/produtos/produto_02.png"
       }
-    ]
+    ],
+    "dia_vencimento": 10,
+    "vencimento": "10/12/2026"
   },
   {
     "id": "parc_12",
@@ -529,9 +551,9 @@
     "endereco": "Rua em Cascavel, Neva",
     "cidade": "Cascavel",
     "telefone": "(45) 99812-3456",
-    "mensalidade": 150,
+    "mensalidade": 300.0,
     "status_pagamento": "pago",
-    "total_pago": 450,
+    "total_pago": 300.0,
     "logo_url": "/static/parceiros/banho_tosa/banho_tosa_02_ep/logo.png",
     "banner_url": "/static/parceiros/banho_tosa/banho_tosa_02_ep/banner.png",
     "destaque_esteira": 1,
@@ -561,7 +583,9 @@
         "tag_desconto": "23% OFF",
         "foto_url": "/static/parceiros/banho_tosa/banho_tosa_02_ep/produtos/produto_02.png"
       }
-    ]
+    ],
+    "dia_vencimento": 10,
+    "vencimento": "10/12/2026"
   },
   {
     "id": "parc_13",
@@ -576,9 +600,9 @@
     "endereco": "Rua em Cascavel, Cancelli",
     "cidade": "Cascavel",
     "telefone": "(45) 99813-3456",
-    "mensalidade": 150,
-    "status_pagamento": "pendente",
-    "total_pago": 0,
+    "mensalidade": 300.0,
+    "status_pagamento": "pago",
+    "total_pago": 300.0,
     "logo_url": "/static/parceiros/banho_tosa/banho_tosa_03_cp/logo.png",
     "banner_url": "/static/parceiros/banho_tosa/banho_tosa_03_cp/banner.png",
     "destaque_esteira": 1,
@@ -608,7 +632,9 @@
         "tag_desconto": "22% OFF",
         "foto_url": "/static/parceiros/banho_tosa/banho_tosa_03_cp/produtos/produto_02.png"
       }
-    ]
+    ],
+    "dia_vencimento": 10,
+    "vencimento": "10/12/2026"
   },
   {
     "id": "parc_14",
@@ -623,9 +649,9 @@
     "endereco": "Rua em Cascavel, Country",
     "cidade": "Cascavel",
     "telefone": "(45) 99814-3456",
-    "mensalidade": 150,
+    "mensalidade": 300.0,
     "status_pagamento": "pago",
-    "total_pago": 450,
+    "total_pago": 300.0,
     "logo_url": "/static/parceiros/banho_tosa/banho_tosa_04_sa/logo.png",
     "banner_url": "/static/parceiros/banho_tosa/banho_tosa_04_sa/banner.png",
     "destaque_esteira": 1,
@@ -655,7 +681,9 @@
         "tag_desconto": "30% OFF",
         "foto_url": "/static/parceiros/banho_tosa/banho_tosa_04_sa/produtos/produto_02.png"
       }
-    ]
+    ],
+    "dia_vencimento": 10,
+    "vencimento": "10/12/2026"
   },
   {
     "id": "parc_15",
@@ -670,9 +698,9 @@
     "endereco": "Rua em Cascavel, Maria Luíza",
     "cidade": "Cascavel",
     "telefone": "(45) 99815-3456",
-    "mensalidade": 150,
-    "status_pagamento": "pendente",
-    "total_pago": 0,
+    "mensalidade": 300.0,
+    "status_pagamento": "pago",
+    "total_pago": 300.0,
     "logo_url": "/static/parceiros/banho_tosa/banho_tosa_05_tv/logo.png",
     "banner_url": "/static/parceiros/banho_tosa/banho_tosa_05_tv/banner.png",
     "destaque_esteira": 1,
@@ -702,7 +730,9 @@
         "tag_desconto": "28% OFF",
         "foto_url": "/static/parceiros/banho_tosa/banho_tosa_05_tv/produtos/produto_02.png"
       }
-    ]
+    ],
+    "dia_vencimento": 10,
+    "vencimento": "10/12/2026"
   },
   {
     "id": "parc_16",
@@ -717,9 +747,9 @@
     "endereco": "Rua em Cascavel, Centro",
     "cidade": "Cascavel",
     "telefone": "(45) 99816-3456",
-    "mensalidade": 300,
+    "mensalidade": 300.0,
     "status_pagamento": "pago",
-    "total_pago": 900,
+    "total_pago": 300.0,
     "logo_url": "/static/parceiros/auto_center/auto_center_01_pp/logo.png",
     "banner_url": "/static/parceiros/auto_center/auto_center_01_pp/banner.png",
     "destaque_esteira": 1,
@@ -749,7 +779,9 @@
         "tag_desconto": "33% OFF",
         "foto_url": "/static/parceiros/auto_center/auto_center_01_pp/produtos/produto_02.png"
       }
-    ]
+    ],
+    "dia_vencimento": 10,
+    "vencimento": "10/12/2026"
   },
   {
     "id": "parc_17",
@@ -764,9 +796,9 @@
     "endereco": "Rua em Cascavel, São Cristóvão",
     "cidade": "Cascavel",
     "telefone": "(45) 99817-3456",
-    "mensalidade": 300,
-    "status_pagamento": "pendente",
-    "total_pago": 0,
+    "mensalidade": 300.0,
+    "status_pagamento": "pago",
+    "total_pago": 300.0,
     "logo_url": "/static/parceiros/auto_center/auto_center_02_ce/logo.png",
     "banner_url": "/static/parceiros/auto_center/auto_center_02_ce/banner.png",
     "destaque_esteira": 1,
@@ -796,7 +828,9 @@
         "tag_desconto": "28% OFF",
         "foto_url": "/static/parceiros/auto_center/auto_center_02_ce/produtos/produto_02.png"
       }
-    ]
+    ],
+    "dia_vencimento": 10,
+    "vencimento": "10/12/2026"
   },
   {
     "id": "parc_18",
@@ -811,9 +845,9 @@
     "endereco": "Rua em Cascavel, Coqueiral",
     "cidade": "Cascavel",
     "telefone": "(45) 99818-3456",
-    "mensalidade": 300,
+    "mensalidade": 300.0,
     "status_pagamento": "pago",
-    "total_pago": 900,
+    "total_pago": 300.0,
     "logo_url": "/static/parceiros/auto_center/auto_center_03_f1/logo.png",
     "banner_url": "/static/parceiros/auto_center/auto_center_03_f1/banner.png",
     "destaque_esteira": 1,
@@ -843,7 +877,9 @@
         "tag_desconto": "36% OFF",
         "foto_url": "/static/parceiros/auto_center/auto_center_03_f1/produtos/produto_02.png"
       }
-    ]
+    ],
+    "dia_vencimento": 10,
+    "vencimento": "10/12/2026"
   },
   {
     "id": "parc_19",
@@ -858,9 +894,9 @@
     "endereco": "Rua em Cascavel, Santa Cruz",
     "cidade": "Cascavel",
     "telefone": "(45) 99819-3456",
-    "mensalidade": 300,
-    "status_pagamento": "pendente",
-    "total_pago": 0,
+    "mensalidade": 300.0,
+    "status_pagamento": "pago",
+    "total_pago": 300.0,
     "logo_url": "/static/parceiros/auto_center/auto_center_04_ro/logo.png",
     "banner_url": "/static/parceiros/auto_center/auto_center_04_ro/banner.png",
     "destaque_esteira": 1,
@@ -890,7 +926,9 @@
         "tag_desconto": "GRÁTIS NA TROCA",
         "foto_url": "/static/parceiros/auto_center/auto_center_04_ro/produtos/produto_02.png"
       }
-    ]
+    ],
+    "dia_vencimento": 10,
+    "vencimento": "10/12/2026"
   },
   {
     "id": "parc_20",
@@ -905,9 +943,9 @@
     "endereco": "Rua em Cascavel, Maria Luíza",
     "cidade": "Cascavel",
     "telefone": "(45) 99820-3456",
-    "mensalidade": 300,
+    "mensalidade": 300.0,
     "status_pagamento": "pago",
-    "total_pago": 900,
+    "total_pago": 300.0,
     "logo_url": "/static/parceiros/auto_center/auto_center_05_vp/logo.png",
     "banner_url": "/static/parceiros/auto_center/auto_center_05_vp/banner.png",
     "destaque_esteira": 1,
@@ -937,7 +975,9 @@
         "tag_desconto": "26% OFF",
         "foto_url": "/static/parceiros/auto_center/auto_center_05_vp/produtos/produto_02.png"
       }
-    ]
+    ],
+    "dia_vencimento": 10,
+    "vencimento": "10/12/2026"
   },
   {
     "id": "parc_21",
@@ -952,9 +992,9 @@
     "endereco": "Rua em Cascavel, São Cristóvão",
     "cidade": "Cascavel",
     "telefone": "(45) 99821-3456",
-    "mensalidade": 150,
-    "status_pagamento": "pendente",
-    "total_pago": 0,
+    "mensalidade": 300.0,
+    "status_pagamento": "pago",
+    "total_pago": 300.0,
     "logo_url": "/static/parceiros/borracharia/borracharia_01_sc/logo.png",
     "banner_url": "/static/parceiros/borracharia/borracharia_01_sc/banner.png",
     "destaque_esteira": 1,
@@ -984,7 +1024,9 @@
         "tag_desconto": "40% OFF",
         "foto_url": "/static/parceiros/borracharia/borracharia_01_sc/produtos/produto_02.png"
       }
-    ]
+    ],
+    "dia_vencimento": 10,
+    "vencimento": "10/12/2026"
   },
   {
     "id": "parc_22",
@@ -999,9 +1041,9 @@
     "endereco": "Rua em Cascavel, Coqueiral",
     "cidade": "Cascavel",
     "telefone": "(45) 99822-3456",
-    "mensalidade": 150,
+    "mensalidade": 300.0,
     "status_pagamento": "pago",
-    "total_pago": 450,
+    "total_pago": 300.0,
     "logo_url": "/static/parceiros/borracharia/borracharia_02_bc/logo.png",
     "banner_url": "/static/parceiros/borracharia/borracharia_02_bc/banner.png",
     "destaque_esteira": 1,
@@ -1031,7 +1073,9 @@
         "tag_desconto": "33% OFF",
         "foto_url": "/static/parceiros/borracharia/borracharia_02_bc/produtos/produto_02.png"
       }
-    ]
+    ],
+    "dia_vencimento": 10,
+    "vencimento": "10/12/2026"
   },
   {
     "id": "parc_23",
@@ -1046,9 +1090,9 @@
     "endereco": "Rua em Cascavel, Cascavel Velho",
     "cidade": "Cascavel",
     "telefone": "(45) 99823-3456",
-    "mensalidade": 150,
-    "status_pagamento": "pendente",
-    "total_pago": 0,
+    "mensalidade": 300.0,
+    "status_pagamento": "pago",
+    "total_pago": 300.0,
     "logo_url": "/static/parceiros/borracharia/borracharia_03_bt/logo.png",
     "banner_url": "/static/parceiros/borracharia/borracharia_03_bt/banner.png",
     "destaque_esteira": 1,
@@ -1078,7 +1122,9 @@
         "tag_desconto": "25% OFF",
         "foto_url": "/static/parceiros/borracharia/borracharia_03_bt/produtos/produto_02.png"
       }
-    ]
+    ],
+    "dia_vencimento": 10,
+    "vencimento": "10/12/2026"
   },
   {
     "id": "parc_24",
@@ -1093,9 +1139,9 @@
     "endereco": "Rua em Cascavel, Centro",
     "cidade": "Cascavel",
     "telefone": "(45) 99824-3456",
-    "mensalidade": 150,
+    "mensalidade": 300.0,
     "status_pagamento": "pago",
-    "total_pago": 450,
+    "total_pago": 300.0,
     "logo_url": "/static/parceiros/borracharia/borracharia_04_cc/logo.png",
     "banner_url": "/static/parceiros/borracharia/borracharia_04_cc/banner.png",
     "destaque_esteira": 1,
@@ -1125,7 +1171,9 @@
         "tag_desconto": "33% OFF",
         "foto_url": "/static/parceiros/borracharia/borracharia_04_cc/produtos/produto_02.png"
       }
-    ]
+    ],
+    "dia_vencimento": 10,
+    "vencimento": "10/12/2026"
   },
   {
     "id": "parc_25",
@@ -1140,9 +1188,9 @@
     "endereco": "Rua em Cascavel, Pacaembu",
     "cidade": "Cascavel",
     "telefone": "(45) 99825-3456",
-    "mensalidade": 150,
-    "status_pagamento": "pendente",
-    "total_pago": 0,
+    "mensalidade": 300.0,
+    "status_pagamento": "pago",
+    "total_pago": 300.0,
     "logo_url": "/static/parceiros/borracharia/borracharia_05_br/logo.png",
     "banner_url": "/static/parceiros/borracharia/borracharia_05_br/banner.png",
     "destaque_esteira": 1,
@@ -1172,7 +1220,9 @@
         "tag_desconto": "28% OFF",
         "foto_url": "/static/parceiros/borracharia/borracharia_05_br/produtos/produto_02.png"
       }
-    ]
+    ],
+    "dia_vencimento": 10,
+    "vencimento": "10/12/2026"
   },
   {
     "id": "parc_26",
@@ -1187,9 +1237,9 @@
     "endereco": "Rua em Cascavel, Centro",
     "cidade": "Cascavel",
     "telefone": "(45) 99826-3456",
-    "mensalidade": 350,
+    "mensalidade": 300.0,
     "status_pagamento": "pago",
-    "total_pago": 1050,
+    "total_pago": 300.0,
     "logo_url": "/static/parceiros/posto/posto_01_pi/logo.png",
     "banner_url": "/static/parceiros/posto/posto_01_pi/banner.png",
     "destaque_esteira": 1,
@@ -1219,7 +1269,9 @@
         "tag_desconto": "43% OFF",
         "foto_url": "/static/parceiros/posto/posto_01_pi/produtos/produto_02.png"
       }
-    ]
+    ],
+    "dia_vencimento": 10,
+    "vencimento": "10/12/2026"
   },
   {
     "id": "parc_27",
@@ -1234,9 +1286,9 @@
     "endereco": "Rua em Cascavel, Cascavel Velho",
     "cidade": "Cascavel",
     "telefone": "(45) 99827-3456",
-    "mensalidade": 350,
-    "status_pagamento": "pendente",
-    "total_pago": 0,
+    "mensalidade": 300.0,
+    "status_pagamento": "pago",
+    "total_pago": 300.0,
     "logo_url": "/static/parceiros/posto/posto_02_tc/logo.png",
     "banner_url": "/static/parceiros/posto/posto_02_tc/banner.png",
     "destaque_esteira": 1,
@@ -1266,7 +1318,9 @@
         "tag_desconto": "20% OFF",
         "foto_url": "/static/parceiros/posto/posto_02_tc/produtos/produto_02.png"
       }
-    ]
+    ],
+    "dia_vencimento": 10,
+    "vencimento": "10/12/2026"
   },
   {
     "id": "parc_28",
@@ -1281,9 +1335,9 @@
     "endereco": "Rua em Cascavel, Centro",
     "cidade": "Cascavel",
     "telefone": "(45) 99828-3456",
-    "mensalidade": 350,
+    "mensalidade": 300.0,
     "status_pagamento": "pago",
-    "total_pago": 1050,
+    "total_pago": 300.0,
     "logo_url": "/static/parceiros/posto/posto_03_pc/logo.png",
     "banner_url": "/static/parceiros/posto/posto_03_pc/banner.png",
     "destaque_esteira": 1,
@@ -1313,7 +1367,9 @@
         "tag_desconto": "26% OFF",
         "foto_url": "/static/parceiros/posto/posto_03_pc/produtos/produto_02.png"
       }
-    ]
+    ],
+    "dia_vencimento": 10,
+    "vencimento": "10/12/2026"
   },
   {
     "id": "parc_29",
@@ -1328,9 +1384,9 @@
     "endereco": "Rua em Cascavel, Cancelli",
     "cidade": "Cascavel",
     "telefone": "(45) 99829-3456",
-    "mensalidade": 350,
-    "status_pagamento": "pendente",
-    "total_pago": 0,
+    "mensalidade": 300.0,
+    "status_pagamento": "pago",
+    "total_pago": 300.0,
     "logo_url": "/static/parceiros/posto/posto_04_ro/logo.png",
     "banner_url": "/static/parceiros/posto/posto_04_ro/banner.png",
     "destaque_esteira": 1,
@@ -1360,7 +1416,9 @@
         "tag_desconto": "33% OFF",
         "foto_url": "/static/parceiros/posto/posto_04_ro/produtos/produto_02.png"
       }
-    ]
+    ],
+    "dia_vencimento": 10,
+    "vencimento": "10/12/2026"
   },
   {
     "id": "parc_30",
@@ -1375,9 +1433,9 @@
     "endereco": "Rua em Cascavel, Pacaembu",
     "cidade": "Cascavel",
     "telefone": "(45) 99830-3456",
-    "mensalidade": 350,
+    "mensalidade": 300.0,
     "status_pagamento": "pago",
-    "total_pago": 1050,
+    "total_pago": 300.0,
     "logo_url": "/static/parceiros/posto/posto_05_pd/logo.png",
     "banner_url": "/static/parceiros/posto/posto_05_pd/banner.png",
     "destaque_esteira": 1,
@@ -1407,7 +1465,9 @@
         "tag_desconto": "28% OFF",
         "foto_url": "/static/parceiros/posto/posto_05_pd/produtos/produto_02.png"
       }
-    ]
+    ],
+    "dia_vencimento": 10,
+    "vencimento": "10/12/2026"
   },
   {
     "id": "parc_31",
@@ -1422,9 +1482,9 @@
     "endereco": "Rua em Cascavel, Centro",
     "cidade": "Cascavel",
     "telefone": "(45) 99831-3456",
-    "mensalidade": 180,
-    "status_pagamento": "pendente",
-    "total_pago": 0,
+    "mensalidade": 300.0,
+    "status_pagamento": "pago",
+    "total_pago": 300.0,
     "logo_url": "/static/parceiros/moto_mecanica/moto_mecanica_01_dr/logo.png",
     "banner_url": "/static/parceiros/moto_mecanica/moto_mecanica_01_dr/banner.png",
     "destaque_esteira": 1,
@@ -1454,7 +1514,9 @@
         "tag_desconto": "22% OFF",
         "foto_url": "/static/parceiros/moto_mecanica/moto_mecanica_01_dr/produtos/produto_02.png"
       }
-    ]
+    ],
+    "dia_vencimento": 10,
+    "vencimento": "10/12/2026"
   },
   {
     "id": "parc_32",
@@ -1469,9 +1531,9 @@
     "endereco": "Rua em Cascavel, São Cristóvão",
     "cidade": "Cascavel",
     "telefone": "(45) 99832-3456",
-    "mensalidade": 180,
+    "mensalidade": 300.0,
     "status_pagamento": "pago",
-    "total_pago": 540,
+    "total_pago": 300.0,
     "logo_url": "/static/parceiros/moto_mecanica/moto_mecanica_02_cm/logo.png",
     "banner_url": "/static/parceiros/moto_mecanica/moto_mecanica_02_cm/banner.png",
     "destaque_esteira": 1,
@@ -1501,7 +1563,9 @@
         "tag_desconto": "20% OFF",
         "foto_url": "/static/parceiros/moto_mecanica/moto_mecanica_02_cm/produtos/produto_02.png"
       }
-    ]
+    ],
+    "dia_vencimento": 10,
+    "vencimento": "10/12/2026"
   },
   {
     "id": "parc_33",
@@ -1516,9 +1580,9 @@
     "endereco": "Rua em Cascavel, Coqueiral",
     "cidade": "Cascavel",
     "telefone": "(45) 99833-3456",
-    "mensalidade": 180,
-    "status_pagamento": "pendente",
-    "total_pago": 0,
+    "mensalidade": 300.0,
+    "status_pagamento": "pago",
+    "total_pago": 300.0,
     "logo_url": "/static/parceiros/moto_mecanica/moto_mecanica_03_gm/logo.png",
     "banner_url": "/static/parceiros/moto_mecanica/moto_mecanica_03_gm/banner.png",
     "destaque_esteira": 1,
@@ -1548,7 +1612,9 @@
         "tag_desconto": "30% OFF",
         "foto_url": "/static/parceiros/moto_mecanica/moto_mecanica_03_gm/produtos/produto_02.png"
       }
-    ]
+    ],
+    "dia_vencimento": 10,
+    "vencimento": "10/12/2026"
   },
   {
     "id": "parc_34",
@@ -1563,9 +1629,9 @@
     "endereco": "Rua em Cascavel, Santa Cruz",
     "cidade": "Cascavel",
     "telefone": "(45) 99834-3456",
-    "mensalidade": 180,
+    "mensalidade": 300.0,
     "status_pagamento": "pago",
-    "total_pago": 540,
+    "total_pago": 300.0,
     "logo_url": "/static/parceiros/moto_mecanica/moto_mecanica_04_sm/logo.png",
     "banner_url": "/static/parceiros/moto_mecanica/moto_mecanica_04_sm/banner.png",
     "destaque_esteira": 1,
@@ -1595,7 +1661,9 @@
         "tag_desconto": "18% OFF",
         "foto_url": "/static/parceiros/moto_mecanica/moto_mecanica_04_sm/produtos/produto_02.png"
       }
-    ]
+    ],
+    "dia_vencimento": 10,
+    "vencimento": "10/12/2026"
   },
   {
     "id": "parc_35",
@@ -1610,9 +1678,9 @@
     "endereco": "Rua em Cascavel, Cancelli",
     "cidade": "Cascavel",
     "telefone": "(45) 99835-3456",
-    "mensalidade": 180,
-    "status_pagamento": "pendente",
-    "total_pago": 0,
+    "mensalidade": 300.0,
+    "status_pagamento": "pago",
+    "total_pago": 300.0,
     "logo_url": "/static/parceiros/moto_mecanica/moto_mecanica_05_om/logo.png",
     "banner_url": "/static/parceiros/moto_mecanica/moto_mecanica_05_om/banner.png",
     "destaque_esteira": 1,
@@ -1642,7 +1710,9 @@
         "tag_desconto": "27% OFF",
         "foto_url": "/static/parceiros/moto_mecanica/moto_mecanica_05_om/produtos/produto_02.png"
       }
-    ]
+    ],
+    "dia_vencimento": 10,
+    "vencimento": "10/12/2026"
   },
   {
     "id": "parc_36",
@@ -1657,9 +1727,9 @@
     "endereco": "Rua em Cascavel, Centro",
     "cidade": "Cascavel",
     "telefone": "(45) 99836-3456",
-    "mensalidade": 250,
+    "mensalidade": 300.0,
     "status_pagamento": "pago",
-    "total_pago": 750,
+    "total_pago": 300.0,
     "logo_url": "/static/parceiros/carro_mecanica/carro_mecanica_01_pa/logo.png",
     "banner_url": "/static/parceiros/carro_mecanica/carro_mecanica_01_pa/banner.png",
     "destaque_esteira": 1,
@@ -1689,7 +1759,9 @@
         "tag_desconto": "41% OFF",
         "foto_url": "/static/parceiros/carro_mecanica/carro_mecanica_01_pa/produtos/produto_02.png"
       }
-    ]
+    ],
+    "dia_vencimento": 10,
+    "vencimento": "10/12/2026"
   },
   {
     "id": "parc_37",
@@ -1704,9 +1776,9 @@
     "endereco": "Rua em Cascavel, Cancelli",
     "cidade": "Cascavel",
     "telefone": "(45) 99837-3456",
-    "mensalidade": 250,
-    "status_pagamento": "pendente",
-    "total_pago": 0,
+    "mensalidade": 300.0,
+    "status_pagamento": "pago",
+    "total_pago": 300.0,
     "logo_url": "/static/parceiros/carro_mecanica/carro_mecanica_02_mc/logo.png",
     "banner_url": "/static/parceiros/carro_mecanica/carro_mecanica_02_mc/banner.png",
     "destaque_esteira": 1,
@@ -1736,7 +1808,9 @@
         "tag_desconto": "28% OFF",
         "foto_url": "/static/parceiros/carro_mecanica/carro_mecanica_02_mc/produtos/produto_02.png"
       }
-    ]
+    ],
+    "dia_vencimento": 10,
+    "vencimento": "10/12/2026"
   },
   {
     "id": "parc_38",
@@ -1751,9 +1825,9 @@
     "endereco": "Rua em Cascavel, Neva",
     "cidade": "Cascavel",
     "telefone": "(45) 99838-3456",
-    "mensalidade": 250,
+    "mensalidade": 300.0,
     "status_pagamento": "pago",
-    "total_pago": 750,
+    "total_pago": 300.0,
     "logo_url": "/static/parceiros/carro_mecanica/carro_mecanica_03_mt/logo.png",
     "banner_url": "/static/parceiros/carro_mecanica/carro_mecanica_03_mt/banner.png",
     "destaque_esteira": 1,
@@ -1783,7 +1857,9 @@
         "tag_desconto": "20% OFF",
         "foto_url": "/static/parceiros/carro_mecanica/carro_mecanica_03_mt/produtos/produto_02.png"
       }
-    ]
+    ],
+    "dia_vencimento": 10,
+    "vencimento": "10/12/2026"
   },
   {
     "id": "parc_39",
@@ -1798,9 +1874,9 @@
     "endereco": "Rua em Cascavel, Parque São Paulo",
     "cidade": "Cascavel",
     "telefone": "(45) 99839-3456",
-    "mensalidade": 250,
-    "status_pagamento": "pendente",
-    "total_pago": 0,
+    "mensalidade": 300.0,
+    "status_pagamento": "pago",
+    "total_pago": 300.0,
     "logo_url": "/static/parceiros/carro_mecanica/carro_mecanica_04_cc/logo.png",
     "banner_url": "/static/parceiros/carro_mecanica/carro_mecanica_04_cc/banner.png",
     "destaque_esteira": 1,
@@ -1830,7 +1906,9 @@
         "tag_desconto": "28% OFF",
         "foto_url": "/static/parceiros/carro_mecanica/carro_mecanica_04_cc/produtos/produto_02.png"
       }
-    ]
+    ],
+    "dia_vencimento": 10,
+    "vencimento": "10/12/2026"
   },
   {
     "id": "parc_40",
@@ -1845,9 +1923,9 @@
     "endereco": "Rua em Cascavel, Coqueiral",
     "cidade": "Cascavel",
     "telefone": "(45) 99840-3456",
-    "mensalidade": 250,
+    "mensalidade": 300.0,
     "status_pagamento": "pago",
-    "total_pago": 750,
+    "total_pago": 300.0,
     "logo_url": "/static/parceiros/carro_mecanica/carro_mecanica_05_ga/logo.png",
     "banner_url": "/static/parceiros/carro_mecanica/carro_mecanica_05_ga/banner.png",
     "destaque_esteira": 1,
@@ -1877,7 +1955,9 @@
         "tag_desconto": "25% OFF",
         "foto_url": "/static/parceiros/carro_mecanica/carro_mecanica_05_ga/produtos/produto_02.png"
       }
-    ]
+    ],
+    "dia_vencimento": 10,
+    "vencimento": "10/12/2026"
   },
   {
     "id": "parc_41",
@@ -1892,9 +1972,9 @@
     "endereco": "Rua em Cascavel, Centro",
     "cidade": "Cascavel",
     "telefone": "(45) 99841-3456",
-    "mensalidade": 200,
-    "status_pagamento": "pendente",
-    "total_pago": 0,
+    "mensalidade": 300.0,
+    "status_pagamento": "pago",
+    "total_pago": 300.0,
     "logo_url": "/static/parceiros/alimentacao/alimentacao_01_bc/logo.png",
     "banner_url": "/static/parceiros/alimentacao/alimentacao_01_bc/banner.png",
     "destaque_esteira": 1,
@@ -1924,7 +2004,9 @@
         "tag_desconto": "27% OFF",
         "foto_url": "/static/parceiros/alimentacao/alimentacao_01_bc/produtos/produto_02.png"
       }
-    ]
+    ],
+    "dia_vencimento": 10,
+    "vencimento": "10/12/2026"
   },
   {
     "id": "parc_42",
@@ -1939,9 +2021,9 @@
     "endereco": "Rua em Cascavel, Country",
     "cidade": "Cascavel",
     "telefone": "(45) 99842-3456",
-    "mensalidade": 200,
+    "mensalidade": 300.0,
     "status_pagamento": "pago",
-    "total_pago": 600,
+    "total_pago": 300.0,
     "logo_url": "/static/parceiros/alimentacao/alimentacao_02_pi/logo.png",
     "banner_url": "/static/parceiros/alimentacao/alimentacao_02_pi/banner.png",
     "destaque_esteira": 1,
@@ -1971,7 +2053,9 @@
         "tag_desconto": "26% OFF",
         "foto_url": "/static/parceiros/alimentacao/alimentacao_02_pi/produtos/produto_02.png"
       }
-    ]
+    ],
+    "dia_vencimento": 10,
+    "vencimento": "10/12/2026"
   },
   {
     "id": "parc_43",
@@ -1986,9 +2070,9 @@
     "endereco": "Rua em Cascavel, Centro",
     "cidade": "Cascavel",
     "telefone": "(45) 99843-3456",
-    "mensalidade": 200,
-    "status_pagamento": "pendente",
-    "total_pago": 0,
+    "mensalidade": 300.0,
+    "status_pagamento": "pago",
+    "total_pago": 300.0,
     "logo_url": "/static/parceiros/alimentacao/alimentacao_03_pc/logo.png",
     "banner_url": "/static/parceiros/alimentacao/alimentacao_03_pc/banner.png",
     "destaque_esteira": 1,
@@ -2018,7 +2102,9 @@
         "tag_desconto": "31% OFF",
         "foto_url": "/static/parceiros/alimentacao/alimentacao_03_pc/produtos/produto_02.png"
       }
-    ]
+    ],
+    "dia_vencimento": 10,
+    "vencimento": "10/12/2026"
   },
   {
     "id": "parc_44",
@@ -2033,9 +2119,9 @@
     "endereco": "Rua em Cascavel, Coqueiral",
     "cidade": "Cascavel",
     "telefone": "(45) 99844-3456",
-    "mensalidade": 200,
+    "mensalidade": 300.0,
     "status_pagamento": "pago",
-    "total_pago": 600,
+    "total_pago": 300.0,
     "logo_url": "",
     "banner_url": "",
     "destaque_esteira": 1,
@@ -2047,7 +2133,9 @@
       "bairro": "Coqueiral"
     },
     "produtos": [],
-    "is_manual_slot": true
+    "is_manual_slot": true,
+    "dia_vencimento": 10,
+    "vencimento": "10/12/2026"
   },
   {
     "id": "parc_45",
@@ -2062,9 +2150,9 @@
     "endereco": "Rua em Cascavel, Neva",
     "cidade": "Cascavel",
     "telefone": "(45) 99845-3456",
-    "mensalidade": 200,
-    "status_pagamento": "pendente",
-    "total_pago": 0,
+    "mensalidade": 300.0,
+    "status_pagamento": "pago",
+    "total_pago": 300.0,
     "logo_url": "",
     "banner_url": "",
     "destaque_esteira": 1,
@@ -2076,6 +2164,8 @@
       "bairro": "Neva"
     },
     "produtos": [],
-    "is_manual_slot": true
+    "is_manual_slot": true,
+    "dia_vencimento": 10,
+    "vencimento": "10/12/2026"
   }
 ]

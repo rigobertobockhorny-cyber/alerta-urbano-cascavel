@@ -1234,7 +1234,7 @@
         💼 Financeiro
       </button>
       <button type="button" class="switch-btn" onclick="trocarVisao('segmentos')">
-        🎯 Radar Metas
+        🏢 Radar Segmentos
       </button>
       <button type="button" class="switch-btn" onclick="trocarVisao('pets')">
         🐾 Gestão Pets
@@ -1283,8 +1283,8 @@
         <!-- Total de Perfis -->
         <div class="fin-stat-card" style="border-left: 4px solid #38BDF8; min-height:95px; height:auto;">
           <span class="fin-stat-label">👥 Perfis Cadastrados</span>
-          <span class="fin-stat-num" id="metric-perfis" style="color:#38BDF8;">70</span>
-          <span class="fin-stat-sub">16 no banco + catálogo</span>
+          <span class="fin-stat-num" id="metric-perfis" style="color:#38BDF8;">0</span>
+          <span class="fin-stat-sub">Cadastros reais no aplicativo</span>
         </div>
 
         <!-- Animais Perdidos -->
@@ -1318,8 +1318,8 @@
         <!-- Faturamento Mensal Parceiros -->
         <div class="fin-stat-card" style="border-left: 4px solid #FED700; min-height:95px; height:auto;">
           <span class="fin-stat-label">💰 Faturamento (MRR)</span>
-          <span class="fin-stat-num" id="metric-mrr" style="color:#FED700;">R$ 10.250</span>
-          <span class="fin-stat-sub">45 empresas oficiais</span>
+          <span class="fin-stat-num" id="metric-mrr" style="color:#FED700;">R$ 13.500,00</span>
+          <span class="fin-stat-sub">45 empresas a R$ 300,00</span>
         </div>
 
       </div>
@@ -1709,9 +1709,9 @@
     <!-- VISAO 3: RADAR DE SEGMENTOS (METAS 5X) -->
     <section id="view-segmentos">
       <div style="background:var(--bg-card); border:1px solid var(--border); border-radius:16px; padding:18px 20px;">
-        <h2 style="font-size:16px; font-weight:900; color:#FFFFFF;">🎯 Estratégia de Captação Exclusiva de Cascavel</h2>
+        <h2 style="font-size:16px; font-weight:900; color:#FFFFFF;">🏢 Catálogo de Parceiros por Segmento em Cascavel</h2>
         <p style="font-size:12px; color:var(--text-muted); margin-top:4px;">
-          Cada segmento possui cota máxima de <strong>5 patrocinadores</strong> para garantir exclusividade e alto valor percebido pelos comerciantes.
+          Distribuição dos 45 estabelecimentos credenciados por nicho comercial e bairros de Cascavel (Mensalidade padrão R$ 300,00).
         </p>
       </div>
 
@@ -1728,16 +1728,13 @@
           <h2>👥 Perfis & Ocorrências</h2>
           <p>Selecione ou <strong>arraste o perfil</strong> diretamente para a rua ou bairro no mapa de Cascavel.</p>
           <div class="profile-filter-tabs">
-            <button type="button" class="prof-tab-btn active" onclick="filtrarPerfisView('todos', this)">Todos (<span id="count-prof-todos">70</span>)</button>
-            <button type="button" class="prof-tab-btn" onclick="filtrarPerfisView('desaparecido', this)">🚨 Perdidos (<span id="count-prof-desap">46</span>)</button>
-            <button type="button" class="prof-tab-btn" onclick="filtrarPerfisView('adocao', this)">🏠 Adoção (<span id="count-prof-adoc">24</span>)</button>
+            <button type="button" class="prof-tab-btn active" onclick="filtrarPerfisView('todos', this)">Todos (<span id="count-prof-todos">0</span>)</button>
+            <button type="button" class="prof-tab-btn" onclick="filtrarPerfisView('desaparecido', this)">🚨 Perdidos (<span id="count-prof-desap">0</span>)</button>
+            <button type="button" class="prof-tab-btn" onclick="filtrarPerfisView('adocao', this)">🏠 Adoção (<span id="count-prof-adoc">0</span>)</button>
             <button type="button" class="prof-tab-btn" onclick="filtrarPerfisView('fixado', this)">📍 No Mapa (<span id="count-prof-mapa">0</span>)</button>
           </div>
 
           <div style="display:flex; flex-direction:column; gap:6px; margin-top:10px;">
-            <button type="button" class="btn-quick-15" onclick="fixarEmLote15Pets()" style="background:#22C55E; color:#FFF; border:none; border-radius:8px; padding:10px 12px; font-weight:900; font-size:11px; width:100%; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:6px; box-shadow:0 0 12px rgba(34,197,94,0.25);">
-              ⚡ Lançar 15 Animais Perdidos nas Vias de Cascavel
-            </button>
             <button type="button" class="btn-new-pet" onclick="abrirDrawerNovoPet()" style="background:#EF4444; color:#FFF; border:none; border-radius:8px; padding:8px 12px; font-weight:800; font-size:10.5px; width:100%; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:6px;">
               ➕ Cadastrar Novo Pet Desaparecido
             </button>
@@ -1974,22 +1971,49 @@
     }
 
     async function carregarParceiros() {
+      // Limpeza de caches legados para forçar catálogo oficial de 45 parceiros a R$ 300
+      localStorage.removeItem('mesa_parceiros_v1');
+      localStorage.removeItem('mesa_parceiros_v2');
+
       try {
         const resp = await fetch('/static/darkplanner_parceiros_completos.json?t=' + Date.now());
         if (resp.ok) {
           parceiros = await resp.json();
-          // Mescla com alterações salvas no localStorage
-          const saved = localStorage.getItem('mesa_parceiros_v2');
+          // Garante padrão executivo: todos os 45 a R$ 300,00 e status PAGO
+          parceiros.forEach(p => {
+            p.mensalidade = 300.0;
+            p.status_pagamento = 'pago';
+            p.total_pago = 300.0;
+            p.dia_vencimento = 10;
+          });
+
+          // Mescla com ajustes manuais de coordenadas salvas no v3
+          const saved = localStorage.getItem('mesa_parceiros_v3');
           if (saved) {
             try {
               const salvos = JSON.parse(saved);
               salvos.forEach(s => {
                 const idx = parceiros.findIndex(p => String(p.id) === String(s.id));
                 if (idx !== -1) {
-                  parceiros[idx] = { ...parceiros[idx], ...s };
+                  if (s.posicao_mapa) parceiros[idx].posicao_mapa = s.posicao_mapa;
+                  if (s.status_pagamento) parceiros[idx].status_pagamento = s.status_pagamento;
                 } else {
                   parceiros.push(s);
                 }
+              });
+            } catch (_) {}
+          }
+        }
+      } catch(e) {
+        console.warn('Erro ao carregar parceiros:', e);
+      }
+
+      renderizarBandejaBaloes();
+      renderizarMarcadoresMapa();
+      atualizarKpisGerais();
+      renderizarTabelaFinanceira();
+      renderizarRadarSegmentos();
+    }
               });
             } catch (_) {}
           }
@@ -2008,7 +2032,7 @@
     }
 
     async function salvarParceiros() {
-      localStorage.setItem('mesa_parceiros_v2', JSON.stringify(parceiros));
+      localStorage.setItem('mesa_parceiros_v3', JSON.stringify(parceiros));
       atualizarKpisGerais();
       try {
         await fetch('/api/mesa/salvar-catalogo', {
@@ -2665,7 +2689,7 @@
         if (resp.ok) {
           const dados = await resp.json();
           const elP = document.getElementById('metric-perfis');
-          if (elP) elP.textContent = dados.total_perfis || 70;
+          if (elP) elP.textContent = (dados.total_perfis !== undefined && dados.total_perfis !== null) ? dados.total_perfis : 0;
           const elPerd = document.getElementById('metric-perdidos');
           if (elPerd) elPerd.textContent = dados.animais_perdidos || 0;
           const elAdoc = document.getElementById('metric-adocao');
@@ -3000,19 +3024,49 @@
       grid.innerHTML = Object.entries(SEGMENTOS_DEF).map(([key, def]) => {
         const empresas = parceiros.filter(p => p.categoria === key);
         const count = empresas.length;
-        const pct = Math.min(100, Math.round((count / def.cota) * 100));
-        const revTotal = empresas.reduce((acc, cur) => acc + (Number(cur.mensalidade) || 0), 0);
-        const revPotencial = def.cota * def.mensalidadeBase;
 
-        let hintClass = 'warn';
-        let hintText = `🟡 Faltam ${def.cota - count} patrocinadores para completar a cota!`;
-        if (count === 0) {
-          hintClass = 'urgent';
-          hintText = `🚨 URGENTE: Zero parceiros neste nicho! Correr atrás de 5 empresas!`;
-        } else if (count >= def.cota) {
-          hintClass = 'ok';
-          hintText = `🟢 COTA MÁXIMA ESGOTADA! Segmento 100% preenchido.`;
-        }
+        const empresasNomes = empresas.map(e => `
+          <div style="font-size:12px; color:#E2E8F0; display:flex; justify-content:space-between; align-items:center; padding:7px 0; border-bottom:1px dashed rgba(255,255,255,0.08);">
+            <div style="display:flex; align-items:center; gap:8px;">
+              <span style="color:var(--gold); font-size:12px;">•</span>
+              <strong style="color:#FFF;">${escapeHtml(e.nome)}</strong>
+            </div>
+            <div style="display:flex; align-items:center; gap:8px;">
+              <span style="font-size:11px; color:var(--text-dim); background:rgba(255,255,255,0.05); padding:2px 8px; border-radius:6px;">📍 ${escapeHtml(e.bairro || 'Centro')}</span>
+              <strong style="color:var(--green-light); font-size:11px;">R$ 300</strong>
+            </div>
+          </div>
+        `).join('') || '<div style="font-size:12px; color:var(--text-dim); font-style:italic; padding:12px 0;">Nenhuma empresa cadastrada neste nicho.</div>';
+
+        return `
+          <div class="segment-card" style="background:var(--bg-card); border:1px solid var(--border); border-radius:16px; padding:20px; display:flex; flex-direction:column; gap:12px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border); padding-bottom:12px;">
+              <div style="display:flex; align-items:center; gap:10px;">
+                <span style="font-size:26px;">${def.icone}</span>
+                <div>
+                  <div style="color:#FFF; font-size:15px; font-weight:800;">${def.nome}</div>
+                  <div style="font-size:11px; color:var(--text-dim);">Rede Oficial Alerta Urbano</div>
+                </div>
+              </div>
+              <span style="background:rgba(217,119,6,0.15); color:var(--gold); border:1px solid rgba(217,119,6,0.3); font-size:11.5px; font-weight:800; padding:4px 12px; border-radius:12px;">
+                ${count} Empresas
+              </span>
+            </div>
+
+            <div style="margin-top:4px; flex:1;">
+              <div style="font-size:11px; font-weight:800; color:var(--text-dim); text-transform:uppercase; margin-bottom:8px; letter-spacing:0.5px;">Empresas na Rede:</div>
+              <div style="max-height:160px; overflow-y:auto; padding-right:4px;">
+                ${empresasNomes}
+              </div>
+            </div>
+
+            <button type="button" onclick="adicionarEmpresaNoSegmento('${key}')" style="margin-top:auto; background:var(--bg-surface); border:1px solid var(--border); color:#FFF; font-size:11.5px; font-weight:800; padding:10px 12px; border-radius:8px; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:6px; transition:0.2s;">
+              + Adicionar Empresa neste Setor
+            </button>
+          </div>
+        `;
+      }).join('');
+    }
 
         const empresasNomes = empresas.map(e => `
           <div style="font-size:11px; color:#E2E8F0; display:flex; justify-content:space-between; padding:3px 0; border-bottom:1px dashed rgba(255,255,255,0.06);">
@@ -3163,12 +3217,15 @@
     }
 
     async function carregarPerfisCompletos() {
+      // Limpeza imediata de massa mock de 70 perfis
+      localStorage.removeItem('mesa_perfis_v2');
+      localStorage.removeItem('mesa_ocorrencias_pets_v1');
+
       try {
         const resp = await fetch('/static/darkplanner_perfis_completos.json?t=' + Date.now());
         if (resp.ok) {
           perfisOcorrencias = await resp.json();
-          // Mescla com posições salvas pelo Rigo no localStorage
-          const salvosStr = localStorage.getItem('mesa_perfis_70_v1');
+          const salvosStr = localStorage.getItem('mesa_perfis_v2');
           if (salvosStr) {
             try {
               const salvos = JSON.parse(salvosStr);
@@ -3176,13 +3233,15 @@
                 const idx = perfisOcorrencias.findIndex(p => p.id === s.id);
                 if (idx !== -1) {
                   perfisOcorrencias[idx] = s;
+                } else {
+                  perfisOcorrencias.push(s);
                 }
               });
             } catch (_) {}
           }
         }
       } catch (err) {
-        console.warn('Erro ao carregar catálogo 70 perfis:', err);
+        console.warn('Erro ao carregar catálogo perfis:', err);
       }
 
       renderizarBandejaPerfis();
@@ -3227,7 +3286,11 @@
       }
 
       if (!filtrados.length) {
-        tray.innerHTML = '<div style="padding: 24px 12px; text-align: center; color: var(--text-muted); font-size: 11px;">Nenhum perfil nesta categoria.</div>';
+        tray.innerHTML = '<div style="padding: 32px 16px; text-align: center; color: var(--text-muted);">
+          <div style="font-size: 32px; margin-bottom: 8px;">🐾</div>
+          <div style="font-weight: 800; color: #FFF; font-size: 13px; margin-bottom: 4px;">Nenhum Pet Cadastrado</div>
+          <div style="font-size: 11px; line-height: 1.4;">Tudo pronto para cadastros reais.<br>Clique no botão vermelho acima para incluir o primeiro pet.</div>
+        </div>';
         return;
       }
 
@@ -3442,7 +3505,7 @@
         } catch (_) {}
       }
 
-      localStorage.setItem('mesa_perfis_70_v1', JSON.stringify(perfisOcorrencias));
+      localStorage.setItem('mesa_perfis_v2', JSON.stringify(perfisOcorrencias));
       renderizarBandejaPerfis();
       plotarTodosPerfisNoMapa();
       atualizarContadoresPerfis();
@@ -3646,7 +3709,7 @@
       };
 
       // Salva no localStorage
-      localStorage.setItem('mesa_perfis_70_v1', JSON.stringify(perfisOcorrencias));
+      localStorage.setItem('mesa_perfis_v2', JSON.stringify(perfisOcorrencias));
 
       // Sincroniza com backend via /api/alertas para o app móvel receber
       try {
@@ -3678,7 +3741,7 @@
           const resJson = await respAlert.json();
           if (resJson && resJson.id) {
             perfilSelecionado.alerta_id = resJson.id;
-            localStorage.setItem('mesa_perfis_70_v1', JSON.stringify(perfisOcorrencias));
+            localStorage.setItem('mesa_perfis_v2', JSON.stringify(perfisOcorrencias));
           }
         }
       } catch (_) {}
@@ -3711,7 +3774,7 @@
       };
       perfilSelecionado.alerta_id = null;
 
-      localStorage.setItem('mesa_perfis_70_v1', JSON.stringify(perfisOcorrencias));
+      localStorage.setItem('mesa_perfis_v2', JSON.stringify(perfisOcorrencias));
 
       // Sincroniza exclusão atômica no banco SQLite para sumir do Painel Geral e do Feed
       try {
@@ -3828,7 +3891,7 @@
       if (!confirm(`Deseja retirar "${p.pet.nome}" do mapa de Cascavel?`)) return;
 
       p.posicao_mapa = { fixado: false, lat: null, lng: null, rua: '', bairro: '', referencia: '', data_fixacao: null };
-      localStorage.setItem('mesa_perfis_70_v1', JSON.stringify(perfisOcorrencias));
+      localStorage.setItem('mesa_perfis_v2', JSON.stringify(perfisOcorrencias));
 
       renderizarBandejaPerfis();
       plotarTodosPerfisNoMapa();
