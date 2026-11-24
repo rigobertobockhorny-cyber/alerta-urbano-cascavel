@@ -148,6 +148,7 @@ def init_db():
         ("subtipo_evento", "TEXT DEFAULT 'avistamento'"),
         ("castrado", "INTEGER DEFAULT 0"),
         ("vacinado", "INTEGER DEFAULT 0"),
+        ("autor_nome", "TEXT DEFAULT ''"),
         ("faixa_etaria", "TEXT DEFAULT 'adulto'"),
         ("sexo", "TEXT DEFAULT 'indefinido'"),
         ("sigiloso", "INTEGER DEFAULT 0"),
@@ -429,10 +430,10 @@ def init_db():
     cur.execute("DELETE FROM alertas WHERE status_pet = 'encontrado' OR titulo LIKE '%RESGATADO%'")
     cur.execute("UPDATE alertas SET recompensa = ''")
     
-    # Sincronização dos 72 perfis reais de animais de Cascavel no banco de alertas
-    cur.execute("SELECT COUNT(*) FROM alertas WHERE pilar = 'pet'")
+    # Sincronização dos perfis reais de animais de Cascavel no banco de alertas
+    cur.execute("SELECT COUNT(*) FROM alertas WHERE pilar = 'pet' AND autor_nome IS NOT NULL AND autor_nome != ''")
     count_pets_db = cur.fetchone()[0]
-    if count_pets_db < 72:
+    if count_pets_db < 70:
         caminho_perfis = os.path.join(os.path.dirname(__file__), "static", "darkplanner_perfis_completos.json")
         if os.path.exists(caminho_perfis):
             try:
@@ -453,33 +454,36 @@ def init_db():
                         lng = pos.get("lng") or -53.4610
                         rua = pos.get("rua") or "Cascavel"
                         bairro = pos.get("bairro") or tutor_info.get("bairro_origem") or "Cascavel"
+                        tutor_nome = tutor_info.get("nome", "Tutor em Cascavel")
                         
                         cur.execute("""
                             INSERT INTO alertas (
                                 id, tipo, pilar, cidade, titulo, descricao, rua, bairro, lat, lng,
                                 peso, confirmacoes, ativo, created_at, foto_url, contato, recompensa,
-                                fonte_tipo, fonte_nome, especie, porte, status_pet
-                            ) VALUES (?, ?, 'pet', 'Cascavel', ?, ?, ?, ?, ?, ?, 1, 1, 1, datetime('now'), ?, ?, '', 'comunidade_pet', ?, ?, ?, ?)
+                                fonte_tipo, fonte_nome, especie, porte, status_pet, autor_nome
+                            ) VALUES (?, ?, 'pet', 'Cascavel', ?, ?, ?, ?, ?, ?, 1, 1, 1, datetime('now', '-' || (? * 2) || ' minutes'), ?, ?, '', 'comunidade_pet', ?, ?, ?, ?, ?)
                         """, (
                             5500 + idx_p + 1,
                             tipo,
                             titulo,
-                            pet_info.get("detalhes", ""),
+                            f"{pet_info.get('detalhes', '')} Tutor: {tutor_nome}.",
                             rua,
                             bairro,
                             lat,
                             lng,
+                            idx_p,
                             pet_info.get("foto_url", ""),
                             tutor_info.get("telefone", ""),
-                            tutor_info.get("nome", "Tutor"),
+                            tutor_nome,
                             pet_info.get("categoria", "cachorro"),
                             pet_info.get("porte", "Médio"),
-                            status_pet
+                            status_pet,
+                            tutor_nome
                         ))
             except Exception as e_perfis:
                 print("Erro ao sincronizar perfis de pets:", e_perfis)
 
-    cur.execute("SELECT COUNT(*) FROM parceiros WHERE ativo = 1")
+    cur.execute("SELECT COUNT(*) FROM parceiros WHERE ativo = 1 AND lat != 0.0 AND endereco NOT LIKE 'Rua em Cascavel%'")
     count_parc = cur.fetchone()[0]
     if count_parc < 45:
         caminho_cat = os.path.join(os.path.dirname(__file__), "static", "darkplanner_parceiros_completos.json")
@@ -490,8 +494,9 @@ def init_db():
                     cur.execute("DELETE FROM parceiros")
                     for idx_p, p in enumerate(parcs_cat):
                         pos = p.get('posicao_mapa') or {}
-                        lat = float(pos.get('lat')) if (pos.get('fixado') and pos.get('lat')) else 0.0
-                        lng = float(pos.get('lng')) if (pos.get('fixado') and pos.get('lng')) else 0.0
+                        lat = float(p.get('lat') or (pos.get('lat') if pos.get('fixado') else -24.9555))
+                        lng = float(p.get('lng') or (pos.get('lng') if pos.get('fixado') else -53.4550))
+                        endereco = p.get('endereco') or (pos.get('rua') if pos.get('fixado') else 'Cascavel')
                         cur.execute("""
                             INSERT INTO parceiros (
                                 id, nome, categoria, subtitulo, descricao, bairro, endereco, cidade,
@@ -504,7 +509,7 @@ def init_db():
                             p.get('subtitulo', ''),
                             p.get('descricao', ''),
                             p.get('bairro', 'Centro'),
-                            p.get('endereco', ''),
+                            endereco,
                             'Cascavel',
                             lat,
                             lng,
@@ -1053,6 +1058,71 @@ def salvar_catalogo_mesa():
         return jsonify({"ok": True, "total": len(parceiros), "mensagem": "Catálogo salvo permanentemente no disco e no banco!"})
     except Exception as e:
         print(f"[MESA] Erro ao salvar catálogo no servidor: {e}")
+        return jsonify({"error": str(e)}), 500
+
+
+@app.route("/api/mesa/salvar-perfis", methods=["POST"])
+def salvar_perfis_mesa():
+    """
+    Grava as coordenadas e dados dos perfis de pets diretamente no disco
+    (static/darkplanner_perfis_completos.json) e sincroniza as ocorrências no banco SQLite.
+    Garante persistência permanente das ruas e bairros definidos pelo Rigo na Mesa.
+    """
+    try:
+        data = request.get_json(force=True, silent=True) or {}
+        perfis = data.get("perfis", [])
+        if not perfis:
+            return jsonify({"error": "Lista de perfis vazia."}), 400
+
+        caminho_json = os.path.join(os.path.dirname(__file__), "static", "darkplanner_perfis_completos.json")
+        with open(caminho_json, "w", encoding="utf-8") as f:
+            json.dump(perfis, f, ensure_ascii=False, indent=2)
+
+        # Sincroniza posições e ocorrências no SQLite
+        conn = get_db()
+        cur = conn.cursor()
+        for idx, p in enumerate(perfis):
+            pet = p.get("pet", {})
+            tutor = p.get("tutor", {})
+            pos = p.get("posicao_mapa", {})
+            nome_pet = pet.get("nome", "Pet")
+            raca = pet.get("raca", "")
+            titulo = f"{nome_pet} • {raca}" if raca else nome_pet
+            eh_adocao = (pet.get("tipo_ocorrencia") == "adocao")
+            tipo = "pet_adocao" if eh_adocao else "pet_perdido"
+            status_pet = "adocao" if eh_adocao else "desaparecido"
+            lat = pos.get("lat")
+            lng = pos.get("lng")
+            rua = pos.get("rua") or "Cascavel"
+            bairro = pos.get("bairro") or tutor.get("bairro_origem") or "Cascavel"
+            tutor_nome = tutor.get("nome") or "Tutor em Cascavel"
+            telefone = tutor.get("telefone") or ""
+            foto_url = pet.get("foto_url") or ""
+            alerta_id = pos.get("alerta_id") or (5500 + idx + 1)
+
+            if lat and lng and pos.get("fixado"):
+                cur.execute("SELECT id FROM alertas WHERE id = ?", (alerta_id,))
+                if cur.fetchone():
+                    cur.execute("""
+                        UPDATE alertas
+                        SET titulo = ?, tipo = ?, status_pet = ?, lat = ?, lng = ?, rua = ?, bairro = ?,
+                            foto_url = ?, contato = ?, autor_nome = ?, fonte_nome = ?, ativo = 1
+                        WHERE id = ?
+                    """, (titulo, tipo, status_pet, float(lat), float(lng), rua, bairro, foto_url, telefone, tutor_nome, tutor_nome, alerta_id))
+                else:
+                    cur.execute("""
+                        INSERT INTO alertas (
+                            id, tipo, pilar, cidade, titulo, descricao, rua, bairro, lat, lng,
+                            peso, confirmacoes, ativo, created_at, foto_url, contato, recompensa,
+                            fonte_tipo, fonte_nome, especie, porte, status_pet, autor_nome
+                        ) VALUES (?, ?, 'pet', 'Cascavel', ?, ?, ?, ?, ?, ?, 1, 1, 1, datetime('now'), ?, ?, '', 'comunidade_pet', ?, ?, ?, ?, ?)
+                    """, (alerta_id, tipo, titulo, f"{pet.get('detalhes','')} Tutor: {tutor_nome}.", rua, bairro, float(lat), float(lng), foto_url, telefone, tutor_nome, pet.get("categoria","cao"), pet.get("porte","Médio"), status_pet, tutor_nome))
+        conn.commit()
+        conn.close()
+        print(f"[MESA] {len(perfis)} perfis de pets salvos com sucesso permanente no disco e banco!")
+        return jsonify({"ok": True, "total": len(perfis), "mensagem": "Perfis e ruas gravados com sucesso permanente!"})
+    except Exception as e:
+        print(f"[MESA] Erro ao salvar perfis: {e}")
         return jsonify({"error": str(e)}), 500
 
 

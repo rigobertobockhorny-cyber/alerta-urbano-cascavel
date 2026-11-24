@@ -9,7 +9,7 @@
     "subtitulo": "Atendimento de urgência e UTI pet 24h em Cascavel",
     "descricao": "Empresa parceira oficial do Alerta Urbano em Cascavel. Especialidade em clínica veterinária no bairro Centro.",
     "bairro": "Centro",
-    "endereco": "Rua em Cascavel, Centro",
+    "endereco": "Avenida Brasil, 6200",
     "cidade": "Cascavel",
     "telefone": "(45) 99801-3456",
     "mensalidade": 300.0,
@@ -19,10 +19,10 @@
     "banner_url": "/static/parceiros/pet_vet/pet_vet_01_vv/banner.png",
     "destaque_esteira": 1,
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
+      "fixado": true,
+      "lat": -24.9555,
+      "lng": -53.456,
+      "endereco": "Avenida Brasil, 6200",
       "bairro": "Centro"
     },
     "produtos": [
@@ -46,7 +46,9 @@
       }
     ],
     "dia_vencimento": 10,
-    "vencimento": "10/12/2026"
+    "vencimento": "10/12/2026",
+    "lat": -24.9555,
+    "lng": -53.456
   },
   {
     "id": "parc_02",
@@ -58,7 +60,7 @@
     "subtitulo": "Especialidades cirúrgicas e exames de imagem",
     "descricao": "Empresa parceira oficial do Alerta Urbano em Cascavel. Especialidade em clínica veterinária no bairro Cancelli.",
     "bairro": "Cancelli",
-    "endereco": "Rua em Cascavel, Cancelli",
+    "endereco": "Rua Manaus, 1420",
     "cidade": "Cascavel",
     "telefone": "(45) 99802-3456",
     "mensalidade": 300.0,
@@ -68,10 +70,10 @@
     "banner_url": "/static/parceiros/pet_vet/pet_vet_02_sf/banner.png",
     "destaque_esteira": 1,
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
+      "fixado": true,
+      "lat": -24.945,
+      "lng": -53.475,
+      "endereco": "Rua Manaus, 1420",
       "bairro": "Cancelli"
     },
     "produtos": [
@@ -95,7 +97,9 @@
       }
     ],
     "dia_vencimento": 10,
-    "vencimento": "10/12/2026"
+    "vencimento": "10/12/2026",
+    "lat": -24.945,
+    "lng": -53.475
   },
   {
     "id": "parc_03",
@@ -107,7 +111,7 @@
     "subtitulo": "Plantão 24h com centro cirúrgico completo",
     "descricao": "Empresa parceira oficial do Alerta Urbano em Cascavel. Especialidade em clínica veterinária no bairro Coqueiral.",
     "bairro": "Coqueiral",
-    "endereco": "Rua em Cascavel, Coqueiral",
+    "endereco": "Rua Presidente Kennedy, 1850",
     "cidade": "Cascavel",
     "telefone": "(45) 99803-3456",
     "mensalidade": 300.0,
@@ -117,10 +121,10 @@
     "banner_url": "/static/parceiros/pet_vet/pet_vet_03_cv/banner.png",
     "destaque_esteira": 1,
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
+      "fixado": true,
+      "lat": -24.9515,
+      "lng": -53.482,
+      "endereco": "Rua Presidente Kennedy, 1850",
       "bairro": "Coqueiral"
     },
     "produtos": [
@@ -144,7 +148,9 @@
       }
     ],
     "dia_vencimento": 10,
-    "vencimento": "10/12/2026"
+    "vencimento": "10/12/2026",
+    "lat": -24.9515,
+    "lng": -53.482
   },
   {
     "id": "parc_04",
@@ -156,7 +162,7 @@
     "subtitulo": "Dermatologia, oftalmologia e acupuntura pet",
     "descricao": "Empresa parceira oficial do Alerta Urbano em Cascavel. Especialidade em clínica veterinária no bairro Neva.",
     "bairro": "Neva",
-    "endereco": "Rua em Cascavel, Neva",
+    "endereco": "Rua Cuiabá, 2900",
     "cidade": "Cascavel",
     "telefone": "(45) 99804-3456",
     "mensalidade": 300.0,
@@ -166,10 +172,10 @@
     "banner_url": "/static/parceiros/pet_vet/pet_vet_04_ea/banner.png",
     "destaque_esteira": 1,
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
+      "fixado": true,
+      "lat": -24.966,
+      "lng": -53.468,
+      "endereco": "Rua Cuiabá, 2900",
       "bairro": "Neva"
     },
     "produtos": [
@@ -193,7 +199,9 @@
       }
     ],
     "dia_vencimento": 10,
-    "vencimento": "10/12/2026"
+    "vencimento": "10/12/2026",
+    "lat": -24.966,
+    "lng": -53.468
   },
   {
     "id": "parc_05",
@@ -205,7 +213,7 @@
     "subtitulo": "Pronto-socorro veterinário e internação",
     "descricao": "Empresa parceira oficial do Alerta Urbano em Cascavel. Especialidade em clínica veterinária no bairro São Cristóvão.",
     "bairro": "São Cristóvão",
-    "endereco": "Rua em Cascavel, São Cristóvão",
+    "endereco": "Avenida Piquiri, 1200",
     "cidade": "Cascavel",
     "telefone": "(45) 99805-3456",
     "mensalidade": 300.0,
@@ -215,10 +223,10 @@
     "banner_url": "/static/parceiros/pet_vet/pet_vet_05_pv/banner.png",
     "destaque_esteira": 1,
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
+      "fixado": true,
+      "lat": -24.938,
+      "lng": -53.431,
+      "endereco": "Avenida Piquiri, 1200",
       "bairro": "São Cristóvão"
     },
     "produtos": [
@@ -242,7 +250,9 @@
       }
     ],
     "dia_vencimento": 10,
-    "vencimento": "10/12/2026"
+    "vencimento": "10/12/2026",
+    "lat": -24.938,
+    "lng": -53.431
   },
   {
     "id": "parc_06",
@@ -254,7 +264,7 @@
     "subtitulo": "As melhores marcas de ração e farmácia veterinária",
     "descricao": "Empresa parceira oficial do Alerta Urbano em Cascavel. Especialidade em pet shop & ração no bairro Centro.",
     "bairro": "Centro",
-    "endereco": "Rua em Cascavel, Centro",
+    "endereco": "Rua Paraná, 2840",
     "cidade": "Cascavel",
     "telefone": "(45) 99806-3456",
     "mensalidade": 300.0,
@@ -264,10 +274,10 @@
     "banner_url": "/static/parceiros/pet_shop/pet_shop_01_bm/banner.png",
     "destaque_esteira": 1,
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
+      "fixado": true,
+      "lat": -24.954,
+      "lng": -53.458,
+      "endereco": "Rua Paraná, 2840",
       "bairro": "Centro"
     },
     "produtos": [
@@ -291,7 +301,9 @@
       }
     ],
     "dia_vencimento": 10,
-    "vencimento": "10/12/2026"
+    "vencimento": "10/12/2026",
+    "lat": -24.954,
+    "lng": -53.458
   },
   {
     "id": "parc_07",
@@ -303,7 +315,7 @@
     "subtitulo": "Variedade em petiscos, brinquedos e caminhas",
     "descricao": "Empresa parceira oficial do Alerta Urbano em Cascavel. Especialidade em pet shop & ração no bairro Coqueiral.",
     "bairro": "Coqueiral",
-    "endereco": "Rua em Cascavel, Coqueiral",
+    "endereco": "Rua Recife, 2400",
     "cidade": "Cascavel",
     "telefone": "(45) 99807-3456",
     "mensalidade": 300.0,
@@ -313,10 +325,10 @@
     "banner_url": "/static/parceiros/pet_shop/pet_shop_02_mp/banner.png",
     "destaque_esteira": 1,
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
+      "fixado": true,
+      "lat": -24.9535,
+      "lng": -53.4795,
+      "endereco": "Rua Recife, 2400",
       "bairro": "Coqueiral"
     },
     "produtos": [
@@ -340,7 +352,9 @@
       }
     ],
     "dia_vencimento": 10,
-    "vencimento": "10/12/2026"
+    "vencimento": "10/12/2026",
+    "lat": -24.9535,
+    "lng": -53.4795
   },
   {
     "id": "parc_08",
@@ -352,7 +366,7 @@
     "subtitulo": "Alimentação animal premium com entrega rápida",
     "descricao": "Empresa parceira oficial do Alerta Urbano em Cascavel. Especialidade em pet shop & ração no bairro Parque São Paulo.",
     "bairro": "Parque São Paulo",
-    "endereco": "Rua em Cascavel, Parque São Paulo",
+    "endereco": "Avenida Rocha Pombo, 1500",
     "cidade": "Cascavel",
     "telefone": "(45) 99808-3456",
     "mensalidade": 300.0,
@@ -362,10 +376,10 @@
     "banner_url": "/static/parceiros/pet_shop/pet_shop_03_ca/banner.png",
     "destaque_esteira": 1,
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
+      "fixado": true,
+      "lat": -24.972,
+      "lng": -53.456,
+      "endereco": "Avenida Rocha Pombo, 1500",
       "bairro": "Parque São Paulo"
     },
     "produtos": [
@@ -389,7 +403,9 @@
       }
     ],
     "dia_vencimento": 10,
-    "vencimento": "10/12/2026"
+    "vencimento": "10/12/2026",
+    "lat": -24.972,
+    "lng": -53.456
   },
   {
     "id": "parc_09",
@@ -401,7 +417,7 @@
     "subtitulo": "Preço imbatível e atendimento especializado",
     "descricao": "Empresa parceira oficial do Alerta Urbano em Cascavel. Especialidade em pet shop & ração no bairro Santa Cruz.",
     "bairro": "Santa Cruz",
-    "endereco": "Rua em Cascavel, Santa Cruz",
+    "endereco": "Avenida Tito Muffato, 1600",
     "cidade": "Cascavel",
     "telefone": "(45) 99809-3456",
     "mensalidade": 300.0,
@@ -411,10 +427,10 @@
     "banner_url": "/static/parceiros/pet_shop/pet_shop_04_af/banner.png",
     "destaque_esteira": 1,
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
+      "fixado": true,
+      "lat": -24.965,
+      "lng": -53.505,
+      "endereco": "Avenida Tito Muffato, 1600",
       "bairro": "Santa Cruz"
     },
     "produtos": [
@@ -438,7 +454,9 @@
       }
     ],
     "dia_vencimento": 10,
-    "vencimento": "10/12/2026"
+    "vencimento": "10/12/2026",
+    "lat": -24.965,
+    "lng": -53.505
   },
   {
     "id": "parc_10",
@@ -450,7 +468,7 @@
     "subtitulo": "Tudo para o conforto e nutrição do seu melhor amigo",
     "descricao": "Empresa parceira oficial do Alerta Urbano em Cascavel. Especialidade em pet shop & ração no bairro Canadá.",
     "bairro": "Canadá",
-    "endereco": "Rua em Cascavel, Canadá",
+    "endereco": "Rua Marechal Cândido Rondon, 2200",
     "cidade": "Cascavel",
     "telefone": "(45) 99810-3456",
     "mensalidade": 300.0,
@@ -460,10 +478,10 @@
     "banner_url": "/static/parceiros/pet_shop/pet_shop_05_pf/banner.png",
     "destaque_esteira": 1,
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
+      "fixado": true,
+      "lat": -24.932,
+      "lng": -53.458,
+      "endereco": "Rua Marechal Cândido Rondon, 2200",
       "bairro": "Canadá"
     },
     "produtos": [
@@ -487,7 +505,9 @@
       }
     ],
     "dia_vencimento": 10,
-    "vencimento": "10/12/2026"
+    "vencimento": "10/12/2026",
+    "lat": -24.932,
+    "lng": -53.458
   },
   {
     "id": "parc_11",
@@ -499,7 +519,7 @@
     "subtitulo": "Banho com toalhas esterilizadas e produtos hipoalergênicos",
     "descricao": "Empresa parceira oficial do Alerta Urbano em Cascavel. Especialidade em banho e tosa no bairro Centro.",
     "bairro": "Centro",
-    "endereco": "Rua em Cascavel, Centro",
+    "endereco": "Rua Rio Grande do Sul, 1250",
     "cidade": "Cascavel",
     "telefone": "(45) 99811-3456",
     "mensalidade": 300.0,
@@ -509,10 +529,10 @@
     "banner_url": "/static/parceiros/banho_tosa/banho_tosa_01_gc/banner.png",
     "destaque_esteira": 1,
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
+      "fixado": true,
+      "lat": -24.9568,
+      "lng": -53.4542,
+      "endereco": "Rua Rio Grande do Sul, 1250",
       "bairro": "Centro"
     },
     "produtos": [
@@ -536,7 +556,9 @@
       }
     ],
     "dia_vencimento": 10,
-    "vencimento": "10/12/2026"
+    "vencimento": "10/12/2026",
+    "lat": -24.9568,
+    "lng": -53.4542
   },
   {
     "id": "parc_12",
@@ -548,7 +570,7 @@
     "subtitulo": "Especialistas em tosa na tesoura e desembolo",
     "descricao": "Empresa parceira oficial do Alerta Urbano em Cascavel. Especialidade em banho e tosa no bairro Neva.",
     "bairro": "Neva",
-    "endereco": "Rua em Cascavel, Neva",
+    "endereco": "Rua Pio XII, 1600",
     "cidade": "Cascavel",
     "telefone": "(45) 99812-3456",
     "mensalidade": 300.0,
@@ -558,10 +580,10 @@
     "banner_url": "/static/parceiros/banho_tosa/banho_tosa_02_ep/banner.png",
     "destaque_esteira": 1,
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
+      "fixado": true,
+      "lat": -24.9645,
+      "lng": -53.465,
+      "endereco": "Rua Pio XII, 1600",
       "bairro": "Neva"
     },
     "produtos": [
@@ -585,7 +607,9 @@
       }
     ],
     "dia_vencimento": 10,
-    "vencimento": "10/12/2026"
+    "vencimento": "10/12/2026",
+    "lat": -24.9645,
+    "lng": -53.465
   },
   {
     "id": "parc_13",
@@ -597,7 +621,7 @@
     "subtitulo": "Carinho e paciência no cuidado do seu peludinho",
     "descricao": "Empresa parceira oficial do Alerta Urbano em Cascavel. Especialidade em banho e tosa no bairro Cancelli.",
     "bairro": "Cancelli",
-    "endereco": "Rua em Cascavel, Cancelli",
+    "endereco": "Rua Presidente Bernardes, 2100",
     "cidade": "Cascavel",
     "telefone": "(45) 99813-3456",
     "mensalidade": 300.0,
@@ -607,10 +631,10 @@
     "banner_url": "/static/parceiros/banho_tosa/banho_tosa_03_cp/banner.png",
     "destaque_esteira": 1,
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
+      "fixado": true,
+      "lat": -24.9435,
+      "lng": -53.4735,
+      "endereco": "Rua Presidente Bernardes, 2100",
       "bairro": "Cancelli"
     },
     "produtos": [
@@ -634,7 +658,9 @@
       }
     ],
     "dia_vencimento": 10,
-    "vencimento": "10/12/2026"
+    "vencimento": "10/12/2026",
+    "lat": -24.9435,
+    "lng": -53.4735
   },
   {
     "id": "parc_14",
@@ -646,7 +672,7 @@
     "subtitulo": "Ambiente climatizado e banho relaxante",
     "descricao": "Empresa parceira oficial do Alerta Urbano em Cascavel. Especialidade em banho e tosa no bairro Country.",
     "bairro": "Country",
-    "endereco": "Rua em Cascavel, Country",
+    "endereco": "Rua Londrina, 1650",
     "cidade": "Cascavel",
     "telefone": "(45) 99814-3456",
     "mensalidade": 300.0,
@@ -656,10 +682,10 @@
     "banner_url": "/static/parceiros/banho_tosa/banho_tosa_04_sa/banner.png",
     "destaque_esteira": 1,
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
+      "fixado": true,
+      "lat": -24.938,
+      "lng": -53.448,
+      "endereco": "Rua Londrina, 1650",
       "bairro": "Country"
     },
     "produtos": [
@@ -683,7 +709,9 @@
       }
     ],
     "dia_vencimento": 10,
-    "vencimento": "10/12/2026"
+    "vencimento": "10/12/2026",
+    "lat": -24.938,
+    "lng": -53.448
   },
   {
     "id": "parc_15",
@@ -695,7 +723,7 @@
     "subtitulo": "Tosa padrão de exposição e hidratação marroquina",
     "descricao": "Empresa parceira oficial do Alerta Urbano em Cascavel. Especialidade em banho e tosa no bairro Maria Luíza.",
     "bairro": "Maria Luíza",
-    "endereco": "Rua em Cascavel, Maria Luíza",
+    "endereco": "Rua Alexandre de Gusmão, 1400",
     "cidade": "Cascavel",
     "telefone": "(45) 99815-3456",
     "mensalidade": 300.0,
@@ -705,10 +733,10 @@
     "banner_url": "/static/parceiros/banho_tosa/banho_tosa_05_tv/banner.png",
     "destaque_esteira": 1,
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
+      "fixado": true,
+      "lat": -24.968,
+      "lng": -53.448,
+      "endereco": "Rua Alexandre de Gusmão, 1400",
       "bairro": "Maria Luíza"
     },
     "produtos": [
@@ -732,7 +760,9 @@
       }
     ],
     "dia_vencimento": 10,
-    "vencimento": "10/12/2026"
+    "vencimento": "10/12/2026",
+    "lat": -24.968,
+    "lng": -53.448
   },
   {
     "id": "parc_16",
@@ -744,7 +774,7 @@
     "subtitulo": "Geometria 3D, suspensão e as melhores marcas de pneus",
     "descricao": "Empresa parceira oficial do Alerta Urbano em Cascavel. Especialidade em auto center & pneus no bairro Centro.",
     "bairro": "Centro",
-    "endereco": "Rua em Cascavel, Centro",
+    "endereco": "Rua Minas Gerais, 1920",
     "cidade": "Cascavel",
     "telefone": "(45) 99816-3456",
     "mensalidade": 300.0,
@@ -754,10 +784,10 @@
     "banner_url": "/static/parceiros/auto_center/auto_center_01_pp/banner.png",
     "destaque_esteira": 1,
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
+      "fixado": true,
+      "lat": -24.9525,
+      "lng": -53.4575,
+      "endereco": "Rua Minas Gerais, 1920",
       "bairro": "Centro"
     },
     "produtos": [
@@ -781,7 +811,9 @@
       }
     ],
     "dia_vencimento": 10,
-    "vencimento": "10/12/2026"
+    "vencimento": "10/12/2026",
+    "lat": -24.9525,
+    "lng": -53.4575
   },
   {
     "id": "parc_17",
@@ -793,7 +825,7 @@
     "subtitulo": "Rapidez e precisão em pneus e freios automotivos",
     "descricao": "Empresa parceira oficial do Alerta Urbano em Cascavel. Especialidade em auto center & pneus no bairro São Cristóvão.",
     "bairro": "São Cristóvão",
-    "endereco": "Rua em Cascavel, São Cristóvão",
+    "endereco": "Rua Jacarezinho, 1540",
     "cidade": "Cascavel",
     "telefone": "(45) 99817-3456",
     "mensalidade": 300.0,
@@ -803,10 +835,10 @@
     "banner_url": "/static/parceiros/auto_center/auto_center_02_ce/banner.png",
     "destaque_esteira": 1,
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
+      "fixado": true,
+      "lat": -24.9405,
+      "lng": -53.4335,
+      "endereco": "Rua Jacarezinho, 1540",
       "bairro": "São Cristóvão"
     },
     "produtos": [
@@ -830,7 +862,9 @@
       }
     ],
     "dia_vencimento": 10,
-    "vencimento": "10/12/2026"
+    "vencimento": "10/12/2026",
+    "lat": -24.9405,
+    "lng": -53.4335
   },
   {
     "id": "parc_18",
@@ -842,7 +876,7 @@
     "subtitulo": "Revisão completa de suspensão e freios computadorizada",
     "descricao": "Empresa parceira oficial do Alerta Urbano em Cascavel. Especialidade em auto center & pneus no bairro Coqueiral.",
     "bairro": "Coqueiral",
-    "endereco": "Rua em Cascavel, Coqueiral",
+    "endereco": "Avenida Brasil, 8500",
     "cidade": "Cascavel",
     "telefone": "(45) 99818-3456",
     "mensalidade": 300.0,
@@ -852,10 +886,10 @@
     "banner_url": "/static/parceiros/auto_center/auto_center_03_f1/banner.png",
     "destaque_esteira": 1,
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
+      "fixado": true,
+      "lat": -24.9545,
+      "lng": -53.4835,
+      "endereco": "Avenida Brasil, 8500",
       "bairro": "Coqueiral"
     },
     "produtos": [
@@ -879,7 +913,9 @@
       }
     ],
     "dia_vencimento": 10,
-    "vencimento": "10/12/2026"
+    "vencimento": "10/12/2026",
+    "lat": -24.9545,
+    "lng": -53.4835
   },
   {
     "id": "parc_19",
@@ -891,7 +927,7 @@
     "subtitulo": "Centro especializado em utilitários, SUVs e importados",
     "descricao": "Empresa parceira oficial do Alerta Urbano em Cascavel. Especialidade em auto center & pneus no bairro Santa Cruz.",
     "bairro": "Santa Cruz",
-    "endereco": "Rua em Cascavel, Santa Cruz",
+    "endereco": "Rua Tupiniquins, 950",
     "cidade": "Cascavel",
     "telefone": "(45) 99819-3456",
     "mensalidade": 300.0,
@@ -901,10 +937,10 @@
     "banner_url": "/static/parceiros/auto_center/auto_center_04_ro/banner.png",
     "destaque_esteira": 1,
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
+      "fixado": true,
+      "lat": -24.962,
+      "lng": -53.501,
+      "endereco": "Rua Tupiniquins, 950",
       "bairro": "Santa Cruz"
     },
     "produtos": [
@@ -928,7 +964,9 @@
       }
     ],
     "dia_vencimento": 10,
-    "vencimento": "10/12/2026"
+    "vencimento": "10/12/2026",
+    "lat": -24.962,
+    "lng": -53.501
   },
   {
     "id": "parc_20",
@@ -940,7 +978,7 @@
     "subtitulo": "Atendimento premium e garantia estendida de rodagem",
     "descricao": "Empresa parceira oficial do Alerta Urbano em Cascavel. Especialidade em auto center & pneus no bairro Maria Luíza.",
     "bairro": "Maria Luíza",
-    "endereco": "Rua em Cascavel, Maria Luíza",
+    "endereco": "Rua Alexandre de Gusmão, 1400",
     "cidade": "Cascavel",
     "telefone": "(45) 99820-3456",
     "mensalidade": 300.0,
@@ -950,10 +988,10 @@
     "banner_url": "/static/parceiros/auto_center/auto_center_05_vp/banner.png",
     "destaque_esteira": 1,
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
+      "fixado": true,
+      "lat": -24.9668,
+      "lng": -53.4492,
+      "endereco": "Rua Alexandre de Gusmão, 1400",
       "bairro": "Maria Luíza"
     },
     "produtos": [
@@ -977,7 +1015,9 @@
       }
     ],
     "dia_vencimento": 10,
-    "vencimento": "10/12/2026"
+    "vencimento": "10/12/2026",
+    "lat": -24.9668,
+    "lng": -53.4492
   },
   {
     "id": "parc_21",
@@ -989,7 +1029,7 @@
     "subtitulo": "Conserto de pneus sem câmara e socorro móvel 24h",
     "descricao": "Empresa parceira oficial do Alerta Urbano em Cascavel. Especialidade em borracharia no bairro São Cristóvão.",
     "bairro": "São Cristóvão",
-    "endereco": "Rua em Cascavel, São Cristóvão",
+    "endereco": "Avenida Barão do Rio Branco, 850",
     "cidade": "Cascavel",
     "telefone": "(45) 99821-3456",
     "mensalidade": 300.0,
@@ -999,10 +1039,10 @@
     "banner_url": "/static/parceiros/borracharia/borracharia_01_sc/banner.png",
     "destaque_esteira": 1,
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
+      "fixado": true,
+      "lat": -24.936,
+      "lng": -53.442,
+      "endereco": "Avenida Barão do Rio Branco, 850",
       "bairro": "São Cristóvão"
     },
     "produtos": [
@@ -1026,7 +1066,9 @@
       }
     ],
     "dia_vencimento": 10,
-    "vencimento": "10/12/2026"
+    "vencimento": "10/12/2026",
+    "lat": -24.936,
+    "lng": -53.442
   },
   {
     "id": "parc_22",
@@ -1038,7 +1080,7 @@
     "subtitulo": "Agilidade no atendimento com macaco pneumático",
     "descricao": "Empresa parceira oficial do Alerta Urbano em Cascavel. Especialidade em borracharia no bairro Coqueiral.",
     "bairro": "Coqueiral",
-    "endereco": "Rua em Cascavel, Coqueiral",
+    "endereco": "Rua Presidente Kennedy, 1850",
     "cidade": "Cascavel",
     "telefone": "(45) 99822-3456",
     "mensalidade": 300.0,
@@ -1048,10 +1090,10 @@
     "banner_url": "/static/parceiros/borracharia/borracharia_02_bc/banner.png",
     "destaque_esteira": 1,
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
+      "fixado": true,
+      "lat": -24.9503,
+      "lng": -53.4832,
+      "endereco": "Rua Presidente Kennedy, 1850",
       "bairro": "Coqueiral"
     },
     "produtos": [
@@ -1075,7 +1117,9 @@
       }
     ],
     "dia_vencimento": 10,
-    "vencimento": "10/12/2026"
+    "vencimento": "10/12/2026",
+    "lat": -24.9503,
+    "lng": -53.4832
   },
   {
     "id": "parc_23",
@@ -1087,7 +1131,7 @@
     "subtitulo": "Ponto estratégico na BR-277 para socorro imediato",
     "descricao": "Empresa parceira oficial do Alerta Urbano em Cascavel. Especialidade em borracharia no bairro Cascavel Velho.",
     "bairro": "Cascavel Velho",
-    "endereco": "Rua em Cascavel, Cascavel Velho",
+    "endereco": "Rua Pedro Baú, 1100",
     "cidade": "Cascavel",
     "telefone": "(45) 99823-3456",
     "mensalidade": 300.0,
@@ -1097,10 +1141,10 @@
     "banner_url": "/static/parceiros/borracharia/borracharia_03_bt/banner.png",
     "destaque_esteira": 1,
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
+      "fixado": true,
+      "lat": -24.978,
+      "lng": -53.428,
+      "endereco": "Rua Pedro Baú, 1100",
       "bairro": "Cascavel Velho"
     },
     "produtos": [
@@ -1124,7 +1168,9 @@
       }
     ],
     "dia_vencimento": 10,
-    "vencimento": "10/12/2026"
+    "vencimento": "10/12/2026",
+    "lat": -24.978,
+    "lng": -53.428
   },
   {
     "id": "parc_24",
@@ -1136,7 +1182,7 @@
     "subtitulo": "Calibragem digital precisa e selagem antifuro",
     "descricao": "Empresa parceira oficial do Alerta Urbano em Cascavel. Especialidade em borracharia no bairro Centro.",
     "bairro": "Centro",
-    "endereco": "Rua em Cascavel, Centro",
+    "endereco": "Rua São Paulo, 1400",
     "cidade": "Cascavel",
     "telefone": "(45) 99824-3456",
     "mensalidade": 300.0,
@@ -1146,10 +1192,10 @@
     "banner_url": "/static/parceiros/borracharia/borracharia_04_cc/banner.png",
     "destaque_esteira": 1,
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
+      "fixado": true,
+      "lat": -24.9575,
+      "lng": -53.453,
+      "endereco": "Rua São Paulo, 1400",
       "bairro": "Centro"
     },
     "produtos": [
@@ -1173,7 +1219,9 @@
       }
     ],
     "dia_vencimento": 10,
-    "vencimento": "10/12/2026"
+    "vencimento": "10/12/2026",
+    "lat": -24.9575,
+    "lng": -53.453
   },
   {
     "id": "parc_25",
@@ -1185,7 +1233,7 @@
     "subtitulo": "Atendimento expresso para frotas e motoristas de app",
     "descricao": "Empresa parceira oficial do Alerta Urbano em Cascavel. Especialidade em borracharia no bairro Pacaembu.",
     "bairro": "Pacaembu",
-    "endereco": "Rua em Cascavel, Pacaembu",
+    "endereco": "Rua Olindo Periollo, 850",
     "cidade": "Cascavel",
     "telefone": "(45) 99825-3456",
     "mensalidade": 300.0,
@@ -1195,10 +1243,10 @@
     "banner_url": "/static/parceiros/borracharia/borracharia_05_br/banner.png",
     "destaque_esteira": 1,
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
+      "fixado": true,
+      "lat": -24.965,
+      "lng": -53.435,
+      "endereco": "Rua Olindo Periollo, 850",
       "bairro": "Pacaembu"
     },
     "produtos": [
@@ -1222,7 +1270,9 @@
       }
     ],
     "dia_vencimento": 10,
-    "vencimento": "10/12/2026"
+    "vencimento": "10/12/2026",
+    "lat": -24.965,
+    "lng": -53.435
   },
   {
     "id": "parc_26",
@@ -1234,7 +1284,7 @@
     "subtitulo": "Combustível com controle rigoroso de qualidade e conveniência",
     "descricao": "Empresa parceira oficial do Alerta Urbano em Cascavel. Especialidade em posto de combustível no bairro Centro.",
     "bairro": "Centro",
-    "endereco": "Rua em Cascavel, Centro",
+    "endereco": "Calçadão da Avenida Brasil, 5000",
     "cidade": "Cascavel",
     "telefone": "(45) 99826-3456",
     "mensalidade": 300.0,
@@ -1244,10 +1294,10 @@
     "banner_url": "/static/parceiros/posto/posto_01_pi/banner.png",
     "destaque_esteira": 1,
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
+      "fixado": true,
+      "lat": -24.9548,
+      "lng": -53.4552,
+      "endereco": "Calçadão da Avenida Brasil, 5000",
       "bairro": "Centro"
     },
     "produtos": [
@@ -1271,7 +1321,9 @@
       }
     ],
     "dia_vencimento": 10,
-    "vencimento": "10/12/2026"
+    "vencimento": "10/12/2026",
+    "lat": -24.9548,
+    "lng": -53.4552
   },
   {
     "id": "parc_27",
@@ -1283,7 +1335,7 @@
     "subtitulo": "Parada oficial do motorista com troca de óleo completa",
     "descricao": "Empresa parceira oficial do Alerta Urbano em Cascavel. Especialidade em posto de combustível no bairro Cascavel Velho.",
     "bairro": "Cascavel Velho",
-    "endereco": "Rua em Cascavel, Cascavel Velho",
+    "endereco": "Rua Pedro Baú, 1100",
     "cidade": "Cascavel",
     "telefone": "(45) 99827-3456",
     "mensalidade": 300.0,
@@ -1293,10 +1345,10 @@
     "banner_url": "/static/parceiros/posto/posto_02_tc/banner.png",
     "destaque_esteira": 1,
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
+      "fixado": true,
+      "lat": -24.9768,
+      "lng": -53.4292,
+      "endereco": "Rua Pedro Baú, 1100",
       "bairro": "Cascavel Velho"
     },
     "produtos": [
@@ -1320,7 +1372,9 @@
       }
     ],
     "dia_vencimento": 10,
-    "vencimento": "10/12/2026"
+    "vencimento": "10/12/2026",
+    "lat": -24.9768,
+    "lng": -53.4292
   },
   {
     "id": "parc_28",
@@ -1332,7 +1386,7 @@
     "subtitulo": "Localização privilegiada e loja de conveniência 24h",
     "descricao": "Empresa parceira oficial do Alerta Urbano em Cascavel. Especialidade em posto de combustível no bairro Centro.",
     "bairro": "Centro",
-    "endereco": "Rua em Cascavel, Centro",
+    "endereco": "Avenida Brasil, 6200",
     "cidade": "Cascavel",
     "telefone": "(45) 99828-3456",
     "mensalidade": 300.0,
@@ -1342,10 +1396,10 @@
     "banner_url": "/static/parceiros/posto/posto_03_pc/banner.png",
     "destaque_esteira": 1,
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
+      "fixado": true,
+      "lat": -24.9543,
+      "lng": -53.4572,
+      "endereco": "Avenida Brasil, 6200",
       "bairro": "Centro"
     },
     "produtos": [
@@ -1369,7 +1423,9 @@
       }
     ],
     "dia_vencimento": 10,
-    "vencimento": "10/12/2026"
+    "vencimento": "10/12/2026",
+    "lat": -24.9543,
+    "lng": -53.4572
   },
   {
     "id": "parc_29",
@@ -1381,7 +1437,7 @@
     "subtitulo": "Ponto de encontro com diesel S10 de alta filtragem",
     "descricao": "Empresa parceira oficial do Alerta Urbano em Cascavel. Especialidade em posto de combustível no bairro Cancelli.",
     "bairro": "Cancelli",
-    "endereco": "Rua em Cascavel, Cancelli",
+    "endereco": "Rua Manaus, 1420",
     "cidade": "Cascavel",
     "telefone": "(45) 99829-3456",
     "mensalidade": 300.0,
@@ -1391,10 +1447,10 @@
     "banner_url": "/static/parceiros/posto/posto_04_ro/banner.png",
     "destaque_esteira": 1,
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
+      "fixado": true,
+      "lat": -24.9438,
+      "lng": -53.4762,
+      "endereco": "Rua Manaus, 1420",
       "bairro": "Cancelli"
     },
     "produtos": [
@@ -1418,7 +1474,9 @@
       }
     ],
     "dia_vencimento": 10,
-    "vencimento": "10/12/2026"
+    "vencimento": "10/12/2026",
+    "lat": -24.9438,
+    "lng": -53.4762
   },
   {
     "id": "parc_30",
@@ -1430,7 +1488,7 @@
     "subtitulo": "Garantia de procedência e atendimento nota 10",
     "descricao": "Empresa parceira oficial do Alerta Urbano em Cascavel. Especialidade em posto de combustível no bairro Pacaembu.",
     "bairro": "Pacaembu",
-    "endereco": "Rua em Cascavel, Pacaembu",
+    "endereco": "Rua Olindo Periollo, 850",
     "cidade": "Cascavel",
     "telefone": "(45) 99830-3456",
     "mensalidade": 300.0,
@@ -1440,10 +1498,10 @@
     "banner_url": "/static/parceiros/posto/posto_05_pd/banner.png",
     "destaque_esteira": 1,
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
+      "fixado": true,
+      "lat": -24.9638,
+      "lng": -53.4362,
+      "endereco": "Rua Olindo Periollo, 850",
       "bairro": "Pacaembu"
     },
     "produtos": [
@@ -1467,7 +1525,9 @@
       }
     ],
     "dia_vencimento": 10,
-    "vencimento": "10/12/2026"
+    "vencimento": "10/12/2026",
+    "lat": -24.9638,
+    "lng": -53.4362
   },
   {
     "id": "parc_31",
@@ -1479,7 +1539,7 @@
     "subtitulo": "Manutenção preventiva e corretiva para todas as marcas",
     "descricao": "Empresa parceira oficial do Alerta Urbano em Cascavel. Especialidade em mecânica de moto no bairro Centro.",
     "bairro": "Centro",
-    "endereco": "Rua em Cascavel, Centro",
+    "endereco": "Rua Paraná, 2840",
     "cidade": "Cascavel",
     "telefone": "(45) 99831-3456",
     "mensalidade": 300.0,
@@ -1489,10 +1549,10 @@
     "banner_url": "/static/parceiros/moto_mecanica/moto_mecanica_01_dr/banner.png",
     "destaque_esteira": 1,
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
+      "fixado": true,
+      "lat": -24.9528,
+      "lng": -53.4592,
+      "endereco": "Rua Paraná, 2840",
       "bairro": "Centro"
     },
     "produtos": [
@@ -1516,7 +1576,9 @@
       }
     ],
     "dia_vencimento": 10,
-    "vencimento": "10/12/2026"
+    "vencimento": "10/12/2026",
+    "lat": -24.9528,
+    "lng": -53.4592
   },
   {
     "id": "parc_32",
@@ -1528,7 +1590,7 @@
     "subtitulo": "Oficina completa com peças originais e paralelas de qualidade",
     "descricao": "Empresa parceira oficial do Alerta Urbano em Cascavel. Especialidade em mecânica de moto no bairro São Cristóvão.",
     "bairro": "São Cristóvão",
-    "endereco": "Rua em Cascavel, São Cristóvão",
+    "endereco": "Avenida Piquiri, 1200",
     "cidade": "Cascavel",
     "telefone": "(45) 99832-3456",
     "mensalidade": 300.0,
@@ -1538,10 +1600,10 @@
     "banner_url": "/static/parceiros/moto_mecanica/moto_mecanica_02_cm/banner.png",
     "destaque_esteira": 1,
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
+      "fixado": true,
+      "lat": -24.9368,
+      "lng": -53.4322,
+      "endereco": "Avenida Piquiri, 1200",
       "bairro": "São Cristóvão"
     },
     "produtos": [
@@ -1565,7 +1627,9 @@
       }
     ],
     "dia_vencimento": 10,
-    "vencimento": "10/12/2026"
+    "vencimento": "10/12/2026",
+    "lat": -24.9368,
+    "lng": -53.4322
   },
   {
     "id": "parc_33",
@@ -1577,7 +1641,7 @@
     "subtitulo": "Preparação, elétrica e mecânica pesada de motos",
     "descricao": "Empresa parceira oficial do Alerta Urbano em Cascavel. Especialidade em mecânica de moto no bairro Coqueiral.",
     "bairro": "Coqueiral",
-    "endereco": "Rua em Cascavel, Coqueiral",
+    "endereco": "Rua Recife, 2400",
     "cidade": "Cascavel",
     "telefone": "(45) 99833-3456",
     "mensalidade": 300.0,
@@ -1587,10 +1651,10 @@
     "banner_url": "/static/parceiros/moto_mecanica/moto_mecanica_03_gm/banner.png",
     "destaque_esteira": 1,
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
+      "fixado": true,
+      "lat": -24.9523,
+      "lng": -53.4807,
+      "endereco": "Rua Recife, 2400",
       "bairro": "Coqueiral"
     },
     "produtos": [
@@ -1614,7 +1678,9 @@
       }
     ],
     "dia_vencimento": 10,
-    "vencimento": "10/12/2026"
+    "vencimento": "10/12/2026",
+    "lat": -24.9523,
+    "lng": -53.4807
   },
   {
     "id": "parc_34",
@@ -1626,7 +1692,7 @@
     "subtitulo": "Mecânica de alta cilindrada e scooter",
     "descricao": "Empresa parceira oficial do Alerta Urbano em Cascavel. Especialidade em mecânica de moto no bairro Santa Cruz.",
     "bairro": "Santa Cruz",
-    "endereco": "Rua em Cascavel, Santa Cruz",
+    "endereco": "Avenida Tito Muffato, 1600",
     "cidade": "Cascavel",
     "telefone": "(45) 99834-3456",
     "mensalidade": 300.0,
@@ -1636,10 +1702,10 @@
     "banner_url": "/static/parceiros/moto_mecanica/moto_mecanica_04_sm/banner.png",
     "destaque_esteira": 1,
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
+      "fixado": true,
+      "lat": -24.9638,
+      "lng": -53.5062,
+      "endereco": "Avenida Tito Muffato, 1600",
       "bairro": "Santa Cruz"
     },
     "produtos": [
@@ -1663,7 +1729,9 @@
       }
     ],
     "dia_vencimento": 10,
-    "vencimento": "10/12/2026"
+    "vencimento": "10/12/2026",
+    "lat": -24.9638,
+    "lng": -53.5062
   },
   {
     "id": "parc_35",
@@ -1675,7 +1743,7 @@
     "subtitulo": "Preço amigo e rapidez no socorro para entregadores",
     "descricao": "Empresa parceira oficial do Alerta Urbano em Cascavel. Especialidade em mecânica de moto no bairro Cancelli.",
     "bairro": "Cancelli",
-    "endereco": "Rua em Cascavel, Cancelli",
+    "endereco": "Rua Presidente Bernardes, 2100",
     "cidade": "Cascavel",
     "telefone": "(45) 99835-3456",
     "mensalidade": 300.0,
@@ -1685,10 +1753,10 @@
     "banner_url": "/static/parceiros/moto_mecanica/moto_mecanica_05_om/banner.png",
     "destaque_esteira": 1,
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
+      "fixado": true,
+      "lat": -24.9423,
+      "lng": -53.4747,
+      "endereco": "Rua Presidente Bernardes, 2100",
       "bairro": "Cancelli"
     },
     "produtos": [
@@ -1712,7 +1780,9 @@
       }
     ],
     "dia_vencimento": 10,
-    "vencimento": "10/12/2026"
+    "vencimento": "10/12/2026",
+    "lat": -24.9423,
+    "lng": -53.4747
   },
   {
     "id": "parc_36",
@@ -1724,7 +1794,7 @@
     "subtitulo": "Injeção eletrônica, motor, câmbio e suspensão",
     "descricao": "Empresa parceira oficial do Alerta Urbano em Cascavel. Especialidade em mecânica de carro no bairro Centro.",
     "bairro": "Centro",
-    "endereco": "Rua em Cascavel, Centro",
+    "endereco": "Rua Rio Grande do Sul, 1250",
     "cidade": "Cascavel",
     "telefone": "(45) 99836-3456",
     "mensalidade": 300.0,
@@ -1734,10 +1804,10 @@
     "banner_url": "/static/parceiros/carro_mecanica/carro_mecanica_01_pa/banner.png",
     "destaque_esteira": 1,
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
+      "fixado": true,
+      "lat": -24.9556,
+      "lng": -53.4554,
+      "endereco": "Rua Rio Grande do Sul, 1250",
       "bairro": "Centro"
     },
     "produtos": [
@@ -1761,7 +1831,9 @@
       }
     ],
     "dia_vencimento": 10,
-    "vencimento": "10/12/2026"
+    "vencimento": "10/12/2026",
+    "lat": -24.9556,
+    "lng": -53.4554
   },
   {
     "id": "parc_37",
@@ -1773,7 +1845,7 @@
     "subtitulo": "Mais de 20 anos de tradição em motores em Cascavel",
     "descricao": "Empresa parceira oficial do Alerta Urbano em Cascavel. Especialidade em mecânica de carro no bairro Cancelli.",
     "bairro": "Cancelli",
-    "endereco": "Rua em Cascavel, Cancelli",
+    "endereco": "Rua Manaus, 1420",
     "cidade": "Cascavel",
     "telefone": "(45) 99837-3456",
     "mensalidade": 300.0,
@@ -1783,10 +1855,10 @@
     "banner_url": "/static/parceiros/carro_mecanica/carro_mecanica_02_mc/banner.png",
     "destaque_esteira": 1,
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
+      "fixado": true,
+      "lat": -24.9426,
+      "lng": -53.4774,
+      "endereco": "Rua Manaus, 1420",
       "bairro": "Cancelli"
     },
     "produtos": [
@@ -1810,7 +1882,9 @@
       }
     ],
     "dia_vencimento": 10,
-    "vencimento": "10/12/2026"
+    "vencimento": "10/12/2026",
+    "lat": -24.9426,
+    "lng": -53.4774
   },
   {
     "id": "parc_38",
@@ -1822,7 +1896,7 @@
     "subtitulo": "Tecnologia de ponta e peças com garantia de 1 ano",
     "descricao": "Empresa parceira oficial do Alerta Urbano em Cascavel. Especialidade em mecânica de carro no bairro Neva.",
     "bairro": "Neva",
-    "endereco": "Rua em Cascavel, Neva",
+    "endereco": "Rua Cuiabá, 2900",
     "cidade": "Cascavel",
     "telefone": "(45) 99838-3456",
     "mensalidade": 300.0,
@@ -1832,10 +1906,10 @@
     "banner_url": "/static/parceiros/carro_mecanica/carro_mecanica_03_mt/banner.png",
     "destaque_esteira": 1,
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
+      "fixado": true,
+      "lat": -24.9648,
+      "lng": -53.4692,
+      "endereco": "Rua Cuiabá, 2900",
       "bairro": "Neva"
     },
     "produtos": [
@@ -1859,7 +1933,9 @@
       }
     ],
     "dia_vencimento": 10,
-    "vencimento": "10/12/2026"
+    "vencimento": "10/12/2026",
+    "lat": -24.9648,
+    "lng": -53.4692
   },
   {
     "id": "parc_39",
@@ -1871,7 +1947,7 @@
     "subtitulo": "Especialistas em transmissão manual e automática",
     "descricao": "Empresa parceira oficial do Alerta Urbano em Cascavel. Especialidade em mecânica de carro no bairro Parque São Paulo.",
     "bairro": "Parque São Paulo",
-    "endereco": "Rua em Cascavel, Parque São Paulo",
+    "endereco": "Rua General Osório, 2800",
     "cidade": "Cascavel",
     "telefone": "(45) 99839-3456",
     "mensalidade": 300.0,
@@ -1881,10 +1957,10 @@
     "banner_url": "/static/parceiros/carro_mecanica/carro_mecanica_04_cc/banner.png",
     "destaque_esteira": 1,
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
+      "fixado": true,
+      "lat": -24.9705,
+      "lng": -53.4585,
+      "endereco": "Rua General Osório, 2800",
       "bairro": "Parque São Paulo"
     },
     "produtos": [
@@ -1908,7 +1984,9 @@
       }
     ],
     "dia_vencimento": 10,
-    "vencimento": "10/12/2026"
+    "vencimento": "10/12/2026",
+    "lat": -24.9705,
+    "lng": -53.4585
   },
   {
     "id": "parc_40",
@@ -1920,7 +1998,7 @@
     "subtitulo": "Confiança total e orçamento transparente e detalhado",
     "descricao": "Empresa parceira oficial do Alerta Urbano em Cascavel. Especialidade em mecânica de carro no bairro Coqueiral.",
     "bairro": "Coqueiral",
-    "endereco": "Rua em Cascavel, Coqueiral",
+    "endereco": "Avenida Brasil, 8500",
     "cidade": "Cascavel",
     "telefone": "(45) 99840-3456",
     "mensalidade": 300.0,
@@ -1930,10 +2008,10 @@
     "banner_url": "/static/parceiros/carro_mecanica/carro_mecanica_05_ga/banner.png",
     "destaque_esteira": 1,
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
+      "fixado": true,
+      "lat": -24.9533,
+      "lng": -53.4847,
+      "endereco": "Avenida Brasil, 8500",
       "bairro": "Coqueiral"
     },
     "produtos": [
@@ -1957,7 +2035,9 @@
       }
     ],
     "dia_vencimento": 10,
-    "vencimento": "10/12/2026"
+    "vencimento": "10/12/2026",
+    "lat": -24.9533,
+    "lng": -53.4847
   },
   {
     "id": "parc_41",
@@ -1969,7 +2049,7 @@
     "subtitulo": "Burgers grelhados no fogo com queijo derretido e bacon crocante",
     "descricao": "Empresa parceira oficial do Alerta Urbano em Cascavel. Especialidade em alimentação & lanches no bairro Centro.",
     "bairro": "Centro",
-    "endereco": "Rua em Cascavel, Centro",
+    "endereco": "Rua Minas Gerais, 1920",
     "cidade": "Cascavel",
     "telefone": "(45) 99841-3456",
     "mensalidade": 300.0,
@@ -1979,10 +2059,10 @@
     "banner_url": "/static/parceiros/alimentacao/alimentacao_01_bc/banner.png",
     "destaque_esteira": 1,
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
+      "fixado": true,
+      "lat": -24.9513,
+      "lng": -53.4587,
+      "endereco": "Rua Minas Gerais, 1920",
       "bairro": "Centro"
     },
     "produtos": [
@@ -2006,7 +2086,9 @@
       }
     ],
     "dia_vencimento": 10,
-    "vencimento": "10/12/2026"
+    "vencimento": "10/12/2026",
+    "lat": -24.9513,
+    "lng": -53.4587
   },
   {
     "id": "parc_42",
@@ -2018,7 +2100,7 @@
     "subtitulo": "Pizzas de fermentação natural assadas no forno à lenha",
     "descricao": "Empresa parceira oficial do Alerta Urbano em Cascavel. Especialidade em alimentação & lanches no bairro Country.",
     "bairro": "Country",
-    "endereco": "Rua em Cascavel, Country",
+    "endereco": "Rua Vicente Machado, 2100",
     "cidade": "Cascavel",
     "telefone": "(45) 99842-3456",
     "mensalidade": 300.0,
@@ -2028,10 +2110,10 @@
     "banner_url": "/static/parceiros/alimentacao/alimentacao_02_pi/banner.png",
     "destaque_esteira": 1,
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
+      "fixado": true,
+      "lat": -24.94,
+      "lng": -53.446,
+      "endereco": "Rua Vicente Machado, 2100",
       "bairro": "Country"
     },
     "produtos": [
@@ -2055,7 +2137,9 @@
       }
     ],
     "dia_vencimento": 10,
-    "vencimento": "10/12/2026"
+    "vencimento": "10/12/2026",
+    "lat": -24.94,
+    "lng": -53.446
   },
   {
     "id": "parc_43",
@@ -2067,7 +2151,7 @@
     "subtitulo": "O pastel mais recheado e crocante de Cascavel com caldo de cana",
     "descricao": "Empresa parceira oficial do Alerta Urbano em Cascavel. Especialidade em alimentação & lanches no bairro Centro.",
     "bairro": "Centro",
-    "endereco": "Rua em Cascavel, Centro",
+    "endereco": "Rua São Paulo, 1400",
     "cidade": "Cascavel",
     "telefone": "(45) 99843-3456",
     "mensalidade": 300.0,
@@ -2077,10 +2161,10 @@
     "banner_url": "/static/parceiros/alimentacao/alimentacao_03_pc/banner.png",
     "destaque_esteira": 1,
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
+      "fixado": true,
+      "lat": -24.9563,
+      "lng": -53.4542,
+      "endereco": "Rua São Paulo, 1400",
       "bairro": "Centro"
     },
     "produtos": [
@@ -2104,7 +2188,9 @@
       }
     ],
     "dia_vencimento": 10,
-    "vencimento": "10/12/2026"
+    "vencimento": "10/12/2026",
+    "lat": -24.9563,
+    "lng": -53.4542
   },
   {
     "id": "parc_44",
@@ -2116,7 +2202,7 @@
     "subtitulo": "Slot reservado para cadastro manual pelo Rigo",
     "descricao": "Empresa parceira oficial do Alerta Urbano em Cascavel. Especialidade em alimentação & lanches no bairro Coqueiral.",
     "bairro": "Coqueiral",
-    "endereco": "Rua em Cascavel, Coqueiral",
+    "endereco": "Rua Presidente Kennedy, 1850",
     "cidade": "Cascavel",
     "telefone": "(45) 99844-3456",
     "mensalidade": 300.0,
@@ -2126,16 +2212,18 @@
     "banner_url": "",
     "destaque_esteira": 1,
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
+      "fixado": true,
+      "lat": -24.9491,
+      "lng": -53.4844,
+      "endereco": "Rua Presidente Kennedy, 1850",
       "bairro": "Coqueiral"
     },
     "produtos": [],
     "is_manual_slot": true,
     "dia_vencimento": 10,
-    "vencimento": "10/12/2026"
+    "vencimento": "10/12/2026",
+    "lat": -24.9491,
+    "lng": -53.4844
   },
   {
     "id": "parc_45",
@@ -2147,7 +2235,7 @@
     "subtitulo": "Slot reservado para cadastro manual pelo Rigo",
     "descricao": "Empresa parceira oficial do Alerta Urbano em Cascavel. Especialidade em alimentação & lanches no bairro Neva.",
     "bairro": "Neva",
-    "endereco": "Rua em Cascavel, Neva",
+    "endereco": "Rua Pio XII, 1600",
     "cidade": "Cascavel",
     "telefone": "(45) 99845-3456",
     "mensalidade": 300.0,
@@ -2157,15 +2245,17 @@
     "banner_url": "",
     "destaque_esteira": 1,
     "posicao_mapa": {
-      "fixado": false,
-      "lat": null,
-      "lng": null,
-      "endereco": "",
+      "fixado": true,
+      "lat": -24.9633,
+      "lng": -53.4662,
+      "endereco": "Rua Pio XII, 1600",
       "bairro": "Neva"
     },
     "produtos": [],
     "is_manual_slot": true,
     "dia_vencimento": 10,
-    "vencimento": "10/12/2026"
+    "vencimento": "10/12/2026",
+    "lat": -24.9633,
+    "lng": -53.4662
   }
 ]

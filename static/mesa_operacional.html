@@ -3241,7 +3241,7 @@
               perfisOcorrencias.push({
                 id: 'alerta_' + a.id,
                 tutor: {
-                  nome: a.contato || 'Tutor em Cascavel',
+                  nome: a.autor_nome || a.fonte_nome || a.contato || 'Tutor em Cascavel',
                   avatar: '/static/logo_bolha_pura.png',
                   telefone: '(45) 99999-0000',
                   bairro_origem: a.bairro
@@ -3778,6 +3778,17 @@
         }
       } catch (_) {}
 
+      // Persistência permanente em disco (static/darkplanner_perfis_completos.json) e SQLite
+      try {
+        await fetch('/api/mesa/salvar-perfis', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ perfis: perfisOcorrencias })
+        });
+      } catch (eSave) {
+        console.warn('Erro ao salvar perfis no disco:', eSave);
+      }
+
       fecharPerfilDrawer();
       renderizarBandejaPerfis();
       plotarTodosPerfisNoMapa();
@@ -3816,6 +3827,17 @@
           await fetch(`/api/cockpit/excluir-por-pet?nome=${encodeURIComponent(petNome)}`, { method: 'DELETE' });
         }
       } catch (_) {}
+
+      // Atualiza persistência permanente em disco
+      try {
+        await fetch('/api/mesa/salvar-perfis', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ perfis: perfisOcorrencias })
+        });
+      } catch (eSave) {
+        console.warn('Erro ao atualizar perfis no disco:', eSave);
+      }
 
       fecharPerfilDrawer();
       renderizarBandejaPerfis();

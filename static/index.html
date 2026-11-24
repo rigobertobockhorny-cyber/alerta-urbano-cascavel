@@ -1016,14 +1016,22 @@
     /* ESTEIRA FIXA DE PARCEIROS (CONGELADA NO RODAPÉ) */
     .esteira-parceiros-docked {
       position: fixed;
-      bottom: 56px;
+      bottom: calc(52px + env(safe-area-inset-bottom, 0px));
       left: 0;
       right: 0;
-      z-index: 99;
+      z-index: 600 !important;
       background: #09090b;
-      border-top: 1.5px solid rgba(254, 215, 0, 0.5);
-      box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.55);
-      padding: 4px 8px 6px;
+      border-top: 1.5px solid #FED700;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 -4px 18px rgba(0, 0, 0, 0.75);
+      padding: 5px 8px 6px;
+    }
+    .esteira-parceiros-docked .esteira-parceiro-pill {
+      background: #18181b !important;
+      border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    }
+    .esteira-parceiros-docked .esteira-parceiro-nome {
+      color: #ffffff !important;
     }
     .esteira-docked-header {
       display: flex;
@@ -3542,10 +3550,6 @@
           <div class="belt-block">
             <div class="belt-head">
               <div class="belt-title uti-title">
-                <svg class="belt-svg" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="m3 11 18-5v12L3 14v-3z"/>
-                  <path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/>
-                </svg>
                 <span>Utilidade Pública</span>
               </div>
             </div>
@@ -3558,10 +3562,6 @@
           <div class="belt-block">
             <div class="belt-head">
               <div class="belt-title seg-title">
-                <svg class="belt-svg" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                  <path d="m9 12 2 2 4-4"/>
-                </svg>
                 <span>Segurança</span>
               </div>
             </div>
@@ -3577,8 +3577,7 @@
         <div id="map"></div>
 
         <div class="map-top-pills">
-          <button type="button" class="map-pill active" data-pilar="todos" onclick="filtrarMapa('todos', this)">Todos</button>
-          <button type="button" class="map-pill" data-pilar="pet" onclick="filtrarMapa('pet', this)">Pets</button>
+          <button type="button" class="map-pill active" data-pilar="pet" onclick="filtrarMapa('pet', this)">Pets</button>
           <button type="button" class="map-pill" data-pilar="seguranca" onclick="filtrarMapa('seguranca', this)">Segurança</button>
           <button type="button" class="map-pill" data-pilar="transito" onclick="filtrarMapa('transito', this)">Trânsito</button>
           <button type="button" class="map-pill" data-pilar="parceiros" onclick="filtrarMapa('parceiros', this)">Parceiros</button>
@@ -3612,11 +3611,11 @@
       </section>
 
       <!-- ABA 3: PETS (ARQUITETURA DE 3 PILARES HIERÁRQUICOS) -->
-      <section class="tab-pane" id="tab-pets" style="padding-bottom:140px;">
+      <section class="tab-pane" id="tab-pets" style="padding-bottom:170px;">
         <!-- BLOCO 1: CENTRAL SLIM DE REGISTRO DE OCORRÊNCIAS (COMPACTO - PEDIDO DO RIGO) -->
         <div style="margin-bottom:12px; background:#ffffff; border-radius:16px; padding:10px 12px; border:1px solid rgba(0,0,0,0.08); box-shadow:0 3px 10px rgba(0,0,0,0.04);">
           <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-            <div style="font-size:10.5px; font-weight:900; letter-spacing:0.5px; color:#009B3A; text-transform:uppercase;">🐾 Central Pet de Cascavel</div>
+            <div style="font-size:10.5px; font-weight:900; letter-spacing:0.5px; color:#009B3A; text-transform:uppercase;">🐾 Rede de Proteção Animal</div>
             <div style="font-size:10px; color:#71717A; font-weight:700;">Toque para registrar</div>
           </div>
           <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px;">
@@ -3662,7 +3661,7 @@
       </section>
 
       <!-- ABA 4: PARCEIROS (EMPRESAS AMIGAS & PROMOÇÕES DE CASCAVEL) -->
-      <section class="tab-pane" id="tab-parceiros" style="padding-bottom:140px;">
+      <section class="tab-pane" id="tab-parceiros" style="padding-bottom:170px;">
         <!-- Header da Aba Parceiros -->
         <div style="background:#ffffff; border-radius:18px; padding:18px 16px; margin-bottom:14px; border:1px solid rgba(0,0,0,0.08); box-shadow:0 4px 14px rgba(0,0,0,0.04);">
           <div style="display:flex; justify-content:space-between; align-items:center;">
@@ -4591,7 +4590,7 @@
       petsMainPillar: 'desaparecidos',
       petsSubFilter: 'desaparecido',
       adocaoFilter: 'todos',
-      mapaFilter: 'todos',
+      mapaFilter: 'pet',
       satelite: false,
       calorAtivo: true,
       userLat: null,
@@ -4649,8 +4648,13 @@
       if (nav) nav.classList.add('active');
 
       const docked = document.getElementById('esteira-parceiros-docked');
+      const bottomWave = document.querySelector('.bottom-river-wave');
       if (docked) {
-        docked.style.display = (aba === 'pets' || aba === 'parceiros') ? 'block' : 'none';
+        const mostrarDocked = (aba === 'pets' || aba === 'parceiros');
+        docked.style.display = mostrarDocked ? 'block' : 'none';
+        if (bottomWave) {
+          bottomWave.style.display = mostrarDocked ? 'none' : 'block';
+        }
       }
 
       if (aba === 'mapa') {
@@ -4774,19 +4778,15 @@
 
       const filtrados = state.alertas.filter(a => {
         if (!a.lat || !a.lng) return false;
-        if (state.mapaFilter === 'todos') return true;
         return a.pilar === state.mapaFilter;
       });
 
-      // 1. Marcadores de Pets: Bolinha com Foto e Borda Preta (Em 'pet' e em 'todos')
-      // NO FILTRO 'TODOS', EXIBE APENAS ANIMAIS PERDIDOS (SEM ADOÇÃO PARA NÃO POLUIR)
-      if (state.mapaFilter === 'pet' || state.mapaFilter === 'todos') {
+      // 1. Marcadores de Pets: Bolinha com Foto e Borda Preta (Filtro 'pet')
+      // EXIBE APENAS ANIMAIS PERDIDOS E AVISTADOS (SEM ADOÇÃO PARA NÃO POLUIR O MAPA)
+      if (state.mapaFilter === 'pet') {
         const petsParaMarcar = filtrados.filter(p => {
           if (p.pilar !== 'pet') return false;
-          if (state.mapaFilter === 'todos') {
-            return p.tipo !== 'pet_adocao' && p.status_pet !== 'adocao';
-          }
-          return true;
+          return p.tipo !== 'pet_adocao' && p.status_pet !== 'adocao';
         });
         petsParaMarcar.forEach(p => {
           if (!p.lat || !p.lng) return;
@@ -4808,15 +4808,11 @@
           m.on('click', () => abrirDetalheById(p.id));
           markersLayer.addLayer(m);
         });
-
-        // Se o filtro for estritamente 'pet', encerra sem mapa de calor
-        if (state.mapaFilter === 'pet') {
-          return;
-        }
+        return;
       }
 
-      // 2. Marcadores de Trânsito / Ponto Seguro (Em 'transito' e em 'todos')
-      if (state.mapaFilter === 'transito' || state.mapaFilter === 'todos') {
+      // 2. Marcadores de Trânsito / Ponto Seguro (Filtro 'transito')
+      if (state.mapaFilter === 'transito') {
         const transitoParaMarcar = filtrados.filter(t => t.pilar === 'transito');
         transitoParaMarcar.forEach(t => {
           if (!t.lat || !t.lng) return;
@@ -4835,18 +4831,20 @@
           m.on('click', () => abrirDetalheById(t.id));
           markersLayer.addLayer(m);
         });
-
-        // Se o filtro for estritamente 'transito', encerra
-        if (state.mapaFilter === 'transito') {
-          return;
-        }
+        return;
       }
 
-      // 3. Marcadores de Empresas Parceiras (Apenas em 'parceiros', NUNCA em 'todos' para não poluir)
+      // 3. Marcadores de Empresas Parceiras (Filtro 'parceiros' - 45 parceiros de Cascavel)
       if (state.mapaFilter === 'parceiros') {
         const parceirosParaMarcar = state.parceiros || [];
         parceirosParaMarcar.forEach(parc => {
-          if (!parc.lat || !parc.lng || Number(parc.lat) === 0 || Number(parc.lng) === 0) return;
+          let pLat = Number(parc.lat);
+          let pLng = Number(parc.lng);
+          if (!pLat || !pLng || isNaN(pLat) || isNaN(pLng) || pLat === 0) {
+            const coord = BAIRROS_COORDS[parc.bairro] || CASCAVEL_CENTER;
+            pLat = coord[0] + (((parc.id || 1) % 7) - 3) * 0.0016;
+            pLng = coord[1] + ((((parc.id || 1) * 3) % 7) - 3) * 0.0016;
+          }
           const ehOuro = parc.selo_tipo === 'ouro';
           const borderColor = ehOuro ? '#FED700' : '#009B3A';
           const badgeIcon = (parc.categoria === 'pet_vet' || parc.categoria === 'pet_shop') ? '🐾' : (parc.categoria === 'auto_center' ? '🚗' : '⛽');
@@ -4863,12 +4861,29 @@
             iconAnchor: [19, 19]
           });
 
-          const m = L.marker([parc.lat, parc.lng], { icon: customPartnerIcon });
+          const m = L.marker([pLat, pLng], { icon: customPartnerIcon });
           m.on('click', () => abrirFolderParceiro(parc));
           markersLayer.addLayer(m);
         });
+        return;
+      }
 
-        // Se o filtro for estritamente 'parceiros', encerra sem mapa de calor
+      // 4. Marcadores e Heatmap de Segurança
+      if (state.mapaFilter === 'seguranca') {
+        const segParaMarcar = filtrados.filter(s => s.pilar === 'seguranca');
+        segParaMarcar.forEach(s => {
+          if (!s.lat || !s.lng) return;
+          const customIcon = L.divIcon({
+            className: 'custom-leaflet-pet-pin',
+            html: `<div style="width:32px; height:32px; border-radius:50%; background:#DC2626; border:2px solid #FFFFFF; box-shadow:0 3px 10px rgba(220,38,38,0.5); display:flex; align-items:center; justify-content:center; font-size:14px; color:#fff;">🛡️</div>`,
+            iconSize: [32, 32],
+            iconAnchor: [16, 16]
+          });
+          const m = L.marker([s.lat, s.lng], { icon: customIcon });
+          m.on('click', () => abrirDetalheById(s.id));
+          markersLayer.addLayer(m);
+        });
+      }
         return;
       }
 
@@ -5216,8 +5231,6 @@
         return;
       }
       const ehSeguranca = (pilarTipo === 'seguranca');
-      const badgeIcon = ehSeguranca ? '🚨' : '📢';
-      const badgeLabel = ehSeguranca ? 'Segurança' : 'Utilidade';
       const cardThemeClass = ehSeguranca ? 'belt-card-seguranca' : 'belt-card-utilidade';
 
       const html = lista.map(a => {
@@ -5232,13 +5245,10 @@
         return `
           <div class="belt-info-card ${cardThemeClass}" onclick="abrirDetalheById(${a.id})">
             <div class="belt-info-topbar">
-              <span class="belt-badge-tag">${badgeIcon} ${badgeLabel}</span>
+              <span class="belt-info-loc">${escapeHtml(bairroLimpo)}</span>
               <span class="belt-info-time">${tempo}</span>
             </div>
             <div class="belt-info-title">${escapeHtml(tit)}</div>
-            <div class="belt-info-meta">
-              <span class="belt-info-loc">📍 ${escapeHtml(bairroLimpo)}</span>
-            </div>
           </div>
         `;
       }).join('');
@@ -5420,15 +5430,18 @@
         const distTxt = (state.userLat && state.userLng) ? formatarDistancia(calcularDistanciaM(state.userLat, state.userLng, p.lat, p.lng)) : '';
         const isLiked = curtidos.includes(p.id);
 
-        // Autor e Subtítulo neutro
-        let autorNome = p.autor_nome || 'Tutor em Cascavel';
-        let autorSub = (p.bairro || 'Cascavel') + ' • ' + tempoRelativo(p.created_at);
+        // Autor e Subtítulo com Rua real e Nome do Tutor
+        let autorNome = p.autor_nome || p.fonte_nome || 'Tutor em Cascavel';
+        let localRua = p.rua ? p.rua : '';
+        let localBairro = p.bairro ? p.bairro : 'Cascavel';
+        let localStr = localRua ? `${localRua} • ${localBairro}` : localBairro;
+        let autorSub = localStr + ' • ' + tempoRelativo(p.created_at);
         let autorLetra = 'T';
         if (ehImprensa) {
           autorNome = 'Imprensa Local';
           autorLetra = 'I';
-        } else if (p.autor_nome) {
-          autorLetra = p.autor_nome.charAt(0).toUpperCase();
+        } else if (autorNome && autorNome !== 'Tutor em Cascavel') {
+          autorLetra = autorNome.charAt(0).toUpperCase();
         }
 
         // Bloco Sólido (Roxo, Rosa ou Azul) + 3 Bolhas Coloridas Grandes Sem Margem (Sempre no Fundo)
@@ -6596,7 +6609,7 @@ Baixe o aplicativo gratuito Alerta Urbano:
             ? `<img src="${escapeAttr(av.foto_url)}" style="width:100%;max-height:170px;object-fit:cover;border-radius:12px;margin:8px 0;" alt="Foto enviada">`
             : '';
           const waBtn = av.contato_avistador
-            ? `<a href="https://wa.me/${escapeAttr(av.contato_avistador)}?text=${encodeURIComponent('Olá! Sou o tutor de ' + av.pet_titulo + ' no Alerta Urbano. Vi seu aviso!')}" target="_blank" class="btn-slim ok" style="text-decoration:none;">Falar no WhatsApp</a>`
+            ? `<button type="button" onclick="abrirWhatsAppUniversal('${escapeAttr(av.contato_avistador)}', 'Olá! Sou o tutor de ${escapeAttr(av.pet_titulo || 'Pet')} no Alerta Urbano. Vi seu aviso!')" class="btn-slim ok" style="cursor:pointer; border:none;">Falar no WhatsApp</button>`
             : `<span style="font-size:10px; color:var(--text-dim);">Contato privado (somente ponto no mapa)</span>`;
           const acoesResgate = ehResg
             ? `<div style="display:flex; gap:6px; margin-top:8px;">
@@ -7144,7 +7157,7 @@ Baixe o aplicativo gratuito Alerta Urbano:
                         <span style="font-size:13.5px; font-weight:900; color:#009B3A;">R$ ${prod.preco_promocional.toFixed(2).replace('.', ',')}</span>
                       </div>
                     </div>
-                    <button type="button" onclick="abrirWhatsappParceiroById(${p.id}, '${escapeAttr(prod.titulo)}')" style="background:#009B3A; color:#ffffff; border:none; border-radius:10px; padding:8px 10px; font-size:11px; font-weight:800; cursor:pointer; white-space:nowrap; box-shadow:0 2px 6px rgba(0,155,58,0.3);">
+                    <button type="button" onclick="abrirWhatsappParceiroById('${escapeAttr(p.id)}', '${escapeAttr(prod.titulo)}')" style="background:#009B3A; color:#ffffff; border:none; border-radius:10px; padding:8px 10px; font-size:11px; font-weight:800; cursor:pointer; white-space:nowrap; box-shadow:0 2px 6px rgba(0,155,58,0.3);">
                       Pedir 💬
                     </button>
                   </div>
@@ -7179,10 +7192,10 @@ Baixe o aplicativo gratuito Alerta Urbano:
 
             <!-- Botões de Ação do Card -->
             <div style="display:flex; gap:8px; margin-top:14px;">
-              <button type="button" onclick="abrirWhatsappParceiroById(${p.id})" style="flex:1; background:#009B3A; color:#ffffff; border:none; padding:10px 12px; border-radius:12px; font-size:12px; font-weight:900; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:6px; box-shadow:0 3px 10px rgba(0,155,58,0.25);">
+              <button type="button" onclick="abrirWhatsappParceiroById('${escapeAttr(p.id)}')" style="flex:1; background:#009B3A; color:#ffffff; border:none; padding:10px 12px; border-radius:12px; font-size:12px; font-weight:900; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:6px; box-shadow:0 3px 10px rgba(0,155,58,0.25);">
                 <span>💬</span> Chamar no WhatsApp
               </button>
-              <button type="button" onclick="verParceiroNoMapa(${p.id}, ${p.lat}, ${p.lng})" style="background:#000000; color:#FED700; border:none; padding:10px 12px; border-radius:12px; font-size:12px; font-weight:800; cursor:pointer; display:flex; align-items:center; gap:4px; box-shadow:0 3px 10px rgba(0,0,0,0.2);">
+              <button type="button" onclick="verParceiroNoMapa('${escapeAttr(p.id)}', ${p.lat}, ${p.lng})" style="background:#000000; color:#FED700; border:none; padding:10px 12px; border-radius:12px; font-size:12px; font-weight:800; cursor:pointer; display:flex; align-items:center; gap:4px; box-shadow:0 3px 10px rgba(0,0,0,0.2);">
                 <span>📍</span> Mapa
               </button>
             </div>
@@ -7231,7 +7244,7 @@ Baixe o aplicativo gratuito Alerta Urbano:
           : `<span class="esteira-parceiro-star">⭐</span>`;
 
         return `
-          <div class="esteira-parceiro-pill" onclick="abrirFolderParceiroById(${p.id})">
+          <div class="esteira-parceiro-pill" onclick="abrirFolderParceiroById('${escapeAttr(p.id)}')">
             ${logoImg}
             <span class="esteira-parceiro-nome">${escapeHtml(p.nome)}</span>
             ${tag}
@@ -7262,7 +7275,7 @@ Baixe o aplicativo gratuito Alerta Urbano:
     }
 
     function abrirFolderParceiroById(id) {
-      const p = (state.parceiros || []).find(item => item.id === Number(id));
+      const p = (state.parceiros || []).find(item => String(item.id) === String(id));
       if (p) abrirFolderParceiro(p);
     }
 
@@ -7297,7 +7310,7 @@ Baixe o aplicativo gratuito Alerta Urbano:
                       <span style="font-size:14px; font-weight:900; color:#009B3A;">R$ ${prod.preco_promocional.toFixed(2).replace('.', ',')}</span>
                     </div>
                   </div>
-                  <button type="button" onclick="abrirWhatsappParceiroById(${parc.id}, '${escapeAttr(prod.titulo)}')" style="background:#009B3A; color:#ffffff; border:none; border-radius:10px; padding:8px 12px; font-size:11px; font-weight:800; cursor:pointer;">
+                  <button type="button" onclick="abrirWhatsappParceiroById('${escapeAttr(parc.id)}', '${escapeAttr(prod.titulo)}')" style="background:#009B3A; color:#ffffff; border:none; border-radius:10px; padding:8px 12px; font-size:11px; font-weight:800; cursor:pointer;">
                     Pedir 💬
                   </button>
                 </div>
@@ -7332,10 +7345,10 @@ Baixe o aplicativo gratuito Alerta Urbano:
         </div>
 
         <div style="display:flex; gap:8px; margin-top:10px;">
-          <button type="button" onclick="abrirWhatsappParceiroById(${parc.id})" style="flex:1; background:#009B3A; color:#ffffff; border:none; padding:12px 14px; border-radius:14px; font-size:13px; font-weight:900; cursor:pointer; box-shadow:0 4px 12px rgba(0,155,58,0.3);">
+          <button type="button" onclick="abrirWhatsappParceiroById('${escapeAttr(parc.id)}')" style="flex:1; background:#009B3A; color:#ffffff; border:none; padding:12px 14px; border-radius:14px; font-size:13px; font-weight:900; cursor:pointer; box-shadow:0 4px 12px rgba(0,155,58,0.3);">
             Chamar no WhatsApp 💬
           </button>
-          <button type="button" onclick="fecharModal('modal-parceiro'); verParceiroNoMapa(${parc.id}, ${parc.lat}, ${parc.lng})" style="background:#000000; color:#FED700; border:none; padding:12px 14px; border-radius:14px; font-size:13px; font-weight:800; cursor:pointer; box-shadow:0 4px 12px rgba(0,0,0,0.25);">
+          <button type="button" onclick="fecharModal('modal-parceiro'); verParceiroNoMapa('${escapeAttr(parc.id)}', ${parc.lat}, ${parc.lng})" style="background:#000000; color:#FED700; border:none; padding:12px 14px; border-radius:14px; font-size:13px; font-weight:800; cursor:pointer; box-shadow:0 4px 12px rgba(0,0,0,0.25);">
             Como Chegar 📍
           </button>
         </div>
@@ -7344,37 +7357,66 @@ Baixe o aplicativo gratuito Alerta Urbano:
       sheet.classList.add('open');
     }
 
+    function abrirWhatsAppUniversal(fone, msg) {
+      let foneLimpo = String(fone || '').replace(/\D/g, '');
+      if (!foneLimpo) {
+        mostrarToast('Telefone não informado.');
+        return;
+      }
+      if (!foneLimpo.startsWith('55')) foneLimpo = '55' + foneLimpo;
+      const texto = msg || 'Olá! Gostaria de atendimento via Alerta Urbano Cascavel.';
+
+      // 1. Tenta bridge Android nativa (se compilada no APK)
+      try {
+        if (window.AndroidAlerta && typeof window.AndroidAlerta.abrirWhatsApp === 'function') {
+          window.AndroidAlerta.abrirWhatsApp(foneLimpo, texto);
+          return;
+        }
+      } catch (_) {}
+
+      // 2. Disparo direto por URI scheme nativo Android (whatsapp://send)
+      // O Android intercepta o scheme whatsapp:// e abre diretamente o app do WhatsApp,
+      // sem jamais navegar ou recarregar a WebView interna do aplicativo!
+      const zapScheme = `whatsapp://send?phone=${foneLimpo}&text=${encodeURIComponent(texto)}`;
+      
+      try {
+        const link = document.createElement('a');
+        link.href = zapScheme;
+        link.setAttribute('target', '_top');
+        document.body.appendChild(link);
+        link.click();
+        setTimeout(() => {
+          if (link.parentNode) link.parentNode.removeChild(link);
+        }, 600);
+      } catch (err) {
+        window.location.href = zapScheme;
+      }
+    }
+
     function abrirWhatsappParceiroById(id, prodTitulo) {
-      const p = (state.parceiros || []).find(item => item.id === Number(id));
+      const p = (state.parceiros || []).find(item => String(item.id) === String(id));
       if (!p) return;
       abrirWhatsappParceiro(p, prodTitulo);
     }
 
     function abrirWhatsappParceiro(parc, prodTitulo) {
-      let fone = String(parc.telefone_whatsapp || '').replace(/\D/g, '');
-      if (!fone) {
-        mostrarToast('Telefone do parceiro não informado.');
-        return;
-      }
-      if (!fone.startsWith('55')) fone = '55' + fone;
-
+      const fone = parc.telefone_whatsapp || parc.telefone || '';
       let msg = '';
       if (prodTitulo) {
         msg = `Olá! Vi a oferta "${prodTitulo}" no aplicativo Alerta Urbano Cascavel e gostaria de aproveitar.`;
       } else {
         msg = `Olá! Encontrei sua empresa no aplicativo Alerta Urbano Cascavel e gostaria de atendimento.`;
       }
-
-      if (window.AndroidAlerta && typeof window.AndroidAlerta.abrirWhatsApp === 'function') {
-        window.AndroidAlerta.abrirWhatsApp(fone, msg);
-      } else {
-        window.open(`https://wa.me/${fone}?text=${encodeURIComponent(msg)}`, '_blank');
-      }
+      abrirWhatsAppUniversal(fone, msg);
     }
 
     function verParceiroNoMapa(parcId, lat, lng) {
       fecharModal('modal-parceiro');
       irParaMapaComFiltro('parceiros');
+      if (!lat || !lng) {
+        const p = (state.parceiros || []).find(item => String(item.id) === String(parcId));
+        if (p) { lat = Number(p.lat); lng = Number(p.lng); }
+      }
       setTimeout(() => {
         if (map && lat && lng) {
           map.flyTo([lat, lng], 16, { duration: 0.6 });
