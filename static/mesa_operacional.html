@@ -1115,6 +1115,23 @@
       transform: scale(1.03);
     }
 
+    .btn-bairro-pill {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border);
+      color: #F8FAFC;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .btn-bairro-pill:hover {
+      background: rgba(254, 215, 0, 0.2);
+      border-color: #FED700;
+      color: #FED700;
+    }
+
     /* Resumo no Drawer do Perfil */
     .perfil-summary-card {
       background: rgba(0, 0, 0, 0.35);
@@ -1762,6 +1779,21 @@
             <span style="font-size: 10px; color: var(--text-muted); margin-top: 3px; display: block;">
               💡 Digite a rua e clique em Buscar, ou clique diretamente na rua no mapa.
             </span>
+          </div>
+
+          <!-- Pílulas de Bairros para Direcionamento Imediato -->
+          <div style="margin-top: 6px; margin-bottom: 10px;">
+            <span style="font-size: 10px; color: var(--text-dim); display:block; margin-bottom:4px;">📍 Pular Alfinete Direto para o Bairro:</span>
+            <div style="display:flex; flex-wrap:wrap; gap:4px;">
+              <button type="button" class="btn-bairro-pill" onclick="pularAlfineteParaBairro('Centro')">Centro</button>
+              <button type="button" class="btn-bairro-pill" onclick="pularAlfineteParaBairro('Coqueiral')">Coqueiral</button>
+              <button type="button" class="btn-bairro-pill" onclick="pularAlfineteParaBairro('Neva')">Neva</button>
+              <button type="button" class="btn-bairro-pill" onclick="pularAlfineteParaBairro('Cancelli')">Cancelli</button>
+              <button type="button" class="btn-bairro-pill" onclick="pularAlfineteParaBairro('São Cristóvão')">São Cristóvão</button>
+              <button type="button" class="btn-bairro-pill" onclick="pularAlfineteParaBairro('Alto Alegre')">Alto Alegre</button>
+              <button type="button" class="btn-bairro-pill" onclick="pularAlfineteParaBairro('Claudete')">Claudete</button>
+              <button type="button" class="btn-bairro-pill" onclick="pularAlfineteParaBairro('Parque São Paulo')">Pq. São Paulo</button>
+            </div>
           </div>
 
           <div class="form-row">
@@ -3048,6 +3080,34 @@
     let markersPerfisMap = {};
     let circlesPerfisMap = {};
 
+    const BAIRROS_CASCAVEL_COORDS = {
+      'Centro': { lat: -24.9555, lng: -53.4565, rua: 'Av. Brasil, Centro' },
+      'Coqueiral': { lat: -24.9530, lng: -53.4770, rua: 'Rua Recife, Coqueiral' },
+      'Neva': { lat: -24.9650, lng: -53.4580, rua: 'Rua Cuiabá, Neva' },
+      'Cancelli': { lat: -24.9460, lng: -53.4620, rua: 'Rua Antonina, Cancelli' },
+      'São Cristóvão': { lat: -24.9470, lng: -53.4350, rua: 'Rua Barão do Cerro Azul, São Cristóvão' },
+      'Parque São Paulo': { lat: -24.9680, lng: -53.4470, rua: 'Av. Carlos Gomes, Parque São Paulo' },
+      'Alto Alegre': { lat: -24.9610, lng: -53.4830, rua: 'Rua Vitória, Alto Alegre' },
+      'Santa Cruz': { lat: -24.9580, lng: -53.4900, rua: 'Rua Tupis, Santa Cruz' },
+      'Country': { lat: -24.9400, lng: -53.4450, rua: 'Rua Vicente Machado, Country' },
+      'Pacaembu': { lat: -24.9590, lng: -53.4280, rua: 'Rua Olindo Periolo, Pacaembu' },
+      'Brasmadeira': { lat: -24.9350, lng: -53.4480, rua: 'Av. Piquiri, Brasmadeira' },
+      'Interlagos': { lat: -24.9280, lng: -53.4400, rua: 'Rua Interlagos, Interlagos' },
+      'Floresta': { lat: -24.9220, lng: -53.4250, rua: 'Av. Papagaios, Floresta' },
+      'Cascavel Velho': { lat: -24.9750, lng: -53.4200, rua: 'Rua Itália, Cascavel Velho' },
+      'Ciro Nardi': { lat: -24.9620, lng: -53.4430, rua: 'Rua da Lapa, Ciro Nardi' },
+      'Claudete': { lat: -24.9430, lng: -53.4680, rua: 'Rua Jorge Lacerda, Claudete' }
+    };
+
+    function pularAlfineteParaBairro(nomeBairro) {
+      const info = BAIRROS_CASCAVEL_COORDS[nomeBairro];
+      if (!info) return;
+      posicionarAlfineteEdicaoPerfil(info.lat, info.lng, true);
+      document.getElementById('perfil-edit-bairro').value = nomeBairro;
+      document.getElementById('perfil-edit-endereco').value = info.rua || '';
+      mostrarToast(`📍 Alfinete direcionado para ${nomeBairro} (${info.rua})!`);
+    }
+
     function inicializarMapaPets() {
       if (mapPets) {
         setTimeout(() => mapPets.invalidateSize(true), 60);
@@ -3221,7 +3281,7 @@
                   ⏳ Fora do mapa
                 </div>
                 <button type="button" class="profile-btn-action" onclick="event.stopPropagation(); abrirDrawerPerfil('${p.id}')">
-                  📍 Lançar no Mapa
+                  📍 Indicar no Mapa
                 </button>
               `}
             </div>
@@ -3433,14 +3493,18 @@
         document.getElementById('perfil-edit-referencia').value = (p.posicao_mapa && p.posicao_mapa.referencia) || '';
         posicionarAlfineteEdicaoPerfil(lat, lng, false);
       } else {
-        // Padrão: centro de Cascavel
-        const center = CASCAVEL_CENTER;
-        document.getElementById('perfil-edit-lat').value = center[0].toFixed(6);
-        document.getElementById('perfil-edit-lng').value = center[1].toFixed(6);
-        document.getElementById('perfil-edit-endereco').value = '';
-        document.getElementById('perfil-edit-bairro').value = p.tutor.bairro_origem;
-        document.getElementById('perfil-edit-referencia').value = '';
-        posicionarAlfineteEdicaoPerfil(center[0], center[1], true);
+        // Direciona imediatamente para o bairro de origem do tutor
+        const bairroOrigem = (p.tutor && p.tutor.bairro_origem) || 'Centro';
+        const infoBairro = BAIRROS_CASCAVEL_COORDS[bairroOrigem] || BAIRROS_CASCAVEL_COORDS['Centro'];
+
+        document.getElementById('perfil-edit-lat').value = infoBairro.lat.toFixed(6);
+        document.getElementById('perfil-edit-lng').value = infoBairro.lng.toFixed(6);
+        document.getElementById('perfil-edit-endereco').value = infoBairro.rua || '';
+        document.getElementById('perfil-edit-bairro').value = bairroOrigem;
+        document.getElementById('perfil-edit-referencia').value = `Visto no bairro ${bairroOrigem}`;
+
+        posicionarAlfineteEdicaoPerfil(infoBairro.lat, infoBairro.lng, true);
+        mostrarToast(`📍 Alfinete posicionado automaticamente em ${bairroOrigem} (${infoBairro.rua})! Ajuste se desejar.`);
       }
 
       document.getElementById('perfil-drawer').classList.remove('closed');
