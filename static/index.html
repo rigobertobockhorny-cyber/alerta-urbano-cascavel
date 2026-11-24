@@ -658,25 +658,25 @@
       padding: 6px 0;
       position: relative;
       cursor: pointer;
-      border: none !important;
-      background: #000000;
-      color: #FED700;
-      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.32);
+      background: #FFFFFF !important;
+      color: #18181B !important;
+      border: 1px solid rgba(0, 155, 58, 0.35) !important;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
     }
     .alert-ticker.amarelo {
       background: #FED700 !important;
       color: #000000 !important;
-      border: none !important;
+      border: 1px solid #EAB308 !important;
     }
     .alert-ticker.laranja {
-      background: #ea580c !important;
-      color: #000000 !important;
-      border: none !important;
+      background: #EA580C !important;
+      color: #FFFFFF !important;
+      border: 1px solid #C2410C !important;
     }
     .alert-ticker.vermelho {
-      background: #dc2626 !important;
-      color: #ffffff !important;
-      border: none !important;
+      background: #DC2626 !important;
+      color: #FFFFFF !important;
+      border: 1px solid #991B1B !important;
     }
     .ticker-track {
       display: flex;
@@ -2771,7 +2771,7 @@
       position: relative;
       z-index: 2;
       width: 100%;
-      height: 230px;
+      height: 200px;
       background: #000000;
       overflow: hidden;
       cursor: pointer;
@@ -2785,6 +2785,157 @@
     }
     .pet-card-media:active img {
       transform: scale(1.02);
+    }
+
+    /* Pílula Discreta de Status no Bloco de Pets (Embaixo da Foto, ao Lado do Nome) */
+    .pet-status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.4px;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 999px;
+      flex-shrink: 0;
+      white-space: nowrap;
+      border: 1px solid rgba(0, 0, 0, 0.15);
+      background: rgba(255, 255, 255, 0.90);
+      color: #18181B;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+    }
+    .pet-status-pill.desaparecido {
+      background: #F4F4F5;
+      color: #18181B;
+      border: 1px solid #D4D4D8;
+    }
+    .pet-status-pill.avistado {
+      background: #F0FDF4;
+      color: #166534;
+      border: 1px solid #BBF7D0;
+    }
+    .pet-status-pill.adocao {
+      background: #EFF6FF;
+      color: #1E40AF;
+      border: 1px solid #BFDBFE;
+    }
+    .pet-status-pill.encontrado {
+      background: #ECFDF5;
+      color: #047857;
+      border: 1px solid #A7F3D0;
+    }
+    [data-theme="dark"] .pet-status-pill {
+      background: rgba(255, 255, 255, 0.12);
+      color: #FFFFFF;
+      border-color: rgba(255, 255, 255, 0.20);
+    }
+    [data-theme="dark"] .pet-status-pill.desaparecido {
+      background: #27272A;
+      color: #F4F4F5;
+      border-color: #3F3F46;
+    }
+
+    /* ==================== ESTEIRAS DE PARCEIROS PADRONIZADAS (NARROW & FLUIDA) ==================== */
+    .esteira-parceiros-narrow-box {
+      margin-top: 18px;
+      margin-bottom: 8px;
+      padding: 10px 12px;
+      background: #FFFFFF;
+      border-radius: 16px;
+      border: 1px solid rgba(0, 0, 0, 0.09);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+      overflow: hidden;
+    }
+    .esteira-parceiros-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+      padding: 0 2px;
+    }
+    .esteira-parceiros-title {
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.6px;
+      color: #009B3A;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .esteira-parceiros-link {
+      background: none;
+      border: none;
+      color: #71717A;
+      font-size: 10.5px;
+      font-weight: 800;
+      cursor: pointer;
+      padding: 0;
+    }
+    .esteira-parceiros-viewport {
+      width: 100%;
+      overflow: hidden;
+      position: relative;
+      mask-image: linear-gradient(to right, transparent, #000 3%, #000 97%, transparent);
+      -webkit-mask-image: linear-gradient(to right, transparent, #000 3%, #000 97%, transparent);
+    }
+    .esteira-parceiros-track {
+      display: flex;
+      gap: 8px;
+      width: max-content;
+      will-change: transform;
+    }
+    .esteira-parceiro-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: #F8FAFC;
+      border: 1px solid rgba(0, 0, 0, 0.10);
+      cursor: pointer;
+      white-space: nowrap;
+      flex-shrink: 0;
+      transition: transform 0.15s ease, background 0.15s ease;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+    }
+    .esteira-parceiro-pill:active {
+      transform: scale(0.96);
+      background: #F1F5F9;
+    }
+    .esteira-parceiro-star {
+      font-size: 12px;
+      color: #F59E0B;
+      line-height: 1;
+    }
+    .esteira-parceiro-nome {
+      font-size: 11.5px;
+      font-weight: 800;
+      color: #18181B;
+    }
+    .esteira-parceiro-tag {
+      font-size: 9.5px;
+      font-weight: 800;
+      padding: 1.5px 6px;
+      border-radius: 999px;
+      background: rgba(0, 155, 58, 0.12);
+      color: #009B3A;
+      letter-spacing: 0.3px;
+    }
+    .esteira-parceiro-tag.promo {
+      background: rgba(220, 38, 38, 0.12);
+      color: #DC2626;
+    }
+    [data-theme="dark"] .esteira-parceiros-narrow-box {
+      background: #18181B;
+      border-color: rgba(255, 255, 255, 0.10);
+    }
+    [data-theme="dark"] .esteira-parceiro-pill {
+      background: #27272A;
+      border-color: rgba(255, 255, 255, 0.12);
+    }
+    [data-theme="dark"] .esteira-parceiro-nome {
+      color: #FFFFFF;
     }
     .pet-card-media-badge {
       position: absolute;
@@ -3380,16 +3531,14 @@
 
         <div class="pets-grid" id="pets-full-list" style="display:flex; flex-direction:column; gap:14px;"></div>
 
-        <!-- ESTEIRA ROLANTE DE PARCEIROS (REDE AMIGA DOS ANIMAIS DE CASCAVEL) -->
-        <div id="esteira-parceiros-box" style="margin-top:20px; padding:14px 14px 12px; background:#ffffff; border-radius:18px; border:1px solid rgba(0,0,0,0.10); box-shadow:0 4px 14px rgba(0,0,0,0.05);">
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
-            <div style="font-size:12.5px; font-weight:900; color:#009B3A; display:flex; align-items:center; gap:6px;">
-              <span>⭐</span> Rede de Parceiros Amigos dos Animais
-            </div>
-            <button type="button" onclick="trocarAba('parceiros')" style="background:none; border:none; color:#71717A; font-size:11px; font-weight:800; cursor:pointer;">Ver Guia Completo ↗</button>
+        <!-- ESTEIRA ROLANTE NARROW DE PARCEIROS (REDE AMIGA DOS ANIMAIS DE CASCAVEL) -->
+        <div class="esteira-parceiros-narrow-box" id="esteira-parceiros-box">
+          <div class="esteira-parceiros-header">
+            <span class="esteira-parceiros-title">⭐ PARCEIROS AMIGOS DOS ANIMAIS</span>
+            <button type="button" class="esteira-parceiros-link" onclick="trocarAba('parceiros')">Ver Guia ↗</button>
           </div>
-          <div id="esteira-parceiros-carrossel" style="display:flex; gap:10px; overflow-x:auto; padding-bottom:6px; -webkit-overflow-scrolling:touch; scrollbar-width:none;">
-            <!-- Itens inseridos dinamicamente via JS -->
+          <div class="esteira-parceiros-viewport">
+            <div class="esteira-parceiros-track" id="esteira-parceiros-track-pets"></div>
           </div>
         </div>
       </section>
@@ -3408,15 +3557,6 @@
               ⭐
             </div>
           </div>
-          
-          <!-- Filtro de Categorias de Parceiros -->
-          <div style="display:flex; gap:6px; overflow-x:auto; margin-top:14px; padding-bottom:2px; -webkit-overflow-scrolling:touch;">
-            <button type="button" class="btn-filtro-parceiro active" onclick="filtrarCategoriaParceiro('todos', this)" style="padding:7px 12px; border-radius:10px; font-size:11.5px; font-weight:800; border:1px solid #000; background:#000; color:#FED700; cursor:pointer; white-space:nowrap;">Todos</button>
-            <button type="button" class="btn-filtro-parceiro" onclick="filtrarCategoriaParceiro('pet_vet', this)" style="padding:7px 12px; border-radius:10px; font-size:11.5px; font-weight:800; border:1px solid rgba(0,0,0,0.15); background:#ffffff; color:#18181B; cursor:pointer; white-space:nowrap;">🐾 Clínicas & Vet</button>
-            <button type="button" class="btn-filtro-parceiro" onclick="filtrarCategoriaParceiro('pet_shop', this)" style="padding:7px 12px; border-radius:10px; font-size:11.5px; font-weight:800; border:1px solid rgba(0,0,0,0.15); background:#ffffff; color:#18181B; cursor:pointer; white-space:nowrap;">🐕 Pet Shops & Ração</button>
-            <button type="button" class="btn-filtro-parceiro" onclick="filtrarCategoriaParceiro('auto_center', this)" style="padding:7px 12px; border-radius:10px; font-size:11.5px; font-weight:800; border:1px solid rgba(0,0,0,0.15); background:#ffffff; color:#18181B; cursor:pointer; white-space:nowrap;">🚗 Auto Centers & Pneus</button>
-            <button type="button" class="btn-filtro-parceiro" onclick="filtrarCategoriaParceiro('posto', this)" style="padding:7px 12px; border-radius:10px; font-size:11.5px; font-weight:800; border:1px solid rgba(0,0,0,0.15); background:#ffffff; color:#18181B; cursor:pointer; white-space:nowrap;">⛽ Postos & Serviços</button>
-          </div>
         </div>
 
         <!-- Banner de Vantagem Cívica -->
@@ -3427,6 +3567,17 @@
 
         <!-- Lista Dinâmica de Cards de Parceiros -->
         <div id="parceiros-lista-container" style="display:flex; flex-direction:column; gap:14px;"></div>
+
+        <!-- ESTEIRA ROLANTE NARROW DE PARCEIROS (COMERCIALZINHO CÍVICO DE CASCAVEL) -->
+        <div class="esteira-parceiros-narrow-box" id="esteira-parceiros-tab-box">
+          <div class="esteira-parceiros-header">
+            <span class="esteira-parceiros-title">⭐ REDE DE PARCEIROS DE CASCAVEL</span>
+            <span style="font-size:10px; color:#71717A; font-weight:700;">Arraste para explorar</span>
+          </div>
+          <div class="esteira-parceiros-viewport">
+            <div class="esteira-parceiros-track" id="esteira-parceiros-track-parceiros"></div>
+          </div>
+        </div>
       </section>
 
       <!-- ABA 4: COPILOTO (BOLINHA FLUTUANTE) -->
@@ -4378,6 +4529,12 @@
         }, 90);
       } else if (aba === 'parceiros') {
         renderizarAbaParceiros();
+        renderizarEsteiraParceiros();
+      } else if (aba === 'pets') {
+        renderizarPetsAba();
+        renderizarEsteiraParceiros();
+      } else if (aba === 'inicio') {
+        renderizarDashboard();
       }
     }
 
@@ -4648,8 +4805,8 @@
       return `${tag} • ${fonte}: ${tituloLimpo} em Cascavel`;
     }
 
-    function ativarEsteiraArrastavel(el, pxPorSegundo = 26) {
-      if (!el || el.classList.contains('static')) return;
+    function ativarEsteiraArrastavel(el, pxPorSegundo = 28) {
+      if (!el) return;
       el.style.animation = 'none';
 
       if (!el._scroller) {
@@ -4660,6 +4817,7 @@
           state: 'running',
           resumeTimer: null,
           startX: 0,
+          startY: 0,
           startCurrentX: 0,
           hasDragged: false,
           lastTime: performance.now()
@@ -4667,7 +4825,19 @@
         el._scroller = sc;
 
         function tick(now) {
-          const dt = Math.min(0.1, (now - sc.lastTime) / 1000);
+          requestAnimationFrame(tick);
+          if (el.classList.contains('static') || el.offsetParent === null) {
+            sc.lastTime = now;
+            return;
+          }
+
+          // Recalibra dinamicamente a meia-largura caso imagens ou layout tenham assentado
+          const hw = el.scrollWidth / 2;
+          if (hw > 20 && (!sc.halfWidth || Math.abs(sc.halfWidth - hw) > 8)) {
+            sc.halfWidth = hw;
+          }
+
+          const dt = Math.min(0.08, (now - sc.lastTime) / 1000);
           sc.lastTime = now;
 
           if (sc.state === 'running' && sc.halfWidth > 0) {
@@ -4676,44 +4846,59 @@
             while (sc.currentX > 0) sc.currentX -= sc.halfWidth;
             el.style.transform = `translate3d(${sc.currentX}px, 0, 0)`;
           }
-          requestAnimationFrame(tick);
         }
         requestAnimationFrame(tick);
 
         function onStart(e) {
-          sc.state = 'dragging';
+          if (el.classList.contains('static')) return;
+          const touch = e.touches ? e.touches[0] : e;
+          sc.startX = touch.clientX;
+          sc.startY = touch.clientY;
+          sc.startCurrentX = sc.currentX;
           sc.hasDragged = false;
           if (sc.resumeTimer) {
             clearTimeout(sc.resumeTimer);
             sc.resumeTimer = null;
           }
-          const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-          sc.startX = clientX;
-          sc.startCurrentX = sc.currentX;
         }
 
         function onMove(e) {
-          if (sc.state !== 'dragging') return;
-          const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-          const deltaX = clientX - sc.startX;
-          if (Math.abs(deltaX) > 6) sc.hasDragged = true;
+          if (el.classList.contains('static')) return;
+          const touch = e.touches ? e.touches[0] : e;
+          const deltaX = touch.clientX - sc.startX;
+          const deltaY = touch.clientY - sc.startY;
 
-          sc.currentX = sc.startCurrentX + deltaX;
-          if (sc.halfWidth > 0) {
-            while (sc.currentX <= -sc.halfWidth) sc.currentX += sc.halfWidth;
-            while (sc.currentX > 0) sc.currentX -= sc.halfWidth;
+          // Se o usuário está rolando a página verticalmente, não sequestra o toque
+          if (sc.state !== 'dragging' && Math.abs(deltaY) > Math.abs(deltaX) * 1.4) {
+            return;
           }
-          el.style.transform = `translate3d(${sc.currentX}px, 0, 0)`;
+
+          if (Math.abs(deltaX) > 8) {
+            sc.state = 'dragging';
+            sc.hasDragged = true;
+          }
+
+          if (sc.state === 'dragging') {
+            sc.currentX = sc.startCurrentX + deltaX;
+            if (sc.halfWidth > 0) {
+              while (sc.currentX <= -sc.halfWidth) sc.currentX += sc.halfWidth;
+              while (sc.currentX > 0) sc.currentX -= sc.halfWidth;
+            }
+            el.style.transform = `translate3d(${sc.currentX}px, 0, 0)`;
+          }
         }
 
         function onEnd() {
-          if (sc.state !== 'dragging') return;
-          sc.state = 'paused';
-          if (sc.resumeTimer) clearTimeout(sc.resumeTimer);
-          sc.resumeTimer = setTimeout(() => {
-            sc.state = 'running';
-            sc.lastTime = performance.now();
-          }, 2500); // 2.5s após soltar o dedo, retoma o fluxo suave!
+          if (sc.state === 'dragging') {
+            sc.state = 'paused';
+            if (sc.resumeTimer) clearTimeout(sc.resumeTimer);
+            sc.resumeTimer = setTimeout(() => {
+              sc.state = 'running';
+              sc.lastTime = performance.now();
+            }, 1400); // Retoma o fluxo contínuo 1.4s após soltar
+            // Reseta hasDragged após curto delay para permitir cliques subsequentes
+            setTimeout(() => { sc.hasDragged = false; }, 200);
+          }
         }
 
         // Touch events (celular / tablet)
@@ -4727,22 +4912,22 @@
         window.addEventListener('mousemove', onMove);
         window.addEventListener('mouseup', onEnd);
 
-        // Previne clique acidental ao arrastar o card
+        // Previne clique acidental ao arrastar a esteira
         el.addEventListener('click', (e) => {
           if (sc.hasDragged) {
             e.preventDefault();
             e.stopPropagation();
           }
         }, true);
-      }
-
-      requestAnimationFrame(() => {
-        el.style.animation = 'none';
-        if (el._scroller) {
-          el._scroller.halfWidth = el.scrollWidth / 2;
-          el._scroller.speed = pxPorSegundo;
+      } else {
+        el._scroller.speed = pxPorSegundo;
+        const hw = el.scrollWidth / 2;
+        if (hw > 20) el._scroller.halfWidth = hw;
+        if (el._scroller.state === 'paused' && !el.classList.contains('static')) {
+          el._scroller.state = 'running';
+          el._scroller.lastTime = performance.now();
         }
-      });
+      }
     }
 
     function calibrarVelocidadeEsteira(el, pxPorSegundo) {
@@ -5101,6 +5286,19 @@
           petNomeExibicao = 'Animal Avistado';
         }
 
+        let statusPillLabel = 'Desaparecido';
+        let statusPillClass = 'desaparecido';
+        if (ehAdocao) {
+          statusPillLabel = 'Para Adoção';
+          statusPillClass = 'adocao';
+        } else if (p.status_pet === 'encontrado' || p.tipo === 'pet_encontrado') {
+          statusPillLabel = 'Encontrado';
+          statusPillClass = 'encontrado';
+        } else if (av) {
+          statusPillLabel = 'Animal Avistado';
+          statusPillClass = 'avistado';
+        }
+
         // Botões de Ação com largura 50% / 50% idêntica
         let actionButtonsHtml = '';
         if (ehAdocao) {
@@ -5169,9 +5367,12 @@
             <!-- Mídia com Fundo Preto de Letterbox (acima do bloco sólido e bolhas) -->
             ${mediaHtml}
 
-            <!-- Conteúdo: Nome do Pet e Descrição (SEM PÍLULAS) -->
+            <!-- Conteúdo: Nome do Pet com Pílula Discreta e Descrição -->
             <div class="pet-card-content" style="position:relative; z-index:2;" onclick="abrirDetalheById(${p.id})">
-              <div class="pet-card-pet-name">${escapeHtml(petNomeExibicao)}</div>
+              <div style="display:flex; align-items:center; justify-content:space-between; gap:8px; margin-bottom:5px;">
+                <div class="pet-card-pet-name">${escapeHtml(petNomeExibicao)}</div>
+                <span class="pet-status-pill ${statusPillClass}">${statusPillLabel}</span>
+              </div>
               <div class="pet-card-desc">${escapeHtml(p.descricao || 'Sem descrição adicional informada.')}</div>
             </div>
 
@@ -6803,33 +7004,46 @@ Baixe o aplicativo gratuito Alerta Urbano:
     }
 
     function renderizarEsteiraParceiros() {
-      const carrossel = document.getElementById('esteira-parceiros-carrossel');
-      if (!carrossel) return;
-
       const lista = (state.parceiros || []).filter(p => p.destaque_esteira === 1);
+      const boxPets = document.getElementById('esteira-parceiros-box');
+      const boxTab = document.getElementById('esteira-parceiros-tab-box');
       if (!lista.length) {
-        const box = document.getElementById('esteira-parceiros-box');
-        if (box) box.style.display = 'none';
+        if (boxPets) boxPets.style.display = 'none';
+        if (boxTab) boxTab.style.display = 'none';
         return;
       }
+      if (boxPets) boxPets.style.display = 'block';
+      if (boxTab) boxTab.style.display = 'block';
 
-      carrossel.innerHTML = lista.map(p => {
+      const pillsHtml = lista.map(p => {
         const ehOuro = p.selo_tipo === 'ouro';
-        const tagDestaque = (p.produtos && p.produtos.length > 0)
-          ? `<div style="font-size:10px; font-weight:900; color:#DC2626; margin-top:4px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">🏷️ ${escapeHtml(p.produtos[0].titulo)} R$ ${p.produtos[0].preco_promocional.toFixed(2).replace('.', ',')}</div>`
-          : `<div style="font-size:10px; font-weight:700; color:#009B3A; margin-top:4px;">Parceiro Oficial</div>`;
+        const tag = (p.produtos && p.produtos.length > 0)
+          ? `<span class="esteira-parceiro-tag promo">🏷️ ${escapeHtml(p.produtos[0].titulo.slice(0, 18))}</span>`
+          : `<span class="esteira-parceiro-tag">${ehOuro ? 'Amigo Pet' : 'Parceiro'}</span>`;
 
         return `
-          <div onclick="abrirFolderParceiroById(${p.id})" style="flex-shrink:0; width:180px; background:#F8FAFC; border:1px solid rgba(0,0,0,0.10); border-radius:14px; padding:10px 12px; cursor:pointer; box-shadow:0 2px 6px rgba(0,0,0,0.04); transition:transform 0.15s ease;">
-            <div style="font-size:9.5px; font-weight:800; color:${ehOuro ? '#B45309' : '#009B3A'}; background:${ehOuro ? 'rgba(254,215,0,0.22)' : 'rgba(0,155,58,0.12)'}; padding:2px 6px; border-radius:999px; display:inline-block; margin-bottom:4px;">
-              ${ehOuro ? '★ Amigo dos Animais' : '🛡️ Parceiro Oficial'}
-            </div>
-            <div style="font-size:12px; font-weight:900; color:#18181B; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${escapeHtml(p.nome)}</div>
-            <div style="font-size:10.5px; color:#64748B;">${escapeHtml(p.bairro)}</div>
-            ${tagDestaque}
+          <div class="esteira-parceiro-pill" onclick="abrirFolderParceiroById(${p.id})">
+            <span class="esteira-parceiro-star">⭐</span>
+            <span class="esteira-parceiro-nome">${escapeHtml(p.nome)}</span>
+            ${tag}
           </div>
         `;
       }).join('');
+
+      // Duplica os itens para loop contínuo e sem costura
+      const loopHtml = lista.length >= 2 ? (pillsHtml + pillsHtml) : pillsHtml;
+
+      const trackPets = document.getElementById('esteira-parceiros-track-pets');
+      if (trackPets) {
+        trackPets.innerHTML = loopHtml;
+        ativarEsteiraArrastavel(trackPets, 24);
+      }
+
+      const trackParc = document.getElementById('esteira-parceiros-track-parceiros');
+      if (trackParc) {
+        trackParc.innerHTML = loopHtml;
+        ativarEsteiraArrastavel(trackParc, 24);
+      }
     }
 
     function abrirFolderParceiroById(id) {
