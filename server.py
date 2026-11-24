@@ -1362,6 +1362,86 @@ def obter_contato_adocao(pet_id):
     return jsonify({"status": "ok", "whatsapp_url": wa_url, "titulo": p.get("titulo")})
 
 
+@app.route("/api/pets/<int:pet_id>/status", methods=["POST"])
+def atualizar_status_pet(pet_id):
+    """Atualiza o ciclo de vida do pet (desaparecido -> avistado -> encontrado) em tempo real."""
+    data = request.json or {}
+    novo_status = data.get("status_pet", "desaparecido")
+    subtipo = data.get("subtipo_evento", "")
+    
+    conn = get_db()
+    cur = conn.cursor()
+    cur.execute("""
+        UPDATE alertas 
+        SET status_pet = ?, subtipo_evento = ?
+        WHERE id = ?
+    """, (novo_status, subtipo, pet_id))
+    conn.commit()
+    conn.close()
+    return jsonify({"ok": True, "pet_id": pet_id, "status_pet": novo_status})
+
+
+@app.route("/api/testadores", methods=["GET"])
+def listar_testadores():
+    """Retorna a escala e rotas dos 4 testadores de campo piloto de Cascavel."""
+    testadores = [
+        {
+            "id": "testador_01_lucas",
+            "nome": "Lucas Martins",
+            "codigo": "TESTADOR-01",
+            "funcao": "Patrulha Rápida (Centro / Neva)",
+            "status": "online",
+            "bairro_base": "Centro",
+            "lat": -24.9570,
+            "lng": -53.4580,
+            "foto_url": "/static/darkplanner_pessoas/homem_02_lucas.jpg",
+            "whatsapp": "45998223344",
+            "rotas_frequentes": ["Rua Paraná", "Rua Rio de Janeiro", "Rua Cuiabá", "Rua Salgado Filho"]
+        },
+        {
+            "id": "testadora_02_camila",
+            "nome": "Camila Rocha",
+            "codigo": "TESTADORA-02",
+            "funcao": "Monitoramento Norte (Coqueiral / Cancelli)",
+            "status": "online",
+            "bairro_base": "Coqueiral",
+            "lat": -24.9490,
+            "lng": -53.4760,
+            "foto_url": "/static/darkplanner_pessoas/mulher_02_camila.jpg",
+            "whatsapp": "45999822030",
+            "rotas_frequentes": ["Av. Brasil Oeste", "Rua Presidente Kennedy", "Rua Antonina", "Rua das Palmeiras"]
+        },
+        {
+            "id": "testador_03_roberto",
+            "nome": "Roberto Silveira",
+            "codigo": "TESTADOR-03",
+            "funcao": "Patrulha Leste (São Cristóvão / Pacaembu)",
+            "status": "online",
+            "bairro_base": "São Cristóvão",
+            "lat": -24.9460,
+            "lng": -53.4350,
+            "foto_url": "/static/darkplanner_pessoas/homem_03_roberto.jpg",
+            "whatsapp": "45999844050",
+            "rotas_frequentes": ["Av. Brasil Leste", "Rua Jacarezinho", "Rua Doutor Colares"]
+        },
+        {
+            "id": "testadora_04_fernanda",
+            "nome": "Fernanda Lima",
+            "codigo": "TESTADORA-04",
+            "funcao": "Monitoramento Sul (Parque São Paulo / Maria Luiza)",
+            "status": "online",
+            "bairro_base": "Parque São Paulo",
+            "lat": -24.9660,
+            "lng": -53.4490,
+            "foto_url": "/static/darkplanner_pessoas/mulher_03_fernanda.jpg",
+            "whatsapp": "45999833040",
+            "rotas_frequentes": ["Rua Carlos Gomes", "Rua General Osório", "Av. Carlos Gomes"]
+        }
+    ]
+    return jsonify({"ok": True, "testadores": testadores})
+
+
+
 @app.route("/api/denuncias/<int:alerta_id>/dossie", methods=["GET"])
 def gerar_dossie_denuncia(alerta_id):
     conn = get_db()

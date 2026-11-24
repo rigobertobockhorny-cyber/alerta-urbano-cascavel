@@ -1,0 +1,178 @@
+[
+  {
+    "id": "mulher_01_mariana",
+    "nome": "Mariana Souza",
+    "sexo": "F",
+    "tipo": "tutora",
+    "bairro": "Centro",
+    "whatsapp": "45999811020",
+    "arquivo": "mulher_01_mariana.jpg",
+    "url": "/static/darkplanner_pessoas/mulher_01_mariana.jpg",
+    "prompt": "Foto de estúdio de uma mulher jovem brasileira de 28 anos, cabelos castanhos ondulados, sorriso simpático, blusa casual neutra cinza, luz suave de estúdio, retrato profissional nítido para perfil de aplicativo"
+  },
+  {
+    "id": "mulher_02_camila",
+    "nome": "Camila Rocha",
+    "sexo": "F",
+    "tipo": "testadora",
+    "bairro": "Coqueiral",
+    "whatsapp": "45999822030",
+    "arquivo": "mulher_02_camila.jpg",
+    "url": "/static/darkplanner_pessoas/mulher_02_camila.jpg",
+    "prompt": "Retrato realista de mulher brasileira de 32 anos, cabelos loiros médios, olhos castanhos expressivos, ar amigável e focado de testadora urbana, fundo de rua de cidade desfocada, foto nítida e natural"
+  },
+  {
+    "id": "mulher_03_fernanda",
+    "nome": "Fernanda Lima",
+    "sexo": "F",
+    "tipo": "testadora",
+    "bairro": "Parque São Paulo",
+    "whatsapp": "45999833040",
+    "arquivo": "mulher_03_fernanda.jpg",
+    "url": "/static/darkplanner_pessoas/mulher_03_fernanda.jpg",
+    "prompt": "Foto aproximada de mulher jovem negra brasileira de 26 anos com tranças elegantes e sorriso confiante e meigo, iluminação natural dourada, retrato de rosto de alta definição"
+  },
+  {
+    "id": "mulher_04_beatriz",
+    "nome": "Beatriz Alves",
+    "sexo": "F",
+    "tipo": "tutora",
+    "bairro": "Neva",
+    "whatsapp": "45999844050",
+    "arquivo": "mulher_04_beatriz.jpg",
+    "url": "/static/darkplanner_pessoas/mulher_04_beatriz.jpg",
+    "prompt": "Retrato de mulher madura brasileira de 46 anos com cabelos castanhos curtos elegantes, óculos de grau modernos discretos, postura acolhedora e confiável de protetora de animais, luz natural"
+  },
+  {
+    "id": "mulher_05_juliana",
+    "nome": "Juliana Mendes",
+    "sexo": "F",
+    "tipo": "tutora",
+    "bairro": "Cancelli",
+    "whatsapp": "45999855060",
+    "arquivo": "mulher_05_juliana.jpg",
+    "url": "/static/darkplanner_pessoas/mulher_05_juliana.jpg",
+    "prompt": "Foto de mulher jovem brasileira de 24 anos com cabelos pretos lisos compridos, expressão carismática e atenta, camiseta esportiva azul, ar de quem passeia com cachorro na praça, foto de perfil realista"
+  },
+  {
+    "id": "mulher_06_ana_paula",
+    "nome": "Ana Paula Costa",
+    "sexo": "F",
+    "tipo": "tutora",
+    "bairro": "São Cristóvão",
+    "whatsapp": "45999866070",
+    "arquivo": "mulher_06_ana_paula.jpg",
+    "url": "/static/darkplanner_pessoas/mulher_06_ana_paula.jpg",
+    "prompt": "Foto realista de mulher brasileira de 38 anos com cabelos cacheados volumosos castanhos, expressão sincera e gentil, luz de fim de tarde suave, hiper realista"
+  },
+  {
+    "id": "mulher_07_patricia",
+    "nome": "Patrícia Ribeiro",
+    "sexo": "F",
+    "tipo": "tutora",
+    "bairro": "Cascavel Velho",
+    "whatsapp": "45999877080",
+    "arquivo": "mulher_07_patricia.jpg",
+    "url": "/static/darkplanner_pessoas/mulher_07_patricia.jpg",
+    "prompt": "Retrato de mulher brasileira de 30 anos com cabelos ruivos naturais, sardas suaves, sorriso simpático, blusa casual de algodão, fundo aconchegante"
+  },
+  {
+    "id": "mulher_08_larissa",
+    "nome": "Larissa Duarte",
+    "sexo": "F",
+    "tipo": "tutora",
+    "bairro": "Santa Cruz",
+    "whatsapp": "45999888090",
+    "arquivo": "mulher_08_larissa.jpg",
+    "url": "/static/darkplanner_pessoas/mulher_08_larissa.jpg",
+    "prompt": "Foto de mulher jovem universitária brasileira de 22 anos, cabelos castanhos claros, jaqueta jeans, olhar comunicativo e inteligente, foto de perfil moderna"
+  },
+  {
+    "id": "homem_01_carlos",
+    "nome": "Carlos Eduardo",
+    "sexo": "M",
+    "tipo": "tutor",
+    "bairro": "Centro",
+    "whatsapp": "45998112233",
+    "arquivo": "homem_01_carlos.jpg",
+    "url": "/static/darkplanner_pessoas/homem_01_carlos.jpg",
+    "prompt": "Foto de estúdio de um homem brasileiro jovem de 30 anos, barba curta bem aparada, cabelos escuros penteados, camisa polo preta, expressão confiante e prestativa, foto de perfil profissional"
+  },
+  {
+    "id": "homem_02_lucas",
+    "nome": "Lucas Martins",
+    "sexo": "M",
+    "tipo": "testador",
+    "bairro": "Neva",
+    "whatsapp": "45998223344",
+    "arquivo": "homem_02_lucas.jpg",
+    "url": "/static/darkplanner_pessoas/homem_02_lucas.jpg",
+    "prompt": "Retrato realista de homem brasileiro de 27 anos, cabelos castanhos ondulados, sorriso espontâneo e carismático, camiseta esportiva cinza, ar de motorista/testador de campo ativo, alta definição"
+  },
+  {
+    "id": "homem_03_roberto",
+    "nome": "Roberto Silveira",
+    "sexo": "M",
+    "tipo": "testador",
+    "bairro": "São Cristóvão",
+    "whatsapp": "45998334455",
+    "arquivo": "homem_03_roberto.jpg",
+    "url": "/static/darkplanner_pessoas/homem_03_roberto.jpg",
+    "prompt": "Foto de homem brasileiro maduro de 50 anos com cabelos grisalhos curtos bem cuidados, olhar sereno e responsável, camisa social casual azul clara, ar confiável de tutor e observador de rua"
+  },
+  {
+    "id": "homem_04_felipe",
+    "nome": "Felipe Santos",
+    "sexo": "M",
+    "tipo": "tutor",
+    "bairro": "Pacaembu",
+    "whatsapp": "45998445566",
+    "arquivo": "homem_04_felipe.jpg",
+    "url": "/static/darkplanner_pessoas/homem_04_felipe.jpg",
+    "prompt": "Retrato de homem jovem negro brasileiro de 25 anos, corte degradê moderno, sorriso alegre, jaqueta esportiva, iluminação urbana natural, retrato de perfil perfeito"
+  },
+  {
+    "id": "homem_05_rodrigo",
+    "nome": "Rodrigo Nogueira",
+    "sexo": "M",
+    "tipo": "tutor",
+    "bairro": "Maria Luiza",
+    "whatsapp": "45998556677",
+    "arquivo": "homem_05_rodrigo.jpg",
+    "url": "/static/darkplanner_pessoas/homem_05_rodrigo.jpg",
+    "prompt": "Foto de homem brasileiro de 35 anos, traços marcantes, barba cerrada, olhar atento e observador, camiseta preta básica, foto nítida de perfil profissional"
+  },
+  {
+    "id": "homem_06_marcos",
+    "nome": "Marcos Vinicius",
+    "sexo": "M",
+    "tipo": "tutor",
+    "bairro": "Coqueiral",
+    "whatsapp": "45998667788",
+    "arquivo": "homem_06_marcos.jpg",
+    "url": "/static/darkplanner_pessoas/homem_06_marcos.jpg",
+    "prompt": "Foto de homem brasileiro de 42 anos com cabelos castanhos, expressão séria e atenciosa, camisa jeans clara, fundo neutro suave, hiper realista"
+  },
+  {
+    "id": "homem_07_diego",
+    "nome": "Diego Ferreira",
+    "sexo": "M",
+    "tipo": "tutor",
+    "bairro": "Santa Felicidade",
+    "whatsapp": "45998778899",
+    "arquivo": "homem_07_diego.jpg",
+    "url": "/static/darkplanner_pessoas/homem_07_diego.jpg",
+    "prompt": "Foto de homem jovem brasileiro de 23 anos com ar descontraído, expressão alegre e amigável, amante de pets, ar livre ensolarado, foco perfeito no rosto"
+  },
+  {
+    "id": "homem_08_gabriel",
+    "nome": "Gabriel Toledo",
+    "sexo": "M",
+    "tipo": "tutor",
+    "bairro": "Pioneiros Catarinenses",
+    "whatsapp": "45998889900",
+    "arquivo": "homem_08_gabriel.jpg",
+    "url": "/static/darkplanner_pessoas/homem_08_gabriel.jpg",
+    "prompt": "Retrato de homem brasileiro de 34 anos com óculos de armação fina moderna, sorriso caloroso e prestativo, camisa casual xadrez suave, excelente definição de detalhes faciais"
+  }
+]

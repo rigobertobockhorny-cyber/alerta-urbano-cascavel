@@ -951,6 +951,175 @@
     .pet-custom-pin:hover {
       transform: scale(1.15);
     }
+
+    /* Estilos de Tutores Dark Planner */
+    .tutor-avatar-chip {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+      flex-shrink: 0;
+      width: 68px;
+      padding: 6px 4px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--bg-surface);
+      transition: all 0.15s ease;
+      text-align: center;
+    }
+    .tutor-avatar-chip:hover, .tutor-avatar-chip.selected {
+      border-color: var(--gold);
+      background: rgba(254, 215, 0, 0.12);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(254, 215, 0, 0.25);
+    }
+    .tutor-avatar-img {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--border);
+    }
+    .tutor-avatar-chip.selected .tutor-avatar-img {
+      border-color: var(--gold);
+    }
+    .tutor-avatar-name {
+      font-size: 10px;
+      font-weight: 800;
+      color: var(--text);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      width: 100%;
+    }
+    .tutor-avatar-sub {
+      font-size: 9px;
+      color: var(--text-muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      width: 100%;
+    }
+
+    /* Dock Inferior dos 4 Testadores de Campo Piloto */
+    .testadores-dock {
+      position: absolute;
+      bottom: 14px;
+      left: 304px;
+      right: 14px;
+      background: rgba(18, 18, 20, 0.94);
+      backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 14px;
+      padding: 10px 14px;
+      z-index: 500;
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.6);
+      transition: all 0.3s ease;
+    }
+    .testadores-dock.collapsed .testadores-grid {
+      display: none;
+    }
+    .testadores-dock-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      user-select: none;
+    }
+    .testadores-dock-title {
+      font-size: 12px;
+      font-weight: 900;
+      color: #38BDF8;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      letter-spacing: 0.5px;
+    }
+    .testadores-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-top: 8px;
+    }
+    .testador-card {
+      background: rgba(30, 30, 36, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      padding: 8px 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+    .testador-card:hover {
+      border-color: #38BDF8;
+      background: rgba(37, 99, 235, 0.15);
+    }
+    .testador-head {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .testador-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #22C55E;
+    }
+    .testador-info {
+      min-width: 0;
+      flex: 1;
+    }
+    .testador-nome {
+      font-size: 12px;
+      font-weight: 800;
+      color: #FFFFFF;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .testador-rota {
+      font-size: 10px;
+      color: #94A3B8;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .testador-actions {
+      display: flex;
+      gap: 6px;
+      margin-top: 4px;
+    }
+    .btn-testador-acao {
+      flex: 1;
+      padding: 4px 6px;
+      border-radius: 6px;
+      font-size: 10px;
+      font-weight: 800;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      transition: all 0.15s ease;
+    }
+    .btn-testador-aproximar {
+      background: #2563EB;
+      color: #FFFFFF;
+    }
+    .btn-testador-aproximar:hover {
+      background: #1D4ED8;
+    }
+    .btn-testador-avistar {
+      background: #EAB308;
+      color: #000000;
+    }
+    .btn-testador-avistar:hover {
+      background: #CA8A04;
+    }
   </style>
 </head>
 <body>
@@ -1259,6 +1428,21 @@
           📍 <strong>Teste de Campo:</strong> Clique na rua exata ou arraste o balão. Círculo vermelho marca o <strong>raio de 450m</strong> onde o Copiloto disparará o áudio!
         </div>
         <div id="map-pets"></div>
+
+        <!-- Dock Flutuante dos 4 Testadores de Campo Piloto -->
+        <div class="testadores-dock" id="testadores-dock">
+          <div class="testadores-dock-header" onclick="alternarDockTestadores()">
+            <div class="testadores-dock-title">
+              <span>👥</span>
+              <span>4 TESTADORES DE CAMPO PILOTO (CASCAVEL)</span>
+              <span style="font-size:10px; background:rgba(34,197,94,0.2); color:#22C55E; padding:2px 6px; border-radius:4px; font-weight:800;">4 ATIVOS NAS RUAS</span>
+            </div>
+            <button type="button" class="btn-slim" style="font-size:10px; background:transparent; border:none; color:#94A3B8; cursor:pointer;" id="btn-toggle-dock">Minimizar ▼</button>
+          </div>
+          <div class="testadores-grid" id="testadores-grid">
+            <!-- Inserido dinamicamente via JS -->
+          </div>
+        </div>
       </div>
 
       <!-- Drawer Lateral de Cadastro de Pet com Galeria Dark Planner -->
@@ -1346,7 +1530,11 @@
             <textarea class="form-textarea" id="pet-desc" rows="2" placeholder="Ex: Pelagem caramelo com peito branco, usando coleira vermelha. Muito dócil."></textarea>
           </div>
 
-          <div class="drawer-section-title">3. Tutor e Comunicação</div>
+          <div class="drawer-section-title">3. Tutor Responsável (16 Perfis Dark Planner)</div>
+          <div style="font-size: 11px; color: var(--text-muted); margin-bottom: 6px;">Selecione o perfil para preencher automaticamente:</div>
+          <div class="tutor-picker-grid" id="tutor-picker-grid" style="display:flex; gap:8px; overflow-x:auto; padding-bottom:8px; margin-bottom:10px;">
+            <!-- Renderizado dinamicamente via JS -->
+          </div>
 
           <div class="form-row">
             <div class="form-group">
@@ -2042,6 +2230,9 @@
     let markerPetAtual = null;
     let circlePetRaio = null;
     let catalogoDarkPlanner = [];
+    let catalogoPessoasDarkPlanner = [];
+    let testadoresCampo = [];
+    let markersTestadores = [];
     let petsCadastradosMesa = [];
     let markersPetsCadastrados = [];
 
@@ -2088,6 +2279,8 @@
 
         posicionarPontoPet(latlng.lat, latlng.lng, especieId);
       });
+
+      carregarTestadoresCampo();
     }
 
     function renderizarBandejaEspeciesPets() {
@@ -2196,6 +2389,52 @@
       } catch (err) {
         console.warn('Erro ao carregar catálogo Dark Planner:', err);
       }
+      carregarCatalogoPessoasDarkPlanner();
+    }
+
+    async function carregarCatalogoPessoasDarkPlanner() {
+      try {
+        const resp = await fetch('/static/darkplanner_pessoas/catalogo_pessoas.json?t=' + Date.now());
+        if (resp.ok) {
+          catalogoPessoasDarkPlanner = await resp.json();
+          renderizarPickerTutores();
+        }
+      } catch (err) {
+        console.warn('Erro ao carregar catálogo de pessoas:', err);
+      }
+    }
+
+    function renderizarPickerTutores() {
+      const grid = document.getElementById('tutor-picker-grid');
+      if (!grid) return;
+
+      if (!catalogoPessoasDarkPlanner.length) {
+        grid.innerHTML = '<div style="font-size:11px; color:#94A3B8;">Carregando perfis...</div>';
+        return;
+      }
+
+      grid.innerHTML = catalogoPessoasDarkPlanner.map(p => `
+        <div class="tutor-avatar-chip" onclick="selecionarTutorPerfil('${p.id}', this)" title="${escapeHtml(p.nome)} (${escapeHtml(p.bairro)})">
+          <img class="tutor-avatar-img" src="${p.url}" alt="${escapeHtml(p.nome)}" loading="lazy">
+          <span class="tutor-avatar-name">${escapeHtml(p.nome.split(' ')[0])}</span>
+          <span class="tutor-avatar-sub">${escapeHtml(p.bairro)}</span>
+        </div>
+      `).join('');
+    }
+
+    function selecionarTutorPerfil(tutorId, el) {
+      const tutor = catalogoPessoasDarkPlanner.find(p => p.id === tutorId);
+      if (!tutor) return;
+
+      document.getElementById('pet-tutor').value = tutor.nome;
+      document.getElementById('pet-contato').value = tutor.whatsapp;
+      if (!document.getElementById('pet-bairro').value) {
+        document.getElementById('pet-bairro').value = tutor.bairro;
+      }
+
+      document.querySelectorAll('.tutor-avatar-chip').forEach(c => c.classList.remove('selected'));
+      if (el) el.classList.add('selected');
+      mostrarToast(`👤 Tutor ${tutor.nome} vinculado com sucesso!`);
     }
 
     function aoMudarEspeciePet() {
@@ -2347,24 +2586,233 @@
 
       pets.forEach(p => {
         if (!p.lat || !p.lng) return;
+
+        let cor = '#DC2626'; // Vermelho Desaparecido
+        let badge = '🚨 DESAPARECIDO';
+        let badgeBg = '#DC2626';
+        let iconeStr = '🐾';
+
+        if (p.status_pet === 'encontrado' || (p.titulo && p.titulo.includes('RESGATADO'))) {
+          cor = '#009B3A';
+          badge = '🎉 RESGATADO / ENCONTRADO';
+          badgeBg = '#009B3A';
+          iconeStr = '🎉';
+        } else if (p.status_pet === 'avistado' || p.tipo === 'pet_avistado') {
+          cor = '#F59E0B';
+          badge = '👀 AVISTAMENTO ATIVO';
+          badgeBg = '#D97706';
+          iconeStr = '👀';
+        }
+
         const icon = L.divIcon({
           className: 'pet-pin-icon-wrap',
-          html: `<div class="pet-custom-pin" style="background:#009B3A;">🐾</div>`,
-          iconSize: [36, 36],
-          iconAnchor: [18, 18]
+          html: `<div class="pet-custom-pin" style="background:${cor};">${iconeStr}</div>`,
+          iconSize: [38, 38],
+          iconAnchor: [19, 19]
         });
 
         const m = L.marker([p.lat, p.lng], { icon }).addTo(mapPets);
         m.bindPopup(`
-          <div style="font-family:sans-serif; min-width:180px;">
+          <div style="font-family:sans-serif; min-width:220px;">
+            <div style="margin-bottom:6px;">
+              <span style="background:${badgeBg}; color:#FFFFFF; font-size:9px; font-weight:900; padding:2px 7px; border-radius:4px; letter-spacing:0.5px;">${badge}</span>
+            </div>
             <div style="font-weight:900; font-size:13px; color:#18181B; margin-bottom:4px;">${escapeHtml(p.titulo)}</div>
             <div style="font-size:11px; color:#71717A; margin-bottom:6px;">${escapeHtml(p.rua || '')} - ${escapeHtml(p.bairro || 'Cascavel')}</div>
-            ${p.foto_url ? `<img src="${p.foto_url}" style="width:100%; height:90px; object-fit:cover; border-radius:6px; margin-bottom:6px;">` : ''}
-            <button type="button" style="background:#2563EB; color:#fff; border:none; padding:4px 8px; border-radius:4px; font-size:11px; font-weight:800; width:100%; cursor:pointer;" onclick="falarPetCadastrado('${escapeAttr(p.titulo)}', '${escapeAttr(p.rua)}', '${escapeAttr(p.bairro)}')">🔊 Ouvir Copiloto</button>
+            ${p.foto_url ? `<img src="${p.foto_url}" style="width:100%; height:96px; object-fit:cover; border-radius:6px; margin-bottom:6px; border:1px solid #E4E4E7;">` : ''}
+            
+            <div style="display:flex; flex-direction:column; gap:5px; margin-top:6px;">
+              <button type="button" style="background:#2563EB; color:#fff; border:none; padding:5px 8px; border-radius:5px; font-size:11px; font-weight:800; cursor:pointer;" onclick="falarPetCadastrado('${escapeAttr(p.titulo)}', '${escapeAttr(p.rua)}', '${escapeAttr(p.bairro)}')">🔊 Ouvir Copiloto (450m)</button>
+              
+              ${p.status_pet !== 'encontrado' ? `
+                <button type="button" style="background:#009B3A; color:#fff; border:none; padding:5px 8px; border-radius:5px; font-size:11px; font-weight:800; cursor:pointer;" onclick="marcarPetStatusMesa(${p.id}, 'encontrado')">🎉 Marcar como Encontrado</button>
+                <button type="button" style="background:#D97706; color:#fff; border:none; padding:5px 8px; border-radius:5px; font-size:11px; font-weight:800; cursor:pointer;" onclick="simularAvistamentoPetMesa(${p.id})">👀 Simular Avistamento na Rua</button>
+              ` : `
+                <div style="font-size:11px; color:#009B3A; font-weight:800; text-align:center;">Reencontro comemorado no App!</div>
+              `}
+              <button type="button" style="background:transparent; color:#EF4444; border:1px solid #EF4444; padding:3px 6px; border-radius:5px; font-size:10px; font-weight:700; cursor:pointer; margin-top:2px;" onclick="excluirPetMesa(${p.id})">🗑️ Excluir Ocorrência</button>
+            </div>
           </div>
         `);
         markersPetsCadastrados.push(m);
       });
+    }
+
+    async function marcarPetStatusMesa(petId, status) {
+      if (!confirm(`Deseja alterar o status desta ocorrência para "${status.toUpperCase()}"? O card mudará em tempo real no app dos usuários.`)) return;
+
+      try {
+        const resp = await fetch(`/api/pets/${petId}/status`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ status_pet: status, subtipo_evento: (status === 'encontrado' ? 'resgatado' : '') })
+        });
+        if (resp.ok) {
+          mostrarToast(`🎉 Status alterado para ${status.toUpperCase()}!`);
+          carregarPetsCadastradosMesa();
+        } else {
+          alert('Erro ao atualizar status.');
+        }
+      } catch (err) {
+        alert('Falha na comunicação: ' + err);
+      }
+    }
+
+    async function simularAvistamentoPetMesa(petId) {
+      const local = prompt('Informe a rua/ponto onde o animal foi visto em Cascavel:', 'Rua Paraná, esquina com Rua Castro Alves');
+      if (!local) return;
+
+      const pet = petsCadastradosMesa.find(p => p.id === petId);
+      const lat = pet ? pet.lat + 0.002 : -24.9550;
+      const lng = pet ? pet.lng + 0.002 : -53.4550;
+
+      try {
+        const resp = await fetch(`/api/pets/${petId}/avistamento`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            lat: lat,
+            lng: lng,
+            descricao: `Avistado por testador de campo na ${local}. Animal parecia atento e desorientado.`,
+            nome_avistador: 'Lucas Martins (Testador 01)',
+            contato_avistador: '45998223344',
+            autorizar_contato: 1
+          })
+        });
+        if (resp.ok) {
+          mostrarToast(`👀 Avistamento registrado! Trilha e ponto plotados no mapa.`);
+          carregarPetsCadastradosMesa();
+        } else {
+          alert('Erro ao registrar avistamento.');
+        }
+      } catch (err) {
+        alert('Falha: ' + err);
+      }
+    }
+
+    async function excluirPetMesa(petId) {
+      if (!confirm('Deseja excluir permanentemente esta ocorrência de teste?')) return;
+      try {
+        const resp = await fetch(`/api/alertas/${petId}`, { method: 'DELETE' });
+        if (resp.ok) {
+          mostrarToast('🗑️ Ocorrência excluída com sucesso.');
+          carregarPetsCadastradosMesa();
+        } else {
+          alert('Erro ao excluir.');
+        }
+      } catch (err) {
+        alert('Falha: ' + err);
+      }
+    }
+
+    /* =====================================================================
+       4 TESTADORES DE CAMPO PILOTO (CASCAVEL)
+       ===================================================================== */
+    async function carregarTestadoresCampo() {
+      try {
+        const resp = await fetch('/api/testadores?t=' + Date.now());
+        if (resp.ok) {
+          const data = await resp.json();
+          testadoresCampo = data.testadores || [];
+          renderizarDockTestadores();
+          plotarTestadoresNoMapa();
+        }
+      } catch (err) {
+        console.warn('Erro ao carregar testadores:', err);
+      }
+    }
+
+    function renderizarDockTestadores() {
+      const grid = document.getElementById('testadores-grid');
+      if (!grid) return;
+
+      grid.innerHTML = testadoresCampo.map(t => `
+        <div class="testador-card" id="card-${t.id}">
+          <div class="testador-head">
+            <img class="testador-avatar" src="${t.foto_url}" alt="${escapeHtml(t.nome)}">
+            <div class="testador-info">
+              <div class="testador-nome">${escapeHtml(t.nome)}</div>
+              <div class="testador-rota">📍 ${escapeHtml(t.funcao)}</div>
+            </div>
+          </div>
+          <div class="testador-actions">
+            <button type="button" class="btn-testador-acao btn-testador-aproximar" onclick="aproximarTestadorDoPet('${t.id}')" title="Move testador para 400m de um pet para disparar Copiloto">
+              📍 400m Copiloto
+            </button>
+            <button type="button" class="btn-testador-acao btn-testador-avistar" onclick="testadorGeraAvistamento('${t.id}')" title="Registra avistamento feito por este testador">
+              👀 Avistar
+            </button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function plotarTestadoresNoMapa() {
+      if (!mapPets) return;
+      markersTestadores.forEach(m => mapPets.removeLayer(m));
+      markersTestadores = [];
+
+      testadoresCampo.forEach(t => {
+        const icon = L.divIcon({
+          className: 'testador-marker-wrap',
+          html: `
+            <div style="position:relative; width:44px; height:44px;">
+              <img src="${t.foto_url}" style="width:40px; height:40px; border-radius:50%; object-fit:cover; border:3px solid #38BDF8; box-shadow:0 6px 16px rgba(0,0,0,0.6);">
+              <div style="position:absolute; bottom:0; right:0; background:#22C55E; width:12px; height:12px; border-radius:50%; border:2px solid #fff;"></div>
+            </div>
+          `,
+          iconSize: [44, 44],
+          iconAnchor: [22, 22]
+        });
+
+        const m = L.marker([t.lat, t.lng], { icon }).addTo(mapPets);
+        m.bindPopup(`
+          <div style="font-family:sans-serif; min-width:190px;">
+            <div style="font-weight:900; font-size:13px; color:#18181B;">${escapeHtml(t.nome)} (${escapeHtml(t.codigo)})</div>
+            <div style="font-size:11px; color:#2563EB; font-weight:800; margin-bottom:4px;">${escapeHtml(t.funcao)}</div>
+            <div style="font-size:11px; color:#71717A; margin-bottom:6px;">Status: <strong>Ativo em Campo</strong></div>
+            <button type="button" style="background:#2563EB; color:#fff; border:none; padding:5px 8px; border-radius:4px; font-size:11px; font-weight:800; width:100%; cursor:pointer;" onclick="aproximarTestadorDoPet('${t.id}')">Simular Aproximação 400m</button>
+          </div>
+        `);
+        markersTestadores.push(m);
+      });
+    }
+
+    function alternarDockTestadores() {
+      const dock = document.getElementById('testadores-dock');
+      const btn = document.getElementById('btn-toggle-dock');
+      if (!dock) return;
+      dock.classList.toggle('collapsed');
+      if (btn) btn.textContent = dock.classList.contains('collapsed') ? 'Expandir ▲' : 'Minimizar ▼';
+    }
+
+    function aproximarTestadorDoPet(testadorId) {
+      const t = testadoresCampo.find(x => x.id === testadorId);
+      if (!t || !petsCadastradosMesa.length) {
+        alert('Nenhum pet cadastrado para aproximar.');
+        return;
+      }
+
+      // Encontra um pet desaparecido
+      const pet = petsCadastradosMesa.find(p => p.status_pet === 'desaparecido') || petsCadastradosMesa[0];
+      const novaLat = pet.lat + 0.0028;
+      const novaLng = pet.lng + 0.0028;
+      t.lat = novaLat;
+      t.lng = novaLng;
+
+      plotarTestadoresNoMapa();
+      mapPets.flyTo([novaLat, novaLng], 16, { duration: 1.2 });
+
+      mostrarToast(`🚗 ${t.nome} aproximou-se a 380m de "${pet.titulo}"!`);
+      falarPetCadastrado(pet.titulo, pet.rua, pet.bairro);
+    }
+
+    function testadorGeraAvistamento(testadorId) {
+      const t = testadoresCampo.find(x => x.id === testadorId);
+      if (!t || !petsCadastradosMesa.length) return;
+
+      const pet = petsCadastradosMesa.find(p => p.status_pet === 'desaparecido') || petsCadastradosMesa[0];
+      simularAvistamentoPetMesa(pet.id);
     }
 
     function falarPetCadastrado(titulo, rua, bairro) {

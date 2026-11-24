@@ -3302,6 +3302,20 @@
       margin-top: 14px;
     }
     </style>
+  <script>
+    // Registro Imediato da Blindagem Anti-Cold Start (Service Worker)
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function() {
+        navigator.serviceWorker.register('/sw.js', { scope: '/' })
+          .then(function(reg) {
+            console.log('[AlertaUrbano] Blindagem PWA/ServiceWorker ativa:', reg.scope);
+          })
+          .catch(function(err) {
+            console.warn('[AlertaUrbano] Erro ao registrar SW:', err);
+          });
+      });
+    }
+  </script>
 </head>
 <body>
   <!-- Splash Oficial: Rede de Proteção e Alerta Urbano -->
