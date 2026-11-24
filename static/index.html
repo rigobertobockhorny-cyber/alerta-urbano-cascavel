@@ -4847,7 +4847,18 @@
           }
           const ehOuro = parc.selo_tipo === 'ouro';
           const borderColor = ehOuro ? '#FED700' : '#009B3A';
-          const badgeIcon = (parc.categoria === 'pet_vet' || parc.categoria === 'pet_shop') ? '🐾' : (parc.categoria === 'auto_center' ? '🚗' : '⛽');
+          const ICONES_SEGMENTOS_APP = {
+            'pet_vet': '🐾',
+            'pet_shop': '🐕',
+            'banho_tosa': '🛁',
+            'auto_center': '🚗',
+            'borracharia': '🛞',
+            'posto': '⛽',
+            'moto_mecanica': '🏍️',
+            'carro_mecanica': '🔧',
+            'alimentacao': '🍔'
+          };
+          const badgeIcon = ICONES_SEGMENTOS_APP[parc.categoria] || '🏢';
 
           const customPartnerIcon = L.divIcon({
             className: 'custom-leaflet-partner-pin',
@@ -7501,6 +7512,14 @@ Baixe o aplicativo gratuito Alerta Urbano:
       const tabParam = urlParams.get('tab') || window.location.hash.replace('#', '');
       if (tabParam && ['inicio', 'mapa', 'pets', 'parceiros', 'copiloto'].includes(tabParam)) {
         setTimeout(() => trocarAba(tabParam), 350);
+      }
+
+      const mapaFilterParam = urlParams.get('filtro_mapa');
+      if (mapaFilterParam) {
+        setTimeout(() => {
+          const btn = document.querySelector(`.map-pill[data-pilar="${mapaFilterParam}"]`);
+          if (btn) filtrarMapa(mapaFilterParam, btn);
+        }, 550);
       }
 
       // Atualiza automaticamente a cada 60s

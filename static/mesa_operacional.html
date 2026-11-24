@@ -1143,50 +1143,69 @@
       align-items: center;
     }
 
-    /* Marcador Circular com Foto do Pet no Mapa */
-    .pet-map-avatar-marker {
-      position: relative;
-      width: 44px;
-      height: 44px;
-      cursor: pointer;
-      transition: transform 0.2s ease;
+    /* Marcador Circular Estrito dos Pets no Mapa (Zero Emojis, Zero Oval, 100% Redondo) */
+    .mesa-pet-divicon-wrap {
+      background: transparent !important;
+      border: none !important;
+      width: 42px !important;
+      height: 42px !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
     }
 
-    .pet-map-avatar-marker:hover {
-      transform: scale(1.18);
+    .mesa-pet-pin {
+      position: relative !important;
+      width: 42px !important;
+      height: 42px !important;
+      min-width: 42px !important;
+      min-height: 42px !important;
+      max-width: 42px !important;
+      max-height: 42px !important;
+      aspect-ratio: 1 / 1 !important;
+      border-radius: 50% !important;
+      overflow: hidden !important;
+      box-sizing: border-box !important;
+      background: #0F172A !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      cursor: grab !important;
+      transition: transform 0.15s ease, box-shadow 0.15s ease !important;
     }
 
-    .pet-map-avatar-img {
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      object-fit: cover;
-      box-shadow: 0 4px 14px rgba(0,0,0,0.6);
+    .mesa-pet-pin:hover {
+      transform: scale(1.15) !important;
     }
 
-    .pet-map-avatar-marker.desaparecido .pet-map-avatar-img {
-      border: 3px solid #EF4444;
-      box-shadow: 0 0 12px rgba(239, 68, 68, 0.75);
+    .mesa-pet-pin:active {
+      cursor: grabbing !important;
+      transform: scale(1.08) !important;
     }
 
-    .pet-map-avatar-marker.adocao .pet-map-avatar-img {
-      border: 3px solid #38BDF8;
-      box-shadow: 0 0 12px rgba(56, 189, 248, 0.75);
+    .mesa-pet-pin.desaparecido {
+      border: 3px solid #DC2626 !important; /* Vermelho vivo oficial */
+      box-shadow: 0 0 14px rgba(220, 38, 38, 0.75), 0 4px 10px rgba(0, 0, 0, 0.5) !important;
     }
 
-    .pet-map-badge-icon {
-      position: absolute;
-      bottom: -2px;
-      right: -2px;
-      background: #000;
-      border-radius: 50%;
-      width: 18px;
-      height: 18px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 10px;
-      border: 1.5px solid #fff;
+    .mesa-pet-pin.adocao {
+      border: 3px solid #2563EB !important; /* Azul vivo oficial */
+      box-shadow: 0 0 14px rgba(37, 99, 235, 0.75), 0 4px 10px rgba(0, 0, 0, 0.5) !important;
+    }
+
+    .mesa-pet-pin img {
+      width: 100% !important;
+      height: 100% !important;
+      min-width: 100% !important;
+      min-height: 100% !important;
+      max-width: 100% !important;
+      max-height: 100% !important;
+      aspect-ratio: 1 / 1 !important;
+      object-fit: cover !important;
+      border-radius: 50% !important;
+      display: block !important;
+      margin: 0 !important;
+      padding: 0 !important;
     }
   </style>
 </head>
@@ -3213,67 +3232,6 @@
         console.warn('Erro ao carregar catálogo perfis:', err);
       }
 
-      // Sincroniza em tempo real com as ocorrências oficiais salvas no banco do Render
-      try {
-        const respAlertas = await fetch('/api/alertas?cidade=Cascavel&t=' + Date.now());
-        if (respAlertas.ok) {
-          const alertasDb = await respAlertas.json();
-          const petsDb = alertasDb.filter(a => a.pilar === 'pet' && a.ativo == 1);
-          
-          petsDb.forEach(a => {
-            const nomeAlert = (a.titulo || '').toLowerCase();
-            const pExistente = perfisOcorrencias.find(p => {
-              const pNome = (p.pet?.nome || '').toLowerCase();
-              return pNome && (nomeAlert.includes(pNome) || pNome.includes(nomeAlert));
-            });
-
-            if (pExistente) {
-              pExistente.posicao_mapa = {
-                fixado: true,
-                lat: a.lat,
-                lng: a.lng,
-                rua: a.rua,
-                bairro: a.bairro,
-                data_fixacao: a.created_at,
-                alerta_id: a.id
-              };
-            } else {
-              perfisOcorrencias.push({
-                id: 'alerta_' + a.id,
-                tutor: {
-                  nome: a.autor_nome || a.fonte_nome || a.contato || 'Tutor em Cascavel',
-                  avatar: '/static/logo_bolha_pura.png',
-                  telefone: '(45) 99999-0000',
-                  bairro_origem: a.bairro
-                },
-                pet: {
-                  nome: a.titulo,
-                  categoria: a.especie || 'cao',
-                  raca: a.especie || 'Pet Comunitário',
-                  porte: a.porte || 'médio',
-                  sexo: 'indefinido',
-                  tipo_ocorrencia: a.status_pet || 'desaparecido',
-                  foto_url: a.foto_url || '/static/logo_bolha_pura.png',
-                  recompensa: '',
-                  detalhes: a.descricao || 'Ocorrência registrada no app.'
-                },
-                posicao_mapa: {
-                  fixado: true,
-                  lat: a.lat,
-                  lng: a.lng,
-                  rua: a.rua,
-                  bairro: a.bairro,
-                  data_fixacao: a.created_at,
-                  alerta_id: a.id
-                }
-              });
-            }
-          });
-        }
-      } catch (errDb) {
-        console.warn('Sincronização com /api/alertas:', errDb);
-      }
-
       renderizarBandejaPerfis();
       plotarTodosPerfisNoMapa();
       atualizarContadoresPerfis();
@@ -3330,7 +3288,7 @@
         const fixado = p.posicao_mapa && p.posicao_mapa.fixado;
         const ehDesap = p.pet.tipo_ocorrencia === 'desaparecido';
         const badgeClass = ehDesap ? 'badge-desaparecido' : 'badge-adocao';
-        const badgeTexto = ehDesap ? '🚨 Desaparecido' : '🏠 Para Adoção';
+        const badgeTexto = ehDesap ? 'Desaparecido' : 'Para Adoção';
         const cardClass = fixado ? 'profile-card no-mapa' : 'profile-card';
 
         return `
@@ -3849,6 +3807,36 @@
       mostrarToast(`🗑️ Ocorrência de "${petNome}" retirada do mapa e excluída do aplicativo.`);
     }
 
+    async function salvarPerfisNoServidorSilencioso() {
+      try {
+        await fetch('/api/mesa/salvar-perfis', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ perfis: perfisOcorrencias })
+        });
+        localStorage.setItem('mesa_perfis_v2', JSON.stringify(perfisOcorrencias));
+      } catch (err) {
+        console.warn('Erro ao salvar perfis silencioso:', err);
+      }
+    }
+
+    async function buscarEnderecoReversoPerfilSilencioso(p, lat, lng) {
+      try {
+        const resp = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}&zoom=18&addressdetails=1`, {
+          headers: { 'Accept-Language': 'pt-BR' }
+        });
+        if (resp.ok) {
+          const data = await resp.json();
+          const addr = data.address || {};
+          const rua = addr.road || addr.street || addr.pedestrian || addr.suburb || '';
+          const bairro = addr.suburb || addr.neighbourhood || addr.city_district || 'Cascavel';
+          if (rua) p.posicao_mapa.rua = rua;
+          if (bairro) p.posicao_mapa.bairro = bairro;
+          salvarPerfisNoServidorSilencioso();
+        }
+      } catch (_) {}
+    }
+
     function plotarTodosPerfisNoMapa() {
       if (!mapPets) return;
 
@@ -3861,28 +3849,30 @@
       perfisOcorrencias.forEach(p => {
         if (!p.posicao_mapa || !p.posicao_mapa.fixado || !p.posicao_mapa.lat || !p.posicao_mapa.lng) return;
 
-        const lat = p.posicao_mapa.lat;
-        const lng = p.posicao_mapa.lng;
-        const ehDesap = p.pet.tipo_ocorrencia === 'desaparecido';
-        const corTema = ehDesap ? '#EF4444' : '#38BDF8';
-        const badgeTexto = ehDesap ? '🚨 DESAPARECIDO' : '🏠 PARA ADOÇÃO';
+        const lat = Number(p.posicao_mapa.lat);
+        const lng = Number(p.posicao_mapa.lng);
+        if (isNaN(lat) || isNaN(lng)) return;
 
-        // Marcador Circular com Foto do Pet e Badge
-        const iconHtml = `
-          <div class="pet-map-avatar-marker ${p.pet.tipo_ocorrencia}">
-            <img class="pet-map-avatar-img" src="${p.pet.foto_url}" alt="${escapeHtml(p.pet.nome)}">
-            <div class="pet-map-badge-icon">${ehDesap ? '🚨' : '🏠'}</div>
+        const ehDesap = p.pet.tipo_ocorrencia === 'desaparecido';
+        const corTema = ehDesap ? '#DC2626' : '#2563EB'; // Vermelho Desaparecido, Azul Adoção
+        const badgeTexto = ehDesap ? 'DESAPARECIDO' : 'PARA ADOÇÃO';
+
+        // Marcador Circular Estrito dos Pets (Zero Emojis, Zero Oval, 100% Redondo)
+        const pinHtml = `
+          <div class="mesa-pet-pin ${p.pet.tipo_ocorrencia}" title="${escapeHtml(p.pet.nome)} (${badgeTexto})">
+            <img src="${p.pet.foto_url || '/static/logo_bolha_pura.png'}" onerror="this.onerror=null; this.src='/static/logo_bolha_pura.png';" alt="${escapeHtml(p.pet.nome)}">
           </div>
         `;
 
         const icon = L.divIcon({
-          className: 'pet-avatar-divicon',
-          html: iconHtml,
-          iconSize: [44, 44],
-          iconAnchor: [22, 22]
+          className: 'mesa-pet-divicon-wrap',
+          html: pinHtml,
+          iconSize: [42, 42],
+          iconAnchor: [21, 21]
         });
 
-        const m = L.marker([lat, lng], { icon }).addTo(mapPets);
+        // Marcador ARRASTÁVEL (draggable: true) para o Rigo posicionar exatamente onde quiser
+        const m = L.marker([lat, lng], { icon, draggable: true }).addTo(mapPets);
 
         // Círculo de 450 metros (raio de disparo do Copiloto TTS)
         const circle = L.circle([lat, lng], {
@@ -3894,17 +3884,37 @@
           dashArray: '5, 5'
         }).addTo(mapPets);
 
-        const cleanPhone = p.tutor.telefone.replace(/\D/g, '');
+        // Permite ao Rigo arrastar o animal livremente pelo mapa para posicionar sem sobreposição
+        m.on('dragend', async (e) => {
+          const newPos = e.target.getLatLng();
+          if (!p.posicao_mapa) p.posicao_mapa = { fixado: true };
+          p.posicao_mapa.lat = newPos.lat;
+          p.posicao_mapa.lng = newPos.lng;
+          p.posicao_mapa.fixado = true;
+
+          // Atualiza o círculo de raio visualmente de imediato
+          circle.setLatLng(newPos);
+
+          // Salva automaticamente no servidor (disco e SQLite)
+          salvarPerfisNoServidorSilencioso();
+
+          // Atualiza rua e bairro em segundo plano
+          buscarEnderecoReversoPerfilSilencioso(p, newPos.lat, newPos.lng);
+
+          mostrarToast(`📍 Posição de "${p.pet.nome}" atualizada no mapa!`);
+        });
+
+        const cleanPhone = (p.tutor && p.tutor.telefone) ? p.tutor.telefone.replace(/\D/g, '') : '';
 
         m.bindPopup(`
           <div style="font-family:sans-serif; min-width:240px; padding:4px;">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-              <span style="background:${corTema}; color:#fff; font-size:9.5px; font-weight:900; padding:2px 7px; border-radius:4px;">${badgeTexto}</span>
-              <span style="font-size:10.5px; font-weight:800; color:${corTema};">${escapeHtml(p.pet.recompensa)}</span>
+              <span style="background:${corTema}; color:#fff; font-size:9.5px; font-weight:900; padding:2px 7px; border-radius:4px; letter-spacing:0.5px;">${badgeTexto}</span>
+              <span style="font-size:10.5px; font-weight:800; color:${corTema};">${escapeHtml(p.pet.recompensa || '')}</span>
             </div>
 
             <div style="display:flex; gap:10px; align-items:center; margin-bottom:10px;">
-              <img src="${p.pet.foto_url}" style="width:60px; height:60px; border-radius:8px; object-fit:cover; border:2px solid ${corTema};">
+              <img src="${p.pet.foto_url || '/static/logo_bolha_pura.png'}" onerror="this.onerror=null; this.src='/static/logo_bolha_pura.png';" style="width:58px; height:58px; border-radius:50%; object-fit:cover; border:2.5px solid ${corTema};">
               <div>
                 <div style="font-size:14px; font-weight:900; color:#18181B;">${escapeHtml(p.pet.nome)}</div>
                 <div style="font-size:11px; color:#52525B;">${escapeHtml(p.pet.raca)} • ${escapeHtml(p.pet.sexo)}</div>
@@ -3913,22 +3923,22 @@
             </div>
 
             <div style="background:#F4F4F5; border-radius:8px; padding:8px; margin-bottom:10px; display:flex; gap:8px; align-items:center;">
-              <img src="${p.tutor.avatar}" style="width:30px; height:30px; border-radius:50%; object-fit:cover;">
+              <img src="${(p.tutor && p.tutor.avatar) || '/static/logo_bolha_pura.png'}" onerror="this.onerror=null; this.src='/static/logo_bolha_pura.png';" style="width:30px; height:30px; border-radius:50%; object-fit:cover;">
               <div style="flex:1; min-width:0;">
-                <div style="font-size:11px; font-weight:800; color:#18181B;">${escapeHtml(p.tutor.nome)}</div>
-                <div style="font-size:10px; color:#71717A;">📱 ${escapeHtml(p.tutor.telefone)}</div>
+                <div style="font-size:11px; font-weight:800; color:#18181B;">${escapeHtml((p.tutor && p.tutor.nome) || 'Tutor')}</div>
+                <div style="font-size:10px; color:#71717A;">${escapeHtml((p.tutor && p.tutor.telefone) || '')}</div>
               </div>
-              <a href="https://wa.me/55${cleanPhone}?text=${encodeURIComponent('Olá ' + p.tutor.nome + ', vi seu alerta sobre o pet ' + p.pet.nome + ' no Alerta Urbano Cascavel!')}" target="_blank" style="background:#22C55E; color:#fff; text-decoration:none; padding:4px 8px; border-radius:6px; font-size:10.5px; font-weight:800; display:flex; align-items:center; gap:3px;">
-                💬 WhatsApp
+              <a href="https://wa.me/55${cleanPhone}?text=${encodeURIComponent('Olá ' + ((p.tutor && p.tutor.nome) || '') + ', vi seu alerta sobre o pet ' + p.pet.nome + ' no Alerta Urbano Cascavel!')}" target="_blank" style="background:#22C55E; color:#fff; text-decoration:none; padding:4px 8px; border-radius:6px; font-size:10.5px; font-weight:800; display:flex; align-items:center; gap:3px;">
+                WhatsApp
               </a>
             </div>
 
             <div style="display:flex; gap:6px;">
               <button type="button" style="flex:1; background:#2563EB; color:#fff; border:none; padding:6px; border-radius:6px; font-size:11px; font-weight:800; cursor:pointer;" onclick="falarOcorrenciaPerfil('${escapeAttr(p.pet.nome)}', '${escapeAttr(p.pet.raca)}', '${escapeAttr(p.posicao_mapa.rua || '')}', '${escapeAttr(p.posicao_mapa.bairro || '')}', '${escapeAttr(p.pet.categoria || '')}')">
-                🔊 Ouvir 450m
+                Ouvir Áudio
               </button>
               <button type="button" style="background:#EF4444; color:#fff; border:none; padding:6px 10px; border-radius:6px; font-size:11px; font-weight:800; cursor:pointer;" onclick="retirarPerfilDoMapaDirect('${p.id}')">
-                🗑️ Retirar
+                Retirar
               </button>
             </div>
           </div>
