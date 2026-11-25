@@ -1570,11 +1570,28 @@ def listar_meus_avistamentos():
     return jsonify([dict(r) for r in rows])
 
 
+def haversine_m(lat1, lon1, lat2, lon2):
+    import math
+    if lat1 is None or lon1 is None or lat2 is None or lon2 is None:
+        return 999999.0
+    try:
+        lat1, lon1, lat2, lon2 = float(lat1), float(lon1), float(lat2), float(lon2)
+        R = 6371000.0
+        phi1, phi2 = math.radians(lat1), math.radians(lat2)
+        dphi = math.radians(lat2 - lat1)
+        dlam = math.radians(lon2 - lon1)
+        a = math.sin(dphi / 2.0) ** 2 + math.cos(phi1) * math.cos(phi2) * math.sin(dlam / 2.0) ** 2
+        return R * 2.0 * math.atan2(math.sqrt(a), math.sqrt(1.0 - a))
+    except Exception:
+        return 999999.0
+
+
 @app.route("/api/pets/<int:pet_id>/trilha", methods=["GET"])
 def trilha_cronologica_pet(pet_id):
     """
     Retorna a Trilha Cronológica completa de um Pet (ponto inicial + avistamentos/resgates em ordem de horário)
     para desenhar o caminho do animal no mapa (ZERO exposição de telefones).
+    Calcula também o epicentro de cluster (baricentro ponderado) e raio dinâmico com rejeição de outliers.
     """
     conn = get_db()
     pai = conn.execute("""
@@ -1622,11 +1639,41 @@ def trilha_cronologica_pet(pet_id):
             "created_at": ev["created_at"],
         })
 
+    # Algoritmo de Estimativa Espacial de Cluster (Rigo/Johan):
+    # Baricentro ponderado com rejeição de outliers (> 3.5km sem confirmação)
+    coords_validas = []
+    if pai["lat"] is not None and pai["lng"] is not None:
+        coords_validas.append((float(pai["lat"]), float(pai["lng"]), 3.0))
+
+    for ev in eventos:
+        if ev["lat"] is not None and ev["lng"] is not None:
+            lat_e = float(ev["lat"])
+            lng_e = float(ev["lng"])
+            dist_fuga = haversine_m(pai["lat"], pai["lng"], lat_e, lng_e) if pai["lat"] is not None else 0
+            if dist_fuga <= 3500:
+                peso = 4.0 if ev["subtipo_evento"] == "resgatado" else 1.5
+                coords_validas.append((lat_e, lng_e, peso))
+
+    if coords_validas:
+        peso_total = sum(p[2] for p in coords_validas)
+        lat_estimada = sum(p[0] * p[2] for p in coords_validas) / peso_total
+        lng_estimada = sum(p[1] * p[2] for p in coords_validas) / peso_total
+        max_dispersao = max(haversine_m(lat_estimada, lng_estimada, p[0], p[1]) for p in coords_validas)
+        raio_estimado = max(500, int(max_dispersao + 150))
+    else:
+        lat_estimada, lng_estimada, raio_estimado = pai["lat"], pai["lng"], 500
+
     return jsonify({
         "pet_id": pai["id"],
         "pet_titulo": pai["titulo"],
         "total_eventos": len(eventos),
         "pontos": pontos,
+        "estimativa_epicentro": {
+            "lat": round(lat_estimada, 6) if lat_estimada is not None else None,
+            "lng": round(lng_estimada, 6) if lng_estimada is not None else None,
+            "raio_m": min(raio_estimado, 1800),
+            "pontos_cluster": len(coords_validas),
+        }
     })
 
 

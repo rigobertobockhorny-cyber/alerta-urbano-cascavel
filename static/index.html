@@ -6289,8 +6289,28 @@ Baixe o aplicativo gratuito Alerta Urbano:
               opacity: 0.9,
               dashArray: '8, 7'
             }).addTo(trailLayer);
+            if (data.estimativa_epicentro && data.estimativa_epicentro.lat && data.estimativa_epicentro.lng) {
+              L.circle([data.estimativa_epicentro.lat, data.estimativa_epicentro.lng], {
+                radius: data.estimativa_epicentro.raio_m || 500,
+                color: '#F59E0B',
+                weight: 2,
+                dashArray: '6, 6',
+                fillColor: '#F59E0B',
+                fillOpacity: 0.12
+              }).addTo(trailLayer);
+            }
             map.fitBounds(coords, { padding: [55, 70], maxZoom: 16 });
           } else if (coords.length === 1) {
+            if (data.estimativa_epicentro && data.estimativa_epicentro.lat && data.estimativa_epicentro.lng) {
+              L.circle([data.estimativa_epicentro.lat, data.estimativa_epicentro.lng], {
+                radius: data.estimativa_epicentro.raio_m || 500,
+                color: '#F59E0B',
+                weight: 2,
+                dashArray: '6, 6',
+                fillColor: '#F59E0B',
+                fillOpacity: 0.12
+              }).addTo(trailLayer);
+            }
             map.flyTo(coords[0], 15, { duration: 0.5 });
           }
 
