@@ -600,16 +600,21 @@ def ping():
 def baixar_apk():
     apk_path = os.path.join(BASE_DIR, "ALERTA_URBANO_CASCAVEL.apk")
     if not os.path.exists(apk_path):
-        apk_path = os.path.join(BASE_DIR, "android_app", "app", "build", "outputs", "apk", "debug", "app-debug.apk")
+        apk_path = os.path.join(BASE_DIR, "android_app", "app", "build", "outputs", "apk", "release", "app-release.apk")
     if not os.path.exists(apk_path):
         return "APK ainda sendo gerado...", 404
-    return send_from_directory(
+    resp = send_from_directory(
         os.path.dirname(apk_path),
         os.path.basename(apk_path),
         as_attachment=True,
-        download_name="Alerta_Urbano_v3.6.6_Cascavel.apk",
+        download_name="ALERTA_URBANO_v3.9.4.apk",
         mimetype="application/vnd.android.package-archive",
+        max_age=0,
     )
+    resp.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+    resp.headers["Pragma"] = "no-cache"
+    resp.headers["Expires"] = "0"
+    return resp
 
 
 @app.route("/api/falar")
