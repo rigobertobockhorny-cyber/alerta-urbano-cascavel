@@ -2065,9 +2065,9 @@
       box-sizing: border-box;
       padding: 8px 2px;
       border-radius: 999px;
-      border: 1.5px solid #000000;
-      background: #FFCC00;
-      color: #000000;
+      border: 1.5px solid rgba(110, 90, 60, 0.3) !important;
+      background: #E4D5BC !important; /* COR AREIA (SEM SELEÇÃO) */
+      color: #2E2417 !important;
       font-size: 11.5px;
       font-weight: 800;
       text-align: center;
@@ -2075,14 +2075,15 @@
       overflow: hidden;
       text-overflow: ellipsis;
       cursor: pointer;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
       transition: all 0.2s ease;
     }
     .map-pill.active {
-      background: #000000 !important;
-      color: #FFFFFF !important;
-      border-color: #000000 !important;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+      background: #EDE8DF !important; /* COR BEGE (SELECIONADO - REGRA OFICIAL RIGO) */
+      color: #2E2417 !important;
+      border: 2px solid #5A4730 !important;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.18) !important;
+      font-weight: 900 !important;
     }
     .map-tools {
       position: absolute;
@@ -2820,13 +2821,18 @@
       color: #000000 !important;
     }
 
-    /* Destaques do Mapa no Verde */
+    /* Destaques do Mapa no Verde (REGRA OFICIAL RIGO: ZERO PRETO) */
+    #tab-mapa .map-pill {
+      background: #E4D5BC !important; /* AREIA */
+      color: #2E2417 !important;
+      border: 1.5px solid rgba(110, 90, 60, 0.3) !important;
+    }
     #tab-mapa .map-pill.active {
-      background: #000000 !important;
-      color: #FED700 !important;
+      background: #EDE8DF !important; /* BEGE SELECIONADO */
+      color: #2E2417 !important;
       font-weight: 900 !important;
-      border-color: #000000 !important;
-      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35) !important;
+      border: 2px solid #5A4730 !important;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.18) !important;
     }
 
     /* Copiloto em Branco Puro com Botão Preto Sólido (Zero Verde e Zero Degradê) */
@@ -3801,16 +3807,17 @@
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
     }
 
-    /* FERRAMENTAS DO MAPA */
+    /* FERRAMENTAS DO MAPA (AREIA / BEGE ATIVO) */
     .map-tool-btn {
-      background: var(--pet-areia) !important;
-      color: var(--pet-texto-escuro) !important;
-      border: 1.5px solid rgba(110, 90, 60, 0.25) !important;
+      background: #E4D5BC !important; /* AREIA */
+      color: #2E2417 !important;
+      border: 1.5px solid rgba(110, 90, 60, 0.3) !important;
     }
     .map-tool-btn.active {
-      background: var(--pet-bege) !important;
-      color: #000000 !important;
-      border: 2px solid var(--pet-marrom-dark) !important;
+      background: #EDE8DF !important; /* BEGE SELECIONADO */
+      color: #2E2417 !important;
+      border: 2px solid #5A4730 !important;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.18) !important;
     }
 
     /* 4 PILARES PETS: CONTAINER BEGE, ABAS AREIA, ATIVO MARROM ESCURO */
@@ -4083,7 +4090,7 @@
         <div class="brand-text">
           <div class="brand-name">Alerta Pet Brasil</div>
           <div class="brand-city">
-            <span>Cascavel • Build 35 (v3.10.8)</span>
+            <span>Cascavel • Build 36 (v3.10.9)</span>
           </div>
         </div>
       </div>
@@ -5299,6 +5306,9 @@
         attributionControl: true
       });
 
+      /* ==================== REGRA PÉTREA RIGO: ESTRATÉGIA DAS BOLINHAS CLUSTER (TRAVADO DEFINITIVAMENTE) ==================== */
+      // Aglutinação com zoom out exibindo contagem por cidade/região e expansão granular com zoom in.
+      // CÓDIGO TRAVADO COMO REGRA PÉTREA - PROIBIDA QUALQUER ALTERAÇÃO.
       if (window.L && typeof L.markerClusterGroup === 'function') {
         markersLayer = L.markerClusterGroup({
           chunkedLoading: true,
@@ -8367,15 +8377,16 @@ Baixe o aplicativo gratuito Alerta Urbano:
       state.parceiroFiltro = cat;
       document.querySelectorAll('.btn-filtro-parceiro').forEach(b => {
         b.classList.remove('active');
-        b.style.background = '#EDE8DF';
+        b.style.background = '#E4D5BC'; // AREIA (NÃO SELECIONADO)
         b.style.color = '#2E2417';
-        b.style.borderColor = 'rgba(110,90,60,0.25)';
+        b.style.borderColor = 'rgba(110,90,60,0.3)';
       });
       if (el) {
         el.classList.add('active');
-        el.style.background = '#6E5A3C';
-        el.style.color = '#EDE8DF';
-        el.style.borderColor = '#6E5A3C';
+        el.style.background = '#EDE8DF'; // BEGE (SELECIONADO - REGRA OFICIAL RIGO)
+        el.style.color = '#2E2417';
+        el.style.borderColor = '#5A4730';
+        el.style.fontWeight = '900';
       }
       renderizarAbaParceiros();
     }
