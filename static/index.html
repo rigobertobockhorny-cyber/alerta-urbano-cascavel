@@ -318,7 +318,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: calc(env(safe-area-inset-top, 0px) + 10px) 16px 6px;
+      padding: calc(env(safe-area-inset-top, 0px) + 8px) 12px 4px;
       background: #009B3A !important; /* Verde Bandeira */
       border-bottom: none !important;
       z-index: 500;
@@ -677,7 +677,7 @@
     /* ==================== HOME: CLIMA INTEGRADO NA CABECEIRA VERDE BRASIL ==================== */
     .home-green-canopy {
       background: #009B3A;
-      padding: 4px 12px 6px;
+      padding: 4px 10px 6px;
       display: flex;
       flex-direction: column;
       gap: 5px;
@@ -687,7 +687,7 @@
     .weather-strip-green {
       background: rgba(0, 0, 0, 0.18);
       border-radius: 14px;
-      padding: 6px 12px 5px;
+      padding: 6px 10px 5px;
       border: 1px solid rgba(254, 215, 0, 0.28);
       box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
       flex-shrink: 0;
@@ -696,7 +696,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 8px;
+      gap: 6px;
     }
     .weather-strip-green .weather-temp-wrap {
       display: flex;
@@ -881,9 +881,9 @@
       flex: 1;
       display: flex;
       flex-direction: column;
-      justify-content: space-evenly;
-      padding: 2px 14px 6px;
-      gap: 4px;
+      justify-content: space-between;
+      padding: 6px 14px 4px;
+      gap: 8px;
       overflow: hidden;
       background: #E8DCC4 !important; /* Areia Acolhedor Oficial Rigo */
     }
@@ -892,11 +892,18 @@
     .belt-block {
       flex-shrink: 0;
     }
+    .belt-block-pets {
+      margin-top: 2px;
+    }
+    .belt-block-parceiros {
+      margin-top: auto !important;
+      margin-bottom: 2px !important;
+    }
     .belt-head {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 3px;
+      margin-bottom: 4px;
       padding: 0 2px;
     }
     .belt-title {
@@ -909,7 +916,17 @@
       align-items: center !important;
       gap: 7px !important;
     }
-    .belt-title.pet-title, .belt-title.uti-title, .belt-title.seg-title {
+    .belt-title.pet-title {
+      text-transform: none !important;
+      font-size: 13px !important;
+      font-weight: 900 !important;
+      letter-spacing: 0.3px !important;
+      color: #2E2417 !important;
+    }
+    .belt-title.pet-title span {
+      color: #2E2417 !important;
+    }
+    .belt-title.uti-title, .belt-title.seg-title {
       color: #000000 !important;
     }
     .belt-title span {
@@ -4250,8 +4267,8 @@
       </svg>
     </div>
     <div class="splash-river-bottom" style="background:#9E8560;">
-      <div class="splash-tagline" style="color:#EDE8DF; font-weight:900; letter-spacing:0.8px;">ACOLHENDO E PROTEGENDO QUEM NÃO SABE PEDIR AJUDA</div>
-      <div class="splash-subtext" style="color:#E4D5BC; font-weight:600;">Rede Solidária de Proteção Animal e Reencontro</div>
+      <div class="splash-tagline" style="color:#EDE8DF; font-weight:900; letter-spacing:0.8px;">QUEM AMA, PROCURA JUNTO.</div>
+      <div class="splash-subtext" style="color:#E4D5BC; font-weight:600;">A maior rede de proteção, resgate e reencontro animal.</div>
     </div>
     <script>
       setTimeout(function() {
@@ -4280,7 +4297,7 @@
         <div class="brand-text">
           <div class="brand-name">Alerta Pet Brasil</div>
           <div class="brand-city">
-            <span>Cascavel • Build 38 (v3.11.1)</span>
+            <span>Cascavel • Build 39 (v3.11.2)</span>
           </div>
         </div>
       </div>
@@ -4356,7 +4373,7 @@
 
         <div class="home-belts-container">
           <!-- Bloco 1: Esteira Pets (mais trabalhada com fotos) -->
-          <div class="belt-block">
+          <div class="belt-block belt-block-pets">
             <div class="belt-head">
               <div class="belt-title pet-title">
                 <svg class="belt-svg" viewBox="0 0 24 24" fill="currentColor">
@@ -4369,7 +4386,7 @@
                   <circle cx="20.5" cy="12" r="1.6"/>
                   <circle cx="17.5" cy="16.2" r="2.8"/>
                 </svg>
-                <span>Pets</span>
+                <span>Quem ama, cuida e procura junto.</span>
               </div>
             </div>
             <div class="belt-viewport">
@@ -4377,10 +4394,8 @@
             </div>
           </div>
 
-
-
-          <!-- Bloco 3: Parceiros Oficiais de Cascavel -->
-          <div class="belt-block" style="margin-bottom:4px;">
+          <!-- Bloco 2: Parceiros Oficiais de Cascavel (Abaixado junto ao menu) -->
+          <div class="belt-block belt-block-parceiros">
             <div class="belt-head">
               <div class="belt-title" style="color:#0F172A; font-weight:900; font-size:12px; display:flex; align-items:center; gap:6px;">
                 <svg class="belt-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:15px;height:15px;"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
