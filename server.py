@@ -933,6 +933,47 @@ def resumo_dashboard():
     })
 
 
+
+@app.route("/api/parceiros/anunciar", methods=["POST"])
+def registrar_lead_parceiro():
+    """
+    Registra interesse de empresas parceiras para anunciar na plataforma Alerta Pet Brasil.
+    """
+    data = request.json or {}
+    nome_empresa = (data.get("nome_empresa") or "").strip()[:100]
+    responsavel = (data.get("responsavel") or "").strip()[:80]
+    whatsapp = normalizar_telefone(data.get("whatsapp") or "")
+    segmento = (data.get("segmento") or "").strip()[:50]
+    cidade = (data.get("cidade") or "Cascavel").strip()[:60]
+    mensagem = (data.get("mensagem") or "").strip()[:500]
+
+    if not nome_empresa or not whatsapp:
+        return jsonify({"error": "Nome da empresa e WhatsApp são obrigatórios."}), 400
+
+    conn = get_db()
+    cur = conn.cursor()
+    cur.execute("""
+        CREATE TABLE IF NOT EXISTS leads_parceiros (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            nome_empresa TEXT NOT NULL,
+            segmento TEXT,
+            responsavel TEXT,
+            whatsapp TEXT,
+            cidade TEXT DEFAULT 'Cascavel',
+            mensagem TEXT,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )
+    """)
+    cur.execute("""
+        INSERT INTO leads_parceiros (nome_empresa, segmento, responsavel, whatsapp, cidade, mensagem)
+        VALUES (?, ?, ?, ?, ?, ?)
+    """, (nome_empresa, segmento, responsavel, whatsapp, cidade, mensagem))
+    conn.commit()
+    lead_id = cur.lastrowid
+    conn.close()
+
+    return jsonify({"status": "ok", "lead_id": lead_id, "mensagem": "Proposta registrada com sucesso!"})
+
 @app.route("/api/parceiros", methods=["GET"])
 def listar_parceiros():
     """
