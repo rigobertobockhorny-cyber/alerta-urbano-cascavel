@@ -2,7 +2,7 @@
 ## Manual Supremo de Engenharia, Governança, Design System, Fluxos de Tela e Pipeline de Publicação
 **Documento Soberano e Obrigatório de Referência Contínua para Engenharia e IAs**
 **Autoridade e Direção:** Rigo | **Engenheiro/Arquiteto de Sistemas:** Johan
-**Data da Última Atualização:** 24/11/2026 | **Versão Corrente:** 3.9.4 (versionCode 20)
+**Data da Última Atualização:** 25/11/2026 | **Versão Corrente:** 3.9.5 (versionCode 21)
 
 ---
 
@@ -440,4 +440,27 @@ A **Mesa Operacional** (`/mesa` e `/admin/mesa`) é a estação de trabalho exec
   * Popup completo com link direto para simulação de WhatsApp (`https://wa.me/...`) e botão para remoção do mapa.
 
 ---
-**Fim da Bíblia Mestra — Alerta Urbano Cascavel v3.9.4**
+## 18. REENGENHARIA DA BOLINHA FLUTUANTE & CARD CÍVICO DE RADAR DE PETS (v3.9.5)
+
+### 18.1. Correção Definitiva da Inversão de Gatilhos
+* **Ao Tocar na Bolinha Flutuante (`toggleMiniCard`):** Abre **exclusivamente o Menu Rápido de Registro de Ocorrência na Rua** (`exibirCardMenuRegistro`), com opções para registrar `[ Animal na Pista ]`, `[ Ponto Seguro ]`, `[ Perigo na Via ]` e `[ Fechar ]`.
+* **Ao Dirigir e Cruzar o Raio de 500m de um Animal Desaparecido (`dispararAlertaSonoroEVisual` / `mostrarBannerTopo`):** Abre **automaticamente o Card de Ocorrência com Foto Ampliada** (`exibirCardOcorrencia`), acompanhado da vinheta sonora e síntese de voz neural.
+
+### 18.2. Redesenho Completo do Card de Animal Desaparecido
+1. **Bloco Amarelo Ouro Cívico (`#FED700`):** Fundo amarelo sólido vibrante, cantos amplamente arredondados (`22dp`), borda preta sólida de `3dp` (`#000000`) e **ZERO margem laranja**.
+2. **Moldura Dedicada ("Cardzinho") para a Foto:**
+   * Container emoldurado (`FrameLayout`) com cantos arredondados (`16dp`), fundo escuro de alto contraste (`#18181B`) e borda preta sólida de `2dp`.
+   * **Foto ampliada em 60%:** Altura aumentada de `125dp` para `195dp` para legibilidade instantânea no suporte do carro em trânsito.
+   * **Pílula de Identificação no Topo:** Badge preta com tipografia amarela negrito `🐾 ANIMAL DESAPARECIDO`.
+3. **Tipografia em Preto Sólido (`#000000`):**
+   * Título principal ampliado para `18sp` negrito.
+   * Subtítulo de localização e distância ampliado para `13sp` negrito (`📍 BAIRRO • A X METROS`).
+4. **Botões de Ação Cívica:**
+   * Linha 1: `[ Visto aqui ]` e `[ Ver no mapa ]` em botões pretos sólidos com texto branco negrito e cantos arredondados de `14dp` (altura `42dp`).
+   * Linha 2: `[ Fechar aviso ]` em largura total (altura `42dp`).
+5. **Erradicação Total da Margem Laranja na Bolinha:**
+   * Na função `atualizarAnelZonaPet`, substituído o anel âmbar/laranja por anel preto cívico de `2dp` (`#000000`), sem interferência de cores terceiras.
+
+---
+
+**Fim da Bíblia Mestra — Alerta Urbano Cascavel v3.9.5**
