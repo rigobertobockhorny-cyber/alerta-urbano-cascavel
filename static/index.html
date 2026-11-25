@@ -6211,6 +6211,7 @@ Baixe o aplicativo gratuito Alerta Urbano:
           botoes += `<button type="button" class="btn-full whatsapp" onclick="abrirModalAvistamento(${a.id}, false, 'resgatado')">Pet Resgatado (Enviar Foto ao Tutor)</button>`;
         }
         botoes += `<button type="button" class="btn-full" onclick="verTrilhaPetNoMapa(${a.id})">Ver Trilha / Caminho no Mapa</button>`;
+        botoes += `<button type="button" class="btn-full" style="background:#0F172A; color:#FED700; font-weight:800; border:1px solid #334155; margin-top:4px;" onclick="fecharModal('modal-detalhe'); dispararAlertaRadarWeb(state.alertas.find(x => x.id === ${a.id}))">🔊 Ouvir / Testar Card de Trânsito</button>`;
       }
       if (a.link_noticia) {
         const lbl = ehImprensaPet ? `Ver Contato da Ocorrência ↗` : `Ler Matéria Completa ↗`;
