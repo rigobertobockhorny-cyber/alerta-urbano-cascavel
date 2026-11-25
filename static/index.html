@@ -28,6 +28,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/static/vendor/leaflet.css" />
+  <link rel="stylesheet" href="/static/vendor/MarkerCluster.css" />
+  <link rel="stylesheet" href="/static/vendor/MarkerCluster.Default.css" />
 
   <style>
     /* =====================================================================
@@ -2044,6 +2046,39 @@
       background: transparent !important;
       border: none !important;
     }
+    .marker-cluster-custom {
+      background: transparent !important;
+      border: none !important;
+    }
+    .pet-cluster {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: #09090b;
+      color: #FED700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 14px;
+      border: 3.5px solid #FED700;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.65);
+      letter-spacing: -0.5px;
+      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .pet-cluster:hover, .pet-cluster:active {
+      transform: scale(1.12);
+    }
+    .pet-cluster-medium {
+      background: #0f172a;
+      border-color: #38bdf8;
+      color: #38bdf8;
+    }
+    .pet-cluster-large {
+      background: #18181b;
+      border-color: #f43f5e;
+      color: #f43f5e;
+    }
     .pin-dot {
       width: 14px;
       height: 14px;
@@ -4053,45 +4088,51 @@
 
         <div class="form-row-2">
           <div class="form-group">
-            <label class="form-label">Bairro em Cascavel</label>
-            <select class="form-select" id="pet-bairro">
-              <option value="Centro">Centro</option>
-              <option value="Alto Alegre">Alto Alegre</option>
-              <option value="Brasmadeira">Brasmadeira</option>
-              <option value="Canadá">Canadá</option>
-              <option value="Cancelli">Cancelli</option>
-              <option value="Cascavel Velho">Cascavel Velho</option>
-              <option value="Cataratas">Cataratas</option>
-              <option value="Cidade Verde">Cidade Verde</option>
-              <option value="Claudete">Claudete</option>
-              <option value="Coqueiral">Coqueiral</option>
-              <option value="Country">Country</option>
-              <option value="Esmeralda">Esmeralda</option>
-              <option value="Floresta">Floresta</option>
-              <option value="Guarujá">Guarujá</option>
-              <option value="Interlagos">Interlagos</option>
-              <option value="Maria Luiza">Maria Luiza</option>
-              <option value="Morumbi">Morumbi</option>
-              <option value="Neva">Neva</option>
-              <option value="Pacaembu">Pacaembu</option>
-              <option value="Parque São Paulo">Parque São Paulo</option>
-              <option value="Periolo">Periolo</option>
-              <option value="Pioneiros Catarinenses">Pioneiros Catarinenses</option>
-              <option value="Quatorze de Novembro">14 de Novembro</option>
-              <option value="Recanto Tropical">Recanto Tropical</option>
-              <option value="Santa Cruz">Santa Cruz</option>
-              <option value="Santa Felicidade">Santa Felicidade</option>
-              <option value="Santo Onofre">Santo Onofre</option>
-              <option value="São Cristóvão">São Cristóvão</option>
-              <option value="Tarumã">Tarumã</option>
-              <option value="Universitário">Universitário</option>
+            <label class="form-label">Cidade</label>
+            <input type="text" class="form-input" id="pet-cidade" placeholder="Ex.: Cascavel, Curitiba, SP..." value="Cascavel">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Estado (UF)</label>
+            <select class="form-select" id="pet-estado">
+              <option value="PR" selected>PR</option>
+              <option value="AC">AC</option><option value="AL">AL</option><option value="AP">AP</option><option value="AM">AM</option>
+              <option value="BA">BA</option><option value="CE">CE</option><option value="DF">DF</option><option value="ES">ES</option>
+              <option value="GO">GO</option><option value="MA">MA</option><option value="MT">MT</option><option value="MS">MS</option>
+              <option value="MG">MG</option><option value="PA">PA</option><option value="PB">PB</option><option value="PE">PE</option>
+              <option value="PI">PI</option><option value="RJ">RJ</option><option value="RN">RN</option><option value="RS">RS</option>
+              <option value="RO">RO</option><option value="RR">RR</option><option value="SC">SC</option><option value="SP">SP</option>
+              <option value="SE">SE</option><option value="TO">TO</option>
             </select>
           </div>
-          <div class="form-group" id="wrap-pet-recompensa">
-            <label class="form-label">Recompensa (Opcional)</label>
-            <input type="text" class="form-input" id="pet-recompensa" placeholder="Ex.: R$ 200 ou A combinar">
+        </div>
+
+        <div class="form-row-2">
+          <div class="form-group">
+            <label class="form-label">Bairro</label>
+            <input type="text" class="form-input" id="pet-bairro" list="lista-bairros" placeholder="Bairro (Ex.: Centro)" value="Centro">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Rua / Ponto de Referência</label>
+            <input type="text" class="form-input" id="pet-rua" placeholder="Rua ou cruzamento">
           </div>
         </div>
+
+        <div class="form-group" id="wrap-pet-recompensa">
+          <label class="form-label">Recompensa (Opcional)</label>
+          <input type="text" class="form-input" id="pet-recompensa" placeholder="Ex.: R$ 200 ou A combinar">
+        </div>
+
+        <datalist id="lista-bairros">
+          <option value="Centro"><option value="Alto Alegre"><option value="Brasília"><option value="Brasmadeira">
+          <option value="Canadá"><option value="Cancelli"><option value="Cascavel Velho"><option value="Cataratas">
+          <option value="Cidade Verde"><option value="Claudete"><option value="Coqueiral"><option value="Country">
+          <option value="Esmeralda"><option value="Floresta"><option value="Gramado"><option value="Guarujá">
+          <option value="Interlagos"><option value="Maria Luiza"><option value="Morumbi"><option value="Neva">
+          <option value="Pacaembu"><option value="Parque São Paulo"><option value="Periolo"><option value="Pioneiros Catarinenses">
+          <option value="Quatorze de Novembro"><option value="Recanto Tropical"><option value="Santa Cruz"><option value="Santa Felicidade">
+          <option value="Santo Inácio"><option value="Santo Onofre"><option value="Santos Dumont"><option value="São Cristóvão">
+          <option value="Tarumã"><option value="Universitário">
+        </datalist>
 
         <div class="form-group">
           <label class="form-label" id="lbl-pet-detalhes">Detalhes / Referência</label>
@@ -4282,45 +4323,32 @@
             <label class="form-label" for="cadastro-input-whatsapp">WhatsApp / Telefone</label>
             <input type="tel" class="form-input" id="cadastro-input-whatsapp" placeholder="(45) 99999-9999">
           </div>
+          <div class="form-row-2">
+            <div class="form-group">
+              <label class="form-label" for="cadastro-input-cidade">Cidade</label>
+              <input type="text" class="form-input" id="cadastro-input-cidade" placeholder="Sua cidade" value="Cascavel">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="cadastro-select-estado">Estado (UF)</label>
+              <select class="form-select" id="cadastro-select-estado">
+                <option value="PR" selected>PR</option>
+                <option value="AC">AC</option><option value="AL">AL</option><option value="AP">AP</option><option value="AM">AM</option>
+                <option value="BA">BA</option><option value="CE">CE</option><option value="DF">DF</option><option value="ES">ES</option>
+                <option value="GO">GO</option><option value="MA">MA</option><option value="MT">MT</option><option value="MS">MS</option>
+                <option value="MG">MG</option><option value="PA">PA</option><option value="PB">PB</option><option value="PE">PE</option>
+                <option value="PI">PI</option><option value="RJ">RJ</option><option value="RN">RN</option><option value="RS">RS</option>
+                <option value="RO">RO</option><option value="RR">RR</option><option value="SC">SC</option><option value="SP">SP</option>
+                <option value="SE">SE</option><option value="TO">TO</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="cadastro-input-bairro">Bairro</label>
+            <input type="text" class="form-input" id="cadastro-input-bairro" list="lista-bairros" placeholder="Bairro onde você mora" value="Centro">
+          </div>
           <div class="form-group" style="margin-bottom:12px;">
-            <label class="form-label" for="cadastro-select-bairro">Seu Bairro em Cascavel</label>
-            <select class="form-select" id="cadastro-select-bairro">
-              <option value="Centro">Centro</option>
-              <option value="Alto Alegre">Alto Alegre</option>
-              <option value="Brasília">Brasília</option>
-              <option value="Brasmadeira">Brasmadeira</option>
-              <option value="Canadá">Canadá</option>
-              <option value="Cancelli">Cancelli</option>
-              <option value="Cascavel Velho">Cascavel Velho</option>
-              <option value="Cataratas">Cataratas</option>
-              <option value="Cidade Verde">Cidade Verde</option>
-              <option value="Claudete">Claudete</option>
-              <option value="Coqueiral">Coqueiral</option>
-              <option value="Country">Country</option>
-              <option value="Esmeralda">Esmeralda</option>
-              <option value="Floresta">Floresta</option>
-              <option value="Gramado">Gramado</option>
-              <option value="Guarujá">Guarujá</option>
-              <option value="Interlagos">Interlagos</option>
-              <option value="Maria Luiza">Maria Luiza</option>
-              <option value="Morumbi">Morumbi</option>
-              <option value="Neva">Neva</option>
-              <option value="Pacaembu">Pacaembu</option>
-              <option value="Parque São Paulo">Parque São Paulo</option>
-              <option value="Periolo">Periolo</option>
-              <option value="Pioneiros Catarinenses">Pioneiros Catarinenses</option>
-              <option value="Quatorze de Novembro">14 de Novembro</option>
-              <option value="Recanto Tropical">Recanto Tropical</option>
-              <option value="Santa Cruz">Santa Cruz</option>
-              <option value="Santa Felicidade">Santa Felicidade</option>
-              <option value="Santo Inácio">Santo Inácio</option>
-              <option value="Santo Onofre">Santo Onofre</option>
-              <option value="Santos Dumont">Santos Dumont</option>
-              <option value="São Cristóvão">São Cristóvão</option>
-              <option value="São Salvador">São Salvador</option>
-              <option value="Tarumã">Tarumã</option>
-              <option value="Universitário">Universitário</option>
-            </select>
+            <label class="form-label" for="cadastro-input-endereco">Endereço / Ponto de Referência (Opcional)</label>
+            <input type="text" class="form-input" id="cadastro-input-endereco" placeholder="Ex: Rua Paraná ou próximo à praça">
           </div>
 
           <div class="lgpd-box" style="margin-bottom:14px; background:#f4f4f5; border:1.5px solid rgba(0,0,0,0.14); padding:13px; border-radius:14px; display:flex; flex-direction:column; gap:9px;">
@@ -4480,45 +4508,32 @@
             <label class="form-label" for="perfil-edit-whatsapp">WhatsApp / Telefone</label>
             <input type="tel" class="form-input" id="perfil-edit-whatsapp" placeholder="(45) 99999-9999">
           </div>
+          <div class="form-row-2">
+            <div class="form-group">
+              <label class="form-label" for="perfil-edit-cidade">Cidade</label>
+              <input type="text" class="form-input" id="perfil-edit-cidade" placeholder="Sua cidade" value="Cascavel">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="perfil-edit-estado">Estado (UF)</label>
+              <select class="form-select" id="perfil-edit-estado">
+                <option value="PR" selected>PR</option>
+                <option value="AC">AC</option><option value="AL">AL</option><option value="AP">AP</option><option value="AM">AM</option>
+                <option value="BA">BA</option><option value="CE">CE</option><option value="DF">DF</option><option value="ES">ES</option>
+                <option value="GO">GO</option><option value="MA">MA</option><option value="MT">MT</option><option value="MS">MS</option>
+                <option value="MG">MG</option><option value="PA">PA</option><option value="PB">PB</option><option value="PE">PE</option>
+                <option value="PI">PI</option><option value="RJ">RJ</option><option value="RN">RN</option><option value="RS">RS</option>
+                <option value="RO">RO</option><option value="RR">RR</option><option value="SC">SC</option><option value="SP">SP</option>
+                <option value="SE">SE</option><option value="TO">TO</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="perfil-edit-bairro">Bairro</label>
+            <input type="text" class="form-input" id="perfil-edit-bairro" list="lista-bairros" placeholder="Bairro onde mora" value="Centro">
+          </div>
           <div class="form-group" style="margin-bottom:14px;">
-            <label class="form-label" for="perfil-edit-bairro">Bairro em Cascavel</label>
-            <select class="form-select" id="perfil-edit-bairro">
-              <option value="Centro">Centro</option>
-              <option value="Alto Alegre">Alto Alegre</option>
-              <option value="Brasília">Brasília</option>
-              <option value="Brasmadeira">Brasmadeira</option>
-              <option value="Canadá">Canadá</option>
-              <option value="Cancelli">Cancelli</option>
-              <option value="Cascavel Velho">Cascavel Velho</option>
-              <option value="Cataratas">Cataratas</option>
-              <option value="Cidade Verde">Cidade Verde</option>
-              <option value="Claudete">Claudete</option>
-              <option value="Coqueiral">Coqueiral</option>
-              <option value="Country">Country</option>
-              <option value="Esmeralda">Esmeralda</option>
-              <option value="Floresta">Floresta</option>
-              <option value="Gramado">Gramado</option>
-              <option value="Guarujá">Guarujá</option>
-              <option value="Interlagos">Interlagos</option>
-              <option value="Maria Luiza">Maria Luiza</option>
-              <option value="Morumbi">Morumbi</option>
-              <option value="Neva">Neva</option>
-              <option value="Pacaembu">Pacaembu</option>
-              <option value="Parque São Paulo">Parque São Paulo</option>
-              <option value="Periolo">Periolo</option>
-              <option value="Pioneiros Catarinenses">Pioneiros Catarinenses</option>
-              <option value="Quatorze de Novembro">14 de Novembro</option>
-              <option value="Recanto Tropical">Recanto Tropical</option>
-              <option value="Santa Cruz">Santa Cruz</option>
-              <option value="Santa Felicidade">Santa Felicidade</option>
-              <option value="Santo Inácio">Santo Inácio</option>
-              <option value="Santo Onofre">Santo Onofre</option>
-              <option value="Santos Dumont">Santos Dumont</option>
-              <option value="São Cristóvão">São Cristóvão</option>
-              <option value="São Salvador">São Salvador</option>
-              <option value="Tarumã">Tarumã</option>
-              <option value="Universitário">Universitário</option>
-            </select>
+            <label class="form-label" for="perfil-edit-endereco">Endereço / Ponto de Referência (Opcional)</label>
+            <input type="text" class="form-input" id="perfil-edit-endereco" placeholder="Ex: Rua Paraná ou próximo à praça">
           </div>
           <button type="button" class="btn-submit" style="background:#10b981; color:#09090b; font-weight:800;" onclick="salvarEdicaoPerfil()">
             Salvar Alterações
@@ -4719,6 +4734,7 @@
   <div class="toast" id="toast"></div>
 
   <script src="/static/vendor/leaflet.js"></script>
+  <script src="/static/vendor/leaflet.markercluster.js"></script>
   <script src="/static/vendor/leaflet-heat.js"></script>
 
   <script>
@@ -4851,13 +4867,44 @@
     /* ==================== MAPA CARTO HD + SATÉLITE ESRI ==================== */
     function initMapIfNeeded() {
       if (map) return;
+      const defaultCenter = (state.userLat && state.userLng)
+        ? [state.userLat, state.userLng]
+        : (state.perfil && state.perfil.lat && state.perfil.lng)
+          ? [state.perfil.lat, state.perfil.lng]
+          : CASCAVEL_CENTER;
+      const defaultZoom = (state.userLat && state.userLng) ? 14 : 12;
+
       map = L.map('map', {
-        center: CASCAVEL_CENTER,
-        zoom: 13,
+        center: defaultCenter,
+        zoom: defaultZoom,
+        minZoom: 3,
+        maxZoom: 19,
         zoomControl: false,
         attributionControl: true
       });
-      markersLayer = L.layerGroup().addTo(map);
+
+      if (window.L && typeof L.markerClusterGroup === 'function') {
+        markersLayer = L.markerClusterGroup({
+          chunkedLoading: true,
+          maxClusterRadius: 45,
+          spiderfyOnMaxZoom: true,
+          showCoverageOnHover: false,
+          zoomToBoundsOnClick: true,
+          iconCreateFunction: function(cluster) {
+            const count = cluster.getChildCount();
+            let sizeClass = 'small';
+            if (count > 50) sizeClass = 'large';
+            else if (count > 10) sizeClass = 'medium';
+            return L.divIcon({
+              html: `<div class="pet-cluster pet-cluster-${sizeClass}"><span>${count}</span></div>`,
+              className: 'marker-cluster-custom',
+              iconSize: L.point(42, 42)
+            });
+          }
+        }).addTo(map);
+      } else {
+        markersLayer = L.layerGroup().addTo(map);
+      }
       trailLayer = L.layerGroup().addTo(map);
       atualizarCamadaBaseMapa();
       renderizarMapa();
@@ -5097,7 +5144,7 @@
       try {
         const [resClima, resAlertas, resParceiros] = await Promise.all([
           fetch('/api/clima?cidade=Cascavel'),
-          fetch('/api/alertas?cidade=Cascavel'),
+          fetch('/api/alertas?cidade=todas'),
           fetch('/api/parceiros')
         ]);
         if (resClima.ok) state.clima = await resClima.json();
@@ -6393,14 +6440,28 @@ Baixe o aplicativo gratuito Alerta Urbano:
       document.getElementById('form-pet').reset();
       document.getElementById('pet-foto-preview').style.display = 'none';
       document.getElementById('photo-upload-hint').textContent = 'Toque para escolher ou tirar uma foto';
-      // Pré-preenche bairro e WhatsApp se já cadastrados no Perfil
-      if (state.perfil && state.perfil.bairro) {
-        const bSel = document.getElementById('pet-bairro');
-        if (bSel) bSel.value = state.perfil.bairro;
-      }
-      if (state.perfil && state.perfil.whatsapp) {
-        const cInp = document.getElementById('pet-contato');
-        if (cInp) cInp.value = state.perfil.whatsapp;
+      // Pré-preenche Cidade, Estado, Bairro, Rua e WhatsApp se já cadastrados no Perfil
+      if (state.perfil) {
+        if (state.perfil.cidade) {
+          const cInp = document.getElementById('pet-cidade');
+          if (cInp) cInp.value = state.perfil.cidade;
+        }
+        if (state.perfil.estado || state.perfil.uf) {
+          const eSel = document.getElementById('pet-estado');
+          if (eSel) eSel.value = state.perfil.estado || state.perfil.uf;
+        }
+        if (state.perfil.bairro) {
+          const bSel = document.getElementById('pet-bairro');
+          if (bSel) bSel.value = state.perfil.bairro;
+        }
+        if (state.perfil.endereco) {
+          const rInp = document.getElementById('pet-rua');
+          if (rInp) rInp.value = state.perfil.endereco;
+        }
+        if (state.perfil.whatsapp) {
+          const cInp = document.getElementById('pet-contato');
+          if (cInp) cInp.value = state.perfil.whatsapp;
+        }
       }
       selecionarModoPet(modo);
       preencherSelectPetsPai();
@@ -6502,7 +6563,10 @@ Baixe o aplicativo gratuito Alerta Urbano:
       const titulo = document.getElementById('pet-titulo').value.trim();
       const especie = document.getElementById('pet-especie').value;
       const porte = document.getElementById('pet-porte').value;
-      const bairro = document.getElementById('pet-bairro').value;
+      const cidade = (document.getElementById('pet-cidade')?.value || state.perfil?.cidade || 'Cascavel').trim();
+      const estado = (document.getElementById('pet-estado')?.value || state.perfil?.estado || state.perfil?.uf || 'PR').trim();
+      const bairro = (document.getElementById('pet-bairro')?.value || 'Centro').trim();
+      const rua = (document.getElementById('pet-rua')?.value || '').trim();
       const recompensa = document.getElementById('pet-recompensa').value.trim();
       const descricao = document.getElementById('pet-descricao').value.trim();
       const contato = document.getElementById('pet-contato').value.trim();
@@ -6537,6 +6601,9 @@ Baixe o aplicativo gratuito Alerta Urbano:
               lat: coords[0],
               lng: coords[1],
               bairro,
+              rua: rua || bairro,
+              cidade,
+              estado,
               descricao: descricao || titulo,
               foto_url: state.fotoUploadUrl,
               autor_token: state.autorToken
@@ -6552,8 +6619,10 @@ Baixe o aplicativo gratuito Alerta Urbano:
               especie,
               porte,
               bairro,
-              rua: bairro,
-              cidade: 'Cascavel',
+              rua: rua || bairro,
+              cidade,
+              estado,
+              uf: estado,
               lat: coords[0],
               lng: coords[1],
               descricao,
@@ -7509,7 +7578,7 @@ Baixe o aplicativo gratuito Alerta Urbano:
       const img = document.getElementById('perfil-avatar-img');
 
       if (dispNome) dispNome.textContent = nome;
-      if (dispSub) dispSub.textContent = `${bairro} • Cascavel - PR`;
+      if (dispSub) dispSub.textContent = `${bairro} • ${p.cidade || 'Cascavel'} - ${p.estado || p.uf || 'PR'}`;
 
       if (p.foto_url) {
         if (img) { img.src = p.foto_url; img.style.display = 'block'; }
@@ -7525,15 +7594,21 @@ Baixe o aplicativo gratuito Alerta Urbano:
       // Preenche campos de edição
       const editNome = document.getElementById('perfil-edit-nome');
       const editWa = document.getElementById('perfil-edit-whatsapp');
+      const editCidade = document.getElementById('perfil-edit-cidade');
+      const editEstado = document.getElementById('perfil-edit-estado');
       const editBairro = document.getElementById('perfil-edit-bairro');
+      const editEndereco = document.getElementById('perfil-edit-endereco');
       if (editNome) editNome.value = nome;
       if (editWa && p.whatsapp) editWa.value = p.whatsapp;
+      if (editCidade && p.cidade) editCidade.value = p.cidade;
+      if (editEstado && (p.estado || p.uf)) editEstado.value = (p.estado || p.uf);
       if (editBairro && p.bairro) editBairro.value = p.bairro;
+      if (editEndereco && p.endereco) editEndereco.value = p.endereco;
     }
 
     function conectarGoogleAuth() {
-      const emailMock = 'usuario.cascavel@gmail.com';
-      const nomeGoogle = prompt('Conectar com o Google:\nInforme seu nome para a conta Google:', (state.perfil && state.perfil.nome) ? state.perfil.nome : 'Cidadão Cascavel');
+      const emailMock = 'usuario.pet@gmail.com';
+      const nomeGoogle = prompt('Conectar com o Google:\nInforme seu nome para a conta Google:', (state.perfil && state.perfil.nome) ? state.perfil.nome : 'Tutor Pet');
       
       if (!nomeGoogle || nomeGoogle.trim() === '') {
         mostrarToast('Login com o Google cancelado.');
@@ -7545,7 +7620,9 @@ Baixe o aplicativo gratuito Alerta Urbano:
         email: emailMock,
         whatsapp: (state.perfil && state.perfil.whatsapp) ? state.perfil.whatsapp : '',
         bairro: (state.perfil && state.perfil.bairro) ? state.perfil.bairro : 'Centro',
-        cidade: 'Cascavel',
+        cidade: (state.perfil && state.perfil.cidade) ? state.perfil.cidade : 'Cascavel',
+        estado: (state.perfil && state.perfil.estado) ? state.perfil.estado : 'PR',
+        endereco: (state.perfil && state.perfil.endereco) ? state.perfil.endereco : '',
         cadastrado: true,
         auth_provider: 'google'
       };
@@ -7558,7 +7635,10 @@ Baixe o aplicativo gratuito Alerta Urbano:
     function concluirCadastroManual() {
       const nome = (document.getElementById('cadastro-input-nome')?.value || '').trim();
       const whatsapp = (document.getElementById('cadastro-input-whatsapp')?.value || '').trim();
-      const bairro = document.getElementById('cadastro-select-bairro')?.value || 'Centro';
+      const cidade = (document.getElementById('cadastro-input-cidade')?.value || 'Cascavel').trim();
+      const estado = (document.getElementById('cadastro-select-estado')?.value || 'PR').trim();
+      const bairro = (document.getElementById('cadastro-input-bairro')?.value || 'Centro').trim();
+      const endereco = (document.getElementById('cadastro-input-endereco')?.value || '').trim();
       const termos = document.getElementById('cadastro-termos-check')?.checked;
 
       if (!termos) {
@@ -7574,7 +7654,9 @@ Baixe o aplicativo gratuito Alerta Urbano:
         nome,
         whatsapp,
         bairro,
-        cidade: 'Cascavel',
+        cidade,
+        estado,
+        endereco,
         cadastrado: true,
         auth_provider: 'manual'
       };
@@ -7590,7 +7672,9 @@ Baixe o aplicativo gratuito Alerta Urbano:
             nome,
             whatsapp,
             bairro,
-            cidade: 'Cascavel'
+            cidade,
+            estado,
+            endereco
           })
         }).catch(() => {});
       } catch (_) {}
@@ -7609,15 +7693,35 @@ Baixe o aplicativo gratuito Alerta Urbano:
     function salvarEdicaoPerfil() {
       const nome = (document.getElementById('perfil-edit-nome')?.value || '').trim();
       const whatsapp = (document.getElementById('perfil-edit-whatsapp')?.value || '').trim();
-      const bairro = document.getElementById('perfil-edit-bairro')?.value || 'Centro';
+      const cidade = (document.getElementById('perfil-edit-cidade')?.value || 'Cascavel').trim();
+      const estado = (document.getElementById('perfil-edit-estado')?.value || 'PR').trim();
+      const bairro = (document.getElementById('perfil-edit-bairro')?.value || 'Centro').trim();
+      const endereco = (document.getElementById('perfil-edit-endereco')?.value || '').trim();
 
       if (!nome) {
         mostrarToast('O nome não pode ficar em branco.');
         return;
       }
 
-      state.perfil = Object.assign({}, state.perfil, { nome, whatsapp, bairro });
+      state.perfil = Object.assign({}, state.perfil, { nome, whatsapp, bairro, cidade, estado, endereco });
       try { localStorage.setItem('au_perfil', JSON.stringify(state.perfil)); } catch(e) {}
+
+      try {
+        fetch('/api/perfil', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            autor_token: state.autorToken,
+            nome,
+            whatsapp,
+            bairro,
+            cidade,
+            estado,
+            endereco
+          })
+        }).catch(() => {});
+      } catch (_) {}
+
       atualizarVisualLogado();
 
       const box = document.getElementById('perfil-caixa-edicao');

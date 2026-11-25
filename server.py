@@ -153,6 +153,8 @@ def init_db():
         ("sexo", "TEXT DEFAULT 'indefinido'"),
         ("sigiloso", "INTEGER DEFAULT 0"),
         ("orgao_destino", "TEXT DEFAULT ''"),
+        ("uf", "TEXT DEFAULT 'PR'"),
+        ("estado", "TEXT DEFAULT 'PR'"),
     ]
     for col_name, col_def in novas_colunas:
         if col_name not in cols:
@@ -181,6 +183,12 @@ def init_db():
     ucols = {r[1] for r in cur.fetchall()}
     if "fcm_token" not in ucols:
         cur.execute("ALTER TABLE usuarios ADD COLUMN fcm_token TEXT DEFAULT '';")
+    if "estado" not in ucols:
+        cur.execute("ALTER TABLE usuarios ADD COLUMN estado TEXT DEFAULT 'PR';")
+    if "uf" not in ucols:
+        cur.execute("ALTER TABLE usuarios ADD COLUMN uf TEXT DEFAULT 'PR';")
+    if "endereco" not in ucols:
+        cur.execute("ALTER TABLE usuarios ADD COLUMN endereco TEXT DEFAULT '';")
 
     # Tabela de Parceiros Comerciais e Empresas Amigas de Cascavel (v3.8)
     cur.execute("""
@@ -781,13 +789,13 @@ def api_clima():
 
 @app.route("/api/perfil", methods=["GET", "POST"])
 def api_perfil():
-    """Cadastro e consulta de perfil do cidadão (Nome, WhatsApp, Bairro, Foto)."""
+    """Cadastro e consulta de perfil do cidadão/tutor (Nome, WhatsApp, Bairro, Cidade, Estado, Endereço, Foto)."""
     if request.method == "GET":
         token = request.args.get("autor_token", "").strip()
         if not token:
             return jsonify({"perfil": None})
         conn = get_db()
-        row = conn.execute("SELECT autor_token, nome, whatsapp, bairro, cidade, foto_url FROM usuarios WHERE autor_token = ?", (token,)).fetchone()
+        row = conn.execute("SELECT autor_token, nome, whatsapp, bairro, cidade, estado, uf, endereco, foto_url FROM usuarios WHERE autor_token = ?", (token,)).fetchone()
         conn.close()
         return jsonify({"perfil": dict(row) if row else None})
 
@@ -800,35 +808,46 @@ def api_perfil():
     whatsapp = normalizar_telefone(data.get("whatsapp") or "")
     bairro = (data.get("bairro") or "Centro").strip()[:80]
     cidade = (data.get("cidade") or "Cascavel").strip()[:80]
+    estado = (data.get("estado") or data.get("uf") or "PR").strip()[:10]
+    endereco = (data.get("endereco") or "").strip()[:150]
     foto_url = (data.get("foto_url") or "").strip()[:300]
     agora = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
     conn = get_db()
     cur = conn.cursor()
     cur.execute("""
-        INSERT INTO usuarios (autor_token, nome, whatsapp, bairro, cidade, foto_url, created_at, updated_at)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+        INSERT INTO usuarios (autor_token, nome, whatsapp, bairro, cidade, estado, uf, endereco, foto_url, created_at, updated_at)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         ON CONFLICT(autor_token) DO UPDATE SET
             nome = excluded.nome,
             whatsapp = excluded.whatsapp,
             bairro = excluded.bairro,
             cidade = excluded.cidade,
+            estado = excluded.estado,
+            uf = excluded.uf,
+            endereco = excluded.endereco,
             foto_url = CASE WHEN excluded.foto_url != '' THEN excluded.foto_url ELSE usuarios.foto_url END,
             updated_at = excluded.updated_at
-    """, (token, nome, whatsapp, bairro, cidade, foto_url, agora, agora))
+    """, (token, nome, whatsapp, bairro, cidade, estado, estado, endereco, foto_url, agora, agora))
     conn.commit()
     conn.close()
-    return jsonify({"status": "ok", "nome": nome, "bairro": bairro})
+    return jsonify({"status": "ok", "nome": nome, "bairro": bairro, "cidade": cidade, "estado": estado})
 
 
 @app.route("/api/resumo", methods=["GET"])
 def resumo_dashboard():
     """Resumo ultra-leve para os cards e banner climático do Dashboard Slim."""
-    cidade = request.args.get("cidade", "Cascavel").strip()
+    cidade = request.args.get("cidade", "").strip()
     conn = get_db()
     cur = conn.cursor()
 
-    cur.execute("""
+    params = []
+    cidade_clause = ""
+    if cidade and cidade.lower() not in ("todas", "global", "brasil", "all", "todas as cidades"):
+        cidade_clause = " AND LOWER(COALESCE(cidade, '')) = LOWER(?)"
+        params.append(cidade)
+
+    cur.execute(f"""
         SELECT
             SUM(CASE WHEN pilar = 'pet' AND status_pet != 'avistado' AND pet_pai_id IS NULL THEN 1 ELSE 0 END) AS pets_perdidos,
             SUM(CASE WHEN pilar = 'pet' AND (status_pet = 'avistado' OR pet_pai_id IS NOT NULL) THEN 1 ELSE 0 END) AS pets_avistados,
@@ -836,29 +855,35 @@ def resumo_dashboard():
             SUM(CASE WHEN pilar = 'utilidade' AND datetime(created_at, '+48 hours') >= datetime('now', 'localtime') THEN 1 ELSE 0 END) AS utilidade
         FROM alertas
         WHERE ativo = 1
-          AND LOWER(COALESCE(cidade, 'Cascavel')) = LOWER(?)
+          {cidade_clause}
           AND pilar IN ('pet', 'seguranca', 'utilidade')
-    """, (cidade,))
+    """, params)
     counts = dict(cur.fetchone() or {})
 
-    cur.execute("""
+    clima_params = []
+    clima_cidade_clause = ""
+    if cidade and cidade.lower() not in ("todas", "global", "brasil", "all", "todas as cidades"):
+        clima_cidade_clause = " AND LOWER(COALESCE(cidade, '')) = LOWER(?)"
+        clima_params.append(cidade)
+
+    cur.execute(f"""
         SELECT id, titulo, descricao, severidade, fonte_nome, link_noticia, created_at
         FROM alertas
         WHERE ativo = 1
           AND pilar = 'utilidade'
           AND tipo = 'utilidade_clima'
-          AND LOWER(COALESCE(cidade, 'Cascavel')) = LOWER(?)
+          {clima_cidade_clause}
           AND datetime(created_at, '+36 hours') >= datetime('now', 'localtime')
         ORDER BY
             CASE severidade WHEN 'critico' THEN 1 WHEN 'alerta' THEN 2 WHEN 'atencao' THEN 3 ELSE 4 END,
             created_at DESC
         LIMIT 1
-    """, (cidade,))
+    """, clima_params)
     clima_row = cur.fetchone()
     conn.close()
 
     return jsonify({
-        "cidade": cidade,
+        "cidade": cidade or "Brasil",
         "pets_perdidos": counts.get("pets_perdidos") or 0,
         "pets_avistados": counts.get("pets_avistados") or 0,
         "seguranca": counts.get("seguranca") or 0,
@@ -1291,15 +1316,21 @@ def listar_alertas():
     - seguranca (imprensa oficial; últimas 48h)
     - utilidade (fontes oficiais/imprensa; últimas 48h)
     * Denúncias sigilosas de maus-tratos NUNCA aparecem na listagem pública aberta!
+    * Destravamento Nacional: aceita ?cidade=todas ou sem filtro para todo o Brasil.
     """
-    cidade = request.args.get("cidade", "Cascavel").strip()
+    cidade = request.args.get("cidade", "").strip()
     pilar = request.args.get("pilar", "").strip().lower()
     autor_token = request.args.get("autor_token", "").strip()
 
     conn = get_db()
     cur = conn.cursor()
 
-    params = [cidade]
+    params = []
+    cidade_clause = ""
+    if cidade and cidade.lower() not in ("todas", "global", "brasil", "all", "todas as cidades", "todas_as_cidades"):
+        cidade_clause = " AND LOWER(COALESCE(cidade, '')) = LOWER(?)"
+        params.append(cidade)
+
     pilar_clause = ""
     if pilar in ("pet", "seguranca", "utilidade", "transito"):
         pilar_clause = " AND pilar = ?"
@@ -1311,7 +1342,7 @@ def listar_alertas():
     cur.execute(f"""
         SELECT * FROM alertas
         WHERE ativo = 1
-          AND LOWER(COALESCE(cidade, 'Cascavel')) = LOWER(?)
+          {cidade_clause}
           AND pilar IN ('pet', 'seguranca', 'utilidade', 'transito')
           AND NOT (pilar = 'pet' AND (COALESCE(fonte_tipo, '') = 'imprensa' OR COALESCE(foto_url, '') LIKE '%cgn%' OR COALESCE(link_noticia, '') LIKE '%cgn%'))
           {pilar_clause}
@@ -1324,7 +1355,7 @@ def listar_alertas():
         ORDER BY
             CASE WHEN tipo = 'utilidade_clima' THEN 0 ELSE 1 END,
             created_at DESC
-        LIMIT 250
+        LIMIT 500
     """, params)
     rows = [dict(r) for r in cur.fetchall()]
 
@@ -1404,6 +1435,7 @@ def criar_alerta():
     rua = (data.get("rua") or "").strip()[:120]
     bairro = (data.get("bairro") or "Cascavel").strip()[:80]
     cidade = (data.get("cidade") or "Cascavel").strip()[:80]
+    estado = (data.get("estado") or data.get("uf") or "PR").strip()[:10]
     foto_url = (data.get("foto_url") or "").strip()
     recompensa = (data.get("recompensa") or "").strip()[:60]
     autor_token = (data.get("autor_token") or "").strip()[:100]
@@ -1465,14 +1497,20 @@ def criar_alerta():
     agora = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     cur.execute("""
         INSERT INTO alertas (
-            tipo, pilar, cidade, titulo, descricao, rua, bairro, lat, lng,
+            tipo, pilar, cidade, estado, uf, titulo, descricao, rua, bairro, lat, lng,
             peso, foto_url, contato, recompensa, link_noticia, autor_token,
             fonte_tipo, fonte_nome, especie, porte, status_pet, pet_pai_id,
             severidade, consentimento_contato, castrado, vacinado, faixa_etaria,
             sexo, sigiloso, orgao_destino, created_at
         )
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 1, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     """, (
+        tipo, pilar, cidade, estado, estado, titulo, descricao, rua, bairro, float(lat), float(lng),
+        foto_url, contato, recompensa, link_noticia, autor_token,
+        fonte_tipo, fonte_nome, especie, porte, status_pet, pet_pai_id,
+        severidade, consentimento, castrado, vacinado, faixa_etaria,
+        sexo, sigiloso, orgao_destino, agora,
+    ))
         tipo, pilar, cidade, titulo, descricao, rua, bairro, float(lat), float(lng),
         foto_url, contato, recompensa, link_noticia, autor_token,
         fonte_tipo, fonte_nome, especie, porte, status_pet, pet_pai_id,
