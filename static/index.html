@@ -2583,16 +2583,20 @@
       color: #94a3b8;
     }
     .pillar-tab.active {
-      background: #000000 !important;
+      background: linear-gradient(135deg, #BFA782 0%, #9E8560 100%) !important;
       color: #FFFFFF !important;
       font-weight: 900;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+      box-shadow: 0 4px 14px rgba(110, 90, 60, 0.35) !important;
+      border: 1px solid rgba(255, 255, 255, 0.25) !important;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
     }
     [data-theme="dark"] .pillar-tab.active {
-      background: #009B3A !important;
+      background: linear-gradient(135deg, #BFA782 0%, #9E8560 100%) !important;
       color: #FFFFFF !important;
       font-weight: 900;
-      box-shadow: 0 4px 12px rgba(0, 155, 58, 0.35);
+      box-shadow: 0 4px 14px rgba(110, 90, 60, 0.35) !important;
+      border: 1px solid rgba(255, 255, 255, 0.25) !important;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
     }
     .pet-pillar-context {
       display: flex;
@@ -3393,19 +3397,20 @@
       padding: 0 14px 14px !important;
     }
     .btn-pet-cta-primary {
-      background: #000000 !important; /* Botão Preto com Letra Branca */
+      background: linear-gradient(135deg, #C2AB87 0%, #9E8560 100%) !important; /* Degradê Areia Encorpado */
       color: #ffffff !important;
       font-weight: 800 !important;
       font-size: 13px !important;
       padding: 11px 10px !important;
       border-radius: 12px !important;
-      border: 1px solid #000000 !important;
+      border: 1px solid rgba(138, 118, 86, 0.5) !important;
       display: flex !important;
       align-items: center !important;
       justify-content: center !important;
       gap: 6px !important;
       cursor: pointer !important;
-      box-shadow: 0 3px 12px rgba(0, 0, 0, 0.3) !important;
+      box-shadow: 0 3px 12px rgba(110, 90, 60, 0.35) !important;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25) !important;
       text-decoration: none !important;
       text-align: center !important;
       width: 100% !important;
@@ -3413,18 +3418,19 @@
     }
     .btn-pet-cta-primary:active { transform: scale(0.97) !important; }
     .btn-pet-cta-secondary {
-      background: #000000 !important; /* Botão Preto com Letra Branca */
-      color: #ffffff !important;
+      background: linear-gradient(135deg, #E8DEC8 0%, #D4C3A3 100%) !important; /* Areia Suave com Texto Elegante */
+      color: #443B2C !important;
       font-weight: 800 !important;
       font-size: 13px !important;
       padding: 11px 10px !important;
       border-radius: 12px !important;
-      border: 1px solid rgba(255, 255, 255, 0.25) !important;
+      border: 1px solid rgba(138, 118, 86, 0.4) !important;
       cursor: pointer !important;
       display: flex !important;
       align-items: center !important;
       justify-content: center !important;
       gap: 6px !important;
+      box-shadow: 0 2px 8px rgba(110, 90, 60, 0.15) !important;
       text-decoration: none !important;
       text-align: center !important;
       width: 100% !important;
@@ -6752,9 +6758,9 @@ Baixe o aplicativo gratuito Alerta Urbano:
 
       if (ehResg) {
         if (bResg) {
-          bResg.style.background = '#000000';
+          bResg.style.background = 'linear-gradient(135deg, #BFA782 0%, #9E8560 100%)';
           bResg.style.color = '#FFFFFF';
-          bResg.style.boxShadow = '0 2px 8px rgba(0,0,0,0.25)';
+          bResg.style.boxShadow = '0 3px 10px rgba(110,90,60,0.35)';
         }
         if (bVisto) {
           bVisto.style.background = '#EDE8DF';
@@ -6763,9 +6769,9 @@ Baixe o aplicativo gratuito Alerta Urbano:
         }
       } else {
         if (bVisto) {
-          bVisto.style.background = '#000000';
+          bVisto.style.background = 'linear-gradient(135deg, #BFA782 0%, #9E8560 100%)';
           bVisto.style.color = '#FFFFFF';
-          bVisto.style.boxShadow = '0 2px 8px rgba(0,0,0,0.25)';
+          bVisto.style.boxShadow = '0 3px 10px rgba(110,90,60,0.35)';
         }
         if (bResg) {
           bResg.style.background = '#EDE8DF';
@@ -7178,21 +7184,16 @@ Baixe o aplicativo gratuito Alerta Urbano:
         ehMacho = !ehFemea && (rawSex.includes('mach') || rawSex.includes('gato') || rawSex.includes('cachorro') || rawSex.includes('cão') || rawSex.includes('cao'));
       }
 
-      let bgCor = '#FAF5FF'; // Indefinido: Roxo/Lavanda
-      let borderCor = '#6D28D9';
+      // Cores sólidas idênticas à aba Pet (sem margem)
+      let bgCor = '#EAE0FF'; // Indefinido / Aves: Roxo/Lavanda
       let textCor = '#4C1D95';
-      let btnBg = '#6D28D9';
 
       if (ehFemea) {
-        bgCor = '#FDF2F8'; // Fêmea: Rosa Acolhedor
-        borderCor = '#BE185D';
+        bgCor = '#FFE0EE'; // Fêmea: Rosa Acolhedor da aba Pet
         textCor = '#831843';
-        btnBg = '#BE185D';
       } else if (ehMacho) {
-        bgCor = '#EFF6FF'; // Macho: Azul Acolhedor
-        borderCor = '#0284C7';
+        bgCor = '#DCF0FF'; // Macho: Azul Acolhedor da aba Pet
         textCor = '#0C4A6E';
-        btnBg = '#0284C7';
       }
 
       let card = document.getElementById('card-radar-topo-web');
@@ -7208,7 +7209,7 @@ Baixe o aplicativo gratuito Alerta Urbano:
           margin: 0 auto;
           z-index: 99999;
           border-radius: 22px;
-          box-shadow: 0 16px 36px rgba(0,0,0,0.45);
+          box-shadow: 0 16px 36px rgba(0,0,0,0.35);
           padding: 14px 14px 14px 14px;
           display: flex;
           flex-direction: column;
@@ -7216,12 +7217,13 @@ Baixe o aplicativo gratuito Alerta Urbano:
           font-family: inherit;
           box-sizing: border-box;
           transition: all 0.3s ease;
+          overflow: hidden;
         `;
         document.body.appendChild(card);
       }
 
       card.style.background = bgCor;
-      card.style.border = `3px solid ${borderCor}`;
+      card.style.border = 'none'; // SEM MARGEM / SEM BORDA!
       card.style.color = textCor;
 
       const foto = pet.foto_url ? pet.foto_url : '/static/logo_vortice.png';
@@ -7230,35 +7232,45 @@ Baixe o aplicativo gratuito Alerta Urbano:
       const distTxt = pet.distM != null ? `A ${pet.distM} METROS` : '';
 
       card.innerHTML = `
-        <div style="width: 44px; height: 4px; background: ${borderCor}; border-radius: 2px; margin: 0 auto 10px;"></div>
+        <!-- CAMADA DE FUNDO: 3 BOLHAS COLORIDAS GRANDES SEM MARGEM (PADRÃO ABA PET) -->
+        <div class="pet-card-bg-bubbles" aria-hidden="true" style="position:absolute; inset:0; z-index:0; overflow:hidden; border-radius:inherit; pointer-events:none;">
+          <div style="position:absolute; top:-35px; right:-30px; width:140px; height:140px; border-radius:50%; background:#F9A8D4; opacity:0.55;"></div>
+          <div style="position:absolute; bottom:-45px; left:-35px; width:160px; height:160px; border-radius:50%; background:#93C5FD; opacity:0.55;"></div>
+          <div style="position:absolute; bottom:40px; right:-40px; width:125px; height:125px; border-radius:50%; background:#C4B5FD; opacity:0.55;"></div>
+        </div>
+
+        <div style="position:relative; z-index:2; width: 44px; height: 4px; background: rgba(0,0,0,0.25); border-radius: 2px; margin: 0 auto 10px;"></div>
         
-        <!-- Cardzinho dedicado da foto do animal (Grande e emoldurado) - SEM PÍLULA SOBRE A FOTO -->
-        <div style="position: relative; width: 100%; height: 185px; background: #18181B; border-radius: 16px; border: 2px solid ${borderCor}; overflow: hidden; margin-bottom: 10px;">
+        <!-- Cardzinho dedicado da foto do animal (Grande e emoldurado) - SEM PÍLULA E SEM BORDA -->
+        <div style="position: relative; z-index:2; width: 100%; height: 185px; background: #18181B; border-radius: 16px; border: none; overflow: hidden; margin-bottom: 10px;">
           <img src="${escapeAttr(foto)}" alt="${escapeAttr(tit)}" style="width: 100%; height: 100%; object-fit: cover; display: block;" onerror="this.src='/static/logo_vortice.png'">
         </div>
 
         <!-- Título e Subtítulo -->
-        <div style="font-size: 18px; font-weight: 900; color: ${textCor}; text-align: center; line-height: 1.25; margin-bottom: 2px;">
+        <div style="position:relative; z-index:2; font-size: 18px; font-weight: 900; color: ${textCor}; text-align: center; line-height: 1.25; margin-bottom: 2px;">
           ${escapeHtml(tit)}
         </div>
-        <div style="font-size: 13px; font-weight: 800; color: ${textCor}; opacity: 0.9; text-align: center; margin-bottom: 12px;">
+        <div style="position:relative; z-index:2; font-size: 13px; font-weight: 800; color: ${textCor}; opacity: 0.9; text-align: center; margin-bottom: 12px;">
           📍 ${escapeHtml(local)} • ${distTxt}
         </div>
 
-        <!-- Botões de Ação Cívica Humanizados -->
-        <div style="display: flex; gap: 8px; width: 100%; margin-bottom: 6px;">
-          <button onclick="registrarAvistamentoRapidoWeb(${pet.id})" style="flex: 1; height: 42px; background: ${btnBg}; color: #FFFFFF; font-weight: 900; font-size: 13.5px; border: none; border-radius: 14px; cursor: pointer;">🐾 Visto aqui</button>
-          <button onclick="verPetNoMapaWeb(${pet.lat}, ${pet.lng}, ${pet.id})" style="flex: 1; height: 42px; background: #000000; color: #FFFFFF; font-weight: 900; font-size: 13.5px; border: none; border-radius: 14px; cursor: pointer;">📍 Ver no mapa</button>
+        <!-- Botões de Ação Cívica no Degradê Bege/Areia Sofisticado -->
+        <div style="display: flex; gap: 8px; width: 100%; margin-bottom: 6px; position:relative; z-index:2;">
+          <button onclick="registrarAvistamentoRapidoWeb(${pet.id})" style="flex: 1; height: 42px; background: linear-gradient(135deg, #C2AB87 0%, #9E8560 100%); color: #FFFFFF; font-weight: 900; font-size: 13.5px; border: 1px solid rgba(138, 118, 86, 0.5); border-radius: 14px; cursor: pointer; box-shadow: 0 3px 10px rgba(110,90,60,0.3); text-shadow: 0 1px 2px rgba(0,0,0,0.2);">🐾 Visto aqui</button>
+          <button onclick="verPetNoMapaWeb(${pet.lat}, ${pet.lng}, ${pet.id})" style="flex: 1; height: 42px; background: linear-gradient(135deg, #E8DEC8 0%, #D4C3A3 100%); color: #443B2C; font-weight: 900; font-size: 13.5px; border: 1px solid rgba(138, 118, 86, 0.4); border-radius: 14px; cursor: pointer; box-shadow: 0 2px 8px rgba(110,90,60,0.15);">📍 Ver no mapa</button>
         </div>
-        <button onclick="fecharCardRadarTopoWeb()" style="width: 100%; height: 42px; background: #000000; color: #FFFFFF; font-weight: 900; font-size: 13px; border: none; border-radius: 14px; cursor: pointer;">🤝 Estou ciente e ajudando a procurar</button>
+        <button onclick="fecharCardRadarTopoWeb()" style="width: 100%; height: 42px; background: linear-gradient(135deg, #BFA782 0%, #947A55 100%); color: #FFFFFF; font-weight: 900; font-size: 13px; border: 1px solid rgba(138, 118, 86, 0.5); border-radius: 14px; cursor: pointer; box-shadow: 0 3px 10px rgba(110,90,60,0.3); text-shadow: 0 1px 2px rgba(0,0,0,0.2); position:relative; z-index:2;">🤝 Estou ciente e ajudando a procurar</button>
       `;
 
       card.style.display = 'flex';
 
+      // Limpa cooldown do teste do Tico para testes contínuos
+      try { localStorage.removeItem('radar_pet_cd_5514'); } catch (_) {}
+
       clearTimeout(card._timerFechar);
       card._timerFechar = setTimeout(() => {
         fecharCardRadarTopoWeb();
-      }, 6000); // 6 segundos cravados (sincronizado com o áudio rápido)
+      }, 25000); // 25 segundos confortáveis para Rigo avaliar e tirar print com calma
     }
 
     function registrarAvistamentoRapidoWeb(petId) {
