@@ -897,7 +897,7 @@
     }
     .belt-block-parceiros {
       margin-top: auto !important;
-      margin-bottom: 2px !important;
+      margin-bottom: 26px !important;
     }
     .belt-head {
       display: flex;
@@ -4105,72 +4105,82 @@
 
 
     /* ========================================================
-       REGRA PÉTREA RIGO: PADRONIZAÇÃO UNIVERSAL DE BOTÕES
-       SEM SELEÇÃO: BEGE CLARO (#EDE8DF) | TEXTO SUAVE (#5A4730)
-       SELECIONADO (ATIVO): AREIA ESCURO (#BFAF96) | TEXTO ESCURO (#1C1917)
+       REGRA OFICIAL RIGO: BOTÕES SEM MARGEM / SEM BORDA
+       1. MAPA: Pílulas Pets / Parceiros (Abaixados e Sem Margem)
        ======================================================== */
-    /* 1. MAPA: Pílulas Pets / Parceiros */
+    .map-top-pills {
+      top: 30px !important;
+    }
     .map-pill,
     #tab-mapa .map-pill {
       background: #EDE8DF !important; /* Bege Claro sem seleção */
       color: #5A4730 !important;
-      border: 1.5px solid rgba(110, 90, 60, 0.25) !important;
+      border: none !important;
+      outline: none !important;
       font-weight: 700 !important;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.06) !important;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.12) !important;
       transition: all 0.15s ease !important;
     }
     .map-pill.active,
     #tab-mapa .map-pill.active {
-      background: #BFAF96 !important; /* Areia Escuro selecionado */
-      color: #1C1917 !important;
+      background: #9E8560 !important; /* Marronzinho sólido oficial */
+      color: #FFFFFF !important;
       font-weight: 900 !important;
-      border: 2px solid #5A4730 !important;
-      box-shadow: inset 0 2px 4px rgba(0,0,0,0.12), 0 2px 6px rgba(0,0,0,0.08) !important;
+      border: none !important;
+      outline: none !important;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.16) !important;
     }
 
-    /* 2. PETS: Pílulas Desaparecidos, Resgatados, Reencontro, Adoção */
+    /* 2. PETS: Pílulas Desaparecidos, Resgatados, Reencontro, Adoção (SÓ A ESCRITA QUANDO INATIVO) */
     .pillar-tab,
     #pets-main-pills .pillar-tab {
-      background: #EDE8DF !important; /* Bege Claro sem seleção */
+      background: transparent !important; /* Só a escrita */
       color: #5A4730 !important;
-      border: 1.5px solid rgba(110, 90, 60, 0.20) !important;
-      border-radius: 10px !important;
+      border: none !important;
+      outline: none !important;
+      border-radius: 8px !important;
       font-weight: 700 !important;
-      padding: 8px 4px !important;
+      font-size: 11px !important;
+      padding: 7px 2px !important;
+      box-shadow: none !important;
       transition: all 0.15s ease !important;
     }
     .pillar-tab.active,
     #pets-main-pills .pillar-tab.active {
-      background: #BFAF96 !important; /* Areia Escuro selecionado */
-      color: #1C1917 !important;
+      background: #9E8560 !important; /* Marronzinho sólido oficial Rigo */
+      color: #FFFFFF !important;
       font-weight: 900 !important;
-      border: 2px solid #5A4730 !important;
-      box-shadow: inset 0 2px 4px rgba(0,0,0,0.12) !important;
+      border: none !important;
+      outline: none !important;
+      box-shadow: none !important;
     }
 
     /* 3. PARCEIROS: Filtros de categorias */
     .btn-filtro-parceiro {
       background: #EDE8DF !important; /* Bege Claro sem seleção */
       color: #5A4730 !important;
-      border: 1.5px solid rgba(110, 90, 60, 0.25) !important;
+      border: none !important;
+      outline: none !important;
       font-weight: 700 !important;
       border-radius: 999px !important;
       padding: 7px 15px !important;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08) !important;
       transition: all 0.15s ease !important;
     }
     .btn-filtro-parceiro.active {
-      background: #BFAF96 !important; /* Areia Escuro selecionado */
-      color: #1C1917 !important;
+      background: #9E8560 !important; /* Marronzinho selecionado */
+      color: #FFFFFF !important;
       font-weight: 900 !important;
-      border: 2px solid #5A4730 !important;
-      box-shadow: inset 0 2px 4px rgba(0,0,0,0.12) !important;
+      border: none !important;
+      outline: none !important;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.14) !important;
     }
 
     /* 4. COPILOTO: Botões Ativar e Desativar */
     #tab-copiloto .btn-bolha-hero {
       background: #BFAF96 !important; /* Areia Escuro Destaque */
       color: #1C1917 !important;
-      border: 2px solid #5A4730 !important;
+      border: none !important;
       font-weight: 900 !important;
       border-radius: 14px !important;
       box-shadow: 0 4px 12px rgba(0,0,0,0.10) !important;
@@ -4178,7 +4188,7 @@
     #tab-copiloto .btn-bolha-desativar {
       background: #EDE8DF !important; /* Bege Claro */
       color: #5A4730 !important;
-      border: 1.5px solid rgba(110, 90, 60, 0.25) !important;
+      border: none !important;
       font-weight: 800 !important;
       border-radius: 14px !important;
       box-shadow: 0 2px 6px rgba(0,0,0,0.06) !important;
@@ -4201,13 +4211,78 @@
       box-shadow: 0 2px 6px rgba(0,0,0,0.05) !important;
     }
 
-    /* 6. BOTÕES DE REGISTRO SUPERIOR DA ABA PET */
+    /* 6. BOTÕES DE REGISTRO SUPERIOR DA ABA PET (SLIM E IDÊNTICOS) */
     .btn-reg-pet {
       background: #EDE8DF !important;
-      border: 1.5px solid rgba(110, 90, 60, 0.25) !important;
+      border: none !important;
+      outline: none !important;
       color: #2E2417 !important;
-      border-radius: 12px !important;
-      padding: 11px 8px !important;
+      border-radius: 9px !important;
+      height: 35px !important;
+      padding: 0 4px !important;
+      font-size: 11px !important;
+      font-weight: 800 !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      text-align: center !important;
+      cursor: pointer !important;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06) !important;
+      white-space: nowrap !important;
+      box-sizing: border-box !important;
+    }
+    .btn-reg-pet:active {
+      transform: scale(0.97) !important;
+      background: #BFAF96 !important;
+    }
+    .btn-reg-pet.btn-reg-sos {
+      background: #EDE8DF !important;
+      color: #991B1B !important;
+      font-weight: 900 !important;
+      letter-spacing: 0.3px !important;
+    }
+
+    /* ========================================================
+       CABEÇALHOS FIXOS / CONGELADOS & ROLAGEM ISOLADA (RIGO)
+       ======================================================== */
+    #tab-pets,
+    #tab-parceiros {
+      display: none;
+      flex-direction: column !important;
+      overflow: hidden !important;
+      padding: 0 !important;
+      background: #9E8560 !important;
+      height: 100% !important;
+      position: absolute !important;
+      inset: 0 !important;
+    }
+    #tab-pets.active,
+    #tab-parceiros.active {
+      display: flex !important;
+    }
+    .pets-fixed-header,
+    .parceiros-fixed-header {
+      flex-shrink: 0 !important;
+      background: #9E8560 !important;
+      padding: 24px 14px 6px !important;
+      z-index: 20 !important;
+      box-sizing: border-box !important;
+      width: 100% !important;
+    }
+    .pets-scroll-viewport,
+    .parceiros-scroll-viewport {
+      flex: 1 !important;
+      overflow-y: auto !important;
+      -webkit-overflow-scrolling: touch !important;
+      padding: 4px 14px 120px !important;
+      box-sizing: border-box !important;
+      width: 100% !important;
+    }
+
+    /* COPILOTO: Respiro superior para não cortar na onda verde */
+    #tab-copiloto {
+      padding-top: 26px !important;
+    }
       font-size: 11.5px !important;
       font-weight: 800 !important;
       display: flex !important;
@@ -4309,7 +4384,7 @@
         <div class="brand-text">
           <div class="brand-name">Alerta Pet Brasil</div>
           <div class="brand-city">
-            <span>Cascavel • Build 40 (v3.11.3)</span>
+            <span>Cascavel • Build 41 (v3.11.4)</span>
           </div>
         </div>
       </div>
@@ -4460,89 +4535,96 @@
         </div>
       </section>
 
-      <!-- ABA 3: PETS (ARQUITETURA DE 4 PILARES OFICIAIS RIGO) -->
-      <section class="tab-pane" id="tab-pets" style="padding-bottom:170px; background:#9E8560; min-height:100vh;">
-        <!-- BLOCO 1: CENTRAL DE REGISTRO (FUNDO AREIA COM BOTÕES BEGE) -->
-        <div style="margin-bottom:12px; background:#E4D5BC; border-radius:18px; padding:14px; border:1px solid rgba(110,90,60,0.22); box-shadow:0 4px 14px rgba(0,0,0,0.08);">
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
-            <div style="font-size:12px; font-weight:900; letter-spacing:0.5px; color:#2E2417; text-transform:uppercase;">Rede de Proteção Animal</div>
-            <div style="font-size:10.5px; color:#6E5A3C; font-weight:700;">Toque para registrar</div>
+      <!-- ABA 3: PETS (ARQUITETURA CONGELADA / SLIM RIGO) -->
+      <section class="tab-pane" id="tab-pets">
+        <!-- CABEÇALHO CONGELADO / FIXO: CENTRAL DE REGISTRO SLIM + 4 PILARES -->
+        <div class="pets-fixed-header">
+          <!-- BLOCO 1: CENTRAL DE REGISTRO SLIM -->
+          <div style="background:#E4D5BC; border-radius:14px; padding:10px 12px; border:none; box-shadow:0 3px 10px rgba(0,0,0,0.06);">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+              <div style="font-size:11.5px; font-weight:900; letter-spacing:0.5px; color:#2E2417; text-transform:uppercase;">Rede de Proteção Animal</div>
+              <div style="font-size:10px; color:#6E5A3C; font-weight:700;">Toque para registrar</div>
+            </div>
+            <!-- 4 BOTÕES SLIM IDÊNTICOS (SEM EMOJIS CONFORME SOLICITADO PELO RIGO) -->
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px;">
+              <button type="button" onclick="abrirModalPet('pet_perdido')" class="btn-reg-pet">
+                <span>Pet Desaparecido</span>
+              </button>
+              <button type="button" onclick="abrirModalPet('pet_resgatado')" class="btn-reg-pet">
+                <span>Animal Resgatado</span>
+              </button>
+              <button type="button" onclick="abrirModalPet('pet_reencontrado')" class="btn-reg-pet">
+                <span>Registrar Reencontro</span>
+              </button>
+              <button type="button" onclick="abrirModalPet('pet_adocao')" class="btn-reg-pet">
+                <span>Para Adoção</span>
+              </button>
+            </div>
+            <!-- 1 BOTÃO GRANDE SOS FULL-WIDTH SLIM -->
+            <button type="button" onclick="abrirModalPet('pet_denuncia_maustratos')" class="btn-reg-pet btn-reg-sos" style="width:100%; margin-top:6px;">
+              <span>SOS / Denúncia Sigilosa</span>
+            </button>
           </div>
-          <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
-            <button type="button" onclick="abrirModalPet('pet_perdido')" class="btn-reg-pet">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2E2417" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-              <span>Pet Desaparecido</span>
+
+          <!-- 4 PILARES OFICIAIS: DESAPARECIDOS | RESGATADOS | REENCONTRO | PARA ADOÇÃO -->
+          <div class="pet-pillars-segmented" id="pets-main-pills" style="margin-top:8px; margin-bottom:2px; background:#EDE8DF; border-radius:10px; padding:3px; display:grid; grid-template-columns:repeat(4, 1fr); gap:4px; border:none;">
+            <button type="button" class="pillar-tab active" id="btn-pillar-desaparecidos" onclick="alternarPilarPet('desaparecidos')">
+              <span>Desaparecidos</span>
             </button>
-            <button type="button" onclick="abrirModalPet('pet_resgatado')" class="btn-reg-pet">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2E2417" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path></svg>
-              <span>Animal Resgatado</span>
+            <button type="button" class="pillar-tab" id="btn-pillar-resgatados" onclick="alternarPilarPet('resgatados')">
+              <span>Resgatados</span>
             </button>
-            <button type="button" onclick="abrirModalPet('pet_reencontrado')" class="btn-reg-pet">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2E2417" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
-              <span>Registrar Reencontro</span>
+            <button type="button" class="pillar-tab" id="btn-pillar-reencontro" onclick="alternarPilarPet('reencontro')">
+              <span>Reencontro</span>
             </button>
-            <button type="button" onclick="abrirModalPet('pet_adocao')" class="btn-reg-pet">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2E2417" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+            <button type="button" class="pillar-tab" id="btn-pillar-adocao" onclick="alternarPilarPet('adocao')">
               <span>Para Adoção</span>
             </button>
           </div>
-          <button type="button" onclick="abrirModalPet('pet_denuncia_maustratos')" class="btn-reg-pet" style="width:100%; margin-top:8px;">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2E2417" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-            <span>SOS / Denúncia Sigilosa</span>
-          </button>
         </div>
 
-        <!-- 4 PILARES OFICIAIS: DESAPARECIDOS | RESGATADOS | REENCONTRO | PARA ADOÇÃO -->
-        <div class="pet-pillars-segmented" id="pets-main-pills" style="margin-bottom:14px; background:#EDE8DF; border:1.5px solid rgba(110,90,60,0.25); border-radius:14px; padding:4px; display:grid; grid-template-columns:repeat(4, 1fr); gap:4px;">
-          <button type="button" class="pillar-tab active" id="btn-pillar-desaparecidos" onclick="alternarPilarPet('desaparecidos')">
-            <span>Desaparecidos</span>
-          </button>
-          <button type="button" class="pillar-tab" id="btn-pillar-resgatados" onclick="alternarPilarPet('resgatados')">
-            <span>Resgatados</span>
-          </button>
-          <button type="button" class="pillar-tab" id="btn-pillar-reencontro" onclick="alternarPilarPet('reencontro')">
-            <span>Reencontro</span>
-          </button>
-          <button type="button" class="pillar-tab" id="btn-pillar-adocao" onclick="alternarPilarPet('adocao')">
-            <span>Para Adoção</span>
-          </button>
+        <!-- CONTAINER DE ROLAGEM ISOLADO DOS CARDS DE ANIMAIS (SOME NO LIMITE DO FILTRO) -->
+        <div class="pets-scroll-viewport">
+          <div class="pets-grid" id="pets-full-list" style="display:flex; flex-direction:column; gap:12px;"></div>
         </div>
-
-        <div class="pets-grid" id="pets-full-list" style="display:flex; flex-direction:column; gap:14px;"></div>
       </section>
 
       <!-- ABA 4: PARCEIROS PET (COMÉRCIO AMIGO DOS ANIMAIS & SERVIÇOS ESSENCIAIS) -->
-      <section class="tab-pane" id="tab-parceiros" style="padding-bottom:170px; background:#9E8560; min-height:100vh;">
-        <!-- CABEÇALHO & FILTRO SEGMENTADO PINNED/STICKY NO SCROLL -->
-        <div class="parceiros-sticky-top" style="position:sticky; top:0; z-index:90; background:#E4D5BC; border-radius:18px; padding:12px 16px; margin-bottom:14px; border:1px solid rgba(110,90,60,0.25); box-shadow:0 4px 16px rgba(0,0,0,0.12);">
-          <div style="display:flex; align-items:center; justify-content:space-between; gap:10px;">
-            <div>
-              <div style="font-size:18px; font-weight:900; color:#2E2417; line-height:1.2;">Empresas Parceiras</div>
-              <div style="font-size:11.5px; font-weight:600; color:#6E5A3C; margin-top:2px;">Comércio Amigo dos Animais & Serviços</div>
+      <section class="tab-pane" id="tab-parceiros">
+        <!-- CABEÇALHO CONGELADO / FIXO: EMPRESAS PARCEIRAS + FILTROS -->
+        <div class="parceiros-fixed-header">
+          <div style="background:#E4D5BC; border-radius:14px; padding:10px 14px; border:none; box-shadow:0 3px 10px rgba(0,0,0,0.08);">
+            <div style="display:flex; align-items:center; justify-content:space-between; gap:10px;">
+              <div>
+                <div style="font-size:16px; font-weight:900; color:#2E2417; line-height:1.2;">Empresas Parceiras</div>
+                <div style="font-size:11px; font-weight:600; color:#6E5A3C; margin-top:2px;">Comércio Amigo dos Animais & Serviços</div>
+              </div>
+              <button type="button" onclick="abrirModalSejaParceiro()" style="background:#009B3A; color:#FFFFFF; border:none; border-radius:999px; padding:6px 12px; font-size:11px; font-weight:800; cursor:pointer; display:flex; align-items:center; gap:4px; box-shadow:0 2px 8px rgba(0,155,58,0.25); flex-shrink:0;">
+                <span>🤝 Seja Parceiro</span>
+              </button>
             </div>
-            <button type="button" onclick="abrirModalSejaParceiro()" style="background:#009B3A; color:#FFFFFF; border:none; border-radius:999px; padding:7px 14px; font-size:12px; font-weight:800; cursor:pointer; display:flex; align-items:center; gap:5px; box-shadow:0 3px 10px rgba(0,155,58,0.28); flex-shrink:0;">
-              <span>🤝 Seja um Parceiro</span>
-            </button>
-          </div>
-          <div style="font-size:11.5px; font-weight:800; color:#009B3A; margin-top:6px; display:flex; align-items:center; gap:5px;">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-            <span>Apoie o comércio local amigo de <strong id="parceiros-cidade-label">Cascavel</strong> • <span id="parceiros-uf-label">PR</span></span>
-          </div>
+            <div style="font-size:11px; font-weight:800; color:#009B3A; margin-top:5px; display:flex; align-items:center; gap:5px;">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+              <span>Apoie o comércio local de <strong id="parceiros-cidade-label">Cascavel</strong> • <span id="parceiros-uf-label">PR</span></span>
+            </div>
 
-          <!-- BARRA DE FILTROS SEGMENTADOS DE CATEGORIAS PET (AREIA/BEGE) -->
-          <div class="parceiros-filtro-scroll" style="display:flex; gap:6px; overflow-x:auto; padding:10px 0 2px; scrollbar-width:none; -webkit-overflow-scrolling:touch;">
-            <button type="button" class="btn-filtro-parceiro active" onclick="filtrarCategoriaParceiro('todos', this)">Todos</button>
-            <button type="button" class="btn-filtro-parceiro" onclick="filtrarCategoriaParceiro('veterinaria', this)">Veterinárias</button>
-            <button type="button" class="btn-filtro-parceiro" onclick="filtrarCategoriaParceiro('pet_shop', this)">Pet Shops</button>
-            <button type="button" class="btn-filtro-parceiro" onclick="filtrarCategoriaParceiro('racao', this)">Rações</button>
-            <button type="button" class="btn-filtro-parceiro" onclick="filtrarCategoriaParceiro('farmacia', this)">Farmácias</button>
-            <button type="button" class="btn-filtro-parceiro" onclick="filtrarCategoriaParceiro('servicos', this)">Serviços Pet</button>
-            <button type="button" class="btn-filtro-parceiro" onclick="abrirModalSejaParceiro()" style="background:#009B3A !important; color:#FFFFFF !important; font-weight:800; border:none; display:flex; align-items:center; gap:4px; flex-shrink:0;">🤝 Seja um Parceiro</button>
+            <!-- BARRA DE FILTROS SEGMENTADOS DE CATEGORIAS PET -->
+            <div class="parceiros-filtro-scroll" style="display:flex; gap:6px; overflow-x:auto; padding:8px 0 2px; scrollbar-width:none; -webkit-overflow-scrolling:touch;">
+              <button type="button" class="btn-filtro-parceiro active" onclick="filtrarCategoriaParceiro('todos', this)">Todos</button>
+              <button type="button" class="btn-filtro-parceiro" onclick="filtrarCategoriaParceiro('veterinaria', this)">Veterinárias</button>
+              <button type="button" class="btn-filtro-parceiro" onclick="filtrarCategoriaParceiro('pet_shop', this)">Pet Shops</button>
+              <button type="button" class="btn-filtro-parceiro" onclick="filtrarCategoriaParceiro('racao', this)">Rações</button>
+              <button type="button" class="btn-filtro-parceiro" onclick="filtrarCategoriaParceiro('farmacia', this)">Farmácias</button>
+              <button type="button" class="btn-filtro-parceiro" onclick="filtrarCategoriaParceiro('servicos', this)">Serviços Pet</button>
+              <button type="button" class="btn-filtro-parceiro" onclick="abrirModalSejaParceiro()" style="background:#009B3A !important; color:#FFFFFF !important; font-weight:800; border:none; display:flex; align-items:center; gap:4px; flex-shrink:0;">🤝 Seja Parceiro</button>
+            </div>
           </div>
         </div>
 
-        <!-- Lista Dinâmica de Cards de Parceiros em Areia -->
-        <div id="parceiros-lista-container" style="display:flex; flex-direction:column; gap:14px;"></div>
+        <!-- CONTAINER DE ROLAGEM ISOLADO DOS CARDS DE PARCEIROS (SOME NO LIMITE DO CABEÇALHO) -->
+        <div class="parceiros-scroll-viewport">
+          <div id="parceiros-lista-container" style="display:flex; flex-direction:column; gap:14px;"></div>
+        </div>
       </section>
 
       <!-- ABA 4: COPILOTO (BOLINHA FLUTUANTE) -->
