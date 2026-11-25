@@ -1305,7 +1305,7 @@ def listar_alertas():
         WHERE ativo = 1
           AND LOWER(COALESCE(cidade, 'Cascavel')) = LOWER(?)
           AND pilar IN ('pet', 'seguranca', 'utilidade', 'transito')
-          AND NOT (pilar = 'pet' AND (fonte_tipo = 'imprensa' OR foto_url LIKE '%cgn%' OR link_noticia LIKE '%cgn%'))
+          AND NOT (pilar = 'pet' AND (COALESCE(fonte_tipo, '') = 'imprensa' OR COALESCE(foto_url, '') LIKE '%cgn%' OR COALESCE(link_noticia, '') LIKE '%cgn%'))
           {pilar_clause}
           {sigiloso_clause}
           AND (
