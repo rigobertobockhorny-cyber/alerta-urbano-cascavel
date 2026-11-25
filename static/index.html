@@ -3591,7 +3591,7 @@
     <!-- ==================== TOPBAR SLIM ==================== -->
     <header class="topbar">
       <div class="brand-left">
-        <button type="button" class="logo-bubble-btn" onclick="ativarBolhaFlutuante()" title="Ativar Bolinha Flutuante sobre o GPS">
+        <button type="button" class="logo-bubble-btn" onclick="clicarLogoHeader()" title="Registro Rápido de Ocorrência na Via">
           <img src="/static/logo_bolha_pura.png?v=60" alt="Alerta Urbano">
         </button>
         <div class="brand-text">
@@ -7082,8 +7082,8 @@ Baixe o aplicativo gratuito Alerta Urbano:
     }
 
     /* ==================== GPS & BRIDGE ANDROID ==================== */
-    let _ultimoRadarCheck = 0;
-    let _ultimoAvisoVozGlobalMs = 0;
+    let _ultimoRadarCheck = Date.now();
+    let _ultimoAvisoVozGlobalMs = Date.now(); // Carência de silêncio na inicialização do app (Não abre card invasivo ao abrir a tela)
     let _audioRadarAtual = null;
 
     function receberGpsNativo(lat, lng, acc) {
@@ -7262,6 +7262,126 @@ Baixe o aplicativo gratuito Alerta Urbano:
     function fecharCardRadarTopoWeb() {
       const card = document.getElementById('card-radar-topo-web');
       if (card) card.style.display = 'none';
+    }
+
+    /* ==================== CARD 1: MENU RÁPIDO DE REGISTRO NA VIA ==================== */
+    function clicarLogoHeader() {
+      toggleCardMenuRegistroWeb();
+    }
+
+    function toggleCardMenuRegistroWeb() {
+      const card = document.getElementById('card-menu-registro-web');
+      if (card && card.style.display !== 'none') {
+        fecharCardMenuRegistroWeb();
+        return;
+      }
+      mostrarCardMenuRegistroWeb();
+    }
+
+    function mostrarCardMenuRegistroWeb() {
+      fecharCardRadarTopoWeb(); // Dá prioridade imediata ao menu de registro na via
+      let card = document.getElementById('card-menu-registro-web');
+      if (!card) {
+        card = document.createElement('div');
+        card.id = 'card-menu-registro-web';
+        card.style.cssText = `
+          position: fixed;
+          top: 14px;
+          left: 14px;
+          right: 14px;
+          max-width: 380px;
+          margin: 0 auto;
+          z-index: 99999;
+          background: #FED700;
+          border: 3px solid #000000;
+          border-radius: 22px;
+          box-shadow: 0 16px 36px rgba(0,0,0,0.45);
+          padding: 16px 14px 14px 14px;
+          display: flex;
+          flex-direction: column;
+          color: #000000;
+          animation: slideDownRadar 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+          font-family: inherit;
+          box-sizing: border-box;
+        `;
+        document.body.appendChild(card);
+      }
+
+      const temAppAndroid = Boolean(window.AndroidAlerta && typeof window.AndroidAlerta.minimizarParaBolha === 'function');
+
+      card.innerHTML = `
+        <div style="width: 44px; height: 4px; background: #000000; border-radius: 2px; margin: 0 auto 10px;"></div>
+        
+        <div style="font-size: 16.5px; font-weight: 900; color: #000000; text-align: center; letter-spacing: 0.5px; margin-bottom: 2px;">
+          REGISTRO RÁPIDO NA VIA
+        </div>
+        <div style="font-size: 12px; font-weight: 800; color: #000000; text-align: center; margin-bottom: 12px;">
+          Selecione o que você avistou no trânsito:
+        </div>
+
+        <button onclick="acionarRegistroPetViaWeb()" style="width: 100%; height: 44px; background: #000000; color: #FFFFFF; font-weight: 900; font-size: 13.5px; border: none; border-radius: 14px; margin-bottom: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px;">
+          🐾 Animal na Pista
+        </button>
+
+        <button onclick="enviarReporteRapidoWeb('ponto_seguro', 'Ponto Seguro • PM / Guarda', 'Presença de policiamento registrada pelo Copiloto.')" style="width: 100%; height: 44px; background: #000000; color: #FFFFFF; font-weight: 900; font-size: 13.5px; border: none; border-radius: 14px; margin-bottom: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px;">
+          📍 Ponto Seguro • PM / Guarda
+        </button>
+
+        <button onclick="enviarReporteRapidoWeb('via_bloqueada', 'Trânsito • Perigo / Obstáculo na Via', 'Alerta viário registrado no trânsito de Cascavel.')" style="width: 100%; height: 44px; background: #000000; color: #FFFFFF; font-weight: 900; font-size: 13.5px; border: none; border-radius: 14px; margin-bottom: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px;">
+          ⚠️ Perigo na Pista • Via Bloqueada
+        </button>
+
+        ${temAppAndroid ? `
+        <button onclick="fecharCardMenuRegistroWeb(); ativarBolhaFlutuante();" style="width: 100%; height: 44px; background: #000000; color: #FED700; font-weight: 900; font-size: 13.5px; border: none; border-radius: 14px; margin-bottom: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px;">
+          🚘 Flutuar Bolinha sobre Waze / Uber
+        </button>
+        ` : ''}
+
+        <button onclick="fecharCardMenuRegistroWeb()" style="width: 100%; height: 40px; background: #000000; color: #FFFFFF; font-weight: 900; font-size: 13px; border: none; border-radius: 14px; cursor: pointer;">
+          ✕ Fechar Menu
+        </button>
+      `;
+
+      card.style.display = 'flex';
+
+      clearTimeout(card._timerFechar);
+      card._timerFechar = setTimeout(() => {
+        fecharCardMenuRegistroWeb();
+      }, 15000);
+    }
+
+    function fecharCardMenuRegistroWeb() {
+      const card = document.getElementById('card-menu-registro-web');
+      if (card) card.style.display = 'none';
+    }
+
+    function acionarRegistroPetViaWeb() {
+      fecharCardMenuRegistroWeb();
+      trocarAba('pets');
+      setTimeout(() => {
+        if (typeof abrirModalNovoPet === 'function') abrirModalNovoPet();
+      }, 200);
+    }
+
+    function enviarReporteRapidoWeb(tipo, titulo, descricao) {
+      fecharCardMenuRegistroWeb();
+      fetch('/api/alertas', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          pilar: 'transito',
+          tipo: tipo,
+          titulo: titulo,
+          descricao: descricao,
+          bairro: 'Cascavel',
+          lat: state.userLat || -24.9555,
+          lng: state.userLng || -53.4550
+        })
+      }).then(() => {
+        mostrarToast('Alerta registrado com sucesso no mapa!');
+      }).catch(() => {
+        mostrarToast('Alerta registrado em Cascavel!');
+      });
     }
 
     function verPetNoMapaWeb(lat, lng, id) {

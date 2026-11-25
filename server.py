@@ -607,7 +607,7 @@ def baixar_apk():
         os.path.dirname(apk_path),
         os.path.basename(apk_path),
         as_attachment=True,
-        download_name="ALERTA_URBANO_v3.9.4.apk",
+        download_name="ALERTA_URBANO_v3.9.5.apk",
         mimetype="application/vnd.android.package-archive",
         max_age=0,
     )
