@@ -2,7 +2,7 @@
 ## Manual Supremo de Engenharia, Governança, Design System, Fluxos de Tela e Pipeline de Publicação
 **Documento Soberano e Obrigatório de Referência Contínua para Engenharia e IAs**
 **Autoridade e Direção:** Rigo | **Engenheiro/Arquiteto de Sistemas:** Johan
-**Data da Última Atualização:** 25/11/2026 | **Versão Corrente:** 3.9.5 (versionCode 21)
+**Data da Última Atualização:** 25/11/2026 | **Versão Corrente:** 3.9.4 (versionCode 22)
 
 ---
 
@@ -440,7 +440,7 @@ A **Mesa Operacional** (`/mesa` e `/admin/mesa`) é a estação de trabalho exec
   * Popup completo com link direto para simulação de WhatsApp (`https://wa.me/...`) e botão para remoção do mapa.
 
 ---
-## 18. REENGENHARIA DA BOLINHA FLUTUANTE & CARD CÍVICO DE RADAR DE PETS (v3.9.5)
+## 18. REENGENHARIA DA BOLINHA FLUTUANTE & CARD CÍVICO DE RADAR DE PETS (v3.9.4)
 
 ### 18.1. Correção Definitiva da Inversão de Gatilhos
 * **Ao Tocar na Bolinha Flutuante (`toggleMiniCard`):** Abre **exclusivamente o Menu Rápido de Registro de Ocorrência na Rua** (`exibirCardMenuRegistro`), com opções para registrar `[ Animal na Pista ]`, `[ Ponto Seguro ]`, `[ Perigo na Via ]` e `[ Fechar ]`.
@@ -463,4 +463,4 @@ A **Mesa Operacional** (`/mesa` e `/admin/mesa`) é a estação de trabalho exec
 
 ---
 
-**Fim da Bíblia Mestra — Alerta Urbano Cascavel v3.9.5**
+**Fim da Bíblia Mestra — Alerta Urbano Cascavel v3.9.4**
