@@ -897,7 +897,7 @@
     }
     .belt-block-parceiros {
       margin-top: auto !important;
-      margin-bottom: 26px !important;
+      margin-bottom: 16px !important;
     }
     .belt-head {
       display: flex;
@@ -4085,16 +4085,19 @@
 
 
     .brand-partner-card {
-      width: 175px !important;
-      height: 114px !important;
+      width: 156px !important;
+      height: 58px !important;
       flex-shrink: 0;
-      border-radius: 14px;
+      border-radius: 12px;
       display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      padding: 8px 10px;
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 6px 12px;
+      gap: 10px;
       cursor: pointer;
-      box-shadow: 0 4px 14px rgba(0,0,0,0.22);
+      box-shadow: 0 3px 10px rgba(0,0,0,0.18);
+      border: none !important;
       transition: transform 0.15s ease;
       user-select: none;
       box-sizing: border-box;
@@ -4384,7 +4387,7 @@
         <div class="brand-text">
           <div class="brand-name">Alerta Pet Brasil</div>
           <div class="brand-city">
-            <span>Cascavel • Build 41 (v3.11.4)</span>
+            <span>Cascavel • Build 42 (v3.11.5)</span>
           </div>
         </div>
       </div>
@@ -4485,8 +4488,8 @@
           <div class="belt-block belt-block-parceiros">
             <div class="belt-head">
               <div class="belt-title" style="color:#EDE8DF; font-weight:900; font-size:12px; display:flex; align-items:center; gap:6px;">
-                <svg class="belt-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:15px;height:15px;"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
-                <span>Parceiros</span>
+                <svg class="belt-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:15px;height:15px;"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                <span>Apoio</span>
               </div>
             </div>
             <div class="belt-viewport">
@@ -4643,6 +4646,26 @@
           <p>A patinha flutuante acompanha você discretamente sobre o Waze, Google Maps e Uber, avisando por áudio quando você passar perto de um animalzinho que precisa de socorro ou reencontro em Cascavel.</p>
           <button type="button" class="btn-bolha-hero" onclick="ativarBolhaFlutuante()">ATIVAR PATINHA</button>
           <button type="button" class="btn-bolha-desativar" onclick="desativarBolhaFlutuante()">DESATIVAR PATINHA</button>
+        </div>
+
+        <div class="section-head" style="margin-top:12px;">
+          <div class="section-title">Voz Oficial da Patinha</div>
+        </div>
+        <div class="settings-group" style="margin-bottom:12px;">
+          <div class="setting-row" style="display:flex; justify-content:space-between; align-items:center;">
+            <div>
+              <div class="setting-title" id="lbl-voz-atual">Timbre da Locução</div>
+              <div class="setting-sub" id="lbl-voz-sub">Escolha a voz que conversa com você</div>
+            </div>
+            <div style="display:flex; gap:6px; background:#EDE8DF; padding:3px; border-radius:10px;">
+              <button type="button" id="btn-voz-fem" class="pillar-tab active" onclick="selecionarVozCopiloto('feminina')" style="padding:6px 12px; font-size:11px; font-weight:800; border-radius:8px; border:none; cursor:pointer;">
+                Feminina
+              </button>
+              <button type="button" id="btn-voz-masc" class="pillar-tab" onclick="selecionarVozCopiloto('masculina')" style="padding:6px 12px; font-size:11px; font-weight:800; border-radius:8px; border:none; cursor:pointer;">
+                Masculina
+              </button>
+            </div>
+          </div>
         </div>
 
         <div class="section-head" style="margin-top:4px;">
@@ -7936,21 +7959,49 @@ Baixe o aplicativo gratuito Alerta Urbano:
     }
 
     /* ==================== COPILOTO, BOLINHA & VOZ EXCLUSIVA ==================== */
+    let vozCopilotoAtual = localStorage.getItem('au_copiloto_voz') || 'feminina';
+
+    function selecionarVozCopiloto(genero, emitirSom = true) {
+      vozCopilotoAtual = genero;
+      localStorage.setItem('au_copiloto_voz', genero);
+
+      const btnFem = document.getElementById('btn-voz-fem');
+      const btnMasc = document.getElementById('btn-voz-masc');
+      if (btnFem && btnMasc) {
+        if (genero === 'feminina') {
+          btnFem.classList.add('active');
+          btnMasc.classList.remove('active');
+        } else {
+          btnMasc.classList.add('active');
+          btnFem.classList.remove('active');
+        }
+      }
+      salvarPrefsCopilotoSilencioso();
+      if (emitirSom) {
+        const fraseExemplo = genero === 'feminina'
+          ? 'Olá! Sou a voz feminina da Patinha. Estou pronta para acompanhar você!'
+          : 'Olá! Sou a voz masculina da Patinha. Estou pronto para acompanhar você!';
+        tocarVozNeuralOuTTS(fraseExemplo);
+        mostrarToast(`Voz ${genero === 'feminina' ? 'Feminina' : 'Masculina'} ativada!`);
+      }
+    }
+
     function carregarPrefsCopiloto() {
       try {
-        const prefs = JSON.parse(localStorage.getItem('au_copiloto_prefs') || '{"pet":true,"seg":true,"uti":true}');
+        const prefs = JSON.parse(localStorage.getItem('au_copiloto_prefs') || '{"pet":true,"seg":true,"uti":true,"voz":"feminina"}');
         document.getElementById('pref-pet').checked = prefs.pet !== false;
         document.getElementById('pref-seg').checked = prefs.seg !== false;
         document.getElementById('pref-uti').checked = prefs.uti !== false;
+        selecionarVozCopiloto(prefs.voz || 'feminina', false);
       } catch (_) {}
     }
 
-    function salvarPrefsCopiloto() {
+    function salvarPrefsCopilotoSilencioso() {
       const prefs = {
-        pet: document.getElementById('pref-pet').checked,
-        seg: document.getElementById('pref-seg').checked,
-        uti: document.getElementById('pref-uti').checked,
-        voz: 'masculina'
+        pet: document.getElementById('pref-pet') ? document.getElementById('pref-pet').checked : true,
+        seg: document.getElementById('pref-seg') ? document.getElementById('pref-seg').checked : true,
+        uti: document.getElementById('pref-uti') ? document.getElementById('pref-uti').checked : true,
+        voz: vozCopilotoAtual
       };
       localStorage.setItem('au_copiloto_prefs', JSON.stringify(prefs));
       try {
@@ -7958,6 +8009,10 @@ Baixe o aplicativo gratuito Alerta Urbano:
           window.AndroidAlerta.salvarPreferenciasCopiloto(JSON.stringify(prefs));
         }
       } catch (_) {}
+    }
+
+    function salvarPrefsCopiloto() {
+      salvarPrefsCopilotoSilencioso();
       mostrarToast('Preferências do Copiloto salvas');
     }
 
@@ -8073,8 +8128,24 @@ Baixe o aplicativo gratuito Alerta Urbano:
       mostrarCardAlertaTopoWeb(pet, ehFemea, ehMacho);
     }
 
+    let ttsAudioPlayer = null;
+
     function tocarVozNeuralOuTTS(frase) {
-      falarTtsNavegador(frase);
+      const voz = vozCopilotoAtual || 'feminina';
+      try {
+        if (!ttsAudioPlayer) ttsAudioPlayer = new Audio();
+        ttsAudioPlayer.pause();
+        ttsAudioPlayer.currentTime = 0;
+        ttsAudioPlayer.src = `/api/falar?voz=${voz}&texto=${encodeURIComponent(frase)}`;
+        const p = ttsAudioPlayer.play();
+        if (p && typeof p.catch === 'function') {
+          p.catch(() => {
+            falarTtsNavegador(frase);
+          });
+        }
+      } catch (_) {
+        falarTtsNavegador(frase);
+      }
     }
 
     function falarTtsNavegador(frase) {

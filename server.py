@@ -397,28 +397,8 @@ def init_db():
             END
         WHERE LOWER(tipo) LIKE 'pet%'
     """)
-    cur.execute("""
-        UPDATE alertas
-        SET pilar = 'seguranca',
-            cidade = COALESCE(NULLIF(cidade, ''), 'Cascavel'),
-            fonte_nome = 'Segurança Pública'
-        WHERE LOWER(tipo) IN ('seguranca', 'assalto', 'furto', 'suspeito')
-          OR pilar = 'seguranca'
-    """)
-    cur.execute("""
-        UPDATE alertas
-        SET pilar = 'utilidade',
-            cidade = COALESCE(NULLIF(cidade, ''), 'Cascavel'),
-            fonte_nome = CASE
-                WHEN LOWER(COALESCE(descricao, '')) LIKE '%inmet%' OR LOWER(COALESCE(titulo, '')) LIKE '%chuva%' OR LOWER(COALESCE(titulo, '')) LIKE '%alerta%' THEN 'Defesa Civil / Clima'
-                WHEN LOWER(COALESCE(descricao, '')) LIKE '%sanepar%' OR LOWER(COALESCE(titulo, '')) LIKE '%sanepar%' THEN 'Sanepar • Água'
-                WHEN LOWER(COALESCE(descricao, '')) LIKE '%copel%' OR LOWER(COALESCE(titulo, '')) LIKE '%copel%' THEN 'Copel • Energia'
-                WHEN LOWER(COALESCE(descricao, '')) LIKE '%transitar%' OR LOWER(COALESCE(descricao, '')) LIKE '%cettrans%' OR LOWER(COALESCE(titulo, '')) LIKE '%trânsito%' THEN 'Trânsito Cascavel'
-                WHEN LOWER(COALESCE(descricao, '')) LIKE '%prefeitura%' THEN 'Prefeitura Municipal'
-                ELSE 'Utilidade Pública'
-            END
-        WHERE (LOWER(tipo) LIKE 'utilidade%' OR LOWER(tipo) = 'escuro' OR pilar = 'utilidade')
-    """)
+    # EXTIRPAÇÃO TOTAL: Alerta Pet Brasil exclusivo (remove registros de segurança e utilidade)
+    cur.execute("DELETE FROM alertas WHERE pilar != 'pet' OR pilar IS NULL")
 
     # LGPD: limpa telefones de registros já inativos/encerrados
     cur.execute("UPDATE alertas SET contato = '' WHERE ativo = 0 AND contato IS NOT NULL AND contato != ''")
@@ -1424,18 +1404,10 @@ def listar_alertas():
         SELECT * FROM alertas
         WHERE ativo = 1
           {cidade_clause}
-          AND pilar IN ('pet', 'seguranca', 'utilidade', 'transito')
-          AND NOT (pilar = 'pet' AND (COALESCE(fonte_tipo, '') = 'imprensa' OR COALESCE(foto_url, '') LIKE '%cgn%' OR COALESCE(link_noticia, '') LIKE '%cgn%'))
-          {pilar_clause}
+          AND pilar = 'pet'
+          AND NOT (COALESCE(fonte_tipo, '') = 'imprensa' OR COALESCE(foto_url, '') LIKE '%cgn%' OR COALESCE(link_noticia, '') LIKE '%cgn%')
           {sigiloso_clause}
-          AND (
-            pilar = 'pet'
-            OR (pilar IN ('seguranca', 'utilidade') AND datetime(created_at, '+48 hours') >= datetime('now', 'localtime'))
-            OR (pilar = 'transito' AND datetime(created_at, '+24 hours') >= datetime('now', 'localtime'))
-          )
-        ORDER BY
-            CASE WHEN tipo = 'utilidade_clima' THEN 0 ELSE 1 END,
-            created_at DESC
+        ORDER BY created_at DESC
         LIMIT 500
     """, params)
     rows = [dict(r) for r in cur.fetchall()]
