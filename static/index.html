@@ -246,7 +246,7 @@
     }
     .splash-river-bottom {
       min-height: 135px;
-      background: #FED700;
+      background: #9E8560;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -3688,7 +3688,179 @@
       font-weight: 700;
       margin-top: 14px;
     }
-    </style>
+    
+    /* ========================================================
+       PALETA MESTRA ALERTA PET BRASIL (4 CORES OFICIAIS DO RIGO)
+       VERDE (#009B3A) | MARROM (#9E8560) | AREIA (#E4D5BC) | BEGE (#EDE8DF)
+       ======================================================== */
+    :root {
+      --pet-verde: #009B3A;
+      --pet-marrom: #9E8560;
+      --pet-marrom-dark: #6E5A3C;
+      --pet-areia: #E4D5BC;
+      --pet-bege: #EDE8DF;
+      --pet-texto-escuro: #2E2417;
+      --accent-brand: #009B3A;
+      --accent-brand-soft: #FED700;
+    }
+
+    /* MODO NOTURNO & TEMA MESTRO RIGO */
+    #tab-pets,
+    #tab-parceiros,
+    #tab-copiloto {
+      background: var(--pet-marrom) !important;
+      min-height: 100vh;
+      box-sizing: border-box;
+    }
+
+    /* CARDS E BLOCOS EM AREIA */
+    #tab-pets .pet-card,
+    #tab-pets .pet-card-curado,
+    #tab-pets .empty-box,
+    #tab-parceiros .card-parceiro-item,
+    #tab-copiloto .hero-copiloto,
+    #tab-copiloto .settings-group {
+      background: var(--pet-areia) !important;
+      border: 1px solid rgba(110, 90, 60, 0.22) !important;
+      border-radius: 18px !important;
+      color: var(--pet-texto-escuro) !important;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08) !important;
+    }
+
+    #tab-pets .pet-card .pet-card-bg-bubbles {
+      opacity: 0.15 !important;
+    }
+
+    #tab-pets .pet-card .pet-card-author-name,
+    #tab-pets .pet-card .pet-card-pet-name {
+      color: var(--pet-texto-escuro) !important;
+      font-weight: 900 !important;
+    }
+
+    #tab-pets .pet-card .pet-card-desc,
+    #tab-pets .pet-card .pet-card-author-sub {
+      color: #5A4730 !important;
+    }
+
+    #tab-pets .pet-card .btn-pet-cta-primary {
+      background: var(--pet-bege) !important;
+      color: var(--pet-texto-escuro) !important;
+      border: 1.5px solid rgba(110, 90, 60, 0.3) !important;
+      font-weight: 800 !important;
+    }
+
+    #tab-pets .pet-card .btn-pet-cta-secondary {
+      background: rgba(110, 90, 60, 0.12) !important;
+      color: var(--pet-texto-escuro) !important;
+      border: 1px solid rgba(110, 90, 60, 0.25) !important;
+      font-weight: 700 !important;
+    }
+
+    /* TÍTULOS E TEXTOS NOS BLOCOS AREIA */
+    #tab-pets h2, #tab-pets h3, #tab-pets strong,
+    #tab-parceiros h2, #tab-parceiros h3, #tab-parceiros strong,
+    #tab-copiloto h2, #tab-copiloto .setting-title {
+      color: var(--pet-texto-escuro) !important;
+    }
+
+    #tab-copiloto p, #tab-copiloto .setting-sub,
+    #tab-parceiros p, #tab-pets p {
+      color: #5A4730 !important;
+    }
+
+    /* BOTÕES NOS BLOCOS: BEGE SUAVE COM CONTRASTE ESCURO */
+    #tab-pets .btn-pet-cta-primary,
+    #tab-pets .btn-submit,
+    #tab-copiloto .btn-bolha-hero {
+      background: var(--pet-bege) !important;
+      color: var(--pet-texto-escuro) !important;
+      border: 1.5px solid rgba(110, 90, 60, 0.3) !important;
+      font-weight: 800 !important;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08) !important;
+    }
+
+    #tab-copiloto .btn-bolha-desativar {
+      background: transparent !important;
+      color: var(--pet-texto-escuro) !important;
+      border: 1.5px solid var(--pet-marrom-dark) !important;
+      font-weight: 800 !important;
+    }
+
+    /* PILULAS DO MAPA (AREIA, ATIVO EM BEGE) */
+    .map-pill {
+      background: var(--pet-areia) !important;
+      color: var(--pet-texto-escuro) !important;
+      border: 1.5px solid rgba(110, 90, 60, 0.25) !important;
+      font-weight: 800 !important;
+    }
+    .map-pill.active {
+      background: var(--pet-bege) !important;
+      color: #000000 !important;
+      border: 2px solid var(--pet-marrom-dark) !important;
+      font-weight: 900 !important;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
+    }
+
+    /* FERRAMENTAS DO MAPA */
+    .map-tool-btn {
+      background: var(--pet-areia) !important;
+      color: var(--pet-texto-escuro) !important;
+      border: 1.5px solid rgba(110, 90, 60, 0.25) !important;
+    }
+    .map-tool-btn.active {
+      background: var(--pet-bege) !important;
+      color: #000000 !important;
+      border: 2px solid var(--pet-marrom-dark) !important;
+    }
+
+    /* 4 PILARES PETS: CONTAINER BEGE, ABAS AREIA, ATIVO MARROM ESCURO */
+    .pet-pillars-segmented {
+      background: var(--pet-bege) !important;
+      border: 1.5px solid rgba(110, 90, 60, 0.25) !important;
+      border-radius: 14px !important;
+      padding: 4px !important;
+    }
+    .pet-pillars-segmented .pillar-tab {
+      background: transparent !important;
+      color: var(--pet-texto-escuro) !important;
+      border: none !important;
+      border-radius: 10px !important;
+      padding: 8px 4px !important;
+      font-size: 11px !important;
+      font-weight: 700 !important;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      text-align: center;
+    }
+    .pet-pillars-segmented .pillar-tab.active {
+      background: var(--pet-marrom-dark) !important;
+      color: var(--pet-bege) !important;
+      font-weight: 900 !important;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15) !important;
+    }
+
+    /* FILTROS SEGMENTADOS DE PARCEIROS */
+    .btn-filtro-parceiro {
+      background: var(--pet-bege);
+      color: var(--pet-texto-escuro);
+      border: 1.5px solid rgba(110, 90, 60, 0.25);
+      border-radius: 999px;
+      padding: 6px 14px;
+      font-size: 11.5px;
+      font-weight: 700;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .btn-filtro-parceiro.active {
+      background: var(--pet-marrom-dark) !important;
+      color: var(--pet-bege) !important;
+      border-color: var(--pet-marrom-dark) !important;
+      font-weight: 900 !important;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    }
+
+</style>
   <script>
     // Registro Imediato da Blindagem Anti-Cold Start (Service Worker)
     if ('serviceWorker' in navigator) {
@@ -3707,19 +3879,19 @@
 <body>
   <!-- Splash Oficial: Rede de Proteção e Alerta Urbano -->
   <div class="splash" id="splash" onclick="fecharSplashImediato()">
-    <div class="splash-river-top">
-      <img src="/static/logo_bolha_pura.png?v=60" class="splash-logo" alt="Alerta Urbano">
-      <div class="splash-title">Alerta Urbano</div>
-      <div class="splash-city">Cascavel • Paraná</div>
+    <div class="splash-river-top" style="background:#009B3A;">
+      <img src="/static/patinha_amarela_vazada.png" class="splash-logo" alt="Alerta Pet Brasil" style="width:105px; height:105px; object-fit:contain; border-radius:0; box-shadow:none; filter:drop-shadow(0 6px 14px rgba(0,0,0,0.35));">
+      <div class="splash-title" style="color:#FFFFFF; font-size:24px; font-weight:900; letter-spacing:1.5px;">Alerta Pet Brasil</div>
+      <div class="splash-city" id="splash-city-label" style="color:#EDE8DF; letter-spacing:2px;">Cascavel • Paraná</div>
     </div>
     <div class="splash-river-wave-wrap">
       <svg class="splash-river-svg" viewBox="0 0 500 120" preserveAspectRatio="none">
-        <path d="M 0,35 C 140,85 230,-10 370,55 C 430,80 470,45 500,40 L 500,120 L 0,120 Z" fill="#FED700"/>
+        <path d="M 0,35 C 140,85 230,-10 370,55 C 430,80 470,45 500,40 L 500,120 L 0,120 Z" fill="#9E8560"/>
       </svg>
     </div>
-    <div class="splash-river-bottom">
-      <div class="splash-tagline">REDE DE PROTEÇÃO E ALERTA URBANO</div>
-      <div class="splash-subtext">Pets • Trânsito • Segurança • Utilidade Pública</div>
+    <div class="splash-river-bottom" style="background:#9E8560;">
+      <div class="splash-tagline" style="color:#EDE8DF; font-weight:900; letter-spacing:0.8px;">REDE DE PROTEÇÃO E RESGATE ANIMAL</div>
+      <div class="splash-subtext" style="color:#E4D5BC; font-weight:600;">Comunidade • Busca Ativa • Comércio Amigo dos Animais</div>
     </div>
     <script>
       setTimeout(function() {
@@ -3874,8 +4046,6 @@
 
         <div class="map-top-pills">
           <button type="button" class="map-pill active" data-pilar="pet" onclick="filtrarMapa('pet', this)">Pets</button>
-          <button type="button" class="map-pill" data-pilar="seguranca" onclick="filtrarMapa('seguranca', this)">Segurança</button>
-          <button type="button" class="map-pill" data-pilar="transito" onclick="filtrarMapa('transito', this)">Trânsito</button>
           <button type="button" class="map-pill" data-pilar="parceiros" onclick="filtrarMapa('parceiros', this)">Parceiros</button>
         </div>
 
@@ -3889,11 +4059,7 @@
 
         <div class="map-tools">
           <button type="button" class="map-tool-btn" id="btn-satelite" onclick="alternarSatelite()" title="Alternar Satélite / Ruas">SAT</button>
-          <button type="button" class="map-tool-btn active" id="btn-calor" onclick="alternarCalor()" title="Alternar Mapa de Calor">
-            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/>
-            </svg>
-          </button>
+          
           <button type="button" class="map-tool-btn" onclick="centralizarNoUsuario()" title="Minha posição no mapa">
             <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2">
               <circle cx="12" cy="12" r="4"></circle>
@@ -3906,101 +4072,83 @@
         </div>
 
         <!-- Esteira Flutuante de Produtos & Ofertas no Mapa -->
-        <div class="map-deals-floating-strip" id="map-deals-strip">
+        <div class="map-deals-floating-strip" id="map-deals-strip" style="display:none;">
           <div class="deal-belt-viewport">
             <div class="deal-belt-track" id="esteira-produtos-track-mapa"></div>
           </div>
         </div>
       </section>
 
-      <!-- ABA 3: PETS (ARQUITETURA DE 3 PILARES HIERÁRQUICOS) -->
-      <section class="tab-pane" id="tab-pets" style="padding-bottom:170px;">
-        <!-- BLOCO 1: CENTRAL SLIM DE REGISTRO DE OCORRÊNCIAS (COMPACTO - PEDIDO DO RIGO) -->
-        <div style="margin-bottom:12px; background:#ffffff; border-radius:16px; padding:12px; border:1px solid rgba(0,0,0,0.08); box-shadow:0 3px 10px rgba(0,0,0,0.04);">
+      <!-- ABA 3: PETS (ARQUITETURA DE 4 PILARES OFICIAIS RIGO) -->
+      <section class="tab-pane" id="tab-pets" style="padding-bottom:170px; background:#9E8560; min-height:100vh;">
+        <!-- BLOCO 1: CENTRAL DE REGISTRO (FUNDO AREIA COM BOTÕES BEGE) -->
+        <div style="margin-bottom:12px; background:#E4D5BC; border-radius:18px; padding:14px; border:1px solid rgba(110,90,60,0.22); box-shadow:0 4px 14px rgba(0,0,0,0.08);">
           <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
-            <div style="font-size:11px; font-weight:900; letter-spacing:0.5px; color:#009B3A; text-transform:uppercase;">Rede de Proteção Animal</div>
-            <div style="font-size:10px; color:#71717A; font-weight:700;">Toque para registrar</div>
+            <div style="font-size:12px; font-weight:900; letter-spacing:0.5px; color:#2E2417; text-transform:uppercase;">Rede de Proteção Animal</div>
+            <div style="font-size:10.5px; color:#6E5A3C; font-weight:700;">Toque para registrar</div>
           </div>
           <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
-            <button type="button" onclick="abrirModalPet('pet_perdido')" style="background:#000000; border:1px solid #27272A; color:#FFFFFF; border-radius:10px; padding:10px 8px; font-size:11.5px; font-weight:800; display:flex; align-items:center; justify-content:center; gap:7px; cursor:pointer; transition:transform 0.15s ease;">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            <button type="button" onclick="abrirModalPet('pet_perdido')" style="background:#EDE8DF; border:1.5px solid rgba(110,90,60,0.25); color:#2E2417; border-radius:12px; padding:11px 8px; font-size:11.5px; font-weight:800; display:flex; align-items:center; justify-content:center; gap:7px; cursor:pointer; box-shadow:0 2px 6px rgba(0,0,0,0.06);">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2E2417" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
               <span>Perdi meu Pet</span>
             </button>
-            <button type="button" onclick="abrirModalPet('pet_avistado')" style="background:#000000; border:1px solid #27272A; color:#FFFFFF; border-radius:10px; padding:10px 8px; font-size:11.5px; font-weight:800; display:flex; align-items:center; justify-content:center; gap:7px; cursor:pointer; transition:transform 0.15s ease;">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+            <button type="button" onclick="abrirModalPet('pet_avistado')" style="background:#EDE8DF; border:1.5px solid rgba(110,90,60,0.25); color:#2E2417; border-radius:12px; padding:11px 8px; font-size:11.5px; font-weight:800; display:flex; align-items:center; justify-content:center; gap:7px; cursor:pointer; box-shadow:0 2px 6px rgba(0,0,0,0.06);">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2E2417" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
               <span>Vi um Animal</span>
             </button>
-            <button type="button" onclick="abrirModalPet('pet_adocao')" style="background:#000000; border:1px solid #27272A; color:#FFFFFF; border-radius:10px; padding:10px 8px; font-size:11.5px; font-weight:800; display:flex; align-items:center; justify-content:center; gap:7px; cursor:pointer; transition:transform 0.15s ease;">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+            <button type="button" onclick="abrirModalPet('pet_adocao')" style="background:#EDE8DF; border:1.5px solid rgba(110,90,60,0.25); color:#2E2417; border-radius:12px; padding:11px 8px; font-size:11.5px; font-weight:800; display:flex; align-items:center; justify-content:center; gap:7px; cursor:pointer; box-shadow:0 2px 6px rgba(0,0,0,0.06);">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2E2417" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
               <span>Para Adoção</span>
             </button>
-            <button type="button" onclick="abrirModalPet('pet_denuncia_maustratos')" style="background:#000000; border:1px solid #27272A; color:#FFFFFF; border-radius:10px; padding:10px 8px; font-size:11.5px; font-weight:800; display:flex; align-items:center; justify-content:center; gap:7px; cursor:pointer; transition:transform 0.15s ease;">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+            <button type="button" onclick="abrirModalPet('pet_denuncia_maustratos')" style="background:#EDE8DF; border:1.5px solid rgba(110,90,60,0.25); color:#2E2417; border-radius:12px; padding:11px 8px; font-size:11.5px; font-weight:800; display:flex; align-items:center; justify-content:center; gap:7px; cursor:pointer; box-shadow:0 2px 6px rgba(0,0,0,0.06);">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2E2417" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
               <span>SOS / Sigiloso</span>
             </button>
           </div>
         </div>
 
-        <!-- ESTEIRA DE PRODUTOS & OFERTAS NA ABA PETS -->
-        <div style="margin-bottom:14px; background:#FFFFFF; border-radius:16px; padding:10px 12px; border:1px solid rgba(0,0,0,0.08); box-shadow:0 3px 10px rgba(0,0,0,0.04);">
-          <div style="font-size:11px; font-weight:900; color:#009B3A; margin-bottom:8px; display:flex; align-items:center; gap:6px;">
-            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
-            <span>Ofertas no Comércio Local</span>
-          </div>
-          <div class="deal-belt-viewport">
-            <div class="deal-belt-track" id="esteira-produtos-track-pets"></div>
-          </div>
-        </div>
-
-        <div class="pet-pillars-segmented" id="pets-main-pills" style="margin-bottom:14px;">
+        <!-- 4 PILARES OFICIAIS: DESAPARECIDOS | RESGATADOS | REENCONTRO | PARA ADOÇÃO -->
+        <div class="pet-pillars-segmented" id="pets-main-pills" style="margin-bottom:14px; background:#EDE8DF; border:1.5px solid rgba(110,90,60,0.25); border-radius:14px; padding:4px; display:grid; grid-template-columns:repeat(4, 1fr); gap:4px;">
           <button type="button" class="pillar-tab active" id="btn-pillar-desaparecidos" onclick="alternarPilarPet('desaparecidos')">
-            <span>Animais Desaparecidos</span>
+            <span>Desaparecidos</span>
           </button>
-          <button type="button" class="pillar-tab" id="btn-pillar-avistados" onclick="alternarPilarPet('avistados')">
-            <span>Animais Avistados</span>
+          <button type="button" class="pillar-tab" id="btn-pillar-resgatados" onclick="alternarPilarPet('resgatados')">
+            <span>Resgatados</span>
+          </button>
+          <button type="button" class="pillar-tab" id="btn-pillar-reencontro" onclick="alternarPilarPet('reencontro')">
+            <span>Reencontro</span>
           </button>
           <button type="button" class="pillar-tab" id="btn-pillar-adocao" onclick="alternarPilarPet('adocao')">
-            <span>Animais para Adoção</span>
+            <span>Para Adoção</span>
           </button>
         </div>
 
         <div class="pets-grid" id="pets-full-list" style="display:flex; flex-direction:column; gap:14px;"></div>
       </section>
 
-      <!-- ABA 4: PARCEIROS (EMPRESAS AMIGAS & PROMOÇÕES DE CASCAVEL) -->
-      <section class="tab-pane" id="tab-parceiros" style="padding-bottom:170px;">
-        <!-- Header da Aba Parceiros -->
-        <div style="background:#ffffff; border-radius:18px; padding:18px 16px; margin-bottom:14px; border:1px solid rgba(0,0,0,0.08); box-shadow:0 4px 14px rgba(0,0,0,0.04);">
-          <div style="display:flex; justify-content:space-between; align-items:center;">
-            <div>
-              <div style="display:inline-block; background:rgba(0,155,58,0.12); color:#009B3A; font-weight:800; font-size:10.5px; padding:3px 8px; border-radius:6px; margin-bottom:4px;">REDE OFICIAL DE CASCAVEL</div>
-              <div style="font-size:18px; font-weight:900; color:#18181B;">Empresas Parceiras</div>
-              <div style="font-size:12px; color:#71717A;">Comércio amigo dos animais e serviços essenciais</div>
-            </div>
-            <div style="width:44px; height:44px; border-radius:14px; background:rgba(254,215,0,0.18); display:flex; align-items:center; justify-content:center; border:1px solid rgba(254,215,0,0.4);">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="#FED700" stroke="#000000" stroke-width="1.2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-            </div>
+      <!-- ABA 4: PARCEIROS PET (COMÉRCIO AMIGO DOS ANIMAIS & SERVIÇOS ESSENCIAIS) -->
+      <section class="tab-pane" id="tab-parceiros" style="padding-bottom:170px; background:#9E8560; min-height:100vh;">
+        <!-- CABEÇALHO & FILTRO SEGMENTADO PINNED/STICKY NO SCROLL -->
+        <div class="parceiros-sticky-top" style="position:sticky; top:0; z-index:90; background:#E4D5BC; border-radius:18px; padding:14px 16px; margin-bottom:14px; border:1px solid rgba(110,90,60,0.25); box-shadow:0 4px 16px rgba(0,0,0,0.12);">
+          <div style="font-size:18px; font-weight:900; color:#2E2417; line-height:1.2;">Empresas Parceiras</div>
+          <div style="font-size:12px; font-weight:600; color:#6E5A3C; margin-top:2px;">Comércio Amigo dos Animais & Serviços Essenciais</div>
+          <div style="font-size:11.5px; font-weight:800; color:#009B3A; margin-top:6px; display:flex; align-items:center; gap:5px;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+            <span>Apoie o comércio local amigo de <strong id="parceiros-cidade-label">Cascavel</strong> • <span id="parceiros-uf-label">PR</span></span>
+          </div>
+
+          <!-- BARRA DE FILTROS SEGMENTADOS DE CATEGORIAS PET (AREIA/BEGE) -->
+          <div class="parceiros-filtro-scroll" style="display:flex; gap:6px; overflow-x:auto; padding:10px 0 2px; scrollbar-width:none; -webkit-overflow-scrolling:touch;">
+            <button type="button" class="btn-filtro-parceiro active" onclick="filtrarCategoriaParceiro('todos', this)">Todos</button>
+            <button type="button" class="btn-filtro-parceiro" onclick="filtrarCategoriaParceiro('veterinaria', this)">Veterinárias</button>
+            <button type="button" class="btn-filtro-parceiro" onclick="filtrarCategoriaParceiro('pet_shop', this)">Pet Shops</button>
+            <button type="button" class="btn-filtro-parceiro" onclick="filtrarCategoriaParceiro('racao', this)">Rações</button>
+            <button type="button" class="btn-filtro-parceiro" onclick="filtrarCategoriaParceiro('farmacia', this)">Farmácias</button>
+            <button type="button" class="btn-filtro-parceiro" onclick="filtrarCategoriaParceiro('servicos', this)">Serviços Pet</button>
           </div>
         </div>
 
-        <!-- ESTEIRA DE PRODUTOS & OFERTAS NA ABA PARCEIROS -->
-        <div style="margin-bottom:14px; background:#FFFFFF; border-radius:16px; padding:10px 12px; border:1px solid rgba(0,0,0,0.08); box-shadow:0 3px 10px rgba(0,0,0,0.04);">
-          <div style="font-size:11px; font-weight:900; color:#009B3A; margin-bottom:8px; display:flex; align-items:center; gap:6px;">
-            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
-            <span>Ofertas & Promoções em Destaque</span>
-          </div>
-          <div class="deal-belt-viewport">
-            <div class="deal-belt-track" id="esteira-produtos-track-parceiros"></div>
-          </div>
-        </div>
-
-        <!-- Banner de Vantagem Cívica -->
-        <div style="background:linear-gradient(135deg, #009B3A, #007A2E); color:#ffffff; border-radius:16px; padding:14px 16px; margin-bottom:16px; box-shadow:0 4px 16px rgba(0,155,58,0.25);">
-          <div style="font-size:13px; font-weight:900; margin-bottom:2px;">Apoie o Comércio Local Amigo de Cascavel</div>
-          <div style="font-size:11.5px; color:rgba(255,255,255,0.9); line-height:1.4;">Estes estabelecimentos apoiam o resgate de animais e a segurança da nossa cidade. Conheça as promoções e contate direto no WhatsApp sem intermediários.</div>
-        </div>
-
-        <!-- Lista Dinâmica de Cards de Parceiros -->
+        <!-- Lista Dinâmica de Cards de Parceiros em Areia -->
         <div id="parceiros-lista-container" style="display:flex; flex-direction:column; gap:14px;"></div>
       </section>
 
@@ -5719,6 +5867,16 @@
       renderizarPetsAba();
     }
 
+    function atualizarLabelsCidade(cidade, estado) {
+      if (!cidade) return;
+      const cLabel = document.getElementById('parceiros-cidade-label');
+      const ufLabel = document.getElementById('parceiros-uf-label');
+      const spLabel = document.getElementById('splash-city-label');
+      if (cLabel) cLabel.textContent = cidade;
+      if (ufLabel && estado) ufLabel.textContent = estado;
+      if (spLabel) spLabel.textContent = `${cidade} • ${estado || 'PR'}`;
+    }
+
     function abrirModalPetContextual() {
       const pilar = state.petMainPillar || 'desaparecidos';
       if (pilar === 'adocao') {
@@ -5820,15 +5978,18 @@
       if (pilarAtivo === 'desaparecidos') {
         pets = basePetsValidos.filter(p => {
           if (p.tipo === 'pet_adocao' || p.status_pet === 'adocao') return false;
-          if (p.tipo === 'pet_sos_rua' || p.status_pet === 'sos_rua') return false;
+          if (p.tipo === 'pet_resgatado' || p.status_pet === 'resgatado') return false;
+          if (p.tipo === 'pet_reencontro' || p.status_pet === 'reencontro') return false;
           if (p.sigiloso || p.tipo === 'pet_denuncia_maustratos') return false;
-          const av = p.status_pet === 'avistado' || p.status_pet === 'encontrado' || p.tipo === 'pet_avistado' || p.tipo === 'pet_encontrado';
-          return !av; // Apenas desaparecidos de fato
+          return true; // Animais desaparecidos procurando tutor
         });
-      } else if (pilarAtivo === 'avistados') {
+      } else if (pilarAtivo === 'resgatados') {
         pets = basePetsValidos.filter(p => {
-          const av = p.status_pet === 'avistado' || p.status_pet === 'encontrado' || p.tipo === 'pet_avistado' || p.tipo === 'pet_encontrado';
-          return av; // Animais avistados ou encontrados na rua
+          return p.status_pet === 'resgatado' || p.tipo === 'pet_resgatado';
+        });
+      } else if (pilarAtivo === 'reencontro') {
+        pets = basePetsValidos.filter(p => {
+          return p.status_pet === 'reencontro' || p.status_pet === 'encontrado' || p.tipo === 'pet_reencontro' || p.tipo === 'pet_encontrado';
         });
       } else if (pilarAtivo === 'adocao') {
         pets = basePetsValidos.filter(a => a.tipo === 'pet_adocao' || a.status_pet === 'adocao');
@@ -5844,26 +6005,34 @@
       const el = document.getElementById('pets-full-list');
       if (!pets.length) {
         if (pilarAtivo === 'adocao') {
-          el.innerHTML = `<div class="empty-box" style="padding:28px 16px; text-align:center; background:#E8DCC4; border:1px solid #D4C4A4; border-radius:18px;">
-            <div style="font-size:15px; font-weight:800; color:#1C1917; margin-bottom:6px;">Nenhum pet para adoção no momento</div>
-            <div style="font-size:12px; color:#57534E; max-width:280px; margin:0 auto 16px;">Divulgue um animal resgatado para ganhar um lar amoroso em Cascavel.</div>
-            <button type="button" class="btn-pet-cta-primary" style="max-width:240px; margin:0 auto;" onclick="abrirModalPet('pet_adocao')">
+          el.innerHTML = `<div class="empty-box" style="padding:28px 16px; text-align:center; background:#E4D5BC; border:1px solid rgba(110,90,60,0.22); border-radius:18px;">
+            <div style="font-size:15px; font-weight:800; color:#2E2417; margin-bottom:6px;">Nenhum pet para adoção no momento</div>
+            <div style="font-size:12px; color:#5A4730; max-width:280px; margin:0 auto 16px;">Divulgue um animal resgatado para ganhar um lar amoroso em Cascavel.</div>
+            <button type="button" class="btn-pet-cta-primary" style="max-width:240px; margin:0 auto; background:#EDE8DF; color:#2E2417;" onclick="abrirModalPet('pet_adocao')">
               + Cadastrar Pet para Adoção
             </button>
           </div>`;
-        } else if (pilarAtivo === 'avistados') {
-          el.innerHTML = `<div class="empty-box" style="padding:28px 16px; text-align:center; background:#E8DCC4; border:1px solid #D4C4A4; border-radius:18px;">
-            <div style="font-size:15px; font-weight:800; color:#1C1917; margin-bottom:6px;">Nenhum pet avistado na rua registrado</div>
-            <div style="font-size:12px; color:#57534E; max-width:300px; margin:0 auto 16px;">Viu algum animal perambulando sem tutor? Registre o ponto para ajudar o dono.</div>
-            <button type="button" class="btn-pet-cta-primary" style="max-width:260px; margin:0 auto;" onclick="abrirModalPet('pet_avistado')">
-              + Registrar Animal Visto
+        } else if (pilarAtivo === 'resgatados') {
+          el.innerHTML = `<div class="empty-box" style="padding:28px 16px; text-align:center; background:#E4D5BC; border:1px solid rgba(110,90,60,0.22); border-radius:18px;">
+            <div style="font-size:15px; font-weight:800; color:#2E2417; margin-bottom:6px;">Nenhuma história de resgate registrada</div>
+            <div style="font-size:12px; color:#5A4730; max-width:300px; margin:0 auto 16px;">Você resgatou um animal e quer compartilhar o antes e depois? Compartilhe a história!</div>
+            <button type="button" class="btn-pet-cta-primary" style="max-width:260px; margin:0 auto; background:#EDE8DF; color:#2E2417;" onclick="abrirModalPet('pet_avistado')">
+              + Compartilhar Resgate
+            </button>
+          </div>`;
+        } else if (pilarAtivo === 'reencontro') {
+          el.innerHTML = `<div class="empty-box" style="padding:28px 16px; text-align:center; background:#E4D5BC; border:1px solid rgba(110,90,60,0.22); border-radius:18px;">
+            <div style="font-size:15px; font-weight:800; color:#2E2417; margin-bottom:6px;">Nenhum reencontro recente registrado</div>
+            <div style="font-size:12px; color:#5A4730; max-width:300px; margin:0 auto 16px;">Reencontrou seu pet perdido com a ajuda da rede? Registre e celebre com a comunidade!</div>
+            <button type="button" class="btn-pet-cta-primary" style="max-width:260px; margin:0 auto; background:#EDE8DF; color:#2E2417;" onclick="abrirModalPet('pet_perdido')">
+              + Registrar Reencontro
             </button>
           </div>`;
         } else {
-          el.innerHTML = `<div class="empty-box" style="padding:28px 16px; text-align:center; background:#E8DCC4; border:1px solid #D4C4A4; border-radius:18px;">
-            <div style="font-size:15px; font-weight:800; color:#1C1917; margin-bottom:6px;">Nenhum pet desaparecido no momento</div>
-            <div style="font-size:12px; color:#57534E; max-width:280px; margin:0 auto 16px;">Cadastre o sumiço do seu animal para alertar a rede de motoristas e cidadãos de Cascavel.</div>
-            <button type="button" class="btn-pet-cta-primary" style="max-width:250px; margin:0 auto;" onclick="abrirModalPet('pet_perdido')">
+          el.innerHTML = `<div class="empty-box" style="padding:28px 16px; text-align:center; background:#E4D5BC; border:1px solid rgba(110,90,60,0.22); border-radius:18px;">
+            <div style="font-size:15px; font-weight:800; color:#2E2417; margin-bottom:6px;">Nenhum pet desaparecido no momento</div>
+            <div style="font-size:12px; color:#5A4730; max-width:280px; margin:0 auto 16px;">Cadastre o sumiço do seu animal para alertar a rede de motoristas e cidadãos de Cascavel.</div>
+            <button type="button" class="btn-pet-cta-primary" style="max-width:250px; margin:0 auto; background:#EDE8DF; color:#2E2417;" onclick="abrirModalPet('pet_perdido')">
               + Cadastrar Pet Desaparecido
             </button>
           </div>`;
@@ -7947,11 +8116,10 @@ Baixe o aplicativo gratuito Alerta Urbano:
       }
 
       container.innerHTML = lista.map(p => {
-        const ehOuro = p.selo_tipo === 'ouro';
-        const seloTexto = ehOuro ? 'Empresa Amiga dos Animais' : 'Empresa Cidadã de Cascavel';
-        const seloBg = ehOuro ? 'rgba(254, 215, 0, 0.18)' : 'rgba(0, 155, 58, 0.12)';
-        const seloColor = ehOuro ? '#B45309' : '#009B3A';
-        const seloBorder = ehOuro ? 'rgba(254, 215, 0, 0.45)' : 'rgba(0, 155, 58, 0.35)';
+        const seloTexto = 'Comércio Amigo dos Animais';
+        const seloBg = '#EDE8DF';
+        const seloColor = '#009B3A';
+        const seloBorder = 'rgba(0, 155, 58, 0.35)';
 
         const produtosHtml = (p.produtos && p.produtos.length > 0)
           ? `
@@ -7983,7 +8151,7 @@ Baixe o aplicativo gratuito Alerta Urbano:
           : '';
 
         return `
-          <div class="card-parceiro-item" style="background:#ffffff; border-radius:18px; padding:16px; border:1px solid rgba(0,0,0,0.08); box-shadow:0 4px 14px rgba(0,0,0,0.05); color:#18181B;">
+          <div class="card-parceiro-item" style="background:#E4D5BC; border-radius:18px; padding:16px; border:1px solid rgba(110,90,60,0.22); box-shadow:0 4px 14px rgba(0,0,0,0.08); color:#2E2417;">
             <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:12px;">
               <div style="width:54px; height:54px; border-radius:12px; background:#F8FAFC; border:1.5px solid rgba(0,0,0,0.1); overflow:hidden; flex-shrink:0; display:flex; align-items:center; justify-content:center; box-shadow:0 2px 6px rgba(0,0,0,0.06);">
                 ${p.logo_url ? `<img src="${escapeAttr(p.logo_url)}" alt="${escapeAttr(p.nome)}" style="width:100%; height:100%; object-fit:contain;" onerror="this.onerror=null; this.src='/static/parceiros/pet_vet/pet_vet_01_vv/logo.png'">` : `<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#94A3B8" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18M15 3v18M3 9h18M3 15h18"/></svg>`}
@@ -8007,10 +8175,10 @@ Baixe o aplicativo gratuito Alerta Urbano:
 
             <!-- Botões de Ação do Card -->
             <div style="display:flex; gap:8px; margin-top:14px;">
-              <button type="button" onclick="abrirWhatsappParceiroById('${escapeAttr(p.id)}')" style="flex:1; background:#009B3A; color:#ffffff; border:none; padding:10px 12px; border-radius:12px; font-size:12px; font-weight:900; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:6px; box-shadow:0 3px 10px rgba(0,155,58,0.25);">
+              <button type="button" onclick="abrirWhatsappParceiroById('${escapeAttr(p.id)}')" style="flex:1; background:#009B3A; color:#ffffff; border:none; padding:11px 12px; border-radius:12px; font-size:12px; font-weight:900; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:6px; box-shadow:0 3px 10px rgba(0,155,58,0.3);">
                 Chamar no WhatsApp
               </button>
-              <button type="button" onclick="verParceiroNoMapa('${escapeAttr(p.id)}', ${p.lat}, ${p.lng})" style="background:#000000; color:#FED700; border:none; padding:10px 12px; border-radius:12px; font-size:12px; font-weight:800; cursor:pointer; display:flex; align-items:center; gap:4px; box-shadow:0 3px 10px rgba(0,0,0,0.2);">
+              <button type="button" onclick="verParceiroNoMapa('${escapeAttr(p.id)}', ${p.lat}, ${p.lng})" style="background:#EDE8DF; color:#2E2417; border:1.5px solid rgba(110,90,60,0.25); padding:11px 12px; border-radius:12px; font-size:12px; font-weight:800; cursor:pointer; display:flex; align-items:center; gap:4px; box-shadow:0 2px 6px rgba(0,0,0,0.08);">
                 Ver no Mapa
               </button>
             </div>
@@ -8022,14 +8190,16 @@ Baixe o aplicativo gratuito Alerta Urbano:
     function filtrarCategoriaParceiro(cat, el) {
       state.parceiroFiltro = cat;
       document.querySelectorAll('.btn-filtro-parceiro').forEach(b => {
-        b.style.background = '#ffffff';
-        b.style.color = '#18181B';
-        b.style.border = '1px solid rgba(0,0,0,0.15)';
+        b.classList.remove('active');
+        b.style.background = '#EDE8DF';
+        b.style.color = '#2E2417';
+        b.style.borderColor = 'rgba(110,90,60,0.25)';
       });
       if (el) {
-        el.style.background = '#000000';
-        el.style.color = '#FED700';
-        el.style.border = '1px solid #000000';
+        el.classList.add('active');
+        el.style.background = '#6E5A3C';
+        el.style.color = '#EDE8DF';
+        el.style.borderColor = '#6E5A3C';
       }
       renderizarAbaParceiros();
     }
