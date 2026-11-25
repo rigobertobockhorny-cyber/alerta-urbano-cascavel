@@ -132,10 +132,10 @@
     }
 
     [data-theme="light"] {
-      --bg: #FED700; /* Fundo Amarelo Oficial 99 */
+      --bg: #9E8560; /* Fundo Marrom Acolhedor Oficial Rigo (Zero Amarelo Vazado) */
       --bg-elevated: #E8DCC4; /* Areia Bege Encorpado e Acolhedor */
       --bg-subtle: #DECDB0; /* Bege Neutro para Divisórias */
-      --bg-glass: #FED700;
+      --bg-glass: rgba(158, 133, 96, 0.90);
       --border: rgba(0, 0, 0, 0.15);
       --border-strong: #000000;
       --text: #000000; /* Preto sólido em alto contraste */
@@ -361,8 +361,8 @@
     
     /* ==================== PATINHA VIVA MINIMALISTA (CHROMA KEY VAZADA) ==================== */
     .logo-bubble-btn {
-      width: 44px;
-      height: 44px;
+      width: 56px;
+      height: 56px;
       border: none !important;
       border-radius: 0 !important;
       padding: 0;
@@ -384,7 +384,7 @@
       width: 100%;
       height: 100%;
       overflow: visible;
-      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.5));
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.22));
     }
     .paw-viva-path {
       fill: #FED700;
@@ -559,11 +559,7 @@
       padding: 14px 16px 24px;
     }
     .tab-pane.active { display: block; }
-    body.tab-inicio .topbar-river-wave,
-    body.tab-mapa .topbar-river-wave,
-    body.tab-mapa .bottom-river-wave {
-      display: none !important;
-    }
+    /* ONDAS PERMANENTES: Ativas em todas as abas (Inicio, Mapa, Pets, Parceiros, Copiloto) */
     body.tab-mapa .main-stage {
       background: #009B3A !important;
     }
@@ -889,6 +885,7 @@
       padding: 2px 14px 6px;
       gap: 4px;
       overflow: hidden;
+      background: #E8DCC4 !important; /* Areia Acolhedor Oficial Rigo */
     }
 
     /* Blocos de Esteiras Horizontais (Mesma Velocidade Calibrada via JS) */
@@ -2365,14 +2362,7 @@
       text-align: center;
       margin-bottom: 14px;
     }
-    .hero-copiloto-logo {
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      margin: 0 auto 10px;
-      display: block;
-      box-shadow: 0 8px 24px rgba(220, 38, 38, 0.35);
-    }
+    .hero-copiloto-logo { display: none !important; }
     .hero-copiloto h2 { font-size: 16px; font-weight: 800; }
     .hero-copiloto p { font-size: 12px; color: var(--text-muted); line-height: 1.45; margin: 6px 0 14px; }
     .btn-bolha-hero {
@@ -2837,11 +2827,11 @@
 
     /* Copiloto em Branco Puro com Botão Preto Sólido (Zero Verde e Zero Degradê) */
     #tab-copiloto .hero-copiloto {
-      border: 1.5px solid rgba(0, 0, 0, 0.12) !important;
-      background: #ffffff !important; /* Branco Puro */
+      border: 1.5px solid rgba(110, 90, 60, 0.25) !important;
+      background: #E8DCC4 !important; /* Areia Oficial Rigo */
       border-radius: 20px !important;
       box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08) !important;
-      color: #000000 !important;
+      color: #2E2417 !important;
     }
     #tab-copiloto .hero-copiloto h2 {
       color: #000000 !important;
@@ -4030,6 +4020,60 @@
       border-bottom: 1px solid rgba(110, 90, 60, 0.15) !important;
     }
 
+
+    .topbar-river-wave {
+      position: absolute !important;
+      top: 0 !important;
+      left: 0 !important;
+      right: 0 !important;
+      height: 22px !important;
+      line-height: 0 !important;
+      z-index: 1000 !important;
+      pointer-events: none !important;
+      background: transparent !important;
+    }
+    .topbar-river-wave svg {
+      width: 100% !important;
+      height: 100% !important;
+      display: block !important;
+    }
+    .bottom-river-wave {
+      position: absolute !important;
+      bottom: 0 !important;
+      left: 0 !important;
+      right: 0 !important;
+      height: 22px !important;
+      line-height: 0 !important;
+      z-index: 1000 !important;
+      pointer-events: none !important;
+      background: transparent !important;
+    }
+    .bottom-river-wave svg {
+      width: 100% !important;
+      height: 100% !important;
+      display: block !important;
+    }
+
+
+    .brand-partner-card {
+      width: 175px !important;
+      height: 114px !important;
+      flex-shrink: 0;
+      border-radius: 14px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 8px 10px;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.22);
+      transition: transform 0.15s ease;
+      user-select: none;
+      box-sizing: border-box;
+    }
+    .brand-partner-card:active {
+      transform: scale(0.95);
+    }
+
 </style>
   <script>
     // Registro Imediato da Blindagem Anti-Cold Start (Service Worker)
@@ -4050,7 +4094,15 @@
   <!-- Splash Oficial: Rede de Proteção e Alerta Urbano -->
   <div class="splash" id="splash" onclick="fecharSplashImediato()">
     <div class="splash-river-top" style="background:#009B3A;">
-      <img src="/static/patinha_amarela_vazada.png" class="splash-logo" alt="Alerta Pet Brasil" style="width:105px; height:105px; object-fit:contain; border-radius:0; box-shadow:none; filter:drop-shadow(0 6px 14px rgba(0,0,0,0.35));">
+      <div class="splash-logo-paw-wrap" style="width:100px; height:100px; margin:0 auto 10px; display:flex; align-items:center; justify-content:center;">
+        <svg viewBox="0 0 512 512" style="width:100%; height:100%; overflow:visible; filter:drop-shadow(0 4px 10px rgba(0,0,0,0.25));">
+          <path d="M115.2 359.3 L109.4 379.5 L110.4 409.3 L117.1 425.6 L124.8 436.2 L137.3 447.7 L144.0 450.6 L198.8 450.6 L217.1 444.9 L244.9 439.1 L270.9 440.1 L309.3 450.6 L365.1 450.6 L378.5 442.9 L389.1 432.4 L397.8 417.9 L401.6 402.6 L401.6 382.4 L399.7 371.8 L393.0 353.6 L386.2 342.0 L371.8 323.8 L348.7 301.7 L341.1 292.0 L305.5 238.2 L288.2 223.8 L274.7 218.0 L264.2 216.1 L244.0 216.1 L235.3 218.0 L223.8 223.8 L214.2 231.5 L199.8 247.8 L162.3 300.7 L138.3 323.8 L129.6 334.3 Z" fill="#FED700" stroke="#2E2417" stroke-width="6"/>
+          <path d="M78.7 170.0 L64.3 178.6 L53.7 195.0 L49.8 211.3 L49.8 224.8 L54.6 244.9 L66.2 266.1 L78.7 278.6 L95.0 287.2 L101.7 289.2 L113.3 289.2 L129.6 281.5 L136.3 274.7 L142.1 264.2 L146.9 244.0 L146.9 235.3 L143.1 216.1 L135.4 198.8 L119.0 179.6 L103.7 170.9 L96.9 169.0 Z" fill="#FED700" stroke="#2E2417" stroke-width="6"/>
+          <path d="M177.7 62.3 L167.1 65.2 L153.6 75.8 L146.9 85.4 L142.1 96.0 L138.3 117.1 L140.2 144.0 L143.1 155.6 L148.8 168.1 L165.2 189.2 L182.5 198.8 L200.7 199.8 L208.4 197.9 L216.1 193.0 L228.6 179.6 L236.3 161.3 L239.2 146.9 L239.2 130.6 L233.4 105.6 L227.6 93.1 L219.0 80.6 L207.5 70.0 L196.9 64.3 Z" fill="#FED700" stroke="#2E2417" stroke-width="6"/>
+          <path d="M338.2 60.4 L327.6 60.4 L318.0 63.3 L307.4 69.1 L294.9 80.6 L288.2 89.2 L279.5 106.5 L273.8 128.7 L273.8 154.6 L279.5 174.8 L284.4 183.4 L294.0 194.0 L303.6 199.8 L314.1 202.7 L322.8 202.7 L333.4 199.8 L347.8 191.1 L359.3 179.6 L370.9 159.4 L376.6 141.1 L377.6 108.5 L371.8 88.3 L358.4 70.0 L349.7 64.3 Z" fill="#FED700" stroke="#2E2417" stroke-width="6"/>
+          <path d="M439.1 170.0 L417.9 170.0 L398.7 179.6 L382.4 196.9 L371.8 218.0 L368.9 231.5 L368.9 251.7 L370.9 261.3 L376.6 272.8 L382.4 279.5 L393.0 286.3 L401.6 289.2 L414.1 289.2 L426.6 285.3 L435.2 280.5 L451.6 265.1 L464.1 243.0 L468.9 222.8 L468.9 209.4 L464.1 192.1 L453.5 177.7 Z" fill="#FED700" stroke="#2E2417" stroke-width="6"/>
+        </svg>
+      </div>
       <div class="splash-title" style="color:#FFFFFF; font-size:24px; font-weight:900; letter-spacing:1.5px;">Alerta Pet Brasil</div>
       <div class="splash-city" id="splash-city-label" style="color:#EDE8DF; letter-spacing:2px;">Cascavel • Paraná</div>
     </div>
@@ -4090,7 +4142,7 @@
         <div class="brand-text">
           <div class="brand-name">Alerta Pet Brasil</div>
           <div class="brand-city">
-            <span>Cascavel • Build 36 (v3.10.9)</span>
+            <span>Cascavel • Build 37 (v3.11.0)</span>
           </div>
         </div>
       </div>
@@ -4108,14 +4160,16 @@
         </button>
       </div>
     </header>
-    <div class="topbar-river-wave">
-      <svg viewBox="0 0 500 20" preserveAspectRatio="none">
-        <path d="M 0,0 L 500,0 L 500,6 C 420,18 330,2 240,14 C 150,22 80,4 0,16 Z" fill="#009B3A"/>
-      </svg>
-    </div>
+
 
     <!-- ==================== CONTEÚDO DAS 4 ABAS ==================== -->
     <main class="main-stage">
+      <!-- Ondulação Superior Orgânica (Conexão Verde com Topbar) -->
+      <div class="topbar-river-wave">
+        <svg viewBox="0 0 500 20" preserveAspectRatio="none">
+          <path d="M 0,0 L 500,0 L 500,6 C 420,18 330,2 240,14 C 150,22 80,4 0,16 Z" fill="#009B3A"/>
+        </svg>
+      </div>
 
       <!-- ABA 1: INÍCIO (ZERO SCROLL — CLIMA INTEGRADO NA CABECEIRA VERDE + ONDA + 3 ESTEIRAS) -->
       <section class="tab-pane home-pane active" id="tab-inicio">
@@ -4325,7 +4379,15 @@
       <!-- ABA 4: COPILOTO (BOLINHA FLUTUANTE) -->
       <section class="tab-pane" id="tab-copiloto">
         <div class="hero-copiloto">
-          <img src="/static/logo_bolha_pura.png?v=60" class="hero-copiloto-logo" alt="Copiloto">
+          <div class="hero-copiloto-paw-wrap" style="width:72px; height:72px; margin:0 auto 12px; display:flex; align-items:center; justify-content:center; background:transparent;">
+            <svg viewBox="0 0 512 512" style="width:100%; height:100%; overflow:visible; filter:drop-shadow(0 3px 6px rgba(0,0,0,0.2));">
+              <path class="paw-viva-path" d="M115.2 359.3 L109.4 379.5 L110.4 409.3 L117.1 425.6 L124.8 436.2 L137.3 447.7 L144.0 450.6 L198.8 450.6 L217.1 444.9 L244.9 439.1 L270.9 440.1 L309.3 450.6 L365.1 450.6 L378.5 442.9 L389.1 432.4 L397.8 417.9 L401.6 402.6 L401.6 382.4 L399.7 371.8 L393.0 353.6 L386.2 342.0 L371.8 323.8 L348.7 301.7 L341.1 292.0 L305.5 238.2 L288.2 223.8 L274.7 218.0 L264.2 216.1 L244.0 216.1 L235.3 218.0 L223.8 223.8 L214.2 231.5 L199.8 247.8 L162.3 300.7 L138.3 323.8 L129.6 334.3 Z" fill="#FED700" stroke="#2E2417" stroke-width="6"/>
+              <path class="paw-viva-path" d="M78.7 170.0 L64.3 178.6 L53.7 195.0 L49.8 211.3 L49.8 224.8 L54.6 244.9 L66.2 266.1 L78.7 278.6 L95.0 287.2 L101.7 289.2 L113.3 289.2 L129.6 281.5 L136.3 274.7 L142.1 264.2 L146.9 244.0 L146.9 235.3 L143.1 216.1 L135.4 198.8 L119.0 179.6 L103.7 170.9 L96.9 169.0 Z" fill="#FED700" stroke="#2E2417" stroke-width="6"/>
+              <path class="paw-viva-path" d="M177.7 62.3 L167.1 65.2 L153.6 75.8 L146.9 85.4 L142.1 96.0 L138.3 117.1 L140.2 144.0 L143.1 155.6 L148.8 168.1 L165.2 189.2 L182.5 198.8 L200.7 199.8 L208.4 197.9 L216.1 193.0 L228.6 179.6 L236.3 161.3 L239.2 146.9 L239.2 130.6 L233.4 105.6 L227.6 93.1 L219.0 80.6 L207.5 70.0 L196.9 64.3 Z" fill="#FED700" stroke="#2E2417" stroke-width="6"/>
+              <path class="paw-viva-path" d="M338.2 60.4 L327.6 60.4 L318.0 63.3 L307.4 69.1 L294.9 80.6 L288.2 89.2 L279.5 106.5 L273.8 128.7 L273.8 154.6 L279.5 174.8 L284.4 183.4 L294.0 194.0 L303.6 199.8 L314.1 202.7 L322.8 202.7 L333.4 199.8 L347.8 191.1 L359.3 179.6 L370.9 159.4 L376.6 141.1 L377.6 108.5 L371.8 88.3 L358.4 70.0 L349.7 64.3 Z" fill="#FED700" stroke="#2E2417" stroke-width="6"/>
+              <path class="paw-viva-path" d="M439.1 170.0 L417.9 170.0 L398.7 179.6 L382.4 196.9 L371.8 218.0 L368.9 231.5 L368.9 251.7 L370.9 261.3 L376.6 272.8 L382.4 279.5 L393.0 286.3 L401.6 289.2 L414.1 289.2 L426.6 285.3 L435.2 280.5 L451.6 265.1 L464.1 243.0 L468.9 222.8 L468.9 209.4 L464.1 192.1 L453.5 177.7 Z" fill="#FED700" stroke="#2E2417" stroke-width="6"/>
+            </svg>
+          </div>
           <h2>Copiloto Alerta Pet</h2>
           <p>A patinha flutuante acompanha você discretamente sobre o Waze, Google Maps e Uber, avisando por áudio quando você passar perto de um animalzinho que precisa de socorro ou reencontro em Cascavel.</p>
           <button type="button" class="btn-bolha-hero" onclick="ativarBolhaFlutuante()">🐾 ATIVAR PATINHA</button>
@@ -4339,33 +4401,35 @@
           <div class="setting-row">
             <div>
               <div class="setting-title">Pets Desaparecidos</div>
-              <div class="setting-sub">Avisa ao entrar na zona de busca (raio 450m)</div>
+              <div class="setting-sub">Avisa ao entrar na zona de busca ativa (raio 450m)</div>
             </div>
             <label class="switch"><input type="checkbox" id="pref-pet" checked onchange="salvarPrefsCopiloto()"><span class="slider"></span></label>
           </div>
           <div class="setting-row">
             <div>
-              <div class="setting-title">Segurança Hiperlocal</div>
-              <div class="setting-sub">Ocorrências de segurança pública na região (raio 250m)</div>
+              <div class="setting-title">Animais Resgatados & Adoção</div>
+              <div class="setting-sub">Feiras de adoção e lares temporários próximos</div>
             </div>
             <label class="switch"><input type="checkbox" id="pref-seg" checked onchange="salvarPrefsCopiloto()"><span class="slider"></span></label>
           </div>
           <div class="setting-row">
             <div>
-              <div class="setting-title">Utilidade Pública</div>
-              <div class="setting-sub">Clima INMET, Sanepar, Copel e vias fechadas</div>
+              <div class="setting-title">Alertas Climáticos de Proteção Animal</div>
+              <div class="setting-sub">Granizo, temporais e frio extremo da Defesa Civil</div>
             </div>
             <label class="switch"><input type="checkbox" id="pref-uti" checked onchange="salvarPrefsCopiloto()"><span class="slider"></span></label>
           </div>
         </div>
       </section>
+      <!-- Ondulação Inferior Orgânica (Conexão Verde com Bottom Nav) -->
+      <div class="bottom-river-wave">
+        <svg viewBox="0 0 500 20" preserveAspectRatio="none">
+          <path d="M 0,14 C 120,22 230,2 350,14 C 420,20 470,6 500,8 L 500,20 L 0,20 Z" fill="#009B3A"/>
+        </svg>
+      </div>
     </main>
 
-    <div class="bottom-river-wave">
-      <svg viewBox="0 0 500 20" preserveAspectRatio="none">
-        <path d="M 0,14 C 120,22 230,2 350,14 C 420,20 470,6 500,8 L 500,20 L 0,20 Z" fill="#009B3A"/>
-      </svg>
-    </div>
+
     <!-- ==================== ESTEIRA FIXA DE PARCEIROS (CONGELADA NO RODAPÉ) ==================== -->
     <div id="esteira-parceiros-docked" class="esteira-parceiros-docked" style="display:none;">
       <div class="esteira-docked-header">
@@ -5249,10 +5313,7 @@
       if (pane) pane.classList.add('active');
       if (nav) nav.classList.add('active');
 
-      const topWave = document.querySelector('.topbar-river-wave');
-      const bottomWave = document.querySelector('.bottom-river-wave');
-      if (topWave) topWave.style.display = (aba === 'inicio' || aba === 'mapa') ? 'none' : 'block';
-      if (bottomWave) bottomWave.style.display = (aba === 'mapa') ? 'none' : 'block';
+      /* Ondas sempre ativas e visíveis */
 
       if (aba === 'mapa') {
         initMapIfNeeded();
@@ -5982,48 +6043,97 @@
       calibrarVelocidadeEsteira(track, 28);
     }
 
+    /* ========================================================
+       ESTEIRA DE PARCEIROS NA HOME — MARCAS OFICIAIS RIGO
+       (Havan, Pedigree, PremieR pet, Zoetis, Uber, iFood)
+       Sem preço, sem produto comercial: prestígio institucional!
+       ======================================================== */
+    const MARCAS_PARCEIRAS_HOME = [
+      {
+        id: 'havan',
+        nome: 'Havan',
+        segmento: 'Mega Loja & Varejo',
+        sub: 'Apoio à Causa Animal em Cascavel',
+        badge: 'PARCEIRA OFICIAL',
+        corFundo: '#002B66',
+        corBadge: '#FFE600',
+        badgeCorTexto: '#000000',
+        svg: '<svg viewBox="0 0 160 44" width="115" height="32"><text x="50%" y="66%" dominant-baseline="middle" text-anchor="middle" fill="#FFFFFF" font-family="Arial Black, Impact, sans-serif" font-weight="900" font-size="26" letter-spacing="3">HAVAN</text></svg>'
+      },
+      {
+        id: 'pedigree',
+        nome: 'Pedigree',
+        segmento: 'Nutrição Animal',
+        sub: 'Alimentando Resgates e Lares',
+        badge: 'NUTRIÇÃO PET',
+        corFundo: '#F59E0B',
+        corBadge: '#C4121A',
+        badgeCorTexto: '#FFFFFF',
+        svg: '<svg viewBox="0 0 160 44" width="125" height="32"><rect x="15" y="4" width="130" height="34" rx="17" fill="#C4121A"/><text x="50%" y="65%" dominant-baseline="middle" text-anchor="middle" fill="#FFFFFF" font-family="Brush Script MT, Georgia, cursive, sans-serif" font-weight="bold" font-size="24">Pedigree</text></svg>'
+      },
+      {
+        id: 'premier',
+        nome: 'PremieR pet',
+        segmento: 'Alimentos Super Premium',
+        sub: 'Qualidade Máxima Cães & Gatos',
+        badge: 'SUPER PREMIUM',
+        corFundo: '#0A192F',
+        corBadge: '#D4AF37',
+        badgeCorTexto: '#000000',
+        svg: '<svg viewBox="0 0 160 44" width="120" height="32"><text x="50%" y="46%" dominant-baseline="middle" text-anchor="middle" fill="#D4AF37" font-family="serif" font-weight="bold" font-size="20" letter-spacing="1">PremieR</text><text x="50%" y="82%" dominant-baseline="middle" text-anchor="middle" fill="#FFFFFF" font-family="sans-serif" font-weight="800" font-size="10" letter-spacing="4">PET</text></svg>'
+      },
+      {
+        id: 'zoetis',
+        nome: 'Zoetis',
+        segmento: 'Saúde Animal',
+        sub: 'Medicamentos & Vacinas Veterinárias',
+        badge: 'SAÚDE VET',
+        corFundo: '#C2410C',
+        corBadge: '#FFFFFF',
+        badgeCorTexto: '#C2410C',
+        svg: '<svg viewBox="0 0 160 44" width="115" height="32"><text x="50%" y="68%" dominant-baseline="middle" text-anchor="middle" fill="#FFFFFF" font-family="Arial, Helvetica, sans-serif" font-weight="900" font-size="28" letter-spacing="-0.5">zoetis</text></svg>'
+      },
+      {
+        id: 'uber',
+        nome: 'Uber',
+        segmento: 'Mobilidade Urbana',
+        sub: 'Motoristas na Ronda de Proteção',
+        badge: 'ALERTA NA RUA',
+        corFundo: '#09090B',
+        corBadge: '#009B3A',
+        badgeCorTexto: '#FFFFFF',
+        svg: '<svg viewBox="0 0 160 44" width="115" height="32"><text x="50%" y="68%" dominant-baseline="middle" text-anchor="middle" fill="#FFFFFF" font-family="sans-serif" font-weight="900" font-size="30" letter-spacing="1">Uber</text></svg>'
+      },
+      {
+        id: 'ifood',
+        nome: 'iFood',
+        segmento: 'Delivery & Conexão',
+        sub: 'Entregadores Atentos aos Animais',
+        badge: 'REDE SOLIDÁRIA',
+        corFundo: '#B91C1C',
+        corBadge: '#FFE600',
+        badgeCorTexto: '#000000',
+        svg: '<svg viewBox="0 0 160 44" width="115" height="32"><text x="46%" y="66%" dominant-baseline="middle" text-anchor="middle" fill="#FFFFFF" font-family="sans-serif" font-weight="900" font-size="28">iFood</text><circle cx="118" cy="18" r="3.5" fill="#FFFFFF"/></svg>'
+      }
+    ];
+
     function renderizarEsteiraParceirosHome() {
       const track = document.getElementById('belt-parceiros-home-track');
       if (!track) return;
 
-      const parceiros = state.parceiros || [];
-      if (!parceiros.length) {
-        track.className = 'belt-track static';
-        track.innerHTML = '<div class="empty-box" style="width:100%;">Carregando parceiros...</div>';
-        return;
-      }
-
-      const MAPA_PILL_PARCEIRO = {
-        'pet_vet': 'VET 24H',
-        'pet_shop': 'PET SHOP',
-        'banho_tosa': 'ESTÉTICA',
-        'auto_center': 'AUTO CENTER',
-        'borracharia': 'BORRACHARIA',
-        'posto': 'POSTO',
-        'moto_mecanica': 'MECÂNICA',
-        'carro_mecanica': 'MECÂNICA',
-        'alimentacao': 'LANCHONETE'
-      };
-
-      const cardsHtml = parceiros.map(p => {
-        const temProd = p.produtos && p.produtos.length > 0;
-        const primeiroProd = temProd ? p.produtos[0] : null;
-        const foto = (primeiroProd && primeiroProd.foto_url)
-          ? primeiroProd.foto_url
-          : (p.logo_url || '/static/brand/logo_rigo_amarela_ruas_pretas_pino_vermelho.png');
-        const pillText = MAPA_PILL_PARCEIRO[p.categoria] || 'PARCEIRO';
-        const tit = primeiroProd ? primeiroProd.titulo : p.nome;
-        const sub = primeiroProd
-          ? `${p.nome} • ${primeiroProd.preco_promocional || primeiroProd.preco || ''}`
-          : (p.bairro ? `Bairro ${p.bairro}` : 'Cascavel');
-
+      const cardsHtml = MARCAS_PARCEIRAS_HOME.map(m => {
         return `
-          <div class="unified-belt-card parceiro-belt-card" onclick="abrirFolderParceiroById('${escapeAttr(p.id)}')">
-            <img class="unified-belt-img" src="${escapeAttr(foto)}" alt="${escapeAttr(p.nome)}" loading="lazy">
-            <span class="unified-belt-pill">${escapeHtml(pillText)}</span>
-            <div class="unified-belt-grad">
-              <div class="unified-belt-title">${escapeHtml(tit)}</div>
-              <div class="unified-belt-sub">${escapeHtml(sub)}</div>
+          <div class="brand-partner-card" style="background:${m.corFundo};" onclick="abrirInfoMarcaParceira('${m.id}')">
+            <div style="display:flex; justify-content:space-between; align-items:center; width:100%;">
+              <span style="background:${m.corBadge}; color:${m.badgeCorTexto}; font-size:8.5px; font-weight:900; padding:2px 7px; border-radius:6px; letter-spacing:0.5px;">${m.badge}</span>
+              <span style="color:rgba(255,255,255,0.7); font-size:10px;">⭐</span>
+            </div>
+            <div style="display:flex; justify-content:center; align-items:center; flex:1; margin:2px 0;">
+              ${m.svg}
+            </div>
+            <div style="width:100%; border-top:1px solid rgba(255,255,255,0.14); padding-top:4px;">
+              <div style="color:#FFFFFF; font-size:10.5px; font-weight:800; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${m.nome} • ${m.segmento}</div>
+              <div style="color:rgba(255,255,255,0.78); font-size:9px; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${m.sub}</div>
             </div>
           </div>
         `;
@@ -6033,7 +6143,13 @@
       while (loopHtml.length < 800) loopHtml += cardsHtml;
       track.className = 'belt-track';
       track.innerHTML = loopHtml + loopHtml;
-      calibrarVelocidadeEsteira(track, 28);
+      calibrarVelocidadeEsteira(track, 30);
+    }
+
+    function abrirInfoMarcaParceira(marcaId) {
+      const m = MARCAS_PARCEIRAS_HOME.find(x => x.id === marcaId);
+      if (!m) return;
+      mostrarToast(`⭐ ${m.nome} é parceira oficial do Alerta Pet Brasil em Cascavel!`);
     }
 
     function alternarPilarPet(pilar) {
