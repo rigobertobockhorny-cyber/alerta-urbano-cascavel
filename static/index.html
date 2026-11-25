@@ -9,11 +9,11 @@
   <meta http-equiv="Expires" content="0">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-title" content="Alerta Urbano">
+  <meta name="apple-mobile-web-app-title" content="Alerta Pet Brasil">
   <link rel="manifest" href="/manifest.json?v=30">
   <link rel="icon" type="image/png" href="/static/logo_bolha_pura.png?v=60">
   <link rel="apple-touch-icon" href="/static/logo_bolha_pura.png?v=60">
-  <title>Alerta Urbano — Cascavel</title>
+  <title>Alerta Pet Brasil — Cascavel</title>
 
   <!-- Notifica imediatamente a WebView Android para destravar a splash nativa -->
   <script>
@@ -4053,8 +4053,8 @@
       </svg>
     </div>
     <div class="splash-river-bottom" style="background:#9E8560;">
-      <div class="splash-tagline" style="color:#EDE8DF; font-weight:900; letter-spacing:0.8px;">REDE DE PROTEÇÃO E RESGATE ANIMAL</div>
-      <div class="splash-subtext" style="color:#E4D5BC; font-weight:600;">Comunidade • Busca Ativa • Comércio Amigo dos Animais</div>
+      <div class="splash-tagline" style="color:#EDE8DF; font-weight:900; letter-spacing:0.8px;">ACOLHENDO E PROTEGENDO QUEM NÃO SABE PEDIR AJUDA</div>
+      <div class="splash-subtext" style="color:#E4D5BC; font-weight:600;">Rede Solidária de Proteção Animal e Reencontro</div>
     </div>
     <script>
       setTimeout(function() {
@@ -4083,7 +4083,7 @@
         <div class="brand-text">
           <div class="brand-name">Alerta Pet Brasil</div>
           <div class="brand-city">
-            <span>Cascavel • Build 33 (v3.10.6)</span>
+            <span>Cascavel • Build 34 (v3.10.7)</span>
           </div>
         </div>
       </div>
@@ -4311,10 +4311,10 @@
       <section class="tab-pane" id="tab-copiloto">
         <div class="hero-copiloto">
           <img src="/static/logo_bolha_pura.png?v=60" class="hero-copiloto-logo" alt="Copiloto">
-          <h2>Copiloto Flutuante</h2>
-          <p>Nossa bolinha flutuante funciona em segundo plano e avisa você por áudio sobre pets desaparecidos, alertas policiais e comunicados de utilidade pública na sua região de Cascavel.</p>
-          <button type="button" class="btn-bolha-hero" onclick="ativarBolhaFlutuante()">ATIVAR BOLINHA FLUTUANTE</button>
-          <button type="button" class="btn-bolha-desativar" onclick="desativarBolhaFlutuante()">DESATIVAR BOLINHA FLUTUANTE</button>
+          <h2>Copiloto Alerta Pet</h2>
+          <p>A patinha flutuante acompanha você discretamente sobre o Waze, Google Maps e Uber, avisando por áudio quando você passar perto de um animalzinho que precisa de socorro ou reencontro em Cascavel.</p>
+          <button type="button" class="btn-bolha-hero" onclick="ativarBolhaFlutuante()">🐾 ATIVAR PATINHA</button>
+          <button type="button" class="btn-bolha-desativar" onclick="desativarBolhaFlutuante()">DESATIVAR PATINHA</button>
         </div>
 
         <div class="section-head" style="margin-top:4px;">
@@ -4583,7 +4583,7 @@
       <button type="button" class="fs-back" onclick="fecharModal('modal-avistamento')" style="background:#EDE8DF !important; color:#000000 !important; border:1px solid rgba(0,0,0,0.18) !important; font-weight:800; border-radius:999px; padding:7px 14px; cursor:pointer;">‹ Voltar</button>
       <div style="text-align:center;">
         <div style="font-size:16px; font-weight:900; color:#000000;" id="av-modal-title">Marcar Onde Vi</div>
-        <div style="font-size:10.5px; font-weight:800; color:#6B655B; letter-spacing:0.5px;">Alerta Urbano Cascavel</div>
+        <div style="font-size:10.5px; font-weight:800; color:#6B655B; letter-spacing:0.5px;">Alerta Pet Brasil • Cascavel</div>
       </div>
       <div style="width:48px;"></div>
     </div>
@@ -4707,7 +4707,7 @@
       <button type="button" class="fs-back profile-back-btn" onclick="fecharModal('modal-perfil')">‹ Voltar</button>
       <div style="text-align:center;">
         <div style="font-size:16px; font-weight:900;" id="perfil-header-title">Minha Conta</div>
-        <div style="font-size:10.5px; font-weight:800; letter-spacing:0.5px;" id="perfil-header-sub">Alerta Urbano Cascavel</div>
+        <div style="font-size:10.5px; font-weight:800; letter-spacing:0.5px;" id="perfil-header-sub">Alerta Pet Brasil • Cascavel</div>
       </div>
       <div style="width:48px;"></div> <!-- Espaçador para equilíbrio visual sem botão redundante -->
     </div>
@@ -4722,6 +4722,22 @@
       <div id="perfil-view-cadastro" style="display:none;">
         <div style="text-align:center; padding:12px 0 16px;">
           <div class="perfil-intro-title">Acesse sua Conta</div>
+          <div class="perfil-intro-sub">
+            Conecte sua conta para publicar animais desaparecidos, registrar adoções e enviar avisos com segurança.
+          </div>
+        </div>
+
+        <div class="perfil-card-box" style="margin-bottom:14px; text-align:center;">
+          <button type="button" class="btn-google-auth" onclick="conectarGoogleAuth()" style="width:100%; display:flex; align-items:center; justify-content:center; gap:10px; background:#ffffff; color:#18181b; border:1.5px solid rgba(0,0,0,0.18); border-radius:12px; padding:12px; font-size:14px; font-weight:700; cursor:pointer; box-shadow:0 2px 6px rgba(0,0,0,0.06);">
+            <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg>
+            <span>Continuar com o Google</span>
+          </button>
+          <div style="display:flex; align-items:center; gap:10px; margin-top:14px;">
+            <div style="flex:1; height:1px; background:rgba(0,0,0,0.12);"></div>
+            <span style="font-size:11.5px; color:#71717A; font-weight:600;">ou cadastre-se com WhatsApp</span>
+            <div style="flex:1; height:1px; background:rgba(0,0,0,0.12);"></div>
+          </div>
+        </div>
           <div class="perfil-intro-sub">
             Conecte sua conta para publicar animais desaparecidos, registrar adoções e enviar denúncias com segurança.
           </div>
@@ -4968,7 +4984,7 @@
       <button type="button" class="fs-back" style="background:#ffffff; color:#000000; font-weight:800; border-radius:12px; padding:6px 14px; border:none; box-shadow:0 2px 6px rgba(0,0,0,0.15); cursor:pointer;" onclick="fecharModal('modal-termos')">‹ Voltar</button>
       <div style="text-align:center;">
         <div style="font-size:16px; font-weight:900; color:#ffffff;">Termos & Diretrizes</div>
-        <div style="font-size:10.5px; font-weight:800; color:rgba(255,255,255,0.85); letter-spacing:0.5px;">ALERTA URBANO CASCAVEL</div>
+        <div style="font-size:10.5px; font-weight:800; color:rgba(255,255,255,0.85); letter-spacing:0.5px;">ALERTA PET BRASIL</div>
       </div>
       <div style="width:58px;"></div>
     </div>
@@ -8672,10 +8688,14 @@ Baixe o aplicativo gratuito Alerta Urbano:
       // Atualiza automaticamente a cada 60s
       setInterval(carregarDados, 60000);
 
-      // Splash Oficial: Exibe a tela de abertura por 2 segundos e faz fade out suave
-      setTimeout(() => {
+      // Splash Oficial: Se estiver no app Android, fecha imediatamente sem delay duplo
+      if (window.AndroidAlerta || /Alerta/i.test(navigator.userAgent)) {
         fecharSplashImediato();
-      }, 2000);
+      } else {
+        setTimeout(() => {
+          fecharSplashImediato();
+        }, 1000);
+      }
     });
   </script>
 
