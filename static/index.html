@@ -7122,7 +7122,7 @@ Baixe o aplicativo gratuito Alerta Urbano:
         if (d != null && d <= 500 && d < menorDist) {
           const cdKey = 'radar_pet_cd_' + pet.id;
           const ultimoAvisoPet = Number(localStorage.getItem(cdKey) || 0);
-          if (agora - ultimoAvisoPet >= 600000) { // 10 min por pet
+          if (agora - ultimoAvisoPet >= 43200000) { // 12 horas por pet específico
             menorDist = d;
             petMaisProximo = { ...pet, distM: Math.round(d) };
           }
@@ -7181,24 +7181,18 @@ Baixe o aplicativo gratuito Alerta Urbano:
       let bgCor = '#FAF5FF'; // Indefinido: Roxo/Lavanda
       let borderCor = '#6D28D9';
       let textCor = '#4C1D95';
-      let badgeBg = '#6D28D9';
-      let badgeTxt = '🐾 ANIMAL DESAPARECIDO';
       let btnBg = '#6D28D9';
 
       if (ehFemea) {
         bgCor = '#FDF2F8'; // Fêmea: Rosa Acolhedor
         borderCor = '#BE185D';
         textCor = '#831843';
-        badgeBg = '#BE185D';
-        badgeTxt = '♀ FÊMEA • DESAPARECIDA';
         btnBg = '#BE185D';
       } else if (ehMacho) {
         bgCor = '#EFF6FF'; // Macho: Azul Acolhedor
-        borderCor = '#0369A1';
+        borderCor = '#0284C7';
         textCor = '#0C4A6E';
-        badgeBg = '#0369A1';
-        badgeTxt = '♂ MACHO • DESAPARECIDO';
-        btnBg = '#0369A1';
+        btnBg = '#0284C7';
       }
 
       let card = document.getElementById('card-radar-topo-web');
@@ -7207,7 +7201,7 @@ Baixe o aplicativo gratuito Alerta Urbano:
         card.id = 'card-radar-topo-web';
         card.style.cssText = `
           position: fixed;
-          top: 14px;
+          top: 6px;
           left: 14px;
           right: 14px;
           max-width: 380px;
@@ -7238,10 +7232,9 @@ Baixe o aplicativo gratuito Alerta Urbano:
       card.innerHTML = `
         <div style="width: 44px; height: 4px; background: ${borderCor}; border-radius: 2px; margin: 0 auto 10px;"></div>
         
-        <!-- Cardzinho dedicado da foto do animal (Grande e emoldurado) -->
+        <!-- Cardzinho dedicado da foto do animal (Grande e emoldurado) - SEM PÍLULA SOBRE A FOTO -->
         <div style="position: relative; width: 100%; height: 185px; background: #18181B; border-radius: 16px; border: 2px solid ${borderCor}; overflow: hidden; margin-bottom: 10px;">
           <img src="${escapeAttr(foto)}" alt="${escapeAttr(tit)}" style="width: 100%; height: 100%; object-fit: cover; display: block;" onerror="this.src='/static/logo_vortice.png'">
-          <span style="position: absolute; top: 10px; left: 10px; background: ${badgeBg}; color: #FFFFFF; font-size: 10.5px; font-weight: 900; padding: 5px 12px; border-radius: 10px; letter-spacing: 0.5px; box-shadow: 0 2px 8px rgba(0,0,0,0.4);">${badgeTxt}</span>
         </div>
 
         <!-- Título e Subtítulo -->
@@ -7252,12 +7245,12 @@ Baixe o aplicativo gratuito Alerta Urbano:
           📍 ${escapeHtml(local)} • ${distTxt}
         </div>
 
-        <!-- Botões de Ação Cívica -->
+        <!-- Botões de Ação Cívica Humanizados -->
         <div style="display: flex; gap: 8px; width: 100%; margin-bottom: 6px;">
-          <button onclick="registrarAvistamentoRapidoWeb(${pet.id})" style="flex: 1; height: 42px; background: ${btnBg}; color: #FFFFFF; font-weight: 900; font-size: 13.5px; border: none; border-radius: 14px; cursor: pointer;">Visto aqui</button>
-          <button onclick="verPetNoMapaWeb(${pet.lat}, ${pet.lng}, ${pet.id})" style="flex: 1; height: 42px; background: #000000; color: #FFFFFF; font-weight: 900; font-size: 13.5px; border: none; border-radius: 14px; cursor: pointer;">Ver no mapa</button>
+          <button onclick="registrarAvistamentoRapidoWeb(${pet.id})" style="flex: 1; height: 42px; background: ${btnBg}; color: #FFFFFF; font-weight: 900; font-size: 13.5px; border: none; border-radius: 14px; cursor: pointer;">🐾 Visto aqui</button>
+          <button onclick="verPetNoMapaWeb(${pet.lat}, ${pet.lng}, ${pet.id})" style="flex: 1; height: 42px; background: #000000; color: #FFFFFF; font-weight: 900; font-size: 13.5px; border: none; border-radius: 14px; cursor: pointer;">📍 Ver no mapa</button>
         </div>
-        <button onclick="fecharCardRadarTopoWeb()" style="width: 100%; height: 38px; background: rgba(0,0,0,0.12); color: ${textCor}; font-weight: 900; font-size: 12.5px; border: 1px solid ${borderCor}; border-radius: 14px; cursor: pointer;">Fechar aviso</button>
+        <button onclick="fecharCardRadarTopoWeb()" style="width: 100%; height: 42px; background: #000000; color: #FFFFFF; font-weight: 900; font-size: 13px; border: none; border-radius: 14px; cursor: pointer;">🤝 Estou ciente e ajudando a procurar</button>
       `;
 
       card.style.display = 'flex';
@@ -7265,7 +7258,7 @@ Baixe o aplicativo gratuito Alerta Urbano:
       clearTimeout(card._timerFechar);
       card._timerFechar = setTimeout(() => {
         fecharCardRadarTopoWeb();
-      }, 5000); // 5 segundos cravados (sincronizado com o áudio rápido)
+      }, 6000); // 6 segundos cravados (sincronizado com o áudio rápido)
     }
 
     function registrarAvistamentoRapidoWeb(petId) {

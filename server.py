@@ -440,6 +440,8 @@ def init_db():
                         eh_adocao = (pet_info.get("tipo_ocorrencia") == "adocao")
                         tipo = "pet_adocao" if eh_adocao else "pet_perdido"
                         status_pet = "adocao" if eh_adocao else "desaparecido"
+                        raw_sexo = (pet_info.get("sexo") or "").lower().strip()
+                        sexo_val = 'femea' if 'f' in raw_sexo else ('macho' if 'm' in raw_sexo else 'indefinido')
                         lat = pos.get("lat") or -24.9555
                         lng = pos.get("lng") or -53.4610
                         rua = pos.get("rua") or "Cascavel"
@@ -450,8 +452,8 @@ def init_db():
                             INSERT INTO alertas (
                                 id, tipo, pilar, cidade, titulo, descricao, rua, bairro, lat, lng,
                                 peso, confirmacoes, ativo, created_at, foto_url, contato, recompensa,
-                                fonte_tipo, fonte_nome, especie, porte, status_pet, autor_nome
-                            ) VALUES (?, ?, 'pet', 'Cascavel', ?, ?, ?, ?, ?, ?, 1, 1, 1, datetime('now', '-' || (? * 2) || ' minutes'), ?, ?, '', 'comunidade_pet', ?, ?, ?, ?, ?)
+                                fonte_tipo, fonte_nome, especie, porte, status_pet, sexo, autor_nome
+                            ) VALUES (?, ?, 'pet', 'Cascavel', ?, ?, ?, ?, ?, ?, 1, 1, 1, datetime('now', '-' || (? * 2) || ' minutes'), ?, ?, '', 'comunidade_pet', ?, ?, ?, ?, ?, ?)
                         """, (
                             5500 + idx_p + 1,
                             tipo,
@@ -468,6 +470,7 @@ def init_db():
                             pet_info.get("categoria", "cachorro"),
                             pet_info.get("porte", "Médio"),
                             status_pet,
+                            sexo_val,
                             tutor_nome
                         ))
             except Exception as e_perfis:
