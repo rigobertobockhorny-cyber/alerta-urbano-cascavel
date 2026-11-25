@@ -1305,6 +1305,7 @@ def listar_alertas():
         WHERE ativo = 1
           AND LOWER(COALESCE(cidade, 'Cascavel')) = LOWER(?)
           AND pilar IN ('pet', 'seguranca', 'utilidade', 'transito')
+          AND NOT (pilar = 'pet' AND (fonte_tipo = 'imprensa' OR foto_url LIKE '%cgn%' OR link_noticia LIKE '%cgn%'))
           {pilar_clause}
           {sigiloso_clause}
           AND (
@@ -1368,6 +1369,9 @@ def criar_alerta():
         return jsonify({
             "error": "Categoria descontinuada na versão 3.0. O Alerta Urbano foca exclusivamente em Pets, Segurança Oficial e Utilidade Pública."
         }), 400
+
+    if pilar == "pet" and (data.get("fonte_tipo") == "imprensa" or "cgn" in (data.get("foto_url") or "").lower()):
+        return jsonify({"error": "Pets de imprensa não são permitidos na plataforma."}), 403
 
     if not eh_robo_autorizado and pilar not in ("pet", "transito"):
         return jsonify({

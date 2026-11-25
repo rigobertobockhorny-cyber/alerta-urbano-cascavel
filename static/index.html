@@ -4938,6 +4938,7 @@
       if (state.mapaFilter === 'pet') {
         const petsParaMarcar = filtrados.filter(p => {
           if (p.pilar !== 'pet') return false;
+          if (p.fonte_tipo === 'imprensa' || (p.foto_url && p.foto_url.includes('cgn')) || (p.link_noticia && p.link_noticia.includes('cgn'))) return false;
           return p.tipo !== 'pet_adocao' && p.status_pet !== 'adocao';
         });
         petsParaMarcar.forEach(p => {
@@ -5302,8 +5303,12 @@
       }
 
       // 3. Esteira Pets Diversificada: Intercala 2 Perdidos, 1 Adoção, variando Cão, Gato e Ave
+      // REGRA DE OURO: O pilar Pet é exclusivo de perfis da comunidade/oficiais. Nunca imprensa/CGN.
       const todosPets = state.alertas.filter(a =>
         a.pilar === 'pet' &&
+        a.fonte_tipo !== 'imprensa' &&
+        !(a.foto_url && a.foto_url.includes('cgn')) &&
+        !(a.link_noticia && a.link_noticia.includes('cgn')) &&
         a.status_pet !== 'avistado' &&
         a.status_pet !== 'encontrado' &&
         a.tipo !== 'pet_avistado' &&
@@ -5641,8 +5646,16 @@
       const pilarAtivo = state.petMainPillar || 'desaparecidos';
       let pets = [];
 
+      // REGRA DE OURO: O pilar Pet é exclusivo dos perfis curados/comunidade. Rejeição total a scrapers/CGN.
+      const basePetsValidos = (state.alertas || []).filter(a =>
+        a.pilar === 'pet' &&
+        a.fonte_tipo !== 'imprensa' &&
+        !(a.foto_url && a.foto_url.includes('cgn')) &&
+        !(a.link_noticia && a.link_noticia.includes('cgn'))
+      );
+
       if (pilarAtivo === 'desaparecidos') {
-        pets = state.alertas.filter(a => a.pilar === 'pet').filter(p => {
+        pets = basePetsValidos.filter(p => {
           if (p.tipo === 'pet_adocao' || p.status_pet === 'adocao') return false;
           if (p.tipo === 'pet_sos_rua' || p.status_pet === 'sos_rua') return false;
           if (p.sigiloso || p.tipo === 'pet_denuncia_maustratos') return false;
@@ -5650,12 +5663,12 @@
           return !av; // Apenas desaparecidos de fato
         });
       } else if (pilarAtivo === 'avistados') {
-        pets = state.alertas.filter(a => a.pilar === 'pet').filter(p => {
+        pets = basePetsValidos.filter(p => {
           const av = p.status_pet === 'avistado' || p.status_pet === 'encontrado' || p.tipo === 'pet_avistado' || p.tipo === 'pet_encontrado';
           return av; // Animais avistados ou encontrados na rua
         });
       } else if (pilarAtivo === 'adocao') {
-        pets = state.alertas.filter(a => a.tipo === 'pet_adocao' || a.status_pet === 'adocao');
+        pets = basePetsValidos.filter(a => a.tipo === 'pet_adocao' || a.status_pet === 'adocao');
       }
 
       // Ordenação: mais recentes no topo
