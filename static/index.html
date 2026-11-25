@@ -3860,6 +3860,169 @@
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
     }
 
+
+    /* ========================================================
+       WIDGET CLIMA 5 DIAS & PÍLULA RIGOROSAMENTE SEM MARGEM (RIGO)
+       ======================================================== */
+    .weather-forecast-5d {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 6px;
+      margin-top: 8px;
+      padding-top: 8px;
+      border-top: 1px solid rgba(255, 255, 255, 0.18);
+      text-align: center;
+    }
+    .w-day-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+    }
+    .w-day-name {
+      font-size: 10px;
+      font-weight: 800;
+      color: #EDE8DF;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .w-day-icon {
+      font-size: 19px;
+      line-height: 1.2;
+      margin: 1px 0;
+    }
+    .w-day-temp {
+      font-size: 10px;
+      font-weight: 800;
+      color: #FFFFFF;
+      white-space: nowrap;
+    }
+
+    /* PÍLULA CLIMÁTICA: ZERO MARGEM, ZERO BORDA (SOLUÇÃO DEFINITIVA RIGO) */
+    .alert-ticker,
+    .alert-ticker.branco,
+    .alert-ticker.amarelo,
+    .alert-ticker.laranja,
+    .alert-ticker.vermelho,
+    [data-theme="dark"] .alert-ticker,
+    [data-theme="dark"] .alert-ticker.branco,
+    [data-theme="dark"] .alert-ticker.amarelo,
+    [data-theme="dark"] .alert-ticker.laranja,
+    [data-theme="dark"] .alert-ticker.vermelho {
+      border: none !important;
+      outline: none !important;
+      box-shadow: none !important;
+      margin: 0 !important;
+      border-radius: 999px !important;
+    }
+
+    /* ESTEIRA PETS: 2 POR TELA, QUADRADINHO, AMPLO COM RESPIRO */
+    .unified-belt-card.pet-belt-card,
+    #belt-pets-track .unified-belt-card {
+      width: 174px !important;
+      height: 168px !important;
+      border-radius: 16px !important;
+      border: 1.5px solid rgba(110, 90, 60, 0.25) !important;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12) !important;
+    }
+    #belt-pets-track .unified-belt-card .unified-belt-title {
+      font-size: 12px !important;
+      font-weight: 900 !important;
+      line-height: 1.2 !important;
+    }
+    #belt-pets-track .unified-belt-card .unified-belt-sub {
+      font-size: 10px !important;
+      font-weight: 700 !important;
+      color: #EDE8DF !important;
+    }
+    #belt-pets-track .unified-belt-card .unified-belt-pill {
+      font-size: 9.5px !important;
+      font-weight: 900 !important;
+      padding: 3px 8px !important;
+    }
+
+    /* ESTEIRA PARCEIROS: MAIS LARGUINHO (RETANGULAR, 2 POR TELA) */
+    .unified-belt-card.parceiro-belt-card,
+    #belt-parceiros-home-track .unified-belt-card {
+      width: 180px !important;
+      height: 116px !important;
+      border-radius: 14px !important;
+      border: 1.5px solid rgba(110, 90, 60, 0.25) !important;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12) !important;
+    }
+    #belt-parceiros-home-track .unified-belt-card .unified-belt-title {
+      font-size: 11.5px !important;
+      font-weight: 900 !important;
+      line-height: 1.2 !important;
+    }
+    #belt-parceiros-home-track .unified-belt-card .unified-belt-sub {
+      font-size: 9.5px !important;
+      font-weight: 700 !important;
+      color: #FED700 !important;
+    }
+
+    /* ========================================================
+       MODAL DE PERFIL — PALETA OFICIAL RIGO
+       FUNDO MARROM (#9E8560) | BLOCOS AREIA (#E4D5BC) | BOTÕES CINZA
+       ======================================================== */
+    #modal-perfil {
+      background: var(--pet-marrom) !important;
+    }
+    #modal-perfil .profile-fs-header {
+      background: var(--pet-verde) !important;
+      color: #FFFFFF !important;
+    }
+    #modal-perfil .profile-back-btn,
+    #modal-perfil #perfil-header-title {
+      color: #FFFFFF !important;
+    }
+    #modal-perfil #perfil-header-sub {
+      color: #EDE8DF !important;
+    }
+    #modal-perfil .perfil-hero,
+    #modal-perfil .perfil-card-box {
+      background: var(--pet-areia) !important;
+      border: 1px solid rgba(110, 90, 60, 0.25) !important;
+      border-radius: 18px !important;
+      color: var(--pet-texto-escuro) !important;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08) !important;
+    }
+    #modal-perfil .perfil-hero-nome,
+    #modal-perfil .perfil-nav-title,
+    #modal-perfil .form-label,
+    #modal-perfil .perfil-intro-title {
+      color: var(--pet-texto-escuro) !important;
+      font-weight: 900 !important;
+    }
+    #modal-perfil .perfil-hero-sub,
+    #modal-perfil .perfil-nav-sub,
+    #modal-perfil .perfil-intro-sub {
+      color: #5A4730 !important;
+    }
+    #modal-perfil .form-input,
+    #modal-perfil .form-select {
+      background: var(--pet-bege) !important;
+      border: 1.5px solid rgba(110, 90, 60, 0.25) !important;
+      color: var(--pet-texto-escuro) !important;
+      border-radius: 12px !important;
+    }
+    /* BOTÕES CINZA NO MODAL PERFIL */
+    #modal-perfil .btn-submit,
+    #modal-perfil .btn-cadastrar-entrar,
+    #modal-perfil .btn-salvar-perfil,
+    #modal-perfil button.btn-cinza,
+    #modal-perfil .fs-body button[type="button"]:not(.fs-back):not(.sheet-close) {
+      background: #71717A !important;
+      color: #FFFFFF !important;
+      border: 1.5px solid #52525B !important;
+      border-radius: 12px !important;
+      font-weight: 800 !important;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
+    }
+    #modal-perfil .perfil-nav-row {
+      border-bottom: 1px solid rgba(110, 90, 60, 0.15) !important;
+    }
+
 </style>
   <script>
     // Registro Imediato da Blindagem Anti-Cold Start (Service Worker)
@@ -3954,22 +4117,25 @@
           <div class="weather-strip-green" id="weather-card">
             <div class="weather-top">
               <div class="weather-temp-wrap">
-                <div class="weather-ico" id="w-ico" style="opacity:0.92;">☁️</div>
+                <div class="weather-ico" id="w-ico" style="opacity:0.95; font-size:32px;">☁️</div>
                 <div>
-                  <div class="weather-temp" id="w-temp">--°</div>
-                  <div class="weather-city-sub">Cascavel • Agora</div>
+                  <div class="weather-temp" id="w-temp" style="font-size:32px; font-weight:900;">--°</div>
+                  <div class="weather-city-sub" id="w-city-sub" style="font-size:11px; font-weight:800; color:#EDE8DF;">Cascavel • Agora</div>
                 </div>
               </div>
-              <div>
-                <div class="weather-cond" id="w-cond">Carregando...</div>
-                <div class="weather-hl" id="w-hl">Máx --° · Mín --°</div>
+              <div style="text-align:right;">
+                <div class="weather-cond" id="w-cond" style="font-size:13px; font-weight:800;">Monitorando...</div>
+                <div class="weather-hl" id="w-hl" style="font-size:11.5px; font-weight:800; color:#FED700; margin-top:2px;">Máx --° · Mín --°</div>
               </div>
             </div>
-            <div class="weather-metrics">
-              <div class="w-metric"><span class="w-metric-lbl">Sens.</span><span class="w-metric-val" id="w-sens">--°</span></div>
-              <div class="w-metric"><span class="w-metric-lbl">Umid.</span><span class="w-metric-val" id="w-umid">--%</span></div>
-              <div class="w-metric"><span class="w-metric-lbl">Vento</span><span class="w-metric-val" id="w-vento">-- km/h</span></div>
-              <div class="w-metric"><span class="w-metric-lbl">Chuva</span><span class="w-metric-val" id="w-chuva">--%</span></div>
+
+            <!-- Grade da Previsão dos Próximos 5 Dias (Inspirado no print do Rigo) -->
+            <div class="weather-forecast-5d" id="weather-forecast-5d">
+              <div class="w-day-col"><span class="w-day-name">QUA.</span><span class="w-day-icon">⛈️</span><span class="w-day-temp">25° / 19°</span></div>
+              <div class="w-day-col"><span class="w-day-name">QUI.</span><span class="w-day-icon">⛈️</span><span class="w-day-temp">26° / 20°</span></div>
+              <div class="w-day-col"><span class="w-day-name">SEX.</span><span class="w-day-icon">⛈️</span><span class="w-day-temp">22° / 18°</span></div>
+              <div class="w-day-col"><span class="w-day-name">SÁB.</span><span class="w-day-icon">🌧️</span><span class="w-day-temp">25° / 19°</span></div>
+              <div class="w-day-col"><span class="w-day-name">DOM.</span><span class="w-day-icon">⛈️</span><span class="w-day-temp">27° / 19°</span></div>
             </div>
           </div>
 
@@ -4012,18 +4178,7 @@
             </div>
           </div>
 
-          <!-- Bloco 2: Esteira Unificada Utilidade Pública & Segurança -->
-          <div class="belt-block">
-            <div class="belt-head">
-              <div class="belt-title uti-title" style="color:#0F172A; font-weight:900; font-size:12px; display:flex; align-items:center; gap:6px;">
-                <svg class="belt-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:15px;height:15px;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                <span>Utilidade Pública & Segurança</span>
-              </div>
-            </div>
-            <div class="belt-viewport">
-              <div class="belt-track" id="belt-util-seg-track"></div>
-            </div>
-          </div>
+
 
           <!-- Bloco 3: Parceiros Oficiais de Cascavel -->
           <div class="belt-block" style="margin-bottom:4px;">
@@ -5563,19 +5718,31 @@
     }
 
     function renderizarDashboard() {
-      // 1. Clima solto (sem bloco)
+      // 1. Clima + Previsão 5 Dias (Inspirado no print do Rigo)
       const c = state.clima;
       if (c) {
-        document.getElementById('w-ico').textContent = c.icone || '⛅';
-        document.getElementById('w-temp').textContent = `${c.temp}°`;
-        document.getElementById('w-cond').textContent = c.condicao || 'Monitorando';
-        document.getElementById('w-hl').textContent = `Máx ${c.max}° · Mín ${c.min}°`;
-        document.getElementById('w-sens').textContent = `${c.sensacao}°`;
-        document.getElementById('w-umid').textContent = `${c.umidade}%`;
-        document.getElementById('w-vento').textContent = `${c.vento} km/h`;
-        document.getElementById('w-chuva').textContent = `${c.chance_chuva}%`;
+        const icoEl = document.getElementById('w-ico');
+        const tempEl = document.getElementById('w-temp');
+        const condEl = document.getElementById('w-cond');
+        const hlEl = document.getElementById('w-hl');
+        if (icoEl) icoEl.textContent = c.icone || '⛅';
+        if (tempEl) tempEl.textContent = `${c.temp}°`;
+        if (condEl) condEl.textContent = c.condicao || 'Monitorando';
+        if (hlEl) hlEl.textContent = `Máx ${c.max}° · Mín ${c.min}°`;
 
-        // 2. Pílula / Esteira Climática Resumida (sem emoji, sem texto cortado "...")
+        // Grade 5 Dias
+        const box5d = document.getElementById('weather-forecast-5d');
+        if (box5d && c.previsao_5_dias && c.previsao_5_dias.length > 0) {
+          box5d.innerHTML = c.previsao_5_dias.map(d => `
+            <div class="w-day-col">
+              <span class="w-day-name">${escapeHtml(d.dia)}</span>
+              <span class="w-day-icon">${d.icone || '⛅'}</span>
+              <span class="w-day-temp">${d.max}° / ${d.min}°</span>
+            </div>
+          `).join('');
+        }
+
+        // 2. Pílula / Esteira Climática Resumida (RIGOROSAMENTE ZERO BORDA)
         const ticker = document.getElementById('alert-ticker');
         const track = document.getElementById('ticker-track');
         const logoBtn = document.querySelector('.logo-bubble-btn');
@@ -5613,20 +5780,16 @@
         }
       }
 
-      // 3. Esteira Pets Diversificada: Intercala 2 Perdidos, 1 Adoção, variando Cão, Gato e Ave
-      // REGRA DE OURO: O pilar Pet é exclusivo de perfis da comunidade/oficiais. Nunca imprensa/CGN.
-      const todosPets = state.alertas.filter(a =>
-        a.pilar === 'pet' &&
-        a.fonte_tipo !== 'imprensa' &&
-        !(a.foto_url && a.foto_url.includes('cgn')) &&
-        !(a.link_noticia && a.link_noticia.includes('cgn')) &&
-        a.status_pet !== 'avistado' &&
-        a.status_pet !== 'encontrado' &&
-        a.tipo !== 'pet_avistado' &&
-        a.tipo !== 'pet_denuncia_maustratos' &&
-        !a.sigiloso &&
-        !((a.titulo || '').toLowerCase().includes('encontrad'))
-      );
+      // REGRA OFICIAL RIGO: Todos os animais de Cascavel (Perdidos, Adoção, Resgatados e Reencontros)
+      const todosPets = (state.alertas || []).filter(a => {
+        if (a.pilar !== 'pet') return false;
+        if (a.fonte_tipo === 'imprensa') return false;
+        if (a.sigiloso || a.tipo === 'pet_denuncia_maustratos') return false;
+        // Filtro regional de Cascavel conforme determinação do Rigo
+        const cid = (a.cidade || '').toLowerCase();
+        if (cid && !cid.includes('cascavel')) return false;
+        return true;
+      });
 
       const perdidos = todosPets.filter(p => p.tipo !== 'pet_adocao' && p.status_pet !== 'adocao');
       const adocoes = todosPets.filter(p => p.tipo === 'pet_adocao' || p.status_pet === 'adocao');
@@ -5673,15 +5836,25 @@
           beltPets.innerHTML = '<div class="empty-box" style="width:100%;">Nenhum pet registrado no momento.</div>';
         } else {
           const cardsHtml = pets.map(p => {
-            const ehAdocao = (p.tipo === 'pet_adocao' || p.status_pet === 'adocao');
-            const badgeText = ehAdocao ? 'Adoção' : 'Perdido';
+            let badgeText = 'Perdido';
+            let badgeStyle = 'background:rgba(220,38,38,0.92); color:#FFFFFF;';
+            if (p.tipo === 'pet_adocao' || p.status_pet === 'adocao') {
+              badgeText = 'Adoção';
+              badgeStyle = 'background:rgba(0,155,58,0.92); color:#FFFFFF;';
+            } else if (p.tipo === 'pet_resgatado' || p.status_pet === 'resgatado') {
+              badgeText = 'Resgatado';
+              badgeStyle = 'background:rgba(37,99,235,0.92); color:#FFFFFF;';
+            } else if (p.tipo === 'pet_reencontro' || p.status_pet === 'reencontro' || p.status_pet === 'encontrado') {
+              badgeText = 'Reencontro';
+              badgeStyle = 'background:rgba(124,58,237,0.92); color:#FFFFFF;';
+            }
             const img = p.foto_url
               ? `<img class="unified-belt-img" src="${escapeAttr(p.foto_url)}" alt="${escapeAttr(p.titulo)}" loading="lazy">`
               : `<div class="unified-belt-img" style="display:flex;align-items:center;justify-content:center;background:#18181B;color:#a8a29e;"><svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor"><circle cx="4.5" cy="5" r="1.6"/><circle cx="7.5" cy="3.5" r="1.6"/><circle cx="10.5" cy="5" r="1.6"/><circle cx="7.5" cy="9.2" r="2.8"/></svg></div>`;
             return `
               <div class="unified-belt-card" onclick="abrirDetalheById(${p.id})">
                 ${img}
-                <span class="unified-belt-pill">${badgeText}</span>
+                <span class="unified-belt-pill" style="${badgeStyle}">${badgeText}</span>
                 <div class="unified-belt-grad">
                   <div class="unified-belt-title">${escapeHtml(p.titulo)}</div>
                   <div class="unified-belt-sub">${escapeHtml(p.bairro || 'Cascavel')}</div>
@@ -5700,7 +5873,7 @@
       // =========================================================================
       // ESTEIRA 2: UTILIDADE PÚBLICA & SEGURANÇA (Unificada - Cards Idênticos)
       // =========================================================================
-      renderizarEsteiraUtilidadeSegurancaHome();
+      // Esteira Utilidade e Seguranca removida conforme pedido do Rigo
 
       // =========================================================================
       // ESTEIRA 3: PARCEIROS OFICIAIS DE CASCAVEL (Cards Idênticos)

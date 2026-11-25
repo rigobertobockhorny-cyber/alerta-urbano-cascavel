@@ -724,16 +724,43 @@ def api_clima():
                 "https://api.open-meteo.com/v1/forecast"
                 "?latitude=-24.9555&longitude=-53.4550"
                 "&current=temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,wind_speed_10m,precipitation"
-                "&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max"
-                "&timezone=America%2FSao_Paulo&forecast_days=1"
+                "&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max"
+                "&timezone=America%2FSao_Paulo&forecast_days=5"
             )
-            req = urllib.request.Request(url, headers={"User-Agent": "AlertaUrbano/3.1"})
+            req = urllib.request.Request(url, headers={"User-Agent": "AlertaPetBrasil/3.1"})
             with urllib.request.urlopen(req, timeout=8) as resp:
                 raw = json.loads(resp.read().decode("utf-8"))
             cur_w = raw.get("current", {})
             day_w = raw.get("daily", {})
             wcode = int(cur_w.get("weather_code", 0))
             cond_txt, cond_ico = WMO_DESC.get(wcode, ("Tempo instável", "⛅"))
+
+            # Previsão 5 dias no formato oficial do Rigo (Dia da Semana, Ícone, Máx/Mín)
+            dias_abrev = ["SEG.", "TER.", "QUA.", "QUI.", "SEX.", "SÁB.", "DOM."]
+            times = day_w.get("time", [])
+            codes = day_w.get("weather_code", [])
+            maxs = day_w.get("temperature_2m_max", [])
+            mins = day_w.get("temperature_2m_min", [])
+
+            p5d = []
+            for i in range(min(5, len(times))):
+                try:
+                    dt = datetime.strptime(times[i], "%Y-%m-%d")
+                    dia_str = dias_abrev[dt.weekday()]
+                except Exception:
+                    dia_str = f"D+{i}"
+                wc = int(codes[i]) if i < len(codes) else 0
+                _, ico = WMO_DESC.get(wc, ("Tempo instável", "⛅"))
+                tmax = round(float(maxs[i])) if i < len(maxs) else 25
+                tmin = round(float(mins[i])) if i < len(mins) else 18
+                p5d.append({
+                    "dia": dia_str,
+                    "data": times[i],
+                    "icone": ico,
+                    "max": tmax,
+                    "min": tmin
+                })
+
             _CLIMA_CACHE["data"] = {
                 "cidade": cidade,
                 "temp": round(float(cur_w.get("temperature_2m", 23))),
@@ -745,15 +772,28 @@ def api_clima():
                 "max": round(float((day_w.get("temperature_2m_max") or [27])[0])),
                 "min": round(float((day_w.get("temperature_2m_min") or [18])[0])),
                 "chance_chuva": int((day_w.get("precipitation_probability_max") or [0])[0]),
+                "previsao_5_dias": p5d,
             }
             _CLIMA_CACHE["ts"] = agora_ts
         except Exception as e:
             print(f"[CLIMA] Falha Open-Meteo: {e}")
             if not _CLIMA_CACHE["data"]:
+                dias_abrev = ["SEG.", "TER.", "QUA.", "QUI.", "SEX.", "SÁB.", "DOM."]
+                hj_idx = datetime.now().weekday()
+                fallback_5d = []
+                for i in range(5):
+                    fallback_5d.append({
+                        "dia": dias_abrev[(hj_idx + i) % 7],
+                        "data": "",
+                        "icone": "⛅",
+                        "max": 25,
+                        "min": 18
+                    })
                 _CLIMA_CACHE["data"] = {
                     "cidade": cidade, "temp": 24, "sensacao": 24, "umidade": 65,
                     "vento": 12, "condicao": "Tempo em monitoramento", "icone": "⛅",
                     "max": 27, "min": 18, "chance_chuva": 20,
+                    "previsao_5_dias": fallback_5d
                 }
 
     # Busca alertas climáticos oficiais de Cascavel (prioridade absoluta: INMET / Simepar / Defesa Civil)
