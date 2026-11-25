@@ -1557,6 +1557,10 @@ def criar_alerta():
             status_pet = "adocao"
         elif tipo == "pet_sos_rua":
             status_pet = "sos_rua"
+        elif tipo == "pet_resgatado":
+            status_pet = "resgatado"
+        elif tipo == "pet_reencontrado":
+            status_pet = "encontrado"
         elif tipo == "pet_denuncia_maustratos":
             status_pet = "maustratos"
         elif tipo == "pet_avistado" or pet_pai_id:

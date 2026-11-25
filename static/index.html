@@ -4074,6 +4074,144 @@
       transform: scale(0.95);
     }
 
+
+    /* ========================================================
+       REGRA PÉTREA RIGO: PADRONIZAÇÃO UNIVERSAL DE BOTÕES
+       SEM SELEÇÃO: BEGE CLARO (#EDE8DF) | TEXTO SUAVE (#5A4730)
+       SELECIONADO (ATIVO): AREIA ESCURO (#BFAF96) | TEXTO ESCURO (#1C1917)
+       ======================================================== */
+    /* 1. MAPA: Pílulas Pets / Parceiros */
+    .map-pill,
+    #tab-mapa .map-pill {
+      background: #EDE8DF !important; /* Bege Claro sem seleção */
+      color: #5A4730 !important;
+      border: 1.5px solid rgba(110, 90, 60, 0.25) !important;
+      font-weight: 700 !important;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.06) !important;
+      transition: all 0.15s ease !important;
+    }
+    .map-pill.active,
+    #tab-mapa .map-pill.active {
+      background: #BFAF96 !important; /* Areia Escuro selecionado */
+      color: #1C1917 !important;
+      font-weight: 900 !important;
+      border: 2px solid #5A4730 !important;
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.12), 0 2px 6px rgba(0,0,0,0.08) !important;
+    }
+
+    /* 2. PETS: Pílulas Desaparecidos, Resgatados, Reencontro, Adoção */
+    .pillar-tab,
+    #pets-main-pills .pillar-tab {
+      background: #EDE8DF !important; /* Bege Claro sem seleção */
+      color: #5A4730 !important;
+      border: 1.5px solid rgba(110, 90, 60, 0.20) !important;
+      border-radius: 10px !important;
+      font-weight: 700 !important;
+      padding: 8px 4px !important;
+      transition: all 0.15s ease !important;
+    }
+    .pillar-tab.active,
+    #pets-main-pills .pillar-tab.active {
+      background: #BFAF96 !important; /* Areia Escuro selecionado */
+      color: #1C1917 !important;
+      font-weight: 900 !important;
+      border: 2px solid #5A4730 !important;
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.12) !important;
+    }
+
+    /* 3. PARCEIROS: Filtros de categorias */
+    .btn-filtro-parceiro {
+      background: #EDE8DF !important; /* Bege Claro sem seleção */
+      color: #5A4730 !important;
+      border: 1.5px solid rgba(110, 90, 60, 0.25) !important;
+      font-weight: 700 !important;
+      border-radius: 999px !important;
+      padding: 7px 15px !important;
+      transition: all 0.15s ease !important;
+    }
+    .btn-filtro-parceiro.active {
+      background: #BFAF96 !important; /* Areia Escuro selecionado */
+      color: #1C1917 !important;
+      font-weight: 900 !important;
+      border: 2px solid #5A4730 !important;
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.12) !important;
+    }
+
+    /* 4. COPILOTO: Botões Ativar e Desativar */
+    #tab-copiloto .btn-bolha-hero {
+      background: #BFAF96 !important; /* Areia Escuro Destaque */
+      color: #1C1917 !important;
+      border: 2px solid #5A4730 !important;
+      font-weight: 900 !important;
+      border-radius: 14px !important;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.10) !important;
+    }
+    #tab-copiloto .btn-bolha-desativar {
+      background: #EDE8DF !important; /* Bege Claro */
+      color: #5A4730 !important;
+      border: 1.5px solid rgba(110, 90, 60, 0.25) !important;
+      font-weight: 800 !important;
+      border-radius: 14px !important;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.06) !important;
+    }
+
+    /* 5. CARDS DE PETS: BEGE CLARO ACOLHEDOR (ADEUS AREIA ESCURA) */
+    .pet-card,
+    #tab-pets .pet-card {
+      background: #EDE8DF !important; /* Bege Claro Acolhedor Oficial Rigo */
+      border: 1.5px solid rgba(110, 90, 60, 0.22) !important;
+      border-radius: 20px !important;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08) !important;
+    }
+    #tab-pets .pet-card .btn-pet-cta-primary,
+    #tab-pets .pet-card .btn-pet-cta-secondary {
+      background: #EDE8DF !important;
+      color: #2E2417 !important;
+      border: 1.5px solid rgba(110, 90, 60, 0.28) !important;
+      font-weight: 800 !important;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05) !important;
+    }
+
+    /* 6. BOTÕES DE REGISTRO SUPERIOR DA ABA PET */
+    .btn-reg-pet {
+      background: #EDE8DF !important;
+      border: 1.5px solid rgba(110, 90, 60, 0.25) !important;
+      color: #2E2417 !important;
+      border-radius: 12px !important;
+      padding: 11px 8px !important;
+      font-size: 11.5px !important;
+      font-weight: 800 !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      gap: 7px !important;
+      cursor: pointer !important;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.06) !important;
+      transition: all 0.15s ease !important;
+    }
+    .btn-reg-pet:active {
+      transform: scale(0.97) !important;
+      background: #BFAF96 !important;
+    }
+
+    /* 7. FERRAMENTAS DO MAPA (SAT E GPS): ABAIXADOS EM DIREÇÃO AO MENU */
+    .map-tools {
+      position: absolute !important;
+      right: 12px !important;
+      bottom: 28px !important; /* Abaixado conforme pedido do Rigo */
+      z-index: 460 !important;
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 8px !important;
+    }
+    .map-tool-btn {
+      background: #EDE8DF !important;
+      color: #2E2417 !important;
+      border: 1.5px solid rgba(110, 90, 60, 0.25) !important;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.15) !important;
+      font-weight: 800 !important;
+    }
+
 </style>
   <script>
     // Registro Imediato da Blindagem Anti-Cold Start (Service Worker)
@@ -4142,7 +4280,7 @@
         <div class="brand-text">
           <div class="brand-name">Alerta Pet Brasil</div>
           <div class="brand-city">
-            <span>Cascavel • Build 37 (v3.11.0)</span>
+            <span>Cascavel • Build 38 (v3.11.1)</span>
           </div>
         </div>
       </div>
@@ -4304,23 +4442,27 @@
             <div style="font-size:10.5px; color:#6E5A3C; font-weight:700;">Toque para registrar</div>
           </div>
           <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
-            <button type="button" onclick="abrirModalPet('pet_perdido')" style="background:#EDE8DF; border:1.5px solid rgba(110,90,60,0.25); color:#2E2417; border-radius:12px; padding:11px 8px; font-size:11.5px; font-weight:800; display:flex; align-items:center; justify-content:center; gap:7px; cursor:pointer; box-shadow:0 2px 6px rgba(0,0,0,0.06);">
+            <button type="button" onclick="abrirModalPet('pet_perdido')" class="btn-reg-pet">
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2E2417" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-              <span>Perdi meu Pet</span>
+              <span>Pet Desaparecido</span>
             </button>
-            <button type="button" onclick="abrirModalPet('pet_avistado')" style="background:#EDE8DF; border:1.5px solid rgba(110,90,60,0.25); color:#2E2417; border-radius:12px; padding:11px 8px; font-size:11.5px; font-weight:800; display:flex; align-items:center; justify-content:center; gap:7px; cursor:pointer; box-shadow:0 2px 6px rgba(0,0,0,0.06);">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2E2417" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
-              <span>Vi um Animal</span>
+            <button type="button" onclick="abrirModalPet('pet_resgatado')" class="btn-reg-pet">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2E2417" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path></svg>
+              <span>Animal Resgatado</span>
             </button>
-            <button type="button" onclick="abrirModalPet('pet_adocao')" style="background:#EDE8DF; border:1.5px solid rgba(110,90,60,0.25); color:#2E2417; border-radius:12px; padding:11px 8px; font-size:11.5px; font-weight:800; display:flex; align-items:center; justify-content:center; gap:7px; cursor:pointer; box-shadow:0 2px 6px rgba(0,0,0,0.06);">
+            <button type="button" onclick="abrirModalPet('pet_reencontrado')" class="btn-reg-pet">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2E2417" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+              <span>Registrar Reencontro</span>
+            </button>
+            <button type="button" onclick="abrirModalPet('pet_adocao')" class="btn-reg-pet">
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2E2417" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
               <span>Para Adoção</span>
             </button>
-            <button type="button" onclick="abrirModalPet('pet_denuncia_maustratos')" style="background:#EDE8DF; border:1.5px solid rgba(110,90,60,0.25); color:#2E2417; border-radius:12px; padding:11px 8px; font-size:11.5px; font-weight:800; display:flex; align-items:center; justify-content:center; gap:7px; cursor:pointer; box-shadow:0 2px 6px rgba(0,0,0,0.06);">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2E2417" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-              <span>SOS / Sigiloso</span>
-            </button>
           </div>
+          <button type="button" onclick="abrirModalPet('pet_denuncia_maustratos')" class="btn-reg-pet" style="width:100%; margin-top:8px;">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2E2417" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+            <span>SOS / Denúncia Sigilosa</span>
+          </button>
         </div>
 
         <!-- 4 PILARES OFICIAIS: DESAPARECIDOS | RESGATADOS | REENCONTRO | PARA ADOÇÃO -->
@@ -4390,7 +4532,7 @@
           </div>
           <h2>Copiloto Alerta Pet</h2>
           <p>A patinha flutuante acompanha você discretamente sobre o Waze, Google Maps e Uber, avisando por áudio quando você passar perto de um animalzinho que precisa de socorro ou reencontro em Cascavel.</p>
-          <button type="button" class="btn-bolha-hero" onclick="ativarBolhaFlutuante()">🐾 ATIVAR PATINHA</button>
+          <button type="button" class="btn-bolha-hero" onclick="ativarBolhaFlutuante()">ATIVAR PATINHA</button>
           <button type="button" class="btn-bolha-desativar" onclick="desativarBolhaFlutuante()">DESATIVAR PATINHA</button>
         </div>
 
@@ -6468,7 +6610,8 @@
                   <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
                   <span>Marcar Onde Vi</span>
                 </button>
-                <button type="button" class="btn-pet-cta-secondary" onclick="abrirModalAvistamento(${p.id}, false, 'resgatado')">
+                <button type="button" class="btn-pet-cta-primary" onclick="abrirModalAvistamento(${p.id}, false, 'resgatado')">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path></svg>
                   <span>Pet Resgatado</span>
                 </button>
               </div>
@@ -7081,6 +7224,16 @@ Baixe o aplicativo gratuito Alerta Urbano:
         titInp.placeholder = 'Ex.: Cão acorrentado sem água e exposto ao sol';
         descInp.placeholder = 'Relate com detalhes os fatos, endereço exato com número e situação do animal...';
         btn.textContent = 'Registrar Denúncia Sigilosa & Gerar Dossiê';
+      } else if (modo === 'pet_resgatado') {
+        if (modalTitle) modalTitle.textContent = 'Registrar Animal Resgatado';
+        titInp.placeholder = 'Ex.: Cãozinho resgatado no Bairro Cancelli';
+        descInp.placeholder = 'Conte onde e como foi resgatado, onde está abrigado (lar temporário/clínica) e se procura o tutor ou novo lar...';
+        btn.textContent = 'Publicar Animal Resgatado';
+      } else if (modo === 'pet_reencontrado') {
+        if (modalTitle) modalTitle.textContent = 'Registrar Reencontro / Final Feliz';
+        titInp.placeholder = 'Ex.: Thor reencontrou sua família!';
+        descInp.placeholder = 'Conte como foi o reencontro com a família e agradeça aos munícipes que ajudaram nas buscas...';
+        btn.textContent = 'Celebrar e Publicar Reencontro';
       } else if (modo === 'pet_sos_rua') {
         if (modalTitle) modalTitle.textContent = 'Alerta de Animal em Risco na Via';
         titInp.placeholder = 'Ex.: Cão atropelado / filhotes abandonados na via';
