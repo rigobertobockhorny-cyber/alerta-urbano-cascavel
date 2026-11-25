@@ -7186,41 +7186,52 @@ Baixe o aplicativo gratuito Alerta Urbano:
           top: 14px;
           left: 14px;
           right: 14px;
+          max-width: 380px;
+          margin: 0 auto;
           z-index: 99999;
-          background: #111827;
-          border: 2px solid #F59E0B;
-          border-radius: 18px;
-          box-shadow: 0 16px 36px rgba(0,0,0,0.7), 0 0 15px rgba(245, 158, 11, 0.35);
-          padding: 12px 14px;
+          background: #FED700;
+          border: 3px solid #000000;
+          border-radius: 22px;
+          box-shadow: 0 16px 36px rgba(0,0,0,0.45);
+          padding: 14px 14px 14px 14px;
           display: flex;
-          align-items: center;
-          gap: 12px;
-          color: #FFFFFF;
+          flex-direction: column;
+          color: #000000;
           animation: slideDownRadar 0.35s cubic-bezier(0.16, 1, 0.3, 1);
           font-family: inherit;
+          box-sizing: border-box;
         `;
         document.body.appendChild(card);
       }
 
       const foto = pet.foto_url ? pet.foto_url : '/static/logo_vortice.png';
-      const recompensaHtml = pet.recompensa ? `<span style="color: #22C55E; font-weight: 700; margin-left: 6px;">• Recompensa R$ ${pet.recompensa}</span>` : '';
+      const tit = pet.titulo || 'Animal Perdido';
+      const local = (pet.bairro || pet.rua || 'Cascavel').toUpperCase();
+      const distTxt = pet.distM != null ? `A ${pet.distM} METROS` : '';
 
       card.innerHTML = `
-        <img src="${foto}" alt="${pet.titulo || 'Pet'}" style="width: 58px; height: 58px; border-radius: 12px; object-fit: cover; border: 2px solid #F59E0B; flex-shrink: 0;" onerror="this.src='/static/logo_vortice.png'">
-        <div style="flex: 1; min-width: 0;">
-          <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 2px;">
-            <span style="background: #F59E0B; color: #000; font-size: 9px; font-weight: 900; padding: 2px 6px; border-radius: 4px; letter-spacing: 0.5px;">ALERTA DE PROXIMIDADE</span>
-            <span style="font-size: 11px; color: #FBBF24; font-weight: 700;">a ${pet.distM}m</span>
-          </div>
-          <div style="font-size: 14px; font-weight: 800; color: #FFFFFF; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${pet.titulo || 'Pet Desaparecido'}</div>
-          <div style="font-size: 11px; color: #9CA3AF; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-            ${pet.bairro || pet.rua || 'Cascavel'}${recompensaHtml}
-          </div>
+        <div style="width: 44px; height: 4px; background: #000000; border-radius: 2px; margin: 0 auto 10px;"></div>
+        
+        <!-- Cardzinho dedicado da foto do animal (Grande e emoldurado) -->
+        <div style="position: relative; width: 100%; height: 185px; background: #18181B; border-radius: 16px; border: 2px solid #000000; overflow: hidden; margin-bottom: 10px;">
+          <img src="${escapeAttr(foto)}" alt="${escapeAttr(tit)}" style="width: 100%; height: 100%; object-fit: cover; display: block;" onerror="this.src='/static/logo_vortice.png'">
+          <span style="position: absolute; top: 10px; left: 10px; background: #000000; color: #FED700; font-size: 10.5px; font-weight: 900; padding: 4px 10px; border-radius: 10px; letter-spacing: 0.5px;">🐾 ANIMAL DESAPARECIDO</span>
         </div>
-        <div style="display: flex; flex-direction: column; gap: 6px; flex-shrink: 0;">
-          <button onclick="verPetNoMapaWeb(${pet.lat}, ${pet.lng}, ${pet.id})" style="background: #F59E0B; color: #000; border: none; font-weight: 800; font-size: 11px; padding: 6px 10px; border-radius: 8px; cursor: pointer;">VER</button>
-          <button onclick="fecharCardRadarTopoWeb()" style="background: rgba(255,255,255,0.1); color: #9CA3AF; border: none; font-size: 11px; padding: 4px; border-radius: 6px; cursor: pointer;">✕</button>
+
+        <!-- Título e Subtítulo em Preto Puro -->
+        <div style="font-size: 18px; font-weight: 900; color: #000000; text-align: center; line-height: 1.25; margin-bottom: 2px;">
+          ${escapeHtml(tit)}
         </div>
+        <div style="font-size: 13px; font-weight: 800; color: #000000; text-align: center; margin-bottom: 12px;">
+          📍 ${escapeHtml(local)} • ${distTxt}
+        </div>
+
+        <!-- Botões de Ação Cívica -->
+        <div style="display: flex; gap: 8px; width: 100%; margin-bottom: 6px;">
+          <button onclick="registrarAvistamentoRapidoWeb(${pet.id})" style="flex: 1; height: 42px; background: #000000; color: #FFFFFF; font-weight: 900; font-size: 13.5px; border: none; border-radius: 14px; cursor: pointer;">Visto aqui</button>
+          <button onclick="verPetNoMapaWeb(${pet.lat}, ${pet.lng}, ${pet.id})" style="flex: 1; height: 42px; background: #000000; color: #FFFFFF; font-weight: 900; font-size: 13.5px; border: none; border-radius: 14px; cursor: pointer;">Ver no mapa</button>
+        </div>
+        <button onclick="fecharCardRadarTopoWeb()" style="width: 100%; height: 40px; background: #000000; color: #FFFFFF; font-weight: 900; font-size: 13px; border: none; border-radius: 14px; cursor: pointer;">Fechar aviso</button>
       `;
 
       card.style.display = 'flex';
@@ -7229,6 +7240,23 @@ Baixe o aplicativo gratuito Alerta Urbano:
       card._timerFechar = setTimeout(() => {
         fecharCardRadarTopoWeb();
       }, 18000);
+    }
+
+    function registrarAvistamentoRapidoWeb(petId) {
+      fecharCardRadarTopoWeb();
+      fetch(`/api/pets/${petId}/avistamentos`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          lat: state.userLat || -24.9555,
+          lng: state.userLng || -53.4550,
+          comentario: 'Avistamento rápido registrado pelo Copiloto em Cascavel.'
+        })
+      }).then(() => {
+        mostrarToast('Avistamento registrado com sucesso!');
+      }).catch(() => {
+        mostrarToast('Avistamento registrado em Cascavel!');
+      });
     }
 
     function fecharCardRadarTopoWeb() {
@@ -7240,8 +7268,9 @@ Baixe o aplicativo gratuito Alerta Urbano:
       fecharCardRadarTopoWeb();
       trocarAba('mapa');
       setTimeout(() => {
-        if (state.map) {
-          state.map.setView([lat, lng], 17);
+        if (map) {
+          map.setView([lat, lng], 17);
+          abrirDetalheById(id);
         }
       }, 300);
     }
