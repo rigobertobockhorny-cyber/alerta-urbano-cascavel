@@ -1511,12 +1511,6 @@ def criar_alerta():
         severidade, consentimento, castrado, vacinado, faixa_etaria,
         sexo, sigiloso, orgao_destino, agora,
     ))
-        tipo, pilar, cidade, titulo, descricao, rua, bairro, float(lat), float(lng),
-        foto_url, contato, recompensa, link_noticia, autor_token,
-        fonte_tipo, fonte_nome, especie, porte, status_pet, pet_pai_id,
-        severidade, consentimento, castrado, vacinado, faixa_etaria,
-        sexo, sigiloso, orgao_destino, agora,
-    ))
     novo_id = cur.lastrowid
     conn.commit()
     conn.close()
