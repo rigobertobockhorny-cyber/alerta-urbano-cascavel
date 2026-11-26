@@ -5246,11 +5246,11 @@
       <!-- Card da Conta Selecionada -->
       <div style="background:#F9FAFB; border:1.5px solid #E5E7EB; border-radius:14px; padding:12px 14px; margin-bottom:14px; display:flex; align-items:center; gap:12px;">
         <div style="width:42px; height:42px; border-radius:50%; background:#4285F4; color:#FFFFFF; display:flex; align-items:center; justify-content:center; font-size:17px; font-weight:900; flex-shrink:0; box-shadow:0 2px 6px rgba(66,133,244,0.3);">
-          <span id="google-auth-avatar-letter">T</span>
+          <span id="google-auth-avatar-letter">G</span>
         </div>
         <div style="flex:1; min-width:0;">
-          <input type="text" id="google-auth-nome-input" value="Tutor Pet" placeholder="Seu nome" style="width:100%; font-size:13.5px; font-weight:800; color:#1F2937; border:none; background:transparent; padding:2px 0; outline:none;" oninput="atualizarBtnGoogleConfirm()">
-          <input type="email" id="google-auth-email-input" value="usuario.pet@gmail.com" placeholder="seuemail@gmail.com" style="width:100%; font-size:11.5px; color:#6B7280; font-weight:600; border:none; background:transparent; padding:0; outline:none;">
+          <input type="text" id="google-auth-nome-input" value="" placeholder="Seu nome completo" style="width:100%; font-size:13.5px; font-weight:800; color:#1F2937; border:none; background:transparent; padding:2px 0; outline:none;" oninput="atualizarBtnGoogleConfirm()">
+          <input type="email" id="google-auth-email-input" value="" placeholder="seu.email@gmail.com" style="width:100%; font-size:11.5px; color:#6B7280; font-weight:600; border:none; background:transparent; padding:0; outline:none;" oninput="atualizarBtnGoogleConfirm()">
         </div>
         <div style="color:#009B3A; font-size:18px;">✓</div>
       </div>
@@ -9450,25 +9450,93 @@ ${downloadUrl}`;
     }
 
     function conectarGoogleAuth() {
+      // 1. Prioridade Nativa: Se rodando no APK Android, aciona o Seletor Oficial do Sistema
+      if (window.AndroidAlerta && typeof window.AndroidAlerta.iniciarGoogleSignInNativo === 'function') {
+        try {
+          window.AndroidAlerta.iniciarGoogleSignInNativo();
+          return;
+        } catch (eBridge) {
+          console.warn('Erro ao disparar Google Sign-In Nativo:', eBridge);
+        }
+      }
+
+      // 2. Fallback Web: Se rodando no navegador externo, abre o modal Google One-Tap
+      abrirModalGoogleAuthWeb();
+    }
+
+    function abrirModalGoogleAuthWeb() {
       const modal = document.getElementById('modal-google-auth');
       const nomeInput = document.getElementById('google-auth-nome-input');
       const emailInput = document.getElementById('google-auth-email-input');
       const avatarLetter = document.getElementById('google-auth-avatar-letter');
       const btnConfirm = document.getElementById('btn-google-auth-confirm');
 
-      let currentName = (state.perfil && state.perfil.nome) ? state.perfil.nome : 'Tutor Pet';
-      let currentEmail = (state.perfil && state.perfil.email) ? state.perfil.email : 'usuario.pet@gmail.com';
+      let currentName = '';
+      let currentEmail = '';
+      if (state.perfil) {
+        if (state.perfil.nome && state.perfil.nome !== 'Tutor Pet') currentName = state.perfil.nome;
+        if (state.perfil.email && state.perfil.email !== 'usuario.pet@gmail.com') currentEmail = state.perfil.email;
+      }
 
       if (nomeInput) nomeInput.value = currentName;
       if (emailInput) emailInput.value = currentEmail;
-      if (avatarLetter) avatarLetter.textContent = (currentName.charAt(0) || 'T').toUpperCase();
-      if (btnConfirm) btnConfirm.innerHTML = `<span>Continuar como ${currentName.split(' ')[0]}</span>`;
+      if (avatarLetter) avatarLetter.textContent = currentName ? currentName.charAt(0).toUpperCase() : 'G';
+      if (btnConfirm) {
+        btnConfirm.innerHTML = currentName
+          ? `<span>Continuar como ${currentName.split(' ')[0]}</span>`
+          : `<span>Conectar com o Google</span>`;
+      }
 
       if (modal) {
         modal.style.display = 'flex';
         modal.classList.add('open');
       }
     }
+
+    // Receptor Oficial de Contas Google do Android
+    window.receberContaGoogleNativa = function(email, nome) {
+      if (!email) return;
+      console.log('[Google Auth Nativo] Conta recebida do Android:', email, nome);
+
+      let p = state.perfil || {};
+      const nomeFinal = (p.nome && p.nome !== 'Tutor Pet') ? p.nome : (nome || email.split('@')[0]);
+
+      state.perfil = {
+        ...p,
+        nome: nomeFinal,
+        email: email,
+        cadastrado: true,
+        auth_provider: 'google'
+      };
+
+      try { localStorage.setItem('au_perfil', JSON.stringify(state.perfil)); } catch(e) {}
+
+      try {
+        fetch('/api/perfil', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            autor_token: state.autorToken,
+            nome: nomeFinal,
+            email: email,
+            auth_provider: 'google'
+          })
+        }).catch(() => {});
+      } catch (_) {}
+
+      fecharGoogleAuth();
+      mostrarToast(`🐾 Conta Google conectada: ${email}`);
+      abrirPerfil(false);
+    };
+
+    window.falhaGoogleSignInNativo = function(err) {
+      console.warn('Falha no seletor nativo Google, abrindo modal web:', err);
+      abrirModalGoogleAuthWeb();
+    };
+
+    window.cancelouGoogleSignInNativo = function() {
+      console.log('Seleção de conta Google cancelada pelo usuário no Android.');
+    };
 
     function fecharGoogleAuth() {
       const modal = document.getElementById('modal-google-auth');
@@ -9482,25 +9550,30 @@ ${downloadUrl}`;
       const nomeInput = document.getElementById('google-auth-nome-input');
       const avatarLetter = document.getElementById('google-auth-avatar-letter');
       const btnConfirm = document.getElementById('btn-google-auth-confirm');
-      const val = (nomeInput?.value || 'Tutor Pet').trim();
-      const first = val.split(' ')[0] || 'Tutor';
-      if (avatarLetter) avatarLetter.textContent = (val.charAt(0) || 'T').toUpperCase();
-      if (btnConfirm) btnConfirm.innerHTML = `<span>Continuar como ${first}</span>`;
+      const val = (nomeInput?.value || '').trim();
+      const first = val ? val.split(' ')[0] : 'Google';
+      if (avatarLetter) avatarLetter.textContent = val ? val.charAt(0).toUpperCase() : 'G';
+      if (btnConfirm) btnConfirm.innerHTML = val ? `<span>Continuar como ${first}</span>` : `<span>Conectar com o Google</span>`;
     }
 
     function confirmarGoogleLoginOficial() {
       const nomeInput = document.getElementById('google-auth-nome-input');
       const emailInput = document.getElementById('google-auth-email-input');
-      const nome = (nomeInput?.value || 'Tutor Pet').trim();
-      const email = (emailInput?.value || 'usuario.pet@gmail.com').trim();
+      const nome = (nomeInput?.value || '').trim();
+      const email = (emailInput?.value || '').trim();
 
-      if (!nome) {
-        mostrarToast('Por favor, informe seu nome.');
+      if (!email || !email.includes('@')) {
+        mostrarToast('Por favor, digite seu e-mail do Google.');
+        if (emailInput) emailInput.focus();
         return;
       }
 
+      let p = state.perfil || {};
+      const nomeFinal = nome || email.split('@')[0];
+
       state.perfil = {
-        nome: nome,
+        ...p,
+        nome: nomeFinal,
         email: email,
         whatsapp: (state.perfil && state.perfil.whatsapp) ? state.perfil.whatsapp : '',
         bairro: (state.perfil && state.perfil.bairro) ? state.perfil.bairro : '',
@@ -9519,15 +9592,15 @@ ${downloadUrl}`;
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             autor_token: state.autorToken,
-            nome,
-            email,
+            nome: nomeFinal,
+            email: email,
             auth_provider: 'google'
           })
         }).catch(() => {});
       } catch (_) {}
 
       fecharGoogleAuth();
-      mostrarToast(`Bem-vindo(a), ${nome}! Conta Google conectada.`);
+      mostrarToast(`Bem-vindo(a), ${nomeFinal}! Conta Google conectada.`);
       abrirPerfil(false);
     }
 
