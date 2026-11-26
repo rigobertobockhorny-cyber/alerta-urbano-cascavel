@@ -1254,7 +1254,7 @@ def listar_protetores():
         SELECT id, autor_token, nome, whatsapp, bairro, cidade, foto_url, tipo_perfil, bio, instagram, chave_pix, total_resgates, verificado
         FROM usuarios
         WHERE tipo_perfil IN ('protetor', 'ong')
-        ORDER BY verificado DESC, total_resgates DESC, id ASC
+        ORDER BY verificado DESC, id ASC
     """)
     protetores = [dict(row) for row in cur.fetchall()]
     
