@@ -4009,26 +4009,18 @@
     /* NOVA FAIXA DE APOIO INSTITUCIONAL NA BASE */
     .home-apoio-strip {
       flex-shrink: 0;
-      background: #009B3A;
+      background: #E4D5BC !important; /* Areia/Bege Encorpado destacado do verde do menu */
       position: relative;
       margin-top: auto;
-      padding-bottom: 6px;
+      padding: 6px 12px 6px;
       z-index: 10;
+      border-top: 1.5px solid rgba(110, 90, 60, 0.18);
     }
     .apoio-wave-top {
-      width: 100%;
-      height: 14px;
-      line-height: 0;
-      margin-top: -13px;
-      display: block;
-    }
-    .apoio-wave-top svg {
-      width: 100%;
-      height: 100%;
-      display: block;
+      display: none !important;
     }
     .apoio-body {
-      padding: 0 10px 6px;
+      padding: 0;
       display: flex;
       flex-direction: column;
       gap: 3px;
@@ -4036,13 +4028,13 @@
     .apoio-header {
       display: flex;
       align-items: center;
-      gap: 5px;
-      font-size: 10px;
-      font-weight: 800;
-      color: #FED700;
+      justify-content: space-between;
+      font-size: 10.5px;
+      font-weight: 900;
+      color: #2E2417;
       text-transform: none;
       letter-spacing: 0.2px;
-      padding-left: 4px;
+      padding: 0 2px 2px;
     }
     .apoio-viewport {
       width: 100%;
@@ -4052,27 +4044,43 @@
     .apoio-track {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 16px;
       width: max-content;
-      padding: 3px 0 5px;
-      animation: apoioSlide 35s linear infinite;
+      padding: 2px 0 3px;
+      animation: apoioSlide 26s linear infinite;
     }
     .apoio-viewport:hover .apoio-track,
     .apoio-viewport:active .apoio-track {
       animation-play-state: paused;
     }
-    @keyframes apoioSlide {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
-    }
-    .apoio-logo-chip {
-      height: 28px;
-      background: #FFFFFF;
-      border-radius: 8px;
-      padding: 3px 9px;
-      display: flex;
+    .apoio-text-item {
+      font-size: 11px;
+      font-weight: 800;
+      color: #2E2417;
+      white-space: nowrap;
+      display: inline-flex;
       align-items: center;
-      gap: 6px;
+      gap: 4px;
+    }
+    .apoio-text-item.highlight {
+      color: #009B3A;
+    }
+    .apoio-sep {
+      color: #9E8560;
+      font-weight: 900;
+      font-size: 12px;
+    }
+    .campaign-box-rect {
+      margin: 2px 0 6px;
+      padding: 9px 12px;
+      background: #E4D5BC;
+      border: 1.5px solid rgba(110, 90, 60, 0.22);
+      border-radius: 4px; /* Retângulo Reto solicitado pelo Rigo */
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+      text-align: center;
+      box-sizing: border-box;
+      width: 100%;
+    }
       box-shadow: 0 1px 4px rgba(0,0,0,0.15);
       flex-shrink: 0;
       font-size: 10px;
@@ -4626,8 +4634,19 @@
           </svg>
         </div>
 
-        <!-- Área Central Areia Oficial (#EDE8DF): Duas Esteiras Principais com Muito Respiro -->
-        <div class="home-belts-container" style="flex:1; display:flex; flex-direction:column; justify-content:space-around; padding:4px 12px 6px; gap:8px; overflow:hidden; background:#EDE8DF !important;">
+        <!-- Área Central Areia Oficial (#EDE8DF): Campanhas + Duas Esteiras Principais -->
+        <div class="home-belts-container" style="flex:1; display:flex; flex-direction:column; justify-content:space-between; padding:4px 12px 6px; gap:8px; overflow:hidden; background:#EDE8DF !important;">
+          
+          <!-- Bloco Oficial: Campanhas Educativas & Adoção Consciente (Retângulo Reto Rigo) -->
+          <div class="campaign-box-rect">
+            <div style="font-size:9.5px; font-weight:900; letter-spacing:0.6px; color:#6E5A3C; text-transform:uppercase; margin-bottom:3px; display:flex; align-items:center; justify-content:center; gap:5px;">
+              <span>📢 CAMPANHA ALERTA PET</span>
+            </div>
+            <div id="home-campaign-text" style="font-size:12.5px; font-weight:800; color:#2E2417; line-height:1.35; min-height:34px; display:flex; align-items:center; justify-content:center; transition:opacity 0.45s ease;">
+              Tem um animal de raça? Dê amor em dobro: adote também um cãozinho de rua.
+            </div>
+          </div>
+
           <!-- Bloco 1: Quem ama, cuida e procura junto -->
           <div class="belt-block belt-block-pets" style="margin-top:0;">
             <div class="belt-head" style="display:flex; align-items:center; justify-content:space-between; margin-bottom:4px;">
@@ -4686,7 +4705,7 @@
             </div>
           </div>
 
-          <!-- Bloco 2: Rede de guardiões & protetores (sem Cascavel) -->
+          <!-- Bloco 2: Comunidade de Protetores -->
           <div class="belt-block belt-block-protetores" style="margin-top:2px;">
             <div class="belt-head" style="display:flex; align-items:center; justify-content:space-between; margin-bottom:4px;">
               <div class="belt-title protetor-title" style="color:#2E2417; font-weight:900; font-size:12.5px; display:flex; align-items:center; gap:6px;">
@@ -4694,7 +4713,7 @@
                   <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
                   <path d="M9 12l2 2 4-4"/>
                 </svg>
-                <span>Rede de guardiões & protetores</span>
+                <span>Comunidade de Protetores</span>
               </div>
             </div>
             <div class="belt-viewport">
@@ -4762,48 +4781,33 @@
           </div>
         </div>
 
-        <!-- Nova Faixa de Apoio Institucional na Base com Ondulação Orgânica Integrada -->
+        <!-- Faixa de Apoio na Base (Diferenciada em Areia Encorpada com texto contínuo fluindo sem pílulas) -->
         <div class="home-apoio-strip">
-          <div class="apoio-wave-top">
-            <svg viewBox="0 0 500 16" preserveAspectRatio="none">
-              <path d="M 0,16 C 120,4 240,16 360,6 C 430,0 470,12 500,8 L 500,16 Z" fill="#009B3A"/>
-            </svg>
-          </div>
           <div class="apoio-body">
             <div class="apoio-header">
-              <svg viewBox="0 0 24 24" fill="#FED700" width="11" height="11"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-              <span>Apoio institucional</span>
+              <div style="display:flex; align-items:center; gap:5px;">
+                <svg viewBox="0 0 24 24" fill="#FED700" width="12" height="12"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                <span>Apoie esta causa</span>
+              </div>
+              <span style="font-size:9.5px; font-weight:800; color:#009B3A; cursor:pointer;" onclick="abrirModalSejaParceiro()">Seja um apoiador ›</span>
             </div>
             <div class="apoio-viewport">
               <div class="apoio-track" id="belt-apoio-track">
-                <div class="apoio-logo-chip" onclick="mostrarToast('⭐ Município de Cascavel: Apoio institucional ao Alerta Pet Brasil.')">
-                  <span style="font-size:12px;">🏛️</span>
-                  <span>Município de Cascavel</span>
-                </div>
-                <div class="apoio-logo-chip" onclick="mostrarToast('⭐ CRMV-PR: Conselho Regional de Medicina Veterinária.')">
-                  <span style="font-size:12px;">🩺</span>
-                  <span>CRMV-PR</span>
-                </div>
-                <div class="apoio-logo-chip" onclick="mostrarToast('⭐ Defesa & Bem-Estar Animal.')">
-                  <span style="font-size:12px;">🛡️</span>
-                  <span>Defesa Animal</span>
-                </div>
-                <div class="apoio-logo-chip" onclick="mostrarToast('⭐ Havan: Parceira Oficial Alerta Pet Brasil.')">
-                  <span style="font-size:12px;">⭐</span>
-                  <span style="color:#002B66; font-weight:900;">HAVAN</span>
-                </div>
-                <div class="apoio-logo-chip" onclick="mostrarToast('⭐ PremieR pet: Nutrição de alta qualidade.')">
-                  <span style="font-size:12px;">🐾</span>
-                  <span style="color:#C41230; font-weight:900;">PremieR pet</span>
-                </div>
-                <div class="apoio-logo-chip" onclick="mostrarToast('⭐ Pedigree: Apoio ao resgate e adoção.')">
-                  <span style="font-size:12px;">🐶</span>
-                  <span style="color:#F37021; font-weight:900;">Pedigree</span>
-                </div>
-                <div class="apoio-logo-chip" onclick="mostrarToast('⭐ Zoetis: Saúde animal.')">
-                  <span style="font-size:12px;">💉</span>
-                  <span style="color:#0072CE; font-weight:900;">Zoetis</span>
-                </div>
+                <span class="apoio-text-item">🐾 Apoie-nos</span>
+                <span class="apoio-sep">•</span>
+                <span class="apoio-text-item highlight">🐾 Apoie esta causa</span>
+                <span class="apoio-sep">•</span>
+                <span class="apoio-text-item">🐾 Empresas Amigas dos Animais</span>
+                <span class="apoio-sep">•</span>
+                <span class="apoio-text-item highlight">🐾 Apoie-nos</span>
+                <span class="apoio-sep">•</span>
+                <span class="apoio-text-item">🐾 Seja um Mantenedor</span>
+                <span class="apoio-sep">•</span>
+                <span class="apoio-text-item highlight">🐾 Apoie esta causa</span>
+                <span class="apoio-sep">•</span>
+                <span class="apoio-text-item">🐾 Apoie-nos</span>
+                <span class="apoio-sep">•</span>
+                <span class="apoio-text-item highlight">🐾 Empresas Amigas dos Animais</span>
               </div>
             </div>
           </div>
@@ -6936,6 +6940,7 @@
     }
 
     function renderizarDashboard() {
+      iniciarRotacaoCampanhas();
       // 1. Clima + Previsão 5 Dias (Inspirado no print do Rigo)
       const c = state.clima;
       if (c) {
@@ -7324,6 +7329,32 @@
 
     function renderizarEsteiraParceirosHome() {
       renderizarEsteiraApoioHome();
+    }
+
+    // =========================================================================
+    // CAMPANHAS EDUCATIVAS & ADOÇÃO CONSCIENTE (DIRETRIZ RIGO)
+    // =========================================================================
+    const CAMPANHAS_HOME = [
+      "Tem um animal de raça? Dê amor em dobro: adote também um cãozinho de rua.",
+      "Adote um melhor amigo para o seu filho de quatro patas.",
+      "Compre se quiser, mas dê uma chance e salve um cachorrinho sem lar.",
+      "Quem ama, cuida e procura junto: a maior rede de proteção animal.",
+      "Castração e vacinação em dia: o maior ato de amor pelo seu companheiro."
+    ];
+    let _campanhaIdxAtual = 0;
+
+    function iniciarRotacaoCampanhas() {
+      const el = document.getElementById('home-campaign-text');
+      if (!el || el._timerAtivo) return;
+      el._timerAtivo = true;
+      setInterval(() => {
+        el.style.opacity = '0';
+        setTimeout(() => {
+          _campanhaIdxAtual = (_campanhaIdxAtual + 1) % CAMPANHAS_HOME.length;
+          el.textContent = CAMPANHAS_HOME[_campanhaIdxAtual];
+          el.style.opacity = '1';
+        }, 450);
+      }, 6500);
     }
 
     function abrirInfoMarcaParceira(marcaId) {
@@ -11212,6 +11243,7 @@ ${downloadUrl} 🐾`;
       carregarDados();
       tentarReconectarGPS(false);
       iniciarCicloQuatroMovimentosPatinha();
+      iniciarRotacaoCampanhas();
 
       // Estado inicial da navegação
       document.body.classList.add('tab-inicio');
