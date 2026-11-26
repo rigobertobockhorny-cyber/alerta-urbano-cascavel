@@ -10084,14 +10084,148 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
       }, 4000);
     }
 
+    // =========================================================================
+    // PROTOCOLO SUPREMO DE SINCRONIZAÇÃO ATÔMICA ÁUDIO <-> CARD (v3.13.0)
+    // REGRA SUPREMA RIGO:
+    // 1. O card NUNCA abre sem o áudio (só abre no instante exato da voz falar)
+    // 2. O áudio NUNCA toca sem o card aparecer
+    // 3. O card dura EXATAMENTE o tempo da locução (+400ms de respiro) e fecha
+    // 4. Se o usuário fechar o card manualmente, o som é cortado imediatamente
+    // =========================================================================
+    let _sessaoAlertaAtiva = null;
+    let _timerAlertaFallback = null;
+
+    function abrirCardSincronizadoComAudio(pet, ehFemea, ehMacho, duracaoEstimadaMs) {
+      if (!_sessaoAlertaAtiva || _sessaoAlertaAtiva.cardAberto) return;
+      _sessaoAlertaAtiva.cardAberto = true;
+
+      // Renderiza o card visual
+      mostrarCardAlertaTopoWeb(pet, ehFemea, ehMacho);
+
+      // Animação imediata da Patinha no topo
+      try {
+        const btnPaw = document.getElementById('btnLogoHeaderPatinha') || document.querySelector('.logo-bubble-btn');
+        if (btnPaw) {
+          btnPaw.classList.remove('anim-idle', 'anim-wave', 'anim-knead');
+          btnPaw.classList.add('anim-alert');
+          btnPaw.classList.add('paw-clicked');
+          setTimeout(() => { if (btnPaw) btnPaw.classList.remove('paw-clicked'); }, 1500);
+        }
+      } catch (_) {}
+
+      // Fallback máximo de segurança do card
+      const tempoMaximo = Math.max(duracaoEstimadaMs || 5500, 4500) + 1200;
+      clearTimeout(_sessaoAlertaAtiva.timerSeguranca);
+      _sessaoAlertaAtiva.timerSeguranca = setTimeout(() => {
+        fecharCardRadarTopoWeb(false);
+      }, tempoMaximo);
+    }
+
+    function fecharCardSincronizadoComAudio() {
+      if (!_sessaoAlertaAtiva) return;
+      fecharCardRadarTopoWeb(false);
+    }
+
+    // Callbacks bidirecionais invocados pela ponte Android MainActivity.kt
+    window.onAlertaAudioIniciou = function(petId, duracaoMs) {
+      if (_sessaoAlertaAtiva && (!_sessaoAlertaAtiva.pet.id || String(_sessaoAlertaAtiva.pet.id) === String(petId) || !petId)) {
+        clearTimeout(_timerAlertaFallback);
+        abrirCardSincronizadoComAudio(_sessaoAlertaAtiva.pet, _sessaoAlertaAtiva.ehFemea, _sessaoAlertaAtiva.ehMacho, duracaoMs);
+      }
+    };
+
+    window.onAlertaAudioTerminou = function(petId) {
+      setTimeout(() => {
+        fecharCardSincronizadoComAudio();
+      }, 400); // 400ms de respiro após última sílaba
+    };
+
+    window.onAlertaAudioFalhou = function(petId) {
+      if (_sessaoAlertaAtiva && !_sessaoAlertaAtiva.cardAberto) {
+        executarVozWebSincronizada(_sessaoAlertaAtiva);
+      }
+    };
+
+    function executarVozWebSincronizada(sessao) {
+      if (!sessao || sessao.cardAberto) return;
+
+      try {
+        if (!ttsAudioPlayer) ttsAudioPlayer = new Audio();
+        ttsAudioPlayer.pause();
+        ttsAudioPlayer.currentTime = 0;
+
+        // O card SÓ ABRE quando o elemento de áudio começar a reproduzir som!
+        ttsAudioPlayer.onplaying = function() {
+          const dur = (ttsAudioPlayer.duration && !isNaN(ttsAudioPlayer.duration)) ? ttsAudioPlayer.duration * 1000 : 5000;
+          abrirCardSincronizadoComAudio(sessao.pet, sessao.ehFemea, sessao.ehMacho, dur);
+        };
+
+        // O card FECHA 400ms após o fim do áudio
+        ttsAudioPlayer.onended = function() {
+          setTimeout(() => {
+            fecharCardSincronizadoComAudio();
+          }, 400);
+        };
+
+        // Se houver erro de carregamento do MP3, tenta SpeechSynthesis sincronizado
+        ttsAudioPlayer.onerror = function() {
+          tocarSpeechSynthesisSincronizado(sessao);
+        };
+
+        ttsAudioPlayer.src = sessao.audioUrl;
+        const playPromise = ttsAudioPlayer.play();
+        if (playPromise !== undefined) {
+          playPromise.catch(err => {
+            console.warn('HTML5 Audio autoplay bloqueado, acionando síntese neural sincronizada:', err);
+            tocarSpeechSynthesisSincronizado(sessao);
+          });
+        }
+      } catch (err) {
+        tocarSpeechSynthesisSincronizado(sessao);
+      }
+    }
+
+    function tocarSpeechSynthesisSincronizado(sessao) {
+      if (!sessao || sessao.cardAberto) return;
+      try {
+        if ('speechSynthesis' in window) {
+          window.speechSynthesis.cancel();
+          const u = new SpeechSynthesisUtterance(sessao.fraseFalada);
+          u.lang = 'pt-BR';
+          u.rate = 1.05;
+          u.pitch = 1.0;
+
+          u.onstart = function() {
+            abrirCardSincronizadoComAudio(sessao.pet, sessao.ehFemea, sessao.ehMacho, 5000);
+          };
+          u.onend = function() {
+            setTimeout(() => {
+              fecharCardSincronizadoComAudio();
+            }, 400);
+          };
+          u.onerror = function() {
+            abrirCardSincronizadoComAudio(sessao.pet, sessao.ehFemea, sessao.ehMacho, 5000);
+            setTimeout(() => fecharCardSincronizadoComAudio(), 5000);
+          };
+
+          window.speechSynthesis.speak(u);
+          return;
+        }
+      } catch (_) {}
+
+      // Fallback silencioso seguro caso tudo falhe
+      abrirCardSincronizadoComAudio(sessao.pet, sessao.ehFemea, sessao.ehMacho, 5000);
+      setTimeout(() => fecharCardSincronizadoComAudio(), 5500);
+    }
+
     function dispararAlertaRadarWeb(pet) {
-      tocarVinhetaExclusiva();
+      // 1. Limpa qualquer sessão e card anteriores
+      fecharCardRadarTopoWeb(true);
 
       const rawInfo = ((pet.sexo || '') + ' ' + (pet.titulo || '') + ' ' + (pet.descricao || '') + ' ' + (pet.especie || '')).toLowerCase();
       const ehFemea = rawInfo.includes('fem') || rawInfo.includes('gata') || rawInfo.includes('cadela');
       const ehMacho = !ehFemea && (rawInfo.includes('mach') || rawInfo.includes('gato') || rawInfo.includes('cachorro') || rawInfo.includes('cão') || rawInfo.includes('cao'));
 
-      // Mapeamento Oficial Supremo (Natalia e Guido) com suporte a Cão, Gato, Ave, Coelho e Outros Animais
       let tipoAnimal = 'cao';
       if (pet.id === 5514 || rawInfo.includes('gato') || rawInfo.includes('gata') || rawInfo.includes('felino') || rawInfo.includes('tico')) {
         tipoAnimal = 'gato';
@@ -10113,63 +10247,40 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
 
       const audioUrl = `/static/vozes_frases_oficiais/${audioFile}?v=20261126`;
 
-      // Disparo de Áudio de Alta Fidelidade com Sincronia Estrita Card-Áudio
-      try {
-        if (!ttsAudioPlayer) ttsAudioPlayer = new Audio();
-        ttsAudioPlayer.pause();
-        ttsAudioPlayer.currentTime = 0;
-        ttsAudioPlayer.src = audioUrl;
+      let fraseFalada = `Atenção! Protetor Alerta Pet, ${tipoAnimal} desaparecido nesta região. Olhos atentos na pista!`;
+      if (tipoAnimal === 'gato') fraseFalada = `Atenção! Protetor Alerta Pet, gato desaparecido nesta região. Olhos atentos na pista!`;
+      if (tipoAnimal === 'cao') fraseFalada = `Atenção! Protetor Alerta Pet, cão desaparecido nesta região. Olhos atentos na pista!`;
 
-        // O Card fica na tela exatamente durante a locução da voz
-        ttsAudioPlayer.onended = function() {
-          setTimeout(() => {
-            fecharCardRadarTopoWeb(false);
-          }, 350);
-        };
+      _sessaoAlertaAtiva = {
+        pet,
+        ehFemea,
+        ehMacho,
+        audioUrl,
+        fraseFalada,
+        cardAberto: false,
+        timerSeguranca: null
+      };
 
-        // 1. Tenta áudio nativo Android se a bridge estiver disponível
-        let fraseFalada = `Atenção! Protetor Alerta Pet, ${tipoAnimal} desaparecido nesta região. Olhos atentos na pista!`;
-        if (tipoAnimal === 'gato') fraseFalada = `Atenção! Protetor Alerta Pet, gato desaparecido nesta região. Olhos atentos na pista!`;
-        if (tipoAnimal === 'cao') fraseFalada = `Atenção! Protetor Alerta Pet, cão desaparecido nesta região. Olhos atentos na pista!`;
+      tocarVinhetaExclusiva();
 
-        if (window.AndroidAlerta && typeof window.AndroidAlerta.tocarAlertaNativo === 'function') {
-          try {
-            window.AndroidAlerta.tocarAlertaNativo(audioUrl, fraseFalada, pet.titulo || '');
-          } catch (eBridge) {
-            console.warn('Bridge tocarAlertaNativo:', eBridge);
-          }
-        }
-
-        // 2. Tenta reproduzir pelo elemento HTML5 Audio
-        ttsAudioPlayer.play().catch(e => {
-          console.warn('Radar audio play bloqueado, acionando síntese neural de voz:', e);
-          try {
-            if ('speechSynthesis' in window) {
-              const u = new SpeechSynthesisUtterance(fraseFalada);
-              u.lang = 'pt-BR';
-              u.rate = 1.05;
-              u.pitch = 1.0;
-              window.speechSynthesis.speak(u);
+      // Prioridade 1: App Nativo Android via Bridge
+      if (window.AndroidAlerta && typeof window.AndroidAlerta.tocarAlertaNativo === 'function') {
+        try {
+          window.AndroidAlerta.tocarAlertaNativo(audioUrl, fraseFalada, pet.titulo || '', String(pet.id));
+          clearTimeout(_timerAlertaFallback);
+          _timerAlertaFallback = setTimeout(() => {
+            if (_sessaoAlertaAtiva && !_sessaoAlertaAtiva.cardAberto) {
+              executarVozWebSincronizada(_sessaoAlertaAtiva);
             }
-          } catch (_) {}
-          setTimeout(() => { fecharCardRadarTopoWeb(false); }, 6500);
-        });
-      } catch (_) {
-        setTimeout(() => { fecharCardRadarTopoWeb(false); }, 6500);
+          }, 2200);
+          return;
+        } catch (eBridge) {
+          console.warn('Bridge tocarAlertaNativo falhou, fallback para web:', eBridge);
+        }
       }
 
-      // Animação imediata da Patinha no topo
-      try {
-        const btnPaw = document.getElementById('btnLogoHeaderPatinha') || document.querySelector('.logo-bubble-btn');
-        if (btnPaw) {
-          btnPaw.classList.remove('anim-idle', 'anim-wave', 'anim-knead');
-          btnPaw.classList.add('anim-alert');
-          btnPaw.classList.add('paw-clicked');
-          setTimeout(() => { if (btnPaw) btnPaw.classList.remove('paw-clicked'); }, 1500);
-        }
-      } catch (_) {}
-
-      mostrarCardAlertaTopoWeb(pet, ehFemea, ehMacho);
+      // Prioridade 2: Web Audio / PWA
+      executarVozWebSincronizada(_sessaoAlertaAtiva);
     }
 
     let ttsAudioPlayer = null;
@@ -10317,26 +10428,8 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
 
       card.style.display = 'flex';
 
-      // REGRA OFICIAL RIGO: O Card abre no 'Atenção' e fecha NO EXATO FIM DA FALA ("Olhos atentos")!
-      clearTimeout(card._timerFechar);
-      if (ttsAudioPlayer) {
-        ttsAudioPlayer.onended = () => {
-          // 400ms de respiro para a última sílaba respirar e fecha naturalmente
-          card._timerFechar = setTimeout(() => {
-            fecharCardRadarTopoWeb(false);
-          }, 400);
-        };
-        ttsAudioPlayer.onerror = () => {
-          card._timerFechar = setTimeout(() => {
-            fecharCardRadarTopoWeb(false);
-          }, 6000);
-        };
-      }
-
-      // Fallback de segurança generoso de 12 segundos (NUNCA corta o áudio no meio!)
-      card._timerFechar = setTimeout(() => {
-        fecharCardRadarTopoWeb(false);
-      }, 12000);
+      // Ciclo de vida estritamente gerenciado por _sessaoAlertaAtiva e callbacks do áudio
+      card._timerFechar = null;
     }
 
     function registrarAvistamentoRapidoWeb(petId) {
@@ -10360,12 +10453,27 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
       const card = document.getElementById('card-radar-topo-web');
       if (card) {
         card.style.display = 'none';
-        clearTimeout(card._timerFechar);
+        if (card._timerFechar) clearTimeout(card._timerFechar);
       }
       const backdrop = document.getElementById('backdrop-radar-topo-web');
       if (backdrop) backdrop.style.display = 'none';
-      if (forcarPararAudio && ttsAudioPlayer) {
-        try { ttsAudioPlayer.pause(); ttsAudioPlayer.currentTime = 0; } catch(_) {}
+
+      clearTimeout(_timerAlertaFallback);
+      if (_sessaoAlertaAtiva) {
+        if (_sessaoAlertaAtiva.timerSeguranca) clearTimeout(_sessaoAlertaAtiva.timerSeguranca);
+        _sessaoAlertaAtiva = null;
+      }
+
+      if (forcarPararAudio) {
+        if (ttsAudioPlayer) {
+          try { ttsAudioPlayer.pause(); ttsAudioPlayer.currentTime = 0; } catch(_) {}
+        }
+        if ('speechSynthesis' in window) {
+          try { window.speechSynthesis.cancel(); } catch(_) {}
+        }
+        if (window.AndroidAlerta && typeof window.AndroidAlerta.pararAudioNativo === 'function') {
+          try { window.AndroidAlerta.pararAudioNativo(); } catch(_) {}
+        }
       }
     }
 
