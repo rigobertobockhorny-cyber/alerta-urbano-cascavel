@@ -561,6 +561,14 @@ def mesa_operacional():
     return resp
 
 
+@app.route("/audios-validacao")
+@app.route("/validar-audios")
+def rota_validar_audios():
+    resp = make_response(send_from_directory("static", "validador_audios.html"))
+    resp.headers["Cache-Control"] = "no-cache, no-store, must-revalidate, max-age=0"
+    return resp
+
+
 @app.route("/manifest.json")
 def manifest():
     return send_from_directory("static", "manifest.json", mimetype="application/manifest+json")
@@ -643,14 +651,14 @@ def api_falar():
         if os.path.exists(oficial_path) and os.path.getsize(oficial_path) > 0:
             return send_file(oficial_path, mimetype="audio/mpeg")
 
-    # Fallback dinâmico com as vozes internacionais Ava (Feminina) e Giuseppe (Masculina)
+    # Vozes oficiais de estúdio em Português Brasileiro puro (sem sotaque estrangeiro)
     if voz_param == "masculina":
-        voice_id = "it-IT-GiuseppeMultilingualNeural"
-        voice_rate = "-4%"
+        voice_id = "pt-BR-AntonioNeural"
+        voice_rate = "-2%"
         voice_pitch = "0Hz"
     else:
-        voice_id = "en-US-AvaMultilingualNeural"
-        voice_rate = "-4%"
+        voice_id = "pt-BR-FranciscaNeural"
+        voice_rate = "-2%"
         voice_pitch = "0Hz"
 
     cache_key = f"{voice_id}:{voice_rate}:{voice_pitch}:{texto_lower}"

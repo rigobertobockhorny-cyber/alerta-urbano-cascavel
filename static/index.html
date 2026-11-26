@@ -4673,11 +4673,11 @@
       </section>
 
       <!-- ABA 4: COPILOTO (BOLINHA FLUTUANTE) -->
-      <section class="tab-pane" id="tab-copiloto" style="padding-bottom:100px;">
-        <!-- Card 1: Hero Copiloto Compacto -->
-        <div class="hero-copiloto" style="padding:12px 14px 10px; margin-bottom:8px; border-radius:16px;">
-          <div class="hero-copiloto-paw-wrap" style="width:38px; height:38px; margin:0 auto 4px; display:flex; align-items:center; justify-content:center; background:transparent;">
-            <svg viewBox="0 0 512 512" style="width:100%; height:100%; overflow:visible; filter:drop-shadow(0 2px 4px rgba(0,0,0,0.2));">
+      <section class="tab-pane" id="tab-copiloto" style="padding:14px 16px 110px; box-sizing:border-box; max-width:520px; margin:0 auto; width:100%;">
+        <!-- Card 1: Hero Copiloto -->
+        <div class="hero-copiloto" style="padding:22px 18px 20px; margin-bottom:14px; border-radius:22px; background:#E4D5BC; box-shadow:0 4px 14px rgba(0,0,0,0.08); text-align:center;">
+          <div class="hero-copiloto-paw-wrap" style="width:62px; height:62px; margin:0 auto 10px; display:flex; align-items:center; justify-content:center; background:transparent;">
+            <svg viewBox="0 0 512 512" style="width:100%; height:100%; overflow:visible; filter:drop-shadow(0 3px 6px rgba(0,0,0,0.22));">
               <path class="paw-viva-path" d="M115.2 359.3 L109.4 379.5 L110.4 409.3 L117.1 425.6 L124.8 436.2 L137.3 447.7 L144.0 450.6 L198.8 450.6 L217.1 444.9 L244.9 439.1 L270.9 440.1 L309.3 450.6 L365.1 450.6 L378.5 442.9 L389.1 432.4 L397.8 417.9 L401.6 402.6 L401.6 382.4 L399.7 371.8 L393.0 353.6 L386.2 342.0 L371.8 323.8 L348.7 301.7 L341.1 292.0 L305.5 238.2 L288.2 223.8 L274.7 218.0 L264.2 216.1 L244.0 216.1 L235.3 218.0 L223.8 223.8 L214.2 231.5 L199.8 247.8 L162.3 300.7 L138.3 323.8 L129.6 334.3 Z" fill="#FED700" stroke="#2E2417" stroke-width="6"/>
               <path class="paw-viva-path" d="M78.7 170.0 L64.3 178.6 L53.7 195.0 L49.8 211.3 L49.8 224.8 L54.6 244.9 L66.2 266.1 L78.7 278.6 L95.0 287.2 L101.7 289.2 L113.3 289.2 L129.6 281.5 L136.3 274.7 L142.1 264.2 L146.9 244.0 L146.9 235.3 L143.1 216.1 L135.4 198.8 L119.0 179.6 L103.7 170.9 L96.9 169.0 Z" fill="#FED700" stroke="#2E2417" stroke-width="6"/>
               <path class="paw-viva-path" d="M177.7 62.3 L167.1 65.2 L153.6 75.8 L146.9 85.4 L142.1 96.0 L138.3 117.1 L140.2 144.0 L143.1 155.6 L148.8 168.1 L165.2 189.2 L182.5 198.8 L200.7 199.8 L208.4 197.9 L216.1 193.0 L228.6 179.6 L236.3 161.3 L239.2 146.9 L239.2 130.6 L233.4 105.6 L227.6 93.1 L219.0 80.6 L207.5 70.0 L196.9 64.3 Z" fill="#FED700" stroke="#2E2417" stroke-width="6"/>
@@ -4685,55 +4685,67 @@
               <path class="paw-viva-path" d="M439.1 170.0 L417.9 170.0 L398.7 179.6 L382.4 196.9 L371.8 218.0 L368.9 231.5 L368.9 251.7 L370.9 261.3 L376.6 272.8 L382.4 279.5 L393.0 286.3 L401.6 289.2 L414.1 289.2 L426.6 285.3 L435.2 280.5 L451.6 265.1 L464.1 243.0 L468.9 222.8 L468.9 209.4 L464.1 192.1 L453.5 177.7 Z" fill="#FED700" stroke="#2E2417" stroke-width="6"/>
             </svg>
           </div>
-          <h2 style="font-size:15px; margin:0 0 2px;">Copiloto Alerta Pet</h2>
-          <p style="font-size:11px; line-height:1.35; margin:0 0 8px;">A patinha flutuante acompanha você sobre o Waze, Google Maps e Uber, avisando por áudio ao passar perto de um pet sumido.</p>
-          <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px;">
-            <button type="button" class="btn-bolha-hero" onclick="ativarBolhaFlutuante()" style="padding:9px; font-size:11.5px; margin:0;">ATIVAR PATINHA</button>
-            <button type="button" class="btn-bolha-desativar" onclick="desativarBolhaFlutuante()" style="padding:9px; font-size:11.5px; margin:0;">DESATIVAR</button>
+          <h2 style="font-size:18px; font-weight:900; color:#2E2417; margin:0 0 6px;">Copiloto Alerta Pet</h2>
+          <p style="font-size:13px; line-height:1.45; color:#5A4730; margin:0 auto 18px; max-width:320px;">
+            A patinha flutuante acompanha você sobre o Waze, Google Maps e Uber, avisando por áudio ao passar perto de um pet sumido em Cascavel.
+          </p>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+            <button type="button" class="btn-bolha-hero" onclick="ativarBolhaFlutuante()" style="height:48px; padding:0 12px; font-size:13px; font-weight:900; letter-spacing:0.3px; border-radius:14px; background:#B8976C; color:#FFFFFF; border:none; cursor:pointer; box-shadow:0 4px 12px rgba(110,90,60,0.25);">
+              ATIVAR PATINHA
+            </button>
+            <button type="button" class="btn-bolha-desativar" onclick="desativarBolhaFlutuante()" style="height:48px; padding:0 12px; font-size:13px; font-weight:900; letter-spacing:0.3px; border-radius:14px; background:#EDE8DF; color:#443B2C; border:1px solid rgba(110,90,60,0.3); cursor:pointer;">
+              DESATIVAR
+            </button>
           </div>
         </div>
 
         <!-- Card 2: Voz Oficial da Patinha -->
-        <div class="section-head" style="margin-top:6px; margin-bottom:4px;">
-          <div class="section-title" style="font-size:12px; font-weight:900;">Voz Oficial da Patinha</div>
+        <div class="section-head" style="margin-top:14px; margin-bottom:6px;">
+          <div class="section-title" style="font-size:13px; font-weight:900; color:#2E2417;">Voz Oficial da Patinha</div>
         </div>
-        <div class="settings-group" style="margin-bottom:8px; padding:8px 12px; border-radius:14px;">
-          <div style="font-size:11px; color:#6E5A3C; font-weight:700; margin-bottom:6px;">Toque para escolher</div>
-          <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px; background:#EDE8DF; padding:3px; border-radius:10px;">
-            <button type="button" id="btn-voz-fem" class="pillar-tab active" onclick="selecionarVozCopiloto('feminina')" style="padding:7px; font-size:12.5px; font-weight:800; border-radius:8px; border:none; cursor:pointer; text-align:center;">
-              Feminina
+        <div class="settings-group" style="margin-bottom:14px; padding:14px 16px; border-radius:18px; background:#E4D5BC; box-shadow:0 4px 14px rgba(0,0,0,0.06);">
+          <div style="font-size:12px; color:#5A4730; font-weight:700; margin-bottom:8px;">Toque para escolher o locutor oficial</div>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; background:#EDE8DF; padding:4px; border-radius:12px;">
+            <button type="button" id="btn-voz-fem" class="pillar-tab active" onclick="selecionarVozCopiloto('feminina')" style="height:42px; font-size:13.5px; font-weight:800; border-radius:10px; border:none; cursor:pointer; text-align:center; transition:all 0.15s ease;">
+              Feminina (Francisca)
             </button>
-            <button type="button" id="btn-voz-masc" class="pillar-tab" onclick="selecionarVozCopiloto('masculina')" style="padding:7px; font-size:12.5px; font-weight:800; border-radius:8px; border:none; cursor:pointer; text-align:center;">
-              Masculina
+            <button type="button" id="btn-voz-masc" class="pillar-tab" onclick="selecionarVozCopiloto('masculina')" style="height:42px; font-size:13.5px; font-weight:800; border-radius:10px; border:none; cursor:pointer; text-align:center; transition:all 0.15s ease;">
+              Masculina (Antonio)
             </button>
           </div>
         </div>
 
         <!-- Card 3: O que avisar por voz na rua -->
-        <div class="section-head" style="margin-top:6px; margin-bottom:4px;">
-          <div class="section-title" style="font-size:12px; font-weight:900;">O que avisar por voz na rua</div>
+        <div class="section-head" style="margin-top:14px; margin-bottom:6px;">
+          <div class="section-title" style="font-size:13px; font-weight:900; color:#2E2417;">O que avisar por voz na rua</div>
         </div>
-        <div class="settings-group" style="margin-bottom:8px; border-radius:14px;">
-          <div class="setting-row" style="padding:8px 12px;">
+        <div class="settings-group" style="margin-bottom:18px; border-radius:18px; background:#E4D5BC; box-shadow:0 4px 14px rgba(0,0,0,0.06); overflow:hidden;">
+          <div class="setting-row" style="padding:14px 16px;">
             <div>
-              <div class="setting-title" style="font-size:12.5px; font-weight:800;">Pets Desaparecidos</div>
-              <div class="setting-sub" style="font-size:10.5px;">Avisa ao entrar na zona de busca ativa (raio 450m)</div>
+              <div class="setting-title" style="font-size:13.5px; font-weight:800; color:#2E2417;">Pets Desaparecidos</div>
+              <div class="setting-sub" style="font-size:11.5px; color:#5A4730; margin-top:2px;">Avisa ao entrar na zona de busca ativa (raio 450m)</div>
             </div>
             <label class="switch"><input type="checkbox" id="pref-pet" checked onchange="salvarPrefsCopiloto()"><span class="slider"></span></label>
           </div>
-          <div class="setting-row" style="padding:8px 12px; border-top:1px solid rgba(0,0,0,0.06);">
+          <div class="setting-row" style="padding:14px 16px; border-top:1px solid rgba(0,0,0,0.06);">
             <div>
-              <div class="setting-title" style="font-size:12.5px; font-weight:800;">Alertas Climáticos</div>
-              <div class="setting-sub" style="font-size:10.5px;">Granizo, temporais e frio extremo da Defesa Civil</div>
+              <div class="setting-title" style="font-size:13.5px; font-weight:800; color:#2E2417;">Alertas Climáticos</div>
+              <div class="setting-sub" style="font-size:11.5px; color:#5A4730; margin-top:2px;">Avisos meteorológicos da Defesa Civil (Alertas Laranja e Vermelho)</div>
             </div>
             <label class="switch"><input type="checkbox" id="pref-uti" checked onchange="salvarPrefsCopiloto()"><span class="slider"></span></label>
           </div>
         </div>
 
-        <!-- Botão Guia do Testador -->
-        <button type="button" onclick="abrirGuiaTestador()" style="width:100%; background:#EDE8DF; color:#009B3A; font-weight:900; font-size:11.5px; border:1px solid rgba(0,155,58,0.3); border-radius:12px; padding:9px; cursor:pointer; text-align:center;">
-          GUIA E MISSÕES DO TESTADOR
-        </button>
+        <!-- Botão Guia e Missões do Testador -->
+        <div style="margin-top:10px; padding:0 2px;">
+          <button type="button" onclick="abrirGuiaTestador()" style="width:100%; height:48px; background:#EDE8DF; color:#009B3A; font-weight:900; font-size:12.5px; letter-spacing:0.4px; border:1.5px solid rgba(0,155,58,0.35); border-radius:14px; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px; box-shadow:0 3px 10px rgba(0,155,58,0.12); transition:all 0.15s ease;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+              <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+            </svg>
+            <span>GUIA E MISSÕES DO TESTADOR</span>
+          </button>
+        </div>
       </section>
       <!-- Ondulação Inferior Orgânica (Conexão Verde com Bottom Nav) -->
       <div class="bottom-river-wave">
@@ -8326,7 +8338,7 @@ ${downloadUrl}`;
       salvarPrefsCopilotoSilencioso();
       if (emitirSom) {
         const vPref = (genero === 'masculina') ? 'masc' : 'fem';
-        const audioUrl = `/static/audios_tts/oficiais/${vPref}_cao.mp3`;
+        const audioUrl = `/static/audios_tts/oficiais/amostra_voz_${vPref}.mp3`;
         try {
           if (!ttsAudioPlayer) ttsAudioPlayer = new Audio();
           ttsAudioPlayer.pause();
@@ -8334,7 +8346,7 @@ ${downloadUrl}`;
           ttsAudioPlayer.src = audioUrl;
           ttsAudioPlayer.play().catch(() => {});
         } catch (_) {}
-        mostrarToast(`Voz ${genero === 'feminina' ? 'Feminina' : 'Masculina'} ativada!`);
+        mostrarToast(`Voz ${genero === 'feminina' ? 'Feminina (Francisca)' : 'Masculina (Antonio)'} selecionada!`);
       }
     }
 
