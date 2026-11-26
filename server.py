@@ -188,6 +188,8 @@ def init_db():
         ("criancas_casa", "TEXT DEFAULT 'Apenas adultos'"),
         ("qtd_moradores", "TEXT DEFAULT '2 a 3 pessoas'"),
         ("outros_pets", "TEXT DEFAULT 'Nenhum outro animal'"),
+        ("pets_castrados", "TEXT DEFAULT 'Nao se aplica'"),
+        ("pets_sociaveis", "TEXT DEFAULT 'Nao se aplica'"),
         ("consenso_familiar", "INTEGER DEFAULT 1")
     ]:
         try:
@@ -2917,11 +2919,24 @@ def registrar_aceite_adocao(pet_id):
     hash_curto = hashlib.sha256(raw_str.encode('utf-8')).hexdigest()[:8].upper()
     protocolo = f"AP-CAND-{hash_curto}"
     
+    tipo_moradia = (data.get("tipo_moradia") or "Casa com Quintal").strip()[:50]
+    seguranca_imovel = (data.get("seguranca_imovel") or "Muros altos e portão seguro").strip()[:60]
+    criancas_casa = (data.get("criancas_casa") or "Apenas adultos").strip()[:50]
+    qtd_moradores = (data.get("qtd_moradores") or "2 a 3 pessoas").strip()[:30]
+    outros_pets = (data.get("outros_pets") or "Nenhum outro animal").strip()[:50]
+    pets_castrados = (data.get("pets_castrados") or "Nao se aplica").strip()[:60]
+    pets_sociaveis = (data.get("pets_sociaveis") or "Nao se aplica").strip()[:80]
+    consenso_familiar = 1 if data.get("consenso_familiar", True) else 0
+
     cur = conn.cursor()
     cur.execute("""
-        INSERT INTO adocao_aceites (pet_id, adotante_token, adotante_nome, adotante_whatsapp, ip_origem, protocolo_hash)
-        VALUES (?, ?, ?, ?, ?, ?)
-    """, (pet_id, token, nome, whatsapp, ip_origem, protocolo))
+        INSERT INTO adocao_aceites (
+            pet_id, adotante_token, adotante_nome, adotante_whatsapp, ip_origem, protocolo_hash,
+            tipo_moradia, seguranca_imovel, criancas_casa, qtd_moradores, outros_pets,
+            pets_castrados, pets_sociaveis, consenso_familiar
+        )
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    """, (pet_id, token, nome, whatsapp, ip_origem, protocolo, tipo_moradia, seguranca_imovel, criancas_casa, qtd_moradores, outros_pets, pets_castrados, pets_sociaveis, consenso_familiar))
     conn.commit()
     conn.close()
     

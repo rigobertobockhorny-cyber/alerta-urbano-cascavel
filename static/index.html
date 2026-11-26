@@ -5107,15 +5107,41 @@
           </div>
         </div>
 
-        <!-- 4. Outros Animais -->
-        <div>
-          <label style="display:block; font-size:11px; font-weight:700; color:#334155; margin-bottom:4px;">Já possui outros animais na casa?</label>
-          <select id="cad-outros-pets" style="width:100%; height:36px; border:1px solid #CBD5E1; border-radius:8px; padding:0 8px; font-size:12px; font-weight:600; color:#1E293B; background:#FFFFFF;">
+        <!-- 4. Outros Animais e Sociabilidade (Foco Rigo: Castração e Convivência) -->
+        <div style="margin-bottom:10px;">
+          <label style="display:block; font-size:11px; font-weight:700; color:#334155; margin-bottom:4px;">Já possui outros animais na residência?</label>
+          <select id="cad-outros-pets" onchange="atualizarCamposAnimaisResidentes()" style="width:100%; height:36px; border:1px solid #CBD5E1; border-radius:8px; padding:0 8px; font-size:12px; font-weight:600; color:#1E293B; background:#FFFFFF;">
             <option value="Nenhum outro animal" selected>Não possui outros animais</option>
-            <option value="Possuo cão(es) sociável(is)">Sim, possuo cão(es) sociável(is)</option>
-            <option value="Possuo gato(s) castrado(s)">Sim, possuo gato(s) castrado(s)</option>
-            <option value="Possuo cães e gatos">Sim, convivem cães e gatos</option>
+            <option value="Possuo cão(es)">Sim, possuo cão(es)</option>
+            <option value="Possuo gato(s)">Sim, possuo gato(s)</option>
+            <option value="Possuo cães e gatos">Sim, possuo cães e gatos</option>
           </select>
+        </div>
+
+        <!-- 4.1 Sub-bloco Dinâmico de Triagem Etológica (Castração e Sociabilidade) -->
+        <div id="bloco-pets-residentes" style="display:none; background:#F1F5F9; border:1.5px solid #CBD5E1; border-radius:10px; padding:10px 12px; margin-bottom:10px;">
+          <div style="font-size:11px; font-weight:800; color:#0F172A; margin-bottom:8px; display:flex; align-items:center; gap:6px;">
+            <span>🐾</span> Perfil dos Animais que Já Moram com Você:
+          </div>
+
+          <div style="margin-bottom:8px;">
+            <label style="display:block; font-size:10.5px; font-weight:700; color:#334155; margin-bottom:3px;">São castrados?</label>
+            <select id="cad-pets-castrados" style="width:100%; height:34px; border:1px solid #CBD5E1; border-radius:6px; padding:0 6px; font-size:11.5px; font-weight:600; color:#1E293B; background:#FFFFFF;">
+              <option value="Todos são castrados" selected>Sim, todos são castrados</option>
+              <option value="Parte dos animais é castrada">Parte dos animais é castrada</option>
+              <option value="Ainda não são castrados (pretendo castrar)">Ainda não são castrados</option>
+            </select>
+          </div>
+
+          <div>
+            <label style="display:block; font-size:10.5px; font-weight:700; color:#334155; margin-bottom:3px;">Como é a convivência e sociabilidade deles?</label>
+            <select id="cad-pets-sociaveis" style="width:100%; height:34px; border:1px solid #CBD5E1; border-radius:6px; padding:0 6px; font-size:11.5px; font-weight:600; color:#1E293B; background:#FFFFFF;">
+              <option value="Muito sociáveis (já convivem com cães e gatos)" selected>Muito sociáveis (convivem bem com cães e gatos)</option>
+              <option value="Sociáveis apenas com outros cães">Sociáveis apenas com outros cães</option>
+              <option value="Sociáveis apenas com outros gatos">Sociáveis apenas com outros gatos</option>
+              <option value="Mais territoriais (precisam de adaptação gradual)">Mais territoriais (requer adaptação gradual)</option>
+            </select>
+          </div>
         </div>
       </div>
 
@@ -7044,6 +7070,18 @@
       }
     }
 
+    function atualizarCamposAnimaisResidentes() {
+      const val = document.getElementById('cad-outros-pets')?.value || '';
+      const bloco = document.getElementById('bloco-pets-residentes');
+      if (bloco) {
+        if (val && val !== 'Nenhum outro animal') {
+          bloco.style.display = 'block';
+        } else {
+          bloco.style.display = 'none';
+        }
+      }
+    }
+
     function atualizarOpcoesSegurancaMoradia() {
       const tipo = document.getElementById('cad-tipo-moradia')?.value || '';
       const segSel = document.getElementById('cad-seguranca-imovel');
@@ -7093,6 +7131,8 @@
       const pessoas = document.getElementById('cad-pessoas')?.value || '2 a 3 pessoas';
       const criancas = document.getElementById('cad-criancas')?.value || 'Apenas adultos';
       const outrosPets = document.getElementById('cad-outros-pets')?.value || 'Nenhum outro animal';
+      const petsCastrados = document.getElementById('cad-pets-castrados')?.value || 'Nao se aplica';
+      const petsSociaveis = document.getElementById('cad-pets-sociaveis')?.value || 'Nao se aplica';
 
       // Registra a Pré-Candidatura Consciente na API
       let protocolo = 'AP-CAND-' + Math.random().toString(36).substring(2, 8).toUpperCase();
@@ -7109,6 +7149,8 @@
             qtd_moradores: pessoas,
             criancas_casa: criancas,
             outros_pets: outrosPets,
+            pets_castrados: petsCastrados,
+            pets_sociaveis: petsSociaveis,
             consenso_familiar: 1
           })
         });
@@ -7128,7 +7170,7 @@ Eu me chamo *${pNome}*, resido no bairro *${pBairro}* e acabei de preencher minh
 🏠 *Tipo de Moradia:* ${moradia}
 🛡️ *Segurança do Imóvel:* ${seguranca}
 👨‍👩‍👧 *Família no Imóvel:* ${pessoas} (${criancas})
-🐾 *Outros animais no lar:* ${outrosPets}
+${outrosPets === 'Nenhum outro animal' ? '🐾 *Outros animais no lar:* Nenhum (será o único animal do imóvel)' : `🐾 *Animais Residentes no Lar:*\n   • Espécie(s): ${outrosPets}\n   • Castração: ${petsCastrados}\n   • Sociabilidade: ${petsSociaveis}`}
 ⚖️ *Compromisso Legal:* Ciência assinada da Lei Federal 9.605/98 / Lei Sansão (abandono e maus-tratos são crimes inafiançáveis com 2 a 5 anos de reclusão).
 
 Gostaria de saber se o animalzinho ainda está disponível e me coloco à sua inteira disposição para sua entrevista, perguntas sobre meu lar e visita presencial para verificar se estou apto a acolhê-lo!`;
