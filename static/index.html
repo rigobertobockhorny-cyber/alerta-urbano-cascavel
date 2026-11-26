@@ -348,10 +348,15 @@
       font-weight: 700 !important;
     }
     .topbar .icon-btn {
-      background: #FFFFFF !important;
-      color: #000000 !important;
-      border: 1.5px solid #000000 !important;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25) !important;
+      background: rgba(0, 0, 0, 0.24) !important;
+      color: #FFFFFF !important;
+      border: 1.5px solid rgba(254, 215, 0, 0.35) !important;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25) !important;
+      border-radius: 12px !important;
+      backdrop-filter: blur(8px);
+    }
+    .topbar .icon-btn svg {
+      stroke: #FFFFFF !important;
     }
     .brand-left {
       display: flex;
@@ -677,12 +682,18 @@
     /* ==================== HOME: CLIMA INTEGRADO NA CABECEIRA VERDE BRASIL ==================== */
     .home-green-canopy {
       background: #009B3A;
-      padding: 24px 12px 6px;
+      padding: 4px 12px 6px;
       display: flex;
       flex-direction: column;
       gap: 6px;
       flex-shrink: 0;
       z-index: 10;
+    }
+    .topbar-river-wave {
+      width: 100%;
+      height: 8px;
+      line-height: 0;
+      flex-shrink: 0;
     }
     .weather-strip-green {
       background: rgba(0, 0, 0, 0.20);
@@ -885,7 +896,7 @@
       padding: 6px 14px 4px;
       gap: 8px;
       overflow: hidden;
-      background: #9E8560 !important; /* Marrom Nobre Oficial Rigo Padronizado em Todas as Abas */
+      background: #EDE8DF !important; /* Cor Areia Oficial Rigo */
     }
 
     /* Blocos de Esteiras Horizontais (Mesma Velocidade Calibrada via JS) */
@@ -911,7 +922,7 @@
       font-weight: 800 !important;
       text-transform: uppercase !important;
       letter-spacing: 0.8px !important;
-      color: #EDE8DF !important;
+      color: #2E2417 !important;
       display: flex !important;
       align-items: center !important;
       gap: 7px !important;
@@ -921,16 +932,16 @@
       font-size: 13px !important;
       font-weight: 900 !important;
       letter-spacing: 0.3px !important;
-      color: #EDE8DF !important;
+      color: #2E2417 !important;
     }
     .belt-title.pet-title span {
-      color: #EDE8DF !important;
+      color: #2E2417 !important;
     }
     .belt-title.pet-title .belt-svg {
-      fill: #EDE8DF !important;
+      fill: #2E2417 !important;
     }
     .belt-title.uti-title, .belt-title.seg-title {
-      color: #EDE8DF !important;
+      color: #2E2417 !important;
     }
     .belt-title span {
       color: #000000 !important;
@@ -2828,16 +2839,16 @@
       color: #ffffff !important;
     }
     #tab-inicio .belt-title.pet-title, #tab-inicio .belt-title.pet-title span {
-      color: #EDE8DF !important;
+      color: #2E2417 !important;
     }
     #tab-inicio .belt-title.pet-title .belt-svg {
-      fill: #EDE8DF !important;
+      fill: #2E2417 !important;
     }
     #tab-inicio .belt-block-parceiros .belt-title, #tab-inicio .belt-block-parceiros .belt-title span {
-      color: #EDE8DF !important;
+      color: #2E2417 !important;
     }
     #tab-inicio .belt-block-parceiros .belt-svg {
-      stroke: #EDE8DF !important;
+      stroke: #2E2417 !important;
     }
 
     /* Destaques do Mapa no Verde (REGRA OFICIAL RIGO: ZERO PRETO) */
@@ -4387,7 +4398,7 @@
         <div class="brand-text">
           <div class="brand-name">Alerta Pet Brasil</div>
           <div class="brand-city">
-            <span id="label-versao-app">Cascavel • Build 45 (v3.11.8)</span>
+            <span id="label-versao-app">Cascavel • PR</span>
           </div>
         </div>
       </div>
@@ -4420,7 +4431,13 @@
       <section class="tab-pane home-pane active" id="tab-inicio">
         <!-- Canopy Verde Integrado: Clima + Pílula de Alertas -->
         <div class="home-green-canopy">
-          <div class="weather-strip-green" id="weather-card">
+          <!-- Ondulação Orgânica Superior do Card Climático -->
+          <div class="weather-wave-top" style="line-height:0; margin-bottom:-1px; width:100%;">
+            <svg viewBox="0 0 500 24" preserveAspectRatio="none" style="width:100%; height:14px; display:block;">
+              <path d="M 0,24 C 130,4 250,22 360,6 C 420,0 470,14 500,8 L 500,24 Z" fill="rgba(0, 55, 20, 0.38)"/>
+            </svg>
+          </div>
+          <div class="weather-strip-green" id="weather-card" style="border-top-left-radius:0; border-top-right-radius:0; border-top:none; background:linear-gradient(180deg, rgba(0, 55, 20, 0.38) 0%, rgba(0, 35, 12, 0.22) 100%);">
             <div class="weather-top">
               <div class="weather-temp-wrap">
                 <div class="weather-ico" id="w-ico" style="opacity:0.95; font-size:32px;">☁️</div>
@@ -9197,17 +9214,14 @@ Baixe o aplicativo gratuito Alerta Urbano:
         }
       } catch (_) {}
 
-      // Identificação da Versão do APK Nativo (Verificação de Atualização no Aparelho)
+      // Identificação da Cidade no Topo (Limpo e Oficial)
       try {
-        if (window.AndroidAlerta && typeof window.AndroidAlerta.obterVersaoApkNativo === 'function') {
-          const vNat = window.AndroidAlerta.obterVersaoApkNativo();
-          const lbl = document.getElementById('label-versao-app');
-          if (lbl && vNat) {
-            lbl.innerText = `Cascavel • APK: ${vNat}`;
-          }
+        const lbl = document.getElementById('label-versao-app');
+        if (lbl) {
+          lbl.innerText = 'Cascavel • PR';
         }
       } catch (eVer) {
-        console.warn('Verificacao versao nativa:', eVer);
+        console.warn('Rotulo cidade:', eVer);
       }
 
       aplicarTema(state.theme);
