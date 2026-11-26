@@ -5040,8 +5040,8 @@
         <div style="display:flex; align-items:center; gap:8px;">
           <div style="width:34px; height:34px; border-radius:50%; background:#DCFCE7; display:flex; align-items:center; justify-content:center; color:#16A34A; font-size:18px;">🐾</div>
           <div>
-            <div style="font-size:16px; font-weight:900; color:#1F2937;">Pré-Candidatura de Adoção Consciente</div>
-            <div style="font-size:10.5px; color:#16A34A; font-weight:800;">PROTOCOLO DE COMPROMISSO LEGAL & AVALIAÇÃO</div>
+            <div style="font-size:16px; font-weight:900; color:#1F2937;">Manifestação de Interesse • Adoção</div>
+            <div style="font-size:10.5px; color:#16A34A; font-weight:800;">PROTOCOLO OFICIAL DE ACOLHIMENTO</div>
           </div>
         </div>
         <button type="button" onclick="fecharProtocoloAdocao()" style="background:none; border:none; color:#9CA3AF; font-size:18px; cursor:pointer; padding:4px 8px; font-weight:bold;">✕</button>
@@ -5053,16 +5053,16 @@
 
       <div style="background:#FFFBEB; border:1.5px solid #F59E0B; border-radius:12px; padding:10px 12px; margin-bottom:12px; font-size:11.5px; color:#92400E; line-height:1.45;">
         🛡️ <b>Soberania do Protetor / Tutor • Regra Oficial Alerta Pet:</b><br>
-        O Alerta Pet Brasil <b>NÃO realiza doações diretas e NÃO entrega animais</b>. Ao assinar abaixo, você registra sua <b>Pré-Candidatura Consciente</b> e assume compromisso civil perante a Lei Sansão. <b>A aprovação final, entrevista, vistoria da residência e decisão de entrega cabem 100% e com exclusividade ao protetor/tutor</b>, que tem total autonomia para doar ou recusar a doação se julgar que o bem-estar do pet não estará garantido.
+        O Alerta Pet Brasil <b>NÃO realiza doações diretas e NÃO entrega animais</b>. Ao enviar seus dados, você formaliza seu <b>interesse de acolhimento</b> perante a guarda responsável. A decisão de entrega cabe 100% e com exclusividade ao protetor/tutor responsável.
       </div>
 
       <!-- QUESTIONÁRIO DE PRÉ-QUALIFICAÇÃO DO LAR (DESIGN OFICIAL RIGO) -->
       <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:14px; padding:12px 14px; margin-bottom:14px;">
         <div style="font-size:12.5px; font-weight:800; color:#1E293B; margin-bottom:4px; display:flex; align-items:center; gap:6px;">
-          <span>📋</span> Ficha de Pré-Qualificação do Lar
+          <span>📋</span> Informações sobre o Lar & Convivência
         </div>
         <div style="font-size:10.5px; color:#64748B; margin-bottom:12px; line-height:1.4;">
-          Dados objetivos de moradia para avaliação do protetor (protegido pela LGPD).
+          Dados básicos de moradia e convivência para o tutor (protegido pela LGPD).
         </div>
 
         <!-- 1. Tipo de Moradia -->
@@ -5184,7 +5184,7 @@
       </button>
 
       <button type="button" id="btn-confirmar-adocao-wa" onclick="confirmarAdocaoWhatsApp()" style="width:100%; height:46px; background:#009B3A; color:#FFFFFF; border:none; border-radius:12px; font-size:13.5px; font-weight:900; display:flex; align-items:center; justify-content:center; gap:8px; cursor:pointer; box-shadow:0 3px 10px rgba(0,155,58,0.3);">
-        <span>✍️ Assinar Pré-Candidatura & Enviar para Avaliação do Tutor</span>
+        <span>✍️ Enviar Interesse de Adoção via WhatsApp</span>
       </button>
     </div>
   </div>
@@ -7246,7 +7246,7 @@
         console.error("Erro ao registrar aceite digital:", e);
       }
 
-      // Mensagem oficial enxuta e profissional (Diretriz Diretor Rigo - sem emoji spam)
+      // Mensagem oficial enxuta e profissional (Diretriz Diretor Rigo - sem emoji spam, sem exigencia invasiva)
       const texto = `Olá! Vi o animalzinho *${pet.titulo}* anunciado para adoção responsável no *Alerta Pet Brasil*.
 
 Gostaria de saber se o animalzinho ainda está disponível e tenho interesse em adotá-lo. Seguem os meus dados:
@@ -7257,9 +7257,9 @@ Gostaria de saber se o animalzinho ainda está disponível e tenho interesse em 
 • Segurança do Imóvel: ${seguranca}
 • Família no Imóvel: ${pessoas} (${criancas})
 • Animais no Lar: ${outrosPets === 'Nenhum outro animal' ? 'Nenhum (será o único pet da casa)' : `${outrosPets} (Castrados: ${petsCastrados} | Sociabilidade: ${petsSociaveis})`}
-• Compromisso Legal: Ciência assinada da Lei Sansão nº 14.064/2020 (crime de abandono com pena de 2 a 5 anos de reclusão).
+• Compromisso Legal: Ciência da Lei Sansão nº 14.064/2020 (guarda responsável).
 
-Me coloco à sua inteira disposição para sua avaliação, entrevista sobre meu lar e visita presencial para verificar se estou apto a acolhê-lo. 🐾`;
+Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
 
       fecharProtocoloAdocao();
       const destWa = WHATSAPP_OFICIAL;
