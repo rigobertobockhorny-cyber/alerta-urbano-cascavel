@@ -2873,12 +2873,6 @@ def ver_cartaz(alerta_id):
 
 
 # Inicializa/migra banco ao importar (compatível com Gunicorn no Render)
-init_db()
-
-if __name__ == "__main__":
-    print("Iniciando Alerta Urbano v3.0 na porta 5000...")
-    app.run(host="0.0.0.0", port=5000, debug=False)
-
 
 
 @app.route("/api/pets/<int:pet_id>/aceite-adocao", methods=["POST"])
@@ -2919,3 +2913,10 @@ def registrar_aceite_adocao(pet_id):
         "pet_id": pet_id,
         "pet_titulo": pet["titulo"]
     })
+
+
+init_db()
+
+if __name__ == "__main__":
+    print("Iniciando Alerta Urbano v3.0 na porta 5000...")
+    app.run(host="0.0.0.0", port=5000, debug=False)
