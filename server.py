@@ -611,25 +611,49 @@ def baixar_apk():
 @app.route("/api/falar")
 def api_falar():
     """
-    Sintetiza alertas de voz exclusivos e calibrados do Alerta Pet Brasil:
-    - Feminina: pt-BR-ThalitaMultilingualNeural (suave, doce, aveludada, sem tom genérico de YouTuber) - rate: -4%, pitch: +1Hz
-    - Masculina: pt-BR-AntonioNeural calibrado (cadenciado, sereno, acolhedor, sem trava robótica) - rate: -7%, pitch: -1Hz
+    Sintetiza e serve alertas sonoros de alta fidelidade do Alerta Pet Brasil:
+    - Áudios oficiais pré-produzidos com efeitos sonoros de animais (latido, miado, piado, chime)
+    - Vozes internacionais multilíngues (sem robô, sem timbre genérico de YouTuber):
+      * Feminina: en-US-AvaMultilingualNeural
+      * Masculina: it-IT-GiuseppeMultilingualNeural
     """
-    texto = request.args.get("texto", "").strip()
+    texto = (request.args.get("texto") or "").strip()
     if not texto:
         return jsonify({"error": "Texto vazio"}), 400
 
     voz_param = request.args.get("voz", "feminina").strip().lower()
-    if voz_param == "masculina":
-        voice_id = "pt-BR-AntonioNeural"
-        voice_rate = "-7%"
-        voice_pitch = "-1Hz"
-    else:
-        voice_id = "pt-BR-ThalitaMultilingualNeural"
-        voice_rate = "-4%"
-        voice_pitch = "+1Hz"
+    voz_prefix = "masc" if voz_param == "masculina" else "fem"
+    texto_lower = texto.lower()
 
-    cache_key = f"{voice_id}:{voice_rate}:{voice_pitch}:{texto.lower()}"
+    # Mapeamento dos 4 áudios oficiais de estúdio com efeitos sonoros
+    oficiais_dir = os.path.join(BASE_DIR, "static", "audios_tts", "oficiais")
+    tag_oficial = None
+
+    if any(k in texto_lower for k in ["cão", "cao", "cachorro", "cadela", "dog"]):
+        tag_oficial = "cao"
+    elif any(k in texto_lower for k in ["gato", "gata", "felino", "cat"]):
+        tag_oficial = "gato"
+    elif any(k in texto_lower for k in ["ave", "pássaro", "passaro", "calopsita", "periquito", "canário", "canario"]):
+        tag_oficial = "ave"
+    elif any(k in texto_lower for k in ["alerta", "clima", "climático", "chuva", "temporal", "proteção", "protecao"]):
+        tag_oficial = "alerta"
+
+    if tag_oficial:
+        oficial_path = os.path.join(oficiais_dir, f"{voz_prefix}_{tag_oficial}.mp3")
+        if os.path.exists(oficial_path) and os.path.getsize(oficial_path) > 0:
+            return send_file(oficial_path, mimetype="audio/mpeg")
+
+    # Fallback dinâmico com as vozes internacionais Ava (Feminina) e Giuseppe (Masculina)
+    if voz_param == "masculina":
+        voice_id = "it-IT-GiuseppeMultilingualNeural"
+        voice_rate = "-4%"
+        voice_pitch = "0Hz"
+    else:
+        voice_id = "en-US-AvaMultilingualNeural"
+        voice_rate = "-4%"
+        voice_pitch = "0Hz"
+
+    cache_key = f"{voice_id}:{voice_rate}:{voice_pitch}:{texto_lower}"
     h = hashlib.md5(cache_key.encode("utf-8")).hexdigest()
     cache_dir = os.path.join(BASE_DIR, "static", "audios_tts")
     os.makedirs(cache_dir, exist_ok=True)
@@ -650,7 +674,12 @@ def api_falar():
         if os.path.exists(filepath) and os.path.getsize(filepath) > 0:
             return send_file(filepath, mimetype="audio/mpeg")
     except Exception as e:
-        print(f"[TTS SERVER] Erro ao gerar fala calibrada: {e}")
+        print(f"[TTS SERVER] Erro ao sintetizar fala internacional: {e}")
+
+    # Fallback final gracioso para o áudio de cão
+    fallback_oficial = os.path.join(oficiais_dir, f"{voz_prefix}_cao.mp3")
+    if os.path.exists(fallback_oficial):
+        return send_file(fallback_oficial, mimetype="audio/mpeg")
 
     return jsonify({"error": "Falha na síntese de áudio"}), 500
 
