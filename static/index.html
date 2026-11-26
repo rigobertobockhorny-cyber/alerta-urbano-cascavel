@@ -4407,7 +4407,7 @@
         <button type="button" class="icon-btn" id="btn-theme-toggle" onclick="alternarTema()" title="Alternar Modo Noturno / Claro" aria-label="Alternar tema">
           <!-- Ícone atualizado por JS -->
         </button>
-        <button type="button" class="icon-btn" onclick="abrirPerfil()" title="Status GPS e Perfil" aria-label="Perfil">
+        <button type="button" class="icon-btn" id="btn-topbar-perfil" onclick="abrirPerfil()" title="Status GPS e Perfil" aria-label="Perfil">
           <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
             <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
             <circle cx="12" cy="7" r="4"></circle>
@@ -5772,8 +5772,6 @@
       } else if (aba === 'inicio') {
         renderizarDashboard();
       }
-
-      renderizarEsteiraProdutos();
     }
 
     function irParaMapaComFiltro(pilar) {
@@ -6100,7 +6098,7 @@
 
         renderizarDashboard();
         renderizarPetsAba();
-        renderizarEsteiraParceiros();
+        renderizarEsteiraParceirosHome();
         renderizarAbaParceiros();
         renderizarMapa();
         preencherSelectPetsPai();
