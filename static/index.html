@@ -9437,7 +9437,7 @@ ${downloadUrl} 🐾`;
       salvarPrefsCopilotoSilencioso();
       if (emitirSom) {
         const vPref = (genero === 'masculina') ? 'masc' : 'fem';
-        const audioUrl = `/static/audios_tts/oficiais/amostra_voz_${vPref}.mp3`;
+        const audioUrl = `/static/vozes_frases_oficiais/${vPref === 'masc' ? 'guido' : 'natalia'}_01_apresentacao.mp3?v=20261126`;
         try {
           if (!ttsAudioPlayer) ttsAudioPlayer = new Audio();
           ttsAudioPlayer.pause();
@@ -10019,7 +10019,7 @@ ${downloadUrl} 🐾`;
       card.style.display = 'block';
 
       // Reproduzir o áudio oficial de reencontro com palminhas e locução aprovada
-      const audioUrl = `/static/audios_tts/oficiais/reencontro_${tagAudio}.mp3`;
+      const locutorReencontro = (typeof getCopilotoVoice === 'function' && getCopilotoVoice() === 'masculina') ? 'guido' : 'natalia'; const audioUrl = `/static/vozes_frases_oficiais/${locutorReencontro}_01_apresentacao.mp3?v=20261126`;
       try {
         if (!ttsAudioPlayer) ttsAudioPlayer = new Audio();
         ttsAudioPlayer.pause();
