@@ -5040,8 +5040,8 @@
         <div style="display:flex; align-items:center; gap:8px;">
           <div style="width:34px; height:34px; border-radius:50%; background:#DCFCE7; display:flex; align-items:center; justify-content:center; color:#16A34A; font-size:18px;">🐾</div>
           <div>
-            <div style="font-size:16px; font-weight:900; color:#1F2937;">Adoção Consciente</div>
-            <div style="font-size:10.5px; color:#16A34A; font-weight:800;">PROTOCOLO OFICIAL ALERTA PET</div>
+            <div style="font-size:16px; font-weight:900; color:#1F2937;">Pré-Candidatura de Adoção Consciente</div>
+            <div style="font-size:10.5px; color:#16A34A; font-weight:800;">PROTOCOLO DE COMPROMISSO LEGAL & AVALIAÇÃO</div>
           </div>
         </div>
         <button type="button" onclick="fecharProtocoloAdocao()" style="background:none; border:none; color:#9CA3AF; font-size:18px; cursor:pointer; padding:4px 8px; font-weight:bold;">✕</button>
@@ -5051,8 +5051,9 @@
         <!-- Preenchido via JS com foto e nome do pet -->
       </div>
 
-      <div style="font-size:11px; color:#52525B; background:#F4EFE6; border:1px solid rgba(110,90,60,0.22); border-radius:10px; padding:8px 10px; margin-bottom:12px; line-height:1.45;">
-        ℹ️ <b>Aviso Comunitário:</b> O Alerta Pet Brasil conecta interessados e tutores promovendo a cultura de guarda responsável. A entrega e transferência legal do animal é de responsabilidade direta entre as partes.
+      <div style="background:#FFFBEB; border:1.5px solid #F59E0B; border-radius:12px; padding:10px 12px; margin-bottom:12px; font-size:11.5px; color:#92400E; line-height:1.45;">
+        🛡️ <b>Soberania do Protetor / Tutor • Regra Oficial Alerta Pet:</b><br>
+        O Alerta Pet Brasil <b>NÃO realiza doações diretas e NÃO entrega animais</b>. Ao assinar abaixo, você registra sua <b>Pré-Candidatura Consciente</b> e assume compromisso civil perante a Lei Sansão. <b>A aprovação final, entrevista, vistoria da residência e decisão de entrega cabem 100% e com exclusividade ao protetor/tutor</b>, que tem total autonomia para doar ou recusar a doação se julgar que o bem-estar do pet não estará garantido.
       </div>
 
       <div style="font-size:12px; color:#374151; line-height:1.45; margin-bottom:12px; font-weight:600;">
@@ -5094,7 +5095,7 @@
       </button>
 
       <button type="button" id="btn-confirmar-adocao-wa" onclick="confirmarAdocaoWhatsApp()" style="width:100%; height:46px; background:#009B3A; color:#FFFFFF; border:none; border-radius:12px; font-size:13.5px; font-weight:900; display:flex; align-items:center; justify-content:center; gap:8px; cursor:pointer; box-shadow:0 3px 10px rgba(0,155,58,0.3);">
-        <span>✍️ Assinar Aceite Digital & Falar com Tutor</span>
+        <span>✍️ Assinar Pré-Candidatura & Enviar para Avaliação do Tutor</span>
       </button>
     </div>
   </div>
@@ -7034,11 +7035,11 @@
 
       const texto = `Olá! Vi o animalzinho *${pet.titulo}* anunciado para adoção responsável no *Alerta Pet Brasil*.
 
-Eu me chamo *${pNome}*, resido no bairro *${pBairro}* e acabei de *assinar digitalmente o Termo de Adoção Responsável na plataforma* com ciência da Lei Federal 9.605/98 (Art. 32, crime de abandono com pena de 2 a 5 anos de reclusão).
+Eu me chamo *${pNome}*, resido no bairro *${pBairro}* e registrei minha *Pré-Candidatura Consciente* na plataforma, assinando digitalmente a ciência da Lei Federal 9.605/98 / Lei Sansão (crime inafiançável de abandono com pena de 2 a 5 anos de reclusão).
 
-📜 *Protocolo de Aceite Digital:* ${protocolo}
+📋 *Protocolo de Pré-Candidatura:* ${protocolo}
 
-Gostaria de combinar a entrega do pet!`;
+Gostaria de saber se ele ainda está disponível e me coloco à sua inteira disposição para sua avaliação, entrevista sobre meu lar e visita presencial para saber se estou apto a recebê-lo!`;
 
       const tel = pet.contato || '45999332144';
       const limpo = tel.replace(/\D/g, '');

@@ -2897,7 +2897,7 @@ def registrar_aceite_adocao(pet_id):
     import hashlib
     raw_str = f"{pet_id}-{token}-{datetime.now().isoformat()}-{ip_origem}"
     hash_curto = hashlib.sha256(raw_str.encode('utf-8')).hexdigest()[:8].upper()
-    protocolo = f"AP-ADOC-{hash_curto}"
+    protocolo = f"AP-CAND-{hash_curto}"
     
     cur = conn.cursor()
     cur.execute("""
