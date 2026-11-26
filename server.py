@@ -681,6 +681,45 @@ def mesa_operacional():
     return resp
 
 
+@app.route("/barulhos-animais")
+@app.route("/validar-barulhos")
+@app.route("/PAINEL_VALIDACAO_BARULHOS_ANIMAIS.html")
+def rota_barulhos_animais():
+    resp = make_response(send_from_directory("static", "PAINEL_VALIDACAO_BARULHOS_ANIMAIS.html"))
+    resp.headers["Cache-Control"] = "no-cache, no-store, must-revalidate, max-age=0"
+    return resp
+
+
+@app.route("/painel-vozes")
+@app.route("/validar-vozes")
+@app.route("/vozes")
+@app.route("/PAINEL_VALIDACAO_VOZES_DARKPLANNER.html")
+def rota_validar_vozes():
+    resp = make_response(send_from_directory("static", "PAINEL_VALIDACAO_VOZES_DARKPLANNER.html"))
+    resp.headers["Cache-Control"] = "no-cache, no-store, must-revalidate, max-age=0"
+    return resp
+
+
+@app.route("/mesa-vozes")
+@app.route("/MESA_VALIDACAO_VOZES_OFICIAIS.html")
+def rota_mesa_vozes():
+    resp = make_response(send_from_directory("static", "MESA_VALIDACAO_VOZES_OFICIAIS.html"))
+    resp.headers["Cache-Control"] = "no-cache, no-store, must-revalidate, max-age=0"
+    return resp
+
+
+@app.route("/vozes_frases_oficiais/<path:filename>")
+def rota_arquivos_vozes_frases(filename):
+    desktop_vozes = r"C:\Users\rigob\OneDrive\Desktop\Alerta Urbano\vozes_frases_oficiais"
+    return send_from_directory(desktop_vozes, filename)
+
+
+@app.route("/vozes_darkplanner/<path:filename>")
+def rota_arquivos_vozes(filename):
+    desktop_vozes = r"C:\Users\rigob\OneDrive\Desktop\Alerta Urbano\vozes_darkplanner"
+    return send_from_directory(desktop_vozes, filename)
+
+
 @app.route("/audios-validacao")
 @app.route("/validar-audios")
 def rota_validar_audios():
