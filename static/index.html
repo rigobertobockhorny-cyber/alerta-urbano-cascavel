@@ -3251,7 +3251,7 @@
       position: relative;
       z-index: 2;
       width: 100%;
-      height: 160px; /* Enquadramento perfeito para caber o bloco inteiro na tela do celular */
+      height: 142px; /* Enquadramento perfeito para caber o bloco inteiro na tela do celular */
       background: #000000;
       overflow: hidden;
       cursor: pointer;
@@ -3508,11 +3508,16 @@
       border: 1px solid var(--border);
     }
     .pet-card-desc {
-      font-size: 14px !important;
-      font-weight: 800 !important;
-      color: #0F172A !important;
-      line-height: 1.5 !important;
-      margin-top: 6px !important;
+      font-size: 13px !important;
+      font-weight: 700 !important;
+      color: #1E293B !important;
+      line-height: 1.4 !important;
+      margin-top: 4px !important;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
     [data-theme="dark"] .pet-card-desc {
       color: #F8FAFC !important;
@@ -4208,21 +4213,55 @@
       box-shadow: 0 2px 6px rgba(0,0,0,0.06) !important;
     }
 
-    /* 5. CARDS DE PETS: BEGE CLARO ACOLHEDOR (ADEUS AREIA ESCURA) */
+    /* 5. CARDS DE PETS: CORES OFICIAIS DE GÊNERO (AZUL MACHO, ROSA FÊMEA, ROXO INDEFINIDO/AVES/NINHADA) */
     .pet-card,
     #tab-pets .pet-card {
-      background: #EDE8DF !important; /* Bege Claro Acolhedor Oficial Rigo */
-      border: 1.5px solid rgba(110, 90, 60, 0.22) !important;
       border-radius: 20px !important;
       box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08) !important;
+      margin-bottom: 12px !important;
+    }
+    .pet-card.tema-azul,
+    #tab-pets .pet-card.tema-azul {
+      background: #DCF0FF !important;
+      border: 1.5px solid #93C5FD !important;
+      color: #0C4A6E !important;
+    }
+    .pet-card.tema-rosa,
+    #tab-pets .pet-card.tema-rosa {
+      background: #FFE0EE !important;
+      border: 1.5px solid #F9A8D4 !important;
+      color: #831843 !important;
+    }
+    .pet-card.tema-roxo,
+    #tab-pets .pet-card.tema-roxo {
+      background: #EAE0FF !important;
+      border: 1.5px solid #D8B4FE !important;
+      color: #4C1D95 !important;
     }
     #tab-pets .pet-card .btn-pet-cta-primary,
     #tab-pets .pet-card .btn-pet-cta-secondary {
-      background: #EDE8DF !important;
-      color: #2E2417 !important;
-      border: 1.5px solid rgba(110, 90, 60, 0.28) !important;
+      background: #FFFFFF !important;
+      color: #18181B !important;
+      border: 1px solid rgba(0, 0, 0, 0.12) !important;
       font-weight: 800 !important;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.05) !important;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.06) !important;
+      border-radius: 12px !important;
+      height: 38px !important;
+    }
+    #tab-pets .pet-card.tema-azul .btn-pet-cta-primary {
+      background: #0284C7 !important;
+      color: #FFFFFF !important;
+      border: none !important;
+    }
+    #tab-pets .pet-card.tema-rosa .btn-pet-cta-primary {
+      background: #DB2777 !important;
+      color: #FFFFFF !important;
+      border: none !important;
+    }
+    #tab-pets .pet-card.tema-roxo .btn-pet-cta-primary {
+      background: #7C3AED !important;
+      color: #FFFFFF !important;
+      border: none !important;
     }
 
     /* 6. BOTÕES DE REGISTRO SUPERIOR DA ABA PET (SLIM E IDÊNTICOS) */
@@ -4557,47 +4596,33 @@
 
       <!-- ABA 3: PETS (ARQUITETURA CONGELADA / SLIM RIGO) -->
       <section class="tab-pane" id="tab-pets">
-        <!-- CABEÇALHO CONGELADO / FIXO: CENTRAL DE REGISTRO SLIM + 4 PILARES -->
-        <div class="pets-fixed-header">
-          <!-- BLOCO 1: CENTRAL DE REGISTRO SLIM -->
-          <div style="background:#E4D5BC; border-radius:14px; padding:10px 12px; border:none; box-shadow:0 3px 10px rgba(0,0,0,0.06);">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-              <div style="font-size:11.5px; font-weight:900; letter-spacing:0.5px; color:#2E2417; text-transform:uppercase;">Rede de Proteção Animal</div>
-              <div style="font-size:10px; color:#6E5A3C; font-weight:700;">Toque para registrar</div>
-            </div>
-            <!-- 4 BOTÕES SLIM IDÊNTICOS (SEM EMOJIS CONFORME SOLICITADO PELO RIGO) -->
-            <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px;">
-              <button type="button" onclick="abrirModalPet('pet_perdido')" class="btn-reg-pet">
-                <span>Pet Desaparecido</span>
-              </button>
-              <button type="button" onclick="abrirModalPet('pet_resgatado')" class="btn-reg-pet">
-                <span>Animal Resgatado</span>
-              </button>
-              <button type="button" onclick="abrirModalPet('pet_reencontrado')" class="btn-reg-pet">
-                <span>Registrar Reencontro</span>
-              </button>
-              <button type="button" onclick="abrirModalPet('pet_adocao')" class="btn-reg-pet">
-                <span>Para Adoção</span>
-              </button>
-            </div>
-            <!-- 1 BOTÃO GRANDE SOS FULL-WIDTH SLIM -->
-            <button type="button" onclick="abrirModalPet('pet_denuncia_maustratos')" class="btn-reg-pet btn-reg-sos" style="width:100%; margin-top:6px;">
-              <span>SOS / Denúncia Sigilosa</span>
-            </button>
+        <!-- CABEÇALHO CONGELADO / FIXO COMPACTO (ECONOMIA DE 130PX PARA O CARD CABER INTEIRO) -->
+        <div class="pets-fixed-header" style="background:#EDE8DF; padding:6px 12px 4px; box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+          <!-- LINHA DE REGISTRO RÁPIDO SLIM COM ROLAGEM HORIZONTAL SUAVE -->
+          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:4px;">
+            <span style="font-size:10.5px; font-weight:900; letter-spacing:0.5px; color:#2E2417; text-transform:uppercase;">Rede de Proteção Animal</span>
+            <span style="font-size:9.5px; color:#6E5A3C; font-weight:700;">Toque para registrar</span>
+          </div>
+          <div style="display:flex; gap:6px; overflow-x:auto; padding-bottom:4px; -webkit-overflow-scrolling:touch; scrollbar-width:none;">
+            <button type="button" onclick="abrirModalPet('pet_perdido')" style="flex-shrink:0; height:28px; padding:0 10px; font-size:11px; font-weight:800; border-radius:999px; background:#FFFFFF; color:#2E2417; border:1px solid rgba(0,0,0,0.14); cursor:pointer;">+ Pet Desaparecido</button>
+            <button type="button" onclick="abrirModalPet('pet_resgatado')" style="flex-shrink:0; height:28px; padding:0 10px; font-size:11px; font-weight:800; border-radius:999px; background:#FFFFFF; color:#2E2417; border:1px solid rgba(0,0,0,0.14); cursor:pointer;">+ Animal Resgatado</button>
+            <button type="button" onclick="abrirModalPet('pet_reencontrado')" style="flex-shrink:0; height:28px; padding:0 10px; font-size:11px; font-weight:800; border-radius:999px; background:#FFFFFF; color:#2E2417; border:1px solid rgba(0,0,0,0.14); cursor:pointer;">+ Reencontro</button>
+            <button type="button" onclick="abrirModalPet('pet_adocao')" style="flex-shrink:0; height:28px; padding:0 10px; font-size:11px; font-weight:800; border-radius:999px; background:#FFFFFF; color:#2E2417; border:1px solid rgba(0,0,0,0.14); cursor:pointer;">+ Para Adoção</button>
+            <button type="button" onclick="abrirModalPet('pet_denuncia_maustratos')" style="flex-shrink:0; height:28px; padding:0 10px; font-size:11px; font-weight:800; border-radius:999px; background:#FEF2F2; color:#DC2626; border:1px solid rgba(220,38,38,0.3); cursor:pointer;">SOS / Denúncia</button>
           </div>
 
           <!-- 4 PILARES OFICIAIS: DESAPARECIDOS | RESGATADOS | REENCONTRO | PARA ADOÇÃO -->
-          <div class="pet-pillars-segmented" id="pets-main-pills" style="margin-top:8px; margin-bottom:2px; background:#EDE8DF; border-radius:10px; padding:3px; display:grid; grid-template-columns:repeat(4, 1fr); gap:4px; border:none;">
-            <button type="button" class="pillar-tab active" id="btn-pillar-desaparecidos" onclick="alternarPilarPet('desaparecidos')">
+          <div class="pet-pillars-segmented" id="pets-main-pills" style="margin-top:2px; margin-bottom:2px; background:#E4D5BC; border-radius:8px; padding:2px; display:grid; grid-template-columns:repeat(4, 1fr); gap:3px; border:none;">
+            <button type="button" class="pillar-tab active" id="btn-pillar-desaparecidos" onclick="alternarPilarPet('desaparecidos')" style="height:28px; font-size:11px; padding:0;">
               <span>Desaparecidos</span>
             </button>
-            <button type="button" class="pillar-tab" id="btn-pillar-resgatados" onclick="alternarPilarPet('resgatados')">
+            <button type="button" class="pillar-tab" id="btn-pillar-resgatados" onclick="alternarPilarPet('resgatados')" style="height:28px; font-size:11px; padding:0;">
               <span>Resgatados</span>
             </button>
-            <button type="button" class="pillar-tab" id="btn-pillar-reencontro" onclick="alternarPilarPet('reencontro')">
+            <button type="button" class="pillar-tab" id="btn-pillar-reencontro" onclick="alternarPilarPet('reencontro')" style="height:28px; font-size:11px; padding:0;">
               <span>Reencontro</span>
             </button>
-            <button type="button" class="pillar-tab" id="btn-pillar-adocao" onclick="alternarPilarPet('adocao')">
+            <button type="button" class="pillar-tab" id="btn-pillar-adocao" onclick="alternarPilarPet('adocao')" style="height:28px; font-size:11px; padding:0;">
               <span>Para Adoção</span>
             </button>
           </div>
@@ -4620,7 +4645,7 @@
                 <div style="font-size:11px; font-weight:600; color:#6E5A3C; margin-top:2px;">Comércio Amigo dos Animais & Serviços</div>
               </div>
               <button type="button" onclick="abrirModalSejaParceiro()" style="background:#009B3A; color:#FFFFFF; border:none; border-radius:999px; padding:6px 12px; font-size:11px; font-weight:800; cursor:pointer; display:flex; align-items:center; gap:4px; box-shadow:0 2px 8px rgba(0,155,58,0.25); flex-shrink:0;">
-                <span>🤝 Seja Parceiro</span>
+                <span>Seja Parceiro</span>
               </button>
             </div>
             <div style="font-size:11px; font-weight:800; color:#009B3A; margin-top:5px; display:flex; align-items:center; gap:5px;">
@@ -4636,7 +4661,7 @@
               <button type="button" class="btn-filtro-parceiro" onclick="filtrarCategoriaParceiro('racao', this)">Rações</button>
               <button type="button" class="btn-filtro-parceiro" onclick="filtrarCategoriaParceiro('farmacia', this)">Farmácias</button>
               <button type="button" class="btn-filtro-parceiro" onclick="filtrarCategoriaParceiro('servicos', this)">Serviços Pet</button>
-              <button type="button" class="btn-filtro-parceiro" onclick="abrirModalSejaParceiro()" style="background:#009B3A !important; color:#FFFFFF !important; font-weight:800; border:none; display:flex; align-items:center; gap:4px; flex-shrink:0;">🤝 Seja Parceiro</button>
+              <button type="button" class="btn-filtro-parceiro" onclick="abrirModalSejaParceiro()" style="background:#009B3A !important; color:#FFFFFF !important; font-weight:800; border:none; display:flex; align-items:center; gap:4px; flex-shrink:0;">Seja Parceiro</button>
             </div>
           </div>
         </div>
@@ -4707,7 +4732,7 @@
 
         <!-- Botão Guia do Testador -->
         <button type="button" onclick="abrirGuiaTestador()" style="width:100%; background:#EDE8DF; color:#009B3A; font-weight:900; font-size:11.5px; border:1px solid rgba(0,155,58,0.3); border-radius:12px; padding:9px; cursor:pointer; text-align:center;">
-          📋 GUIA E MISSÕES DO TESTADOR
+          GUIA E MISSÕES DO TESTADOR
         </button>
       </section>
       <!-- Ondulação Inferior Orgânica (Conexão Verde com Bottom Nav) -->
@@ -4722,7 +4747,7 @@
     <!-- ==================== ESTEIRA FIXA DE PARCEIROS (CONGELADA NO RODAPÉ) ==================== -->
     <div id="esteira-parceiros-docked" class="esteira-parceiros-docked" style="display:none;">
       <div class="esteira-docked-header">
-        <span class="esteira-docked-title">⭐ REDE DE PARCEIROS DE CASCAVEL</span>
+        <span class="esteira-docked-title">REDE DE PARCEIROS DE CASCAVEL</span>
         <button type="button" class="esteira-docked-link" onclick="trocarAba('parceiros')">Ver Guia ↗</button>
       </div>
       <div class="esteira-docked-viewport">
@@ -4935,9 +4960,23 @@
     </div>
   </div>
 
-  <!-- ==================== MODAL: DETALHES DO ITEM ==================== -->
-  <div class="sheet-backdrop" id="modal-detalhe" onclick="if(event.target===this) fecharModal('modal-detalhe')">
-    <div class="sheet" id="detalhe-conteudo"></div>
+  <!-- ==================== TELA COMPLETA: DETALHES DO PET / OCORRÊNCIA EM TELA CHEIA ==================== -->
+  <div class="full-screen-view" id="modal-detalhe" style="display:none; flex-direction:column; background:#EDE8DF; z-index:2600;">
+    <div class="fs-header" id="detalhe-fs-header" style="background:#009B3A; color:#FFFFFF; padding:calc(env(safe-area-inset-top, 0px) + 12px) 16px 14px; display:flex; align-items:center; justify-content:space-between; flex-shrink:0;">
+      <button type="button" class="fs-back" onclick="fecharModal('modal-detalhe')" style="background:#000000; color:#FFFFFF; border:none; border-radius:999px; padding:7px 15px; font-weight:800; cursor:pointer;">‹ Voltar</button>
+      <div style="text-align:center;">
+        <div style="font-size:16px; font-weight:900; color:#FFFFFF;" id="detalhe-header-title">Ficha do Animal</div>
+        <div style="font-size:10.5px; font-weight:800; color:#FED700; letter-spacing:0.5px;" id="detalhe-header-sub">Alerta Pet Brasil</div>
+      </div>
+      <div style="width:48px;"></div>
+    </div>
+    <div class="profile-river-wave" style="background:#009B3A; line-height:0; flex-shrink:0;">
+      <svg viewBox="0 0 500 16" preserveAspectRatio="none" style="width:100%; height:16px; display:block;">
+        <path d="M 0,0 L 500,0 L 500,4 C 420,16 330,2 240,12 C 150,18 80,4 0,14 Z" fill="#EDE8DF"/>
+      </svg>
+    </div>
+    <div class="fs-content" id="detalhe-conteudo" style="flex:1; overflow-y:auto; padding:16px 18px calc(env(safe-area-inset-bottom, 0px) + 30px); -webkit-overflow-scrolling:touch; max-width:560px; margin:0 auto; width:100%; box-sizing:border-box;">
+    </div>
   </div>
 
   <!-- ==================== MODAL: FOLDER COMERCIAL DO PARCEIRO ==================== -->
@@ -5593,7 +5632,6 @@
       <!-- Boas-vindas -->
       <div style="background:#ffffff; border-radius:16px; padding:18px; margin-bottom:14px; box-shadow:0 3px 12px rgba(0,0,0,0.06); border:1.5px solid rgba(0,155,58,0.25);">
         <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px;">
-          <span style="font-size:26px;">🐾</span>
           <div>
             <div style="font-size:16px; font-weight:900; color:#009B3A;">Bem-vindo, Testador Pioneiro!</div>
             <div style="font-size:11.5px; font-weight:700; color:#71717A;">Ambiente de Testes Fechado Oficial</div>
@@ -5607,8 +5645,8 @@
 
       <!-- Missão do Testador (Roteiro Completo) -->
       <div style="background:#ffffff; border-radius:16px; padding:18px; margin-bottom:14px; box-shadow:0 3px 12px rgba(0,0,0,0.06); border:1px solid rgba(0,0,0,0.08);">
-        <div style="font-size:13.5px; font-weight:900; color:#1C1917; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:10px; display:flex; align-items:center; gap:6px;">
-          <span>🎯</span> Suas Missões nos 14 Dias (Faça um pouco a cada dia)
+        <div style="font-size:13.5px; font-weight:900; color:#1C1917; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:10px;">
+          Suas Missões nos 14 Dias (Faça um pouco a cada dia)
         </div>
         <div style="display:flex; flex-direction:column; gap:10px; font-size:12px; color:#2E2417; line-height:1.45;">
           <div style="background:#F4EFE6; padding:10px 12px; border-radius:10px; border-left:4px solid #009B3A;">
@@ -5627,7 +5665,7 @@
             <b>Dia 5 (Copiloto & Patinha Flutuante):</b> Na aba Copiloto, ative a Patinha Flutuante e teste as locuções com miado/latido (Voz Feminina e Masculina).
           </div>
           <div style="background:#F4EFE6; padding:10px 12px; border-radius:10px; border-left:4px solid #3B82F6;">
-            <b>Dia 6 (Interações no Mapa & WhatsApp):</b> Abra qualquer pet no mapa e clique em <b>"Marcar Onde Vi"</b> ou no botão <b>"❤️ Quero Adotar"</b> simulando uma mensagem no WhatsApp.
+            <b>Dia 6 (Interações no Mapa & WhatsApp):</b> Abra qualquer pet no mapa e clique em <b>"Marcar Onde Vi"</b> ou no botão <b>"Quero Adotar"</b> simulando uma mensagem no WhatsApp.
           </div>
           <div style="background:#F4EFE6; padding:10px 12px; border-radius:10px; border-left:4px solid #8B5CF6;">
             <b>Dia 7 (Denúncia Protetiva Sigilosa):</b> No menu de qualquer card de teste, simule uma denúncia protetiva com garantia de sigilo de ponta a ponta.
@@ -5641,7 +5679,7 @@
       <!-- Recursos Chave -->
       <div style="background:#ffffff; border-radius:16px; padding:18px; margin-bottom:18px; box-shadow:0 3px 12px rgba(0,0,0,0.06); border:1px solid rgba(0,0,0,0.08);">
         <div style="font-size:13.5px; font-weight:900; color:#1C1917; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:10px;">
-          🚀 Recursos Exclusivos para Você Explorar
+          Recursos Exclusivos para Você Explorar
         </div>
         <ul style="margin:0; padding-left:18px; font-size:12px; color:#2E2417; line-height:1.6;">
           <li><b>Patinha Flutuante em Chroma Key:</b> Acompanha você sobre o Waze, Google Maps e tela inicial alertando a 450m de pets sumidos.</li>
@@ -5653,7 +5691,7 @@
 
       <!-- Botão CTA Principal -->
       <button type="button" onclick="fecharGuiaTestador(true)" style="width:100%; background:#009B3A; color:#ffffff; font-size:15px; font-weight:900; padding:15px; border-radius:14px; border:none; cursor:pointer; box-shadow:0 4px 14px rgba(0,155,58,0.35); text-align:center;">
-        🐾 Entendi! Começar a Testar Agora
+        Entendi! Começar a Testar Agora
       </button>
 
     </div>
@@ -6001,17 +6039,17 @@
           const ehOuro = parc.selo_tipo === 'ouro';
           const borderColor = ehOuro ? '#FED700' : '#009B3A';
           const ICONES_SEGMENTOS_APP = {
-            'pet_vet': '🐾',
-            'pet_shop': '🐕',
-            'banho_tosa': '🛁',
-            'auto_center': '🚗',
-            'borracharia': '🛞',
-            'posto': '⛽',
-            'moto_mecanica': '🏍️',
-            'carro_mecanica': '🔧',
-            'alimentacao': '🍔'
+            'pet_vet': '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>',
+            'pet_shop': '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>',
+            'banho_tosa': '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2"><path d="M7 21h10M12 3v14M8 7l4-4 4 4"/></svg>',
+            'auto_center': '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2"><rect x="3" y="11" width="18" height="8" rx="2"/><path d="M5 11l2-6h10l2 6"/></svg>',
+            'borracharia': '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/></svg>',
+            'posto': '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2"><path d="M3 22h12M4 2h10a1 1 0 011 1v19H4V2zM15 7h4a2 2 0 012 2v10a2 2 0 01-2 2"/></svg>',
+            'moto_mecanica': '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2"><circle cx="5" cy="17" r="3"/><circle cx="19" cy="17" r="3"/><path d="M9 17h6l2-7H7l2 7z"/></svg>',
+            'carro_mecanica': '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>',
+            'alimentacao': '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2"><path d="M18 8h1a4 4 0 010 8h-1M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8zM6 1v3M10 1v3M14 1v3"/></svg>'
           };
-          const badgeIcon = ICONES_SEGMENTOS_APP[parc.categoria] || '🏢';
+          const badgeIcon = ICONES_SEGMENTOS_APP[parc.categoria] || '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>';
 
           const customPartnerIcon = L.divIcon({
             className: 'custom-leaflet-partner-pin',
@@ -6764,6 +6802,36 @@
       return dt.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
     }
 
+    /* ==================== REGRA SUPREMA DE CORES DOS ANIMAIS (RIGO) ====================
+       - Macho: AZUL (#DCF0FF)
+       - Fêmea: ROSA (#FFE0EE)
+       - Indefinido / Aves / Ninhada / Não informado: ROXO (#EAE0FF)
+       Aplicado em 100% dos cards: Aba Pets, Radar Flutuante e Detalhes.
+       ================================================================================== */
+    function obterTemaGeneroPet(p) {
+      if (!p) return { tema: 'tema-roxo', corBg: '#EAE0FF', corTexto: '#4C1D95', corBorda: '#D8B4FE', coresBolhas: ['roxa', 'azul', 'rosa'], genero: 'indefinido' };
+      const raw = ((p.sexo || '') + ' ' + (p.especie || '') + ' ' + (p.titulo || '') + ' ' + (p.descricao || '')).toLowerCase();
+      
+      const ehAve = raw.includes('ave') || raw.includes('pássaro') || raw.includes('passaro') || raw.includes('calopsita') || raw.includes('periquito') || raw.includes('canário') || raw.includes('canario') || raw.includes('papagaio');
+      const ehNinhada = raw.includes('ninhada') || raw.includes('filhotes') || raw.includes('ninhadinha') || raw.includes('indefinido') || raw.includes('não informado') || raw.includes('nao informado') || raw.includes('não sabe') || raw.includes('nao sabe');
+      
+      if (ehAve || ehNinhada) {
+        return { tema: 'tema-roxo', corBg: '#EAE0FF', corTexto: '#4C1D95', corBorda: '#D8B4FE', coresBolhas: ['roxa', 'azul', 'rosa'], genero: 'indefinido' };
+      }
+      
+      const ehFemea = (p.sexo && p.sexo.toLowerCase().startsWith('f')) || raw.includes('fêmea') || raw.includes('femea') || raw.includes('gata') || raw.includes('cadela') || raw.includes('menininha');
+      if (ehFemea) {
+        return { tema: 'tema-rosa', corBg: '#FFE0EE', corTexto: '#831843', corBorda: '#F9A8D4', coresBolhas: ['rosa', 'roxa', 'rosa'], genero: 'femea' };
+      }
+
+      const ehMacho = (p.sexo && p.sexo.toLowerCase().startsWith('m')) || raw.includes('macho') || raw.includes('gato') || raw.includes('cachorro') || raw.includes('cão') || raw.includes('cao') || raw.includes('machinho') || p.id === 5514 || raw.includes('tico');
+      if (ehMacho) {
+        return { tema: 'tema-azul', corBg: '#DCF0FF', corTexto: '#0C4A6E', corBorda: '#93C5FD', coresBolhas: ['azul', 'roxa', 'azul'], genero: 'macho' };
+      }
+
+      return { tema: 'tema-roxo', corBg: '#EAE0FF', corTexto: '#4C1D95', corBorda: '#D8B4FE', coresBolhas: ['roxa', 'azul', 'rosa'], genero: 'indefinido' };
+    }
+
     function renderizarPetsAba() {
       const pilarAtivo = state.petMainPillar || 'desaparecidos';
       let pets = [];
@@ -6865,12 +6933,7 @@
           autorLetra = autorNome.charAt(0).toUpperCase();
         }
 
-        // Bloco Sólido (Roxo, Rosa ou Azul) + 3 Bolhas Coloridas Grandes Sem Margem (Sempre no Fundo)
-        const temasBloco = [
-          { tema: 'tema-roxo', cores: ['rosa', 'azul', 'roxa'] },
-          { tema: 'tema-rosa', cores: ['roxa', 'azul', 'rosa'] },
-          { tema: 'tema-azul', cores: ['rosa', 'roxa', 'azul'] }
-        ];
+        const temaInfo = obterTemaGeneroPet(p);
         const presetsPosicoes = [
           [
             'top:-55px; right:-45px; width:170px; height:170px;',
@@ -6894,14 +6957,13 @@
           ]
         ];
 
-        const blocoCfg = temasBloco[idx % temasBloco.length];
         const parPos = presetsPosicoes[idx % presetsPosicoes.length];
 
         const bolhasHtml = `
           <div class="pet-card-bg-bubbles" aria-hidden="true">
-            <div class="pet-bubble bubble-${blocoCfg.cores[0]}" style="${parPos[0]}"></div>
-            <div class="pet-bubble bubble-${blocoCfg.cores[1]}" style="${parPos[1]}"></div>
-            <div class="pet-bubble bubble-${blocoCfg.cores[2]}" style="${parPos[2]}"></div>
+            <div class="pet-bubble bubble-${temaInfo.coresBolhas[0]}" style="${parPos[0]}"></div>
+            <div class="pet-bubble bubble-${temaInfo.coresBolhas[1]}" style="${parPos[1]}"></div>
+            <div class="pet-bubble bubble-${temaInfo.coresBolhas[2]}" style="${parPos[2]}"></div>
           </div>
         `;
 
@@ -6977,7 +7039,7 @@
         }
 
         return `
-          <div class="pet-card ${blocoCfg.tema}" id="pet-card-${p.id}">
+          <div class="pet-card ${temaInfo.tema}" id="pet-card-${p.id}">
             <!-- Camada de Fundo: Bloco Sólido + Bolhas Coloridas Grandes Sem Margem -->
             ${bolhasHtml}
 
@@ -7142,7 +7204,7 @@
           const svg = btn.querySelector('svg');
           if (svg) { svg.setAttribute('fill', '#10b981'); svg.style.stroke = '#10b981'; }
         }
-        mostrarToast('❤️ Você apoiou esta causa!');
+        mostrarToast('Você apoiou esta causa!');
       }
       try { localStorage.setItem('alerta_pets_curtidos', JSON.stringify(curtidos)); } catch(e) {}
     }
@@ -7207,7 +7269,7 @@
 
     function denunciarPetCard(petId) {
       fecharMenuPetCard();
-      mostrarToast('🛡️ Denúncia registrada sob sigilo total. Nossa equipe analisará em até 24 horas.');
+      mostrarToast('Denúncia registrada sob sigilo total. Nossa equipe analisará em até 24 horas.');
     }
 
     function bloquearAutorPet(petId) {
@@ -7244,18 +7306,18 @@
       const bairroStr = (pet.bairro || 'Cascavel').toUpperCase();
 
       const textoWhatsApp = 
-`📢 *ALERTA URBANO CASCAVEL*
-🐾 *${statusLabel}*
+`*ALERTA PET BRASIL - CASCAVEL*
+*${statusLabel}*
 
-🐶 *Nome:* ${pet.titulo}
-📍 *Bairro:* ${bairroStr} • Cascavel/PR
-${pet.porte ? `📏 *Porte:* ${pet.porte}\n` : ''}${pet.especie ? `🐾 *Espécie:* ${pet.especie}\n` : ''}${pet.recompensa ? `💰 *Recompensa:* ${pet.recompensa}\n` : ''}${pet.descricao ? `📝 *Detalhes:* ${pet.descricao}\n` : ''}
-🖼️ *VER CARTAZ OFICIAL COM FOTO:*
-👉 ${cartazUrl}
+*Nome:* ${pet.titulo}
+*Bairro:* ${bairroStr} • Cascavel/PR
+${pet.porte ? `*Porte:* ${pet.porte}\n` : ''}${pet.especie ? `*Espécie:* ${pet.especie}\n` : ''}${pet.recompensa ? `*Recompensa:* ${pet.recompensa}\n` : ''}${pet.descricao ? `*Detalhes:* ${pet.descricao}\n` : ''}
+*VER CARTAZ OFICIAL COM FOTO:*
+${cartazUrl}
 
-📱 *Ajude a monitorar animais e segurança em Cascavel:*
-Baixe o aplicativo gratuito Alerta Urbano:
-👉 ${downloadUrl}`;
+*Ajude a monitorar animais e proteção em Cascavel:*
+Baixe o aplicativo gratuito Alerta Pet Brasil:
+${downloadUrl}`;
 
       mostrarToast('Abrindo WhatsApp com o Cartaz Oficial...');
 
@@ -7309,7 +7371,11 @@ Baixe o aplicativo gratuito Alerta Urbano:
       const ehAvistado = a.status_pet === 'avistado' || a.tipo === 'pet_avistado';
       const ehImprensaPet = ehPet && (a.fonte_tipo === 'imprensa' || (!a.tem_tutor_notificavel && a.link_noticia));
 
-      let photoHtml = a.foto_url ? `<img src="${escapeAttr(a.foto_url)}" class="detail-photo" alt="Foto">` : '';
+      let photoHtml = a.foto_url
+        ? `<div style="position:relative; width:100%; height:230px; border-radius:16px; overflow:hidden; background:#000000; margin-bottom:12px; cursor:pointer;" onclick="abrirFotoZoom('${escapeAttr(a.foto_url)}', '${escapeAttr(a.titulo)}')">
+             <img src="${escapeAttr(a.foto_url)}" style="width:100%; height:100%; object-fit:contain;" alt="Foto">
+           </div>`
+        : '';
       let extraMeta = '';
       if (ehPet) {
         const partes = [a.especie, a.porte, a.recompensa ? 'Recompensa: ' + a.recompensa : ''].filter(Boolean);
@@ -7332,9 +7398,14 @@ Baixe o aplicativo gratuito Alerta Urbano:
         tagTexto = 'Utilidade Pública';
       }
 
+      const hTitle = document.getElementById('detalhe-header-title');
+      const hSub = document.getElementById('detalhe-header-sub');
+      if (hTitle) hTitle.innerText = ehPet ? (a.titulo || 'Ficha do Animal') : 'Detalhes da Ocorrência';
+      if (hSub) hSub.innerText = tagTexto.toUpperCase();
+
       let botoes = '';
       if (a.tipo === 'pet_adocao') {
-        botoes += `<button type="button" class="btn-full" style="background:#ffffff; color:#09090b; font-weight:800;" onclick="abrirContatoAdocao(${a.id})">❤️ Quero Adotar (Falar no WhatsApp)</button>`;
+        botoes += `<button type="button" class="btn-full" style="background:#009B3A; color:#FFFFFF; font-weight:800; border:none; display:flex; align-items:center; justify-content:center; gap:8px;" onclick="abrirContatoAdocao(${a.id})"><span>Quero Adotar no WhatsApp</span></button>`;
       }
       if (a.tipo === 'pet_denuncia_maustratos') {
         botoes += `<button type="button" class="btn-full danger" onclick="abrirDossieDenuncia(${a.id})">Copiar Dossiê Oficial e Abrir Ouvidoria 156</button>`;
@@ -7343,12 +7414,11 @@ Baixe o aplicativo gratuito Alerta Urbano:
         if (ehImprensaPet) {
           botoes += `<button type="button" class="btn-full" onclick="abrirModalAvistamento(${a.id}, true, 'avistamento')">Marcar no Mapa onde Vi este Pet</button>`;
         } else {
-          botoes += `<button type="button" class="btn-full pet" onclick="abrirModalAvistamento(${a.id}, false, 'avistamento')">Marcar Onde Vi (Na Trilha do Mapa)</button>`;
-          botoes += `<button type="button" class="btn-full whatsapp" onclick="abrirModalAvistamento(${a.id}, false, 'resgatado')">Pet Resgatado (Enviar Foto ao Tutor)</button>`;
-          botoes += `<button type="button" class="btn-full" style="background:#25D366; color:#ffffff; font-weight:800; border:none; margin-top:4px;" onclick="falarComTutorWhatsApp(${a.id})">💬 Falar com Tutor no WhatsApp</button>`;
+          botoes += `<button type="button" class="btn-full pet" style="background:#0284C7; color:#FFFFFF; border:none;" onclick="abrirModalAvistamento(${a.id}, false, 'avistamento')">Marcar Onde Vi (Na Trilha do Mapa)</button>`;
+          botoes += `<button type="button" class="btn-full whatsapp" style="background:#059669; color:#FFFFFF; border:none; margin-top:6px;" onclick="abrirModalAvistamento(${a.id}, false, 'resgatado')">Pet Resgatado (Enviar Foto ao Tutor)</button>`;
+          botoes += `<button type="button" class="btn-full" style="background:#25D366; color:#ffffff; font-weight:800; border:none; margin-top:6px; display:flex; align-items:center; justify-content:center; gap:8px;" onclick="falarComTutorWhatsApp(${a.id})"><span>Falar com Tutor no WhatsApp</span></button>`;
         }
-        botoes += `<button type="button" class="btn-full" onclick="verTrilhaPetNoMapa(${a.id})">Ver Trilha / Caminho no Mapa</button>`;
-        botoes += `<button type="button" class="btn-full" style="background:#0F172A; color:#FED700; font-weight:800; border:1px solid #334155; margin-top:4px;" onclick="fecharModal('modal-detalhe'); dispararAlertaRadarWeb(state.alertas.find(x => x.id === ${a.id}))">🔊 Ouvir / Testar Card de Trânsito</button>`;
+        botoes += `<button type="button" class="btn-full" style="background:#FFFFFF; color:#2E2417; font-weight:800; border:1px solid rgba(0,0,0,0.18); margin-top:6px; display:flex; align-items:center; justify-content:center; gap:8px;" onclick="verTrilhaPetNoMapa(${a.id})"><span>Ver Trilha / Caminho no Mapa</span></button>`;
       }
       if (a.link_noticia) {
         const lbl = ehImprensaPet ? `Ver Contato da Ocorrência ↗` : `Ler Matéria Completa ↗`;
@@ -7369,7 +7439,7 @@ Baixe o aplicativo gratuito Alerta Urbano:
         : '';
 
       const timelineSlot = (ehPet && !ehAvistado)
-        ? `<div id="detalhe-timeline-slot" class="timeline-box" style="display:none;"></div>`
+        ? `<div id="detalhe-timeline-slot" class="timeline-box" style="display:none; margin-top:12px;"></div>`
         : '';
 
       const descricaoLimpa = (a.descricao || 'Sem descrição adicional.')
@@ -7379,22 +7449,27 @@ Baixe o aplicativo gratuito Alerta Urbano:
         .trim();
 
       box.innerHTML = `
-        <div class="sheet-handle"></div>
-        <div class="sheet-header">
-          <span class="source-tag ${a.pilar}">${tagTexto}</span>
-          <button type="button" class="sheet-close" onclick="fecharModal('modal-detalhe')">✕</button>
+        <div style="background:#FFFFFF; border-radius:18px; padding:16px; box-shadow:0 3px 12px rgba(0,0,0,0.06); border:1px solid rgba(0,0,0,0.08);">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+            <span class="source-tag ${a.pilar}" style="font-size:11px; font-weight:800; padding:4px 10px; border-radius:8px;">${tagTexto}</span>
+            <span style="font-size:11.5px; color:#71717A; font-weight:700;">${tempoRelativo(a.created_at)}</span>
+          </div>
+          ${photoHtml}
+          <div style="font-size:19px; font-weight:900; line-height:1.25; color:#18181B;">${escapeHtml(a.titulo)}</div>
+          <div style="font-size:12.5px; color:#52525B; font-weight:700; margin-top:4px;">${escapeHtml(a.bairro || 'Cascavel')}</div>
+          ${extraMeta}
+          <div style="font-size:13.5px; color:#27272A; line-height:1.55; margin-top:12px; white-space:pre-line;">${escapeHtml(descricaoLimpa)}</div>
+          ${timelineSlot}
         </div>
-        ${photoHtml}
-        <div style="font-size:18px;font-weight:800;line-height:1.25;">${escapeHtml(a.titulo)}</div>
-        <div style="font-size:12px;color:var(--text-muted);margin-top:4px;">${escapeHtml(a.bairro || 'Cascavel')} • ${tempoRelativo(a.created_at)}</div>
-        ${extraMeta}
-        <div style="font-size:13px;color:var(--text);line-height:1.5;margin-top:10px;">${escapeHtml(descricaoLimpa)}</div>
-        ${timelineSlot}
-        <div class="detail-actions">${botoes}</div>
+        <div class="detail-actions" style="margin-top:14px; display:flex; flex-direction:column; gap:6px;">${botoes}</div>
         ${notaTutorImprensa}
       `;
 
-      document.getElementById('modal-detalhe').classList.add('open');
+      const md = document.getElementById('modal-detalhe');
+      if (md) {
+        md.style.display = 'flex';
+        md.classList.add('open');
+      }
       if (ehPet && !ehAvistado) carregarTimelineNaFicha(a.id);
     }
 
@@ -7421,16 +7496,27 @@ Baixe o aplicativo gratuito Alerta Urbano:
 
     async function verTrilhaPetNoMapa(petId) {
       fecharModal('modal-detalhe');
+      const pet = (state.alertas || []).find(a => a.id === petId);
+
+      // Ativa pilar pet no mapa
+      state.mapaFilter = 'pet';
+      document.querySelectorAll('.map-pill').forEach(p => {
+        p.classList.toggle('active', p.getAttribute('data-pilar') === 'pet');
+      });
       trocarAba('mapa');
+
+      const targetLat = pet?.lat || -24.9555;
+      const targetLng = pet?.lng || -53.4550;
+
       try {
         const resp = await fetch(`/api/pets/${petId}/trilha`);
-        if (!resp.ok) return;
-        const data = await resp.json();
+        let data = { pontos: [] };
+        if (resp.ok) data = await resp.json();
+
         setTimeout(() => {
-          if (!map || !trailLayer) return;
+          if (!map) return;
+          if (!trailLayer) trailLayer = L.layerGroup().addTo(map);
           trailLayer.clearLayers();
-          if (markersLayer) markersLayer.clearLayers();
-          if (heatLayer) { map.removeLayer(heatLayer); heatLayer = null; }
 
           const coords = [];
           (data.pontos || []).forEach(pt => {
@@ -7448,46 +7534,43 @@ Baixe o aplicativo gratuito Alerta Urbano:
             L.marker([pt.lat, pt.lng], { icon }).addTo(trailLayer);
           });
 
-          if (coords.length >= 2) {
-            L.polyline(coords, {
-              color: '#f59e0b',
-              weight: 3.5,
-              opacity: 0.9,
-              dashArray: '8, 7'
-            }).addTo(trailLayer);
-            if (data.estimativa_epicentro && data.estimativa_epicentro.lat && data.estimativa_epicentro.lng) {
-              L.circle([data.estimativa_epicentro.lat, data.estimativa_epicentro.lng], {
-                radius: data.estimativa_epicentro.raio_m || 500,
-                color: '#F59E0B',
-                weight: 2,
-                dashArray: '6, 6',
-                fillColor: '#F59E0B',
-                fillOpacity: 0.12
-              }).addTo(trailLayer);
-            }
-            map.fitBounds(coords, { padding: [55, 70], maxZoom: 16 });
-          } else if (coords.length === 1) {
-            if (data.estimativa_epicentro && data.estimativa_epicentro.lat && data.estimativa_epicentro.lng) {
-              L.circle([data.estimativa_epicentro.lat, data.estimativa_epicentro.lng], {
-                radius: data.estimativa_epicentro.raio_m || 500,
-                color: '#F59E0B',
-                weight: 2,
-                dashArray: '6, 6',
-                fillColor: '#F59E0B',
-                fillOpacity: 0.12
-              }).addTo(trailLayer);
-            }
-            map.flyTo(coords[0], 15, { duration: 0.5 });
+          if (coords.length === 0 && targetLat && targetLng) {
+            coords.push([targetLat, targetLng]);
           }
 
-          document.getElementById('trail-bar-title').textContent = `Trilha: ${data.pet_titulo}`;
-          document.getElementById('trail-bar-sub').textContent = data.total_eventos > 0
-            ? `${data.total_eventos} ${data.total_eventos === 1 ? 'ponto registrado' : 'pontos registrados'} em ordem de horário`
-            : 'Ponto inicial do desaparecimento (aguardando avistamentos)';
-          document.getElementById('trail-bar').classList.add('show');
-        }, 140);
+          if (coords.length >= 2) {
+            L.polyline(coords, {
+              color: '#F59E0B',
+              weight: 4,
+              opacity: 0.95,
+              dashArray: '8, 7'
+            }).addTo(trailLayer);
+            map.fitBounds(coords, { padding: [60, 60], maxZoom: 17 });
+          } else if (coords.length === 1) {
+            L.circle(coords[0], {
+              radius: 180,
+              color: '#009B3A',
+              weight: 2,
+              dashArray: '6, 6',
+              fillColor: '#009B3A',
+              fillOpacity: 0.15
+            }).addTo(trailLayer);
+            map.flyTo(coords[0], 17, { duration: 0.6 });
+          }
+
+          const bar = document.getElementById('trail-bar');
+          const trailTitle = document.getElementById('trail-bar-title');
+          const trailSub = document.getElementById('trail-bar-sub');
+          if (trailTitle) trailTitle.textContent = `Trilha: ${pet ? pet.titulo : (data.pet_titulo || 'Pet')}`;
+          if (trailSub) trailSub.textContent = coords.length > 1
+            ? `${coords.length} pontos registrados no mapa em ordem cronológica`
+            : 'Ponto do desaparecimento do animal';
+          if (bar) bar.classList.add('show');
+        }, 220);
       } catch (_) {
-        mostrarToast('Não foi possível carregar a trilha.');
+        if (map && targetLat && targetLng) {
+          map.flyTo([targetLat, targetLng], 17, { duration: 0.6 });
+        }
       }
     }
 
@@ -8192,7 +8275,7 @@ Baixe o aplicativo gratuito Alerta Urbano:
       const origem = document.querySelector('input[name="origem_reencontro"]:checked')?.value || 'app_alerta_pet';
       const feedback = document.getElementById('feedback-reencontro-texto')?.value || '';
 
-      mostrarToast('Registrando celebração de reencontro... 🎉');
+      mostrarToast('Registrando celebração de reencontro...');
       try {
         const resp = await fetch(`/api/alertas/${petIdParaReencontro}/confirmar-reencontro`, {
           method: 'POST',
@@ -8205,7 +8288,7 @@ Baixe o aplicativo gratuito Alerta Urbano:
         });
 
         if (resp.ok) {
-          mostrarToast('Parabéns pelo reencontro! 🐾❤️ Caso concluído com sucesso!');
+          mostrarToast('Parabéns pelo reencontro! Caso concluído com sucesso!');
           fecharModalFeedbackReencontro();
           fecharModal('modal-detalhe');
           await carregarDados();
@@ -8483,6 +8566,23 @@ Baixe o aplicativo gratuito Alerta Urbano:
         document.body.appendChild(card);
       }
 
+      // Backdrop transparente para fechar ao tocar em qualquer área da tela
+      let backdrop = document.getElementById('backdrop-radar-topo-web');
+      if (!backdrop) {
+        backdrop = document.createElement('div');
+        backdrop.id = 'backdrop-radar-topo-web';
+        backdrop.style.cssText = `
+          position: fixed;
+          inset: 0;
+          z-index: 100004;
+          background: transparent;
+          display: none;
+        `;
+        backdrop.onclick = fecharCardRadarTopoWeb;
+        document.body.appendChild(backdrop);
+      }
+      backdrop.style.display = 'block';
+
       card.style.background = bgCor;
       card.style.border = 'none'; // SEM MARGEM / SEM BORDA!
       card.style.color = textCor;
@@ -8503,24 +8603,24 @@ Baixe o aplicativo gratuito Alerta Urbano:
         <div style="position:relative; z-index:2; width: 44px; height: 4px; background: rgba(0,0,0,0.25); border-radius: 2px; margin: 0 auto 10px;"></div>
         
         <!-- Cardzinho dedicado da foto do animal (Grande e emoldurado) - SEM PÍLULA E SEM BORDA -->
-        <div style="position: relative; z-index:2; width: 100%; height: 185px; background: #18181B; border-radius: 16px; border: none; overflow: hidden; margin-bottom: 10px;">
+        <div style="position: relative; z-index:2; width: 100%; height: 185px; background: #18181B; border-radius: 16px; border: none; overflow: hidden; margin-bottom: 10px; cursor:pointer;" onclick="fecharCardRadarTopoWeb(); abrirFotoZoom('${escapeAttr(foto)}', '${escapeAttr(tit)}')">
           <img src="${escapeAttr(foto)}" alt="${escapeAttr(tit)}" style="width: 100%; height: 100%; object-fit: cover; display: block;" onerror="this.src='/static/logo_vortice.png'">
         </div>
 
-        <!-- Título e Subtítulo -->
+        <!-- Título e Subtítulo (SEM EMOJIS) -->
         <div style="position:relative; z-index:2; font-size: 18px; font-weight: 900; color: ${textCor}; text-align: center; line-height: 1.25; margin-bottom: 2px;">
           ${escapeHtml(tit)}
         </div>
         <div style="position:relative; z-index:2; font-size: 13px; font-weight: 800; color: ${textCor}; opacity: 0.9; text-align: center; margin-bottom: 12px;">
-          📍 ${escapeHtml(local)} • ${distTxt}
+          ${escapeHtml(local)}${distTxt ? ` • ${distTxt}` : ''}
         </div>
 
-        <!-- Botões de Ação Cívica no Degradê Bege/Areia Sofisticado -->
+        <!-- Botões de Ação Cívica (SEM EMOJIS CONFORME REGRA OFICIAL) -->
         <div style="display: flex; gap: 8px; width: 100%; margin-bottom: 6px; position:relative; z-index:2;">
-          <button onclick="registrarAvistamentoRapidoWeb(${pet.id})" style="flex: 1; height: 42px; background: linear-gradient(135deg, #C2AB87 0%, #9E8560 100%); color: #FFFFFF; font-weight: 900; font-size: 13.5px; border: 1px solid rgba(138, 118, 86, 0.5); border-radius: 14px; cursor: pointer; box-shadow: 0 3px 10px rgba(110,90,60,0.3); text-shadow: 0 1px 2px rgba(0,0,0,0.2);">🐾 Visto aqui</button>
-          <button onclick="verPetNoMapaWeb(${pet.lat}, ${pet.lng}, ${pet.id})" style="flex: 1; height: 42px; background: linear-gradient(135deg, #E8DEC8 0%, #D4C3A3 100%); color: #443B2C; font-weight: 900; font-size: 13.5px; border: 1px solid rgba(138, 118, 86, 0.4); border-radius: 14px; cursor: pointer; box-shadow: 0 2px 8px rgba(110,90,60,0.15);">📍 Ver no mapa</button>
+          <button onclick="registrarAvistamentoRapidoWeb(${pet.id})" style="flex: 1; height: 42px; background: linear-gradient(135deg, #C2AB87 0%, #9E8560 100%); color: #FFFFFF; font-weight: 900; font-size: 13.5px; border: 1px solid rgba(138, 118, 86, 0.5); border-radius: 14px; cursor: pointer; box-shadow: 0 3px 10px rgba(110,90,60,0.3); text-shadow: 0 1px 2px rgba(0,0,0,0.2);">Visto aqui</button>
+          <button onclick="verPetNoMapaWeb(${pet.lat}, ${pet.lng}, ${pet.id})" style="flex: 1; height: 42px; background: linear-gradient(135deg, #E8DEC8 0%, #D4C3A3 100%); color: #443B2C; font-weight: 900; font-size: 13.5px; border: 1px solid rgba(138, 118, 86, 0.4); border-radius: 14px; cursor: pointer; box-shadow: 0 2px 8px rgba(110,90,60,0.15);">Ver no mapa</button>
         </div>
-        <button onclick="fecharCardRadarTopoWeb()" style="width: 100%; height: 42px; background: linear-gradient(135deg, #BFA782 0%, #947A55 100%); color: #FFFFFF; font-weight: 900; font-size: 13px; border: 1px solid rgba(138, 118, 86, 0.5); border-radius: 14px; cursor: pointer; box-shadow: 0 3px 10px rgba(110,90,60,0.3); text-shadow: 0 1px 2px rgba(0,0,0,0.2); position:relative; z-index:2;">🤝 Estou ciente e ajudando a procurar</button>
+        <button onclick="fecharCardRadarTopoWeb()" style="width: 100%; height: 42px; background: linear-gradient(135deg, #BFA782 0%, #947A55 100%); color: #FFFFFF; font-weight: 900; font-size: 13px; border: 1px solid rgba(138, 118, 86, 0.5); border-radius: 14px; cursor: pointer; box-shadow: 0 3px 10px rgba(110,90,60,0.3); text-shadow: 0 1px 2px rgba(0,0,0,0.2); position:relative; z-index:2;">Estou ciente e ajudando a procurar</button>
       `;
 
       card.style.display = 'flex';
@@ -8528,10 +8628,21 @@ Baixe o aplicativo gratuito Alerta Urbano:
       // Limpa cooldown do teste do Tico para testes contínuos
       try { localStorage.removeItem('radar_pet_cd_5514'); } catch (_) {}
 
+      // Sincronia de Áudio & Card: quando a fala termina, aguarda 1s e fecha
+      if (ttsAudioPlayer) {
+        ttsAudioPlayer.onended = () => {
+          clearTimeout(card._timerFechar);
+          card._timerFechar = setTimeout(() => {
+            fecharCardRadarTopoWeb();
+          }, 1000);
+        };
+      }
+
+      // Fallback máximo de 4.2 segundos caso o áudio termine ou não dispare
       clearTimeout(card._timerFechar);
       card._timerFechar = setTimeout(() => {
         fecharCardRadarTopoWeb();
-      }, 25000); // 25 segundos confortáveis para Rigo avaliar e tirar print com calma
+      }, 4200);
     }
 
     function registrarAvistamentoRapidoWeb(petId) {
@@ -8553,7 +8664,15 @@ Baixe o aplicativo gratuito Alerta Urbano:
 
     function fecharCardRadarTopoWeb() {
       const card = document.getElementById('card-radar-topo-web');
-      if (card) card.style.display = 'none';
+      if (card) {
+        card.style.display = 'none';
+        clearTimeout(card._timerFechar);
+      }
+      const backdrop = document.getElementById('backdrop-radar-topo-web');
+      if (backdrop) backdrop.style.display = 'none';
+      if (ttsAudioPlayer) {
+        try { ttsAudioPlayer.pause(); ttsAudioPlayer.currentTime = 0; } catch(_) {}
+      }
     }
 
     /* ==================== AÇÃO OFICIAL RIGO: CLIQUE NA LOGO DO TOPO ATIVA BOLINHA FLUTUANTE ==================== */
@@ -8820,7 +8939,7 @@ Baixe o aplicativo gratuito Alerta Urbano:
       } catch (_) {}
 
       fecharGoogleAuth();
-      mostrarToast(`✅ Bem-vindo(a), ${nome}! Conta Google conectada.`);
+      mostrarToast(`Bem-vindo(a), ${nome}! Conta Google conectada.`);
       abrirPerfil(false);
     }
 
@@ -9420,10 +9539,10 @@ Baixe o aplicativo gratuito Alerta Urbano:
       <!-- Botões de Contato Rápido Direto -->
       <div style="display:flex; gap:8px; margin-bottom:14px;">
         <button type="button" onclick="chamarWhatsAppCentralParceiro()" style="flex:1; background:#009B3A; color:#FFFFFF; border:none; padding:12px; border-radius:12px; font-size:13px; font-weight:800; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:6px; box-shadow:0 3px 10px rgba(0,155,58,0.3);">
-          <span>💬 Falar no WhatsApp</span>
+          <span>Falar no WhatsApp</span>
         </button>
         <button type="button" onclick="ligarCentralParceiro()" style="background:#2E2417; color:#FED700; border:none; padding:12px 14px; border-radius:12px; font-size:13px; font-weight:800; cursor:pointer; display:flex; align-items:center; gap:6px;">
-          <span>📞 Ligar</span>
+          <span>Ligar</span>
         </button>
       </div>
 
@@ -9513,7 +9632,7 @@ Baixe o aplicativo gratuito Alerta Urbano:
       <div style="max-width:550px; margin:0 auto; background:#E4D5BC; border-radius:18px; padding:20px; box-sizing:border-box; width:100%; box-shadow:0 4px 14px rgba(0,0,0,0.08); color:#2E2417;">
         
         <div style="text-align:center; margin-bottom:16px;">
-          <div style="font-size:42px; margin-bottom:6px;">🐾❤️🎉</div>
+          <div style="width:48px; height:48px; margin:0 auto 10px; background:#009B3A; color:#FFFFFF; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:24px; font-weight:900;">✓</div>
           <h2 style="font-size:18px; font-weight:900; color:#18181B; margin:0;">Que Notícia Maravilhosa!</h2>
           <p style="font-size:12px; color:#475569; margin:6px 0 0; line-height:1.4;">
             Ficamos imensamente felizes que o seu pet está em segurança em casa. Para fortalecermos a rede em Cascavel, nos responda:
@@ -9528,15 +9647,15 @@ Baixe o aplicativo gratuito Alerta Urbano:
             <div style="display:flex; flex-direction:column; gap:8px;">
               <label style="display:flex; align-items:center; gap:10px; background:#FFFFFF; padding:10px 12px; border-radius:12px; border:1px solid rgba(0,0,0,0.08); cursor:pointer;">
                 <input type="radio" name="origem_reencontro" value="app_alerta_pet" checked style="accent-color:#009B3A;">
-                <span style="font-size:12px; font-weight:700; color:#18181B;">⭐ Sim, diretamente pelo Alerta Pet Brasil!</span>
+                <span style="font-size:12px; font-weight:700; color:#18181B;">Sim, diretamente pelo Alerta Pet Brasil</span>
               </label>
               <label style="display:flex; align-items:center; gap:10px; background:#FFFFFF; padding:10px 12px; border-radius:12px; border:1px solid rgba(0,0,0,0.08); cursor:pointer;">
                 <input type="radio" name="origem_reencontro" value="rede_solidaria" style="accent-color:#009B3A;">
-                <span style="font-size:12px; font-weight:700; color:#18181B;">🤝 Pela rede solidária / Amigos / Redes Sociais</span>
+                <span style="font-size:12px; font-weight:700; color:#18181B;">Pela rede solidária / Amigos / Redes Sociais</span>
               </label>
               <label style="display:flex; align-items:center; gap:10px; background:#FFFFFF; padding:10px 12px; border-radius:12px; border:1px solid rgba(0,0,0,0.08); cursor:pointer;">
                 <input type="radio" name="origem_reencontro" value="por_conta_propria" style="accent-color:#009B3A;">
-                <span style="font-size:12px; font-weight:700; color:#18181B;">🔍 Por conta própria / Outros meios</span>
+                <span style="font-size:12px; font-weight:700; color:#18181B;">Por conta própria / Outros meios</span>
               </label>
             </div>
           </div>
