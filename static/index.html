@@ -578,7 +578,7 @@
       background: #009B3A !important;
     }
     .tab-pane#tab-inicio {
-      background: #EDE8DF !important;
+      background: transparent !important;
     }
     .home-pane.active {
       display: flex;
@@ -4518,71 +4518,50 @@
       overflow-y: auto !important;
       min-height: 100% !important;
       height: auto !important;
-      padding-bottom: 0 !important;
-      background: #D8CABA !important;
+      padding-bottom: 4px !important;
+      background: linear-gradient(180deg, 
+        #009B3A 0%, 
+        #009B3A 12%, 
+        #24883C 18%, 
+        #5F9E66 25%, 
+        #B0BF9C 32%, 
+        #D8CABA 38%, 
+        #D8CABA 72%, 
+        #B8C4A4 80%, 
+        #6DA673 88%, 
+        #24883C 94%, 
+        #009B3A 100%) !important;
     }
 
-    /* Bloco do Clima com Degradê Luminoso Verde -> Areia (Quebrando o marrom pesado - Diretriz Rigo) */
+    /* Bloco do Clima Achatado e Compacto (Transparente no degradê superior verde - Diretriz Rigo) */
     .home-weather-zone {
-      background: linear-gradient(180deg, #009B3A 0%, #1F6E37 26%, #526742 56%, #836E50 84%, #A28A6D 100%);
-      padding: 6px 14px 4px;
+      background: transparent !important;
+      padding: 6px 14px 2px;
       color: #FFFFFF;
       flex-shrink: 0;
       position: relative;
     }
 
-    /* Ondulação Grande Superior (Descendo do Topbar Verde para o Degradê) */
-    .wave-green-top {
-      width: 100%;
-      height: 16px;
-      line-height: 0;
-      flex-shrink: 0;
-      background: #009B3A;
-    }
-
-    /* Ondulação Descendo do Clima para o Corpo Areia */
-    .wave-weather-down {
-      width: 100%;
-      height: 14px;
-      line-height: 0;
-      flex-shrink: 0;
-      background: #D8CABA;
-    }
-
-    /* Ondulação Estreita e Pequena Subindo para a Faixa Apoie-nos (Diretriz Rigo) */
-    .wave-apoie-up {
-      width: 100%;
-      height: 10px;
-      line-height: 0;
-      flex-shrink: 0;
-      background: #D8CABA;
-    }
-
-    /* Faixa Apoie-nos com Tom Terroso Harmonioso (Sem hospital/patrocinador - Diretriz Rigo) */
-    .home-apoie-zone {
-      background: #917558; /* Tom terroso cacau suave acolhedor */
-      padding: 8px 12px 10px;
-      color: #FFFFFF;
-      flex-shrink: 0;
-      margin-top: -1px;
-      position: relative;
-    }
-
-    /* Ondulação Menor Inferior conectando a Faixa Apoie-nos ao Menu Verde (Sem linha reta ou corte!) */
+    /* Ondulações Eliminadas - Transição 100% no Degradê Conforme Diretriz Rigo */
+    .wave-green-top,
+    .wave-weather-down,
+    .wave-apoie-up,
+    .wave-apoie-down,
     .bottom-river-wave {
-      display: block !important;
-      width: 100% !important;
-      height: 12px !important; /* Ondulação menor elegante conforme pedido do Rigo */
-      line-height: 0 !important;
-      flex-shrink: 0 !important;
-      background: #917558 !important; /* Casa perfeitamente com a faixa Apoie-nos acima! */
-      margin-bottom: -1px !important;
-      z-index: 499 !important;
+      display: none !important;
+      height: 0 !important;
+      margin: 0 !important;
+      padding: 0 !important;
     }
-    .bottom-river-wave svg {
-      width: 100% !important;
-      height: 100% !important;
-      display: block !important;
+
+    /* Faixa Apoie-nos no Degradê (Transparente, sem pílulas, sem marrom - Diretriz Rigo) */
+    .home-apoie-zone {
+      background: transparent !important;
+      padding: 4px 0 8px;
+      color: #FFFFFF;
+      flex-shrink: 0;
+      margin-top: 4px;
+      position: relative;
     }
 
     /* Viewport Deslizante no Dedo para Apoie-nos */
@@ -4614,13 +4593,13 @@
       100% { transform: translateX(-50%); }
     }
 
-    /* Área Central Areia Encorpada */
+    /* Área Central Areia Encorpada (Fluindo de forma contínua no degradê - Diretriz Rigo) */
     .home-body-sand {
-      background: #D8CABA !important;
-      padding: 4px 12px 6px;
+      background: transparent !important;
+      padding: 2px 12px 4px;
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 10px;
       flex: 1;
     }
 
@@ -4789,68 +4768,46 @@
 
     <!-- ==================== CONTEÚDO DAS 4 ABAS ==================== -->
     <main class="main-stage">
-      <!-- ABA 1: INÍCIO (DEGRADÊ HARMONIOSO VERDE-AREIA + CLIMA RESPIRÁVEL + PETS DESAPARECIDOS + APOIE-NOS - DIRETRIZ RIGO) -->
+      <!-- ABA 1: INÍCIO (DEGRADÊ PURO VERDE-AREIA-VERDE • SEM ONDULAÇÕES • CLIMA ACHATADO BRANCO • APOIE-NOS PURO - DIRETRIZ RIGO) -->
       <section class="tab-pane home-pane active" id="tab-inicio">
-        <!-- 1. ONDULAÇÃO GRANDE SUPERIOR (Verde Oficial Brasil descendo para o Degradê Climático) -->
-        <div class="wave-green-top">
-          <svg viewBox="0 0 500 16" preserveAspectRatio="none" style="width:100%; height:100%; display:block;">
-            <path d="M 0,0 L 500,0 L 500,4 C 380,18 260,2 160,12 C 80,20 30,4 0,14 Z" fill="#009B3A"/>
-          </svg>
-        </div>
 
-        <!-- 2. ESPAÇO CLIMA COM DEGRADÊ LUMINOSO VERDE -> TERROSO (Sem marrom pesado) -->
+        <!-- 1. ESPAÇO CLIMA ACHATADO COMPACTO COM DEGRADÊ VERDE (Sem 5 dias, sem amarelo, ganho de espaço vertical) -->
         <div class="home-weather-zone" id="weather-card">
-          <!-- Linha Superior do Clima: Ícone + Temperatura Ouro + Cascavel (Sem a palavra Agora!) -->
+          <!-- Linha do Clima: Ícone Nuvem + Temperatura Branca Maior + Cascavel Branco (Sem amarelo!) -->
           <div style="display:flex; align-items:center; justify-content:space-between; gap:10px;">
             <div style="display:flex; align-items:center; gap:8px;">
-              <span id="w-ico" style="font-size:22px; line-height:1; filter:drop-shadow(0 2px 4px rgba(0,0,0,0.3));">⛅</span>
+              <span id="w-ico" style="font-size:28px; line-height:1; filter:drop-shadow(0 2px 4px rgba(0,0,0,0.25));">⛅</span>
               <div style="display:flex; align-items:baseline; gap:5px;">
-                <span id="w-temp" style="font-size:23px; font-weight:900; line-height:1; color:#FED700; letter-spacing:0.4px;">--°</span>
-                <span style="font-size:12px; font-weight:900; color:#FFFFFF; letter-spacing:0.3px;">Cascavel</span>
+                <span id="w-temp" style="font-size:28px; font-weight:900; line-height:1; color:#FFFFFF; letter-spacing:0.4px;">--°</span>
+                <span style="font-size:13.5px; font-weight:900; color:#FFFFFF; letter-spacing:0.3px;">Cascavel</span>
               </div>
             </div>
             <div style="text-align:right;">
-              <div id="w-cond" style="font-size:11px; font-weight:800; color:#74E894; letter-spacing:0.3px;">Monitoramento</div>
-              <div id="w-hl" style="font-size:11px; font-weight:800; color:#FED700; margin-top:1px;">Máx --° · Mín --°</div>
+              <div id="w-cond" style="font-size:11px; font-weight:800; color:rgba(255,255,255,0.88); letter-spacing:0.3px;">Monitoramento</div>
+              <div id="w-hl" style="font-size:11.5px; font-weight:800; color:#FFFFFF; margin-top:1px;">Máx --° · Mín --°</div>
             </div>
           </div>
 
-          <!-- Grade Compacta dos 5 Dias: Direto no fundo degradê -->
-          <div class="weather-forecast-5d" id="weather-forecast-5d" style="display:flex; justify-content:space-between; margin-top:6px; padding-top:4px; border-top:1px dashed rgba(255,255,255,0.22);">
-            <div class="w-day-col" style="text-align:center;"><span class="w-day-name" style="color:#FAF0E6; font-size:10px; font-weight:800; display:block;">QUA</span><span class="w-day-icon" style="font-size:12px; display:block; margin:1px 0;">⛈️</span><span class="w-day-temp" style="color:#FFFFFF; font-size:10px; font-weight:800;">25°/19°</span></div>
-            <div class="w-day-col" style="text-align:center;"><span class="w-day-name" style="color:#FAF0E6; font-size:10px; font-weight:800; display:block;">QUI</span><span class="w-day-icon" style="font-size:12px; display:block; margin:1px 0;">⛈️</span><span class="w-day-temp" style="color:#FFFFFF; font-size:10px; font-weight:800;">26°/20°</span></div>
-            <div class="w-day-col" style="text-align:center;"><span class="w-day-name" style="color:#FAF0E6; font-size:10px; font-weight:800; display:block;">SEX</span><span class="w-day-icon" style="font-size:12px; display:block; margin:1px 0;">⛈️</span><span class="w-day-temp" style="color:#FFFFFF; font-size:10px; font-weight:800;">22°/18°</span></div>
-            <div class="w-day-col" style="text-align:center;"><span class="w-day-name" style="color:#FAF0E6; font-size:10px; font-weight:800; display:block;">SÁB</span><span class="w-day-icon" style="font-size:12px; display:block; margin:1px 0;">🌧️</span><span class="w-day-temp" style="color:#FFFFFF; font-size:10px; font-weight:800;">25°/19°</span></div>
-            <div class="w-day-col" style="text-align:center;"><span class="w-day-name" style="color:#FAF0E6; font-size:10px; font-weight:800; display:block;">DOM</span><span class="w-day-icon" style="font-size:12px; display:block; margin:1px 0;">⛈️</span><span class="w-day-temp" style="color:#FFFFFF; font-size:10px; font-weight:800;">27°/19°</span></div>
-          </div>
-
-          <!-- Pílula Slim de Alerta com Espaçamento e Respiro (Não colada na temperatura) -->
-          <div class="alert-ticker" id="alert-ticker" onclick="abrirClimaBanner()" style="margin:7px 0 2px 0; padding:4px 10px; border-radius:999px; background:rgba(0,0,0,0.22); cursor:pointer;">
+          <!-- Pílula Slim de Alerta Climático: Subida e Integrada logo abaixo do clima -->
+          <div class="alert-ticker" id="alert-ticker" onclick="abrirClimaBanner()" style="margin:4px 0 2px 0; padding:3px 10px; border-radius:999px; background:rgba(0,0,0,0.22); cursor:pointer;">
             <div class="ticker-track" id="ticker-track">
-              <span class="ticker-item" style="color:#FED700; font-weight:800; font-size:10px; letter-spacing:0.4px;">🐾 CASCAVEL • RADAR E MONITORAMENTO CLIMÁTICO ATIVO</span>
-              <span class="ticker-item" style="color:#FED700; font-weight:800; font-size:10px; letter-spacing:0.4px;">🐾 CASCAVEL • RADAR E MONITORAMENTO CLIMÁTICO ATIVO</span>
+              <span class="ticker-item" style="color:#FFFFFF; font-weight:800; font-size:10px; letter-spacing:0.4px;">🐾 CASCAVEL • RADAR E MONITORAMENTO CLIMÁTICO ATIVO</span>
+              <span class="ticker-item" style="color:#FFFFFF; font-weight:800; font-size:10px; letter-spacing:0.4px;">🐾 CASCAVEL • RADAR E MONITORAMENTO CLIMÁTICO ATIVO</span>
             </div>
           </div>
         </div>
 
-        <!-- 3. ONDULAÇÃO DESCENDO DO CLIMA PARA O CORPO AREIA -->
-        <div class="wave-weather-down">
-          <svg viewBox="0 0 500 14" preserveAspectRatio="none" style="width:100%; height:100%; display:block;">
-            <path d="M 0,0 L 500,0 L 500,4 C 400,16 280,2 180,12 C 90,18 40,6 0,12 Z" fill="#A28A6D"/>
-          </svg>
-        </div>
-
-        <!-- 4. CORPO AREIA (#D8CABA): FRASE MAIOR VERDE + PETS DESAPARECIDOS + PERFIS COM SWIPE -->
+        <!-- 2. CORPO AREIA: FRASE MAIOR VERDE + PETS DESAPARECIDOS + PERFIS SOCIAIS (Fluindo no degradê, sem ondulações) -->
         <div class="home-body-sand">
           
-          <!-- Frase de Campanha Flutuante: MAIOR, EM VERDE VIBRANTE (Sem marrom apagado!) -->
+          <!-- Frase de Campanha Flutuante: MAIOR, EM VERDE VIBRANTE -->
           <div style="padding:4px 14px 2px; text-align:center;">
-            <div id="home-campaign-text" style="font-size:15.5px; font-weight:900; color:#007A2D; line-height:1.35; min-height:32px; display:flex; align-items:center; justify-content:center; transition:opacity 0.45s ease; font-style:italic; text-shadow:0 1px 1px rgba(255,255,255,0.7);">
+            <div id="home-campaign-text" style="font-size:15.5px; font-weight:900; color:#007A2D; line-height:1.35; min-height:30px; display:flex; align-items:center; justify-content:center; transition:opacity 0.45s ease; font-style:italic; text-shadow:0 1px 1px rgba(255,255,255,0.7);">
               Quem ama cuida e procura junto: a maior rede de proteção animal.
             </div>
           </div>
 
-          <!-- Bloco A: Pets Desaparecidos (Nome Oficial Conversado) -->
+          <!-- Bloco A: Pets Desaparecidos (Sem 'Ver todos ›' - Diretriz Rigo) -->
           <div class="belt-block belt-block-pets" style="margin-top:0;">
             <div class="belt-head" style="display:flex; align-items:center; justify-content:space-between; margin-bottom:4px;">
               <div class="belt-title pet-title" style="display:flex; align-items:center; gap:6px;">
@@ -4859,7 +4816,6 @@
                 </svg>
                 <span style="font-size:12px; font-weight:800; color:#2E2417; letter-spacing:0.2px;">Pets Desaparecidos</span>
               </div>
-              <button type="button" class="belt-more-link" onclick="trocarAba('pets')" style="font-size:10px; font-weight:800; color:#009B3A; background:none; border:none; cursor:pointer;">Ver todos ›</button>
             </div>
             
             <div class="belt-viewport">
@@ -4869,7 +4825,7 @@
             </div>
           </div>
 
-          <!-- Bloco B: Comunidade de Protetores • Perfis Sociais com Swipe no Dedo -->
+          <!-- Bloco B: Comunidade de Protetores (Sem 'Deslize para o lado ›' - Diretriz Rigo) -->
           <div class="belt-block belt-block-protetores" style="margin-top:6px;">
             <div class="belt-head" style="display:flex; align-items:center; justify-content:space-between; margin-bottom:4px;">
               <div class="belt-title" style="display:flex; align-items:center; gap:6px;">
@@ -4881,7 +4837,6 @@
                 </svg>
                 <span style="font-size:12px; font-weight:800; color:#2E2417; letter-spacing:0.2px;">Comunidade de Protetores</span>
               </div>
-              <span style="font-size:10px; font-weight:800; color:#6E5A3C;">Deslize para o lado ›</span>
             </div>
 
             <!-- Container Horizontal para passar com o dedo (Swipe) -->
@@ -4891,38 +4846,14 @@
           </div>
         </div>
 
-        <!-- 5. ONDULAÇÃO PEQUENA E ESTREITA SUBINDO PARA A FAIXA APOIE-NOS (Diretriz Rigo) -->
-        <div class="wave-apoie-up">
-          <svg viewBox="0 0 500 10" preserveAspectRatio="none" style="width:100%; height:100%; display:block;">
-            <path d="M 0,10 L 500,10 L 500,6 C 380,0 260,8 160,2 C 80,-1 30,7 0,1 Z" fill="#917558"/>
-          </svg>
-        </div>
-
-        <!-- 6. FAIXA EXCLUSIVA APOIE-NOS (COM ESTEIRA DESLIZANTE NO DEDO - SEM HOSPITAL/PATROCINADOR) -->
-        <div class="home-apoie-zone" id="home-apoie-zone">
-          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:6px; padding:0 4px;">
-            <div style="display:flex; align-items:center; gap:6px;">
-              <svg viewBox="0 0 24 24" fill="#FED700" width="14" height="14">
-                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-              </svg>
-              <span style="font-size:12px; font-weight:900; color:#FED700; letter-spacing:0.5px;">Apoie-nos ›</span>
-            </div>
-            <span style="font-size:10px; font-weight:800; color:rgba(255,255,255,0.7); pointer-events:none;">Deslize para o lado ›</span>
-          </div>
-
+        <!-- 3. FAIXA EXCLUSIVA APOIE-NOS: APENAS A ESCRITA EM BRANCO NO DEGRADÊ (Sem pílulas, sem emojis coloridos, sem coração - Diretriz Rigo) -->
+        <div class="home-apoie-zone" id="home-apoie-zone" style="padding:6px 0 10px; margin-top:4px;">
           <!-- Esteira de Apoie-nos que corre suave e pode ser passada no dedo -->
           <div class="apoie-scroll-viewport" id="apoie-scroll-viewport">
             <div class="apoie-text-track" id="belt-apoio-track">
-              <!-- Pílulas exclusivas Apoie-nos preenchidas via JS -->
+              <!-- Texto corrido Apoie-nos preenchido via JS -->
             </div>
           </div>
-        </div>
-
-        <!-- 7. ONDULAÇÃO MENOR INFERIOR CONECTANDO DIRETO AO MENU VERDE (Sem gap de areia e sem linha reta!) -->
-        <div class="wave-apoie-down" style="width:100%; height:12px; line-height:0; background:#917558; margin-top:-1px;">
-          <svg viewBox="0 0 500 12" preserveAspectRatio="none" style="width:100%; height:100%; display:block;">
-            <path d="M 0,8 C 120,13 230,1 350,8 C 420,12 470,3 500,4 L 500,12 L 0,12 Z" fill="#009B3A"/>
-          </svg>
         </div>
       </section>
 
@@ -7056,17 +6987,7 @@
         if (condEl) condEl.textContent = c.condicao || 'Monitorando';
         if (hlEl) hlEl.textContent = `Máx ${c.max}° · Mín ${c.min}°`;
 
-        // Grade 5 Dias
-        const box5d = document.getElementById('weather-forecast-5d');
-        if (box5d && c.previsao_5_dias && c.previsao_5_dias.length > 0) {
-          box5d.innerHTML = c.previsao_5_dias.map(d => `
-            <div class="w-day-col">
-              <span class="w-day-name">${escapeHtml(d.dia)}</span>
-              <span class="w-day-icon">${d.icone || '⛅'}</span>
-              <span class="w-day-temp">${d.max}° / ${d.min}°</span>
-            </div>
-          `).join('');
-        }
+        // Grade 5 Dias Removida conforme Diretriz Rigo (Clima Achatado e Compacto)
 
         // 2. Pílula / Esteira Climática Resumida (RIGOROSAMENTE ZERO BORDA)
         const ticker = document.getElementById('alert-ticker');
@@ -7405,23 +7326,17 @@
       const track = document.getElementById('belt-apoio-track');
       if (!track) return;
 
-      // REGRA OFICIAL RIGO: Apenas o texto 'Apoie-nos ›' correndo na esteira e deslizável com o dedo!
-      const textosApoie = [
-        "🐾 Apoie-nos ›",
-        "🐾 Apoie-nos ›",
-        "🐾 Apoie-nos ›",
-        "🐾 Apoie-nos ›",
-        "🐾 Apoie-nos ›",
-        "🐾 Apoie-nos ›"
-      ];
+      // REGRA OFICIAL RIGO: Apenas o texto puro 'Apoie-nos' correndo no degradê em branco, sem pílulas e sem emojis!
+      const repeticoes = 8;
+      let html = '';
+      for (let i = 0; i < repeticoes; i++) {
+        html += `
+          <span style="font-size:13px; font-weight:900; color:#FFFFFF; letter-spacing:0.8px; text-shadow:0 1px 3px rgba(0,0,0,0.35); text-transform:none; cursor:pointer;">Apoie-nos</span>
+          <span style="font-size:10px; color:rgba(255,255,255,0.6); margin:0 14px; user-select:none;">•</span>
+        `;
+      }
 
-      const itensHtml = textosApoie.map(txt => `
-        <div class="apoie-text-badge" onclick="void(0)" style="display:inline-flex; align-items:center; gap:6px; background:#FAF7F2; border:1px solid rgba(140,110,80,0.3); border-radius:999px; padding:6px 14px; font-size:12px; font-weight:900; color:#4A3828; box-shadow:0 2px 6px rgba(0,0,0,0.12); cursor:pointer; user-select:none; white-space:nowrap;">
-          <span>${txt}</span>
-        </div>
-      `).join('');
-
-      track.innerHTML = itensHtml + itensHtml;
+      track.innerHTML = html + html;
     }
 
     function renderizarEsteiraParceirosHome() {
