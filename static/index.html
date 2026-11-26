@@ -5189,6 +5189,49 @@
     </div>
   </div>
 
+  <!-- ==================== MODAL: GERADOR DE CARDS VISUAIS DE DIVULGAÇÃO (DESIGN OFICIAL RIGO) ==================== -->
+  <div class="sheet-backdrop" id="modal-gerador-card-pet" onclick="if(event.target===this) fecharGeradorCardPet()" style="display:none; z-index:3300;">
+    <div class="sheet" style="background:#1E1E24; color:#FFFFFF; border-radius:24px 24px 0 0; padding:18px 20px calc(env(safe-area-inset-bottom, 0px) + 24px); max-width:480px; max-height:92vh; overflow-y:auto; -webkit-overflow-scrolling:touch; box-shadow:0 -8px 32px rgba(0,0,0,0.5);">
+      <div class="sheet-handle" style="width:36px; height:4px; background:#4B5563; border-radius:999px; margin:0 auto 12px;"></div>
+      
+      <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:12px;">
+        <div>
+          <div style="font-size:16px; font-weight:900; color:#FFFFFF;">Card Oficial de Divulgação</div>
+          <div style="font-size:11px; color:#10B981; font-weight:800; letter-spacing:0.5px;">BANNER DE ALTA DEFINIÇÃO PARA WHATSAPP E REDES</div>
+        </div>
+        <button type="button" onclick="fecharGeradorCardPet()" style="background:none; border:none; color:#9CA3AF; font-size:20px; cursor:pointer; padding:4px 8px; font-weight:bold;">✕</button>
+      </div>
+
+      <!-- Seletor de Cores Solicitado pelo Diretor Rigo: Azul, Rosa, Roxo, Verde -->
+      <div style="display:grid; grid-template-columns:repeat(4, 1fr); gap:6px; margin-bottom:12px;">
+        <button type="button" class="btn-cor-banner" id="btn-banner-azul" onclick="alterarTemaBanner('azul')" style="padding:8px 4px; border-radius:10px; font-size:11px; font-weight:800; border:2px solid transparent; background:#1E3A8A; color:#FFFFFF; cursor:pointer; text-align:center;">Azul (Macho)</button>
+        <button type="button" class="btn-cor-banner" id="btn-banner-rosa" onclick="alterarTemaBanner('rosa')" style="padding:8px 4px; border-radius:10px; font-size:11px; font-weight:800; border:2px solid transparent; background:#831843; color:#FFFFFF; cursor:pointer; text-align:center;">Rosa (Fêmea)</button>
+        <button type="button" class="btn-cor-banner" id="btn-banner-roxo" onclick="alterarTemaBanner('roxo')" style="padding:8px 4px; border-radius:10px; font-size:11px; font-weight:800; border:2px solid transparent; background:#581C87; color:#FFFFFF; cursor:pointer; text-align:center;">Roxo (Aves/Esp)</button>
+        <button type="button" class="btn-cor-banner" id="btn-banner-verde" onclick="alterarTemaBanner('verde')" style="padding:8px 4px; border-radius:10px; font-size:11px; font-weight:800; border:2px solid transparent; background:#065F46; color:#FFFFFF; cursor:pointer; text-align:center;">Verde (Sucesso)</button>
+      </div>
+
+      <!-- Preview do Canvas -->
+      <div style="width:100%; display:flex; justify-content:center; margin-bottom:14px; background:#0F172A; border-radius:16px; padding:10px; box-sizing:border-box; border:1px solid #334155;">
+        <canvas id="canvas-card-pet" width="1080" height="1080" style="width:100%; max-width:360px; height:auto; aspect-ratio:1/1; border-radius:12px; display:block; box-shadow:0 8px 24px rgba(0,0,0,0.6);"></canvas>
+      </div>
+
+      <!-- Ações: WhatsApp, Baixar PNG, Copiar -->
+      <div style="display:flex; flex-direction:column; gap:8px;">
+        <button type="button" onclick="dispararWhatsAppDoCard()" style="width:100%; height:46px; background:#25D366; color:#FFFFFF; border:none; border-radius:12px; font-size:14px; font-weight:900; display:flex; align-items:center; justify-content:center; gap:8px; cursor:pointer; box-shadow:0 4px 14px rgba(37,211,102,0.35);">
+          <span>Compartilhar no WhatsApp</span>
+        </button>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+          <button type="button" onclick="baixarImagemCardBanner()" style="height:42px; background:#374151; color:#FFFFFF; border:1px solid #4B5563; border-radius:12px; font-size:12px; font-weight:800; display:flex; align-items:center; justify-content:center; gap:6px; cursor:pointer;">
+            <span>Baixar Imagem (PNG)</span>
+          </button>
+          <button type="button" onclick="copiarTextoCardOficial()" style="height:42px; background:#1F2937; color:#E5E7EB; border:1px solid #374151; border-radius:12px; font-size:12px; font-weight:800; display:flex; align-items:center; justify-content:center; gap:6px; cursor:pointer;">
+            <span>Copiar Mensagem</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- ==================== MODAL: FOLDER COMERCIAL DO PARCEIRO ==================== -->
   <!-- ==================== TELA COMPLETA: FOLDER COMERCIAL DO PARCEIRO ==================== -->
   <div class="full-screen-view" id="modal-parceiro" style="background:#9E8560 !important; z-index:2600;">
@@ -5979,6 +6022,10 @@
       "Santo Onofre": [-24.9620, -53.5010], "São Cristóvão": [-24.9420, -53.4280],
       "Tarumã": [-24.9180, -53.4180], "Universitário": [-24.9820, -53.4520]
     };
+
+    // Central Oficial Alerta Pet Brasil - Número fornecido pelo Diretor Rigo
+    const WHATSAPP_OFICIAL = '554598143263';
+    const WHATSAPP_OFICIAL_FORMATADO = '(45) 9814-3263';
 
     let state = {
       theme: localStorage.getItem('au_theme') || 'light',
@@ -7162,29 +7209,24 @@
         console.error("Erro ao registrar aceite digital:", e);
       }
 
+      // Mensagem oficial enxuta e profissional (Diretriz Diretor Rigo - sem emoji spam)
       const texto = `Olá! Vi o animalzinho *${pet.titulo}* anunciado para adoção responsável no *Alerta Pet Brasil*.
 
 Gostaria de saber se o animalzinho ainda está disponível e tenho interesse em adotá-lo. Seguem os meus dados:
 
-👤 *Candidato(a):* ${pNome} (Bairro ${pBairro})
-📋 *Protocolo Oficial:* ${protocolo}
-🏠 *Tipo de Moradia:* ${moradia}
-🛡️ *Segurança do Imóvel:* ${seguranca}
-👨‍👩‍👧 *Família no Imóvel:* ${pessoas} (${criancas})
-${outrosPets === 'Nenhum outro animal' ? '🐾 *Outros animais no lar:* Nenhum (será o único animal do imóvel)' : `🐾 *Animais Residentes no Lar:*\n   • Espécie(s): ${outrosPets}\n   • Castração: ${petsCastrados}\n   • Sociabilidade: ${petsSociaveis}`}
-⚖️ *Compromisso Legal:* Ciência assinada da Lei Federal 9.605/98 / Lei Sansão (abandono e maus-tratos são crimes inafiançáveis com 2 a 5 anos de reclusão).
+• Candidato(a): ${pNome} (Bairro ${pBairro})
+• Protocolo Oficial: ${protocolo}
+• Tipo de Moradia: ${moradia}
+• Segurança do Imóvel: ${seguranca}
+• Família no Imóvel: ${pessoas} (${criancas})
+• Animais no Lar: ${outrosPets === 'Nenhum outro animal' ? 'Nenhum (será o único pet da casa)' : `${outrosPets} (Castrados: ${petsCastrados} | Sociabilidade: ${petsSociaveis})`}
+• Compromisso Legal: Ciência assinada da Lei Sansão nº 14.064/2020 (crime de abandono com pena de 2 a 5 anos de reclusão).
 
-Gostaria de saber se o animalzinho ainda está disponível e me coloco à sua inteira disposição para sua entrevista, perguntas sobre meu lar e visita presencial para verificar se estou apto a acolhê-lo!`;
+Me coloco à sua inteira disposição para sua avaliação, entrevista sobre meu lar e visita presencial para verificar se estou apto a acolhê-lo. 🐾`;
 
-      const tel = pet.contato || '45999332144';
-      const limpo = tel.replace(/\D/g, '');
       fecharProtocoloAdocao();
-
-      if (limpo) {
-        window.open(`https://wa.me/55${limpo}?text=${encodeURIComponent(texto)}`, '_blank');
-      } else {
-        mostrarToast('Aceite digital registrado! Contato do tutor indisponível no momento.');
-      }
+      const destWa = WHATSAPP_OFICIAL;
+      window.open(`https://wa.me/${destWa}?text=${encodeURIComponent(texto)}`, '_blank');
     }
 
     function imprimirTermoAdocao(petId) {
@@ -7466,9 +7508,9 @@ Gostaria de saber se o animalzinho ainda está disponível e me coloco à sua in
     function falarComTutorWhatsApp(petId) {
       const p = (state.alertas || []).find(a => a.id === petId);
       const petNome = p ? (p.titulo || 'Pet') : 'Pet';
-      const foneRaw = (p && p.contato && p.contato.trim() !== '') ? p.contato.replace(/\D/g, '') : '5545999985280';
-      const fone = foneRaw.length >= 10 ? foneRaw : '5545999985280';
-      const msg = encodeURIComponent(`Olá! Vi o alerta do pet '${petNome}' no Alerta Pet Brasil e gostaria de conversar a respeito.`);
+      const fone = WHATSAPP_OFICIAL;
+      const fone = WHATSAPP_OFICIAL;
+      const msg = encodeURIComponent(`Olá! Vi o aviso do pet *${petNome}* no *Alerta Pet Brasil* e gostaria de conversar a respeito.`);
       const url = `https://wa.me/${fone}?text=${msg}`;
       try {
         window.open(url, '_blank');
@@ -8021,67 +8063,359 @@ Gostaria de saber se o animalzinho ainda está disponível e me coloco à sua in
       }
     }
 
-    function compartilharPet(petId, event) {
-      if (event) event.stopPropagation();
-      const pet = state.alertas.find(a => a.id === petId);
+    /* ==================== GERADOR DE CARDS VISUAIS E COMPARTILHAMENTO (DESIGN RIGO) ==================== */
+    let bannerPetAtual = null;
+    let bannerTemaAtual = 'azul';
+
+    function abrirGeradorCardPet(petId) {
+      const pet = (state.alertas || []).find(a => a.id === petId);
       if (!pet) {
-        mostrarToast('Alerta não encontrado.');
+        mostrarToast('Animal não encontrado.');
         return;
       }
+      bannerPetAtual = pet;
 
+      // Seleção inteligente do tema com base no pet
+      const st = (pet.status_pet || '').toLowerCase();
+      const tp = (pet.tipo || '').toLowerCase();
+      const esp = (pet.especie || '').toLowerCase();
+      const sx = (pet.sexo || '').toLowerCase();
+
+      if (st === 'reencontro' || tp === 'pet_reencontro' || st === 'encontrado') {
+        bannerTemaAtual = 'verde';
+      } else if (tp === 'pet_adocao' || st === 'adocao' || esp.includes('ave') || esp.includes('passar') || esp.includes('silvestr')) {
+        bannerTemaAtual = 'roxo';
+      } else if (sx === 'femea' || sx === 'fêmea' || esp.includes('cadela') || esp.includes('gata')) {
+        bannerTemaAtual = 'rosa';
+      } else {
+        bannerTemaAtual = 'azul';
+      }
+
+      atualizarBotoesTemaBanner(bannerTemaAtual);
+      renderizarBannerNoCanvas(pet, bannerTemaAtual);
+
+      const modal = document.getElementById('modal-gerador-card-pet');
+      if (modal) modal.style.display = 'flex';
+    }
+
+    function fecharGeradorCardPet() {
+      const modal = document.getElementById('modal-gerador-card-pet');
+      if (modal) modal.style.display = 'none';
+      bannerPetAtual = null;
+    }
+
+    function alterarTemaBanner(tema) {
+      bannerTemaAtual = tema;
+      atualizarBotoesTemaBanner(tema);
+      if (bannerPetAtual) {
+        renderizarBannerNoCanvas(bannerPetAtual, tema);
+      }
+    }
+
+    function atualizarBotoesTemaBanner(temaAtivo) {
+      const temas = ['azul', 'rosa', 'roxo', 'verde'];
+      temas.forEach(t => {
+        const btn = document.getElementById('btn-banner-' + t);
+        if (btn) {
+          if (t === temaAtivo) {
+            btn.style.border = '2px solid #FFFFFF';
+            btn.style.transform = 'scale(1.04)';
+            btn.style.boxShadow = '0 0 10px rgba(255,255,255,0.4)';
+          } else {
+            btn.style.border = '2px solid transparent';
+            btn.style.transform = 'scale(1)';
+            btn.style.boxShadow = 'none';
+          }
+        }
+      });
+    }
+
+    function drawRoundedRectCanvas(ctx, x, y, width, height, radius) {
+      if (ctx.roundRect) {
+        ctx.roundRect(x, y, width, height, radius);
+      } else {
+        ctx.beginPath();
+        ctx.moveTo(x + radius, y);
+        ctx.lineTo(x + width - radius, y);
+        ctx.quadraticCurveTo(x + width, y + width, y + radius);
+        ctx.lineTo(x + width, y + height - radius);
+        ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+        ctx.lineTo(x + radius, y + height);
+        ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+        ctx.lineTo(x, y + radius);
+        ctx.quadraticCurveTo(x, y, x + radius, y);
+        ctx.closePath();
+      }
+    }
+
+    function renderizarBannerNoCanvas(pet, tema) {
+      const canvas = document.getElementById('canvas-card-pet');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const w = 1080;
+      const h = 1080;
+
+      // Paleta por tema
+      let gradTop = '#0A1128', gradBottom = '#1C3782', accent = '#3B82F6', badgeBg = '#1D4ED8', badgeTxt = 'DESAPARECIDO • MACHO';
+      if (tema === 'rosa') {
+        gradTop = '#1C0B1B'; gradBottom = '#831843'; accent = '#EC4899'; badgeBg = '#BE185D'; badgeTxt = 'DESAPARECIDA • FÊMEA';
+      } else if (tema === 'roxo') {
+        gradTop = '#150D2A'; gradBottom = '#581C87'; accent = '#A855F7'; badgeBg = '#6D28D9'; badgeTxt = 'ADOÇÃO RESPONSÁVEL';
+      } else if (tema === 'verde') {
+        gradTop = '#032B1A'; gradBottom = '#065F46'; accent = '#10B981'; badgeBg = '#047857'; badgeTxt = 'REENCONTRADO COM SUCESSO';
+      }
+
+      const st = (pet.status_pet || '').toLowerCase();
+      const tp = (pet.tipo || '').toLowerCase();
+      if (st === 'reencontro' || tp === 'pet_reencontro' || st === 'encontrado') {
+        badgeTxt = 'REENCONTRADO COM SUCESSO';
+      } else if (tp === 'pet_adocao' || st === 'adocao') {
+        badgeTxt = 'ADOÇÃO RESPONSÁVEL';
+      } else if (st === 'avistado' || tp === 'pet_avistado') {
+        badgeTxt = 'ANIMAL AVISTADO NA RUA';
+      } else if (st === 'resgatado' || tp === 'pet_resgatado') {
+        badgeTxt = 'ANIMAL RESGATADO • AGUARDANDO TUTOR';
+      }
+
+      // Fundo Gradiente
+      const grad = ctx.createLinearGradient(0, 0, 0, h);
+      grad.addColorStop(0, gradTop);
+      grad.addColorStop(1, gradBottom);
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, w, h);
+
+      // Borda decorativa externa
+      ctx.strokeStyle = accent;
+      ctx.lineWidth = 14;
+      ctx.strokeRect(10, 10, w - 20, h - 20);
+
+      // Topo: Marca Oficial
+      ctx.textAlign = 'center';
+      ctx.fillStyle = '#FFFFFF';
+      ctx.font = 'bold 36px "Inter", "Segoe UI", sans-serif';
+      ctx.fillText('ALERTA PET BRASIL • CASCAVEL/PR', w / 2, 85);
+
+      ctx.fillStyle = '#94A3B8';
+      ctx.font = '600 20px "Inter", "Segoe UI", sans-serif';
+      ctx.fillText('REDE COLABORATIVA DE BUSCA ATIVA E PROTEÇÃO ANIMAL', w / 2, 122);
+
+      // Badge de Status
+      const badgeW = 680;
+      const badgeH = 58;
+      const badgeX = (w - badgeW) / 2;
+      const badgeY = 145;
+      ctx.fillStyle = badgeBg;
+      ctx.beginPath();
+      drawRoundedRectCanvas(ctx, badgeX, badgeY, badgeW, badgeH, 14);
+      ctx.fill();
+      ctx.strokeStyle = '#FFFFFF';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+
+      ctx.fillStyle = '#FFFFFF';
+      ctx.font = '900 28px "Inter", "Segoe UI", sans-serif';
+      ctx.fillText(badgeTxt, w / 2, badgeY + 40);
+
+      // Caixa da Foto
+      const photoX = 220;
+      const photoY = 225;
+      const photoW = 640;
+      const photoH = 510;
+
+      function desenharConteudoInferior() {
+        ctx.textAlign = 'center';
+        ctx.fillStyle = '#FFFFFF';
+        ctx.font = '900 58px "Inter", "Segoe UI", sans-serif';
+        const nomePet = (pet.titulo || 'Animal').toUpperCase();
+        ctx.fillText(nomePet, w / 2, 795);
+
+        const boxInfoW = 880;
+        const boxInfoH = 120;
+        const boxInfoX = (w - boxInfoW) / 2;
+        const boxInfoY = 820;
+
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.45)';
+        ctx.beginPath();
+        drawRoundedRectCanvas(ctx, boxInfoX, boxInfoY, boxInfoW, boxInfoH, 18);
+        ctx.fill();
+        ctx.strokeStyle = accent;
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
+        ctx.fillStyle = '#FFFFFF';
+        ctx.font = 'bold 28px "Inter", "Segoe UI", sans-serif';
+        const bairroStr = (pet.bairro || 'Cascavel').toUpperCase();
+        ctx.fillText(`BAIRRO: ${bairroStr} • CASCAVEL/PR`, w / 2, boxInfoY + 42);
+
+        ctx.fillStyle = '#E2E8F0';
+        ctx.font = '600 22px "Inter", "Segoe UI", sans-serif';
+        const partes = [];
+        if (pet.especie) partes.push(`Espécie: ${pet.especie}`);
+        if (pet.porte) partes.push(`Porte: ${pet.porte}`);
+        if (pet.sexo) partes.push(`Sexo: ${pet.sexo}`);
+        if (pet.recompensa) partes.push(`Recompensa: ${pet.recompensa}`);
+        const infoTxt = partes.length ? partes.join('  |  ') : 'Ajude a divulgar para encontrar com a família';
+        ctx.fillText(infoTxt, w / 2, boxInfoY + 84);
+
+        const footW = 960;
+        const footH = 95;
+        const footX = (w - footW) / 2;
+        const footY = 955;
+
+        ctx.fillStyle = '#16A34A';
+        ctx.beginPath();
+        drawRoundedRectCanvas(ctx, footX, footY, footW, footH, 20);
+        ctx.fill();
+
+        ctx.fillStyle = '#FFFFFF';
+        ctx.font = '900 32px "Inter", "Segoe UI", sans-serif';
+        ctx.fillText('Central 24h WhatsApp: (45) 9814-3263', w / 2, footY + 42);
+
+        ctx.fillStyle = '#DCFCE7';
+        ctx.font = 'bold 20px "Inter", "Segoe UI", sans-serif';
+        ctx.fillText('Acesse no app ou web: alerta-urbano-cascavel.onrender.com', w / 2, footY + 74);
+      }
+
+      if (pet.foto_url) {
+        const img = new Image();
+        img.crossOrigin = 'anonymous';
+        img.onload = function() {
+          ctx.save();
+          ctx.beginPath();
+          drawRoundedRectCanvas(ctx, photoX, photoY, photoW, photoH, 22);
+          ctx.clip();
+
+          const imgRatio = img.width / img.height;
+          const targetRatio = photoW / photoH;
+          let dw = photoW, dh = photoH, dx = photoX, dy = photoY;
+          if (imgRatio > targetRatio) {
+            dw = photoH * imgRatio;
+            dx = photoX - (dw - photoW) / 2;
+          } else {
+            dh = photoW / imgRatio;
+            dy = photoY - (dh - photoH) / 2;
+          }
+          ctx.drawImage(img, dx, dy, dw, dh);
+          ctx.restore();
+
+          ctx.strokeStyle = '#FFFFFF';
+          ctx.lineWidth = 6;
+          ctx.beginPath();
+          drawRoundedRectCanvas(ctx, photoX, photoY, photoW, photoH, 22);
+          ctx.stroke();
+
+          desenharConteudoInferior();
+        };
+        img.onerror = function() {
+          desenharPlaceholderFoto(ctx, photoX, photoY, photoW, photoH, accent);
+          desenharConteudoInferior();
+        };
+        img.src = pet.foto_url;
+      } else {
+        desenharPlaceholderFoto(ctx, photoX, photoY, photoW, photoH, accent);
+        desenharConteudoInferior();
+      }
+    }
+
+    function desenharPlaceholderFoto(ctx, x, y, w, h, accent) {
+      ctx.fillStyle = '#18181B';
+      ctx.beginPath();
+      drawRoundedRectCanvas(ctx, x, y, w, h, 22);
+      ctx.fill();
+      ctx.strokeStyle = accent;
+      ctx.lineWidth = 4;
+      ctx.stroke();
+
+      ctx.fillStyle = '#71717A';
+      ctx.font = '900 48px sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('ALERTA PET BRASIL', x + w / 2, y + h / 2);
+    }
+
+    function gerarTextoWhatsAppOficialPet(pet) {
+      if (!pet) return '';
+      const st = (pet.status_pet || '').toLowerCase();
+      const tp = (pet.tipo || '').toLowerCase();
+      let statusLabel = 'PET DESAPARECIDO';
+      if (st === 'reencontro' || tp === 'pet_reencontro' || st === 'encontrado') statusLabel = 'ANIMAL REENCONTRADO COM SUCESSO';
+      else if (tp === 'pet_adocao' || st === 'adocao') statusLabel = 'ADOÇÃO RESPONSÁVEL';
+      else if (st === 'avistado' || tp === 'pet_avistado') statusLabel = 'ANIMAL AVISTADO NA RUA';
+      else if (st === 'resgatado' || tp === 'pet_resgatado') statusLabel = 'ANIMAL RESGATADO • AGUARDANDO TUTOR';
+
+      const bairroStr = (pet.bairro || 'Cascavel').toUpperCase();
       const linkSolidario = `https://alerta-urbano-cascavel.onrender.com/?ref_pet=${pet.id}`;
       const cartazUrl = `https://alerta-urbano-cascavel.onrender.com/cartaz/${pet.id}`;
       const downloadUrl = `https://alerta-urbano-cascavel.onrender.com/download`;
-      const statusLabel = pet.status_pet === 'avistado' ? 'ANIMAL AVISTADO NA RUA' : 'PET DESAPARECIDO';
-      const bairroStr = (pet.bairro || 'Cascavel').toUpperCase();
 
-      const textoWhatsApp = 
-`*ALERTA PET BRASIL - CASCAVEL*
+      return `*ALERTA PET BRASIL — CASCAVEL*
 *${statusLabel}*
 
-*Nome:* ${pet.titulo}
-*Bairro:* ${bairroStr} • Cascavel/PR
-${pet.porte ? `*Porte:* ${pet.porte}\n` : ''}${pet.especie ? `*Espécie:* ${pet.especie}\n` : ''}${pet.recompensa ? `*Recompensa:* ${pet.recompensa}\n` : ''}${pet.descricao ? `*Detalhes:* ${pet.descricao}\n` : ''}
-*🔗 LINK PARA O COPILOTO AVISAR SEUS AMIGOS POR VOZ NA RUA:*
-${linkSolidario}
-(Ao abrir o link, seu aplicativo Alerta Pet Brasil colocará este animal em busca prioritária e avisará por voz se você passar perto!)
+• Pet: *${pet.titulo}*
+• Região: Bairro ${bairroStr} (Cascavel/PR)
+${pet.porte ? `• Porte: ${pet.porte}\n` : ''}${pet.especie ? `• Espécie: ${pet.especie}\n` : ''}${pet.sexo ? `• Sexo: ${pet.sexo}\n` : ''}${pet.recompensa ? `• Recompensa Oficial: ${pet.recompensa}\n` : ''}${pet.descricao ? `• Detalhes: ${pet.descricao}\n` : ''}• Central WhatsApp: (45) 9814-3263
 
-*VER CARTAZ OFICIAL COM FOTO:*
+Acompanhe o radar em tempo real e o cartaz oficial com foto:
 ${cartazUrl}
 
-*Baixe o aplicativo gratuito Alerta Pet Brasil:*
-${downloadUrl}`;
+Baixe o aplicativo gratuito Alerta Pet Brasil:
+${downloadUrl} 🐾`;
+    }
 
-      mostrarToast('Abrindo WhatsApp com o Cartaz Oficial...');
-
-      // 1. Android Nativo via Bridge (abre direto o app do WhatsApp no celular)
-      if (window.AndroidAlerta && typeof window.AndroidAlerta.compartilharWhatsApp === 'function') {
-        try {
-          window.AndroidAlerta.compartilharWhatsApp(textoWhatsApp);
-          return;
-        } catch (e) {
-          console.warn('Erro ao disparar WhatsApp nativo:', e);
-        }
-      }
-
-      // 2. Disparo direto para WhatsApp Web / Móvel
-      const waLink = 'https://api.whatsapp.com/send?text=' + encodeURIComponent(textoWhatsApp);
+    function dispararWhatsAppDoCard() {
+      if (!bannerPetAtual) return;
+      const texto = gerarTextoWhatsAppOficialPet(bannerPetAtual);
+      const waLink = 'https://api.whatsapp.com/send?text=' + encodeURIComponent(texto);
       const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-
       if (isMobile) {
         window.location.href = waLink;
       } else {
         window.open(waLink, '_blank');
       }
+    }
 
-      // 3. Fallback de cópia para área de transferência
-      if (navigator.clipboard) {
-        navigator.clipboard.writeText(textoWhatsApp).catch(() => {});
+    function baixarImagemCardBanner() {
+      const canvas = document.getElementById('canvas-card-pet');
+      if (!canvas || !bannerPetAtual) return;
+      try {
+        canvas.toBlob(blob => {
+          if (!blob) {
+            mostrarToast('Erro ao processar imagem.');
+            return;
+          }
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          const cleanName = (bannerPetAtual.titulo || 'pet').replace(/[^a-zA-Z0-9]/g, '_');
+          a.href = url;
+          a.download = `AlertaPet_${cleanName}_${bannerPetAtual.id}.png`;
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          URL.revokeObjectURL(url);
+          mostrarToast('Card baixado com sucesso! Pronto para postar.');
+        }, 'image/png');
+      } catch (e) {
+        console.error('Erro ao baixar banner:', e);
+        mostrarToast('Clique com botão direito no card para salvar a imagem.');
       }
     }
 
+    function copiarTextoCardOficial() {
+      if (!bannerPetAtual) return;
+      const texto = gerarTextoWhatsAppOficialPet(bannerPetAtual);
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(texto).then(() => {
+          mostrarToast('Texto oficial copiado para a área de transferência!');
+        }).catch(() => {
+          mostrarToast('Mensagem pronta para compartilhar.');
+        });
+      }
+    }
 
-    /* ==================== DETALHE & AÇÕES ==================== */
+    function compartilharPet(petId, event) {
+      if (event) event.stopPropagation();
+      abrirGeradorCardPet(petId);
+    }
+
     function abrirDetalheById(id) {
       const item = state.alertas.find(a => a.id === id);
       if (item) abrirDetalhe(item);
@@ -10286,7 +10620,7 @@ ${downloadUrl}`;
         mostrarToast('Parceiro não encontrado.');
         return;
       }
-      let fone = String(p.telefone_whatsapp || p.whatsapp || p.telefone || '45999000000').replace(/\D/g, '');
+      let fone = String(p.telefone_whatsapp || p.whatsapp || p.telefone || '554598143263').replace(/\D/g, '');
       if (fone.length === 10 || fone.length === 11) {
         fone = '55' + fone;
       }

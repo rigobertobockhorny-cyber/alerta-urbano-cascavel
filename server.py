@@ -2316,11 +2316,11 @@ def obter_contato_adocao(pet_id):
     if not pet:
         return jsonify({"error": "Pet não encontrado ou já adotado."}), 404
     p = dict(pet)
-    # Fallback inteligente para demonstração / testadores
+    # Fallback inteligente para demonstracao / Central Oficial Rigo Alerta Pet Brasil
     contato_num = (p.get("contato") or "").strip()
     if not contato_num or not p.get("consentimento_contato"):
-        contato_num = "5545999985280"
-    msg = urllib.parse.quote(f"Olá! Vi o pet '{p.get('titulo')}' anunciado para adoção responsável no Alerta Pet Brasil. Gostaria de saber mais informações!")
+        contato_num = "554598143263"
+    msg = urllib.parse.quote(f"Olá! Vi o pet '{p.get('titulo')}' anunciado para adoção responsável no Alerta Pet Brasil. Gostaria de saber se ainda está disponível e como funciona o processo de acolhimento. 🐾")
     wa_url = f"https://wa.me/{contato_num}?text={msg}"
     return jsonify({"status": "ok", "whatsapp_url": wa_url, "titulo": p.get("titulo")})
 
@@ -2358,7 +2358,7 @@ def listar_testadores():
             "lat": -24.9570,
             "lng": -53.4580,
             "foto_url": "/static/testadores/rigo.png",
-            "whatsapp": "45999990000",
+            "whatsapp": "554598143263",
             "rotas_frequentes": ["Av. Brasil", "Rua Paraná", "Rua Rio de Janeiro", "Centro"]
         },
         {
@@ -2371,7 +2371,7 @@ def listar_testadores():
             "lat": -24.9490,
             "lng": -53.4760,
             "foto_url": "/static/testadores/andre.png",
-            "whatsapp": "45999990001",
+            "whatsapp": "554598143263",
             "rotas_frequentes": ["Av. Brasil Oeste", "Presidente Kennedy", "Coqueiral", "Cancelli"]
         },
         {
@@ -2384,7 +2384,7 @@ def listar_testadores():
             "lat": -24.9460,
             "lng": -53.4350,
             "foto_url": "/static/testadores/irmao.png",
-            "whatsapp": "45999990002",
+            "whatsapp": "554598143263",
             "rotas_frequentes": ["Av. Brasil Leste", "São Cristóvão", "Pacaembu", "Região Leste"]
         }
     ]
@@ -2406,17 +2406,18 @@ def api_semear_cidade():
     estado = (data.get("estado") or "PR").strip()
     qtd = min(max(int(data.get("quantidade") or 10), 1), 25)
 
+    # Central Oficial Rigo Alerta Pet Brasil para centralizar todas as ocorrências de testes
     tutores_pool = [
-        ("Carlos Mendes", "5545999985280", "Centro"),
-        ("Mariana Vasconcelos", "5545999985280", "Jardim América"),
-        ("Rodrigo Silveira", "5545999985280", "Bela Vista"),
-        ("Beatriz Alencar", "5545999985280", "Parque das Flores"),
-        ("Fernando Henrique", "5545999985280", "Vila Nova"),
-        ("Camila Fontes", "5545999985280", "Alto Alegre"),
-        ("Lucas Pinheiro", "5545999985280", "São Cristóvão"),
-        ("Patrícia Duarte", "5545999985280", "Primavera"),
-        ("Gustavo Barbosa", "5545999985280", "Santa Cruz"),
-        ("Juliana Prado", "5545999985280", "Aeroporto")
+        ("Carlos Mendes", "554598143263", "Centro"),
+        ("Mariana Vasconcelos", "554598143263", "Jardim América"),
+        ("Rodrigo Silveira", "554598143263", "Bela Vista"),
+        ("Beatriz Alencar", "554598143263", "Parque das Flores"),
+        ("Fernando Henrique", "554598143263", "Vila Nova"),
+        ("Camila Fontes", "554598143263", "Alto Alegre"),
+        ("Lucas Pinheiro", "554598143263", "São Cristóvão"),
+        ("Patrícia Duarte", "554598143263", "Primavera"),
+        ("Gustavo Barbosa", "554598143263", "Santa Cruz"),
+        ("Juliana Prado", "554598143263", "Aeroporto")
     ]
 
     pets_pool = [
@@ -2599,36 +2600,39 @@ def ver_cartaz(alerta_id):
     download_url = "https://alerta-urbano-cascavel.onrender.com/download"
     cartaz_url = f"https://alerta-urbano-cascavel.onrender.com/cartaz/{alerta_id}"
 
+    # Mensagem WhatsApp limpa, profissional e sem poluicao de emojis (Diretriz Diretor Rigo)
+    badge_label_limpa = badge_label.replace("🚨 ", "").replace("👁️ ", "").replace("💚 ", "").replace("📢 ", "").replace("🐾 ", "")
     msg_whatsapp = (
-        f"📢 *ALERTA URBANO CASCAVEL*\n"
-        f"🐾 *{badge_label}*\n\n"
-        f"🐶 *Nome:* {titulo}\n"
-        f"📍 *Bairro:* {bairro} • Cascavel/PR\n"
-        f"{f'📏 *Porte:* {porte} • {especie}' + chr(10) if porte or especie else ''}"
-        f"{f'💰 *Recompensa:* {recompensa}' + chr(10) if recompensa else ''}"
-        f"📝 *Detalhes:* {descricao}\n\n"
-        f"🖼️ *VER CARTAZ OFICIAL COM FOTO:*\n"
-        f"👉 {cartaz_url}\n\n"
-        f"📱 *Baixe o App Comunitário de Cascavel:*\n"
-        f"👉 {download_url}"
+        f"*ALERTA PET BRASIL — CASCAVEL*\n"
+        f"*{badge_label_limpa}*\n\n"
+        f"• Pet: *{titulo}*\n"
+        f"• Bairro: {bairro} (Cascavel/PR)\n"
+        f"{f'• Porte/Espécie: {porte} • {especie}' + chr(10) if porte or especie else ''}"
+        f"{f'• Recompensa Oficial: {recompensa}' + chr(10) if recompensa else ''}"
+        f"• Informações: {descricao}\n\n"
+        f"Acompanhe o radar em tempo real e o cartaz com foto:\n"
+        f"{cartaz_url}\n\n"
+        f"Baixe o aplicativo gratuito Alerta Pet Brasil:\n"
+        f"{download_url} 🐾"
     )
     msg_wa_encoded = urllib.parse.quote(msg_whatsapp)
 
     btn_contato_html = ""
+    num_limpo = "554598143263"
     if contato and any(c.isdigit() for c in contato):
-        num_limpo = "".join(filter(str.isdigit, contato))
-        if len(num_limpo) in (10, 11):
-            num_limpo = "55" + num_limpo
-        wa_tutor_msg = urllib.parse.quote(f"Olá, vi o cartaz do {titulo} no Alerta Urbano e tenho informações!")
-        btn_contato_html = f"""
-        <a href="https://wa.me/{num_limpo}?text={wa_tutor_msg}" target="_blank" class="btn-action btn-tutor">
-          💬 Falar com o Tutor no WhatsApp
-        </a>
-        """
+        parsed = "".join(filter(str.isdigit, contato))
+        if len(parsed) >= 8:
+            num_limpo = parsed if parsed.startswith("55") else "55" + parsed
+    wa_tutor_msg = urllib.parse.quote(f"Olá! Vi o cartaz oficial do pet '{titulo}' no Alerta Pet Brasil e gostaria de conversar a respeito.")
+    btn_contato_html = f"""
+    <a href="https://wa.me/{num_limpo}?text={wa_tutor_msg}" target="_blank" class="btn-action btn-tutor">
+      Falar no WhatsApp Oficial da Central
+    </a>
+    """
 
     tag_porte_html = f'<span class="tag-pill">{porte}</span>' if porte else ''
     tag_especie_html = f'<span class="tag-pill">{especie}</span>' if especie else ''
-    tag_recompensa_html = f'<span class="tag-pill" style="background:#dc2626;color:#fff;">💰 Recompensa: {recompensa}</span>' if recompensa else ''
+    tag_recompensa_html = f'<span class="tag-pill" style="background:#dc2626;color:#fff;">Recompensa: {recompensa}</span>' if recompensa else ''
 
     html_content = f"""<!DOCTYPE html>
 <html lang="pt-BR">
@@ -2874,7 +2878,7 @@ def ver_cartaz(alerta_id):
         <div class="actions-wrap">
           {btn_contato_html}
           <a href="https://api.whatsapp.com/send?text={msg_wa_encoded}" class="btn-action btn-whatsapp">
-            ↗️ Compartilhar este Cartaz no WhatsApp
+            Compartilhar este Cartaz no WhatsApp
           </a>
         </div>
       </div>
