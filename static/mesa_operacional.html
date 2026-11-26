@@ -1755,6 +1755,7 @@
             <button type="button" class="prof-tab-btn active" onclick="filtrarPerfisView('todos', this)">Todos (<span id="count-prof-todos">0</span>)</button>
             <button type="button" class="prof-tab-btn" onclick="filtrarPerfisView('desaparecido', this)">🚨 Perdidos (<span id="count-prof-desap">0</span>)</button>
             <button type="button" class="prof-tab-btn" onclick="filtrarPerfisView('adocao', this)">🏠 Adoção (<span id="count-prof-adoc">0</span>)</button>
+            <button type="button" class="prof-tab-btn" onclick="filtrarPerfisView('reencontrado', this)">🎉 Reencontrados (<span id="count-prof-reencontro">0</span>)</button>
             <button type="button" class="prof-tab-btn" onclick="filtrarPerfisView('fixado', this)">📍 No Mapa (<span id="count-prof-mapa">0</span>)</button>
           </div>
 
@@ -3269,6 +3270,8 @@
         filtrados = perfisOcorrencias.filter(p => p.pet.tipo_ocorrencia === 'desaparecido');
       } else if (filtroPerfisAtivo === 'adocao') {
         filtrados = perfisOcorrencias.filter(p => p.pet.tipo_ocorrencia === 'adocao');
+      } else if (filtroPerfisAtivo === 'reencontrado') {
+        filtrados = perfisOcorrencias.filter(p => p.pet.tipo_ocorrencia === 'reencontrado' || p.pet.status === 'reencontrado');
       } else if (filtroPerfisAtivo === 'fixado') {
         filtrados = perfisOcorrencias.filter(p => p.posicao_mapa && p.posicao_mapa.fixado);
       }
@@ -3500,6 +3503,39 @@
       plotarTodosPerfisNoMapa();
       atualizarContadoresPerfis();
       mostrarToast("🎉 15 Animais Desaparecidos foram fixados nas ruas de Cascavel! O App já pode ser testado.");
+    }
+
+    async function marcarReencontradoMesa(perfilId) {
+      const p = perfisOcorrencias.find(x => x.id === perfilId);
+      if (!p) return;
+
+      const confirmou = confirm(`Deseja confirmar a baixa por reencontro de ${p.pet.nome}?`);
+      if (!confirmou) return;
+
+      const depoimento = prompt("Depoimento do tutor ou observação (opcional):", "Reencontrado e seguro com a família!") || "";
+      
+      try {
+        const resp = await fetch(`/api/alertas/${perfilId}/confirmar-reencontro`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            autor_token: 'ADMIN_OPERACIONAL',
+            origem_reencontro: 'app_alerta_pet',
+            feedback_reencontro: depoimento
+          })
+        });
+        
+        p.pet.tipo_ocorrencia = 'reencontrado';
+        p.pet.status = 'reencontrado';
+        if (p.posicao_mapa) p.posicao_mapa.fixado = false;
+        
+        atualizarContadoresPerfis();
+        renderizarBandejaPerfis();
+        fecharDrawerPerfil();
+        alert(`Sucesso! ${p.pet.nome} foi marcado como reencontrado e computado no placar de vidas salvas!`);
+      } catch (e) {
+        alert("Erro ao registrar reencontro na API.");
+      }
     }
 
     function abrirDrawerPerfil(perfilId, latOpcional, lngOpcional) {

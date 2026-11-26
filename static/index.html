@@ -4387,7 +4387,7 @@
         <div class="brand-text">
           <div class="brand-name">Alerta Pet Brasil</div>
           <div class="brand-city">
-            <span>Cascavel • Build 43 (v3.11.6)</span>
+            <span>Cascavel • Build 44 (v3.11.7)</span>
           </div>
         </div>
       </div>
@@ -7952,19 +7952,55 @@ Baixe o aplicativo gratuito Alerta Urbano:
       }
     }
 
-    async function encerrarMeuPet(id) {
-      const resp = await fetch(`/api/alertas/${id}/encontrado`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ autor_token: state.autorToken })
-      });
-      if (resp.ok) {
-        mostrarToast('Caso encerrado! Telefone removido com segurança (LGPD).');
-        fecharModal('modal-detalhe');
-        carregarDados();
-      } else {
-        mostrarToast('Apenas o autor pode encerrar.');
+    let petIdParaReencontro = null;
+
+    function abrirModalFeedbackReencontro(id) {
+      petIdParaReencontro = id;
+      const modal = document.getElementById('modal-feedback-reencontro');
+      if (modal) modal.classList.add('open');
+    }
+
+    function fecharModalFeedbackReencontro() {
+      const modal = document.getElementById('modal-feedback-reencontro');
+      if (modal) modal.classList.remove('open');
+      petIdParaReencontro = null;
+    }
+
+    async function submeterFeedbackReencontro(e) {
+      if (e) e.preventDefault();
+      if (!petIdParaReencontro) return;
+
+      const origem = document.querySelector('input[name="origem_reencontro"]:checked')?.value || 'app_alerta_pet';
+      const feedback = document.getElementById('feedback-reencontro-texto')?.value || '';
+
+      mostrarToast('Registrando celebração de reencontro... 🎉');
+      try {
+        const resp = await fetch(`/api/alertas/${petIdParaReencontro}/confirmar-reencontro`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            autor_token: state.autorToken,
+            origem_reencontro: origem,
+            feedback_reencontro: feedback
+          })
+        });
+
+        if (resp.ok) {
+          mostrarToast('Parabéns pelo reencontro! 🐾❤️ Caso concluído com sucesso!');
+          fecharModalFeedbackReencontro();
+          fecharModal('modal-detalhe');
+          await carregarDados();
+          alternarPilarPet('reencontro');
+        } else {
+          mostrarToast('Apenas o tutor que cadastrou tem permissão para encerrar.');
+        }
+      } catch (_) {
+        mostrarToast('Erro ao registrar reencontro.');
       }
+    }
+
+    function encerrarMeuPet(id) {
+      abrirModalFeedbackReencontro(id);
     }
 
     /* ==================== COPILOTO, BOLINHA & VOZ EXCLUSIVA ==================== */
@@ -9115,6 +9151,64 @@ Baixe o aplicativo gratuito Alerta Urbano:
     </div>
     <div class="fs-body" style="padding:0; overflow:hidden; display:flex; flex-direction:column; height:calc(100% - 54px);">
       <iframe id="iframe-noticia-externa" src="" style="width:100%; height:100%; border:none; background:#ffffff;" loading="lazy"></iframe>
+    </div>
+  </div>
+
+
+  <!-- ==================== MODAL DE CELEBRAÇÃO & FEEDBACK DE REENCONTRO ==================== -->
+  <div class="full-screen-view" id="modal-feedback-reencontro" style="background:#9E8560 !important; z-index:2800;">
+    <div class="profile-fs-header" style="background:#009B3A !important; padding:16px 14px; display:flex; align-items:center; justify-content:space-between; flex-shrink:0; box-shadow:0 3px 10px rgba(0,0,0,0.15); box-sizing:border-box; width:100%;">
+      <button type="button" onclick="fecharModalFeedbackReencontro()" style="background:rgba(255,255,255,0.2); border:none; color:#FFFFFF; font-size:12px; font-weight:900; padding:8px 14px; border-radius:10px; cursor:pointer; display:flex; align-items:center; gap:6px;">
+        ← Voltar
+      </button>
+      <div style="font-size:13px; font-weight:900; color:#FFFFFF; text-transform:uppercase; letter-spacing:0.5px;">Reencontro Confirmado</div>
+      <div style="width:70px;"></div>
+    </div>
+    <div style="flex:1; overflow-y:auto; -webkit-overflow-scrolling:touch; padding:16px 14px 100px; box-sizing:border-box; width:100%;">
+      <div style="max-width:550px; margin:0 auto; background:#E4D5BC; border-radius:18px; padding:20px; box-sizing:border-box; width:100%; box-shadow:0 4px 14px rgba(0,0,0,0.08); color:#2E2417;">
+        
+        <div style="text-align:center; margin-bottom:16px;">
+          <div style="font-size:42px; margin-bottom:6px;">🐾❤️🎉</div>
+          <h2 style="font-size:18px; font-weight:900; color:#18181B; margin:0;">Que Notícia Maravilhosa!</h2>
+          <p style="font-size:12px; color:#475569; margin:6px 0 0; line-height:1.4;">
+            Ficamos imensamente felizes que o seu pet está em segurança em casa. Para fortalecermos a rede em Cascavel, nos responda:
+          </p>
+        </div>
+
+        <form onsubmit="submeterFeedbackReencontro(event)">
+          <div style="margin-bottom:16px;">
+            <label style="font-size:11.5px; font-weight:800; color:#2E2417; display:block; margin-bottom:8px;">
+              O Alerta Pet Brasil auxiliou nesta busca?
+            </label>
+            <div style="display:flex; flex-direction:column; gap:8px;">
+              <label style="display:flex; align-items:center; gap:10px; background:#FFFFFF; padding:10px 12px; border-radius:12px; border:1px solid rgba(0,0,0,0.08); cursor:pointer;">
+                <input type="radio" name="origem_reencontro" value="app_alerta_pet" checked style="accent-color:#009B3A;">
+                <span style="font-size:12px; font-weight:700; color:#18181B;">⭐ Sim, diretamente pelo Alerta Pet Brasil!</span>
+              </label>
+              <label style="display:flex; align-items:center; gap:10px; background:#FFFFFF; padding:10px 12px; border-radius:12px; border:1px solid rgba(0,0,0,0.08); cursor:pointer;">
+                <input type="radio" name="origem_reencontro" value="rede_solidaria" style="accent-color:#009B3A;">
+                <span style="font-size:12px; font-weight:700; color:#18181B;">🤝 Pela rede solidária / Amigos / Redes Sociais</span>
+              </label>
+              <label style="display:flex; align-items:center; gap:10px; background:#FFFFFF; padding:10px 12px; border-radius:12px; border:1px solid rgba(0,0,0,0.08); cursor:pointer;">
+                <input type="radio" name="origem_reencontro" value="por_conta_propria" style="accent-color:#009B3A;">
+                <span style="font-size:12px; font-weight:700; color:#18181B;">🔍 Por conta própria / Outros meios</span>
+              </label>
+            </div>
+          </div>
+
+          <div style="margin-bottom:18px;">
+            <label style="font-size:11.5px; font-weight:800; color:#2E2417; display:block; margin-bottom:6px;">
+              Deixe um recado ou agradecimento para a comunidade (opcional):
+            </label>
+            <textarea id="feedback-reencontro-texto" rows="3" placeholder="Ex: Agradeço a todos os vizinhos de Cascavel que ajudaram a ficar de olho no Thor!" style="width:100%; border-radius:12px; border:1px solid rgba(110,90,60,0.3); background:#FFFFFF; padding:10px; font-size:12px; box-sizing:border-box; resize:none; font-family:inherit;"></textarea>
+          </div>
+
+          <button type="submit" style="width:100%; height:46px; background:#009B3A; color:#FFFFFF; border:none; border-radius:12px; font-size:13px; font-weight:900; cursor:pointer; box-shadow:0 3px 10px rgba(0,155,58,0.3); display:flex; align-items:center; justify-content:center; gap:6px;">
+            Confirmar Reencontro e Concluir
+          </button>
+        </form>
+
+      </div>
     </div>
   </div>
 

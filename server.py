@@ -610,15 +610,26 @@ def baixar_apk():
 
 @app.route("/api/falar")
 def api_falar():
-    """Sintetiza alertas de voz exclusivos (padrão: voz masculina pt-BR-AntonioNeural)."""
+    """
+    Sintetiza alertas de voz exclusivos e calibrados do Alerta Pet Brasil:
+    - Feminina: pt-BR-ThalitaMultilingualNeural (suave, doce, aveludada, sem tom genérico de YouTuber) - rate: -4%, pitch: +1Hz
+    - Masculina: pt-BR-AntonioNeural calibrado (cadenciado, sereno, acolhedor, sem trava robótica) - rate: -7%, pitch: -1Hz
+    """
     texto = request.args.get("texto", "").strip()
     if not texto:
         return jsonify({"error": "Texto vazio"}), 400
 
-    voz_param = request.args.get("voz", "masculina").strip().lower()
-    voice_id = "pt-BR-FranciscaNeural" if voz_param == "feminina" else "pt-BR-AntonioNeural"
+    voz_param = request.args.get("voz", "feminina").strip().lower()
+    if voz_param == "masculina":
+        voice_id = "pt-BR-AntonioNeural"
+        voice_rate = "-7%"
+        voice_pitch = "-1Hz"
+    else:
+        voice_id = "pt-BR-ThalitaMultilingualNeural"
+        voice_rate = "-4%"
+        voice_pitch = "+1Hz"
 
-    cache_key = f"{voice_id}:{texto.lower()}"
+    cache_key = f"{voice_id}:{voice_rate}:{voice_pitch}:{texto.lower()}"
     h = hashlib.md5(cache_key.encode("utf-8")).hexdigest()
     cache_dir = os.path.join(BASE_DIR, "static", "audios_tts")
     os.makedirs(cache_dir, exist_ok=True)
@@ -632,14 +643,14 @@ def api_falar():
         import edge_tts
 
         async def _synthesize():
-            comm = edge_tts.Communicate(texto, voice_id)
+            comm = edge_tts.Communicate(texto, voice_id, rate=voice_rate, pitch=voice_pitch)
             await comm.save(filepath)
 
         asyncio.run(_synthesize())
         if os.path.exists(filepath) and os.path.getsize(filepath) > 0:
             return send_file(filepath, mimetype="audio/mpeg")
     except Exception as e:
-        print(f"[TTS SERVER] Erro ao gerar fala: {e}")
+        print(f"[TTS SERVER] Erro ao gerar fala calibrada: {e}")
 
     return jsonify({"error": "Falha na síntese de áudio"}), 500
 
@@ -1955,13 +1966,16 @@ def renovar_alerta(alerta_id):
 
 
 @app.route("/api/alertas/<int:alerta_id>/encontrado", methods=["POST"])
+@app.route("/api/alertas/<int:alerta_id>/confirmar-reencontro", methods=["POST"])
+@app.route("/api/alertas/<int:alerta_id>/reencontrado", methods=["POST"])
 @app.route("/api/alertas/<int:alerta_id>/desativar", methods=["POST"])
 @app.route("/api/alertas/<int:alerta_id>", methods=["DELETE"])
 def desativar_alerta(alerta_id):
     """
     Regra Suprema do Rigo + LGPD:
     - Somente o autor (autor_token) ou admin pode encerrar um registro de Pet.
-    - Ao encerrar, limpa automaticamente o telefone/WhatsApp (contato = '') por LGPD.
+    - Ao encerrar como reencontrado, salva origem_reencontro, feedback_reencontro e data_reencontro.
+    - Limpa automaticamente o telefone/WhatsApp (contato = '') por LGPD.
     """
     data = request.json or {}
     token = data.get("autor_token") or request.args.get("autor_token", "")
@@ -1981,15 +1995,67 @@ def desativar_alerta(alerta_id):
             "error": "Acesso negado. Apenas o autor que cadastrou este registro tem permissão para encerrá-lo."
         }), 403
 
-    eh_encontrado = request.path.endswith("/encontrado")
+    eh_encontrado = request.path.endswith("/encontrado") or request.path.endswith("/reencontrado") or request.path.endswith("/confirmar-reencontro")
+    origem = data.get("origem_reencontro") or "app_alerta_pet"
+    feedback = (data.get("feedback_reencontro") or "").strip()
+    agora_iso = datetime.now().isoformat()
+
     if eh_encontrado:
-        cur.execute("UPDATE alertas SET ativo = 0, status_pet = 'encontrado', contato = '', contato_avistador = '' WHERE id = ? OR pet_pai_id = ?", (alerta_id, alerta_id))
+        cur.execute("""
+            UPDATE alertas 
+            SET status_pet = 'reencontrado', 
+                origem_reencontro = ?, 
+                feedback_reencontro = ?, 
+                data_reencontro = ?, 
+                contato = '', 
+                contato_avistador = '' 
+            WHERE id = ? OR pet_pai_id = ?
+        """, (origem, feedback, agora_iso, alerta_id, alerta_id))
     else:
-        cur.execute("UPDATE alertas SET ativo = 0, contato = '', contato_avistador = '' WHERE id = ? OR pet_pai_id = ?", (alerta_id, alerta_id))
+        cur.execute("""
+            UPDATE alertas 
+            SET ativo = 0, 
+                contato = '', 
+                contato_avistador = '' 
+            WHERE id = ? OR pet_pai_id = ?
+        """, (alerta_id, alerta_id))
 
     conn.commit()
     conn.close()
-    return jsonify({"status": "ok", "desativado": alerta_id, "encontrado": eh_encontrado})
+    return jsonify({"status": "ok", "desativado": alerta_id, "encontrado": eh_encontrado, "origem": origem})
+
+
+@app.route("/api/reencontros/metricas", methods=["GET"])
+def obter_metricas_reencontros():
+    """
+    Retorna o placar consolidado de vidas salvas e reuniões de famílias em Cascavel.
+    Alimenta o marketing, slogans e a Mesa Operacional.
+    """
+    conn = get_db()
+    cur = conn.cursor()
+    cur.execute("SELECT COUNT(*) as total FROM alertas WHERE status_pet IN ('reencontrado', 'encontrado')")
+    row_total = cur.fetchone()
+    total = row_total["total"] if row_total else 0
+
+    cur.execute("SELECT COUNT(*) as total_app FROM alertas WHERE status_pet IN ('reencontrado', 'encontrado') AND (origem_reencontro = 'app_alerta_pet' OR origem_reencontro = '')")
+    row_app = cur.fetchone()
+    total_app = row_app["total_app"] if row_app else 0
+
+    cur.execute("""
+        SELECT id, titulo, especie, bairro, feedback_reencontro, data_reencontro, foto_url 
+        FROM alertas 
+        WHERE status_pet IN ('reencontrado', 'encontrado')
+        ORDER BY data_reencontro DESC, id DESC LIMIT 15
+    """)
+    depoimentos = [dict(r) for r in cur.fetchall()]
+    conn.close()
+
+    taxa = round((total_app / total * 100), 1) if total > 0 else 100.0
+    return jsonify({
+        "total_reencontrados": total,
+        "taxa_app": taxa,
+        "depoimentos": depoimentos
+    })
 
 
 @app.route("/api/pets/<int:pet_id>/adotar", methods=["GET"])
