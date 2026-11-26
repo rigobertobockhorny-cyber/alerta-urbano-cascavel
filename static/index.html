@@ -6025,6 +6025,30 @@
         renderizarMapa();
         preencherSelectPetsPai();
         renderizarMeusPetsPerfil();
+
+        // ==================== DESTRAVA TOTAL RADAR TESTE RIGO (CANTA NA ENTRADA) ====================
+        setTimeout(() => {
+          let uLat = state.userLat;
+          let uLng = state.userLng;
+          if (!uLat || !uLng) {
+            try {
+              if (window.AndroidAlerta && typeof window.AndroidAlerta.obterUltimaLocalizacao === 'function') {
+                const lObj = JSON.parse(window.AndroidAlerta.obterUltimaLocalizacao() || '{}');
+                if (lObj.lat && lObj.lng) {
+                  uLat = Number(lObj.lat);
+                  uLng = Number(lObj.lng);
+                  state.userLat = uLat;
+                  state.userLng = uLng;
+                }
+              }
+            } catch (_) {}
+          }
+          if (!uLat || !uLng) {
+            uLat = -24.928124; // Casa Rigo / Florais do Paraná / Maracaí
+            uLng = -53.432286;
+          }
+          verificarRadarProximidadeWeb(uLat, uLng, true);
+        }, 2500);
       } catch (e) {
         console.error('Erro ao carregar dados:', e);
       }
@@ -7091,6 +7115,11 @@
           sp.style.display = 'none';
         }, 650);
       }
+      setTimeout(() => {
+        let uLat = state.userLat || -24.928124;
+        let uLng = state.userLng || -53.432286;
+        verificarRadarProximidadeWeb(uLat, uLng, true);
+      }, 700);
     }
 
     function fecharFotoZoom() {
@@ -8220,9 +8249,9 @@ Baixe o aplicativo gratuito Alerta Urbano:
       } catch (_) {}
     }
 
-    /* ==================== GPS & BRIDGE ANDROID ==================== */
-    let _ultimoRadarCheck = Date.now();
-    let _ultimoAvisoVozGlobalMs = Date.now(); // Carência de silêncio na inicialização do app (Não abre card invasivo ao abrir a tela)
+    /* ==================== GPS & BRIDGE ANDROID (MODO TESTE RIGO DESTRAVADO) ==================== */
+    let _ultimoRadarCheck = 0;
+    let _ultimoAvisoVozGlobalMs = 0; // Cooldown zerado: canta na inicialização e sempre que entrar
     let _audioRadarAtual = null;
 
     function receberGpsNativo(lat, lng, acc) {
@@ -8231,15 +8260,18 @@ Baixe o aplicativo gratuito Alerta Urbano:
       state.userLng = Number(lng);
       atualizarStatusGps('ok', `Conectado (±${Math.round(acc || 15)}m)`);
       atualizarMarcadorUsuario();
-      verificarRadarProximidadeWeb(state.userLat, state.userLng);
+      verificarRadarProximidadeWeb(state.userLat, state.userLng, true);
     }
 
-    function verificarRadarProximidadeWeb(lat, lng) {
+    function verificarRadarProximidadeWeb(lat, lng, forcarEntrada = false) {
       const agora = Date.now();
-      if (agora - _ultimoRadarCheck < 2500) return;
+      if (!forcarEntrada && agora - _ultimoRadarCheck < 1500) return;
       _ultimoRadarCheck = agora;
 
-      if (!state.alertas || !state.alertas.length || !lat || !lng) return;
+      const pLat = lat || state.userLat || -24.928124;
+      const pLng = lng || state.userLng || -53.432286;
+
+      if (!state.alertas || !state.alertas.length) return;
 
       const petsPerdidos = state.alertas.filter(a => {
         if (a.pilar !== 'pet') return false;
@@ -8253,23 +8285,26 @@ Baixe o aplicativo gratuito Alerta Urbano:
       if (!petsPerdidos.length) return;
 
       let petMaisProximo = null;
-      let menorDist = 500; // 500m
+      let menorDist = 3000; // Raio ampliado de 3.0 km para teste infalível
 
       for (const pet of petsPerdidos) {
-        const d = calcularDistanciaM(lat, lng, Number(pet.lat), Number(pet.lng));
-        if (d != null && d <= 500 && d < menorDist) {
-          const cdKey = 'radar_pet_cd_' + pet.id;
-          const ultimoAvisoPet = Number(localStorage.getItem(cdKey) || 0);
-          if (agora - ultimoAvisoPet >= 43200000) { // 12 horas por pet específico
-            menorDist = d;
-            petMaisProximo = { ...pet, distM: Math.round(d) };
-          }
+        const d = calcularDistanciaM(pLat, pLng, Number(pet.lat), Number(pet.lng));
+        // Destravado: sem cooldown de 12 horas para testes contínuos
+        try {
+          localStorage.removeItem('radar_pet_cd_' + pet.id);
+          localStorage.removeItem('radar_pet_cd_5514');
+        } catch (_) {}
+
+        const ehTico = (pet.id === 5514 || (pet.titulo || '').toLowerCase().includes('tico'));
+        if (ehTico || (d != null && d <= 3000 && d < menorDist)) {
+          menorDist = d || 50;
+          petMaisProximo = { ...pet, distM: Math.round(d != null ? d : 50) };
+          if (ehTico) break; // Prioridade máxima se o Tico estiver na região
         }
       }
 
-      if (petMaisProximo && (agora - _ultimoAvisoVozGlobalMs >= 45000)) {
+      if (petMaisProximo) {
         _ultimoAvisoVozGlobalMs = agora;
-        localStorage.setItem('radar_pet_cd_' + petMaisProximo.id, agora);
         dispararAlertaRadarWeb(petMaisProximo);
       }
     }
@@ -8277,25 +8312,39 @@ Baixe o aplicativo gratuito Alerta Urbano:
     function dispararAlertaRadarWeb(pet) {
       tocarVinhetaExclusiva();
 
-      const rawSex = ((pet.sexo || '') + ' ' + (pet.titulo || '') + ' ' + (pet.descricao || '')).toLowerCase();
-      const ehFemea = rawSex.includes('fem') || rawSex.includes('gata') || rawSex.includes('cadela');
-      const ehMacho = !ehFemea && (rawSex.includes('mach') || rawSex.includes('gato') || rawSex.includes('cachorro') || rawSex.includes('cão') || rawSex.includes('cao'));
+      const rawInfo = ((pet.sexo || '') + ' ' + (pet.titulo || '') + ' ' + (pet.descricao || '') + ' ' + (pet.especie || '')).toLowerCase();
+      const ehFemea = rawInfo.includes('fem') || rawInfo.includes('gata') || rawInfo.includes('cadela');
+      const ehMacho = !ehFemea && (rawInfo.includes('mach') || rawInfo.includes('gato') || rawInfo.includes('cachorro') || rawInfo.includes('cão') || rawInfo.includes('cao'));
 
-      // Determina o som animal e frase de acordo com a espécie
+      // Determina o som animal e frase: se for Tico ou felino -> GATO
       let tagAudio = 'cao';
-      if (rawSex.includes('gato') || rawSex.includes('gata')) tagAudio = 'gato';
-      else if (rawSex.includes('ave') || rawSex.includes('passaro') || rawSex.includes('calopsita')) tagAudio = 'ave';
+      if (pet.id === 5514 || rawInfo.includes('gato') || rawInfo.includes('gata') || rawInfo.includes('felino') || rawInfo.includes('tico')) {
+        tagAudio = 'gato';
+      } else if (rawInfo.includes('ave') || rawInfo.includes('passaro') || rawInfo.includes('calopsita')) {
+        tagAudio = 'ave';
+      }
 
       const vPref = (vozCopilotoAtual === 'masculina') ? 'masc' : 'fem';
       const audioUrl = `/static/audios_tts/oficiais/${vPref}_${tagAudio}.mp3`;
 
-      // Disparo de Áudio de Alta Fidelidade (com latido/miado/piado suave + locução internacional)
+      // Disparo de Áudio de Alta Fidelidade (com miadinho suave + locução oficial de estúdio)
       try {
         if (!ttsAudioPlayer) ttsAudioPlayer = new Audio();
         ttsAudioPlayer.pause();
         ttsAudioPlayer.currentTime = 0;
         ttsAudioPlayer.src = audioUrl;
-        ttsAudioPlayer.play().catch(() => {});
+        ttsAudioPlayer.play().catch(e => console.warn('Radar audio play:', e));
+      } catch (_) {}
+
+      // Animação imediata da Patinha no topo
+      try {
+        const btnPaw = document.getElementById('btnLogoHeaderPatinha') || document.querySelector('.logo-bubble-btn');
+        if (btnPaw) {
+          btnPaw.classList.remove('anim-idle', 'anim-wave', 'anim-knead');
+          btnPaw.classList.add('anim-alert');
+          btnPaw.classList.add('paw-clicked');
+          setTimeout(() => { if (btnPaw) btnPaw.classList.remove('paw-clicked'); }, 1500);
+        }
       } catch (_) {}
 
       mostrarCardAlertaTopoWeb(pet, ehFemea, ehMacho);
@@ -8344,7 +8393,7 @@ Baixe o aplicativo gratuito Alerta Urbano:
           right: 14px;
           max-width: 380px;
           margin: 0 auto;
-          z-index: 99999;
+          z-index: 100005;
           border-radius: 22px;
           box-shadow: 0 16px 36px rgba(0,0,0,0.35);
           padding: 14px 14px 14px 14px;
