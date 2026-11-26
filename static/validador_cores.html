@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alerta Pet Brasil • Painel Oficial de Validação de Cores & Telas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #0B0F17;
+      color: #F8FAFC;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      min-height: 100vh;
+      padding: 24px 16px 80px;
+    }
+
+    .container {
+      max-width: 1440px;
+      margin: 0 auto;
+    }
+
+    /* BARRA SUPERIOR FIXA DE CONTROLE DE CORES */
+    .top-toolbar {
+      position: sticky;
+      top: 12px;
+      z-index: 99999;
+      background: rgba(15, 23, 42, 0.95);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 20px;
+      padding: 16px 20px;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+      margin-bottom: 28px;
+    }
+
+    .toolbar-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 14px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding-bottom: 12px;
+    }
+
+    .toolbar-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 20px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #FFFFFF;
+    }
+
+    .toolbar-badge {
+      font-size: 11px;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(250, 204, 21, 0.15);
+      border: 1px solid rgba(250, 204, 21, 0.35);
+      color: #FACC15;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .palettes-selector {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .btn-palette {
+      background: rgba(255, 255, 255, 0.06);
+      border: 2px solid rgba(255, 255, 255, 0.12);
+      color: #E2E8F0;
+      padding: 10px 16px;
+      border-radius: 14px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .btn-palette:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.25);
+      transform: translateY(-2px);
+    }
+
+    .btn-palette.active {
+      background: rgba(250, 204, 21, 0.12);
+      border-color: #FACC15;
+      color: #FFFFFF;
+      box-shadow: 0 4px 18px rgba(250, 204, 21, 0.25);
+    }
+
+    .color-dots {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      display: inline-block;
+    }
+
+    /* FILTROS DE TELAS (ABAS) */
+    .screens-filter {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      overflow-x: auto;
+      padding-top: 10px;
+      padding-bottom: 4px;
+    }
+
+    .btn-screen-filter {
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #94A3B8;
+      padding: 6px 14px;
+      border-radius: 10px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.15s;
+    }
+
+    .btn-screen-filter:hover {
+      color: #F8FAFC;
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .btn-screen-filter.active {
+      background: #FFFFFF;
+      color: #0F172A;
+      border-color: #FFFFFF;
+    }
+
+    /* GRID DE DISPLAYS MOCKUPS */
+    .screens-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 28px;
+      align-items: start;
+    }
+
+    /* SMARTPHONE MOCKUP FRAME */
+    .mockup-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .mockup-label {
+      font-family: 'Outfit', sans-serif;
+      font-size: 15px;
+      font-weight: 800;
+      color: #E2E8F0;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .mockup-badge {
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.1);
+      color: #CBD5E1;
+      font-weight: 700;
+    }
+
+    .mockup-phone {
+      width: 100%;
+      max-width: 360px;
+      height: 680px;
+      border-radius: 36px;
+      border: 4px solid #334155;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6), inset 0 0 0 2px rgba(255, 255, 255, 0.1);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      background: var(--app-bg);
+      transition: background 0.3s ease;
+    }
+
+    /* STATUS BAR DO ANDROID */
+    .phone-status-bar {
+      height: 26px;
+      background: var(--header-bg);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 18px;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--header-text);
+      opacity: 0.85;
+      z-index: 10;
+    }
+
+    /* HEADER DO APP */
+    .phone-app-header {
+      background: var(--header-bg);
+      color: var(--header-text);
+      padding: 10px 14px 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--header-border);
+      z-index: 10;
+      transition: all 0.3s ease;
+    }
+
+    .phone-logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 900;
+      font-size: 15px;
+      letter-spacing: -0.01em;
+    }
+
+    .phone-logo-badge {
+      background: #009B3A;
+      color: #FED700;
+      font-size: 11px;
+      padding: 3px 6px;
+      border-radius: 6px;
+      font-weight: 900;
+    }
+
+    /* CONTEÚDO COM ROLAGEM DENTRO DO MOCKUP */
+    .phone-content {
+      flex: 1;
+      overflow-y: auto;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      background: var(--app-bg);
+      color: var(--text-base);
+      transition: all 0.3s ease;
+    }
+
+    .phone-content::-webkit-scrollbar {
+      width: 4px;
+    }
+    .phone-content::-webkit-scrollbar-thumb {
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 4px;
+    }
+
+    /* BARRA INFERIOR DE NAVEGAÇÃO */
+    .phone-bottom-nav {
+      height: 56px;
+      background: var(--nav-bg);
+      border-top: 1px solid var(--nav-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      padding: 0 4px;
+      z-index: 10;
+      transition: all 0.3s ease;
+    }
+
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      color: var(--nav-muted);
+      font-size: 9.5px;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .nav-item.active {
+      color: var(--nav-active);
+    }
+
+    .nav-icon {
+      font-size: 18px;
+      line-height: 1;
+    }
+
+    /* ELEMENTOS COMUNS INTERNOS */
+    .app-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 12px;
+      box-shadow: var(--card-shadow);
+      transition: all 0.3s ease;
+    }
+
+    .app-card-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--text-title);
+      margin-bottom: 4px;
+    }
+
+    .app-card-desc {
+      font-size: 11.5px;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    .app-btn-primary {
+      background: var(--btn-primary-bg);
+      color: var(--btn-primary-text);
+      border: 1px solid var(--btn-primary-border);
+      border-radius: 10px;
+      padding: 8px 12px;
+      font-weight: 800;
+      font-size: 11.5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      cursor: pointer;
+      width: 100%;
+      box-shadow: var(--btn-shadow);
+      transition: all 0.2s ease;
+    }
+
+    .app-btn-accent {
+      background: var(--btn-accent-bg);
+      color: var(--btn-accent-text);
+      border: none;
+      border-radius: 10px;
+      padding: 8px 12px;
+      font-weight: 800;
+      font-size: 11.5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      cursor: pointer;
+      width: 100%;
+      transition: all 0.2s ease;
+    }
+
+    .app-tag {
+      font-size: 10px;
+      font-weight: 800;
+      padding: 2px 7px;
+      border-radius: 6px;
+      display: inline-block;
+    }
+
+    /* ============================================================== */
+    /* DEFINIÇÃO DAS 5 PALETAS DE CORES EM CSS VARIABLES              */
+    /* ============================================================== */
+
+    /* 1. MARROM NOBRE (ATUAL OFICIAL) */
+    .theme-1-marrom {
+      --app-bg: #9E8560;
+      --header-bg: #5A4730;
+      --header-text: #FFFFFF;
+      --header-border: rgba(0, 0, 0, 0.15);
+      --card-bg: #EDE8DF;
+      --card-border: rgba(110, 90, 60, 0.25);
+      --card-shadow: 0 4px 12px rgba(60, 45, 30, 0.18);
+      --text-title: #2E2417;
+      --text-base: #3E3222;
+      --text-muted: #6B573F;
+      --btn-primary-bg: #E4D5BC;
+      --btn-primary-text: #2E2417;
+      --btn-primary-border: rgba(110, 90, 60, 0.35);
+      --btn-accent-bg: #009B3A;
+      --btn-accent-text: #FFFFFF;
+      --btn-shadow: 0 2px 6px rgba(0,0,0,0.12);
+      --nav-bg: #5A4730;
+      --nav-border: rgba(0, 0, 0, 0.18);
+      --nav-muted: #C4AF8B;
+      --nav-active: #FED700;
+    }
+
+    /* 2. BEGE & AREIA CLARA (FUNDO CLARO ACOLHEDOR) */
+    .theme-2-areia {
+      --app-bg: #F5EFE6;
+      --header-bg: #EDE3D5;
+      --header-text: #2E2417;
+      --header-border: #D8CCBC;
+      --card-bg: #FFFFFF;
+      --card-border: #E5D9C8;
+      --card-shadow: 0 4px 14px rgba(138, 118, 86, 0.12);
+      --text-title: #2E2417;
+      --text-base: #443B2C;
+      --text-muted: #7A6953;
+      --btn-primary-bg: #8C7350;
+      --btn-primary-text: #FFFFFF;
+      --btn-primary-border: transparent;
+      --btn-accent-bg: #009B3A;
+      --btn-accent-text: #FFFFFF;
+      --btn-shadow: 0 2px 8px rgba(140, 115, 80, 0.25);
+      --nav-bg: #FFFFFF;
+      --nav-border: #E8DFD3;
+      --nav-muted: #8C7862;
+      --nav-active: #009B3A;
+    }
+
+    /* 3. CINZA URBANO PLATINA (MODERNO GPS & TRÂNSITO) */
+    .theme-3-cinza {
+      --app-bg: #EAEFF5;
+      --header-bg: #1E293B;
+      --header-text: #F8FAFC;
+      --header-border: rgba(255, 255, 255, 0.1);
+      --card-bg: #FFFFFF;
+      --card-border: #CBD5E1;
+      --card-shadow: 0 4px 16px rgba(15, 23, 42, 0.08);
+      --text-title: #0F172A;
+      --text-base: #334155;
+      --text-muted: #64748B;
+      --btn-primary-bg: #1E293B;
+      --btn-primary-text: #F8FAFC;
+      --btn-primary-border: transparent;
+      --btn-accent-bg: #059669;
+      --btn-accent-text: #FFFFFF;
+      --btn-shadow: 0 2px 8px rgba(30, 41, 59, 0.2);
+      --nav-bg: #FFFFFF;
+      --nav-border: #CBD5E1;
+      --nav-muted: #64748B;
+      --nav-active: #059669;
+    }
+
+    /* 4. VERDE BOTÂNICO & AREIA (IDENTIDADE VIVA BRASIL) */
+    .theme-4-verde {
+      --app-bg: #EAF5ED;
+      --header-bg: #007A2D;
+      --header-text: #FFFFFF;
+      --header-border: #006023;
+      --card-bg: #FAF8F2;
+      --card-border: #CFE3D5;
+      --card-shadow: 0 4px 14px rgba(0, 122, 45, 0.12);
+      --text-title: #064E3B;
+      --text-base: #1C382A;
+      --text-muted: #4B6E5B;
+      --btn-primary-bg: #009B3A;
+      --btn-primary-text: #FFFFFF;
+      --btn-primary-border: transparent;
+      --btn-accent-bg: #FED700;
+      --btn-accent-text: #064E3B;
+      --btn-shadow: 0 3px 10px rgba(0, 155, 58, 0.3);
+      --nav-bg: #FFFFFF;
+      --nav-border: #D1E5D7;
+      --nav-muted: #4B6E5B;
+      --nav-active: #009B3A;
+    }
+
+    /* 5. BEGE COURO & TERRACOTA (EARTH WARM PREMIUM) */
+    .theme-5-couro {
+      --app-bg: #D4C3B2;
+      --header-bg: #4A3525;
+      --header-text: #FAF6F0;
+      --header-border: #38271B;
+      --card-bg: #FAF6F0;
+      --card-border: #C4B19F;
+      --card-shadow: 0 4px 14px rgba(74, 53, 37, 0.2);
+      --text-title: #2B1E15;
+      --text-base: #3D2C20;
+      --text-muted: #735A46;
+      --btn-primary-bg: #4A3525;
+      --btn-primary-text: #FAF6F0;
+      --btn-primary-border: transparent;
+      --btn-accent-bg: #2D6A4F;
+      --btn-accent-text: #FFFFFF;
+      --btn-shadow: 0 2px 8px rgba(74, 53, 37, 0.3);
+      --nav-bg: #4A3525;
+      --nav-border: #38271B;
+      --nav-muted: #B8A391;
+      --nav-active: #F3C68F;
+    }
+
+    /* RODAPÉ DO PAINEL */
+    .panel-footer {
+      text-align: center;
+      margin-top: 60px;
+      padding: 24px;
+      color: #64748B;
+      font-size: 13px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+  </style>
+</head>
+<body class="theme-1-marrom" id="mainBody">
+
+<div class="container">
+
+  <!-- BARRA DE CONTROLE FIXA NO TOPO -->
+  <div class="top-toolbar">
+    <div class="toolbar-header">
+      <div class="toolbar-title">
+        <span>🎨</span> Validação Cromática • Alerta Pet Brasil
+        <span class="toolbar-badge" id="activeThemeBadge">1. Marrom Nobre (Atual)</span>
+      </div>
+      <div style="font-size: 13px; color: #94A3B8;">
+        Clique nas variações abaixo para ver todas as telas mudarem simultaneamente:
+      </div>
+    </div>
+
+    <!-- SELETOR DAS 5 VARIAÇÕES DE CORES -->
+    <div class="palettes-selector">
+      
+      <button class="btn-palette active" id="btn-t1" onclick="aplicarTema('theme-1-marrom', '1. Marrom Nobre (Atual Oficial)', this)">
+        <div class="color-dots">
+          <span class="dot" style="background: #9E8560;"></span>
+          <span class="dot" style="background: #EDE8DF;"></span>
+          <span class="dot" style="background: #009B3A;"></span>
+          <span class="dot" style="background: #FED700;"></span>
+        </div>
+        <span>1. Marrom Nobre (Atual)</span>
+      </button>
+
+      <button class="btn-palette" id="btn-t2" onclick="aplicarTema('theme-2-areia', '2. Areia & Bege Claro (Fundo Areia)', this)">
+        <div class="color-dots">
+          <span class="dot" style="background: #F5EFE6;"></span>
+          <span class="dot" style="background: #FFFFFF;"></span>
+          <span class="dot" style="background: #8C7350;"></span>
+          <span class="dot" style="background: #009B3A;"></span>
+        </div>
+        <span>2. Areia & Bege Claro</span>
+      </button>
+
+      <button class="btn-palette" id="btn-t3" onclick="aplicarTema('theme-3-cinza', '3. Cinza Urbano Platina (GPS Clean)', this)">
+        <div class="color-dots">
+          <span class="dot" style="background: #EAEFF5;"></span>
+          <span class="dot" style="background: #FFFFFF;"></span>
+          <span class="dot" style="background: #1E293B;"></span>
+          <span class="dot" style="background: #059669;"></span>
+        </div>
+        <span>3. Cinza Urbano Platina</span>
+      </button>
+
+      <button class="btn-palette" id="btn-t4" onclick="aplicarTema('theme-4-verde', '4. Verde Botânico & Areia (Viva Brasil)', this)">
+        <div class="color-dots">
+          <span class="dot" style="background: #EAF5ED;"></span>
+          <span class="dot" style="background: #007A2D;"></span>
+          <span class="dot" style="background: #FAF8F2;"></span>
+          <span class="dot" style="background: #FED700;"></span>
+        </div>
+        <span>4. Verde Botânico & Areia</span>
+      </button>
+
+      <button class="btn-palette" id="btn-t5" onclick="aplicarTema('theme-5-couro', '5. Bege Couro & Terracota (Warm Earth)', this)">
+        <div class="color-dots">
+          <span class="dot" style="background: #D4C3B2;"></span>
+          <span class="dot" style="background: #4A3525;"></span>
+          <span class="dot" style="background: #FAF6F0;"></span>
+          <span class="dot" style="background: #2D6A4F;"></span>
+        </div>
+        <span>5. Bege Couro & Terracota</span>
+      </button>
+
+    </div>
+
+    <!-- FILTRO RÁPIDO DE TELAS -->
+    <div class="screens-filter">
+      <span style="font-size: 11px; font-weight: 800; color: #64748B; text-transform: uppercase; margin-right: 4px;">Filtro de Telas:</span>
+      <button class="btn-screen-filter active" onclick="filtrarTelas('todas', this)">Mostrar Todas (8 Telas)</button>
+      <button class="btn-screen-filter" onclick="filtrarTelas('tela-home', this)">1. Home / Radar</button>
+      <button class="btn-screen-filter" onclick="filtrarTelas('tela-pets', this)">2. Aba Pets (4 Pilares)</button>
+      <button class="btn-screen-filter" onclick="filtrarTelas('tela-protetores', this)">3. Aba Protetores</button>
+      <button class="btn-screen-filter" onclick="filtrarTelas('tela-copiloto', this)">4. Aba Copiloto</button>
+      <button class="btn-screen-filter" onclick="filtrarTelas('tela-ficha', this)">5. Ficha do Pet</button>
+      <button class="btn-screen-filter" onclick="filtrarTelas('tela-adocao', this)">6. Pré-Candidatura</button>
+      <button class="btn-screen-filter" onclick="filtrarTelas('tela-reencontro', this)">7. Card Reencontro</button>
+      <button class="btn-screen-filter" onclick="filtrarTelas('tela-perfil', this)">8. Perfil do Tutor</button>
+    </div>
+  </div>
+
+  <!-- GRID COM AS 8 TELAS DO APLICATIVO -->
+  <div class="screens-grid" id="screensContainer">
+
+    <!-- ==================== TELA 1: HOME / RADAR ==================== -->
+    <div class="mockup-wrapper screen-item" id="item-tela-home">
+      <div class="mockup-label">
+        <span>📍</span> 1. Home / Radar em Tempo Real
+        <span class="mockup-badge">Tela Principal</span>
+      </div>
+      <div class="mockup-phone">
+        <div class="phone-status-bar">
+          <span>09:41</span>
+          <span>5G • 100%</span>
+        </div>
+        <div class="phone-app-header">
+          <div class="phone-logo">
+            <span class="phone-logo-badge">ALERTA</span>
+            <span>PET BRASIL</span>
+          </div>
+          <div style="width:28px; height:28px; border-radius:50%; background: #FED700; color:#000; display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:900;">🐾</div>
+        </div>
+        <div class="phone-content">
+          
+          <!-- Card de Alerta no Topo -->
+          <div class="app-card" style="border-left: 4px solid #EF4444; background: var(--card-bg);">
+            <div style="display:flex; gap:10px; align-items:center;">
+              <img src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=120&q=80" style="width:50px; height:50px; border-radius:10px; object-fit:cover;">
+              <div style="flex:1;">
+                <span class="app-tag" style="background:#FEE2E2; color:#B91C1C;">⚠️ PERDIDO HÁ 20 MIN</span>
+                <div class="app-card-title" style="margin-top:2px;">Tico • Fox Paulistinha</div>
+                <div class="app-card-desc">Visto no Bairro Santa Cruz (Cascavel)</div>
+              </div>
+            </div>
+            <div style="display:flex; gap:6px; margin-top:8px;">
+              <button class="app-btn-primary">Ver no mapa</button>
+              <button class="app-btn-accent">Visto Aqui</button>
+            </div>
+          </div>
+
+          <!-- Radar Virtual / Mapa -->
+          <div class="app-card" style="height:190px; background: #C8D6E5; position:relative; overflow:hidden; display:flex; align-items:center; justify-content:center;">
+            <div style="position:absolute; width:140px; height:140px; border-radius:50%; border:2px dashed #009B3A; opacity:0.6;"></div>
+            <div style="position:absolute; width:70px; height:70px; border-radius:50%; background:rgba(0,155,58,0.15);"></div>
+            <div style="width:16px; height:16px; border-radius:50%; background:#009B3A; border:3px solid #FFF;"></div>
+            <div style="position:absolute; top:24px; left:40px; background:#EF4444; color:#FFF; font-size:10px; font-weight:800; padding:3px 8px; border-radius:8px;">📍 Tico (350m)</div>
+            <div style="position:absolute; bottom:8px; right:8px; background:rgba(0,0,0,0.6); color:#FFF; font-size:9px; padding:2px 6px; border-radius:4px;">GPS Ativo</div>
+          </div>
+
+          <!-- Esteira de Animais Desaparecidos -->
+          <div style="font-size:12px; font-weight:800; color:var(--text-title); margin-top:4px;">Pets Perdidos na sua Rota:</div>
+          <div class="app-card" style="display:flex; gap:10px; align-items:center;">
+            <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&w=120&q=80" style="width:44px; height:44px; border-radius:8px; object-fit:cover;">
+            <div style="flex:1;">
+              <div class="app-card-title">Mel • Siamês Fêmea</div>
+              <div class="app-card-desc">Bairro Neva (500m)</div>
+            </div>
+            <button class="app-btn-primary" style="width:auto; padding:6px 10px;">Apoiar</button>
+          </div>
+
+        </div>
+        <div class="phone-bottom-nav">
+          <div class="nav-item active"><span class="nav-icon">🏠</span><span>Início</span></div>
+          <div class="nav-item"><span class="nav-icon">🐾</span><span>Pets</span></div>
+          <div class="nav-item"><span class="nav-icon">🤝</span><span>Protetores</span></div>
+          <div class="nav-item"><span class="nav-icon">🚗</span><span>Copiloto</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== TELA 2: ABA PETS (4 PILARES) ==================== -->
+    <div class="mockup-wrapper screen-item" id="item-tela-pets">
+      <div class="mockup-label">
+        <span>🐾</span> 2. Aba Pets (Os 4 Pilares)
+        <span class="mockup-badge">Catálogo</span>
+      </div>
+      <div class="mockup-phone">
+        <div class="phone-status-bar">
+          <span>09:41</span>
+          <span>5G • 100%</span>
+        </div>
+        <div class="phone-app-header">
+          <div class="phone-logo">
+            <span>🐾 Catálogo de Animais</span>
+          </div>
+          <button style="background:var(--btn-accent-bg); color:var(--btn-accent-text); border:none; border-radius:8px; padding:4px 8px; font-weight:800; font-size:11px;">+ Cadastrar</button>
+        </div>
+        <div class="phone-content">
+          
+          <!-- Segmented Control dos 4 Pilares -->
+          <div style="display:grid; grid-template-columns:repeat(4, 1fr); background:rgba(0,0,0,0.08); padding:3px; border-radius:12px; gap:2px;">
+            <button style="background:var(--btn-primary-bg); color:var(--btn-primary-text); border:none; border-radius:8px; padding:5px 0; font-size:9.5px; font-weight:800;">Perdidos</button>
+            <button style="background:transparent; color:var(--text-muted); border:none; font-size:9.5px; font-weight:700;">Resgates</button>
+            <button style="background:transparent; color:var(--text-muted); border:none; font-size:9.5px; font-weight:700;">Em Casa</button>
+            <button style="background:transparent; color:var(--text-muted); border:none; font-size:9.5px; font-weight:700;">Adoção</button>
+          </div>
+
+          <!-- Card Pet Macho (Azul Acolhedor) -->
+          <div class="app-card" style="border-left: 4px solid #0284C7;">
+            <div style="display:flex; gap:10px;">
+              <img src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=150&q=80" style="width:70px; height:70px; border-radius:12px; object-fit:cover;">
+              <div style="flex:1;">
+                <span class="app-tag" style="background:#E0F2FE; color:#0369A1;">🐕 MACHO • PORTE MÉDIO</span>
+                <div class="app-card-title" style="margin-top:3px;">Tico • Fox Paulistinha</div>
+                <div class="app-card-desc">Bairro Santa Cruz • Recompensa R$ 500</div>
+              </div>
+            </div>
+            <div style="display:flex; gap:6px; margin-top:10px;">
+              <button class="app-btn-primary">Ver Ficha</button>
+              <button class="app-btn-accent">Informar Pista</button>
+            </div>
+          </div>
+
+          <!-- Card Pet Fêmea (Rosa Acolhedor) -->
+          <div class="app-card" style="border-left: 4px solid #DB2777;">
+            <div style="display:flex; gap:10px;">
+              <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&w=150&q=80" style="width:70px; height:70px; border-radius:12px; object-fit:cover;">
+              <div style="flex:1;">
+                <span class="app-tag" style="background:#FCE7F3; color:#BE185D;">🐱 FÊMEA • CASTRADA</span>
+                <div class="app-card-title" style="margin-top:3px;">Mel • Gatinha Dócil</div>
+                <div class="app-card-desc">Bairro Neva • Desaparecida desde ontem</div>
+              </div>
+            </div>
+            <div style="display:flex; gap:6px; margin-top:10px;">
+              <button class="app-btn-primary">Ver Ficha</button>
+              <button class="app-btn-accent">Informar Pista</button>
+            </div>
+          </div>
+
+        </div>
+        <div class="phone-bottom-nav">
+          <div class="nav-item"><span class="nav-icon">🏠</span><span>Início</span></div>
+          <div class="nav-item active"><span class="nav-icon">🐾</span><span>Pets</span></div>
+          <div class="nav-item"><span class="nav-icon">🤝</span><span>Protetores</span></div>
+          <div class="nav-item"><span class="nav-icon">🚗</span><span>Copiloto</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== TELA 3: ABA PROTETORES ==================== -->
+    <div class="mockup-wrapper screen-item" id="item-tela-protetores">
+      <div class="mockup-label">
+        <span>🤝</span> 3. Aba Protetores da Cidade
+        <span class="mockup-badge">Comunidade</span>
+      </div>
+      <div class="mockup-phone">
+        <div class="phone-status-bar">
+          <span>09:41</span>
+          <span>5G • 100%</span>
+        </div>
+        <div class="phone-app-header">
+          <div class="phone-logo">
+            <span>🤝 Rede de Protetores</span>
+          </div>
+          <div style="font-size:11px; color:var(--header-text); font-weight:700;">Cascavel / PR</div>
+        </div>
+        <div class="phone-content">
+          
+          <div class="app-card" style="text-align:center; padding:16px;">
+            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=120&q=80" style="width:60px; height:60px; border-radius:50%; object-fit:cover; margin:0 auto 8px; border:2px solid var(--btn-accent-bg);">
+            <div class="app-card-title">Dra. Camila Resgates</div>
+            <div class="app-card-desc" style="margin-bottom:8px;">Protetora Independente • 14 animais sob tutela</div>
+            <span class="app-tag" style="background:rgba(0,155,58,0.15); color:#009B3A; margin-bottom:10px;">✨ 100% Dedicação Cívica</span>
+            <div style="display:flex; gap:6px;">
+              <button class="app-btn-primary">Ver Animais (14)</button>
+              <button class="app-btn-accent">Falar no WhatsApp</button>
+            </div>
+          </div>
+
+          <div class="app-card" style="text-align:center; padding:16px;">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=120&q=80" style="width:60px; height:60px; border-radius:50%; object-fit:cover; margin:0 auto 8px; border:2px solid var(--btn-accent-bg);">
+            <div class="app-card-title">Marcos • Abrigo Esperança</div>
+            <div class="app-card-desc" style="margin-bottom:8px;">Resgate de cães de grande porte e idosos</div>
+            <div style="display:flex; gap:6px;">
+              <button class="app-btn-primary">Ver Animais (22)</button>
+              <button class="app-btn-accent">Apoiar Abrigo</button>
+            </div>
+          </div>
+
+        </div>
+        <div class="phone-bottom-nav">
+          <div class="nav-item"><span class="nav-icon">🏠</span><span>Início</span></div>
+          <div class="nav-item"><span class="nav-icon">🐾</span><span>Pets</span></div>
+          <div class="nav-item active"><span class="nav-icon">🤝</span><span>Protetores</span></div>
+          <div class="nav-item"><span class="nav-icon">🚗</span><span>Copiloto</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== TELA 4: ABA COPILOTO ==================== -->
+    <div class="mockup-wrapper screen-item" id="item-tela-copiloto">
+      <div class="mockup-label">
+        <span>🚗</span> 4. Aba Copiloto & Trânsito
+        <span class="mockup-badge">Áudio & Radar</span>
+      </div>
+      <div class="mockup-phone">
+        <div class="phone-status-bar">
+          <span>09:41</span>
+          <span>5G • 100%</span>
+        </div>
+        <div class="phone-app-header">
+          <div class="phone-logo">
+            <span>🚗 Copiloto Alerta Urbano</span>
+          </div>
+          <span class="app-tag" style="background:#009B3A; color:#FFF;">ATIVO</span>
+        </div>
+        <div class="phone-content">
+          
+          <!-- Seletor de Voz de Estúdio -->
+          <div class="app-card">
+            <div class="app-card-title">🎙️ Voz Oficial do Assistente:</div>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px; margin-top:8px;">
+              <button class="app-btn-primary" style="background:var(--btn-accent-bg); color:var(--btn-accent-text); border:none;">👩 Elsa (Itália)</button>
+              <button class="app-btn-primary">👨 Diego (Itália)</button>
+            </div>
+          </div>
+
+          <!-- Switches de Radares -->
+          <div class="app-card">
+            <div class="app-card-title">Alertas por Voz no Trajeto:</div>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-top:10px;">
+              <span style="font-size:12px; font-weight:700;">🐾 Pets Perdidos (500m)</span>
+              <span style="color:#009B3A; font-weight:900;">LIGADO</span>
+            </div>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-top:10px;">
+              <span style="font-size:12px; font-weight:700;">⛈️ Alertas Climáticos & Defesa Civil</span>
+              <span style="color:#009B3A; font-weight:900;">LIGADO</span>
+            </div>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-top:10px;">
+              <span style="font-size:12px; font-weight:700;">🚗 Trânsito & Segurança (250m)</span>
+              <span style="color:#009B3A; font-weight:900;">LIGADO</span>
+            </div>
+          </div>
+
+          <!-- Feed Cívico -->
+          <div class="app-card">
+            <span class="app-tag" style="background:#FEF3C7; color:#92400E;">DEFESA CIVIL</span>
+            <div class="app-card-title" style="margin-top:4px;">Alerta de Chuva e Vendaval</div>
+            <div class="app-card-desc">Proteja seus animais dentro de casa para evitar fugas por trovões.</div>
+          </div>
+
+        </div>
+        <div class="phone-bottom-nav">
+          <div class="nav-item"><span class="nav-icon">🏠</span><span>Início</span></div>
+          <div class="nav-item"><span class="nav-icon">🐾</span><span>Pets</span></div>
+          <div class="nav-item"><span class="nav-icon">🤝</span><span>Protetores</span></div>
+          <div class="nav-item active"><span class="nav-icon">🚗</span><span>Copiloto</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== TELA 5: FICHA DO PET ==================== -->
+    <div class="mockup-wrapper screen-item" id="item-tela-ficha">
+      <div class="mockup-label">
+        <span>📋</span> 5. Ficha Detalhada do Pet
+        <span class="mockup-badge">Tela Cheia</span>
+      </div>
+      <div class="mockup-phone">
+        <div class="phone-status-bar">
+          <span>09:41</span>
+          <span>5G • 100%</span>
+        </div>
+        <div class="phone-app-header">
+          <div class="phone-logo">
+            <span>← Detalhes do Pet</span>
+          </div>
+          <span>🔗 Compartilhar</span>
+        </div>
+        <div class="phone-content" style="padding:0;">
+          
+          <img src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=400&q=80" style="width:100%; height:200px; object-fit:cover;">
+
+          <div style="padding:14px; display:flex; flex-direction:column; gap:10px;">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <div>
+                <div class="app-card-title" style="font-size:18px;">Tico • Fox Paulistinha</div>
+                <div class="app-card-desc">Cascavel • Bairro Santa Cruz</div>
+              </div>
+              <span class="app-tag" style="background:#FEE2E2; color:#B91C1C; font-size:11px;">RECOMPENSA R$ 500</span>
+            </div>
+
+            <div class="app-card">
+              <div style="font-size:12px; font-weight:800; color:var(--text-title); margin-bottom:4px;">Características:</div>
+              <div class="app-card-desc">Porte médio, mancha preta no olho esquerdo, dócil, atende pelo nome. Estava usando coleira vermelha.</div>
+            </div>
+
+            <button class="app-btn-accent" style="height:42px; font-size:13px;">📍 Informar que Vi o Animal</button>
+            <button class="app-btn-primary" style="height:40px;">💬 Falar com o Tutor no WhatsApp</button>
+          </div>
+
+        </div>
+        <div class="phone-bottom-nav">
+          <div class="nav-item"><span class="nav-icon">🏠</span><span>Início</span></div>
+          <div class="nav-item active"><span class="nav-icon">🐾</span><span>Pets</span></div>
+          <div class="nav-item"><span class="nav-icon">🤝</span><span>Protetores</span></div>
+          <div class="nav-item"><span class="nav-icon">🚗</span><span>Copiloto</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== TELA 6: MODAL DE PRÉ-CANDIDATURA ==================== -->
+    <div class="mockup-wrapper screen-item" id="item-tela-adocao">
+      <div class="mockup-label">
+        <span>✍️</span> 6. Pré-Candidatura de Adoção
+        <span class="mockup-badge">Ficha do Lar & Lei Sansão</span>
+      </div>
+      <div class="mockup-phone">
+        <div class="phone-status-bar">
+          <span>09:41</span>
+          <span>5G • 100%</span>
+        </div>
+        <div class="phone-app-header">
+          <div class="phone-logo">
+            <span>✍️ Pré-Candidatura Consciente</span>
+          </div>
+          <span style="font-size:14px; font-weight:900;">✕</span>
+        </div>
+        <div class="phone-content">
+          
+          <!-- Box Soberania Protetor -->
+          <div style="background:#FFFBEB; border:1.5px solid #F59E0B; border-radius:10px; padding:8px 10px; font-size:10px; color:#92400E; line-height:1.35;">
+            🛡️ <b>Soberania do Protetor:</b> O Alerta Pet não entrega animais. A aprovação final cabe 100% ao protetor após entrevista e vistoria.
+          </div>
+
+          <!-- Questionário do Lar -->
+          <div class="app-card">
+            <div style="font-size:11.5px; font-weight:800; color:var(--text-title); margin-bottom:6px;">📋 Ficha do seu Lar:</div>
+            <div style="font-size:10.5px; margin-bottom:4px;"><b>Moradia:</b> Casa com Quintal</div>
+            <div style="font-size:10.5px; margin-bottom:4px;"><b>Segurança:</b> Muros altos e portão seguro</div>
+            <div style="font-size:10.5px; margin-bottom:4px;"><b>Família:</b> 2 a 3 pessoas (Apenas adultos)</div>
+            <div style="font-size:10.5px;"><b>Outros Pets:</b> Sim, cãozinho castrado e sociável</div>
+          </div>
+
+          <!-- Advertência Lei Sansão -->
+          <div style="background:rgba(239,68,68,0.1); border:1px solid #EF4444; border-radius:10px; padding:8px 10px; font-size:10px; color:#991B1B; line-height:1.35;">
+            ⚖️ <b>Lei Sansão nº 14.064/2020:</b> Abandono e maus-tratos são crimes inafiançáveis com <b>2 a 5 anos de reclusão</b>.
+          </div>
+
+          <button class="app-btn-accent" style="height:44px; font-size:12px;">✍️ Assinar Pré-Candidatura & Enviar</button>
+
+        </div>
+        <div class="phone-bottom-nav">
+          <div class="nav-item"><span class="nav-icon">🏠</span><span>Início</span></div>
+          <div class="nav-item active"><span class="nav-icon">🐾</span><span>Pets</span></div>
+          <div class="nav-item"><span class="nav-icon">🤝</span><span>Protetores</span></div>
+          <div class="nav-item"><span class="nav-icon">🚗</span><span>Copiloto</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== TELA 7: CARD COLORIDO REENCONTRO ==================== -->
+    <div class="mockup-wrapper screen-item" id="item-tela-reencontro">
+      <div class="mockup-label">
+        <span>🎉</span> 7. Card Colorido de Reencontro
+        <span class="mockup-badge">Missão Cumprida</span>
+      </div>
+      <div class="mockup-phone">
+        <div class="phone-status-bar">
+          <span>09:41</span>
+          <span>5G • 100%</span>
+        </div>
+        <div class="phone-app-header">
+          <div class="phone-logo">
+            <span>🎉 Reencontro Confirmado</span>
+          </div>
+          <span>🔔</span>
+        </div>
+        <div class="phone-content" style="display:flex; justify-content:center; align-items:center;">
+          
+          <!-- Card Colorido Aprovado pelo Rigo -->
+          <div style="background: linear-gradient(135deg, #064E3B 0%, #065F46 100%); border: 2px solid #10B981; border-radius: 20px; padding: 18px; box-shadow: 0 16px 36px rgba(6, 78, 59, 0.45); color: #FFFFFF; width: 100%;">
+            
+            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+              <img src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=150&q=80" style="width: 56px; height: 56px; border-radius: 14px; object-fit: cover; border: 2px solid #34D399; background: #111;">
+              <div>
+                <div style="font-size: 15px; font-weight: 800; line-height: 1.25; color: #FFF;">
+                  Tico já está voltando para casa.
+                </div>
+                <div style="font-size: 11px; color: #A7F3D0; font-weight: 700; margin-top: 2px;">
+                  Busca solidária encerrada com sucesso.
+                </div>
+              </div>
+            </div>
+
+            <div style="background: rgba(0, 0, 0, 0.25); border-radius: 10px; padding: 8px 12px; font-size: 12px; color: #ECFDF5; font-weight: 600; line-height: 1.4; margin-bottom: 14px; border-left: 3px solid #34D399;">
+              💚 Agradecemos a todos que ficaram de olhos atentos!
+            </div>
+
+            <div style="display: flex; gap: 8px;">
+              <button style="flex: 1; height: 38px; background: rgba(255, 255, 255, 0.15); border: 1px solid rgba(255, 255, 255, 0.3); color: #FFFFFF; font-weight: 700; font-size: 12px; border-radius: 10px; cursor: pointer;">
+                Ver história
+              </button>
+              <button style="flex: 1.2; height: 38px; background: linear-gradient(135deg, #10B981 0%, #059669 100%); border: none; color: #FFFFFF; font-weight: 800; font-size: 12.5px; border-radius: 10px; cursor: pointer; box-shadow: 0 4px 10px rgba(16, 185, 129, 0.4);">
+                Fico feliz 🎉
+              </button>
+            </div>
+
+          </div>
+
+        </div>
+        <div class="phone-bottom-nav">
+          <div class="nav-item"><span class="nav-icon">🏠</span><span>Início</span></div>
+          <div class="nav-item active"><span class="nav-icon">🐾</span><span>Pets</span></div>
+          <div class="nav-item"><span class="nav-icon">🤝</span><span>Protetores</span></div>
+          <div class="nav-item"><span class="nav-icon">🚗</span><span>Copiloto</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== TELA 8: PERFIL DO TUTOR ==================== -->
+    <div class="mockup-wrapper screen-item" id="item-tela-perfil">
+      <div class="mockup-label">
+        <span>👤</span> 8. Perfil do Tutor
+        <span class="mockup-badge">Minha Conta</span>
+      </div>
+      <div class="mockup-phone">
+        <div class="phone-status-bar">
+          <span>09:41</span>
+          <span>5G • 100%</span>
+        </div>
+        <div class="phone-app-header">
+          <div class="phone-logo">
+            <span>👤 Meu Perfil</span>
+          </div>
+          <span style="font-size:12px; font-weight:700;">⚙️ Config</span>
+        </div>
+        <div class="phone-content">
+          
+          <div class="app-card" style="text-align:center; padding:16px;">
+            <div style="width:64px; height:64px; border-radius:50%; background:#FED700; color:#000; font-size:26px; font-weight:900; display:flex; align-items:center; justify-content:center; margin:0 auto 8px;">R</div>
+            <div class="app-card-title">Rigoberto • Tutor Verificado</div>
+            <div class="app-card-desc">Bairro Cascavel Velho • Voluntário Ativo</div>
+            <span class="app-tag" style="background:#DCFCE7; color:#16A34A; margin-top:6px;">⭐ Olhos Atentos Nível 5</span>
+          </div>
+
+          <div class="app-card">
+            <div class="app-card-title" style="margin-bottom:8px;">Meus Pets Cadastrados (2):</div>
+            <div style="display:flex; gap:10px; align-items:center; border-bottom:1px solid rgba(0,0,0,0.06); padding-bottom:8px; margin-bottom:8px;">
+              <img src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=100&q=80" style="width:40px; height:40px; border-radius:8px; object-fit:cover;">
+              <div style="flex:1;">
+                <div style="font-size:12px; font-weight:800; color:var(--text-title);">Tico (Fox Paulistinha)</div>
+                <div style="font-size:10px; color:#EF4444; font-weight:700;">EM BUSCA ATIVA</div>
+              </div>
+            </div>
+            <div style="display:flex; gap:10px; align-items:center;">
+              <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&w=100&q=80" style="width:40px; height:40px; border-radius:8px; object-fit:cover;">
+              <div style="flex:1;">
+                <div style="font-size:12px; font-weight:800; color:var(--text-title);">Mel (Siamês)</div>
+                <div style="font-size:10px; color:#10B981; font-weight:700;">EM SEGURANÇA EM CASA</div>
+              </div>
+            </div>
+          </div>
+
+          <button class="app-btn-primary" style="height:40px;">Editar Dados do Perfil</button>
+
+        </div>
+        <div class="phone-bottom-nav">
+          <div class="nav-item"><span class="nav-icon">🏠</span><span>Início</span></div>
+          <div class="nav-item"><span class="nav-icon">🐾</span><span>Pets</span></div>
+          <div class="nav-item"><span class="nav-icon">🤝</span><span>Protetores</span></div>
+          <div class="nav-item active"><span class="nav-icon">👤</span><span>Perfil</span></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="panel-footer">
+    Alerta Pet Brasil • Sistema de Validação Cromática Multi-Telas • Direção de Arte: Rigo
+  </div>
+
+</div>
+
+<script>
+  function aplicarTema(themeClass, label, btn) {
+    const body = document.getElementById('mainBody');
+    body.className = themeClass;
+
+    document.querySelectorAll('.btn-palette').forEach(b => b.classList.remove('active'));
+    if (btn) btn.classList.add('active');
+
+    const badge = document.getElementById('activeThemeBadge');
+    if (badge) badge.innerText = label;
+  }
+
+  function filtrarTelas(tipo, btn) {
+    document.querySelectorAll('.btn-screen-filter').forEach(b => b.classList.remove('active'));
+    if (btn) btn.classList.add('active');
+
+    const items = document.querySelectorAll('.screen-item');
+    if (tipo === 'todas') {
+      items.forEach(el => el.style.display = 'flex');
+    } else {
+      items.forEach(el => {
+        if (el.id === 'item-' + tipo) {
+          el.style.display = 'flex';
+        } else {
+          el.style.display = 'none';
+        }
+      });
+    }
+  }
+</script>
+
+</body>
+</html>
