@@ -4403,7 +4403,7 @@
         </svg>
       </div>
       <div class="splash-title" style="color:#FFFFFF; font-size:24px; font-weight:900; letter-spacing:1.5px;">Alerta Pet Brasil</div>
-      <div class="splash-city" id="splash-city-label" style="color:#EDE8DF; letter-spacing:2px;">Cascavel • Paraná</div>
+      <div class="splash-city" id="splash-city-label" style="color:#EDE8DF; letter-spacing:2px; font-weight:800;">CASCAVEL - PR</div>
     </div>
     <div class="splash-river-wave-wrap">
       <svg class="splash-river-svg" viewBox="0 0 500 120" preserveAspectRatio="none">
@@ -4441,7 +4441,7 @@
         <div class="brand-text">
           <div class="brand-name">Alerta Pet Brasil</div>
           <div class="brand-city">
-            <span id="label-versao-app">Cascavel • PR</span>
+            <span id="label-versao-app">Cascavel - PR</span>
           </div>
         </div>
       </div>
@@ -6026,6 +6026,43 @@
     // Central Oficial Alerta Pet Brasil - Número fornecido pelo Diretor Rigo
     const WHATSAPP_OFICIAL = '554598143263';
     const WHATSAPP_OFICIAL_FORMATADO = '(45) 9814-3263';
+
+    // Dicionário Oficial de todas as 27 Unidades Federativas (UFs) do Brasil (Diretriz Diretor Rigo)
+    const UFS_BRASIL = {
+      'ACRE': 'AC', 'ALAGOAS': 'AL', 'AMAPÁ': 'AP', 'AMAPA': 'AP', 'AMAZONAS': 'AM',
+      'BAHIA': 'BA', 'CEARÁ': 'CE', 'CEARA': 'CE', 'DISTRITO FEDERAL': 'DF',
+      'ESPÍRITO SANTO': 'ES', 'ESPIRITO SANTO': 'ES', 'GOIÁS': 'GO', 'GOIAS': 'GO',
+      'MARANHÃO': 'MA', 'MARANHAO': 'MA', 'MATO GROSSO': 'MT', 'MATO GROSSO DO SUL': 'MS',
+      'MINAS GERAIS': 'MG', 'PARÁ': 'PA', 'PARA': 'PA', 'PARAÍBA': 'PB', 'PARAIBA': 'PB',
+      'PARANÁ': 'PR', 'PARANA': 'PR', 'PERNAMBUCO': 'PE', 'PIAUÍ': 'PI', 'PIAUI': 'PI',
+      'RIO DE JANEIRO': 'RJ', 'RIO GRANDE DO NORTE': 'RN', 'RIO GRANDE DO SUL': 'RS',
+      'RONDÔNIA': 'RO', 'RONDONIA': 'RO', 'RORAIMA': 'RR', 'SANTA CATARINA': 'SC',
+      'SÃO PAULO': 'SP', 'SAO PAULO': 'SP', 'SERGIPE': 'SE', 'TOCANTINS': 'TO'
+    };
+
+    function obterSiglaUF(estadoOuUf) {
+      if (!estadoOuUf) return 'PR';
+      const limpo = estadoOuUf.trim().toUpperCase();
+      if (limpo.length === 2 && Object.values(UFS_BRASIL).includes(limpo)) return limpo;
+      return UFS_BRASIL[limpo] || 'PR';
+    }
+
+    function formatarCidadeUF(cidade, estadoOuUf) {
+      const cid = (cidade || 'Cascavel').trim();
+      const uf = obterSiglaUF(estadoOuUf);
+      return `${cid} - ${uf}`;
+    }
+
+    function atualizarLabelCidadeTopo(cidade, estadoOuUf) {
+      const fmt = formatarCidadeUF(cidade, estadoOuUf);
+      const el = document.getElementById('label-versao-app');
+      if (el) el.innerText = fmt;
+      const sp = document.getElementById('splash-city-label');
+      if (sp) sp.innerText = fmt.toUpperCase();
+      if (window.AndroidAlerta && typeof window.AndroidAlerta.atualizarCidadeUf === 'function') {
+        try { window.AndroidAlerta.atualizarCidadeUf(cidade, estadoOuUf); } catch(_) {}
+      }
+    }
 
     let state = {
       theme: localStorage.getItem('au_theme') || 'light',
@@ -10850,12 +10887,11 @@ ${downloadUrl} 🐾`;
         }
       } catch (_) {}
 
-      // Identificação da Cidade no Topo (Limpo e Oficial)
+      // Identificação da Cidade no Topo (Padrão Nacional Cidade - UF • Diretriz Diretor Rigo)
       try {
-        const lbl = document.getElementById('label-versao-app');
-        if (lbl) {
-          lbl.innerText = 'Cascavel • PR';
-        }
+        const cNome = (state.perfil && state.perfil.cidade) ? state.perfil.cidade : 'Cascavel';
+        const cUf = (state.perfil && (state.perfil.estado || state.perfil.uf)) ? (state.perfil.estado || state.perfil.uf) : 'PR';
+        atualizarLabelCidadeTopo(cNome, cUf);
       } catch (eVer) {
         console.warn('Rotulo cidade:', eVer);
       }
