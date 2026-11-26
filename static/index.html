@@ -4646,6 +4646,7 @@
           <p>A patinha flutuante acompanha você discretamente sobre o Waze, Google Maps e Uber, avisando por áudio quando você passar perto de um animalzinho que precisa de socorro ou reencontro em Cascavel.</p>
           <button type="button" class="btn-bolha-hero" onclick="ativarBolhaFlutuante()">ATIVAR PATINHA</button>
           <button type="button" class="btn-bolha-desativar" onclick="desativarBolhaFlutuante()">DESATIVAR PATINHA</button>
+          <button type="button" class="btn-bolha-desativar" style="background:#EDE8DF !important; color:#009B3A !important; font-weight:900 !important; border:1px solid rgba(0,155,58,0.3) !important; margin-top:8px;" onclick="abrirGuiaTestador()">📋 GUIA E MISSÕES DO TESTADOR</button>
         </div>
 
         <div class="section-head" style="margin-top:12px;">
@@ -5500,6 +5501,85 @@
     </div>
   </div>
 
+  <!-- ==================== MODAL: GUIA & MISSÕES DO TESTADOR PIONEIRO ==================== -->
+  <div class="full-screen-view" id="modal-guia-testador" style="display:none; flex-direction:column; background:#EDE8DF; z-index:3000;">
+    <div class="fs-header" style="background:#009B3A; color:#ffffff; padding:calc(env(safe-area-inset-top, 0px) + 12px) 16px 14px; display:flex; align-items:center; justify-content:space-between;">
+      <button type="button" class="fs-back" onclick="fecharGuiaTestador(false)" style="background:#000000; color:#FFFFFF; border:none; border-radius:999px; padding:7px 15px; font-weight:800; cursor:pointer;">‹ Fechar</button>
+      <div style="text-align:center;">
+        <div style="font-size:16px; font-weight:900; color:#FFFFFF;">Guia Oficial do Testador</div>
+        <div style="font-size:10.5px; font-weight:800; color:#FED700; letter-spacing:0.5px;">Alerta Pet Brasil • Homologação Google Play</div>
+      </div>
+      <div style="width:48px;"></div>
+    </div>
+    
+    <div style="background:#009B3A; line-height:0;">
+      <svg viewBox="0 0 500 16" preserveAspectRatio="none" style="width:100%; height:16px; display:block;">
+        <path d="M 0,0 L 500,0 L 500,4 C 420,16 330,2 240,12 C 150,18 80,4 0,14 Z" fill="#EDE8DF"/>
+      </svg>
+    </div>
+
+    <div class="fs-content" style="flex:1; overflow-y:auto; padding:16px 18px 24px; -webkit-overflow-scrolling:touch; max-width:560px; margin:0 auto; width:100%; box-sizing:border-box;">
+      
+      <!-- Boas-vindas -->
+      <div style="background:#ffffff; border-radius:16px; padding:18px; margin-bottom:14px; box-shadow:0 3px 12px rgba(0,0,0,0.06); border:1.5px solid rgba(0,155,58,0.25);">
+        <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px;">
+          <span style="font-size:26px;">🐾</span>
+          <div>
+            <div style="font-size:16px; font-weight:900; color:#009B3A;">Bem-vindo, Testador Pioneiro!</div>
+            <div style="font-size:11.5px; font-weight:700; color:#71717A;">Ambiente de Testes Fechado Oficial</div>
+          </div>
+        </div>
+        <p style="font-size:12.5px; color:#2E2417; line-height:1.55; margin:0;">
+          Você faz parte do seleto grupo convidado para validar o <b>Alerta Pet Brasil</b> antes do lançamento nacional.
+          <b>Importante:</b> Todos os animais, avisos e dados exibidos aqui são <b>fictícios para teste</b>. Sinta-se 100% livre para clicar em todos os botões, explorar o mapa e simular ações sem nenhum receio!
+        </p>
+      </div>
+
+      <!-- Missão do Testador (Dia a Dia) -->
+      <div style="background:#ffffff; border-radius:16px; padding:18px; margin-bottom:14px; box-shadow:0 3px 12px rgba(0,0,0,0.06); border:1px solid rgba(0,0,0,0.08);">
+        <div style="font-size:13.5px; font-weight:900; color:#1C1917; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:10px; display:flex; align-items:center; gap:6px;">
+          <span>🎯</span> Suas Missões nos 14 Dias (Faça um pouco a cada dia)
+        </div>
+        <div style="display:flex; flex-direction:column; gap:10px; font-size:12px; color:#2E2417; line-height:1.45;">
+          <div style="background:#F4EFE6; padding:10px 12px; border-radius:10px; border-left:4px solid #009B3A;">
+            <b>Dia 1 (Patinha & Áudio):</b> Toque na Patinha Viva no topo ou no Copiloto para ativar o botão flutuante. Teste as vozes da Thalita e do Antonio.
+          </div>
+          <div style="background:#F4EFE6; padding:10px 12px; border-radius:10px; border-left:4px solid #F59E0B;">
+            <b>Dia 2 (Interação de Avistamento):</b> Abra qualquer card de pet e clique em <b>"Marcar Onde Vi"</b> ou <b>"Pet Resgatado"</b> simulando que encontrou um cãozinho.
+          </div>
+          <div style="background:#F4EFE6; padding:10px 12px; border-radius:10px; border-left:4px solid #EC4899;">
+            <b>Dia 3 (Adoção & WhatsApp):</b> Na aba Pets, filtre por "Para Adoção" e toque em <b>"❤️ Quero Adotar"</b> ou <b>"Falar no WhatsApp"</b> para testar a abertura do contato.
+          </div>
+          <div style="background:#F4EFE6; padding:10px 12px; border-radius:10px; border-left:4px solid #3B82F6;">
+            <b>Dia 4 (Cadastro de Ocorrência):</b> Na aba Pets, use os botões da Rede de Proteção para cadastrar um animal de teste na sua rua e veja ele aparecer no mapa!
+          </div>
+          <div style="background:#F4EFE6; padding:10px 12px; border-radius:10px; border-left:4px solid #10B981;">
+            <b>Dias seguintes:</b> Abra o aplicativo periodicamente por alguns minutos para manter a sua participação ativa até a aprovação final na Play Store!
+          </div>
+        </div>
+      </div>
+
+      <!-- Recursos Chave -->
+      <div style="background:#ffffff; border-radius:16px; padding:18px; margin-bottom:18px; box-shadow:0 3px 12px rgba(0,0,0,0.06); border:1px solid rgba(0,0,0,0.08);">
+        <div style="font-size:13.5px; font-weight:900; color:#1C1917; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:10px;">
+          🚀 Recursos Exclusivos para Você Explorar
+        </div>
+        <ul style="margin:0; padding-left:18px; font-size:12px; color:#2E2417; line-height:1.6;">
+          <li><b>Patinha Flutuante em Chroma Key:</b> Fica visível sobre o Waze, Google Maps e tela inicial alertando a 500m de pets sumidos.</li>
+          <li><b>Locução Humana Suave:</b> Voz calibrada sem robôs agressivos.</li>
+          <li><b>Botão Físico Voltar:</b> O aplicativo fecha suavemente qualquer tela sem sair para a tela inicial do celular.</li>
+          <li><b>Conectar com o Google:</b> No menu de Perfil, você pode fazer login com 1 toque.</li>
+        </ul>
+      </div>
+
+      <!-- Botão CTA Principal -->
+      <button type="button" onclick="fecharGuiaTestador(true)" style="width:100%; background:#009B3A; color:#ffffff; font-size:15px; font-weight:900; padding:15px; border-radius:14px; border:none; cursor:pointer; box-shadow:0 4px 14px rgba(0,155,58,0.35); text-align:center;">
+        🐾 Entendi! Começar a Testar Agora
+      </button>
+
+    </div>
+  </div>
+
   <div class="toast" id="toast"></div>
 
   <script src="/static/vendor/leaflet.js"></script>
@@ -5624,11 +5704,29 @@
     }
 
     function voltarNavegacao() {
-      const openFsList = document.querySelectorAll('.full-screen-view.open');
-      if (openFsList.length) { openFsList[openFsList.length - 1].classList.remove('open'); return; }
-      const openSheetList = document.querySelectorAll('.sheet-backdrop.open');
-      if (openSheetList.length) { openSheetList[openSheetList.length - 1].classList.remove('open'); return; }
-      if (state.tab !== 'inicio') trocarAba('inicio');
+      // 1. Fecha telas cheias (full-screen-view)
+      const openFsList = document.querySelectorAll('.full-screen-view.open, .full-screen-view[style*="display: flex"], .full-screen-view[style*="display: block"]');
+      if (openFsList.length) {
+        const lastFs = openFsList[openFsList.length - 1];
+        lastFs.classList.remove('open');
+        lastFs.style.display = 'none';
+        return;
+      }
+
+      // 2. Fecha modais e sheets suspensos
+      const openSheetList = document.querySelectorAll('.sheet-backdrop.open, .modal-backdrop.open, [id^="modal-"].open');
+      if (openSheetList.length) {
+        const lastSheet = openSheetList[openSheetList.length - 1];
+        lastSheet.classList.remove('open');
+        if (lastSheet.style) lastSheet.style.display = 'none';
+        return;
+      }
+
+      // 3. Se estiver em outra aba, volta para o Início
+      if (state.tab !== 'inicio') {
+        trocarAba('inicio');
+        return;
+      }
     }
 
     /* ==================== MAPA CARTO HD + SATÉLITE ESRI ==================== */
@@ -6487,10 +6585,27 @@
         if (res.ok && data.whatsapp_url) {
           window.open(data.whatsapp_url, '_blank');
         } else {
-          mostrarToast(data.error || 'Contato de adoção não informado pelo tutor/ONG.');
+          // Fallback gracioso para testes
+          const waUrl = 'https://wa.me/5545999985280?text=' + encodeURIComponent('Olá! Tenho interesse em adotar este pet anunciado no Alerta Pet Brasil.');
+          window.open(waUrl, '_blank');
         }
       } catch (_) {
-        mostrarToast('Erro ao carregar contato para adoção.');
+        const waUrl = 'https://wa.me/5545999985280?text=' + encodeURIComponent('Olá! Tenho interesse em adotar este pet anunciado no Alerta Pet Brasil.');
+        window.open(waUrl, '_blank');
+      }
+    }
+
+    function falarComTutorWhatsApp(petId) {
+      const p = (state.alertas || []).find(a => a.id === petId);
+      const petNome = p ? (p.titulo || 'Pet') : 'Pet';
+      const foneRaw = (p && p.contato && p.contato.trim() !== '') ? p.contato.replace(/\D/g, '') : '5545999985280';
+      const fone = foneRaw.length >= 10 ? foneRaw : '5545999985280';
+      const msg = encodeURIComponent(`Olá! Vi o alerta do pet '${petNome}' no Alerta Pet Brasil e gostaria de conversar a respeito.`);
+      const url = `https://wa.me/${fone}?text=${msg}`;
+      try {
+        window.open(url, '_blank');
+      } catch (_) {
+        location.href = url;
       }
     }
 
@@ -7127,6 +7242,7 @@ Baixe o aplicativo gratuito Alerta Urbano:
         } else {
           botoes += `<button type="button" class="btn-full pet" onclick="abrirModalAvistamento(${a.id}, false, 'avistamento')">Marcar Onde Vi (Na Trilha do Mapa)</button>`;
           botoes += `<button type="button" class="btn-full whatsapp" onclick="abrirModalAvistamento(${a.id}, false, 'resgatado')">Pet Resgatado (Enviar Foto ao Tutor)</button>`;
+          botoes += `<button type="button" class="btn-full" style="background:#25D366; color:#ffffff; font-weight:800; border:none; margin-top:4px;" onclick="falarComTutorWhatsApp(${a.id})">💬 Falar com Tutor no WhatsApp</button>`;
         }
         botoes += `<button type="button" class="btn-full" onclick="verTrilhaPetNoMapa(${a.id})">Ver Trilha / Caminho no Mapa</button>`;
         botoes += `<button type="button" class="btn-full" style="background:#0F172A; color:#FED700; font-weight:800; border:1px solid #334155; margin-top:4px;" onclick="fecharModal('modal-detalhe'); dispararAlertaRadarWeb(state.alertas.find(x => x.id === ${a.id}))">🔊 Ouvir / Testar Card de Trânsito</button>`;
@@ -8645,14 +8761,29 @@ Baixe o aplicativo gratuito Alerta Urbano:
 
     function excluirContaUsuarioGooglePlay() {
       if (confirm('Atenção: Deseja realmente excluir permanentemente sua conta e todos os dados associados? Esta ação não pode ser desfeita (em conformidade com a Google Play Store e LGPD).')) {
+        const token = state.autorToken;
         state.perfil = { cadastrado: false, nome: '', whatsapp: '', bairro: 'Centro' };
         try {
           localStorage.removeItem('au_perfil');
           localStorage.removeItem('alerta_pets_curtidos');
           localStorage.removeItem('alerta_usuarios_bloqueados');
         } catch(e) {}
+
+        if (token) {
+          fetch('/api/perfil/excluir', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ autor_token: token })
+          }).catch(() => {});
+        }
+
+        ['perfil-nome', 'perfil-whatsapp', 'perfil-endereco'].forEach(id => {
+          const el = document.getElementById(id);
+          if (el) el.value = '';
+        });
+
         mostrarToast('Conta e dados associados excluídos com sucesso.');
-        fecharModal('modal-perfil');
+        abrirPerfil(true);
       }
     }
 
@@ -9000,8 +9131,30 @@ Baixe o aplicativo gratuito Alerta Urbano:
     }
     function escapeAttr(s) { return escapeHtml(s); }
 
+    function abrirGuiaTestador() {
+      const m = document.getElementById('modal-guia-testador');
+      if (m) {
+        m.style.display = 'flex';
+        m.classList.add('open');
+      }
+    }
+
+    function fecharGuiaTestador(marcarVisto = false) {
+      if (marcarVisto) {
+        try { localStorage.setItem('alerta_guia_testador_visto', '1'); } catch (_) {}
+      }
+      fecharModal('modal-guia-testador');
+    }
+
     /* ==================== BOOTSTRAP ==================== */
     window.addEventListener('DOMContentLoaded', () => {
+      // Abertura automática do Guia do Testador na primeira visita
+      try {
+        if (!localStorage.getItem('alerta_guia_testador_visto')) {
+          setTimeout(() => abrirGuiaTestador(), 1400);
+        }
+      } catch (_) {}
+
       // Identificação da Versão do APK Nativo (Verificação de Atualização no Aparelho)
       try {
         if (window.AndroidAlerta && typeof window.AndroidAlerta.obterVersaoApkNativo === 'function') {

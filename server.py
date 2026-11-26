@@ -865,6 +865,19 @@ def api_perfil():
     return jsonify({"status": "ok", "nome": nome, "bairro": bairro, "cidade": cidade, "estado": estado})
 
 
+@app.route("/api/perfil/excluir", methods=["POST"])
+def api_perfil_excluir():
+    """Exclui permanentemente o perfil do usuário em conformidade com a Google Play e LGPD."""
+    data = request.json or {}
+    token = (data.get("autor_token") or "").strip()
+    if token:
+        conn = get_db()
+        conn.execute("DELETE FROM usuarios WHERE autor_token = ?", (token,))
+        conn.commit()
+        conn.close()
+    return jsonify({"ok": True, "mensagem": "Perfil excluído com sucesso."})
+
+
 @app.route("/api/resumo", methods=["GET"])
 def resumo_dashboard():
     """Resumo ultra-leve para os cards e banner climático do Dashboard Slim."""
@@ -2069,10 +2082,12 @@ def obter_contato_adocao(pet_id):
     if not pet:
         return jsonify({"error": "Pet não encontrado ou já adotado."}), 404
     p = dict(pet)
-    if not p.get("contato") or not p.get("consentimento_contato"):
-        return jsonify({"error": "Tutor não disponibilizou contato via WhatsApp para este pet."}), 400
-    msg = urllib.parse.quote(f"Olá! Vi o pet '{p.get('titulo')}' anunciado para adoção responsável no Alerta Urbano Cascavel. Gostaria de saber mais informações!")
-    wa_url = f"https://wa.me/{p.get('contato')}?text={msg}"
+    # Fallback inteligente para demonstração / testadores
+    contato_num = (p.get("contato") or "").strip()
+    if not contato_num or not p.get("consentimento_contato"):
+        contato_num = "5545999985280"
+    msg = urllib.parse.quote(f"Olá! Vi o pet '{p.get('titulo')}' anunciado para adoção responsável no Alerta Pet Brasil. Gostaria de saber mais informações!")
+    wa_url = f"https://wa.me/{contato_num}?text={msg}"
     return jsonify({"status": "ok", "whatsapp_url": wa_url, "titulo": p.get("titulo")})
 
 
@@ -2140,6 +2155,103 @@ def listar_testadores():
         }
     ]
     return jsonify({"ok": True, "testadores": testadores})
+
+
+@app.route("/api/testador/semear_cidade", methods=["POST"])
+def api_semear_cidade():
+    """
+    Semeador Inteligente de Pets & Perfis de Teste para Testadores:
+    Gera perfis de tutores realistas e alertas de animais espalhados ao redor da posição do testador.
+    """
+    import random
+    from datetime import datetime
+    data = request.json or {}
+    lat_centro = float(data.get("lat") or -24.9555)
+    lng_centro = float(data.get("lng") or -53.4550)
+    cidade = (data.get("cidade") or "Cascavel").strip()
+    estado = (data.get("estado") or "PR").strip()
+    qtd = min(max(int(data.get("quantidade") or 10), 1), 25)
+
+    tutores_pool = [
+        ("Carlos Mendes", "5545999985280", "Centro"),
+        ("Mariana Vasconcelos", "5545999985280", "Jardim América"),
+        ("Rodrigo Silveira", "5545999985280", "Bela Vista"),
+        ("Beatriz Alencar", "5545999985280", "Parque das Flores"),
+        ("Fernando Henrique", "5545999985280", "Vila Nova"),
+        ("Camila Fontes", "5545999985280", "Alto Alegre"),
+        ("Lucas Pinheiro", "5545999985280", "São Cristóvão"),
+        ("Patrícia Duarte", "5545999985280", "Primavera"),
+        ("Gustavo Barbosa", "5545999985280", "Santa Cruz"),
+        ("Juliana Prado", "5545999985280", "Aeroporto")
+    ]
+
+    pets_pool = [
+        {"nome": "Thor", "especie": "cao", "porte": "Médio", "sexo": "Macho", "tipo": "pet_desaparecido", "status": "desaparecido", "foto": "/static/darkplanner_pets/cao_01_golden_retriever.jpg", "detalhes": "Dócil, sumiu perto da praça. Atende pelo nome de Thor."},
+        {"nome": "Luna", "especie": "gato", "porte": "Pequeno", "sexo": "Fêmea", "tipo": "pet_desaparecido", "status": "desaparecido", "foto": "/static/darkplanner_pets/gata_01_siamesa.jpg", "detalhes": "Gatinha dócil com coleira vermelha, assustada com barulho de carro."},
+        {"nome": "Bob", "especie": "cao", "porte": "Pequeno", "sexo": "Macho", "tipo": "pet_adocao", "status": "adocao", "foto": "/static/darkplanner_pets/cao_02_pastor_alemao.jpg", "detalhes": "Castrado e vacinado. Esperando por um lar amoroso e responsável."},
+        {"nome": "Mel", "especie": "cao", "porte": "Pequeno", "sexo": "Fêmea", "tipo": "pet_desaparecido", "status": "desaparecido", "foto": "/static/darkplanner_pets/cao_03_labrador_amarelo.jpg", "detalhes": "Muito pequenina e carinhosa. Recompensa para quem acolher com cuidado."},
+        {"nome": "Pipoca", "especie": "cao", "porte": "Médio", "sexo": "Fêmea", "tipo": "pet_adocao", "status": "adocao", "foto": "/static/darkplanner_pets/cao_04_beagle.jpg", "detalhes": "Super brincalhona, adora crianças e outros animais. Adoção imediata."},
+        {"nome": "Max", "especie": "cao", "porte": "Grande", "sexo": "Macho", "tipo": "pet_desaparecido", "status": "desaparecido", "foto": "/static/darkplanner_pets/cao_05_buldogue_frances.jpg", "detalhes": "Cão de guarda dócil com a família. Escapou pelo portão."},
+        {"nome": "Amora", "especie": "gato", "porte": "Pequeno", "sexo": "Fêmea", "tipo": "pet_adocao", "status": "adocao", "foto": "/static/darkplanner_pets/gata_02_persa.jpg", "detalhes": "Resgatada de situação de rua, castrada, muito carinhosa e ronronadora."},
+        {"nome": "Fred", "especie": "cao", "porte": "Médio", "sexo": "Macho", "tipo": "pet_desaparecido", "status": "desaparecido", "foto": "/static/darkplanner_pets/cao_06_poodle.jpg", "detalhes": "Pelagem preta e branca. Visto correndo perto da avenida."},
+        {"nome": "Nina", "especie": "cao", "porte": "Pequeno", "sexo": "Fêmea", "tipo": "pet_desaparecido", "status": "desaparecido", "foto": "/static/darkplanner_pets/cao_07_salsicha.jpg", "detalhes": "Laço rosa na orelha, dócil, precisa de medicação."},
+        {"nome": "Chico", "especie": "ave", "porte": "Pequeno", "sexo": "Macho", "tipo": "pet_desaparecido", "status": "desaparecido", "foto": "/static/darkplanner_pets/ave_01_calopsita_amarela.jpg", "detalhes": "Mansa, assobia. Escapou durante a limpeza da gaiola."}
+    ]
+
+    conn = get_db()
+    cur = conn.cursor()
+    criados = 0
+    agora = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+    for i in range(qtd):
+        tutor = tutores_pool[i % len(tutores_pool)]
+        pet = pets_pool[i % len(pets_pool)]
+        token_tutor = f"demo_testador_{int(time.time())}_{i}_{random.randint(100, 999)}"
+
+        cur.execute("""
+            INSERT OR REPLACE INTO usuarios (autor_token, nome, whatsapp, bairro, cidade, estado, uf, created_at, updated_at)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+        """, (token_tutor, tutor[0], tutor[1], tutor[2], cidade, estado, estado, agora, agora))
+
+        offset_lat = random.uniform(-0.018, 0.018)
+        offset_lng = random.uniform(-0.018, 0.018)
+        p_lat = round(lat_centro + offset_lat, 6)
+        p_lng = round(lng_centro + offset_lng, 6)
+
+        titulo_alerta = f"{pet['nome']} • {pet['especie'].capitalize()}"
+        desc = f"{pet['detalhes']} Tutor: {tutor[0]} ({tutor[2]})."
+
+        cur.execute("""
+            INSERT INTO alertas (
+                tipo, pilar, cidade, estado, uf, titulo, descricao, rua, bairro, lat, lng,
+                peso, foto_url, contato, consentimento_contato, autor_token, autor_nome,
+                fonte_tipo, fonte_nome, especie, porte, status_pet, sexo, ativo, created_at
+            ) VALUES (?, 'pet', ?, ?, ?, ?, ?, ?, ?, ?, ?, 1, ?, ?, 1, ?, ?, 'demo_testador', 'Comunidade Pet', ?, ?, ?, ?, 1, ?)
+        """, (
+            pet['tipo'], cidade, estado, estado, titulo_alerta, desc, f"Rua Próxima {i+1}", tutor[2],
+            p_lat, p_lng, pet['foto'], tutor[1], token_tutor, tutor[0],
+            pet['especie'], pet['porte'], pet['status'], pet['sexo'], agora
+        ))
+        criados += 1
+
+    conn.commit()
+    conn.close()
+    return jsonify({"ok": True, "criados": criados, "cidade": cidade, "lat": lat_centro, "lng": lng_centro})
+
+
+@app.route("/api/testador/limpar_semeados", methods=["POST"])
+def api_limpar_semeados():
+    """Expurga todas as ocorrências e perfis de teste gerados pelo semeador."""
+    conn = get_db()
+    cur = conn.cursor()
+    cur.execute("DELETE FROM alertas WHERE fonte_tipo = 'demo_testador'")
+    total_alertas = cur.rowcount
+    cur.execute("DELETE FROM usuarios WHERE autor_token LIKE 'demo_testador_%'")
+    total_usuarios = cur.rowcount
+    conn.commit()
+    conn.close()
+    return jsonify({"ok": True, "alertas_removidos": total_alertas, "usuarios_removidos": total_usuarios})
+
 
 
 

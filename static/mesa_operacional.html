@@ -1295,6 +1295,12 @@
           <button type="button" onclick="carregarMetricasCockpit(); carregarFeedCockpit();" style="background:var(--bg-surface); border:1px solid var(--border); color:#FFF; font-size:11.5px; font-weight:800; padding:8px 14px; border-radius:8px; cursor:pointer; display:flex; align-items:center; gap:6px;">
             🔄 Atualizar Métricas
           </button>
+          <button type="button" onclick="abrirModalSemearTestador()" style="background:#059669; border:none; color:#FFF; font-size:11.5px; font-weight:800; padding:8px 14px; border-radius:8px; cursor:pointer; display:flex; align-items:center; gap:6px;">
+            🌱 Semear Pets p/ Testadores
+          </button>
+          <button type="button" onclick="limparPetsTestadores()" style="background:#DC2626; border:none; color:#FFF; font-size:11.5px; font-weight:800; padding:8px 14px; border-radius:8px; cursor:pointer; display:flex; align-items:center; gap:6px;">
+            🧹 Limpar Testes
+          </button>
           <a href="https://play.google.com/console" target="_blank" style="background:#2563EB; color:#FFF; text-decoration:none; font-size:11.5px; font-weight:800; padding:8px 14px; border-radius:8px; display:flex; align-items:center; gap:6px;">
             📱 Google Play Console ↗
           </a>
@@ -2733,6 +2739,59 @@
     /* ==================== MOTOR DE MÉTRICAS & COCKPIT GERAL ==================== */
     let listaFeedModeracao = [];
     let filtroModeracaoAtual = 'todos';
+
+    async function abrirModalSemearTestador() {
+      const cidade = prompt('Semear Pets para Testadores:\nInforme o Nome da Cidade do Testador (ex: São Paulo, Brasília, Curitiba):', 'São Paulo');
+      if (!cidade) return;
+
+      const coords = prompt(`Informe a Latitude e Longitude de ${cidade} separadas por vírgula:\n(Ex: -23.5505, -46.6333)`, '-23.5505, -46.6333');
+      if (!coords) return;
+
+      const parts = coords.split(',').map(s => parseFloat(s.trim()));
+      if (parts.length < 2 || isNaN(parts[0]) || isNaN(parts[1])) {
+        alert('Coordenadas inválidas.');
+        return;
+      }
+
+      const qtd = prompt('Quantos pets e perfis deseja semear?', '10') || '10';
+
+      try {
+        const resp = await fetch('/api/testador/semear_cidade', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            cidade: cidade.trim(),
+            estado: 'BR',
+            lat: parts[0],
+            lng: parts[1],
+            quantidade: parseInt(qtd)
+          })
+        });
+        const res = await resp.json();
+        if (res.ok) {
+          alert(`✅ Sucesso! ${res.criados} pets e tutores semeados com sucesso em ${cidade}!`);
+          carregarMetricasCockpit();
+        } else {
+          alert('Erro ao semear: ' + (res.error || 'Erro desconhecido'));
+        }
+      } catch (e) {
+        alert('Erro na requisição: ' + e.message);
+      }
+    }
+
+    async function limparPetsTestadores() {
+      if (!confirm('Deseja realmente expurgar todas as ocorrências e perfis de teste gerados pelo semeador?')) return;
+      try {
+        const resp = await fetch('/api/testador/limpar_semeados', { method: 'POST' });
+        const res = await resp.json();
+        if (res.ok) {
+          alert(`🧹 Limpeza concluída!\n${res.alertas_removidos} alertas e ${res.usuarios_removidos} perfis de teste removidos.`);
+          carregarMetricasCockpit();
+        }
+      } catch (e) {
+        alert('Erro ao limpar: ' + e.message);
+      }
+    }
 
     async function carregarMetricasCockpit() {
       try {
