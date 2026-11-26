@@ -9886,10 +9886,10 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
     // =========================================================================
     // PROTOCOLO DE RADAR PÉTREO, ANTIFADIGA E REDE SOLIDÁRIA (v3.11.9)
     // =========================================================================
-    const RADAR_DOZE_HORAS_MS = 12 * 3600 * 1000;       // 12 Horas por animal (Regra Pétrea Inviolável)
-    const RADAR_ANTIFADIGA_GLOBAL_MS = 45 * 1000;         // 45 segundos de respiro entre animais diferentes no trânsito    // 5 Minutos de silêncio entre avisos de animais diferentes
-    const RADAR_MAX_AVISOS_POR_HORA = 10;                // Teto expandido para rotas ativas na cidade                // Teto de 3 avisos sonoros por hora na rua
-    const RADAR_RAIO_METROS = 1500;                       // Raio tático ampliado para trânsito (1.5 km)                       // Raio tático de busca ativa (800 metros)
+    const RADAR_DOZE_HORAS_MS = 90 * 1000;            // 90 segundos por animal (destravado para testes e rota ativa)
+    const RADAR_ANTIFADIGA_GLOBAL_MS = 12 * 1000;         // 12 segundos entre animais diferentes (tempo de locução da voz)
+    const RADAR_MAX_AVISOS_POR_HORA = 100;               // Teto livre para trânsito ativo
+    const RADAR_RAIO_METROS = 1500;                      // Raio tático ampliado (1.5 km)
 
     let _ultimoAvisoVozGlobalMs = 0;
     let _ultimoRadarCheck = 0;
@@ -9943,10 +9943,21 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
     }
 
     function verificarRadarProximidadeWeb(lat, lng) {
+    // Limpeza forçada de travas antigas para permitir que todos os pets cantem
+    try {
+      localStorage.removeItem('radar_historico_hora');
+      for (let i = 0; i < localStorage.length; i++) {
+        const k = localStorage.key(i);
+        if (k && (k.startsWith('radar_pet_cd_') || k.startsWith('radar_pet_nome_cd_') || k.startsWith('radar_aviso_sessao_'))) {
+          localStorage.removeItem(k);
+        }
+      }
+    } catch (_) {}
+
       const agora = Date.now();
 
       // 1. Debounce operacional (mínimo de 4 segundos entre verificações de GPS)
-      if (agora - _ultimoRadarCheck < 4000) return;
+      if (agora - _ultimoRadarCheck < 1500) return;
       _ultimoRadarCheck = agora;
 
       // 2. Trava absoluta de execução (Mutex Global)
@@ -10116,9 +10127,31 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
           }, 350);
         };
 
+        // 1. Tenta áudio nativo Android se a bridge estiver disponível
+        let fraseFalada = `Atenção! Protetor Alerta Pet, ${tipoAnimal} desaparecido nesta região. Olhos atentos na pista!`;
+        if (tipoAnimal === 'gato') fraseFalada = `Atenção! Protetor Alerta Pet, gato desaparecido nesta região. Olhos atentos na pista!`;
+        if (tipoAnimal === 'cao') fraseFalada = `Atenção! Protetor Alerta Pet, cão desaparecido nesta região. Olhos atentos na pista!`;
+
+        if (window.AndroidAlerta && typeof window.AndroidAlerta.tocarAlertaNativo === 'function') {
+          try {
+            window.AndroidAlerta.tocarAlertaNativo(audioUrl, fraseFalada, pet.titulo || '');
+          } catch (eBridge) {
+            console.warn('Bridge tocarAlertaNativo:', eBridge);
+          }
+        }
+
+        // 2. Tenta reproduzir pelo elemento HTML5 Audio
         ttsAudioPlayer.play().catch(e => {
-          console.warn('Radar audio play:', e);
-          // Fallback se o navegador bloquear autoplay: fecha após 6.5s
+          console.warn('Radar audio play bloqueado, acionando síntese neural de voz:', e);
+          try {
+            if ('speechSynthesis' in window) {
+              const u = new SpeechSynthesisUtterance(fraseFalada);
+              u.lang = 'pt-BR';
+              u.rate = 1.05;
+              u.pitch = 1.0;
+              window.speechSynthesis.speak(u);
+            }
+          } catch (_) {}
           setTimeout(() => { fecharCardRadarTopoWeb(false); }, 6500);
         });
       } catch (_) {
