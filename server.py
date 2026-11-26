@@ -189,6 +189,18 @@ def init_db():
         cur.execute("ALTER TABLE usuarios ADD COLUMN uf TEXT DEFAULT 'PR';")
     if "endereco" not in ucols:
         cur.execute("ALTER TABLE usuarios ADD COLUMN endereco TEXT DEFAULT '';")
+    if "tipo_perfil" not in ucols:
+        cur.execute("ALTER TABLE usuarios ADD COLUMN tipo_perfil TEXT DEFAULT 'tutor';")
+    if "bio" not in ucols:
+        cur.execute("ALTER TABLE usuarios ADD COLUMN bio TEXT DEFAULT '';")
+    if "instagram" not in ucols:
+        cur.execute("ALTER TABLE usuarios ADD COLUMN instagram TEXT DEFAULT '';")
+    if "chave_pix" not in ucols:
+        cur.execute("ALTER TABLE usuarios ADD COLUMN chave_pix TEXT DEFAULT '';")
+    if "total_resgates" not in ucols:
+        cur.execute("ALTER TABLE usuarios ADD COLUMN total_resgates INTEGER DEFAULT 0;")
+    if "verificado" not in ucols:
+        cur.execute("ALTER TABLE usuarios ADD COLUMN verificado INTEGER DEFAULT 0;")
 
     # Tabela de Parceiros Comerciais e Empresas Amigas de Cascavel (v3.8)
     cur.execute("""
@@ -503,6 +515,78 @@ def init_db():
                         ))
             except Exception as e_cat:
                 print("Erro ao sincronizar catalogo de parceiros:", e_cat)
+
+    # Sincronização dos Protetores de Animais & ONGs de Cascavel (v3.11.9)
+    cur.execute("SELECT COUNT(*) FROM usuarios WHERE tipo_perfil IN ('protetor', 'ong')")
+    count_prot = cur.fetchone()[0]
+    if count_prot < 3:
+        protetores_iniciais = [
+            (
+                "protetor_mariana_cascavel",
+                "Mariana Silva (Resgate Independente)",
+                "(45) 99933-2144",
+                "Cascavel Velho",
+                "Cascavel",
+                "/static/darkplanner_pessoas/mulher_03_amanda.jpg",
+                "protetor",
+                "Resgatista voluntária e independente atuando há mais de 6 anos em Cascavel. Foco no acolhimento de mãezinhas com ninhadas, tratamento veterinário, castração e adoção responsável.",
+                "@mariana_resgatepet",
+                "mariana.resgate.cascavel@gmail.com",
+                14,
+                1
+            ),
+            (
+                "protetor_patinhas_oeste",
+                "Coletivo Patinhas do Oeste",
+                "(45) 99822-7711",
+                "Alto Alegre",
+                "Cascavel",
+                "/static/darkplanner_pessoas/mulher_02_camila.jpg",
+                "ong",
+                "Rede colaborativa de protetores e lares temporários de Cascavel. Socorremos animais atropelados ou vítimas de abandono com castração solidária e encaminhamento consciente.",
+                "@patinhasdooestecascavel",
+                "contato@patinhasdooeste.org.br",
+                28,
+                1
+            ),
+            (
+                "protetor_carlos_saofrancisco",
+                "Carlos Eduardo (Lar São Francisco)",
+                "(45) 99955-8833",
+                "São Cristóvão",
+                "Cascavel",
+                "/static/darkplanner_pessoas/homem_04_lucas.jpg",
+                "protetor",
+                "Dedico minha chácara urbana em Cascavel para reabilitação de cães idosos, especiais e de grande porte resgatados de situações críticas. Toda vida merece dignidade e amor.",
+                "@larsaofrancisco_cascavel",
+                "45999558833",
+                19,
+                1
+            ),
+        ]
+        for prot in protetores_iniciais:
+            cur.execute("""
+                INSERT INTO usuarios (autor_token, nome, whatsapp, bairro, cidade, foto_url, tipo_perfil, bio, instagram, chave_pix, total_resgates, verificado)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                ON CONFLICT(autor_token) DO UPDATE SET
+                    nome=excluded.nome,
+                    whatsapp=excluded.whatsapp,
+                    bairro=excluded.bairro,
+                    cidade=excluded.cidade,
+                    foto_url=excluded.foto_url,
+                    tipo_perfil=excluded.tipo_perfil,
+                    bio=excluded.bio,
+                    instagram=excluded.instagram,
+                    chave_pix=excluded.chave_pix,
+                    total_resgates=excluded.total_resgates,
+                    verificado=excluded.verificado
+            """, prot)
+            
+        adocao_ids = [r[0] for r in cur.execute("SELECT id FROM alertas WHERE tipo = 'pet_adocao' ORDER BY id").fetchall()]
+        if len(adocao_ids) >= 12:
+            for i in adocao_ids[:4]: cur.execute("UPDATE alertas SET autor_token = 'protetor_mariana_cascavel' WHERE id = ?", (i,))
+            for i in adocao_ids[4:8]: cur.execute("UPDATE alertas SET autor_token = 'protetor_patinhas_oeste' WHERE id = ?", (i,))
+            for i in adocao_ids[8:12]: cur.execute("UPDATE alertas SET autor_token = 'protetor_carlos_saofrancisco' WHERE id = ?", (i,))
 
     conn.commit()
     conn.close()
@@ -857,13 +941,13 @@ def api_clima():
 
 @app.route("/api/perfil", methods=["GET", "POST"])
 def api_perfil():
-    """Cadastro e consulta de perfil do cidadão/tutor (Nome, WhatsApp, Bairro, Cidade, Estado, Endereço, Foto)."""
+    """Cadastro e consulta de perfil do cidadão/tutor/protetor (Nome, WhatsApp, Bairro, Cidade, Estado, Endereço, Foto, Tipo, Bio, Pix)."""
     if request.method == "GET":
         token = request.args.get("autor_token", "").strip()
         if not token:
             return jsonify({"perfil": None})
         conn = get_db()
-        row = conn.execute("SELECT autor_token, nome, whatsapp, bairro, cidade, estado, uf, endereco, foto_url FROM usuarios WHERE autor_token = ?", (token,)).fetchone()
+        row = conn.execute("SELECT autor_token, nome, whatsapp, bairro, cidade, estado, uf, endereco, foto_url, tipo_perfil, bio, instagram, chave_pix, total_resgates, verificado FROM usuarios WHERE autor_token = ?", (token,)).fetchone()
         conn.close()
         return jsonify({"perfil": dict(row) if row else None})
 
@@ -879,13 +963,17 @@ def api_perfil():
     estado = (data.get("estado") or data.get("uf") or "PR").strip()[:10]
     endereco = (data.get("endereco") or "").strip()[:150]
     foto_url = (data.get("foto_url") or "").strip()[:300]
+    tipo_perfil = (data.get("tipo_perfil") or "tutor").strip()[:30]
+    bio = (data.get("bio") or "").strip()[:600]
+    instagram = (data.get("instagram") or "").strip()[:60]
+    chave_pix = (data.get("chave_pix") or "").strip()[:100]
     agora = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
     conn = get_db()
     cur = conn.cursor()
     cur.execute("""
-        INSERT INTO usuarios (autor_token, nome, whatsapp, bairro, cidade, estado, uf, endereco, foto_url, created_at, updated_at)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        INSERT INTO usuarios (autor_token, nome, whatsapp, bairro, cidade, estado, uf, endereco, foto_url, tipo_perfil, bio, instagram, chave_pix, created_at, updated_at)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         ON CONFLICT(autor_token) DO UPDATE SET
             nome = excluded.nome,
             whatsapp = excluded.whatsapp,
@@ -895,11 +983,15 @@ def api_perfil():
             uf = excluded.uf,
             endereco = excluded.endereco,
             foto_url = CASE WHEN excluded.foto_url != '' THEN excluded.foto_url ELSE usuarios.foto_url END,
+            tipo_perfil = excluded.tipo_perfil,
+            bio = excluded.bio,
+            instagram = excluded.instagram,
+            chave_pix = excluded.chave_pix,
             updated_at = excluded.updated_at
-    """, (token, nome, whatsapp, bairro, cidade, estado, estado, endereco, foto_url, agora, agora))
+    """, (token, nome, whatsapp, bairro, cidade, estado, estado, endereco, foto_url, tipo_perfil, bio, instagram, chave_pix, agora, agora))
     conn.commit()
     conn.close()
-    return jsonify({"status": "ok", "nome": nome, "bairro": bairro, "cidade": cidade, "estado": estado})
+    return jsonify({"status": "ok", "nome": nome, "bairro": bairro, "cidade": cidade, "estado": estado, "tipo_perfil": tipo_perfil})
 
 
 @app.route("/api/perfil/excluir", methods=["POST"])
@@ -1145,6 +1237,75 @@ def excluir_parceiro(parceiro_id):
     conn.commit()
     conn.close()
     return jsonify({"ok": True, "mensagem": "Parceiro excluído com sucesso."})
+
+
+# =====================================================================
+# REDE DE PROTETORES E HISTÓRIAS DE RESGATE DE CASCAVEL (v3.11.9)
+# =====================================================================
+@app.route("/api/protetores", methods=["GET"])
+def listar_protetores():
+    """
+    Lista protetores independentes e ONGs de Cascavel cadastrados na Rede Alerta Pet Brasil.
+    Retorna estatísticas de resgates, bio, contato, chave pix de apoio voluntário e animais disponíveis.
+    """
+    conn = get_db()
+    cur = conn.cursor()
+    cur.execute("""
+        SELECT id, autor_token, nome, whatsapp, bairro, cidade, foto_url, tipo_perfil, bio, instagram, chave_pix, total_resgates, verificado
+        FROM usuarios
+        WHERE tipo_perfil IN ('protetor', 'ong')
+        ORDER BY verificado DESC, total_resgates DESC, id ASC
+    """)
+    protetores = [dict(row) for row in cur.fetchall()]
+    
+    # Para cada protetor, busca os animais cadastrados (resgates e adoções)
+    for p in protetores:
+        token = p["autor_token"]
+        cur.execute("""
+            SELECT id, titulo, tipo, status_pet, foto_url, especie, porte, bairro, descricao, created_at
+            FROM alertas
+            WHERE autor_token = ? AND ativo = 1 AND pilar = 'pet'
+            ORDER BY id DESC LIMIT 6
+        """, (token,))
+        p["animais"] = [dict(a) for a in cur.fetchall()]
+        p["total_adocao"] = sum(1 for a in p["animais"] if a.get("tipo") == "pet_adocao")
+    
+    conn.close()
+    return jsonify({"protetores": protetores})
+
+
+@app.route("/api/protetor/<identificador>", methods=["GET"])
+def detalhe_protetor(identificador):
+    """
+    Página Pública do Protetor: detalhes completos, bio, chave Pix e galeria de todos os resgates/adoções.
+    """
+    conn = get_db()
+    cur = conn.cursor()
+    cur.execute("""
+        SELECT id, autor_token, nome, whatsapp, bairro, cidade, foto_url, tipo_perfil, bio, instagram, chave_pix, total_resgates, verificado
+        FROM usuarios
+        WHERE autor_token = ? OR id = ?
+    """, (identificador, int(identificador) if identificador.isdigit() else -1))
+    row = cur.fetchone()
+    if not row:
+        conn.close()
+        return jsonify({"error": "Protetor não encontrado."}), 404
+    
+    protetor = dict(row)
+    token = protetor["autor_token"]
+    
+    cur.execute("""
+        SELECT id, titulo, tipo, status_pet, foto_url, especie, porte, bairro, descricao, created_at, lat, lng
+        FROM alertas
+        WHERE autor_token = ? AND ativo = 1 AND pilar = 'pet'
+        ORDER BY id DESC
+    """, (token,))
+    protetor["animais"] = [dict(a) for a in cur.fetchall()]
+    protetor["total_adocao"] = sum(1 for a in protetor["animais"] if a.get("tipo") == "pet_adocao")
+    protetor["total_historico_resgates"] = max(protetor.get("total_resgates") or 0, len(protetor["animais"]))
+    
+    conn.close()
+    return jsonify({"protetor": protetor})
 
 
 @app.route("/api/mesa/salvar-catalogo", methods=["POST"])

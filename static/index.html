@@ -906,9 +906,13 @@
     .belt-block-pets {
       margin-top: 2px;
     }
+    .belt-block-protetores {
+      margin-top: 8px !important;
+      margin-bottom: 2px !important;
+    }
     .belt-block-parceiros {
-      margin-top: auto !important;
-      margin-bottom: 16px !important;
+      margin-top: 10px !important;
+      margin-bottom: 20px !important;
     }
     .belt-head {
       display: flex;
@@ -4540,7 +4544,23 @@
             </div>
           </div>
 
-          <!-- Bloco 2: Parceiros Oficiais de Cascavel (Abaixado junto ao menu) -->
+          <!-- Bloco 2: Vozes do Resgate & Protetores de Cascavel (v3.11.9) -->
+          <div class="belt-block belt-block-protetores" style="margin-top: 10px;">
+            <div class="belt-head">
+              <div class="belt-title protetor-title" style="color:#2E2417; font-weight:900; font-size:12px; display:flex; align-items:center; gap:6px;">
+                <svg class="belt-svg" viewBox="0 0 24 24" fill="none" stroke="#2E2417" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:15px;height:15px;">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                  <path d="M9 12l2 2 4-4"/>
+                </svg>
+                <span>Vozes do Resgate & Protetores de Cascavel</span>
+              </div>
+            </div>
+            <div class="belt-viewport">
+              <div class="belt-track" id="belt-protetores-track"></div>
+            </div>
+          </div>
+
+          <!-- Bloco 3: Parceiros Oficiais de Cascavel (Abaixado junto ao menu) -->
           <div class="belt-block belt-block-parceiros">
             <div class="belt-head">
               <div class="belt-title" style="color:#EDE8DF; font-weight:900; font-size:12px; display:flex; align-items:center; gap:6px;">
@@ -4987,7 +5007,76 @@
         <path d="M 0,0 L 500,0 L 500,4 C 420,16 330,2 240,12 C 150,18 80,4 0,14 Z" fill="#EDE8DF"/>
       </svg>
     </div>
-    <div class="fs-content" id="detalhe-conteudo" style="flex:1; overflow-y:auto; padding:16px 18px calc(env(safe-area-inset-bottom, 0px) + 30px); -webkit-overflow-scrolling:touch; max-width:560px; margin:0 auto; width:100%; box-sizing:border-box;">
+    <div class="fs-content" id="detalhe-conteudo" style="flex:1; overflow-y:auto; padding:16px 18px calc(env(safe-area-inset-bottom, 0px) + 60px); -webkit-overflow-scrolling:touch; max-width:560px; margin:0 auto; width:100%; box-sizing:border-box;">
+    </div>
+  </div>
+
+  <!-- ==================== TELA COMPLETA: PÁGINA PÚBLICA DO PROTETOR (v3.11.9) ==================== -->
+  <div class="full-screen-view" id="modal-perfil-protetor" style="display:none; flex-direction:column; background:#EDE8DF; z-index:2700;">
+    <div class="fs-header" style="background:#009B3A; color:#FFFFFF; padding:calc(env(safe-area-inset-top, 0px) + 12px) 16px 14px; display:flex; align-items:center; justify-content:space-between; flex-shrink:0;">
+      <button type="button" class="fs-back" onclick="fecharPerfilPublicoProtetor()" style="background:#000000; color:#FFFFFF; border:none; border-radius:999px; padding:7px 15px; font-weight:800; cursor:pointer;">‹ Voltar</button>
+      <div style="text-align:center;">
+        <div style="font-size:16px; font-weight:900; color:#FFFFFF;" id="protetor-fs-nome">Protetor de Animais</div>
+        <div style="font-size:10.5px; font-weight:800; color:#FED700; letter-spacing:0.5px;">REDE DE PROTEÇÃO CASCAVEL</div>
+      </div>
+      <div style="width:48px;"></div>
+    </div>
+    <div class="profile-river-wave" style="background:#009B3A; line-height:0; flex-shrink:0;">
+      <svg viewBox="0 0 500 16" preserveAspectRatio="none" style="width:100%; height:16px; display:block;">
+        <path d="M 0,0 L 500,0 L 500,4 C 420,16 330,2 240,12 C 150,18 80,4 0,14 Z" fill="#EDE8DF"/>
+      </svg>
+    </div>
+    <div class="fs-content" id="protetor-fs-conteudo" style="flex:1; overflow-y:auto; padding:16px 18px calc(env(safe-area-inset-bottom, 0px) + 30px); -webkit-overflow-scrolling:touch; max-width:560px; margin:0 auto; width:100%; box-sizing:border-box;">
+      <!-- Preenchido dinamicamente via JS -->
+    </div>
+  </div>
+
+  <!-- ==================== MODAL: PROTOCOLO DE ADOÇÃO CONSCIENTE (v3.11.9) ==================== -->
+  <div class="sheet-backdrop" id="modal-protocolo-adocao" onclick="if(event.target===this) fecharProtocoloAdocao()" style="z-index:3200;">
+    <div class="sheet" style="background:#FFFFFF; border-radius:24px 24px 0 0; padding:18px 20px calc(env(safe-area-inset-bottom, 0px) + 24px); max-width:480px; box-shadow:0 -8px 30px rgba(0,0,0,0.18);">
+      <div class="sheet-handle" style="width:36px; height:4px; background:#D1D5DB; border-radius:999px; margin:0 auto 14px;"></div>
+      
+      <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:12px;">
+        <div style="display:flex; align-items:center; gap:8px;">
+          <div style="width:34px; height:34px; border-radius:50%; background:#DCFCE7; display:flex; align-items:center; justify-content:center; color:#16A34A; font-size:18px;">🐾</div>
+          <div>
+            <div style="font-size:16px; font-weight:900; color:#1F2937;">Adoção Consciente</div>
+            <div style="font-size:10.5px; color:#16A34A; font-weight:800;">PROTOCOLO OFICIAL ALERTA PET</div>
+          </div>
+        </div>
+        <button type="button" onclick="fecharProtocoloAdocao()" style="background:none; border:none; color:#9CA3AF; font-size:18px; cursor:pointer; padding:4px 8px; font-weight:bold;">✕</button>
+      </div>
+
+      <div id="protocolo-pet-resumo" style="background:#F9FAFB; border:1px solid #E5E7EB; border-radius:14px; padding:10px 12px; margin-bottom:14px; display:flex; align-items:center; gap:12px;">
+        <!-- Preenchido via JS com foto e nome do pet -->
+      </div>
+
+      <div style="font-size:12px; color:#374151; line-height:1.45; margin-bottom:12px; font-weight:600;">
+        Para garantir o bem-estar deste animalzinho, confirme o compromisso com os 4 pilares da guarda responsável em Cascavel:
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:8px; margin-bottom:16px;">
+        <label style="display:flex; align-items:flex-start; gap:10px; font-size:11.5px; color:#1F2937; line-height:1.4; cursor:pointer;">
+          <input type="checkbox" id="chk-prot-seguro" checked style="margin-top:2px; accent-color:#009B3A; width:16px; height:16px;">
+          <span><b>Ambiente Seguro:</b> Imóvel seguro, com muros ou telas, sem acesso livre à rua ou risco de fuga.</span>
+        </label>
+        <label style="display:flex; align-items:flex-start; gap:10px; font-size:11.5px; color:#1F2937; line-height:1.4; cursor:pointer;">
+          <input type="checkbox" id="chk-prot-familia" checked style="margin-top:2px; accent-color:#009B3A; width:16px; height:16px;">
+          <span><b>Aprovação Familiar:</b> Todos os moradores da residência estão de pleno acordo com a acolhida.</span>
+        </label>
+        <label style="display:flex; align-items:flex-start; gap:10px; font-size:11.5px; color:#1F2937; line-height:1.4; cursor:pointer;">
+          <input type="checkbox" id="chk-prot-saude" checked style="margin-top:2px; accent-color:#009B3A; width:16px; height:16px;">
+          <span><b>Cuidados Veterinários:</b> Condições financeiras para ração digna, vacinas anuais e atendimento vet.</span>
+        </label>
+        <label style="display:flex; align-items:flex-start; gap:10px; font-size:11.5px; color:#1F2937; line-height:1.4; cursor:pointer;">
+          <input type="checkbox" id="chk-prot-vida" checked style="margin-top:2px; accent-color:#009B3A; width:16px; height:16px;">
+          <span><b>Amor por Toda a Vida:</b> Compromisso de não abandonar em caso de mudanças ou imprevistos.</span>
+        </label>
+      </div>
+
+      <button type="button" id="btn-confirmar-adocao-wa" onclick="confirmarAdocaoWhatsApp()" style="width:100%; height:46px; background:#25D366; color:#FFFFFF; border:none; border-radius:12px; font-size:13.5px; font-weight:900; display:flex; align-items:center; justify-content:center; gap:8px; cursor:pointer; box-shadow:0 3px 10px rgba(37,211,102,0.3);">
+        <span>Confirmar Compromisso & Falar no WhatsApp</span>
+      </button>
     </div>
   </div>
 
@@ -5220,6 +5309,39 @@
         </div>
 
         <div class="perfil-card-box" style="padding:12px; margin-bottom:0;">
+          <!-- Seletor de Tipo de Perfil: Tutor vs Protetor/ONG (v3.11.9) -->
+          <div style="margin-bottom:10px;">
+            <label class="form-label" style="font-size:10px; font-weight:800; margin-bottom:4px; display:block; color:#2E2417;">Como você atua na proteção animal?</label>
+            <div style="display:flex; gap:6px;">
+              <button type="button" id="btn-tipo-tutor" onclick="selecionarTipoPerfilCadastro('tutor')" style="flex:1; height:34px; border-radius:8px; font-size:11.5px; font-weight:800; cursor:pointer; background:#009B3A; color:#FFFFFF; border:none; transition:all 0.2s;">
+                🐾 Tutor / Cidadão
+              </button>
+              <button type="button" id="btn-tipo-protetor" onclick="selecionarTipoPerfilCadastro('protetor')" style="flex:1.2; height:34px; border-radius:8px; font-size:11.5px; font-weight:800; cursor:pointer; background:#FFFFFF; color:#2E2417; border:1.5px solid rgba(0,0,0,0.15); transition:all 0.2s;">
+                🛡️ Protetor(a) / ONG
+              </button>
+            </div>
+            <input type="hidden" id="cadastro-input-tipo-perfil" value="tutor">
+          </div>
+
+          <!-- Campos extras para Protetores & ONGs -->
+          <div id="wrap-campos-protetor" style="display:none; background:#F4EFE6; border:1px dashed rgba(110,90,60,0.3); border-radius:10px; padding:10px; margin-bottom:10px;">
+            <div style="font-size:11px; font-weight:800; color:#2E2417; margin-bottom:6px;">🛡️ Sua Página Pública de Protetor(a)</div>
+            <div style="margin-bottom:6px;">
+              <label class="form-label" for="cadastro-input-bio" style="font-size:10px; font-weight:800; margin-bottom:2px; display:block;">Sua Causa / Apresentação</label>
+              <textarea class="form-input" id="cadastro-input-bio" rows="2" placeholder="Conte brevemente sobre seus resgates e atuação em Cascavel..." style="width:100%; font-size:11.5px; padding:6px; border-radius:6px; box-sizing:border-box; resize:none;"></textarea>
+            </div>
+            <div style="display:flex; gap:6px;">
+              <div style="flex:1;">
+                <label class="form-label" for="cadastro-input-instagram" style="font-size:10px; font-weight:800; margin-bottom:2px; display:block;">Instagram @</label>
+                <input type="text" class="form-input" id="cadastro-input-instagram" placeholder="@seuinstagram" style="width:100%; height:32px; font-size:11.5px; padding:4px 8px; border-radius:6px; box-sizing:border-box;">
+              </div>
+              <div style="flex:1;">
+                <label class="form-label" for="cadastro-input-chave-pix" style="font-size:10px; font-weight:800; margin-bottom:2px; display:block;">Chave Pix de Apoio (Opcional)</label>
+                <input type="text" class="form-input" id="cadastro-input-chave-pix" placeholder="E-mail, CPF ou Tel" style="width:100%; height:32px; font-size:11.5px; padding:4px 8px; border-radius:6px; box-sizing:border-box;">
+              </div>
+            </div>
+          </div>
+
           <!-- Linha 1: Nome e WhatsApp -->
           <div style="display:flex; gap:8px; margin-bottom:8px;">
             <div style="flex:1.2;">
@@ -5279,9 +5401,12 @@
           <div style="flex:1; min-width:0;">
             <div id="perfil-display-nome" class="perfil-hero-nome">Nome do Usuário</div>
             <div id="perfil-display-sub" class="perfil-hero-sub">Centro • Cascavel - PR</div>
-            <div style="margin-top:6px;">
+            <div style="margin-top:6px; display:flex; gap:6px; flex-wrap:wrap;">
               <span style="display:inline-flex; align-items:center; gap:4px; font-size:10px; font-weight:800; color:#009B3A; background:rgba(0, 155, 58, 0.12); padding:2px 8px; border-radius:999px; border:1px solid rgba(0, 155, 58, 0.25);">
                 ✓ Conta Ativa
+              </span>
+              <span id="perfil-badge-protetor" style="display:none; align-items:center; gap:4px; font-size:10px; font-weight:800; color:#1E40AF; background:#DBEAFE; padding:2px 8px; border-radius:999px; border:1px solid #93C5FD;">
+                🛡️ Protetor(a) Verificado(a)
               </span>
             </div>
           </div>
@@ -5289,7 +5414,21 @@
 
         <!-- Grupo de Navegação em Linhas com Chevron (›) -->
         <div class="perfil-card-box" style="padding:0; overflow:hidden;">
-          <!-- Linha 1: Editar Dados -->
+          <!-- Linha 1: Minha Página Pública de Protetor (se for protetor) -->
+          <div class="perfil-nav-row" id="row-minha-pagina-protetor" style="display:none;" onclick="abrirPerfilPublicoProtetor(state.autorToken)">
+            <div class="perfil-nav-left">
+              <div class="perfil-nav-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#009B3A" stroke-width="2.2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></div>
+              <div>
+                <div class="perfil-nav-title" style="color:#009B3A; font-weight:900;">Minha Página Pública de Protetor(a)</div>
+                <div class="perfil-nav-sub">Veja sua galeria de resgates e adoções como o público vê</div>
+              </div>
+            </div>
+            <div class="pet-nav-chevron">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </div>
+          </div>
+
+          <!-- Linha 2: Editar Dados -->
           <div class="perfil-nav-row" onclick="alternarEdicaoDados()">
             <div class="perfil-nav-left">
               <div class="perfil-nav-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg></div>
@@ -6137,17 +6276,23 @@
     /* ==================== DADOS & RENDERIZAÇÃO v3.1 ==================== */
     async function carregarDados() {
       try {
-        const [resClima, resAlertas, resParceiros] = await Promise.all([
+        const [resClima, resAlertas, resParceiros, resProtetores] = await Promise.all([
           fetch('/api/clima?cidade=Cascavel'),
           fetch('/api/alertas?cidade=todas'),
-          fetch('/api/parceiros')
+          fetch('/api/parceiros'),
+          fetch('/api/protetores')
         ]);
         if (resClima.ok) state.clima = await resClima.json();
         if (resAlertas.ok) state.alertas = await resAlertas.json();
         if (resParceiros && resParceiros.ok) state.parceiros = await resParceiros.json();
+        if (resProtetores && resProtetores.ok) {
+          const pData = await resProtetores.json();
+          state.protetores = pData.protetores || [];
+        }
 
         renderizarDashboard();
         renderizarPetsAba();
+        renderizarEsteiraProtetores();
         renderizarEsteiraParceirosHome();
         renderizarAbaParceiros();
         renderizarMapa();
@@ -6649,6 +6794,58 @@
       }
     ];
 
+    function renderizarEsteiraProtetores() {
+      const track = document.getElementById('belt-protetores-track');
+      if (!track) return;
+
+      const protetores = state.protetores || [];
+      if (!protetores.length) {
+        track.className = 'belt-track static';
+        track.innerHTML = '<div style="font-size:11px; color:#6E5A3C; font-weight:700; padding:10px 16px;">Carregando protetores de Cascavel...</div>';
+        return;
+      }
+
+      const cardsHtml = protetores.map(p => {
+        const avatar = p.foto_url
+          ? `<img src="${escapeAttr(p.foto_url)}" style="width:38px; height:38px; border-radius:50%; object-fit:cover; border:2px solid #009B3A; flex-shrink:0;" alt="${escapeAttr(p.nome)}">`
+          : `<div style="width:38px; height:38px; border-radius:50%; background:#009B3A; color:#FFFFFF; display:flex; align-items:center; justify-content:center; font-weight:900; font-size:15px; flex-shrink:0;">${escapeHtml(p.nome.charAt(0))}</div>`;
+
+        const tipoBadge = p.tipo_perfil === 'ong' ? 'ONG OFICIAL' : 'PROTETOR(A)';
+        const miniThumbs = (p.animais || []).slice(0, 3).map(a => {
+          if (!a.foto_url) return '';
+          return `<img src="${escapeAttr(a.foto_url)}" style="width:22px; height:22px; border-radius:6px; object-fit:cover; border:1px solid rgba(0,0,0,0.12);" title="${escapeAttr(a.titulo)}">`;
+        }).join('');
+
+        return `
+          <div class="protetor-belt-card" onclick="abrirPerfilPublicoProtetor('${escapeAttr(p.autor_token || p.id)}')" style="width:220px; flex-shrink:0; background:#FFFFFF; border:1px solid rgba(110,90,60,0.22); border-radius:14px; padding:10px 12px; cursor:pointer; box-shadow:0 3px 8px rgba(0,0,0,0.05); display:flex; flex-direction:column; justify-content:space-between; height:116px; box-sizing:border-box;">
+            <div>
+              <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:5px;">
+                <span style="background:#EBFDF2; color:#009B3A; font-size:8.5px; font-weight:900; padding:2px 6px; border-radius:6px; letter-spacing:0.4px;">🛡️ ${tipoBadge}</span>
+                <span style="font-size:9.5px; color:#059669; font-weight:800;">✓ Verificado</span>
+              </div>
+              <div style="display:flex; align-items:center; gap:8px;">
+                ${avatar}
+                <div style="flex:1; min-width:0;">
+                  <div style="font-size:11.5px; font-weight:900; color:#18181B; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${escapeHtml(p.nome)}</div>
+                  <div style="font-size:9.5px; color:#52525B; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${escapeHtml(p.bairro || 'Cascavel')}</div>
+                </div>
+              </div>
+            </div>
+            <div style="display:flex; align-items:center; justify-content:space-between; border-top:1px solid rgba(0,0,0,0.06); padding-top:4px; margin-top:2px;">
+              <div style="display:flex; gap:3px;">${miniThumbs}</div>
+              <span style="font-size:9.5px; font-weight:800; color:#009B3A;">${p.total_resgates || 0} resgates ›</span>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      let loopHtml = cardsHtml;
+      while (loopHtml.length < 800) loopHtml += cardsHtml;
+      track.className = 'belt-track';
+      track.innerHTML = loopHtml + loopHtml;
+      calibrarVelocidadeEsteira(track, 32);
+    }
+
     function renderizarEsteiraParceirosHome() {
       const track = document.getElementById('belt-parceiros-home-track');
       if (!track) return;
@@ -6729,20 +6926,248 @@
       renderizarPetsAba();
     }
 
-    async function abrirContatoAdocao(petId) {
+    // =========================================================================
+    // PROTOCOLO DE ADOÇÃO CONSCIENTE & RESPONSÁVEL (v3.11.9)
+    // =========================================================================
+    let petIdAdocaoAtual = null;
+
+    function abrirContatoAdocao(petId) {
+      abrirProtocoloAdocao(petId);
+    }
+
+    function abrirProtocoloAdocao(petId) {
+      const pet = (state.alertas || []).find(a => a.id === petId);
+      if (!pet) return;
+      petIdAdocaoAtual = petId;
+
+      const resumoBox = document.getElementById('protocolo-pet-resumo');
+      if (resumoBox) {
+        const foto = pet.foto_url
+          ? `<img src="${escapeAttr(pet.foto_url)}" style="width:46px; height:46px; border-radius:8px; object-fit:cover; flex-shrink:0;">`
+          : `<div style="width:46px; height:46px; border-radius:8px; background:#009B3A; color:#FFF; display:flex; align-items:center; justify-content:center; font-size:18px;">🐾</div>`;
+
+        resumoBox.innerHTML = `
+          ${foto}
+          <div style="flex:1; min-width:0;">
+            <div style="font-size:13.5px; font-weight:900; color:#111827; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${escapeHtml(pet.titulo)}</div>
+            <div style="font-size:11px; color:#4B5563;">${escapeHtml(pet.bairro || 'Cascavel')} • ${escapeHtml(pet.porte || 'Médio')}</div>
+          </div>
+        `;
+      }
+
+      ['chk-prot-seguro', 'chk-prot-familia', 'chk-prot-saude', 'chk-prot-vida'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.checked = true;
+      });
+
+      const modal = document.getElementById('modal-protocolo-adocao');
+      if (modal) {
+        modal.style.display = 'flex';
+        modal.classList.add('open');
+      }
+    }
+
+    function fecharProtocoloAdocao() {
+      const modal = document.getElementById('modal-protocolo-adocao');
+      if (modal) {
+        modal.classList.remove('open');
+        modal.style.display = 'none';
+      }
+      petIdAdocaoAtual = null;
+    }
+
+    function confirmarAdocaoWhatsApp() {
+      const seguro = document.getElementById('chk-prot-seguro')?.checked;
+      const familia = document.getElementById('chk-prot-familia')?.checked;
+      const saude = document.getElementById('chk-prot-saude')?.checked;
+      const vida = document.getElementById('chk-prot-vida')?.checked;
+
+      if (!seguro || !familia || !saude || !vida) {
+        mostrarToast('Por favor, confirme todos os pilares da posse responsável.');
+        return;
+      }
+
+      const pet = (state.alertas || []).find(a => a.id === petIdAdocaoAtual);
+      if (!pet) return;
+
+      const pNome = (state.perfil && state.perfil.nome) ? state.perfil.nome : 'Adotante Consciente';
+      const pBairro = (state.perfil && state.perfil.bairro) ? state.perfil.bairro : 'Cascavel';
+      
+      const texto = `Olá! Vi o animalzinho *${pet.titulo}* anunciado para adoção responsável no *Alerta Pet Brasil*. Eu me chamo *${pNome}*, resido no bairro *${pBairro}* em Cascavel e confirmei os termos do Protocolo de Adoção Consciente (ambiente protegido sem fuga e compromisso vitalício). Gostaria muito de conversar sobre o processo de adoção dele(a)!`;
+
+      const tel = pet.contato || '45999332144';
+      const limpo = tel.replace(/\D/g, '');
+      fecharProtocoloAdocao();
+
+      if (limpo) {
+        window.open(`https://wa.me/55${limpo}?text=${encodeURIComponent(texto)}`, '_blank');
+      } else {
+        mostrarToast('Contato do tutor/protetor indisponível no momento.');
+      }
+    }
+
+    // =========================================================================
+    // PÁGINA PÚBLICA DO PROTETOR & APOIO PIX (v3.11.9)
+    // =========================================================================
+    async function abrirPerfilPublicoProtetor(idOuToken) {
       try {
-        const res = await fetch(`/api/pets/${petId}/adotar`);
-        const data = await res.json();
-        if (res.ok && data.whatsapp_url) {
-          window.open(data.whatsapp_url, '_blank');
-        } else {
-          // Fallback gracioso para testes
-          const waUrl = 'https://wa.me/5545999985280?text=' + encodeURIComponent('Olá! Tenho interesse em adotar este pet anunciado no Alerta Pet Brasil.');
-          window.open(waUrl, '_blank');
+        const resp = await fetch(`/api/protetor/${encodeURIComponent(idOuToken)}`);
+        if (!resp.ok) {
+          mostrarToast('Protetor não encontrado.');
+          return;
         }
-      } catch (_) {
-        const waUrl = 'https://wa.me/5545999985280?text=' + encodeURIComponent('Olá! Tenho interesse em adotar este pet anunciado no Alerta Pet Brasil.');
-        window.open(waUrl, '_blank');
+        const data = await resp.json();
+        const p = data.protetor;
+        if (!p) return;
+
+        const nomeEl = document.getElementById('protetor-fs-nome');
+        if (nomeEl) nomeEl.textContent = p.nome;
+
+        const box = document.getElementById('protetor-fs-conteudo');
+        if (!box) return;
+
+        const avatar = p.foto_url
+          ? `<img src="${escapeAttr(p.foto_url)}" style="width:72px; height:72px; border-radius:50%; object-fit:cover; border:3px solid #009B3A; box-shadow:0 3px 10px rgba(0,0,0,0.12);" alt="${escapeAttr(p.nome)}">`
+          : `<div style="width:72px; height:72px; border-radius:50%; background:#009B3A; color:#FFFFFF; display:flex; align-items:center; justify-content:center; font-weight:900; font-size:28px;">${escapeHtml(p.nome.charAt(0))}</div>`;
+
+        const waLimpo = (p.whatsapp || '').replace(/\D/g, '');
+        const btnWa = waLimpo
+          ? `<a href="https://wa.me/55${waLimpo}?text=Ol%C3%A1%2C%20vi%20sua%20p%C3%A1gina%20de%20protetor%20no%20Alerta%20Pet%20Brasil!" target="_blank" style="flex:1; height:42px; background:#25D366; color:#FFFFFF; text-decoration:none; border-radius:10px; font-size:12px; font-weight:800; display:flex; align-items:center; justify-content:center; gap:6px; box-shadow:0 2px 8px rgba(37,211,102,0.3);">
+               <span>Falar no WhatsApp</span>
+             </a>`
+          : '';
+
+        const btnPix = p.chave_pix
+          ? `<button type="button" onclick="copiarPixProtetor('${escapeAttr(p.chave_pix)}')" style="flex:1; height:42px; background:#0F172A; color:#FED700; border:none; border-radius:10px; font-size:12px; font-weight:800; display:flex; align-items:center; justify-content:center; gap:6px; cursor:pointer;">
+               <span>Apoiar via Pix</span>
+             </button>`
+          : '';
+
+        const listaAnimais = (p.animais || []).map(a => {
+          const ehAdocao = a.tipo === 'pet_adocao' || a.status_pet === 'adocao';
+          const badgeText = ehAdocao ? 'Adoção Responsável' : 'História de Resgate';
+          const badgeCor = ehAdocao ? 'background:#009B3A;' : 'background:#2563EB;';
+          return `
+            <div style="background:#FFFFFF; border-radius:14px; border:1px solid rgba(0,0,0,0.08); padding:12px; margin-bottom:10px; display:flex; gap:12px; align-items:center;">
+              <img src="${escapeAttr(a.foto_url || '/static/darkplanner_pets/cachorro_01_vira_lata.jpg')}" style="width:70px; height:70px; border-radius:10px; object-fit:cover; flex-shrink:0;">
+              <div style="flex:1; min-width:0;">
+                <span style="${badgeCor} color:#FFFFFF; font-size:8.5px; font-weight:800; padding:2px 7px; border-radius:6px;">${badgeText}</span>
+                <div style="font-size:14px; font-weight:900; color:#18181B; margin-top:4px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${escapeHtml(a.titulo)}</div>
+                <div style="font-size:11px; color:#52525B; font-weight:600;">${escapeHtml(a.bairro || 'Cascavel')}</div>
+                <div style="margin-top:6px;">
+                  ${ehAdocao 
+                    ? `<button type="button" onclick="abrirProtocoloAdocao(${a.id})" style="background:#009B3A; color:#FFFFFF; border:none; border-radius:6px; padding:4px 10px; font-size:10.5px; font-weight:800; cursor:pointer;">Quero Adotar</button>`
+                    : `<button type="button" onclick="abrirDetalheById(${a.id})" style="background:#EDE8DF; color:#2E2417; border:none; border-radius:6px; padding:4px 10px; font-size:10.5px; font-weight:800; cursor:pointer;">Ver História</button>`
+                  }
+                </div>
+              </div>
+            </div>
+          `;
+        }).join('') || '<div style="text-align:center; padding:20px; color:#71717A; font-size:12px;">Nenhum animal listado no momento.</div>';
+
+        box.innerHTML = `
+          <!-- Hero do Protetor -->
+          <div style="background:#FFFFFF; border-radius:18px; padding:18px; box-shadow:0 3px 12px rgba(0,0,0,0.06); border:1px solid rgba(0,0,0,0.08); text-align:center; margin-bottom:16px;">
+            <div style="display:flex; justify-content:center; margin-bottom:10px;">${avatar}</div>
+            <div style="font-size:17px; font-weight:900; color:#18181B; margin-bottom:2px;">${escapeHtml(p.nome)}</div>
+            <div style="font-size:12px; color:#009B3A; font-weight:800; margin-bottom:6px;">✓ Protetor(a) Verificado(a) em Cascavel</div>
+            <div style="font-size:11px; color:#71717A; font-weight:600; margin-bottom:12px;">Atuação: ${escapeHtml(p.bairro || 'Cascavel')} ${p.instagram ? '• ' + escapeHtml(p.instagram) : ''}</div>
+            
+            <!-- Placar de Vidas -->
+            <div style="display:flex; justify-content:center; gap:12px; margin-bottom:14px;">
+              <div style="background:#F4F4F5; border-radius:10px; padding:8px 14px; min-width:80px;">
+                <div style="font-size:18px; font-weight:900; color:#009B3A;">${p.total_resgates || 0}</div>
+                <div style="font-size:9.5px; font-weight:800; color:#71717A; text-transform:uppercase;">Resgates</div>
+              </div>
+              <div style="background:#F4F4F5; border-radius:10px; padding:8px 14px; min-width:80px;">
+                <div style="font-size:18px; font-weight:900; color:#2563EB;">${p.total_adocao || 0}</div>
+                <div style="font-size:9.5px; font-weight:800; color:#71717A; text-transform:uppercase;">Para Adoção</div>
+              </div>
+            </div>
+
+            <!-- Bio -->
+            <div style="font-size:12.5px; color:#3F3F46; line-height:1.55; text-align:left; background:#FBF8F3; border:1px solid rgba(110,90,60,0.18); border-radius:12px; padding:12px; margin-bottom:14px;">
+              ${escapeHtml(p.bio || 'Sem biografia informada.')}
+            </div>
+
+            <!-- Botões de Ação do Protetor -->
+            <div style="display:flex; gap:8px;">
+              ${btnWa}
+              ${btnPix}
+            </div>
+          </div>
+
+          <!-- Galeria de Animais -->
+          <div style="font-size:13px; font-weight:900; color:#2E2417; margin-bottom:10px; display:flex; align-items:center; gap:6px;">
+            <span>🐾 Animais Sob Cuidados & Adoção Responsável</span>
+          </div>
+          <div>${listaAnimais}</div>
+        `;
+
+        const modal = document.getElementById('modal-perfil-protetor');
+        if (modal) {
+          modal.style.display = 'flex';
+          modal.classList.add('open');
+        }
+      } catch (err) {
+        console.error(err);
+        mostrarToast('Erro ao abrir perfil do protetor.');
+      }
+    }
+
+    function fecharPerfilPublicoProtetor() {
+      const modal = document.getElementById('modal-perfil-protetor');
+      if (modal) {
+        modal.classList.remove('open');
+        modal.style.display = 'none';
+      }
+    }
+
+    function copiarPixProtetor(chave) {
+      if (!chave) return;
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(chave).then(() => {
+          mostrarToast('Chave Pix copiada para a área de transferência!');
+        }).catch(() => {
+          prompt('Chave Pix do Protetor (Copie para apoiar com ração ou veterinário):', chave);
+        });
+      } else {
+        prompt('Chave Pix do Protetor (Copie para apoiar com ração ou veterinário):', chave);
+      }
+    }
+
+    function selecionarTipoPerfilCadastro(tipo) {
+      const btnTutor = document.getElementById('btn-tipo-tutor');
+      const btnProt = document.getElementById('btn-tipo-protetor');
+      const inputTipo = document.getElementById('cadastro-input-tipo-perfil');
+      const wrapProt = document.getElementById('wrap-campos-protetor');
+
+      if (inputTipo) inputTipo.value = tipo;
+
+      if (tipo === 'protetor') {
+        if (btnProt) {
+          btnProt.style.background = '#009B3A';
+          btnProt.style.color = '#FFFFFF';
+          btnProt.style.border = 'none';
+        }
+        if (btnTutor) {
+          btnTutor.style.background = '#FFFFFF';
+          btnTutor.style.color = '#2E2417';
+          btnTutor.style.border = '1.5px solid rgba(0,0,0,0.15)';
+        }
+        if (wrapProt) wrapProt.style.display = 'block';
+      } else {
+        if (btnTutor) {
+          btnTutor.style.background = '#009B3A';
+          btnTutor.style.color = '#FFFFFF';
+          btnTutor.style.border = 'none';
+        }
+        if (btnProt) {
+          btnProt.style.background = '#FFFFFF';
+          btnProt.style.color = '#2E2417';
+          btnProt.style.border = '1.5px solid rgba(0,0,0,0.15)';
+        }
+        if (wrapProt) wrapProt.style.display = 'none';
       }
     }
 
@@ -8896,6 +9321,12 @@ ${downloadUrl}`;
       if (editEstado && (p.estado || p.uf)) editEstado.value = (p.estado || p.uf);
       if (editBairro && p.bairro) editBairro.value = p.bairro;
       if (editEndereco && p.endereco) editEndereco.value = p.endereco;
+
+      const isProt = (p.tipo_perfil === 'protetor' || p.tipo_perfil === 'ong');
+      const badgeProt = document.getElementById('perfil-badge-protetor');
+      const rowProt = document.getElementById('row-minha-pagina-protetor');
+      if (badgeProt) badgeProt.style.display = isProt ? 'inline-flex' : 'none';
+      if (rowProt) rowProt.style.display = isProt ? 'flex' : 'none';
     }
 
     function conectarGoogleAuth() {
@@ -8987,6 +9418,10 @@ ${downloadUrl}`;
       const estado = (document.getElementById('cadastro-select-estado')?.value || '').trim();
       const bairro = (document.getElementById('cadastro-input-bairro')?.value || '').trim();
       const endereco = (document.getElementById('cadastro-input-endereco')?.value || '').trim();
+      const tipo_perfil = (document.getElementById('cadastro-input-tipo-perfil')?.value || 'tutor').trim();
+      const bio = (document.getElementById('cadastro-input-bio')?.value || '').trim();
+      const instagram = (document.getElementById('cadastro-input-instagram')?.value || '').trim();
+      const chave_pix = (document.getElementById('cadastro-input-chave-pix')?.value || '').trim();
       const termos = document.getElementById('cadastro-termos-check')?.checked;
 
       if (!termos) {
@@ -9005,6 +9440,10 @@ ${downloadUrl}`;
         cidade,
         estado,
         endereco,
+        tipo_perfil,
+        bio,
+        instagram,
+        chave_pix,
         cadastrado: true,
         auth_provider: 'manual'
       };
@@ -9022,7 +9461,11 @@ ${downloadUrl}`;
             bairro,
             cidade,
             estado,
-            endereco
+            endereco,
+            tipo_perfil,
+            bio,
+            instagram,
+            chave_pix
           })
         }).catch(() => {});
       } catch (_) {}
