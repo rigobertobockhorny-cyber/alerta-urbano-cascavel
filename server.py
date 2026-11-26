@@ -778,77 +778,63 @@ def baixar_apk():
 @app.route("/api/falar")
 def api_falar():
     """
-    Sintetiza e serve alertas sonoros de alta fidelidade do Alerta Pet Brasil:
-    - Áudios oficiais pré-produzidos com efeitos sonoros de animais (latido, miado, piado, chime)
-    - Vozes internacionais multilíngues (sem robô, sem timbre genérico de YouTuber):
-      * Feminina: en-US-AvaMultilingualNeural
-      * Masculina: it-IT-GiuseppeMultilingualNeural
+    Serve exclusivamente as vozes oficiais do Dark Planner (Natalia e Guido).
+    Purga total de sintetizadores externos ou vozes estrangeiras.
     """
     texto = (request.args.get("texto") or "").strip()
-    if not texto:
-        return jsonify({"error": "Texto vazio"}), 400
-
     voz_param = request.args.get("voz", "feminina").strip().lower()
-    voz_prefix = "masc" if voz_param == "masculina" else "fem"
+    locutor = "guido" if voz_param in ["masculina", "guido", "masc"] else "natalia"
     texto_lower = texto.lower()
 
-    # Mapeamento dos 4 áudios oficiais de estúdio com efeitos sonoros
-    oficiais_dir = os.path.join(BASE_DIR, "static", "audios_tts", "oficiais")
-    tag_oficial = None
+    vozes_dir = os.path.join(BASE_DIR, "static", "vozes_frases_oficiais")
+    is_atualizacao = any(k in texto_lower for k in ["atualiza", "atualização", "atualizacao", "novidade"])
 
-    if any(k in texto_lower for k in ["cão", "cao", "cachorro", "cadela", "dog"]):
-        tag_oficial = "cao"
-    elif any(k in texto_lower for k in ["gato", "gata", "felino", "cat"]):
-        tag_oficial = "gato"
-    elif any(k in texto_lower for k in ["ave", "pássaro", "passaro", "calopsita", "periquito", "canário", "canario"]):
-        tag_oficial = "ave"
-    elif any(k in texto_lower for k in ["alerta", "clima", "climático", "chuva", "temporal", "proteção", "protecao"]):
-        tag_oficial = "alerta"
-
-    if tag_oficial:
-        oficial_path = os.path.join(oficiais_dir, f"{voz_prefix}_{tag_oficial}.mp3")
-        if os.path.exists(oficial_path) and os.path.getsize(oficial_path) > 0:
-            return send_file(oficial_path, mimetype="audio/mpeg")
-
-    # Vozes oficiais de estúdio em Português Brasileiro puro (sem sotaque estrangeiro)
-    if voz_param == "masculina":
-        voice_id = "pt-BR-AntonioNeural"
-        voice_rate = "-2%"
-        voice_pitch = "0Hz"
+    if is_atualizacao:
+        if any(k in texto_lower for k in ["cão", "cao", "cachorro", "cadela", "dog"]):
+            nome_arq = f"{locutor}_05_atualizacao_cao.mp3"
+        elif any(k in texto_lower for k in ["gato", "gata", "felino", "cat"]):
+            nome_arq = f"{locutor}_06_atualizacao_gato.mp3"
+        elif any(k in texto_lower for k in ["ave", "pássaro", "passaro", "calopsita", "periquito"]):
+            nome_arq = f"{locutor}_07_atualizacao_ave.mp3"
+        elif any(k in texto_lower for k in ["coelh", "lebre"]):
+            nome_arq = f"{locutor}_15_atualizacao_coelho.mp3"
+        else:
+            nome_arq = f"{locutor}_13_atualizacao_animal.mp3"
     else:
-        voice_id = "pt-BR-FranciscaNeural"
-        voice_rate = "-2%"
-        voice_pitch = "0Hz"
+        if any(k in texto_lower for k in ["tempestade", "temporal", "chuva forte"]):
+            nome_arq = f"{locutor}_08_clima_tempestade.mp3"
+        elif any(k in texto_lower for k in ["granizo", "pedras de gelo"]):
+            nome_arq = f"{locutor}_09_clima_granizo.mp3"
+        elif any(k in texto_lower for k in ["geada", "frio extremo", "frio"]):
+            nome_arq = f"{locutor}_10_clima_frio.mp3"
+        elif any(k in texto_lower for k in ["calor", "onda de calor"]):
+            nome_arq = f"{locutor}_11_clima_calor.mp3"
+        elif any(k in texto_lower for k in ["apresenta", "amostra", "boas-vindas", "bem-vindo", "olá", "teste"]):
+            nome_arq = f"{locutor}_01_apresentacao.mp3"
+        elif any(k in texto_lower for k in ["gato", "gata", "felino", "cat"]):
+            nome_arq = f"{locutor}_03_alerta_gato.mp3"
+        elif any(k in texto_lower for k in ["ave", "pássaro", "passaro", "calopsita", "periquito"]):
+            nome_arq = f"{locutor}_04_alerta_ave.mp3"
+        elif any(k in texto_lower for k in ["coelh", "lebre"]):
+            nome_arq = f"{locutor}_14_alerta_coelho.mp3"
+        elif any(k in texto_lower for k in ["animal", "outro", "cavalo", "hamster", "roedor", "tartaruga"]):
+            nome_arq = f"{locutor}_12_alerta_animal.mp3"
+        else:
+            nome_arq = f"{locutor}_02_alerta_cao.mp3"
 
-    cache_key = f"{voice_id}:{voice_rate}:{voice_pitch}:{texto_lower}"
-    h = hashlib.md5(cache_key.encode("utf-8")).hexdigest()
-    cache_dir = os.path.join(BASE_DIR, "static", "audios_tts")
-    os.makedirs(cache_dir, exist_ok=True)
-    filepath = os.path.join(cache_dir, f"{h}.mp3")
+    caminho = os.path.join(vozes_dir, nome_arq)
+    if os.path.exists(caminho) and os.path.getsize(caminho) > 0:
+        resp = send_file(caminho, mimetype="audio/mpeg")
+        resp.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+        return resp
 
-    if os.path.exists(filepath) and os.path.getsize(filepath) > 0:
-        return send_file(filepath, mimetype="audio/mpeg")
+    fallback_path = os.path.join(vozes_dir, f"{locutor}_02_alerta_cao.mp3")
+    if os.path.exists(fallback_path):
+        resp = send_file(fallback_path, mimetype="audio/mpeg")
+        resp.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+        return resp
 
-    try:
-        import asyncio
-        import edge_tts
-
-        async def _synthesize():
-            comm = edge_tts.Communicate(texto, voice_id, rate=voice_rate, pitch=voice_pitch)
-            await comm.save(filepath)
-
-        asyncio.run(_synthesize())
-        if os.path.exists(filepath) and os.path.getsize(filepath) > 0:
-            return send_file(filepath, mimetype="audio/mpeg")
-    except Exception as e:
-        print(f"[TTS SERVER] Erro ao sintetizar fala internacional: {e}")
-
-    # Fallback final gracioso para o áudio de cão
-    fallback_oficial = os.path.join(oficiais_dir, f"{voz_prefix}_cao.mp3")
-    if os.path.exists(fallback_oficial):
-        return send_file(fallback_oficial, mimetype="audio/mpeg")
-
-    return jsonify({"error": "Falha na síntese de áudio"}), 500
+    return jsonify({"error": "Audio oficial indisponivel"}), 404
 
 
 @app.route("/api/upload", methods=["POST"])
