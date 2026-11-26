@@ -4387,7 +4387,7 @@
         <div class="brand-text">
           <div class="brand-name">Alerta Pet Brasil</div>
           <div class="brand-city">
-            <span>Cascavel • Build 44 (v3.11.7)</span>
+            <span id="label-versao-app">Cascavel • Build 45 (v3.11.8)</span>
           </div>
         </div>
       </div>
@@ -9002,6 +9002,19 @@ Baixe o aplicativo gratuito Alerta Urbano:
 
     /* ==================== BOOTSTRAP ==================== */
     window.addEventListener('DOMContentLoaded', () => {
+      // Identificação da Versão do APK Nativo (Verificação de Atualização no Aparelho)
+      try {
+        if (window.AndroidAlerta && typeof window.AndroidAlerta.obterVersaoApkNativo === 'function') {
+          const vNat = window.AndroidAlerta.obterVersaoApkNativo();
+          const lbl = document.getElementById('label-versao-app');
+          if (lbl && vNat) {
+            lbl.innerText = `Cascavel • APK: ${vNat}`;
+          }
+        }
+      } catch (eVer) {
+        console.warn('Verificacao versao nativa:', eVer);
+      }
+
       aplicarTema(state.theme);
       carregarPrefsCopiloto();
       carregarPerfilUsuario();
