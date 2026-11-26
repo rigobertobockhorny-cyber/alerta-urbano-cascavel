@@ -596,12 +596,12 @@
       height: 100%;
     }
 
-    /* ABA PETS: FUNDO BEGE ESCURO ENCORPADO IDÊNTICO AO MARCAR ONDE VI (ZERO AMARELO) */
+    /* ABA PETS: FUNDO AREIA PASTEL SUAVE (#EDE8DF) HARMONIZADO COM A HOME */
     #tab-pets {
-      background: #E4D5BC !important;
+      background: #EDE8DF !important;
     }
     [data-theme="dark"] #tab-pets {
-      background: #000000 !important;
+      background: #18181B !important;
     }
 
     /* Bottom Navigation Slim (4 abas) */
@@ -3073,7 +3073,8 @@
       border-color: rgba(56, 189, 248, 0.30) !important;
     }
 
-    /* CAMADA DE FUNDO: BOLHAS COLORIDAS GRANDES SEM MARGEM (SEMPRE ATRÁS DE TUDO) */
+    /* CAMADA DE FUNDO: PATAS COLORIDAS GRANDES DA MARCA (SEMPRE ATRÁS DE TUDO) */
+    .pet-card-bg-paws,
     .pet-card-bg-bubbles {
       position: absolute;
       inset: 0;
@@ -3081,6 +3082,17 @@
       pointer-events: none;
       overflow: hidden;
       border-radius: inherit;
+    }
+    .pet-bg-paw {
+      position: absolute;
+      pointer-events: none;
+      box-sizing: border-box;
+      transition: transform 0.3s ease;
+    }
+    .pet-bg-paw svg {
+      width: 100%;
+      height: 100%;
+      display: block;
     }
     .pet-bubble {
       position: absolute;
@@ -3114,8 +3126,8 @@
       background: rgba(56, 189, 248, 0.28) !important;
     }
 
-    /* TODO CONTEÚDO DO CARD FICA ESTRITAMENTE POR CIMA DO BLOCO SÓLIDO + BOLHAS */
-    .pet-card > :not(.pet-card-bg-bubbles):not(.pet-bubble) {
+    /* TODO CONTEÚDO DO CARD FICA ESTRITAMENTE POR CIMA DO BLOCO SÓLIDO + PATAS */
+    .pet-card > :not(.pet-card-bg-paws):not(.pet-card-bg-bubbles):not(.pet-bg-paw):not(.pet-bubble) {
       position: relative;
       z-index: 2;
     }
@@ -3761,11 +3773,12 @@
       --accent-brand-soft: #FED700;
     }
 
-    /* MODO NOTURNO & TEMA MESTRO RIGO */
+    /* UNIFICAÇÃO DA PALETA: FUNDO AREIA PASTEL SUAVE (#EDE8DF) EM TODAS AS TELAS */
+    #tab-inicio,
     #tab-pets,
     #tab-parceiros,
     #tab-copiloto {
-      background: var(--pet-marrom) !important;
+      background: #EDE8DF !important;
       min-height: 100vh;
       box-sizing: border-box;
     }
@@ -4415,7 +4428,7 @@
       flex-direction: column !important;
       overflow: hidden !important;
       padding: 0 !important;
-      background: #9E8560 !important;
+      background: #EDE8DF !important;
       height: 100% !important;
       position: absolute !important;
       inset: 0 !important;
@@ -4427,11 +4440,12 @@
     .pets-fixed-header,
     .parceiros-fixed-header {
       flex-shrink: 0 !important;
-      background: #9E8560 !important;
+      background: #EDE8DF !important;
       padding: 24px 14px 6px !important;
       z-index: 20 !important;
       box-sizing: border-box !important;
       width: 100% !important;
+      border-bottom: 1px solid rgba(110, 90, 60, 0.12) !important;
     }
     .pets-scroll-viewport,
     .parceiros-scroll-viewport {
@@ -7861,33 +7875,47 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
     }
 
     /* ==================== REGRA SUPREMA DE CORES DOS ANIMAIS (RIGO) ====================
-       - Macho: AZUL (#DCF0FF)
-       - Fêmea: ROSA (#FFE0EE)
-       - Indefinido / Aves / Ninhada / Não informado: ROXO (#EAE0FF)
+       - Macho: AZUL (#DCF0FF) | Patas em tons de Azul
+       - Fêmea: ROSA (#FFE0EE) | Patas em tons de Rosa
+       - Indefinido / Aves / Ninhada / Não informado: ROXO (#EAE0FF) | Patas em tons de Roxo
        Aplicado em 100% dos cards: Aba Pets, Radar Flutuante e Detalhes.
        ================================================================================== */
     function obterTemaGeneroPet(p) {
-      if (!p) return { tema: 'tema-roxo', corBg: '#EAE0FF', corTexto: '#4C1D95', corBorda: '#D8B4FE', coresBolhas: ['roxa', 'azul', 'rosa'], genero: 'indefinido' };
+      if (!p) return { tema: 'tema-roxo', corBg: '#EAE0FF', corTexto: '#4C1D95', corBorda: '#D8B4FE', coresBolhas: ['roxa', 'azul', 'rosa'], coresPatas: ['#A78BFA', '#C084FC', '#C4B5FD'], genero: 'indefinido' };
       const raw = ((p.sexo || '') + ' ' + (p.especie || '') + ' ' + (p.titulo || '') + ' ' + (p.descricao || '')).toLowerCase();
       
       const ehAve = raw.includes('ave') || raw.includes('pássaro') || raw.includes('passaro') || raw.includes('calopsita') || raw.includes('periquito') || raw.includes('canário') || raw.includes('canario') || raw.includes('papagaio');
       const ehNinhada = raw.includes('ninhada') || raw.includes('filhotes') || raw.includes('ninhadinha') || raw.includes('indefinido') || raw.includes('não informado') || raw.includes('nao informado') || raw.includes('não sabe') || raw.includes('nao sabe');
       
       if (ehAve || ehNinhada) {
-        return { tema: 'tema-roxo', corBg: '#EAE0FF', corTexto: '#4C1D95', corBorda: '#D8B4FE', coresBolhas: ['roxa', 'azul', 'rosa'], genero: 'indefinido' };
+        return { tema: 'tema-roxo', corBg: '#EAE0FF', corTexto: '#4C1D95', corBorda: '#D8B4FE', coresBolhas: ['roxa', 'azul', 'rosa'], coresPatas: ['#A78BFA', '#C084FC', '#C4B5FD'], genero: 'indefinido' };
       }
       
       const ehFemea = (p.sexo && p.sexo.toLowerCase().startsWith('f')) || raw.includes('fêmea') || raw.includes('femea') || raw.includes('gata') || raw.includes('cadela') || raw.includes('menininha');
       if (ehFemea) {
-        return { tema: 'tema-rosa', corBg: '#FFE0EE', corTexto: '#831843', corBorda: '#F9A8D4', coresBolhas: ['rosa', 'roxa', 'rosa'], genero: 'femea' };
+        return { tema: 'tema-rosa', corBg: '#FFE0EE', corTexto: '#831843', corBorda: '#F9A8D4', coresBolhas: ['rosa', 'roxa', 'rosa'], coresPatas: ['#F472B6', '#FB7185', '#EC4899'], genero: 'femea' };
       }
 
       const ehMacho = (p.sexo && p.sexo.toLowerCase().startsWith('m')) || raw.includes('macho') || raw.includes('gato') || raw.includes('cachorro') || raw.includes('cão') || raw.includes('cao') || raw.includes('machinho') || p.id === 5514 || raw.includes('tico');
       if (ehMacho) {
-        return { tema: 'tema-azul', corBg: '#DCF0FF', corTexto: '#0C4A6E', corBorda: '#93C5FD', coresBolhas: ['azul', 'roxa', 'azul'], genero: 'macho' };
+        return { tema: 'tema-azul', corBg: '#DCF0FF', corTexto: '#0C4A6E', corBorda: '#93C5FD', coresBolhas: ['azul', 'roxa', 'azul'], coresPatas: ['#60A5FA', '#38BDF8', '#93C5FD'], genero: 'macho' };
       }
 
-      return { tema: 'tema-roxo', corBg: '#EAE0FF', corTexto: '#4C1D95', corBorda: '#D8B4FE', coresBolhas: ['roxa', 'azul', 'rosa'], genero: 'indefinido' };
+      return { tema: 'tema-roxo', corBg: '#EAE0FF', corTexto: '#4C1D95', corBorda: '#D8B4FE', coresBolhas: ['roxa', 'azul', 'rosa'], coresPatas: ['#A78BFA', '#C084FC', '#C4B5FD'], genero: 'indefinido' };
+    }
+
+    function gerarSvgPataFundo(cor, estilo, opacidade = 0.38, rotacao = 0) {
+      return `
+        <div class="pet-bg-paw" style="position:absolute; ${estilo}; opacity:${opacidade}; transform:rotate(${rotacao}deg); pointer-events:none; z-index:0;" aria-hidden="true">
+          <svg viewBox="0 0 512 512" style="width:100%; height:100%; display:block;" fill="${cor}">
+            <path d="M115.2 359.3 L109.4 379.5 L110.4 409.3 L117.1 425.6 L124.8 436.2 L137.3 447.7 L144.0 450.6 L198.8 450.6 L217.1 444.9 L244.9 439.1 L270.9 440.1 L309.3 450.6 L365.1 450.6 L378.5 442.9 L389.1 432.4 L397.8 417.9 L401.6 402.6 L401.6 382.4 L399.7 371.8 L393.0 353.6 L386.2 342.0 L371.8 323.8 L348.7 301.7 L341.1 292.0 L305.5 238.2 L288.2 223.8 L274.7 218.0 L264.2 216.1 L244.0 216.1 L235.3 218.0 L223.8 223.8 L214.2 231.5 L199.8 247.8 L162.3 300.7 L138.3 323.8 L129.6 334.3 Z"/>
+            <path d="M78.7 170.0 L64.3 178.6 L53.7 195.0 L49.8 211.3 L49.8 224.8 L54.6 244.9 L66.2 266.1 L78.7 278.6 L95.0 287.2 L101.7 289.2 L113.3 289.2 L129.6 281.5 L136.3 274.7 L142.1 264.2 L146.9 244.0 L146.9 235.3 L143.1 216.1 L135.4 198.8 L119.0 179.6 L103.7 170.9 L96.9 169.0 Z"/>
+            <path d="M177.7 62.3 L167.1 65.2 L153.6 75.8 L146.9 85.4 L142.1 96.0 L138.3 117.1 L140.2 144.0 L143.1 155.6 L148.8 168.1 L165.2 189.2 L182.5 198.8 L200.7 199.8 L208.4 197.9 L216.1 193.0 L228.6 179.6 L236.3 161.3 L239.2 146.9 L239.2 130.6 L233.4 105.6 L227.6 93.1 L219.0 80.6 L207.5 70.0 L196.9 64.3 Z"/>
+            <path d="M338.2 60.4 L327.6 60.4 L318.0 63.3 L307.4 69.1 L294.9 80.6 L288.2 89.2 L279.5 106.5 L273.8 128.7 L273.8 154.6 L279.5 174.8 L284.4 183.4 L294.0 194.0 L303.6 199.8 L314.1 202.7 L322.8 202.7 L333.4 199.8 L347.8 191.1 L359.3 179.6 L370.9 159.4 L376.6 141.1 L377.6 108.5 L371.8 88.3 L358.4 70.0 L349.7 64.3 Z"/>
+            <path d="M439.1 170.0 L417.9 170.0 L398.7 179.6 L382.4 196.9 L371.8 218.0 L368.9 231.5 L368.9 251.7 L370.9 261.3 L376.6 272.8 L382.4 279.5 L393.0 286.3 L401.6 289.2 L414.1 289.2 L426.6 285.3 L435.2 280.5 L451.6 265.1 L464.1 243.0 L468.9 222.8 L468.9 209.4 L464.1 192.1 L453.5 177.7 Z"/>
+          </svg>
+        </div>
+      `;
     }
 
     function renderizarPetsAba() {
@@ -7992,36 +8020,36 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
         }
 
         const temaInfo = obterTemaGeneroPet(p);
-        const presetsPosicoes = [
+        const presetsPosicoesPatas = [
           [
-            'top:-55px; right:-45px; width:170px; height:170px;',
-            'bottom:-55px; left:-50px; width:210px; height:210px;',
-            'bottom:48px; right:-60px; width:155px; height:155px;'
+            { estilo: 'top:-30px; right:-25px; width:160px; height:160px;', rot: 18, opac: 0.38 },
+            { estilo: 'bottom:-40px; left:-30px; width:185px; height:185px;', rot: -22, opac: 0.32 },
+            { estilo: 'bottom:55px; right:-35px; width:140px; height:140px;', rot: 12, opac: 0.35 }
           ],
           [
-            'top:-60px; left:-45px; width:175px; height:175px;',
-            'bottom:-60px; right:-45px; width:215px; height:215px;',
-            'bottom:58px; left:-55px; width:150px; height:150px;'
+            { estilo: 'top:-35px; left:-25px; width:165px; height:165px;', rot: -18, opac: 0.38 },
+            { estilo: 'bottom:-45px; right:-25px; width:190px; height:190px;', rot: 25, opac: 0.32 },
+            { estilo: 'bottom:60px; left:-35px; width:135px; height:135px;', rot: -14, opac: 0.35 }
           ],
           [
-            'top:-52px; right:14%; width:155px; height:155px;',
-            'bottom:-50px; left:-42px; width:195px; height:195px;',
-            'bottom:-38px; right:-48px; width:175px; height:175px;'
+            { estilo: 'top:-28px; right:12%; width:150px; height:150px;', rot: 15, opac: 0.36 },
+            { estilo: 'bottom:-38px; left:-25px; width:175px; height:175px;', rot: -20, opac: 0.32 },
+            { estilo: 'bottom:-30px; right:-30px; width:155px; height:155px;', rot: 18, opac: 0.34 }
           ],
           [
-            'top:-55px; left:18%; width:160px; height:160px;',
-            'bottom:-55px; right:-50px; width:205px; height:205px;',
-            'bottom:-42px; left:-52px; width:170px; height:170px;'
+            { estilo: 'top:-30px; left:15%; width:150px; height:150px;', rot: -16, opac: 0.36 },
+            { estilo: 'bottom:-40px; right:-30px; width:180px; height:180px;', rot: 22, opac: 0.32 },
+            { estilo: 'bottom:-32px; left:-32px; width:150px; height:150px;', rot: -18, opac: 0.34 }
           ]
         ];
 
-        const parPos = presetsPosicoes[idx % presetsPosicoes.length];
+        const parPos = presetsPosicoesPatas[idx % presetsPosicoesPatas.length];
 
-        const bolhasHtml = `
-          <div class="pet-card-bg-bubbles" aria-hidden="true">
-            <div class="pet-bubble bubble-${temaInfo.coresBolhas[0]}" style="${parPos[0]}"></div>
-            <div class="pet-bubble bubble-${temaInfo.coresBolhas[1]}" style="${parPos[1]}"></div>
-            <div class="pet-bubble bubble-${temaInfo.coresBolhas[2]}" style="${parPos[2]}"></div>
+        const patasFundoHtml = `
+          <div class="pet-card-bg-paws" aria-hidden="true">
+            ${gerarSvgPataFundo(temaInfo.coresPatas[0], parPos[0].estilo, parPos[0].opac, parPos[0].rot)}
+            ${gerarSvgPataFundo(temaInfo.coresPatas[1], parPos[1].estilo, parPos[1].opac, parPos[1].rot)}
+            ${gerarSvgPataFundo(temaInfo.coresPatas[2], parPos[2].estilo, parPos[2].opac, parPos[2].rot)}
           </div>
         `;
 
@@ -8098,8 +8126,8 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
 
         return `
           <div class="pet-card ${temaInfo.tema}" id="pet-card-${p.id}">
-            <!-- Camada de Fundo: Bloco Sólido + Bolhas Coloridas Grandes Sem Margem -->
-            ${bolhasHtml}
+            <!-- Camada de Fundo: Patas Oficiais Grandes Sem Margem -->
+            ${patasFundoHtml}
 
             <!-- Header do Card com Autor e 3 Pontinhos -->
             <div class="pet-card-header" style="position:relative; z-index:2;">
@@ -10115,12 +10143,16 @@ ${downloadUrl} 🐾`;
         ? `<button onclick="fecharCardRadarTopoWeb(); abrirDetalheById(${pet.id})" style="width: 100%; height: 42px; background: #009B3A; color: #FFFFFF; font-weight: 900; font-size: 13px; border: none; border-radius: 14px; cursor: pointer; box-shadow: 0 3px 10px rgba(0,155,58,0.3); position:relative; z-index:2;">Ver Ficha e Avistamentos do Meu Pet</button>`
         : `<button onclick="fecharCardRadarTopoWeb()" style="width: 100%; height: 42px; background: linear-gradient(135deg, #BFA782 0%, #947A55 100%); color: #FFFFFF; font-weight: 900; font-size: 13px; border: 1px solid rgba(138, 118, 86, 0.5); border-radius: 14px; cursor: pointer; box-shadow: 0 3px 10px rgba(110,90,60,0.3); text-shadow: 0 1px 2px rgba(0,0,0,0.2); position:relative; z-index:2;">Estou ciente e ajudando a procurar</button>`;
 
+      const coresPatasAlerta = ehFemea 
+        ? ['#F472B6', '#FB7185', '#EC4899']
+        : (ehMacho ? ['#60A5FA', '#38BDF8', '#93C5FD'] : ['#A78BFA', '#C084FC', '#C4B5FD']);
+
       card.innerHTML = `
-        <!-- CAMADA DE FUNDO: 3 BOLHAS COLORIDAS GRANDES SEM MARGEM (PADRÃO ABA PET) -->
-        <div class="pet-card-bg-bubbles" aria-hidden="true" style="position:absolute; inset:0; z-index:0; overflow:hidden; border-radius:inherit; pointer-events:none;">
-          <div style="position:absolute; top:-35px; right:-30px; width:140px; height:140px; border-radius:50%; background:#F9A8D4; opacity:0.55;"></div>
-          <div style="position:absolute; bottom:-45px; left:-35px; width:160px; height:160px; border-radius:50%; background:#93C5FD; opacity:0.55;"></div>
-          <div style="position:absolute; bottom:40px; right:-40px; width:125px; height:125px; border-radius:50%; background:#C4B5FD; opacity:0.55;"></div>
+        <!-- CAMADA DE FUNDO: 3 PATAS COLORIDAS GRANDES DA MARCA NAS CORES DO GÊNERO -->
+        <div class="pet-card-bg-paws" aria-hidden="true" style="position:absolute; inset:0; z-index:0; overflow:hidden; border-radius:inherit; pointer-events:none;">
+          ${gerarSvgPataFundo(coresPatasAlerta[0], 'top:-30px; right:-25px; width:150px; height:150px;', 0.36, 18)}
+          ${gerarSvgPataFundo(coresPatasAlerta[1], 'bottom:-40px; left:-30px; width:175px; height:175px;', 0.30, -22)}
+          ${gerarSvgPataFundo(coresPatasAlerta[2], 'bottom:35px; right:-35px; width:130px; height:130px;', 0.34, 12)}
         </div>
 
         <div style="position:relative; z-index:2; width: 44px; height: 4px; background: rgba(0,0,0,0.25); border-radius: 2px; margin: 0 auto 10px;"></div>
