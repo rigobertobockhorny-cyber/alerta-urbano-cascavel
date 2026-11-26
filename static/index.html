@@ -9886,14 +9886,21 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
     // =========================================================================
     // PROTOCOLO DE RADAR PÉTREO, ANTIFADIGA E REDE SOLIDÁRIA (v3.11.9)
     // =========================================================================
-    const RADAR_DOZE_HORAS_MS = 90 * 1000;            // 90 segundos por animal (destravado para testes e rota ativa)
-    const RADAR_ANTIFADIGA_GLOBAL_MS = 12 * 1000;         // 12 segundos entre animais diferentes (tempo de locução da voz)
-    const RADAR_MAX_AVISOS_POR_HORA = 100;               // Teto livre para trânsito ativo
-    const RADAR_RAIO_METROS = 1500;                      // Raio tático ampliado (1.5 km)
+    // =========================================================================
+    // PROTOCOLO DE CADÊNCIA DE TRÂNSITO E FILA TÁTICA (REGRA OFICIAL RIGO)
+    // 1. Intervalo humano de 1m40s (100 segundos) entre comunicados de voz
+    // 2. Fila sequencial: se houver 2 ou mais pets próximos (10m, 20m, 50m), fala um agora
+    //    e guarda o outro para falar daqui a 1m40s com calma, sem atropelo sonoro!
+    // =========================================================================
+    const RADAR_DOZE_HORAS_MS = 30 * 60 * 1000;          // 30 minutos por pet específico (nunca repete o mesmo animal na mesma rota)
+    const RADAR_ANTIFADIGA_GLOBAL_MS = 100 * 1000;       // 100 segundos (~1 minuto e 40 segundos) de respiro agradável
+    const RADAR_MAX_AVISOS_POR_HORA = 40;                // Teto saudável para trânsito
+    const RADAR_RAIO_METROS = 1500;                      // Raio tático de 1.5 km
 
     let _ultimoAvisoVozGlobalMs = 0;
     let _ultimoRadarCheck = 0;
     let _bloqueioRadarAtivo = false; // Mutex global contra concorrência
+    let _filaEsperaRadarTransito = []; // Fila sequencial de animais detectados na mesma passagem
 
     function obterHistoricoAvisosHora() {
       try {
@@ -9943,20 +9950,9 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
     }
 
     function verificarRadarProximidadeWeb(lat, lng) {
-    // Limpeza forçada de travas antigas para permitir que todos os pets cantem
-    try {
-      localStorage.removeItem('radar_historico_hora');
-      for (let i = 0; i < localStorage.length; i++) {
-        const k = localStorage.key(i);
-        if (k && (k.startsWith('radar_pet_cd_') || k.startsWith('radar_pet_nome_cd_') || k.startsWith('radar_aviso_sessao_'))) {
-          localStorage.removeItem(k);
-        }
-      }
-    } catch (_) {}
-
       const agora = Date.now();
 
-      // 1. Debounce operacional (mínimo de 4 segundos entre verificações de GPS)
+      // 1. Debounce operacional
       if (agora - _ultimoRadarCheck < 1500) return;
       _ultimoRadarCheck = agora;
 
@@ -9968,9 +9964,43 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
         return;
       }
 
-      // 4. Trava de Card na Tela: se o card do radar já está visível, não redispara
+      // 4. Trava de Card na Tela: se o card do radar já está visível, aguarda o card fechar
       const cardAberto = document.getElementById('card-radar-topo-web');
       if (cardAberto && cardAberto.style.display !== 'none') {
+        return;
+      }
+
+      // =========================================================================
+      // FILA TÁTICA SEQUENCIAL DE TRÂNSITO (REGRA OFICIAL RIGO)
+      // Se houver animal retido na fila (ex: dois pets na mesma rua a 20m de distância),
+      // e já se passaram 100 segundos (1m40s) desde o último áudio, anuncia o próximo!
+      // =========================================================================
+      // Expira itens com mais de 6 minutos de retenção
+      _filaEsperaRadarTransito = _filaEsperaRadarTransito.filter(item => (agora - item.capturadoEm) < 360000);
+
+      if (_filaEsperaRadarTransito.length > 0 && (agora - _ultimoAvisoVozGlobalMs >= RADAR_ANTIFADIGA_GLOBAL_MS)) {
+        const itemFila = _filaEsperaRadarTransito.shift();
+        if (itemFila && itemFila.pet) {
+          _bloqueioRadarAtivo = true;
+          _ultimoAvisoVozGlobalMs = agora;
+          registrarAvisoHora();
+          try {
+            const petNomeKey = (itemFila.pet.titulo || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+            localStorage.setItem('radar_pet_cd_' + itemFila.pet.id, agora.toString());
+            localStorage.setItem('radar_pet_nome_cd_' + petNomeKey, agora.toString());
+            if (!window._cooldownMemoriaPets) window._cooldownMemoriaPets = {};
+            window._cooldownMemoriaPets[itemFila.pet.id] = agora;
+            window._cooldownMemoriaPets[petNomeKey] = agora;
+          } catch (_) {}
+
+          dispararAlertaRadarWeb(itemFila.pet);
+          setTimeout(() => { _bloqueioRadarAtivo = false; }, 4000);
+          return;
+        }
+      }
+
+      // REGRA DE CADÊNCIA GLOBAL: Se ainda NÃO deu o tempo de respiro (100s / 1m40s), silêncio absoluto!
+      if (agora - _ultimoAvisoVozGlobalMs < RADAR_ANTIFADIGA_GLOBAL_MS) {
         return;
       }
 
@@ -9999,7 +10029,6 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
 
       const petsNoRaio = [];
       for (const pet of petsPerdidos) {
-        // REGRA PÉTREA 1: Cooldown de 12 Horas Inviolável por ID e por Nome
         if (!window._cooldownMemoriaPets) window._cooldownMemoriaPets = {};
         const petNomeKey = (pet.titulo || '').toLowerCase().replace(/[^a-z0-9]/g, '');
         const ultimoAvisoId = Math.max(
@@ -10012,12 +10041,8 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
         );
 
         if ((agora - ultimoAvisoId < RADAR_DOZE_HORAS_MS) || (agora - ultimoAvisoNome < RADAR_DOZE_HORAS_MS)) {
-          continue; // Já avisado nas últimas 12h: silêncio absoluto
+          continue; // Animal já anunciado recentemente
         }
-
-        // REGRA PÉTREA 2: Trava de Sessão Única
-        // Sessão dinâmica com base na distância de movimento
-        // if (sessionStorage.getItem('radar_aviso_sessao_' + pet.id)) continue;
 
         const d = calcularDistanciaM(pLat, pLng, Number(pet.lat), Number(pet.lng));
         if (d != null && d <= RADAR_RAIO_METROS) {
@@ -10046,14 +10071,22 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
 
       const petEscolhido = petsNoRaio[0];
 
-      // REGRA ANTIFADIGA SONORA GLOBAL:
-      // Se não for o pet do próprio dono nem pet de amigo solidário, aplica:
-      // 1. Mínimo de 5 minutos de silêncio entre avisos de animais diferentes
-      // 2. Máximo de 3 comunicados por hora
-      // Antifadiga Global Inviolável: mínimo de 4 minutos de silêncio entre QUALQUER alerta no trânsito
-      if (agora - _ultimoAvisoVozGlobalMs < RADAR_ANTIFADIGA_GLOBAL_MS) {
-        return; // Silêncio antifadiga
+      // SE HOUVER OUTROS PETS NA MESMA REGIÃO (ex: 20m, 50m, mesma quadra):
+      // Guarda os demais na Fila Sequencial de Trânsito para tocarem daqui a 1m40s!
+      if (petsNoRaio.length > 1) {
+        for (let i = 1; i < petsNoRaio.length; i++) {
+          const outroPet = petsNoRaio[i];
+          const jaNaFila = _filaEsperaRadarTransito.some(item => item.pet.id === outroPet.id);
+          if (!jaNaFila && _filaEsperaRadarTransito.length < 3) {
+            _filaEsperaRadarTransito.push({
+              pet: outroPet,
+              capturadoEm: agora,
+              distOriginal: outroPet.distM
+            });
+          }
+        }
       }
+
       const avisosHora = obterHistoricoAvisosHora();
       if (avisosHora.length >= RADAR_MAX_AVISOS_POR_HORA) {
         return; // Teto atingido
@@ -10064,7 +10097,7 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
       _ultimoAvisoVozGlobalMs = agora;
       registrarAvisoHora();
 
-      // Grava o cooldown imediatamente no banco local, sessão e memória global por 12 HORAS
+      // Grava o cooldown por 30 minutos
       try {
         if (!window._cooldownMemoriaPets) window._cooldownMemoriaPets = {};
         const petNomeKey = (petEscolhido.titulo || '').toLowerCase().replace(/[^a-z0-9]/g, '');
