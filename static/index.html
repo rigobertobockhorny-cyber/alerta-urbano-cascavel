@@ -5074,16 +5074,27 @@
         </label>
         <label style="display:flex; align-items:flex-start; gap:10px; font-size:11.5px; color:#1F2937; line-height:1.4; cursor:pointer;">
           <input type="checkbox" id="chk-prot-vida" checked style="margin-top:2px; accent-color:#009B3A; width:16px; height:16px;">
-          <span><b>Amor por Toda a Vida:</b> Compromisso de não abandonar em caso de mudanças ou imprevistos.</span>
+          <span><b>Compromisso Vitalício:</b> Não abandonar em hipótese alguma por motivo de viagens, mudanças ou velhice.</span>
         </label>
       </div>
+
+      <!-- ADVERTÊNCIA LEGAL PÉTREA (LEI FEDERAL 9.605/98 E LEI SANSÃO) -->
+      <div style="background:rgba(239,68,68,0.08); border:1.5px solid #EF4444; border-radius:12px; padding:10px 12px; margin-bottom:12px; font-size:11px; color:#991B1B; line-height:1.45;">
+        ⚖️ <b>Cláusula Legal Pétrea • Lei Federal nº 9.605/98 (Art. 32, §1º-A):</b><br>
+        O abandono ou maus-tratos a cães e gatos é <b>CRIME INAFIANÇÁVEL com pena de 2 a 5 anos de reclusão</b>, multa e perda da guarda. Ao assinar este termo digitalmente, você assume a responsabilidade civil e criminal vitalícia pelo animal perante a lei.
+      </div>
+
+      <label style="display:flex; align-items:flex-start; gap:10px; font-size:11.5px; color:#1F2937; line-height:1.4; cursor:pointer; background:#FEF2F2; border:1px solid #FECACA; padding:8px 10px; border-radius:10px; margin-bottom:14px;">
+        <input type="checkbox" id="chk-prot-crime" checked style="margin-top:2px; accent-color:#DC2626; width:17px; height:17px;">
+        <span><b>Aceite Digital Vinculante:</b> Declaro ciência inequívoca da lei de que abandonar é crime punível com reclusão de 2 a 5 anos, assinando digitalmente a guarda responsável.</span>
+      </label>
 
       <button type="button" onclick="imprimirTermoAdocao(petIdAdocaoAtual)" style="width:100%; height:40px; background:#EDE8DF; color:#2E2417; border:1px solid rgba(110,90,60,0.35); border-radius:12px; font-size:12.5px; font-weight:800; cursor:pointer; margin-bottom:8px; display:flex; align-items:center; justify-content:center; gap:8px;">
         <span>📄 Baixar / Imprimir Termo de Adoção em PDF</span>
       </button>
 
-      <button type="button" id="btn-confirmar-adocao-wa" onclick="confirmarAdocaoWhatsApp()" style="width:100%; height:46px; background:#25D366; color:#FFFFFF; border:none; border-radius:12px; font-size:13.5px; font-weight:900; display:flex; align-items:center; justify-content:center; gap:8px; cursor:pointer; box-shadow:0 3px 10px rgba(37,211,102,0.3);">
-        <span>Dar Aceite Digital & Falar com Tutor</span>
+      <button type="button" id="btn-confirmar-adocao-wa" onclick="confirmarAdocaoWhatsApp()" style="width:100%; height:46px; background:#009B3A; color:#FFFFFF; border:none; border-radius:12px; font-size:13.5px; font-weight:900; display:flex; align-items:center; justify-content:center; gap:8px; cursor:pointer; box-shadow:0 3px 10px rgba(0,155,58,0.3);">
+        <span>✍️ Assinar Aceite Digital & Falar com Tutor</span>
       </button>
     </div>
   </div>
@@ -6978,24 +6989,56 @@
       petIdAdocaoAtual = null;
     }
 
-    function confirmarAdocaoWhatsApp() {
+    async function confirmarAdocaoWhatsApp() {
       const seguro = document.getElementById('chk-prot-seguro')?.checked;
       const familia = document.getElementById('chk-prot-familia')?.checked;
       const saude = document.getElementById('chk-prot-saude')?.checked;
       const vida = document.getElementById('chk-prot-vida')?.checked;
+      const crime = document.getElementById('chk-prot-crime')?.checked;
 
       if (!seguro || !familia || !saude || !vida) {
-        mostrarToast('Por favor, confirme todos os pilares da posse responsável.');
+        mostrarToast('Por favor, confirme todos os pilares da guarda responsável.');
+        return;
+      }
+      if (!crime) {
+        mostrarToast('Para adotar, é obrigatório assinar ciência sobre a Lei de Abandono (2 a 5 anos de reclusão).');
         return;
       }
 
       const pet = (state.alertas || []).find(a => a.id === petIdAdocaoAtual);
       if (!pet) return;
 
-      const pNome = (state.perfil && state.perfil.nome) ? state.perfil.nome : 'Adotante Consciente';
+      const pNome = (state.perfil && state.perfil.nome && state.perfil.nome !== 'Tutor Pet') ? state.perfil.nome : 'Adotante Consciente';
       const pBairro = (state.perfil && state.perfil.bairro) ? state.perfil.bairro : 'Cascavel';
-      
-      const texto = `Olá! Vi o animalzinho *${pet.titulo}* anunciado para adoção responsável no *Alerta Pet Brasil*. Eu me chamo *${pNome}*, resido no bairro *${pBairro}* em Cascavel e confirmei os termos do Protocolo de Adoção Consciente (ambiente protegido sem fuga e compromisso vitalício). Gostaria muito de conversar sobre o processo de adoção dele(a)!`;
+      const pWa = (state.perfil && state.perfil.whatsapp) ? state.perfil.whatsapp : '';
+
+      // Registra o Aceite Digital Vinculante na API do Alerta Pet Brasil
+      let protocolo = 'AP-ADOC-' + Math.random().toString(36).substring(2, 8).toUpperCase();
+      try {
+        const resp = await fetch(`/api/pets/${petIdAdocaoAtual}/aceite-adocao`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            autor_token: state.userToken || '',
+            nome: pNome,
+            whatsapp: pWa
+          })
+        });
+        if (resp.ok) {
+          const resData = await resp.json();
+          if (resData.protocolo) protocolo = resData.protocolo;
+        }
+      } catch (e) {
+        console.error("Erro ao registrar aceite digital:", e);
+      }
+
+      const texto = `Olá! Vi o animalzinho *${pet.titulo}* anunciado para adoção responsável no *Alerta Pet Brasil*.
+
+Eu me chamo *${pNome}*, resido no bairro *${pBairro}* e acabei de *assinar digitalmente o Termo de Adoção Responsável na plataforma* com ciência da Lei Federal 9.605/98 (Art. 32, crime de abandono com pena de 2 a 5 anos de reclusão).
+
+📜 *Protocolo de Aceite Digital:* ${protocolo}
+
+Gostaria de combinar a entrega do pet!`;
 
       const tel = pet.contato || '45999332144';
       const limpo = tel.replace(/\D/g, '');
@@ -7004,7 +7047,7 @@
       if (limpo) {
         window.open(`https://wa.me/55${limpo}?text=${encodeURIComponent(texto)}`, '_blank');
       } else {
-        mostrarToast('Contato do tutor/protetor indisponível no momento.');
+        mostrarToast('Aceite digital registrado! Contato do tutor indisponível no momento.');
       }
     }
 

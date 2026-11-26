@@ -162,6 +162,22 @@ def init_db():
 
     # Índices para performance do Dashboard Slim e Mapa de Calor
     cur.execute("CREATE INDEX IF NOT EXISTS idx_alertas_ativo_pilar ON alertas (ativo, pilar, cidade);")
+    
+    # Tabela de Aceite Digital de Adoção Responsável (Lei Sansão 14.064/2020)
+    cur.execute('''
+        CREATE TABLE IF NOT EXISTS adocao_aceites (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            pet_id INTEGER NOT NULL,
+            adotante_token TEXT,
+            adotante_nome TEXT,
+            adotante_whatsapp TEXT,
+            ip_origem TEXT,
+            protocolo_hash TEXT UNIQUE,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        );
+    ''')
+    cur.execute("CREATE INDEX IF NOT EXISTS idx_adocao_aceites_pet ON adocao_aceites (pet_id);")
+
     cur.execute("CREATE INDEX IF NOT EXISTS idx_alertas_pet_pai ON alertas (pet_pai_id);")
 
     # Tabela de Perfil / Cadastro do Cidadão (v3.1 + FCM Push)
@@ -2862,3 +2878,44 @@ init_db()
 if __name__ == "__main__":
     print("Iniciando Alerta Urbano v3.0 na porta 5000...")
     app.run(host="0.0.0.0", port=5000, debug=False)
+
+
+
+@app.route("/api/pets/<int:pet_id>/aceite-adocao", methods=["POST"])
+def registrar_aceite_adocao(pet_id):
+    """
+    Registra o Aceite Digital Vinculante de Adoção Responsável:
+    - Vincula adotante, pet, timestamp e hash cívico.
+    - Suporte à Lei Federal 9.605/98 (Art. 32, §1º-A - Lei Sansão).
+    """
+    data = request.json or {}
+    token = (data.get("autor_token") or "").strip()
+    nome = (data.get("nome") or "Adotante Consciente").strip()[:100]
+    whatsapp = normalizar_telefone(data.get("whatsapp") or "")
+    ip_origem = request.headers.get("X-Forwarded-For", request.remote_addr or "")
+    
+    conn = get_db()
+    pet = conn.execute("SELECT id, titulo, bairro FROM alertas WHERE id = ? AND pilar = 'pet'", (pet_id,)).fetchone()
+    if not pet:
+        conn.close()
+        return jsonify({"error": "Pet não encontrado"}), 404
+        
+    import hashlib
+    raw_str = f"{pet_id}-{token}-{datetime.now().isoformat()}-{ip_origem}"
+    hash_curto = hashlib.sha256(raw_str.encode('utf-8')).hexdigest()[:8].upper()
+    protocolo = f"AP-ADOC-{hash_curto}"
+    
+    cur = conn.cursor()
+    cur.execute("""
+        INSERT INTO adocao_aceites (pet_id, adotante_token, adotante_nome, adotante_whatsapp, ip_origem, protocolo_hash)
+        VALUES (?, ?, ?, ?, ?, ?)
+    """, (pet_id, token, nome, whatsapp, ip_origem, protocolo))
+    conn.commit()
+    conn.close()
+    
+    return jsonify({
+        "status": "ok",
+        "protocolo": protocolo,
+        "pet_id": pet_id,
+        "pet_titulo": pet["titulo"]
+    })
