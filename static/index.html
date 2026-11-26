@@ -694,13 +694,14 @@
 
     /* ==================== HOME: CLIMA INTEGRADO NA CABECEIRA VERDE BRASIL ==================== */
     .home-green-canopy {
-      background: #009B3A;
-      padding: 4px 12px 6px;
+      background: #EDE8DF; /* Areia Nobre Oficial */
+      padding: 6px 12px 4px;
       display: flex;
       flex-direction: column;
       gap: 6px;
       flex-shrink: 0;
       z-index: 10;
+      border-bottom: 1px solid rgba(110, 90, 60, 0.12);
     }
     .topbar-river-wave {
       width: 100%;
@@ -709,11 +710,11 @@
       flex-shrink: 0;
     }
     .weather-strip-green {
-      background: rgba(0, 0, 0, 0.20);
-      border-radius: 16px;
-      padding: 10px 14px 8px;
-      border: 1.5px solid rgba(254, 215, 0, 0.32);
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
+      background: #E4D5BC; /* Areia Encorpada / Bege Quente */
+      border-radius: 14px;
+      padding: 8px 12px 6px;
+      border: 1px solid rgba(110, 90, 60, 0.20);
+      box-shadow: 0 2px 10px rgba(74, 46, 27, 0.08);
       flex-shrink: 0;
     }
     .weather-strip-green .weather-top {
@@ -4596,44 +4597,39 @@
       <section class="tab-pane home-pane active" id="tab-inicio">
         <!-- Canopy Verde Integrado: Clima Compacto + Pílula Slim de Alertas -->
         <div class="home-green-canopy">
-          <div class="weather-strip-green" id="weather-card">
+          <div class="weather-strip-green" id="weather-card" style="background:#E4D5BC; border:1px solid rgba(110,90,60,0.22); border-radius:14px; padding:8px 12px 6px;">
             <div class="weather-top" style="display:flex; align-items:center; justify-content:space-between;">
               <div class="weather-temp-wrap" style="display:flex; align-items:center; gap:8px;">
                 <span class="weather-ico" id="w-ico" style="font-size:22px; line-height:1;">⛅</span>
-                <span class="weather-temp" id="w-temp" style="font-size:22px; font-weight:900; line-height:1; color:#FFFFFF;">--°</span>
-                <span class="weather-city-sub" id="w-city-sub" style="font-size:10px; font-weight:800; color:#EDE8DF; margin-top:2px;">Cascavel • Agora</span>
+                <span class="weather-temp" id="w-temp" style="font-size:22px; font-weight:900; line-height:1; color:#2E2417;">--°</span>
+                <span class="weather-city-sub" id="w-city-sub" style="font-size:10.5px; font-weight:800; color:#5D4037; margin-top:2px;">Cascavel • Agora</span>
               </div>
               <div style="text-align:right;">
-                <div class="weather-cond" id="w-cond" style="font-size:11px; font-weight:800; color:#FFFFFF;">Monitorando...</div>
-                <div class="weather-hl" id="w-hl" style="font-size:10px; font-weight:800; color:#FED700; margin-top:1px;">Máx --° · Mín --°</div>
+                <div class="weather-cond" id="w-cond" style="font-size:11.5px; font-weight:800; color:#009B3A;">Monitorando...</div>
+                <div class="weather-hl" id="w-hl" style="font-size:10px; font-weight:800; color:#6E5A3C; margin-top:1px;">Máx --° · Mín --°</div>
               </div>
             </div>
 
-            <!-- Grade da Previsão dos Próximos 5 Dias Compacta -->
-            <div class="weather-forecast-5d" id="weather-forecast-5d">
-              <div class="w-day-col"><span class="w-day-name">QUA</span><span class="w-day-icon">⛈️</span><span class="w-day-temp">25°/19°</span></div>
-              <div class="w-day-col"><span class="w-day-name">QUI</span><span class="w-day-icon">⛈️</span><span class="w-day-temp">26°/20°</span></div>
-              <div class="w-day-col"><span class="w-day-name">SEX</span><span class="w-day-icon">⛈️</span><span class="w-day-temp">22°/18°</span></div>
-              <div class="w-day-col"><span class="w-day-name">SÁB</span><span class="w-day-icon">🌧️</span><span class="w-day-temp">25°/19°</span></div>
-              <div class="w-day-col"><span class="w-day-name">DOM</span><span class="w-day-icon">⛈️</span><span class="w-day-temp">27°/19°</span></div>
+            <!-- Grade da Previsão dos Próximos 5 Dias Compacta em Areia / Marrom -->
+            <div class="weather-forecast-5d" id="weather-forecast-5d" style="background:#FAF7F2; border-radius:10px; padding:4px 6px; margin-top:6px; border:1px solid rgba(110,90,60,0.12); display:flex; justify-content:space-between;">
+              <div class="w-day-col"><span class="w-day-name" style="color:#5D4037; font-weight:800;">QUA</span><span class="w-day-icon">⛈️</span><span class="w-day-temp" style="color:#2E2417; font-weight:700;">25°/19°</span></div>
+              <div class="w-day-col"><span class="w-day-name" style="color:#5D4037; font-weight:800;">QUI</span><span class="w-day-icon">⛈️</span><span class="w-day-temp" style="color:#2E2417; font-weight:700;">26°/20°</span></div>
+              <div class="w-day-col"><span class="w-day-name" style="color:#5D4037; font-weight:800;">SEX</span><span class="w-day-icon">⛈️</span><span class="w-day-temp" style="color:#2E2417; font-weight:700;">22°/18°</span></div>
+              <div class="w-day-col"><span class="w-day-name" style="color:#5D4037; font-weight:800;">SÁB</span><span class="w-day-icon">🌧️</span><span class="w-day-temp" style="color:#2E2417; font-weight:700;">25°/19°</span></div>
+              <div class="w-day-col"><span class="w-day-name" style="color:#5D4037; font-weight:800;">DOM</span><span class="w-day-icon">⛈️</span><span class="w-day-temp" style="color:#2E2417; font-weight:700;">27°/19°</span></div>
             </div>
           </div>
 
-          <!-- Pílula / Esteira Climática Slim -->
-          <div class="alert-ticker" id="alert-ticker" onclick="abrirClimaBanner()" style="padding:3px 0; border-radius:999px;">
+          <!-- Pílula / Esteira Climática Slim Integrada -->
+          <div class="alert-ticker" id="alert-ticker" onclick="abrirClimaBanner()" style="padding:4px 10px; border-radius:999px; background:#E4D5BC; border:1px solid rgba(110,90,60,0.15);">
             <div class="ticker-track" id="ticker-track">
-              <span class="ticker-item">CASCAVEL • MONITORAMENTO CLIMÁTICO ATIVO</span>
-              <span class="ticker-item">CASCAVEL • MONITORAMENTO CLIMÁTICO ATIVO</span>
+              <span class="ticker-item" style="color:#4A2E1B; font-weight:800;">🐾 CASCAVEL • RADAR E MONITORAMENTO CLIMÁTICO ATIVO</span>
+              <span class="ticker-item" style="color:#4A2E1B; font-weight:800;">🐾 CASCAVEL • RADAR E MONITORAMENTO CLIMÁTICO ATIVO</span>
             </div>
           </div>
         </div>
 
-        <!-- Curva Orgânica Verde -> Areia (Transição suave única, sem cortes) -->
-        <div class="home-river-wave" style="line-height:0; margin-bottom:-1px; width:100%; height:14px; flex-shrink:0; background:#EDE8DF;">
-          <svg viewBox="0 0 500 20" preserveAspectRatio="none" style="width:100%; height:100%; display:block;">
-            <path d="M 0,0 L 500,0 L 500,4 C 380,20 280,2 180,14 C 90,22 40,4 0,16 Z" fill="#009B3A"/>
-          </svg>
-        </div>
+        <!-- Transição Contínua em Tela Única -->
 
         <!-- Área Central Areia Oficial (#EDE8DF): Campanhas + Duas Esteiras Principais -->
         <div class="home-belts-container" style="flex:1; display:flex; flex-direction:column; justify-content:space-between; padding:4px 12px 6px; gap:8px; overflow:hidden; background:#EDE8DF !important;">
@@ -4784,10 +4780,10 @@
           <div class="apoio-body">
             <div class="apoio-header">
               <div style="display:flex; align-items:center; gap:5px;">
-                <svg viewBox="0 0 24 24" fill="#FED700" width="12" height="12"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-                <span>Apoie esta causa</span>
+                <svg viewBox="0 0 24 24" fill="#FED700" width="13" height="13"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <span style="font-size:11px; font-weight:900; color:#2E2417; letter-spacing:0.4px;">PATROCINADORES MASTER</span>
               </div>
-              <span style="font-size:9.5px; font-weight:800; color:#009B3A; cursor:pointer;" onclick="abrirModalSejaParceiro()">Seja um apoiador ›</span>
+              <span style="font-size:9.5px; font-weight:800; color:#009B3A; cursor:pointer;" onclick="abrirModalSejaParceiro()">Seja Patrocinador Master ›</span>
             </div>
             <div class="apoio-viewport">
               <div class="apoio-track" id="belt-apoio-track">
@@ -4816,9 +4812,9 @@
       <section class="tab-pane map-pane" id="tab-mapa">
         <div id="map"></div>
 
-        <div class="map-top-pills">
-          <button type="button" class="map-pill active" data-pilar="pet" onclick="filtrarMapa('pet', this)">Pets</button>
-          <button type="button" class="map-pill" data-pilar="parceiros" onclick="filtrarMapa('parceiros', this)">Parceiros</button>
+        <div class="map-top-pills" style="background:#E4D5BC; padding:3px; border-radius:999px; border:1px solid rgba(110,90,60,0.22); box-shadow:0 3px 10px rgba(0,0,0,0.12);">
+          <button type="button" class="map-pill active" data-pilar="pet" onclick="filtrarMapa('pet', this)" style="border-radius:999px; font-weight:800; font-size:12px; padding:6px 16px;">🐾 Pets Perdidos</button>
+          <button type="button" class="map-pill" data-pilar="parceiros" onclick="filtrarMapa('parceiros', this)" style="border-radius:999px; font-weight:800; font-size:12px; padding:6px 16px;">🤝 Parceiros Locais</button>
         </div>
 
         <div class="trail-bar" id="trail-bar">
@@ -4964,10 +4960,10 @@
           <div style="font-size:12px; color:#5A4730; font-weight:700; margin-bottom:8px;">Toque para escolher o locutor oficial</div>
           <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; background:#EDE8DF; padding:4px; border-radius:12px;">
             <button type="button" id="btn-voz-fem" class="pillar-tab active" onclick="selecionarVozCopiloto('feminina')" style="height:42px; font-size:13.5px; font-weight:800; border-radius:10px; border:none; cursor:pointer; text-align:center; transition:all 0.15s ease;">
-              Feminina (Francisca)
+              Natália (Feminina Oficial)
             </button>
             <button type="button" id="btn-voz-masc" class="pillar-tab" onclick="selecionarVozCopiloto('masculina')" style="height:42px; font-size:13.5px; font-weight:800; border-radius:10px; border:none; cursor:pointer; text-align:center; transition:all 0.15s ease;">
-              Masculina (Antonio)
+              Guido (Masculino Oficial)
             </button>
           </div>
         </div>
@@ -9732,7 +9728,7 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
           ttsAudioPlayer.src = audioUrl;
           ttsAudioPlayer.play().catch(() => {});
         } catch (_) {}
-        mostrarToast(`Voz ${genero === 'feminina' ? 'Feminina (Francisca)' : 'Masculina (Antonio)'} selecionada!`);
+        mostrarToast(`Voz ${genero === 'feminina' ? 'Natália (Feminina Oficial)' : 'Guido (Masculino Oficial)'} selecionada!`);
       }
     }
 
