@@ -4503,6 +4503,173 @@
       font-weight: 800 !important;
     }
 
+
+    /* ==================== NOVA ARQUITETURA DE CORES HOME (PADRÃO RIGO) ==================== */
+    #tab-inicio {
+      background: #D8CABA !important; /* Areia Mais Escura e Encorpada */
+      color: #2E2417 !important;
+      overflow-y: auto !important;
+      -webkit-overflow-scrolling: touch !important;
+    }
+
+    .home-pane.active {
+      display: flex !important;
+      flex-direction: column !important;
+      overflow-y: auto !important;
+      min-height: 100% !important;
+      height: auto !important;
+      padding-bottom: 24px !important;
+      background: #D8CABA !important;
+    }
+
+    /* Bloco Marrom Nobre do Clima Superior */
+    .home-brown-weather-zone {
+      background: #3D2B1F; /* Marrom Nobre Cacau */
+      padding: 8px 14px 4px;
+      color: #FFFFFF;
+      flex-shrink: 0;
+      position: relative;
+    }
+
+    /* Bloco Marrom Nobre da Esteira de Apoio Inferior */
+    .home-brown-apoio-zone {
+      background: #3D2B1F; /* Marrom Nobre Cacau */
+      padding: 10px 12px 14px;
+      color: #FFFFFF;
+      flex-shrink: 0;
+      margin-top: 14px;
+      position: relative;
+    }
+
+    /* Ondulação Verde do Topo */
+    .wave-green-top {
+      width: 100%;
+      height: 14px;
+      line-height: 0;
+      flex-shrink: 0;
+      background: #3D2B1F;
+    }
+
+    /* Ondulação Marrom do Clima descendo para o Areia */
+    .wave-brown-down {
+      width: 100%;
+      height: 14px;
+      line-height: 0;
+      flex-shrink: 0;
+      background: #D8CABA;
+    }
+
+    /* Ondulação Marrom do Apoio subindo do Areia */
+    .wave-brown-up {
+      width: 100%;
+      height: 14px;
+      line-height: 0;
+      flex-shrink: 0;
+      background: #D8CABA;
+    }
+
+    /* Ondulação Verde Inferior conectada DIRETO ao Menu (Zero aba marrom!) */
+    .bottom-river-wave {
+      display: block !important;
+      width: 100% !important;
+      height: 16px !important;
+      line-height: 0 !important;
+      flex-shrink: 0 !important;
+      background: #3D2B1F !important; /* Fundo do SVG casa com a faixa marrom de apoio! */
+      margin-bottom: -1px !important;
+      z-index: 499 !important;
+    }
+    .bottom-river-wave svg {
+      width: 100% !important;
+      height: 100% !important;
+      display: block !important;
+    }
+
+    /* Área Central Areia Encorpada */
+    .home-body-sand {
+      background: #D8CABA !important;
+      padding: 4px 12px 6px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      flex: 1;
+    }
+
+    /* Container de Perfis Sociais com Swipe no Dedo */
+    .swipe-protetores-container {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding: 4px 2px 8px;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .swipe-protetores-container::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* Card de Perfil de Rede Social para Swipe */
+    .card-perfil-swipe {
+      flex: 0 0 160px;
+      scroll-snap-align: start;
+      background: #FAF7F2;
+      border: 1px solid rgba(110, 90, 60, 0.20);
+      border-radius: 16px;
+      padding: 12px 10px 10px;
+      box-shadow: 0 2px 8px rgba(74, 46, 27, 0.08);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.15s ease;
+    }
+    .card-perfil-swipe:active {
+      transform: scale(0.97);
+    }
+
+    /* Esteira de Logos de Patrocinadores Master */
+    .apoio-logos-track {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      white-space: nowrap;
+      will-change: transform;
+      animation: scroll-apoio 26s linear infinite;
+    }
+    @keyframes scroll-apoio {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    .apoio-logo-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #FAF7F2;
+      border: 1px solid rgba(254, 215, 0, 0.35);
+      border-radius: 999px;
+      padding: 5px 14px 5px 6px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .apoio-logo-badge img {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      object-fit: cover;
+      background: #FFFFFF;
+      border: 1px solid rgba(110, 90, 60, 0.15);
+    }
+    .apoio-logo-badge span {
+      font-size: 11.5px;
+      font-weight: 900;
+      color: #2E2417;
+      letter-spacing: 0.3px;
+    }
+
 </style>
   <script>
     // Registro Imediato da Blindagem Anti-Cold Start (Service Worker)
@@ -4595,214 +4762,127 @@
     <main class="main-stage">
       <!-- ABA 1: INÍCIO (ZERO SCROLL — CLIMA ULTRA-COMPACTO INTEGRADO + TRANSIÇÃO ORGÂNICA + ESTEIRAS SOCIAIS + APOIO INSTITUCIONAL) -->
       <section class="tab-pane home-pane active" id="tab-inicio">
-        <!-- Canopy Verde Integrado: Clima Compacto + Pílula Slim de Alertas -->
-        <div class="home-green-canopy">
-          <div class="weather-strip-green" id="weather-card" style="background:#E4D5BC; border:1px solid rgba(110,90,60,0.22); border-radius:14px; padding:8px 12px 6px;">
-            <div class="weather-top" style="display:flex; align-items:center; justify-content:space-between;">
-              <div class="weather-temp-wrap" style="display:flex; align-items:center; gap:8px;">
-                <span class="weather-ico" id="w-ico" style="font-size:22px; line-height:1;">⛅</span>
-                <span class="weather-temp" id="w-temp" style="font-size:22px; font-weight:900; line-height:1; color:#2E2417;">--°</span>
-                <span class="weather-city-sub" id="w-city-sub" style="font-size:10.5px; font-weight:800; color:#5D4037; margin-top:2px;">Cascavel • Agora</span>
-              </div>
-              <div style="text-align:right;">
-                <div class="weather-cond" id="w-cond" style="font-size:11.5px; font-weight:800; color:#009B3A;">Monitorando...</div>
-                <div class="weather-hl" id="w-hl" style="font-size:10px; font-weight:800; color:#6E5A3C; margin-top:1px;">Máx --° · Mín --°</div>
+        <!-- 1. ONDULAÇÃO VERDE SUPERIOR (Descendo do Topbar Verde para o Marrom do Clima) -->
+        <div class="wave-green-top">
+          <svg viewBox="0 0 500 16" preserveAspectRatio="none" style="width:100%; height:100%; display:block;">
+            <path d="M 0,0 L 500,0 L 500,4 C 380,18 260,2 160,12 C 80,20 30,4 0,14 Z" fill="#009B3A"/>
+          </svg>
+        </div>
+
+        <!-- 2. ESPAÇO MARROM NOBRE: INFORMAÇÕES METEOROLÓGICAS DIRETAS NA ONDULAÇÃO (Sem caixas ou blocos apagados) -->
+        <div class="home-brown-weather-zone" id="weather-card">
+          <!-- Linha Superior do Clima: Ícone + Temperatura Ouro + Cidade + Máx/Mín -->
+          <div style="display:flex; align-items:center; justify-content:space-between; gap:10px;">
+            <div style="display:flex; align-items:center; gap:8px;">
+              <span id="w-ico" style="font-size:24px; line-height:1; filter:drop-shadow(0 2px 4px rgba(0,0,0,0.3));">⛅</span>
+              <div>
+                <span id="w-temp" style="font-size:26px; font-weight:900; line-height:1; color:#FED700; letter-spacing:0.5px;">--°</span>
+                <span style="font-size:11px; font-weight:800; color:#FFFFFF; margin-left:6px; opacity:0.95;">Cascavel • Agora</span>
               </div>
             </div>
-
-            <!-- Grade da Previsão dos Próximos 5 Dias Compacta em Areia / Marrom -->
-            <div class="weather-forecast-5d" id="weather-forecast-5d" style="background:#FAF7F2; border-radius:10px; padding:4px 6px; margin-top:6px; border:1px solid rgba(110,90,60,0.12); display:flex; justify-content:space-between;">
-              <div class="w-day-col"><span class="w-day-name" style="color:#5D4037; font-weight:800;">QUA</span><span class="w-day-icon">⛈️</span><span class="w-day-temp" style="color:#2E2417; font-weight:700;">25°/19°</span></div>
-              <div class="w-day-col"><span class="w-day-name" style="color:#5D4037; font-weight:800;">QUI</span><span class="w-day-icon">⛈️</span><span class="w-day-temp" style="color:#2E2417; font-weight:700;">26°/20°</span></div>
-              <div class="w-day-col"><span class="w-day-name" style="color:#5D4037; font-weight:800;">SEX</span><span class="w-day-icon">⛈️</span><span class="w-day-temp" style="color:#2E2417; font-weight:700;">22°/18°</span></div>
-              <div class="w-day-col"><span class="w-day-name" style="color:#5D4037; font-weight:800;">SÁB</span><span class="w-day-icon">🌧️</span><span class="w-day-temp" style="color:#2E2417; font-weight:700;">25°/19°</span></div>
-              <div class="w-day-col"><span class="w-day-name" style="color:#5D4037; font-weight:800;">DOM</span><span class="w-day-icon">⛈️</span><span class="w-day-temp" style="color:#2E2417; font-weight:700;">27°/19°</span></div>
+            <div style="text-align:right;">
+              <div id="w-cond" style="font-size:11.5px; font-weight:900; color:#74E894; letter-spacing:0.4px;">Monitorando Clima</div>
+              <div id="w-hl" style="font-size:10.5px; font-weight:800; color:#FED700; margin-top:2px;">Máx --° · Mín --°</div>
             </div>
           </div>
 
-          <!-- Pílula / Esteira Climática Slim Integrada -->
-          <div class="alert-ticker" id="alert-ticker" onclick="abrirClimaBanner()" style="padding:4px 10px; border-radius:999px; background:#E4D5BC; border:1px solid rgba(110,90,60,0.15);">
+          <!-- Grade Compacta dos 5 Dias: Direto no fundo marrom -->
+          <div class="weather-forecast-5d" id="weather-forecast-5d" style="display:flex; justify-content:space-between; margin-top:8px; padding-top:6px; border-top:1px dashed rgba(255,255,255,0.18);">
+            <div class="w-day-col" style="text-align:center;"><span class="w-day-name" style="color:#E8DAC5; font-size:10px; font-weight:800; display:block;">QUA</span><span class="w-day-icon" style="font-size:13px; display:block; margin:2px 0;">⛈️</span><span class="w-day-temp" style="color:#FFFFFF; font-size:10px; font-weight:800;">25°/19°</span></div>
+            <div class="w-day-col" style="text-align:center;"><span class="w-day-name" style="color:#E8DAC5; font-size:10px; font-weight:800; display:block;">QUI</span><span class="w-day-icon" style="font-size:13px; display:block; margin:2px 0;">⛈️</span><span class="w-day-temp" style="color:#FFFFFF; font-size:10px; font-weight:800;">26°/20°</span></div>
+            <div class="w-day-col" style="text-align:center;"><span class="w-day-name" style="color:#E8DAC5; font-size:10px; font-weight:800; display:block;">SEX</span><span class="w-day-icon" style="font-size:13px; display:block; margin:2px 0;">⛈️</span><span class="w-day-temp" style="color:#FFFFFF; font-size:10px; font-weight:800;">22°/18°</span></div>
+            <div class="w-day-col" style="text-align:center;"><span class="w-day-name" style="color:#E8DAC5; font-size:10px; font-weight:800; display:block;">SÁB</span><span class="w-day-icon" style="font-size:13px; display:block; margin:2px 0;">🌧️</span><span class="w-day-temp" style="color:#FFFFFF; font-size:10px; font-weight:800;">25°/19°</span></div>
+            <div class="w-day-col" style="text-align:center;"><span class="w-day-name" style="color:#E8DAC5; font-size:10px; font-weight:800; display:block;">DOM</span><span class="w-day-icon" style="font-size:13px; display:block; margin:2px 0;">⛈️</span><span class="w-day-temp" style="color:#FFFFFF; font-size:10px; font-weight:800;">27°/19°</span></div>
+          </div>
+
+          <!-- Ticker / Pílula Slim Direta na Ondulação -->
+          <div class="alert-ticker" id="alert-ticker" onclick="abrirClimaBanner()" style="margin-top:6px; padding:3px 8px; border-radius:999px; background:rgba(0,0,0,0.22); cursor:pointer;">
             <div class="ticker-track" id="ticker-track">
-              <span class="ticker-item" style="color:#4A2E1B; font-weight:800;">🐾 CASCAVEL • RADAR E MONITORAMENTO CLIMÁTICO ATIVO</span>
-              <span class="ticker-item" style="color:#4A2E1B; font-weight:800;">🐾 CASCAVEL • RADAR E MONITORAMENTO CLIMÁTICO ATIVO</span>
+              <span class="ticker-item" style="color:#FED700; font-weight:800; font-size:10px; letter-spacing:0.4px;">🐾 CASCAVEL • RADAR E MONITORAMENTO CLIMÁTICO ATIVO</span>
+              <span class="ticker-item" style="color:#FED700; font-weight:800; font-size:10px; letter-spacing:0.4px;">🐾 CASCAVEL • RADAR E MONITORAMENTO CLIMÁTICO ATIVO</span>
             </div>
           </div>
         </div>
 
-        <!-- Transição Contínua em Tela Única -->
+        <!-- 3. ONDULAÇÃO MARROM DESCENDO PARA O CORPO AREIA ESCURA -->
+        <div class="wave-brown-down">
+          <svg viewBox="0 0 500 16" preserveAspectRatio="none" style="width:100%; height:100%; display:block;">
+            <path d="M 0,0 L 500,0 L 500,4 C 400,18 280,2 180,14 C 90,20 40,6 0,14 Z" fill="#3D2B1F"/>
+          </svg>
+        </div>
 
-        <!-- Área Central Areia Oficial (#EDE8DF): Campanhas + Duas Esteiras Principais -->
-        <div class="home-belts-container" style="flex:1; display:flex; flex-direction:column; justify-content:space-between; padding:4px 12px 6px; gap:8px; overflow:hidden; background:#EDE8DF !important;">
+        <!-- 4. CORPO AREIA MAIS ESCURA (#D8CABA): FRASE + ANIMAIS + PERFIS SOCIAIS (SWIPE) -->
+        <div class="home-body-sand">
           
-          <!-- Frase de Campanha Fluida na Tela (Sem Caixas ou Pílulas - Padrão Rigo) -->
+          <!-- Frase de Campanha Flutuante em Itálico Nobre -->
           <div style="padding:4px 16px 2px; text-align:center;">
-            <div id="home-campaign-text" style="font-size:12.5px; font-weight:800; color:#4A2E1B; line-height:1.35; min-height:32px; display:flex; align-items:center; justify-content:center; transition:opacity 0.45s ease; font-style:italic;">
+            <div id="home-campaign-text" style="font-size:12.5px; font-weight:800; color:#2E2417; line-height:1.35; min-height:30px; display:flex; align-items:center; justify-content:center; transition:opacity 0.45s ease; font-style:italic;">
               Tem um animal de raça? Dê amor em dobro: adote também um cãozinho de rua.
             </div>
           </div>
 
-          <!-- Bloco 1: Quem ama, cuida e procura junto -->
+          <!-- Bloco A: Animais em Busca Ativa (Esteira Pets) -->
           <div class="belt-block belt-block-pets" style="margin-top:0;">
             <div class="belt-head" style="display:flex; align-items:center; justify-content:space-between; margin-bottom:4px;">
-              <div class="belt-title pet-title" style="color:#2E2417; font-weight:900; font-size:12.5px; display:flex; align-items:center; gap:6px;">
-                <svg class="belt-svg" viewBox="0 0 24 24" fill="#009B3A" style="width:15px; height:15px;">
-                  <circle cx="4.5" cy="5" r="1.6"/><circle cx="7.5" cy="3.5" r="1.6"/><circle cx="10.5" cy="5" r="1.6"/><circle cx="7.5" cy="9.2" r="2.8"/>
-                  <circle cx="14.5" cy="12" r="1.6"/><circle cx="17.5" cy="10.5" r="1.6"/><circle cx="20.5" cy="12" r="1.6"/><circle cx="17.5" cy="16.2" r="2.8"/>
+              <div class="belt-title pet-title" style="display:flex; align-items:center; gap:6px;">
+                <svg class="belt-svg" viewBox="0 0 24 24" fill="currentColor" width="14" height="14" style="color:#2E2417;">
+                  <path d="M12 12c-2 0-3.5 1.5-3.5 3.3 0 1.6 1.2 2.7 3.5 2.7s3.5-1.1 3.5-2.7C15.5 13.5 14 12 12 12zm-5.8-2.3c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm11.6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-8.6-4.1c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm5.6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/>
                 </svg>
-                <span>Quem ama, cuida e procura junto</span>
+                <span style="font-size:11px; font-weight:900; color:#2E2417; letter-spacing:0.4px;">ANIMAIS EM BUSCA ATIVA</span>
               </div>
+              <button type="button" class="belt-more-link" onclick="trocarAba('pets')" style="font-size:10px; font-weight:800; color:#009B3A; background:none; border:none; cursor:pointer;">Ver todos ›</button>
             </div>
+            
             <div class="belt-viewport">
               <div class="belt-track" id="belt-pets-track">
-                <!-- Pré-render inicial imediato para nunca abrir em branco -->
-                <div class="unified-belt-card" onclick="abrirDetalheById(5501)">
-                  <img class="unified-belt-img" src="/static/darkplanner_pets/gata_01_siamesa.jpg" alt="Mel Siamês" loading="lazy">
-                  <span class="unified-belt-pill" style="background:rgba(0,155,58,0.92); color:#FFFFFF;">Adoção</span>
-                  <div class="unified-belt-grad">
-                    <div class="unified-belt-title">Mel • Siamês Dócil</div>
-                    <div class="unified-belt-sub">Centro</div>
-                  </div>
-                </div>
-                <div class="unified-belt-card" onclick="abrirDetalheById(5698)">
-                  <img class="unified-belt-img" src="/static/darkplanner_pets/cachorra_03_golden_retriever.jpg" alt="Thor" loading="lazy">
-                  <span class="unified-belt-pill" style="background:rgba(220,38,38,0.92); color:#FFFFFF;">Perdido</span>
-                  <div class="unified-belt-grad">
-                    <div class="unified-belt-title">Thor • Pastor Alemão</div>
-                    <div class="unified-belt-sub">Coqueiral</div>
-                  </div>
-                </div>
-                <div class="unified-belt-card" onclick="abrirDetalheById(5700)">
-                  <img class="unified-belt-img" src="/static/darkplanner_pets/cachorra_10_labradora_chocolate.jpg" alt="Bob Resgatado" loading="lazy">
-                  <span class="unified-belt-pill" style="background:rgba(37,99,235,0.92); color:#FFFFFF;">Resgatado</span>
-                  <div class="unified-belt-grad">
-                    <div class="unified-belt-title">Bob • Superação</div>
-                    <div class="unified-belt-sub">Cascavel Velho</div>
-                  </div>
-                </div>
-                <div class="unified-belt-card" onclick="abrirDetalheById(5503)">
-                  <img class="unified-belt-img" src="/static/darkplanner_pets/gata_05_frajola.jpg" alt="Mia Frajola" loading="lazy">
-                  <span class="unified-belt-pill" style="background:rgba(0,155,58,0.92); color:#FFFFFF;">Adoção</span>
-                  <div class="unified-belt-grad">
-                    <div class="unified-belt-title">Mia • Frajola Amorosa</div>
-                    <div class="unified-belt-sub">Neva</div>
-                  </div>
-                </div>
-                <div class="unified-belt-card" onclick="abrirDetalheById(5699)">
-                  <img class="unified-belt-img" src="/static/darkplanner_pets/gata_03_calico_tricolor.jpg" alt="Mel Reencontro" loading="lazy">
-                  <span class="unified-belt-pill" style="background:rgba(124,58,237,0.92); color:#FFFFFF;">Reencontro</span>
-                  <div class="unified-belt-grad">
-                    <div class="unified-belt-title">Mel • Em Casa!</div>
-                    <div class="unified-belt-sub">Cancelli</div>
-                  </div>
-                </div>
+                <!-- Cards de pets desaparecidos gerados dinamicamente via JS -->
               </div>
             </div>
           </div>
 
-          <!-- Bloco 2: Comunidade de Protetores -->
-          <div class="belt-block belt-block-protetores" style="margin-top:2px;">
+          <!-- Bloco B: Comunidade de Protetores • Perfis Sociais com Swipe no Dedo -->
+          <div class="belt-block belt-block-protetores" style="margin-top:6px;">
             <div class="belt-head" style="display:flex; align-items:center; justify-content:space-between; margin-bottom:4px;">
-              <div class="belt-title protetor-title" style="color:#2E2417; font-weight:900; font-size:12.5px; display:flex; align-items:center; gap:6px;">
-                <svg class="belt-svg" viewBox="0 0 24 24" fill="none" stroke="#009B3A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:15px;height:15px;">
-                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                  <path d="M9 12l2 2 4-4"/>
+              <div class="belt-title" style="display:flex; align-items:center; gap:6px;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#2E2417" stroke-width="2.2" width="14" height="14">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="9" cy="7" r="4"></circle>
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
                 </svg>
-                <span>Comunidade de Protetores</span>
+                <span style="font-size:11px; font-weight:900; color:#2E2417; letter-spacing:0.4px;">COMUNIDADE DE PROTETORES</span>
               </div>
+              <span style="font-size:10px; font-weight:800; color:#6E5A3C;">Deslize para o lado ›</span>
             </div>
-            <div class="belt-viewport">
-              <div class="belt-track" id="belt-protetores-track">
-                <!-- Pré-render inicial imediato -->
-                <div class="protetor-belt-card" onclick="trocarAba('pets')">
-                  <div>
-                    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:4px;">
-                      <span style="background:#EBFDF2; color:#009B3A; font-size:8.5px; font-weight:900; padding:2px 6px; border-radius:6px; letter-spacing:0.3px;">🛡️ ONG OFICIAL</span>
-                      <span style="font-size:9.5px; color:#059669; font-weight:800;">✓ Verificado</span>
-                    </div>
-                    <div style="display:flex; align-items:center; gap:8px;">
-                      <div style="width:34px; height:34px; border-radius:50%; background:#009B3A; color:#FFFFFF; display:flex; align-items:center; justify-content:center; font-weight:900; font-size:14px; flex-shrink:0;">S</div>
-                      <div style="flex:1; min-width:0;">
-                        <div style="font-size:11px; font-weight:900; color:#18181B; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">SOS Animais Solidários</div>
-                        <div style="font-size:9px; color:#52525B; font-weight:600;">Cascavel e Região</div>
-                      </div>
-                    </div>
-                  </div>
-                  <div style="display:flex; align-items:center; justify-content:space-between; border-top:1px solid rgba(0,0,0,0.06); padding-top:3px; margin-top:2px;">
-                    <span style="font-size:9px; font-weight:800; color:#009B3A;">Rede de Proteção Ativa</span>
-                    <span style="font-size:9px; font-weight:800; color:#009B3A;">Conhecer ›</span>
-                  </div>
-                </div>
-                <div class="protetor-belt-card" onclick="trocarAba('pets')">
-                  <div>
-                    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:4px;">
-                      <span style="background:#EBFDF2; color:#009B3A; font-size:8.5px; font-weight:900; padding:2px 6px; border-radius:6px; letter-spacing:0.3px;">🛡️ PROTETORA</span>
-                      <span style="font-size:9.5px; color:#059669; font-weight:800;">✓ Verificado</span>
-                    </div>
-                    <div style="display:flex; align-items:center; gap:8px;">
-                      <div style="width:34px; height:34px; border-radius:50%; background:#2563EB; color:#FFFFFF; display:flex; align-items:center; justify-content:center; font-weight:900; font-size:14px; flex-shrink:0;">C</div>
-                      <div style="flex:1; min-width:0;">
-                        <div style="font-size:11px; font-weight:900; color:#18181B; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">Dra. Camila Rocha</div>
-                        <div style="font-size:9px; color:#52525B; font-weight:600;">Medicina Veterinária Social</div>
-                      </div>
-                    </div>
-                  </div>
-                  <div style="display:flex; align-items:center; justify-content:space-between; border-top:1px solid rgba(0,0,0,0.06); padding-top:3px; margin-top:2px;">
-                    <span style="font-size:9px; font-weight:800; color:#009B3A;">Cuidados & Resgates</span>
-                    <span style="font-size:9px; font-weight:800; color:#009B3A;">Conhecer ›</span>
-                  </div>
-                </div>
-                <div class="protetor-belt-card" onclick="trocarAba('pets')">
-                  <div>
-                    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:4px;">
-                      <span style="background:#EBFDF2; color:#009B3A; font-size:8.5px; font-weight:900; padding:2px 6px; border-radius:6px; letter-spacing:0.3px;">🛡️ RESGATISTA</span>
-                      <span style="font-size:9.5px; color:#059669; font-weight:800;">✓ Verificado</span>
-                    </div>
-                    <div style="display:flex; align-items:center; gap:8px;">
-                      <div style="width:34px; height:34px; border-radius:50%; background:#D97706; color:#FFFFFF; display:flex; align-items:center; justify-content:center; font-weight:900; font-size:14px; flex-shrink:0;">M</div>
-                      <div style="flex:1; min-width:0;">
-                        <div style="font-size:11px; font-weight:900; color:#18181B; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">Marcos Resgatista</div>
-                        <div style="font-size:9px; color:#52525B; font-weight:600;">Guardião Voluntário</div>
-                      </div>
-                    </div>
-                  </div>
-                  <div style="display:flex; align-items:center; justify-content:space-between; border-top:1px solid rgba(0,0,0,0.06); padding-top:3px; margin-top:2px;">
-                    <span style="font-size:9px; font-weight:800; color:#009B3A;">Pronto Atendimento Pet</span>
-                    <span style="font-size:9px; font-weight:800; color:#009B3A;">Conhecer ›</span>
-                  </div>
-                </div>
-              </div>
+
+            <!-- Container Horizontal para passar com o dedo (Swipe) -->
+            <div class="swipe-protetores-container" id="swipe-protetores-container">
+              <!-- Cards de perfil social inseridos dinamicamente -->
             </div>
           </div>
         </div>
 
-        <!-- Faixa de Apoio na Base (Diferenciada em Areia Encorpada com texto contínuo fluindo sem pílulas) -->
-        <div class="home-apoio-strip">
-          <div class="apoio-body">
-            <div class="apoio-header">
-              <div style="display:flex; align-items:center; gap:5px;">
-                <svg viewBox="0 0 24 24" fill="#FED700" width="13" height="13"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-                <span style="font-size:11px; font-weight:900; color:#2E2417; letter-spacing:0.4px;">PATROCINADORES MASTER</span>
-              </div>
-              <span style="font-size:9.5px; font-weight:800; color:#009B3A; cursor:pointer;" onclick="abrirModalSejaParceiro()">Seja Patrocinador Master ›</span>
+        <!-- 5. ONDULAÇÃO MARROM SUBINDO PARA A FAIXA DE APOIO -->
+        <div class="wave-brown-up">
+          <svg viewBox="0 0 500 16" preserveAspectRatio="none" style="width:100%; height:100%; display:block;">
+            <path d="M 0,16 L 500,16 L 500,10 C 380,0 260,14 160,4 C 80,-2 30,12 0,2 Z" fill="#3D2B1F"/>
+          </svg>
+        </div>
+
+        <!-- 6. ESPAÇO MARROM NOBRE: ESTEIRA DE APOIO INSTITUCIONAL & PATROCINADORES COM LOGOS REAIS -->
+        <div class="home-brown-apoio-zone">
+          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:8px;">
+            <div style="display:flex; align-items:center; gap:5px;">
+              <svg viewBox="0 0 24 24" fill="#FED700" width="14" height="14"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              <span style="font-size:11.5px; font-weight:900; color:#FED700; letter-spacing:0.5px;">PATROCINADORES & APOIO INSTITUCIONAL</span>
             </div>
-            <div class="apoio-viewport">
-              <div class="apoio-track" id="belt-apoio-track">
-                <span class="apoio-text-item">🐾 Apoie-nos</span>
-                <span class="apoio-sep">•</span>
-                <span class="apoio-text-item highlight">🐾 Apoie esta causa</span>
-                <span class="apoio-sep">•</span>
-                <span class="apoio-text-item">🐾 Empresas Amigas dos Animais</span>
-                <span class="apoio-sep">•</span>
-                <span class="apoio-text-item highlight">🐾 Apoie-nos</span>
-                <span class="apoio-sep">•</span>
-                <span class="apoio-text-item">🐾 Seja um Mantenedor</span>
-                <span class="apoio-sep">•</span>
-                <span class="apoio-text-item highlight">🐾 Apoie esta causa</span>
-                <span class="apoio-sep">•</span>
-                <span class="apoio-text-item">🐾 Apoie-nos</span>
-                <span class="apoio-sep">•</span>
-                <span class="apoio-text-item highlight">🐾 Empresas Amigas dos Animais</span>
-              </div>
+            <span style="font-size:10px; font-weight:800; color:#74E894; cursor:pointer;" onclick="abrirModalSejaParceiro()">Seja Patrocinador ›</span>
+          </div>
+
+          <!-- Esteira com Logos Reais correndo continuamente -->
+          <div style="overflow:hidden; width:100%; position:relative; padding:4px 0;">
+            <div class="apoio-logos-track" id="belt-apoio-track">
+              <!-- Logos reais inseridas dinamicamente via JS -->
             </div>
           </div>
         </div>
@@ -5003,8 +5083,8 @@
     </main>
 
     <!-- Ondulação Inferior Orgânica (Conexão Verde com Bottom Nav) -->
-    <div class="bottom-river-wave">
-      <svg viewBox="0 0 500 20" preserveAspectRatio="none">
+    <div class="bottom-river-wave" style="background:#3D2B1F !important; height:18px; margin-bottom:-1px; line-height:0; width:100%;">
+      <svg viewBox="0 0 500 20" preserveAspectRatio="none" style="display:block; width:100%; height:100%;">
         <path d="M 0,14 C 120,22 230,2 350,14 C 420,20 470,6 500,8 L 500,20 L 0,20 Z" fill="#009B3A"/>
       </svg>
     </div>
@@ -7255,65 +7335,65 @@
     ];
 
     function renderizarEsteiraProtetores() {
-      const track = document.getElementById('belt-protetores-track');
-      if (!track) return;
+      const container = document.getElementById('swipe-protetores-container');
+      if (!container) return;
 
       const protetores = state.protetores || [];
-      if (!protetores.length) {
-        calibrarVelocidadeEsteira(track, 28);
-        return;
-      }
+      const lista = protetores.length > 0 ? protetores : [
+        { nome: 'Marcos Resgatista', tipo_perfil: 'protetor', foto_url: '/static/testadores/rigo.png', animais: [{}, {}], bio: 'Guardião Voluntário Cascavel' },
+        { nome: 'Ana Protetora', tipo_perfil: 'protetor', foto_url: '/static/testadores/andre.png', animais: [{}], bio: 'Resgates e Cuidados' },
+        { nome: 'ONG Patinhas Cascavel', tipo_perfil: 'ong', foto_url: '/static/testadores/irmao.png', animais: [{}, {}, {}], bio: 'Acolhimento e Adoção' },
+        { nome: 'Clube dos Protetores', tipo_perfil: 'ong', foto_url: '/static/testadores/rigo.png', animais: [{}, {}], bio: 'Rede de Proteção Animal' }
+      ];
 
-      const cardsHtml = protetores.map(p => {
-        const avatar = p.foto_url
-          ? `<img src="${escapeAttr(p.foto_url)}" onerror="this.onerror=null; this.style.display='none';" style="width:38px; height:38px; border-radius:50%; object-fit:cover; border:2px solid #009B3A; flex-shrink:0;" alt="${escapeAttr(p.nome)}">`
-          : `<div style="width:38px; height:38px; border-radius:50%; background:#009B3A; color:#FFFFFF; display:flex; align-items:center; justify-content:center; font-weight:900; font-size:15px; flex-shrink:0;">${escapeHtml(p.nome.charAt(0))}</div>`;
-
-        const tipoBadge = p.tipo_perfil === 'ong' ? 'ONG OFICIAL' : 'PROTETOR(A)';
-        const miniThumbs = (p.animais || []).slice(0, 3).map(a => {
-          if (!a.foto_url) return '';
-          return `<img src="${escapeAttr(a.foto_url)}" style="width:22px; height:22px; border-radius:6px; object-fit:cover; border:1px solid rgba(0,0,0,0.12);" title="${escapeAttr(a.titulo)}">`;
-        }).join('');
-
+      container.innerHTML = lista.map(p => {
+        const foto = p.foto_url || '/static/testadores/rigo.png';
+        const badge = p.tipo_perfil === 'ong' ? '🏛️ ONG OFICIAL' : '🛡️ PROTETOR';
+        const qtdPets = (p.animais && p.animais.length) ? p.animais.length : 2;
         return `
-          <div class="protetor-belt-card" onclick="abrirPerfilPublicoProtetor('${escapeAttr(p.autor_token || p.id)}')" style="width:220px; flex-shrink:0; background:#FFFFFF; border:1px solid rgba(110,90,60,0.22); border-radius:14px; padding:10px 12px; cursor:pointer; box-shadow:0 3px 8px rgba(0,0,0,0.05); display:flex; flex-direction:column; justify-content:space-between; height:116px; box-sizing:border-box;">
-            <div>
-              <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:5px;">
-                <span style="background:#EBFDF2; color:#009B3A; font-size:8.5px; font-weight:900; padding:2px 6px; border-radius:6px; letter-spacing:0.4px;">🛡️ ${tipoBadge}</span>
-                <span style="font-size:9.5px; color:#059669; font-weight:800;">✓ Verificado</span>
-              </div>
-              <div style="display:flex; align-items:center; gap:8px;">
-                ${avatar}
-                <div style="flex:1; min-width:0;">
-                  <div style="font-size:11.5px; font-weight:900; color:#18181B; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${escapeHtml(p.nome)}</div>
-                  <div style="font-size:9.5px; color:#52525B; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${escapeHtml(p.bairro || 'Cascavel')}</div>
-                </div>
-              </div>
+          <div class="card-perfil-swipe" onclick="trocarAba('pets')">
+            <div style="width:48px; height:48px; border-radius:50%; border:2.5px solid #009B3A; overflow:hidden; margin-bottom:6px; box-shadow:0 2px 6px rgba(0,0,0,0.12);">
+              <img src="${foto}" alt="${escapeAttr(p.nome)}" style="width:100%; height:100%; object-fit:cover;" onerror="this.onerror=null; this.src='/static/testadores/rigo.png';">
             </div>
-            <div style="display:flex; align-items:center; justify-content:space-between; border-top:1px solid rgba(0,0,0,0.06); padding-top:4px; margin-top:2px;">
-              <div style="display:flex; gap:3px;">${miniThumbs}</div>
-              <span style="font-size:9.5px; font-weight:800; color:#009B3A;">Conhecer Protetor(a) ›</span>
+            <span style="font-size:8.5px; font-weight:900; background:#EBFDF2; color:#009B3A; padding:2px 6px; border-radius:999px; margin-bottom:4px; letter-spacing:0.3px;">${badge}</span>
+            <div style="font-size:11.5px; font-weight:900; color:#2E2417; line-height:1.2; max-width:130px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${escapeHtml(p.nome)}</div>
+            <div style="font-size:9.5px; font-weight:700; color:#6E5A3C; margin-top:2px;">${qtdPets} animais assistidos</div>
+            <div style="margin-top:8px; width:100%; padding-top:6px; border-top:1px solid rgba(110,90,60,0.15); display:flex; justify-content:center;">
+              <span style="font-size:10px; font-weight:900; color:#009B3A;">Ver Perfil ›</span>
             </div>
           </div>
         `;
       }).join('');
-
-      let loopHtml = cardsHtml;
-      while (loopHtml.length < 800) loopHtml += cardsHtml;
-      track.className = 'belt-track';
-      track.innerHTML = loopHtml + loopHtml;
-      calibrarVelocidadeEsteira(track, 32);
+      return;
     }
 
     function renderizarEsteiraApoioHome() {
       const track = document.getElementById('belt-apoio-track');
       if (!track) return;
-      if (!track.dataset.calibrated) {
-        track.dataset.calibrated = 'true';
-        // Duplica os chips para loop horizontal infinito perfeito
-        track.innerHTML = track.innerHTML + track.innerHTML;
-      }
-      calibrarVelocidadeEsteira(track, 22);
+
+      const parceiros = (state.parceiros || []).filter(p => p.logo_url && p.logo_url.trim() !== '');
+      
+      // Fallback rico caso a lista da API ainda não tenha retornado
+      const listaLogos = parceiros.length > 0 ? parceiros : [
+        { nome: 'VetVida 24h', logo_url: '/static/parceiros/pet_vet/pet_vet_01_vv/logo.png', id: 1 },
+        { nome: 'Hospital São Francisco', logo_url: '/static/parceiros/pet_vet/pet_vet_02_sf/logo.png', id: 2 },
+        { nome: 'Cascavel Vet Emergências', logo_url: '/static/parceiros/pet_vet/pet_vet_03_cv/logo.png', id: 3 },
+        { nome: 'Mundo Pet Ração', logo_url: '/static/parceiros/pet_shop/pet_shop_02_mp/logo.png', id: 7 },
+        { nome: 'Pampa Pneus Auto Center', logo_url: '/static/parceiros/auto_center/auto_center_01_pp/logo.png', id: 16 },
+        { nome: 'Auto Posto Iguaçu', logo_url: '/static/parceiros/posto/posto_01_pi/logo.png', id: 26 },
+        { nome: 'Bicho Mimado Pet Store', logo_url: '/static/parceiros/pet_shop/pet_shop_01_bm/logo.png', id: 6 },
+        { nome: 'Cascavel Pet & Agro', logo_url: '/static/parceiros/pet_shop/pet_shop_03_ca/logo.png', id: 8 }
+      ];
+
+      const itensHtml = listaLogos.map(p => `
+        <div class="apoio-logo-badge" onclick="abrirFolderParceiroById('${p.id}')" title="${escapeAttr(p.nome)}">
+          <img src="${escapeAttr(p.logo_url)}" alt="${escapeAttr(p.nome)}" onerror="this.onerror=null; this.src='/static/parceiros/pet_vet/pet_vet_01_vv/logo.png';">
+          <span>${escapeHtml(p.nome)}</span>
+        </div>
+      `).join('');
+
+      // Duplica para loop contínuo infinito
+      track.innerHTML = itensHtml + itensHtml;
     }
 
     function renderizarEsteiraParceirosHome() {
