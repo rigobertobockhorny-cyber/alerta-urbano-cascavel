@@ -584,10 +584,11 @@
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
-      overflow: hidden;
+      overflow-y: auto !important;
+      -webkit-overflow-scrolling: touch;
       padding: 0 !important;
       gap: 0;
-      height: 100%;
+      min-height: 100%;
     }
     .tab-pane.map-pane {
       padding: 0;
@@ -4637,12 +4638,9 @@
         <!-- Área Central Areia Oficial (#EDE8DF): Campanhas + Duas Esteiras Principais -->
         <div class="home-belts-container" style="flex:1; display:flex; flex-direction:column; justify-content:space-between; padding:4px 12px 6px; gap:8px; overflow:hidden; background:#EDE8DF !important;">
           
-          <!-- Bloco Oficial: Campanhas Educativas & Adoção Consciente (Retângulo Reto Rigo) -->
-          <div class="campaign-box-rect">
-            <div style="font-size:9.5px; font-weight:900; letter-spacing:0.6px; color:#6E5A3C; text-transform:uppercase; margin-bottom:3px; display:flex; align-items:center; justify-content:center; gap:5px;">
-              <span>📢 CAMPANHA ALERTA PET</span>
-            </div>
-            <div id="home-campaign-text" style="font-size:12.5px; font-weight:800; color:#2E2417; line-height:1.35; min-height:34px; display:flex; align-items:center; justify-content:center; transition:opacity 0.45s ease;">
+          <!-- Frase de Campanha Fluida na Tela (Sem Caixas ou Pílulas - Padrão Rigo) -->
+          <div style="padding:4px 16px 2px; text-align:center;">
+            <div id="home-campaign-text" style="font-size:12.5px; font-weight:800; color:#4A2E1B; line-height:1.35; min-height:32px; display:flex; align-items:center; justify-content:center; transition:opacity 0.45s ease; font-style:italic;">
               Tem um animal de raça? Dê amor em dobro: adote também um cãozinho de rua.
             </div>
           </div>
@@ -9813,9 +9811,9 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
     // PROTOCOLO DE RADAR PÉTREO, ANTIFADIGA E REDE SOLIDÁRIA (v3.11.9)
     // =========================================================================
     const RADAR_DOZE_HORAS_MS = 12 * 3600 * 1000;       // 12 Horas por animal (Regra Pétrea Inviolável)
-    const RADAR_ANTIFADIGA_GLOBAL_MS = 5 * 60 * 1000;    // 5 Minutos de silêncio entre avisos de animais diferentes
-    const RADAR_MAX_AVISOS_POR_HORA = 3;                // Teto de 3 avisos sonoros por hora na rua
-    const RADAR_RAIO_METROS = 800;                       // Raio tático de busca ativa (800 metros)
+    const RADAR_ANTIFADIGA_GLOBAL_MS = 45 * 1000;         // 45 segundos de respiro entre animais diferentes no trânsito    // 5 Minutos de silêncio entre avisos de animais diferentes
+    const RADAR_MAX_AVISOS_POR_HORA = 10;                // Teto expandido para rotas ativas na cidade                // Teto de 3 avisos sonoros por hora na rua
+    const RADAR_RAIO_METROS = 1500;                       // Raio tático ampliado para trânsito (1.5 km)                       // Raio tático de busca ativa (800 metros)
 
     let _ultimoAvisoVozGlobalMs = 0;
     let _ultimoRadarCheck = 0;
@@ -9931,9 +9929,8 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
         }
 
         // REGRA PÉTREA 2: Trava de Sessão Única
-        if (sessionStorage.getItem('radar_aviso_sessao_' + pet.id) || sessionStorage.getItem('radar_aviso_sessao_' + petNomeKey)) {
-          continue;
-        }
+        // Sessão dinâmica com base na distância de movimento
+        // if (sessionStorage.getItem('radar_aviso_sessao_' + pet.id)) continue;
 
         const d = calcularDistanciaM(pLat, pLng, Number(pet.lat), Number(pet.lng));
         if (d != null && d <= RADAR_RAIO_METROS) {
@@ -10029,14 +10026,28 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
 
       const audioUrl = `/static/vozes_frases_oficiais/${audioFile}?v=20261126`;
 
-      // Disparo de Áudio de Alta Fidelidade (com miadinho suave + locução oficial de estúdio)
+      // Disparo de Áudio de Alta Fidelidade com Sincronia Estrita Card-Áudio
       try {
         if (!ttsAudioPlayer) ttsAudioPlayer = new Audio();
         ttsAudioPlayer.pause();
         ttsAudioPlayer.currentTime = 0;
         ttsAudioPlayer.src = audioUrl;
-        ttsAudioPlayer.play().catch(e => console.warn('Radar audio play:', e));
-      } catch (_) {}
+
+        // O Card fica na tela exatamente durante a locução da voz
+        ttsAudioPlayer.onended = function() {
+          setTimeout(() => {
+            fecharCardRadarTopoWeb(false);
+          }, 350);
+        };
+
+        ttsAudioPlayer.play().catch(e => {
+          console.warn('Radar audio play:', e);
+          // Fallback se o navegador bloquear autoplay: fecha após 6.5s
+          setTimeout(() => { fecharCardRadarTopoWeb(false); }, 6500);
+        });
+      } catch (_) {
+        setTimeout(() => { fecharCardRadarTopoWeb(false); }, 6500);
+      }
 
       // Animação imediata da Patinha no topo
       try {
@@ -10404,6 +10415,7 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
     }
 
     function tentarReconectarGPS(mostrarAviso) {
+      // 1. Android Nativo (Solicita atualizações contínuas de 1.2s)
       if (window.AndroidAlerta && typeof window.AndroidAlerta.solicitarGpsNativo === 'function') {
         window.AndroidAlerta.solicitarGpsNativo();
         try {
@@ -10413,15 +10425,29 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
             receberGpsNativo(j.lat, j.lng, j.accuracy);
           }
         } catch (_) {}
-      } else if ('geolocation' in navigator) {
+      }
+
+      // 2. Web / PWA / Navegador Global (Celular do André, irmão, Safari, Chrome):
+      if ('geolocation' in navigator) {
         navigator.geolocation.getCurrentPosition(
           pos => {
             receberGpsNativo(pos.coords.latitude, pos.coords.longitude, pos.coords.accuracy);
-            if (mostrarAviso) mostrarToast('Localização atualizada');
+            if (mostrarAviso) mostrarToast('GPS conectado: monitoramento de rua ativo');
           },
           () => atualizarStatusGps('err', 'Permissão de GPS pendente'),
           { enableHighAccuracy: true, timeout: 8000 }
         );
+
+        // Rastreador Contínuo em Tempo Real
+        if (!window._gpsGlobalWatcher) {
+          window._gpsGlobalWatcher = navigator.geolocation.watchPosition(
+            pos => {
+              receberGpsNativo(pos.coords.latitude, pos.coords.longitude, pos.coords.accuracy, pos.coords.speed, pos.coords.heading);
+            },
+            err => console.warn('GPS Watcher erro:', err),
+            { enableHighAccuracy: true, maximumAge: 2000, timeout: 10000 }
+          );
+        }
       }
     }
 
