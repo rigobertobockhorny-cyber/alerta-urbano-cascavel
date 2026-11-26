@@ -6320,7 +6320,7 @@
             uLat = -24.928124; // Casa Rigo / Florais do Paraná / Maracaí
             uLng = -53.432286;
           }
-          verificarRadarProximidadeWeb(uLat, uLng, true);
+          verificarRadarProximidadeWeb(uLat, uLng);
         }, 2500);
       } catch (e) {
         console.error('Erro ao carregar dados:', e);
@@ -7695,7 +7695,7 @@
       setTimeout(() => {
         let uLat = state.userLat || -24.928124;
         let uLng = state.userLng || -53.432286;
-        verificarRadarProximidadeWeb(uLat, uLng, true);
+        verificarRadarProximidadeWeb(uLat, uLng);
       }, 700);
     }
 
@@ -7737,6 +7737,7 @@
         return;
       }
 
+      const linkSolidario = `https://alerta-urbano-cascavel.onrender.com/?ref_pet=${pet.id}`;
       const cartazUrl = `https://alerta-urbano-cascavel.onrender.com/cartaz/${pet.id}`;
       const downloadUrl = `https://alerta-urbano-cascavel.onrender.com/download`;
       const statusLabel = pet.status_pet === 'avistado' ? 'ANIMAL AVISTADO NA RUA' : 'PET DESAPARECIDO';
@@ -7749,11 +7750,14 @@
 *Nome:* ${pet.titulo}
 *Bairro:* ${bairroStr} • Cascavel/PR
 ${pet.porte ? `*Porte:* ${pet.porte}\n` : ''}${pet.especie ? `*Espécie:* ${pet.especie}\n` : ''}${pet.recompensa ? `*Recompensa:* ${pet.recompensa}\n` : ''}${pet.descricao ? `*Detalhes:* ${pet.descricao}\n` : ''}
+*🔗 LINK PARA O COPILOTO AVISAR SEUS AMIGOS POR VOZ NA RUA:*
+${linkSolidario}
+(Ao abrir o link, seu aplicativo Alerta Pet Brasil colocará este animal em busca prioritária e avisará por voz se você passar perto!)
+
 *VER CARTAZ OFICIAL COM FOTO:*
 ${cartazUrl}
 
-*Ajude a monitorar animais e proteção em Cascavel:*
-Baixe o aplicativo gratuito Alerta Pet Brasil:
+*Baixe o aplicativo gratuito Alerta Pet Brasil:*
 ${downloadUrl}`;
 
       mostrarToast('Abrindo WhatsApp com o Cartaz Oficial...');
@@ -8848,7 +8852,55 @@ ${downloadUrl}`;
     let _ultimoRadarCheck = 0;
     let _ultimoAvisoVozGlobalMs = 0;
     let _audioRadarAtual = null;
-    const RADAR_DOZE_HORAS_MS = 12 * 60 * 60 * 1000;
+    // =========================================================================
+    // PROTOCOLO DE RADAR PÉTREO, ANTIFADIGA E REDE SOLIDÁRIA (v3.11.9)
+    // =========================================================================
+    const RADAR_DOZE_HORAS_MS = 12 * 3600 * 1000;       // 12 Horas por animal (Regra Pétrea Inviolável)
+    const RADAR_ANTIFADIGA_GLOBAL_MS = 5 * 60 * 1000;    // 5 Minutos de silêncio entre avisos de animais diferentes
+    const RADAR_MAX_AVISOS_POR_HORA = 3;                // Teto de 3 avisos sonoros por hora na rua
+    const RADAR_RAIO_METROS = 800;                       // Raio tático de busca ativa (800 metros)
+
+    let _ultimoAvisoVozGlobalMs = 0;
+    let _ultimoRadarCheck = 0;
+    let _bloqueioRadarAtivo = false; // Mutex global contra concorrência
+
+    function obterHistoricoAvisosHora() {
+      try {
+        const raw = localStorage.getItem('radar_historico_hora');
+        const agora = Date.now();
+        const arr = raw ? JSON.parse(raw) : [];
+        return arr.filter(ts => (agora - ts) < 3600000);
+      } catch (_) { return []; }
+    }
+
+    function registrarAvisoHora() {
+      try {
+        const arr = obterHistoricoAvisosHora();
+        arr.push(Date.now());
+        localStorage.setItem('radar_historico_hora', JSON.stringify(arr));
+      } catch (_) {}
+    }
+
+    // Captura Deep Link de Busca Solidária de Amigos via URL (?ref_pet=ID)
+    function capturarDeepLinkPetSolidario() {
+      try {
+        const urlParams = new URLSearchParams(window.location.search);
+        const refPet = urlParams.get('ref_pet') || urlParams.get('pet') || urlParams.get('compartilhado');
+        if (refPet && !isNaN(Number(refPet))) {
+          const petId = Number(refPet);
+          let amigosPets = JSON.parse(localStorage.getItem('radar_pets_amigos_prioritarios') || '[]');
+          if (!amigosPets.includes(petId)) {
+            amigosPets.push(petId);
+            localStorage.setItem('radar_pets_amigos_prioritarios', JSON.stringify(amigosPets));
+            setTimeout(() => {
+              const pet = (state.alertas || []).find(a => a.id === petId);
+              const nome = pet ? pet.titulo : 'o animalzinho';
+              mostrarToast(`🐾 Você entrou na Rede Solidária de Busca de ${nome}! Seu copiloto dará prioridade a ele.`);
+            }, 1800);
+          }
+        }
+      } catch (_) {}
+    }
 
     function receberGpsNativo(lat, lng, acc) {
       if (!lat || !lng) return;
@@ -8856,28 +8908,27 @@ ${downloadUrl}`;
       state.userLng = Number(lng);
       atualizarStatusGps('ok', `Conectado (±${Math.round(acc || 15)}m)`);
       atualizarMarcadorUsuario();
-      verificarRadarProximidadeWeb(state.userLat, state.userLng, false);
+      verificarRadarProximidadeWeb(state.userLat, state.userLng);
     }
 
-    function verificarRadarProximidadeWeb(lat, lng, forcarEntrada = false) {
+    function verificarRadarProximidadeWeb(lat, lng) {
       const agora = Date.now();
-      // Debounce: mínimo de 4 segundos entre verificações de radar
-      if (!forcarEntrada && (agora - _ultimoRadarCheck < 4000)) return;
+
+      // 1. Debounce operacional (mínimo de 4 segundos entre verificações de GPS)
+      if (agora - _ultimoRadarCheck < 4000) return;
       _ultimoRadarCheck = agora;
 
-      // Trava 1 (Mutex de Áudio): se a voz já está tocando, NUNCA sobrepõe ou reinicia
+      // 2. Trava absoluta de execução (Mutex Global)
+      if (_bloqueioRadarAtivo) return;
+
+      // 3. Trava de Áudio Tocando: se a voz já está tocando, NUNCA sobrepõe ou reinicia
       if (ttsAudioPlayer && !ttsAudioPlayer.paused && ttsAudioPlayer.currentTime < (ttsAudioPlayer.duration || 10)) {
         return;
       }
 
-      // Trava 2 (Mutex Visual): se o card do radar já está na tela, não redispara
+      // 4. Trava de Card na Tela: se o card do radar já está visível, não redispara
       const cardAberto = document.getElementById('card-radar-topo-web');
       if (cardAberto && cardAberto.style.display !== 'none') {
-        return;
-      }
-
-      // Trava 3 (Silêncio Global): intervalo mínimo de 60s entre quaisquer avisos sonoros
-      if (!forcarEntrada && (agora - _ultimoAvisoVozGlobalMs < 60000)) {
         return;
       }
 
@@ -8897,39 +8948,84 @@ ${downloadUrl}`;
 
       if (!petsPerdidos.length) return;
 
-      let petMaisProximo = null;
-      let menorDist = 1200; // Raio oficial de 1.2 km
+      // Identifica Meus Pets (Tutor) e Pets Prioritários de Amigos
+      const token = state.autorToken;
+      let amigosPets = [];
+      try {
+        amigosPets = JSON.parse(localStorage.getItem('radar_pets_amigos_prioritarios') || '[]');
+      } catch (_) {}
 
+      const petsNoRaio = [];
       for (const pet of petsPerdidos) {
-        // Regra Pétrea 1: Cooldown de 12 horas por pet em localStorage
+        // REGRA PÉTREA 1: Cooldown de 12 horas por pet (NUNCA toca se já tocou nas últimas 12h)
         const ultimoAviso = Number(localStorage.getItem('radar_pet_cd_' + pet.id) || 0);
-        if (!forcarEntrada && (agora - ultimoAviso < RADAR_DOZE_HORAS_MS)) {
-          continue; // Já avisado nas últimas 12h: silêncio absoluto
+        if (agora - ultimoAviso < RADAR_DOZE_HORAS_MS) {
+          continue; // Já avisado nas últimas 12h: silêncio absoluto para este pet
         }
 
-        // Regra Pétrea 2: Trava de Sessão (máximo 1 aviso do pet por abertura do app)
-        if (!forcarEntrada && sessionStorage.getItem('radar_aviso_sessao_' + pet.id)) {
+        // REGRA PÉTREA 2: Trava de Sessão Única (máximo 1 aviso do pet por abertura do app)
+        if (sessionStorage.getItem('radar_aviso_sessao_' + pet.id)) {
           continue;
         }
 
         const d = calcularDistanciaM(pLat, pLng, Number(pet.lat), Number(pet.lng));
-        const ehTico = (pet.id === 5514 || (pet.titulo || '').toLowerCase().includes('tico'));
-        if (ehTico || (d != null && d <= 1200 && d < menorDist)) {
-          menorDist = d || 50;
-          petMaisProximo = { ...pet, distM: Math.round(d != null ? d : 50) };
-          if (ehTico) break;
+        if (d != null && d <= RADAR_RAIO_METROS) {
+          const ehMeuPet = Boolean(token && pet.autor_token && pet.autor_token === token);
+          const ehPetAmigo = amigosPets.includes(pet.id);
+
+          petsNoRaio.push({
+            ...pet,
+            distM: Math.round(d),
+            ehMeuPet,
+            ehPetAmigo,
+            pesoPrioridade: ehMeuPet ? 100 : (ehPetAmigo ? 50 : 10)
+          });
         }
       }
 
-      if (petMaisProximo) {
-        _ultimoAvisoVozGlobalMs = agora;
-        // Grava o cooldown imediatamente antes de tocar
-        try {
-          localStorage.setItem('radar_pet_cd_' + petMaisProximo.id, agora.toString());
-          sessionStorage.setItem('radar_aviso_sessao_' + petMaisProximo.id, '1');
-        } catch (_) {}
-        dispararAlertaRadarWeb(petMaisProximo);
+      if (!petsNoRaio.length) return;
+
+      // Ordena por Prioridade: 1º Meu Pet (Dono) > 2º Pet de Amigo Solidário > 3º Menor Distância
+      petsNoRaio.sort((a, b) => {
+        if (b.pesoPrioridade !== a.pesoPrioridade) {
+          return b.pesoPrioridade - a.pesoPrioridade;
+        }
+        return a.distM - b.distM;
+      });
+
+      const petEscolhido = petsNoRaio[0];
+
+      // REGRA ANTIFADIGA SONORA GLOBAL:
+      // Se não for o pet do próprio dono nem pet de amigo solidário, aplica:
+      // 1. Mínimo de 5 minutos de silêncio entre avisos de animais diferentes
+      // 2. Máximo de 3 comunicados por hora
+      if (!petEscolhido.ehMeuPet && !petEscolhido.ehPetAmigo) {
+        if (agora - _ultimoAvisoVozGlobalMs < RADAR_ANTIFADIGA_GLOBAL_MS) {
+          return; // Antifadiga: silêncio de 5 minutos
+        }
+        const avisosHora = obterHistoricoAvisosHora();
+        if (avisosHora.length >= RADAR_MAX_AVISOS_POR_HORA) {
+          return; // Teto de 3 avisos por hora atingido: silêncio
+        }
       }
+
+      // DISPARO ÚNICO E BLINDADO (MUTEX ATIVO):
+      _bloqueioRadarAtivo = true;
+      _ultimoAvisoVozGlobalMs = agora;
+      registrarAvisoHora();
+
+      // Grava o cooldown imediatamente no banco local e sessão antes do som
+      try {
+        localStorage.setItem('radar_pet_cd_' + petEscolhido.id, agora.toString());
+        sessionStorage.setItem('radar_aviso_sessao_' + petEscolhido.id, '1');
+      } catch (_) {}
+
+      dispararAlertaRadarWeb(petEscolhido);
+
+      // Libera o mutex após 4 segundos
+      setTimeout(() => {
+        _bloqueioRadarAtivo = false;
+      }, 4000);
     }
 
     function dispararAlertaRadarWeb(pet) {
@@ -9057,6 +9153,29 @@ ${downloadUrl}`;
       const local = (pet.bairro || pet.rua || 'Cascavel').toUpperCase();
       const distTxt = pet.distM != null ? `A ${pet.distM} METROS` : '';
 
+      let badgeTopoEspecial = '';
+      if (pet.ehMeuPet) {
+        badgeTopoEspecial = `
+          <div style="position:relative; z-index:2; text-align:center; margin-bottom:8px;">
+            <span style="background:#009B3A; color:#FFFFFF; font-size:10px; font-weight:900; padding:3px 10px; border-radius:999px; letter-spacing:0.4px; box-shadow:0 2px 6px rgba(0,155,58,0.35);">
+              🐾 SEU ANIMAL • ALERTA ATIVO NA REDE
+            </span>
+          </div>
+        `;
+      } else if (pet.ehPetAmigo) {
+        badgeTopoEspecial = `
+          <div style="position:relative; z-index:2; text-align:center; margin-bottom:8px;">
+            <span style="background:#1D4ED8; color:#FFFFFF; font-size:10px; font-weight:900; padding:3px 10px; border-radius:999px; letter-spacing:0.4px; box-shadow:0 2px 6px rgba(29,78,216,0.35);">
+              🤝 BUSCA SOLIDÁRIA • PET DO SEU AMIGO
+            </span>
+          </div>
+        `;
+      }
+
+      const btnInferiorHtml = pet.ehMeuPet
+        ? `<button onclick="fecharCardRadarTopoWeb(); abrirDetalheById(${pet.id})" style="width: 100%; height: 42px; background: #009B3A; color: #FFFFFF; font-weight: 900; font-size: 13px; border: none; border-radius: 14px; cursor: pointer; box-shadow: 0 3px 10px rgba(0,155,58,0.3); position:relative; z-index:2;">Ver Ficha e Avistamentos do Meu Pet</button>`
+        : `<button onclick="fecharCardRadarTopoWeb()" style="width: 100%; height: 42px; background: linear-gradient(135deg, #BFA782 0%, #947A55 100%); color: #FFFFFF; font-weight: 900; font-size: 13px; border: 1px solid rgba(138, 118, 86, 0.5); border-radius: 14px; cursor: pointer; box-shadow: 0 3px 10px rgba(110,90,60,0.3); text-shadow: 0 1px 2px rgba(0,0,0,0.2); position:relative; z-index:2;">Estou ciente e ajudando a procurar</button>`;
+
       card.innerHTML = `
         <!-- CAMADA DE FUNDO: 3 BOLHAS COLORIDAS GRANDES SEM MARGEM (PADRÃO ABA PET) -->
         <div class="pet-card-bg-bubbles" aria-hidden="true" style="position:absolute; inset:0; z-index:0; overflow:hidden; border-radius:inherit; pointer-events:none;">
@@ -9066,7 +9185,8 @@ ${downloadUrl}`;
         </div>
 
         <div style="position:relative; z-index:2; width: 44px; height: 4px; background: rgba(0,0,0,0.25); border-radius: 2px; margin: 0 auto 10px;"></div>
-        
+        ${badgeTopoEspecial}
+
         <!-- Cardzinho dedicado da foto do animal (Grande e emoldurado) - SEM PÍLULA E SEM BORDA -->
         <div style="position: relative; z-index:2; width: 100%; height: 185px; background: #18181B; border-radius: 16px; border: none; overflow: hidden; margin-bottom: 10px; cursor:pointer;" onclick="fecharCardRadarTopoWeb(); abrirFotoZoom('${escapeAttr(foto)}', '${escapeAttr(tit)}')">
           <img src="${escapeAttr(foto)}" alt="${escapeAttr(tit)}" style="width: 100%; height: 100%; object-fit: cover; display: block;" onerror="this.src='/static/logo_vortice.png'">
@@ -9085,7 +9205,7 @@ ${downloadUrl}`;
           <button onclick="registrarAvistamentoRapidoWeb(${pet.id})" style="flex: 1; height: 42px; background: linear-gradient(135deg, #C2AB87 0%, #9E8560 100%); color: #FFFFFF; font-weight: 900; font-size: 13.5px; border: 1px solid rgba(138, 118, 86, 0.5); border-radius: 14px; cursor: pointer; box-shadow: 0 3px 10px rgba(110,90,60,0.3); text-shadow: 0 1px 2px rgba(0,0,0,0.2);">Visto aqui</button>
           <button onclick="verPetNoMapaWeb(${pet.lat}, ${pet.lng}, ${pet.id})" style="flex: 1; height: 42px; background: linear-gradient(135deg, #E8DEC8 0%, #D4C3A3 100%); color: #443B2C; font-weight: 900; font-size: 13.5px; border: 1px solid rgba(138, 118, 86, 0.4); border-radius: 14px; cursor: pointer; box-shadow: 0 2px 8px rgba(110,90,60,0.15);">Ver no mapa</button>
         </div>
-        <button onclick="fecharCardRadarTopoWeb()" style="width: 100%; height: 42px; background: linear-gradient(135deg, #BFA782 0%, #947A55 100%); color: #FFFFFF; font-weight: 900; font-size: 13px; border: 1px solid rgba(138, 118, 86, 0.5); border-radius: 14px; cursor: pointer; box-shadow: 0 3px 10px rgba(110,90,60,0.3); text-shadow: 0 1px 2px rgba(0,0,0,0.2); position:relative; z-index:2;">Estou ciente e ajudando a procurar</button>
+        ${btnInferiorHtml}
       `;
 
       card.style.display = 'flex';
@@ -9929,6 +10049,11 @@ ${downloadUrl}`;
 
     /* ==================== BOOTSTRAP ==================== */
     window.addEventListener('DOMContentLoaded', () => {
+      const urlParams = new URLSearchParams(window.location.search);
+
+      // Captura Deep Link de Busca Solidária de Amigos (?ref_pet=ID)
+      capturarDeepLinkPetSolidario();
+
       // Abertura automática do Guia do Testador na primeira visita
       try {
         if (!localStorage.getItem('alerta_guia_testador_visto') && !urlParams.get('no_guia') && !urlParams.get('tab')) {
@@ -9957,7 +10082,6 @@ ${downloadUrl}`;
       document.body.classList.add('tab-inicio');
 
       // Suporte a aba direta via URL (?tab=pets ou #pets)
-      const urlParams = new URLSearchParams(window.location.search);
       const tabParam = urlParams.get('tab') || window.location.hash.replace('#', '');
       if (tabParam && ['inicio', 'mapa', 'pets', 'parceiros', 'copiloto'].includes(tabParam)) {
         setTimeout(() => trocarAba(tabParam), 350);
