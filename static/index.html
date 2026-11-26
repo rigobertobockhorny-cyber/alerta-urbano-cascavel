@@ -5033,7 +5033,7 @@
 
   <!-- ==================== MODAL: PROTOCOLO DE ADOÇÃO CONSCIENTE (v3.11.9) ==================== -->
   <div class="sheet-backdrop" id="modal-protocolo-adocao" onclick="if(event.target===this) fecharProtocoloAdocao()" style="z-index:3200;">
-    <div class="sheet" style="background:#FFFFFF; border-radius:24px 24px 0 0; padding:18px 20px calc(env(safe-area-inset-bottom, 0px) + 24px); max-width:480px; box-shadow:0 -8px 30px rgba(0,0,0,0.18);">
+    <div class="sheet" style="background:#FFFFFF; border-radius:24px 24px 0 0; padding:18px 20px calc(env(safe-area-inset-bottom, 0px) + 24px); max-width:480px; max-height:88vh; overflow-y:auto; -webkit-overflow-scrolling:touch; box-shadow:0 -8px 30px rgba(0,0,0,0.18);">
       <div class="sheet-handle" style="width:36px; height:4px; background:#D1D5DB; border-radius:999px; margin:0 auto 14px;"></div>
       
       <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:12px;">
@@ -5054,6 +5054,69 @@
       <div style="background:#FFFBEB; border:1.5px solid #F59E0B; border-radius:12px; padding:10px 12px; margin-bottom:12px; font-size:11.5px; color:#92400E; line-height:1.45;">
         🛡️ <b>Soberania do Protetor / Tutor • Regra Oficial Alerta Pet:</b><br>
         O Alerta Pet Brasil <b>NÃO realiza doações diretas e NÃO entrega animais</b>. Ao assinar abaixo, você registra sua <b>Pré-Candidatura Consciente</b> e assume compromisso civil perante a Lei Sansão. <b>A aprovação final, entrevista, vistoria da residência e decisão de entrega cabem 100% e com exclusividade ao protetor/tutor</b>, que tem total autonomia para doar ou recusar a doação se julgar que o bem-estar do pet não estará garantido.
+      </div>
+
+      <!-- QUESTIONÁRIO DE PRÉ-QUALIFICAÇÃO DO LAR (DESIGN OFICIAL RIGO) -->
+      <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:14px; padding:12px 14px; margin-bottom:14px;">
+        <div style="font-size:12.5px; font-weight:800; color:#1E293B; margin-bottom:4px; display:flex; align-items:center; gap:6px;">
+          <span>📋</span> Ficha de Pré-Qualificação do Lar
+        </div>
+        <div style="font-size:10.5px; color:#64748B; margin-bottom:12px; line-height:1.4;">
+          Dados objetivos de moradia para avaliação do protetor (protegido pela LGPD).
+        </div>
+
+        <!-- 1. Tipo de Moradia -->
+        <div style="margin-bottom:10px;">
+          <label style="display:block; font-size:11px; font-weight:700; color:#334155; margin-bottom:4px;">Tipo de Residência:</label>
+          <select id="cad-tipo-moradia" onchange="atualizarOpcoesSegurancaMoradia()" style="width:100%; height:36px; border:1px solid #CBD5E1; border-radius:8px; padding:0 8px; font-size:12px; font-weight:600; color:#1E293B; background:#FFFFFF;">
+            <option value="Casa com Quintal">🏠 Casa com Quintal Fechado</option>
+            <option value="Apartamento">🏢 Apartamento</option>
+            <option value="Chácara / Sítio">🌳 Chácara / Sítio</option>
+            <option value="Casa sem Quintal">🏡 Casa sem Quintal Livre</option>
+          </select>
+        </div>
+
+        <!-- 2. Segurança do Imóvel (Muros / Telas) -->
+        <div style="margin-bottom:10px;">
+          <label style="display:block; font-size:11px; font-weight:700; color:#334155; margin-bottom:4px;">Segurança Física contra Fugas:</label>
+          <select id="cad-seguranca-imovel" style="width:100%; height:36px; border:1px solid #CBD5E1; border-radius:8px; padding:0 8px; font-size:12px; font-weight:600; color:#1E293B; background:#FFFFFF;">
+            <option value="Muros altos e portão fechado sem frestas">Muros altos e portão seguro sem frestas</option>
+            <option value="Telas de proteção em janelas e sacadas">Telas de proteção instaladas em janelas e sacadas</option>
+            <option value="Instalarei telas / muros antes de receber o pet">Instalarei telas/adequações antes de receber o pet</option>
+            <option value="Canil / Gatil telado e estruturado">Canil / Gatil estruturado e coberto</option>
+          </select>
+        </div>
+
+        <!-- 3. Moradores e Crianças -->
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:10px;">
+          <div>
+            <label style="display:block; font-size:11px; font-weight:700; color:#334155; margin-bottom:4px;">Pessoas no Imóvel:</label>
+            <select id="cad-pessoas" style="width:100%; height:36px; border:1px solid #CBD5E1; border-radius:8px; padding:0 6px; font-size:11.5px; font-weight:600; color:#1E293B; background:#FFFFFF;">
+              <option value="Moro sozinho(a)">1 pessoa (moro só)</option>
+              <option value="2 a 3 pessoas" selected>2 a 3 pessoas</option>
+              <option value="4 ou mais pessoas">4 ou mais pessoas</option>
+            </select>
+          </div>
+          <div>
+            <label style="display:block; font-size:11px; font-weight:700; color:#334155; margin-bottom:4px;">Crianças no Lar:</label>
+            <select id="cad-criancas" style="width:100%; height:36px; border:1px solid #CBD5E1; border-radius:8px; padding:0 6px; font-size:11.5px; font-weight:600; color:#1E293B; background:#FFFFFF;">
+              <option value="Apenas adultos" selected>Apenas adultos</option>
+              <option value="Crianças maiores de 6 anos">Crianças maiores (> 6 anos)</option>
+              <option value="Crianças pequenas (até 5 anos)">Crianças pequenas (≤ 5 anos)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- 4. Outros Animais -->
+        <div>
+          <label style="display:block; font-size:11px; font-weight:700; color:#334155; margin-bottom:4px;">Já possui outros animais na casa?</label>
+          <select id="cad-outros-pets" style="width:100%; height:36px; border:1px solid #CBD5E1; border-radius:8px; padding:0 8px; font-size:12px; font-weight:600; color:#1E293B; background:#FFFFFF;">
+            <option value="Nenhum outro animal" selected>Não possui outros animais</option>
+            <option value="Possuo cão(es) sociável(is)">Sim, possuo cão(es) sociável(is)</option>
+            <option value="Possuo gato(s) castrado(s)">Sim, possuo gato(s) castrado(s)</option>
+            <option value="Possuo cães e gatos">Sim, convivem cães e gatos</option>
+          </select>
+        </div>
       </div>
 
       <div style="font-size:12px; color:#374151; line-height:1.45; margin-bottom:12px; font-weight:600;">
@@ -5241,7 +5304,7 @@
 
   <!-- ==================== MODAL: GOOGLE SIGN-IN SHEET OFICIAL ==================== -->
   <div class="sheet-backdrop" id="modal-google-auth" onclick="if(event.target===this) fecharGoogleAuth()" style="z-index:3100;">
-    <div class="sheet" style="background:#FFFFFF; border-radius:24px 24px 0 0; padding:18px 20px calc(env(safe-area-inset-bottom, 0px) + 24px); max-width:480px; box-shadow:0 -8px 30px rgba(0,0,0,0.18);">
+    <div class="sheet" style="background:#FFFFFF; border-radius:24px 24px 0 0; padding:18px 20px calc(env(safe-area-inset-bottom, 0px) + 24px); max-width:480px; max-height:88vh; overflow-y:auto; -webkit-overflow-scrolling:touch; box-shadow:0 -8px 30px rgba(0,0,0,0.18);">
       <div class="sheet-handle" style="width:36px; height:4px; background:#D1D5DB; border-radius:999px; margin:0 auto 16px;"></div>
       
       <!-- Topo Google com Logo Oficial Colorida -->
@@ -6981,6 +7044,17 @@
       }
     }
 
+    function atualizarOpcoesSegurancaMoradia() {
+      const tipo = document.getElementById('cad-tipo-moradia')?.value || '';
+      const segSel = document.getElementById('cad-seguranca-imovel');
+      if (!segSel) return;
+      if (tipo === 'Apartamento') {
+        segSel.value = 'Telas de proteção em janelas e sacadas';
+      } else if (tipo === 'Casa com Quintal' || tipo === 'Chácara / Sítio') {
+        segSel.value = 'Muros altos e portão fechado sem frestas';
+      }
+    }
+
     function fecharProtocoloAdocao() {
       const modal = document.getElementById('modal-protocolo-adocao');
       if (modal) {
@@ -7013,8 +7087,15 @@
       const pBairro = (state.perfil && state.perfil.bairro) ? state.perfil.bairro : 'Cascavel';
       const pWa = (state.perfil && state.perfil.whatsapp) ? state.perfil.whatsapp : '';
 
-      // Registra o Aceite Digital Vinculante na API do Alerta Pet Brasil
-      let protocolo = 'AP-ADOC-' + Math.random().toString(36).substring(2, 8).toUpperCase();
+      // Coleta dados socioambientais preenchidos
+      const moradia = document.getElementById('cad-tipo-moradia')?.value || 'Casa com Quintal';
+      const seguranca = document.getElementById('cad-seguranca-imovel')?.value || 'Muros altos e portão seguro';
+      const pessoas = document.getElementById('cad-pessoas')?.value || '2 a 3 pessoas';
+      const criancas = document.getElementById('cad-criancas')?.value || 'Apenas adultos';
+      const outrosPets = document.getElementById('cad-outros-pets')?.value || 'Nenhum outro animal';
+
+      // Registra a Pré-Candidatura Consciente na API
+      let protocolo = 'AP-CAND-' + Math.random().toString(36).substring(2, 8).toUpperCase();
       try {
         const resp = await fetch(`/api/pets/${petIdAdocaoAtual}/aceite-adocao`, {
           method: 'POST',
@@ -7022,7 +7103,13 @@
           body: JSON.stringify({
             autor_token: state.userToken || '',
             nome: pNome,
-            whatsapp: pWa
+            whatsapp: pWa,
+            tipo_moradia: moradia,
+            seguranca_imovel: seguranca,
+            qtd_moradores: pessoas,
+            criancas_casa: criancas,
+            outros_pets: outrosPets,
+            consenso_familiar: 1
           })
         });
         if (resp.ok) {
@@ -7035,11 +7122,16 @@
 
       const texto = `Olá! Vi o animalzinho *${pet.titulo}* anunciado para adoção responsável no *Alerta Pet Brasil*.
 
-Eu me chamo *${pNome}*, resido no bairro *${pBairro}* e registrei minha *Pré-Candidatura Consciente* na plataforma, assinando digitalmente a ciência da Lei Federal 9.605/98 / Lei Sansão (crime inafiançável de abandono com pena de 2 a 5 anos de reclusão).
+Eu me chamo *${pNome}*, resido no bairro *${pBairro}* e acabei de preencher minha *Ficha de Pré-Candidatura Consciente* na plataforma:
 
-📋 *Protocolo de Pré-Candidatura:* ${protocolo}
+📋 *Protocolo Oficial:* ${protocolo}
+🏠 *Tipo de Moradia:* ${moradia}
+🛡️ *Segurança do Imóvel:* ${seguranca}
+👨‍👩‍👧 *Família no Imóvel:* ${pessoas} (${criancas})
+🐾 *Outros animais no lar:* ${outrosPets}
+⚖️ *Compromisso Legal:* Ciência assinada da Lei Federal 9.605/98 / Lei Sansão (abandono e maus-tratos são crimes inafiançáveis com 2 a 5 anos de reclusão).
 
-Gostaria de saber se ele ainda está disponível e me coloco à sua inteira disposição para sua avaliação, entrevista sobre meu lar e visita presencial para saber se estou apto a recebê-lo!`;
+Gostaria de saber se o animalzinho ainda está disponível e me coloco à sua inteira disposição para sua entrevista, perguntas sobre meu lar e visita presencial para verificar se estou apto a acolhê-lo!`;
 
       const tel = pet.contato || '45999332144';
       const limpo = tel.replace(/\D/g, '');

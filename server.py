@@ -173,9 +173,27 @@ def init_db():
             adotante_whatsapp TEXT,
             ip_origem TEXT,
             protocolo_hash TEXT UNIQUE,
+            tipo_moradia TEXT DEFAULT 'Casa com Quintal',
+            seguranca_imovel TEXT DEFAULT 'Muros altos e portão seguro',
+            criancas_casa TEXT DEFAULT 'Apenas adultos',
+            qtd_moradores TEXT DEFAULT '2 a 3 pessoas',
+            outros_pets TEXT DEFAULT 'Nenhum outro animal',
+            consenso_familiar INTEGER DEFAULT 1,
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         );
     ''')
+    for col_def in [
+        ("tipo_moradia", "TEXT DEFAULT 'Casa com Quintal'"),
+        ("seguranca_imovel", "TEXT DEFAULT 'Muros altos e portão seguro'"),
+        ("criancas_casa", "TEXT DEFAULT 'Apenas adultos'"),
+        ("qtd_moradores", "TEXT DEFAULT '2 a 3 pessoas'"),
+        ("outros_pets", "TEXT DEFAULT 'Nenhum outro animal'"),
+        ("consenso_familiar", "INTEGER DEFAULT 1")
+    ]:
+        try:
+            cur.execute(f"ALTER TABLE adocao_aceites ADD COLUMN {col_def[0]} {col_def[1]};")
+        except Exception:
+            pass
     cur.execute("CREATE INDEX IF NOT EXISTS idx_adocao_aceites_pet ON adocao_aceites (pet_id);")
 
     cur.execute("CREATE INDEX IF NOT EXISTS idx_alertas_pet_pai ON alertas (pet_pai_id);")
