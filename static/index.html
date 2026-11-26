@@ -8419,10 +8419,11 @@ ${downloadUrl}`;
       } catch (_) {}
     }
 
-    /* ==================== GPS & BRIDGE ANDROID (MODO TESTE RIGO DESTRAVADO) ==================== */
+    /* ==================== GPS & BRIDGE ANDROID (REGRA PÉTREA DE 12 HORAS E ANTI-SPAM) ==================== */
     let _ultimoRadarCheck = 0;
-    let _ultimoAvisoVozGlobalMs = 0; // Cooldown zerado: canta na inicialização e sempre que entrar
+    let _ultimoAvisoVozGlobalMs = 0;
     let _audioRadarAtual = null;
+    const RADAR_DOZE_HORAS_MS = 12 * 60 * 60 * 1000;
 
     function receberGpsNativo(lat, lng, acc) {
       if (!lat || !lng) return;
@@ -8430,13 +8431,30 @@ ${downloadUrl}`;
       state.userLng = Number(lng);
       atualizarStatusGps('ok', `Conectado (±${Math.round(acc || 15)}m)`);
       atualizarMarcadorUsuario();
-      verificarRadarProximidadeWeb(state.userLat, state.userLng, true);
+      verificarRadarProximidadeWeb(state.userLat, state.userLng, false);
     }
 
     function verificarRadarProximidadeWeb(lat, lng, forcarEntrada = false) {
       const agora = Date.now();
-      if (!forcarEntrada && agora - _ultimoRadarCheck < 1500) return;
+      // Debounce: mínimo de 4 segundos entre verificações de radar
+      if (!forcarEntrada && (agora - _ultimoRadarCheck < 4000)) return;
       _ultimoRadarCheck = agora;
+
+      // Trava 1 (Mutex de Áudio): se a voz já está tocando, NUNCA sobrepõe ou reinicia
+      if (ttsAudioPlayer && !ttsAudioPlayer.paused && ttsAudioPlayer.currentTime < (ttsAudioPlayer.duration || 10)) {
+        return;
+      }
+
+      // Trava 2 (Mutex Visual): se o card do radar já está na tela, não redispara
+      const cardAberto = document.getElementById('card-radar-topo-web');
+      if (cardAberto && cardAberto.style.display !== 'none') {
+        return;
+      }
+
+      // Trava 3 (Silêncio Global): intervalo mínimo de 60s entre quaisquer avisos sonoros
+      if (!forcarEntrada && (agora - _ultimoAvisoVozGlobalMs < 60000)) {
+        return;
+      }
 
       const pLat = lat || state.userLat || -24.928124;
       const pLng = lng || state.userLng || -53.432286;
@@ -8455,26 +8473,36 @@ ${downloadUrl}`;
       if (!petsPerdidos.length) return;
 
       let petMaisProximo = null;
-      let menorDist = 3000; // Raio ampliado de 3.0 km para teste infalível
+      let menorDist = 1200; // Raio oficial de 1.2 km
 
       for (const pet of petsPerdidos) {
-        const d = calcularDistanciaM(pLat, pLng, Number(pet.lat), Number(pet.lng));
-        // Destravado: sem cooldown de 12 horas para testes contínuos
-        try {
-          localStorage.removeItem('radar_pet_cd_' + pet.id);
-          localStorage.removeItem('radar_pet_cd_5514');
-        } catch (_) {}
+        // Regra Pétrea 1: Cooldown de 12 horas por pet em localStorage
+        const ultimoAviso = Number(localStorage.getItem('radar_pet_cd_' + pet.id) || 0);
+        if (!forcarEntrada && (agora - ultimoAviso < RADAR_DOZE_HORAS_MS)) {
+          continue; // Já avisado nas últimas 12h: silêncio absoluto
+        }
 
+        // Regra Pétrea 2: Trava de Sessão (máximo 1 aviso do pet por abertura do app)
+        if (!forcarEntrada && sessionStorage.getItem('radar_aviso_sessao_' + pet.id)) {
+          continue;
+        }
+
+        const d = calcularDistanciaM(pLat, pLng, Number(pet.lat), Number(pet.lng));
         const ehTico = (pet.id === 5514 || (pet.titulo || '').toLowerCase().includes('tico'));
-        if (ehTico || (d != null && d <= 3000 && d < menorDist)) {
+        if (ehTico || (d != null && d <= 1200 && d < menorDist)) {
           menorDist = d || 50;
           petMaisProximo = { ...pet, distM: Math.round(d != null ? d : 50) };
-          if (ehTico) break; // Prioridade máxima se o Tico estiver na região
+          if (ehTico) break;
         }
       }
 
       if (petMaisProximo) {
         _ultimoAvisoVozGlobalMs = agora;
+        // Grava o cooldown imediatamente antes de tocar
+        try {
+          localStorage.setItem('radar_pet_cd_' + petMaisProximo.id, agora.toString());
+          sessionStorage.setItem('radar_aviso_sessao_' + petMaisProximo.id, '1');
+        } catch (_) {}
         dispararAlertaRadarWeb(petMaisProximo);
       }
     }
@@ -8636,9 +8664,6 @@ ${downloadUrl}`;
       `;
 
       card.style.display = 'flex';
-
-      // Limpa cooldown do teste do Tico para testes contínuos
-      try { localStorage.removeItem('radar_pet_cd_5514'); } catch (_) {}
 
       // Sincronia de Áudio & Card: quando a fala termina, aguarda 1s e fecha
       if (ttsAudioPlayer) {
