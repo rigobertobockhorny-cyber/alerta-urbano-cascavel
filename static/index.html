@@ -577,6 +577,7 @@
       -webkit-overflow-scrolling: touch;
       display: none;
       padding: 14px 16px 24px;
+      z-index: 5;
     }
     .tab-pane.active { display: block; }
     /* ONDAS PERMANENTES: Ativas em todas as abas (Inicio, Mapa, Pets, Parceiros, Copiloto) */
@@ -3823,6 +3824,8 @@
       border-radius: 18px !important;
       color: var(--pet-texto-escuro) !important;
       box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08) !important;
+      position: relative !important;
+      z-index: 10 !important;
     }
 
     #tab-pets .pet-card .pet-card-bg-bubbles {
@@ -4826,7 +4829,7 @@
         rgba(0, 155, 58, 0.80) 80%, 
         #009B3A 100%) !important;
       pointer-events: none !important;
-      z-index: 10 !important; /* Fica no fundo (z-index 10), BEM ATRÁS de qualquer botão (z-index 500+) */
+      z-index: 1 !important; /* Fica no fundo (z-index 1), BEM ATRÁS das abas e cards */
     }
     body.tab-inicio .main-stage::after,
     body.tab-mapa .main-stage::after {
@@ -6426,7 +6429,7 @@
       <!-- ABA 4: COPILOTO (BOLINHA FLUTUANTE) -->
 
 
-      <section class="tab-pane" id="tab-copiloto" style="padding:4px 14px 16px; box-sizing:border-box; max-width:480px; margin:0 auto; width:100%; overflow-y:hidden;">
+      <section class="tab-pane" id="tab-copiloto" style="padding:4px 14px 20px; box-sizing:border-box; max-width:480px; margin:0 auto; width:100%; overflow-y:hidden;">
 
   <!-- Botão Topo no Degradê Verde: Guia e Missões do Testador (Diretriz Suprema Rigo) -->
   <div style="display:flex; justify-content:center; margin-bottom:8px; margin-top:2px;">
@@ -6483,41 +6486,40 @@
   <div class="settings-group" style="margin-bottom:8px; border-radius:16px; background:#E4D5BC; box-shadow:0 3px 10px rgba(0,0,0,0.06); overflow:hidden;">
     <div style="padding:8px 12px 4px; font-size:13.5px; font-weight:900; color:#2E2417; letter-spacing:0.15px;">O que avisar por voz na rua</div>
     
-    <!-- Item 1: Pets Desaparecidos + Switch Liga/Desliga -->
+    <!-- Item 1: Alertas Climáticos + Switch Liga/Desliga (1º Item - Diretriz Rigo) -->
     <div class="setting-row" style="padding:5px 12px; display:flex; align-items:center; justify-content:space-between;">
-      <div style="display:flex; align-items:center; gap:5px;">
-        <span style="font-size:11.5px; font-weight:800; color:#2E2417;">Pets Desaparecidos</span>
-        <span style="font-size:10.5px; color:#5A4730;" id="label-raio-pet-resumo">• Raio 1.000m</span>
-      </div>
-      <label class="switch"><input type="checkbox" id="pref-pet" checked onchange="alternarAvisosPetCopiloto(this)"><span class="slider"></span></label>
-    </div>
-
-    <!-- SELETOR DE DISTÂNCIA / RAIO EM 3 PÍLULAS (Opção B - Diretriz Rigo) -->
-    <div id="wrap-seletor-raio-pet" style="padding:4px 12px 7px; border-top:1px dashed rgba(110,90,60,0.18); background:rgba(237,232,223,0.45);">
-      <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:3px;">
-        <span style="font-size:10px; font-weight:800; color:#2E2417;">Raio de Alerta por Voz:</span>
-        <span style="font-size:9.5px; font-weight:800; color:#009B3A;" id="badge-raio-atual">1.000m (Recomendado)</span>
-      </div>
-      <div style="display:grid; grid-template-columns:1fr 1.35fr 1fr; gap:5px; background:#EDE8DF; padding:3px; border-radius:10px;">
-        <button type="button" id="btn-raio-500" class="btn-raio-pill" onclick="selecionarRaioCopiloto('500')">
-          500m
-        </button>
-        <button type="button" id="btn-raio-1000" class="btn-raio-pill active" onclick="selecionarRaioCopiloto('1000')">
-          1.000m Padrão
-        </button>
-        <button type="button" id="btn-raio-2000" class="btn-raio-pill" onclick="selecionarRaioCopiloto('2000')">
-          2.000m
-        </button>
-      </div>
-    </div>
-
-    <!-- Item 2: Alertas Climáticos + Switch Liga/Desliga -->
-    <div class="setting-row" style="padding:5px 12px; border-top:1px solid rgba(0,0,0,0.05); display:flex; align-items:center; justify-content:space-between;">
       <div style="display:flex; align-items:center; gap:5px;">
         <span style="font-size:11.5px; font-weight:800; color:#2E2417;">Alertas Climáticos</span>
         <span style="font-size:10.5px; color:#5A4730;">• Defesa Civil</span>
       </div>
       <label class="switch"><input type="checkbox" id="pref-uti" checked onchange="salvarPrefsCopiloto()"><span class="slider"></span></label>
+    </div>
+
+    <!-- Item 2: Pets Desaparecidos + Switch Liga/Desliga (2º Item - Diretriz Rigo) -->
+    <div class="setting-row" style="padding:5px 12px; border-top:1px solid rgba(0,0,0,0.05); display:flex; align-items:center; justify-content:space-between;">
+      <div style="display:flex; align-items:center; gap:5px;">
+        <span style="font-size:11.5px; font-weight:800; color:#2E2417;">Pets Desaparecidos</span>
+        <span style="font-size:10.5px; color:#5A4730; display:inline-flex; align-items:center;" id="label-raio-pet-resumo">• Raio 1.000m <span id="badge-rec-pet" style="font-size:9.5px; background:#009B3A; color:#FFFFFF; padding:1px 5px; border-radius:6px; font-weight:700; margin-left:4px;">Recomendado</span></span>
+      </div>
+      <label class="switch"><input type="checkbox" id="pref-pet" checked onchange="alternarAvisosPetCopiloto(this)"><span class="slider"></span></label>
+    </div>
+
+    <!-- SELETOR DE DISTÂNCIA / RAIO EM 3 PÍLULAS (Opção B - Diretriz Rigo: 500m | 1.000m | 2.000m) -->
+    <div id="wrap-seletor-raio-pet" style="padding:5px 12px 8px; border-top:1px dashed rgba(110,90,60,0.18); background:rgba(237,232,223,0.45);">
+      <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:4px;">
+        <span style="font-size:10px; font-weight:800; color:#2E2417;">Raio de Alerta por Voz:</span>
+      </div>
+      <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:5px; background:#EDE8DF; padding:3px; border-radius:10px;">
+        <button type="button" id="btn-raio-500" class="btn-raio-pill" onclick="selecionarRaioCopiloto('500')">
+          500m
+        </button>
+        <button type="button" id="btn-raio-1000" class="btn-raio-pill active" onclick="selecionarRaioCopiloto('1000')">
+          1.000m
+        </button>
+        <button type="button" id="btn-raio-2000" class="btn-raio-pill" onclick="selecionarRaioCopiloto('2000')">
+          2.000m
+        </button>
+      </div>
     </div>
   </div>
 
@@ -11685,7 +11687,13 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
           : (raioPetAtual === '500' ? '500m (Perto)' : '2.000m (Amplo)');
       }
       if (resumoHeader) {
-        resumoHeader.textContent = `• Raio ${raioPetAtual === '2000' ? '2.000m' : (raioPetAtual === '500' ? '500m' : '1.000m')}`;
+        if (raioPetAtual === '1000') {
+          resumoHeader.innerHTML = '• Raio 1.000m <span id="badge-rec-pet" style="font-size:9.5px; background:#009B3A; color:#FFFFFF; padding:1px 5px; border-radius:6px; font-weight:700; margin-left:4px;">Recomendado</span>';
+        } else if (raioPetAtual === '500') {
+          resumoHeader.innerHTML = '• Raio 500m';
+        } else if (raioPetAtual === '2000') {
+          resumoHeader.innerHTML = '• Raio 2.000m';
+        }
       }
 
       salvarPrefsCopilotoSilencioso();
@@ -11703,7 +11711,7 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
         wrap.style.display = ligado ? 'block' : 'none';
       }
       if (resumo) {
-        resumo.style.display = ligado ? 'inline' : 'none';
+        resumo.style.display = ligado ? 'inline-flex' : 'none';
       }
       salvarPrefsCopiloto();
     }
