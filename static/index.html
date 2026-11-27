@@ -4633,9 +4633,9 @@
 
     /* Card de Perfil de Rede Social para Swipe (Calibrado para Logos e Zero Scroll - Diretriz Rigo) */
     .card-perfil-swipe {
-      flex: 0 0 175px;
-      height: 188px;
-      min-height: 188px;
+      flex: 0 0 170px;
+      height: 172px;
+      min-height: 172px;
       scroll-snap-align: start;
       background: #FAF7F2;
       border: 1.5px solid rgba(110, 90, 60, 0.22);
@@ -4651,6 +4651,29 @@
     }
     .card-perfil-swipe:active {
       transform: scale(0.97);
+    }
+
+    /* Quadradinhos de Apoio / Espaço Destinado a Patrocinadores (Diretriz Rigo) */
+    .quadradinho-apoio {
+      width: 52px;
+      height: 44px;
+      flex-shrink: 0;
+      border-radius: 12px;
+      background: #FFFFFF;
+      border: 1.5px solid rgba(0, 155, 58, 0.35);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: transform 0.15s ease;
+      overflow: hidden;
+      padding: 2px 4px;
+      box-sizing: border-box;
+    }
+    .quadradinho-apoio:active {
+      transform: scale(0.93);
     }
 
     /* Esteira de Logos de Patrocinadores Master */
@@ -4829,12 +4852,12 @@
           </div>
         </div>
 
-        <!-- 3. FAIXA EXCLUSIVA APOIE-NOS: APENAS A ESCRITA EM BRANCO NO DEGRADÊ (Sem pílulas, sem emojis coloridos, sem coração - Diretriz Rigo) -->
-        <div class="home-apoie-zone" id="home-apoie-zone" style="padding:4px 0 6px; margin-top:2px;">
-          <!-- Esteira de Apoie-nos que corre suave e pode ser passada no dedo -->
+        <!-- 3. ESTEIRA DE QUADRADINHOS DE APOIO / MARCAS (DIRETRIZ OFICIAL RIGO: ESPAÇO VISUAL DESTINADO ÀS COTAS DE APOIO) -->
+        <div class="home-apoie-zone" id="home-apoie-zone" style="padding:2px 0 4px; margin-top:2px;">
+          <!-- Esteira de Quadradinhos de Apoio que corre suave e pode ser passada no dedo -->
           <div class="apoie-scroll-viewport" id="apoie-scroll-viewport">
             <div class="apoie-text-track" id="belt-apoio-track">
-              <!-- Texto corrido Apoie-nos preenchido via JS -->
+              <!-- Quadradinhos de apoio preenchidos via JS -->
             </div>
           </div>
         </div>
@@ -7309,17 +7332,25 @@
       const track = document.getElementById('belt-apoio-track');
       if (!track) return;
 
-      // REGRA OFICIAL RIGO: Apenas o texto puro 'Apoie-nos' correndo no degradê em branco, sem pílulas e sem emojis!
-      const repeticoes = 8;
-      let html = '';
-      for (let i = 0; i < repeticoes; i++) {
-        html += `
-          <span style="font-size:13px; font-weight:900; color:#FFFFFF; letter-spacing:0.8px; text-shadow:0 1px 3px rgba(0,0,0,0.35); text-transform:none; cursor:pointer;">Apoie-nos</span>
-          <span style="font-size:10px; color:rgba(255,255,255,0.6); margin:0 14px; user-select:none;">•</span>
-        `;
-      }
+      // QUADRADINHOS DE APOIO / MARCAS PARCEIRAS (DIRETRIZ OFICIAL RIGO: ESPAÇO DESTINADO AOS APOIADORES)
+      const slotsApoio = [
+        { id: 'havan', html: '<span style="font-size:10px; font-weight:900; color:#002B66; font-family:Arial Black, Impact, sans-serif; letter-spacing:0.5px;">HAVAN</span>' },
+        { id: 'pedigree', html: '<span style="font-size:10.5px; font-weight:900; color:#C4121A; font-family:Georgia, serif; font-style:italic;">Pedigree</span>' },
+        { id: 'premier', html: '<span style="font-size:9.5px; font-weight:900; color:#B48A27; font-family:serif;">PremieR</span><span style="font-size:6.5px; font-weight:800; color:#000000; letter-spacing:1px;">PET</span>' },
+        { id: 'zoetis', html: '<span style="font-size:10.5px; font-weight:900; color:#C2410C; letter-spacing:-0.2px;">zoetis</span>' },
+        { id: 'uber', html: '<span style="font-size:11px; font-weight:900; color:#000000;">Uber</span>' },
+        { id: 'cota1', html: '<span style="font-size:8px; font-weight:900; color:#009B3A; text-align:center; line-height:1.1;">+ APOIE<br><span style="font-size:6.5px; color:#5A4730;">AQUI</span></span>' },
+        { id: 'ifood', html: '<span style="font-size:10.5px; font-weight:900; color:#EA1D2C; font-style:italic;">iFood</span>' },
+        { id: 'petshop', html: '<span style="font-size:8.5px; font-weight:900; color:#2E2417; text-align:center; line-height:1.1;">PetShop<br><span style="font-size:6.5px; color:#009B3A;">Cascavel</span></span>' }
+      ];
 
-      track.innerHTML = html + html;
+      const htmlSlots = slotsApoio.map(s => `
+        <div class="quadradinho-apoio" onclick="mostrarToast('⭐ Espaço Oficial de Apoio Alerta Pet Brasil!')" title="Espaço Destinado a Apoiadores">
+          ${s.html}
+        </div>
+      `).join('');
+
+      track.innerHTML = htmlSlots + htmlSlots;
     }
 
     function renderizarEsteiraParceirosHome() {
