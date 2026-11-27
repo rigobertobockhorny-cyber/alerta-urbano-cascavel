@@ -4138,59 +4138,115 @@
        MODAL DE PERFIL — PALETA OFICIAL RIGO
        FUNDO MARROM (#9E8560) | BLOCOS AREIA (#E4D5BC) | BOTÕES CINZA
        ======================================================== */
+    /* ========================================================
+       MODAL PERFIL & ACESSO (PADRÃO PRINT 2 DIRETRIZ RIGO)
+       Fundo Degradê Verde-Areia-Verde • Cards Arenosos • Botões Marrom
+       ======================================================== */
     #modal-perfil {
-      background: var(--pet-marrom) !important;
+      background: linear-gradient(180deg, 
+        #009B3A 0px, 
+        #009B3A 22px, 
+        #1EA54F 30px, 
+        #3BAE63 38px, 
+        #59B878 46px, 
+        #76C18C 54px, 
+        #9ECFA8 60px, 
+        #C9DFC9 66px, 
+        #EDE8DF 72px, 
+        #EDE8DF calc(100% - 72px), 
+        #D5DDD0 calc(100% - 56px), 
+        #B0C3AA calc(100% - 42px), 
+        #7DAB80 calc(100% - 28px), 
+        #4D985B calc(100% - 16px), 
+        #21853D calc(100% - 8px), 
+        #009B3A 100%) !important;
     }
     #modal-perfil .profile-fs-header {
-      background: var(--pet-verde) !important;
+      background: transparent !important;
+      border-bottom: none !important;
       color: #FFFFFF !important;
     }
-    #modal-perfil .profile-back-btn,
-    #modal-perfil #perfil-header-title {
+    .btn-voltar-acesso {
+      height: 32px !important;
+      padding: 0 14px !important;
+      background: #5A4730 !important;
       color: #FFFFFF !important;
+      border: 1.5px solid #443B2C !important;
+      border-radius: 999px !important;
+      font-size: 12px !important;
+      font-weight: 800 !important;
+      cursor: pointer !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 4px !important;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15) !important;
+      transition: all 0.15s ease !important;
     }
-    #modal-perfil #perfil-header-sub {
-      color: #EDE8DF !important;
+    .btn-voltar-acesso:active {
+      transform: scale(0.96) !important;
+    }
+    .btn-google-auth-marrom {
+      width: 100% !important;
+      height: 46px !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      gap: 10px !important;
+      background: #5A4730 !important;
+      color: #FFFFFF !important;
+      border: 1.5px solid #443B2C !important;
+      border-radius: 12px !important;
+      font-size: 13.5px !important;
+      font-weight: 900 !important;
+      letter-spacing: 0.3px !important;
+      cursor: pointer !important;
+      box-shadow: 0 3px 10px rgba(90, 71, 48, 0.25) !important;
+      transition: all 0.15s ease !important;
+    }
+    .btn-google-auth-marrom:active {
+      transform: scale(0.98) !important;
     }
     #modal-perfil .perfil-hero,
     #modal-perfil .perfil-card-box {
-      background: var(--pet-areia) !important;
-      border: 1px solid rgba(110, 90, 60, 0.25) !important;
+      background: #E4D5BC !important;
+      border: 1.5px solid rgba(110, 90, 60, 0.25) !important;
       border-radius: 18px !important;
-      color: var(--pet-texto-escuro) !important;
+      color: #2E2417 !important;
       box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08) !important;
     }
-    #modal-perfil .perfil-hero-nome,
-    #modal-perfil .perfil-nav-title,
-    #modal-perfil .form-label,
-    #modal-perfil .perfil-intro-title {
-      color: var(--pet-texto-escuro) !important;
-      font-weight: 900 !important;
-    }
-    #modal-perfil .perfil-hero-sub,
-    #modal-perfil .perfil-nav-sub,
-    #modal-perfil .perfil-intro-sub {
-      color: #5A4730 !important;
+    #modal-perfil .form-label {
+      color: #2E2417 !important;
+      font-weight: 800 !important;
     }
     #modal-perfil .form-input,
     #modal-perfil .form-select {
-      background: var(--pet-bege) !important;
-      border: 1.5px solid rgba(110, 90, 60, 0.25) !important;
-      color: var(--pet-texto-escuro) !important;
-      border-radius: 12px !important;
+      background: #EDE8DF !important;
+      border: 1.5px solid rgba(110, 90, 60, 0.28) !important;
+      color: #2E2417 !important;
+      border-radius: 8px !important;
+      font-weight: 600 !important;
     }
-    /* BOTÕES CINZA NO MODAL PERFIL */
+    #modal-perfil .form-input:focus,
+    #modal-perfil .form-select:focus {
+      border-color: #5A4730 !important;
+      outline: none !important;
+    }
+    /* BOTÕES MARROM NO MODAL PERFIL (ELIMINAÇÃO TOTAL DO CINZA - DIRETRIZ RIGO) */
     #modal-perfil .btn-submit,
     #modal-perfil .btn-cadastrar-entrar,
     #modal-perfil .btn-salvar-perfil,
-    #modal-perfil button.btn-cinza,
-    #modal-perfil .fs-body button[type="button"]:not(.fs-back):not(.sheet-close) {
-      background: #71717A !important;
+    #modal-perfil button.btn-marrom-padrao {
+      background: #5A4730 !important;
       color: #FFFFFF !important;
-      border: 1.5px solid #52525B !important;
+      border: 1.5px solid #443B2C !important;
       border-radius: 12px !important;
-      font-weight: 800 !important;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
+      font-weight: 900 !important;
+      box-shadow: 0 3px 10px rgba(90, 71, 48, 0.25) !important;
+      transition: all 0.15s ease !important;
+    }
+    #modal-perfil .btn-submit:active,
+    #modal-perfil .btn-cadastrar-entrar:active {
+      transform: scale(0.98) !important;
     }
     #modal-perfil .perfil-nav-row {
       border-bottom: 1px solid rgba(110, 90, 60, 0.15) !important;
@@ -5981,10 +6037,10 @@
       stroke: #FFFFFF !important;
     }
 
-    /* 8. MODAIS, GAVETAS E PERFIL */
+    /* 8. MODAIS, GAVETAS E PERFIL NO MODO NOTURNO */
     [data-theme="dark"] #modal-perfil,
     body.theme-dark #modal-perfil {
-      background: #0F1115 !important;
+      background: #000000 !important;
     }
 
     [data-theme="dark"] #modal-perfil .profile-fs-header,
@@ -5993,13 +6049,36 @@
       border-bottom: 1px solid rgba(255, 255, 255, 0.10) !important;
     }
 
+    [data-theme="dark"] .btn-voltar-acesso,
+    body.theme-dark .btn-voltar-acesso {
+      background: #000000 !important;
+      border: 1.5px solid #FFFFFF !important;
+      color: #FFFFFF !important;
+    }
+
+    [data-theme="dark"] .btn-google-auth-marrom,
+    body.theme-dark .btn-google-auth-marrom {
+      background: #000000 !important;
+      border: 1.5px solid #FFFFFF !important;
+      color: #FFFFFF !important;
+    }
+
     [data-theme="dark"] #modal-perfil .perfil-hero,
     [data-theme="dark"] #modal-perfil .perfil-card-box,
     body.theme-dark #modal-perfil .perfil-hero,
     body.theme-dark #modal-perfil .perfil-card-box {
-      background: #181A1F !important;
-      border: 1px solid rgba(255, 255, 255, 0.08) !important;
-      color: #F8FAFC !important;
+      background: #14161B !important;
+      border: 1px solid rgba(255, 255, 255, 0.12) !important;
+      color: #FFFFFF !important;
+    }
+
+    [data-theme="dark"] #modal-perfil .btn-submit,
+    [data-theme="dark"] #modal-perfil .btn-cadastrar-entrar,
+    body.theme-dark #modal-perfil .btn-submit,
+    body.theme-dark #modal-perfil .btn-cadastrar-entrar {
+      background: #000000 !important;
+      color: #FFFFFF !important;
+      border: 1.5px solid #FFFFFF !important;
     }
 
 </style>
@@ -7040,108 +7119,151 @@
 
   <!-- ==================== TELA COMPLETA: MEU PERFIL & CADASTRO ==================== -->
   <div class="full-screen-view" id="modal-perfil">
-    <div class="fs-header profile-fs-header">
-      <button type="button" class="fs-back profile-back-btn" onclick="fecharModal('modal-perfil')">‹ Voltar</button>
+    <!-- Topo Centralizado de Acesso & Cadastro com Degradê Brasil -->
+    <div class="fs-header profile-fs-header" style="justify-content:center; position:relative;">
       <div style="text-align:center;">
-        <div style="font-size:16px; font-weight:900;" id="perfil-header-title">Minha Conta</div>
-        <div style="font-size:10.5px; font-weight:800; letter-spacing:0.5px;" id="perfil-header-sub">Alerta Pet Brasil</div>
+        <div style="font-size:18px; font-weight:900; color:#FFFFFF; letter-spacing:0.3px;" id="perfil-header-title">Acesso & Cadastro</div>
+        <div style="font-size:11px; font-weight:800; color:#FED700; letter-spacing:0.5px;" id="perfil-header-sub">Alerta Pet Brasil</div>
       </div>
-      <div style="width:48px;"></div> <!-- Espaçador para equilíbrio visual sem botão redundante -->
-    </div>
-    <div class="profile-river-wave">
-      <svg viewBox="0 0 500 20" preserveAspectRatio="none">
-        <path d="M 0,0 L 500,0 L 500,6 C 420,18 330,2 240,14 C 150,22 80,4 0,16 Z" fill="#009B3A"/>
-      </svg>
     </div>
 
-    <div class="fs-body" style="max-width:540px; margin:0 auto; width:100%;">
-      <!-- ESTADO 1: TELA DE CADASTRO / LOGIN (ZERO SCROLL VIEWPORT) -->
-      <div id="perfil-view-cadastro" style="display:none; padding:4px 0;">
-        <div style="text-align:center; padding:0 0 8px;">
-          <div style="font-size:12px; font-weight:700; color:#52525B;">Cadastre-se para publicar, reencontrar e resgatar animais</div>
+    <!-- Botão Voltar separado no início da área de conteúdo com suspiro -->
+    <div style="max-width:540px; margin:0 auto; width:100%; padding:6px 16px 2px; display:flex; align-items:center; justify-content:flex-start;">
+      <button type="button" class="btn-voltar-acesso" onclick="fecharModal('modal-perfil')">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        <span>Voltar</span>
+      </button>
+    </div>
+
+    <div class="fs-body" style="max-width:540px; margin:0 auto; width:100%; overflow-y:auto;">
+      <!-- ESTADO 1: TELA DE CADASTRO / LOGIN (PADRÃO PRINT 2 DIRETRIZ RIGO) -->
+      <div id="perfil-view-cadastro" style="display:none; padding:4px 0 24px;">
+        <!-- Frase de Destaque Grande e em Preto com Suspiro -->
+        <div style="text-align:center; padding:10px 16px 14px;">
+          <div style="font-size:15px; font-weight:900; color:#2E2417; line-height:1.35; letter-spacing:0.1px;">
+            Cadastre-se para publicar, reencontrar e resgatar animais
+          </div>
         </div>
 
-        <!-- Botão Google Login -->
-        <button type="button" class="btn-google-auth" onclick="conectarGoogleAuth()" style="width:100%; display:flex; align-items:center; justify-content:center; gap:8px; background:#ffffff; color:#18181b; border:1.5px solid rgba(0,0,0,0.18); border-radius:10px; padding:10px; font-size:13.5px; font-weight:700; cursor:pointer; box-shadow:0 2px 6px rgba(0,0,0,0.06); margin-bottom:8px;">
-          <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg>
-          <span>Continuar com o Google</span>
-        </button>
-
-        <div style="display:flex; align-items:center; gap:8px; margin:6px 0 10px;">
-          <div style="flex:1; height:1px; background:rgba(0,0,0,0.12);"></div>
-          <span style="font-size:11px; color:#71717A; font-weight:700;">ou preencha seus dados abaixo</span>
-          <div style="flex:1; height:1px; background:rgba(0,0,0,0.12);"></div>
-        </div>
-
-        <div class="perfil-card-box" style="padding:12px; margin-bottom:0;">
-          <!-- Seletor de Tipo de Perfil: Tutor vs Protetor/ONG (v3.11.9) -->
-          <div style="margin-bottom:10px;">
-            <label class="form-label" style="font-size:10px; font-weight:800; margin-bottom:4px; display:block; color:#2E2417;">Como você atua na proteção animal?</label>
-            <div style="display:flex; gap:6px;">
-              <button type="button" id="btn-tipo-tutor" onclick="selecionarTipoPerfilCadastro('tutor')" style="flex:1; height:34px; border-radius:8px; font-size:11.5px; font-weight:800; cursor:pointer; background:#009B3A; color:#FFFFFF; border:none; transition:all 0.2s;">
-                Tutor / Cidadão
-              </button>
-              <button type="button" id="btn-tipo-protetor" onclick="selecionarTipoPerfilCadastro('protetor')" style="flex:1.2; height:34px; border-radius:8px; font-size:11.5px; font-weight:800; cursor:pointer; background:#FFFFFF; color:#2E2417; border:1.5px solid rgba(0,0,0,0.15); transition:all 0.2s;">
-                Protetor(a) / ONG
-              </button>
-            </div>
-            <input type="hidden" id="cadastro-input-tipo-perfil" value="tutor">
-          </div>
-
-          <!-- Campos extras para Protetores & ONGs -->
-          <div id="wrap-campos-protetor" style="display:none; background:#F4EFE6; border:1px dashed rgba(110,90,60,0.3); border-radius:10px; padding:10px; margin-bottom:10px;">
-            <div style="font-size:11px; font-weight:800; color:#2E2417; margin-bottom:6px;">Sua Página Pública de Protetor(a)</div>
-            <div style="margin-bottom:6px;">
-              <label class="form-label" for="cadastro-input-bio" style="font-size:10px; font-weight:800; margin-bottom:2px; display:block;">Sua Causa / Apresentação</label>
-              <textarea class="form-input" id="cadastro-input-bio" rows="2" placeholder="Conte brevemente sobre seus resgates e atuação em Cascavel..." style="width:100%; font-size:11.5px; padding:6px; border-radius:6px; box-sizing:border-box; resize:none;"></textarea>
-            </div>
-            <div>
-              <label class="form-label" for="cadastro-input-instagram" style="font-size:10px; font-weight:800; margin-bottom:2px; display:block;">Instagram Oficial da Causa / ONG (Opcional)</label>
-              <input type="text" class="form-input" id="cadastro-input-instagram" placeholder="@seuperfil" style="width:100%; height:32px; font-size:11.5px; padding:4px 8px; border-radius:6px; box-sizing:border-box;">
-            </div>
-          </div>
-
-          <!-- Linha 1: Nome e WhatsApp -->
-          <div style="display:flex; gap:8px; margin-bottom:8px;">
-            <div style="flex:1.2;">
-              <label class="form-label" for="cadastro-input-nome" style="font-size:10px; font-weight:800; margin-bottom:3px; display:block;">Nome Completo</label>
-              <input type="text" class="form-input" id="cadastro-input-nome" placeholder="Seu nome" style="width:100%; height:36px; padding:6px 10px; font-size:12.5px; border-radius:8px; box-sizing:border-box;">
-            </div>
-            <div style="flex:1;">
-              <label class="form-label" for="cadastro-input-whatsapp" style="font-size:10px; font-weight:800; margin-bottom:3px; display:block;">WhatsApp</label>
-              <input type="tel" class="form-input" id="cadastro-input-whatsapp" placeholder="(DD) 99999-9999" style="width:100%; height:36px; padding:6px 10px; font-size:12.5px; border-radius:8px; box-sizing:border-box;">
-            </div>
-          </div>
-
-          <!-- Linha 2: Bairro, Cidade e UF -->
-          <div style="display:flex; gap:8px; margin-bottom:8px;">
-            <div style="flex:1.2;">
-              <label class="form-label" for="cadastro-input-bairro" style="font-size:10px; font-weight:800; margin-bottom:3px; display:block;">Bairro</label>
-              <input type="text" class="form-input" id="cadastro-input-bairro" placeholder="Seu bairro" style="width:100%; height:36px; padding:6px 10px; font-size:12.5px; border-radius:8px; box-sizing:border-box;">
-            </div>
-            <div style="flex:1;">
-              <label class="form-label" for="cadastro-input-cidade" style="font-size:10px; font-weight:800; margin-bottom:3px; display:block;">Cidade</label>
-              <input type="text" class="form-input" id="cadastro-input-cidade" placeholder="Sua cidade" style="width:100%; height:36px; padding:6px 10px; font-size:12.5px; border-radius:8px; box-sizing:border-box;">
-            </div>
-            <div style="width:62px;">
-              <label class="form-label" for="cadastro-select-estado" style="font-size:10px; font-weight:800; margin-bottom:3px; display:block;">UF</label>
-              <select class="form-select" id="cadastro-select-estado" style="width:100%; height:36px; padding:6px 4px; font-size:12px; border-radius:8px; box-sizing:border-box;">
-                <option value="" disabled selected>UF</option>
-                <option value="AC">AC</option><option value="AL">AL</option><option value="AP">AP</option><option value="AM">AM</option><option value="BA">BA</option><option value="CE">CE</option><option value="DF">DF</option><option value="ES">ES</option><option value="GO">GO</option><option value="MA">MA</option><option value="MT">MT</option><option value="MS">MS</option><option value="MG">MG</option><option value="PA">PA</option><option value="PB">PB</option><option value="PR">PR</option><option value="PE">PE</option><option value="PI">PI</option><option value="RJ">RJ</option><option value="RN">RN</option><option value="RS">RS</option><option value="RO">RO</option><option value="RR">RR</option><option value="SC">SC</option><option value="SP">SP</option><option value="SE">SE</option><option value="TO">TO</option>
-              </select>
-            </div>
-          </div>
-
-          <!-- Termos LGPD Compactos -->
-          <div style="display:flex; align-items:center; gap:8px; margin:6px 0 10px; font-size:11px; color:#3F3F46;">
-            <input type="checkbox" id="cadastro-termos-check" checked style="accent-color:#009B3A; width:16px; height:16px; cursor:pointer; flex-shrink:0;">
-            <span>Concordo com os <a href="javascript:void(0)" onclick="abrirModalTermos('termos')" style="color:#009B3A; font-weight:800; text-decoration:underline;">Termos</a> e a <a href="javascript:void(0)" onclick="abrirModalTermos('privacidade')" style="color:#009B3A; font-weight:800; text-decoration:underline;">Privacidade LGPD</a>.</span>
-          </div>
-
-          <!-- Botão Concluir Acesso & Entrar (Zero Scroll) -->
-          <button type="button" class="btn-submit btn-cadastrar-entrar" onclick="concluirCadastroManual()" style="width:100%; height:44px; padding:0; display:flex; align-items:center; justify-content:center; background:#009B3A; color:#FFFFFF; border:none; border-radius:10px; font-size:14px; font-weight:900; cursor:pointer; box-shadow:0 3px 10px rgba(0,155,58,0.3);">
-            Concluir Acesso & Entrar
+        <!-- Botão Continuar com o Google (Marrom com Destaque Oficial) -->
+        <div style="padding:0 16px 4px;">
+          <button type="button" class="btn-google-auth-marrom" onclick="conectarGoogleAuth()">
+            <svg width="20" height="20" viewBox="0 0 24 24" style="flex-shrink:0;">
+              <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+              <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+              <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+              <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+            </svg>
+            <span id="btn-google-text">Continuar com o Google</span>
           </button>
+        </div>
+
+        <!-- Divisor com Suspiro e Letra Preta Bonita -->
+        <div style="display:flex; align-items:center; gap:10px; margin:14px 16px 14px;">
+          <div style="flex:1; height:1.5px; background:rgba(46,36,23,0.18);"></div>
+          <span style="font-size:12px; color:#2E2417; font-weight:900; letter-spacing:0.2px;">ou preencha seus dados abaixo</span>
+          <div style="flex:1; height:1.5px; background:rgba(46,36,23,0.18);"></div>
+        </div>
+
+        <!-- Card Arenoso de Cadastro Manual -->
+        <div style="padding:0 16px;">
+          <div class="perfil-card-box" style="padding:14px; margin-bottom:14px; border-radius:18px; background:#E4D5BC; box-shadow:0 4px 14px rgba(0,0,0,0.08); border:1.5px solid rgba(110,90,60,0.25);">
+            
+            <!-- Aviso quando conectado com Google -->
+            <div id="google-conectado-aviso" style="display:none; background:#EDE8DF; border:1.5px solid #5A4730; border-radius:12px; padding:10px 12px; margin-bottom:12px; text-align:center;">
+              <div style="font-size:12px; font-weight:900; color:#2E2417;">✓ Conta Google Conectada!</div>
+              <div style="font-size:11px; font-weight:700; color:#5A4730; margin-top:2px;">Complete apenas seu perfil e WhatsApp abaixo para concluir seu acesso.</div>
+            </div>
+
+            <!-- Seletor de Tipo de Perfil: Tutor / Voluntário vs Protetor / ONG -->
+            <div style="margin-bottom:12px;">
+              <label class="form-label" style="font-size:11px; font-weight:900; margin-bottom:6px; display:block; color:#2E2417; letter-spacing:0.3px;">COMO VOCÊ ATUA NA PROTEÇÃO ANIMAL?</label>
+              <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+                <button type="button" id="btn-tipo-tutor" onclick="selecionarTipoPerfilCadastro('tutor')" class="btn-tipo-perfil active" style="height:38px; border-radius:10px; font-size:12px; font-weight:900; cursor:pointer; background:#5A4730; color:#FFFFFF; border:1.5px solid #443B2C; transition:all 0.15s ease;">
+                  Tutor / Voluntário
+                </button>
+                <button type="button" id="btn-tipo-protetor" onclick="selecionarTipoPerfilCadastro('protetor')" class="btn-tipo-perfil" style="height:38px; border-radius:10px; font-size:12px; font-weight:800; cursor:pointer; background:#EDE8DF; color:#5A4730; border:1.5px solid rgba(110,90,60,0.28); transition:all 0.15s ease;">
+                  Protetor / ONG
+                </button>
+              </div>
+              <input type="hidden" id="cadastro-input-tipo-perfil" value="tutor">
+            </div>
+
+            <!-- Campos Específicos para Protetor / ONG -->
+            <div id="wrap-campos-protetor" style="display:none; background:#EDE8DF; border:1.5px solid rgba(110,90,60,0.28); border-radius:14px; padding:12px; margin-bottom:12px;">
+              <div style="font-size:12px; font-weight:900; color:#2E2417; margin-bottom:8px;">
+                <span>Sua Página Pública de Protetor / ONG</span>
+              </div>
+              <div style="margin-bottom:8px;">
+                <label class="form-label" for="cadastro-input-ong-nome" style="font-size:10.5px; font-weight:800; color:#2E2417; margin-bottom:3px; display:block;">Nome da ONG ou Projeto de Resgate</label>
+                <input type="text" class="form-input" id="cadastro-input-ong-nome" placeholder="Ex: Patinhas do Oeste, Coletivo Resgate..." style="width:100%; height:36px; padding:6px 10px; font-size:12px; border-radius:8px; box-sizing:border-box;">
+              </div>
+              <div style="margin-bottom:8px;">
+                <label class="form-label" for="cadastro-input-bio" style="font-size:10.5px; font-weight:800; color:#2E2417; margin-bottom:3px; display:block;">Sua Causa / Apresentação (História de resgates)</label>
+                <textarea class="form-input" id="cadastro-input-bio" rows="2" placeholder="Conte brevemente sobre sua atuação, resgates e lares temporários..." style="width:100%; font-size:11.5px; padding:6px 10px; border-radius:8px; box-sizing:border-box; resize:none;"></textarea>
+              </div>
+              <div style="display:flex; gap:8px; margin-bottom:8px;">
+                <div style="flex:1;">
+                  <label class="form-label" for="cadastro-input-instagram" style="font-size:10.5px; font-weight:800; color:#2E2417; margin-bottom:3px; display:block;">Instagram Oficial</label>
+                  <input type="text" class="form-input" id="cadastro-input-instagram" placeholder="@suaong" style="width:100%; height:36px; padding:6px 10px; font-size:12px; border-radius:8px; box-sizing:border-box;">
+                </div>
+                <div style="flex:1;">
+                  <label class="form-label" for="cadastro-input-chave-pix" style="font-size:10.5px; font-weight:800; color:#2E2417; margin-bottom:3px; display:block;">Chave Pix (Opcional)</label>
+                  <input type="text" class="form-input" id="cadastro-input-chave-pix" placeholder="CNPJ, E-mail, Celular..." style="width:100%; height:36px; padding:6px 10px; font-size:12px; border-radius:8px; box-sizing:border-box;">
+                </div>
+              </div>
+              <div style="margin-bottom:8px;">
+                <label class="form-label" for="cadastro-input-redes" style="font-size:10.5px; font-weight:800; color:#2E2417; margin-bottom:3px; display:block;">Canal no YouTube ou Facebook (Opcional)</label>
+                <input type="text" class="form-input" id="cadastro-input-redes" placeholder="Link do canal ou página" style="width:100%; height:36px; padding:6px 10px; font-size:12px; border-radius:8px; box-sizing:border-box;">
+              </div>
+              <div style="display:flex; align-items:center; gap:8px; padding-top:4px;">
+                <input type="checkbox" id="cadastro-aceita-chamados" checked style="accent-color:#5A4730; width:16px; height:16px; cursor:pointer; flex-shrink:0;">
+                <label for="cadastro-aceita-chamados" style="font-size:11px; font-weight:700; color:#2E2417; cursor:pointer;">Aceito receber chamados de resgate no WhatsApp de moradores da minha região</label>
+              </div>
+            </div>
+
+            <!-- Linha 1: Nome e WhatsApp -->
+            <div style="display:flex; gap:8px; margin-bottom:10px;">
+              <div style="flex:1.2;">
+                <label class="form-label" for="cadastro-input-nome" style="font-size:10.5px; font-weight:800; margin-bottom:3px; display:block; color:#2E2417;">Nome Completo</label>
+                <input type="text" class="form-input" id="cadastro-input-nome" placeholder="Seu nome" style="width:100%; height:38px; padding:6px 10px; font-size:12.5px; border-radius:8px; box-sizing:border-box;">
+              </div>
+              <div style="flex:1;">
+                <label class="form-label" for="cadastro-input-whatsapp" style="font-size:10.5px; font-weight:800; margin-bottom:3px; display:block; color:#2E2417;">WhatsApp</label>
+                <input type="tel" class="form-input" id="cadastro-input-whatsapp" placeholder="(DD) 99999-9999" style="width:100%; height:38px; padding:6px 10px; font-size:12.5px; border-radius:8px; box-sizing:border-box;">
+              </div>
+            </div>
+
+            <!-- Linha 2: Bairro, Cidade e UF -->
+            <div style="display:flex; gap:8px; margin-bottom:12px;">
+              <div style="flex:1.2;">
+                <label class="form-label" for="cadastro-input-bairro" style="font-size:10.5px; font-weight:800; margin-bottom:3px; display:block; color:#2E2417;">Bairro</label>
+                <input type="text" class="form-input" id="cadastro-input-bairro" placeholder="Seu bairro" style="width:100%; height:38px; padding:6px 10px; font-size:12.5px; border-radius:8px; box-sizing:border-box;">
+              </div>
+              <div style="flex:1;">
+                <label class="form-label" for="cadastro-input-cidade" style="font-size:10.5px; font-weight:800; margin-bottom:3px; display:block; color:#2E2417;">Cidade</label>
+                <input type="text" class="form-input" id="cadastro-input-cidade" placeholder="Sua cidade" style="width:100%; height:38px; padding:6px 10px; font-size:12.5px; border-radius:8px; box-sizing:border-box;">
+              </div>
+              <div style="width:62px;">
+                <label class="form-label" for="cadastro-select-estado" style="font-size:10.5px; font-weight:800; margin-bottom:3px; display:block; color:#2E2417;">UF</label>
+                <select class="form-select" id="cadastro-select-estado" style="width:100%; height:38px; padding:6px 4px; font-size:12px; border-radius:8px; box-sizing:border-box;">
+                  <option value="" disabled selected>UF</option>
+                  <option value="AC">AC</option><option value="AL">AL</option><option value="AP">AP</option><option value="AM">AM</option><option value="BA">BA</option><option value="CE">CE</option><option value="DF">DF</option><option value="ES">ES</option><option value="GO">GO</option><option value="MA">MA</option><option value="MT">MT</option><option value="MS">MS</option><option value="MG">MG</option><option value="PA">PA</option><option value="PB">PB</option><option value="PR" selected>PR</option><option value="PE">PE</option><option value="PI">PI</option><option value="RJ">RJ</option><option value="RN">RN</option><option value="RS">RS</option><option value="RO">RO</option><option value="RR">RR</option><option value="SC">SC</option><option value="SP">SP</option><option value="SE">SE</option><option value="TO">TO</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Termos LGPD Compactos -->
+            <div style="display:flex; align-items:center; gap:8px; margin:6px 0 14px; font-size:11.5px; color:#2E2417;">
+              <input type="checkbox" id="cadastro-termos-check" checked style="accent-color:#5A4730; width:17px; height:17px; cursor:pointer; flex-shrink:0;">
+              <span>Concordo com os <a href="javascript:void(0)" onclick="abrirModalTermos('termos')" style="color:#5A4730; font-weight:900; text-decoration:underline;">Termos</a> e a <a href="javascript:void(0)" onclick="abrirModalTermos('privacidade')" style="color:#5A4730; font-weight:900; text-decoration:underline;">Privacidade LGPD</a>.</span>
+            </div>
+
+            <!-- Botão Concluir Acesso & Entrar (Marrom Oficial Rigo) -->
+            <button type="button" class="btn-submit btn-cadastrar-entrar" onclick="concluirCadastroManual()" style="width:100%; height:46px; padding:0; display:flex; align-items:center; justify-content:center; background:#5A4730; color:#FFFFFF; border:1.5px solid #443B2C; border-radius:12px; font-size:14px; font-weight:900; letter-spacing:0.3px; cursor:pointer; box-shadow:0 4px 12px rgba(90,71,48,0.25);">
+              Concluir Acesso & Entrar
+            </button>
+          </div>
         </div>
       </div>
 
@@ -9453,26 +9575,26 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
 
       if (tipo === 'protetor') {
         if (btnProt) {
-          btnProt.style.background = '#009B3A';
+          btnProt.style.background = '#5A4730';
           btnProt.style.color = '#FFFFFF';
-          btnProt.style.border = 'none';
+          btnProt.style.border = '1.5px solid #443B2C';
         }
         if (btnTutor) {
-          btnTutor.style.background = '#FFFFFF';
-          btnTutor.style.color = '#2E2417';
-          btnTutor.style.border = '1.5px solid rgba(0,0,0,0.15)';
+          btnTutor.style.background = '#EDE8DF';
+          btnTutor.style.color = '#5A4730';
+          btnTutor.style.border = '1.5px solid rgba(110,90,60,0.28)';
         }
         if (wrapProt) wrapProt.style.display = 'block';
       } else {
         if (btnTutor) {
-          btnTutor.style.background = '#009B3A';
+          btnTutor.style.background = '#5A4730';
           btnTutor.style.color = '#FFFFFF';
-          btnTutor.style.border = 'none';
+          btnTutor.style.border = '1.5px solid #443B2C';
         }
         if (btnProt) {
-          btnProt.style.background = '#FFFFFF';
-          btnProt.style.color = '#2E2417';
-          btnProt.style.border = '1.5px solid rgba(0,0,0,0.15)';
+          btnProt.style.background = '#EDE8DF';
+          btnProt.style.color = '#5A4730';
+          btnProt.style.border = '1.5px solid rgba(110,90,60,0.28)';
         }
         if (wrapProt) wrapProt.style.display = 'none';
       }
@@ -12299,28 +12421,32 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
         ...p,
         nome: nomeFinal,
         email: email,
-        cadastrado: true,
         auth_provider: 'google'
       };
 
       try { localStorage.setItem('au_perfil', JSON.stringify(state.perfil)); } catch(e) {}
 
-      try {
-        fetch('/api/perfil', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            autor_token: state.autorToken,
-            nome: nomeFinal,
-            email: email,
-            auth_provider: 'google'
-          })
-        }).catch(() => {});
-      } catch (_) {}
+      // Preenche os campos para o usuário completar WhatsApp e Tipo de Perfil
+      const nomeInput = document.getElementById('cadastro-input-nome');
+      if (nomeInput) nomeInput.value = nomeFinal;
+
+      const avisoGoogle = document.getElementById('google-conectado-aviso');
+      if (avisoGoogle) avisoGoogle.style.display = 'block';
+
+      const btnGoogleText = document.getElementById('btn-google-text');
+      if (btnGoogleText) btnGoogleText.textContent = `✓ Conectado: ${nomeFinal.split(' ')[0]}`;
 
       fecharGoogleAuth();
-      mostrarToast(`🐾 Conta Google conectada: ${email}`);
-      abrirPerfil(false);
+
+      // Se já possui WhatsApp cadastrado, conclui direto. Se não, foca no WhatsApp
+      if (p.whatsapp && p.cadastrado) {
+        mostrarToast(`✓ Bem-vindo(a) de volta, ${nomeFinal}!`);
+        abrirPerfil(false);
+      } else {
+        mostrarToast(`✓ Conta Google conectada! Complete seu WhatsApp abaixo.`);
+        const zapInput = document.getElementById('cadastro-input-whatsapp');
+        if (zapInput) zapInput.focus();
+      }
     };
 
     window.falhaGoogleSignInNativo = function(err) {
@@ -12369,33 +12495,31 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
         ...p,
         nome: nomeFinal,
         email: email,
-        whatsapp: (state.perfil && state.perfil.whatsapp) ? state.perfil.whatsapp : '',
-        bairro: (state.perfil && state.perfil.bairro) ? state.perfil.bairro : '',
-        cidade: (state.perfil && state.perfil.cidade) ? state.perfil.cidade : '',
-        estado: (state.perfil && state.perfil.estado) ? state.perfil.estado : '',
-        endereco: (state.perfil && state.perfil.endereco) ? state.perfil.endereco : '',
-        cadastrado: true,
         auth_provider: 'google'
       };
 
       try { localStorage.setItem('au_perfil', JSON.stringify(state.perfil)); } catch(e) {}
 
-      try {
-        fetch('/api/perfil', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            autor_token: state.autorToken,
-            nome: nomeFinal,
-            email: email,
-            auth_provider: 'google'
-          })
-        }).catch(() => {});
-      } catch (_) {}
+      // Preenche os campos do cadastro manual
+      const nomeInputCad = document.getElementById('cadastro-input-nome');
+      if (nomeInputCad) nomeInputCad.value = nomeFinal;
+
+      const avisoGoogle = document.getElementById('google-conectado-aviso');
+      if (avisoGoogle) avisoGoogle.style.display = 'block';
+
+      const btnGoogleText = document.getElementById('btn-google-text');
+      if (btnGoogleText) btnGoogleText.textContent = `✓ Conectado: ${nomeFinal.split(' ')[0]}`;
 
       fecharGoogleAuth();
-      mostrarToast(`Bem-vindo(a), ${nomeFinal}! Conta Google conectada.`);
-      abrirPerfil(false);
+
+      if (p.whatsapp && p.cadastrado) {
+        mostrarToast(`✓ Bem-vindo(a), ${nomeFinal}!`);
+        abrirPerfil(false);
+      } else {
+        mostrarToast(`✓ Google conectado! Complete seu perfil e WhatsApp abaixo.`);
+        const zapInput = document.getElementById('cadastro-input-whatsapp');
+        if (zapInput) zapInput.focus();
+      }
     }
 
     function concluirCadastroManual() {
@@ -12406,9 +12530,12 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
       const bairro = (document.getElementById('cadastro-input-bairro')?.value || '').trim();
       const endereco = (document.getElementById('cadastro-input-endereco')?.value || '').trim();
       const tipo_perfil = (document.getElementById('cadastro-input-tipo-perfil')?.value || 'tutor').trim();
+      const ong_nome = (document.getElementById('cadastro-input-ong-nome')?.value || '').trim();
       const bio = (document.getElementById('cadastro-input-bio')?.value || '').trim();
       const instagram = (document.getElementById('cadastro-input-instagram')?.value || '').trim();
       const chave_pix = (document.getElementById('cadastro-input-chave-pix')?.value || '').trim();
+      const canal_redes = (document.getElementById('cadastro-input-redes')?.value || '').trim();
+      const aceita_chamados = Boolean(document.getElementById('cadastro-aceita-chamados')?.checked);
       const termos = document.getElementById('cadastro-termos-check')?.checked;
 
       if (!termos) {
@@ -12421,18 +12548,22 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
       }
 
       state.perfil = {
+        ...state.perfil,
         nome,
         whatsapp,
-        bairro,
-        cidade,
-        estado,
+        bairro: bairro || 'Centro',
+        cidade: cidade || 'Cascavel',
+        estado: estado || 'PR',
         endereco,
         tipo_perfil,
+        ong_nome,
         bio,
         instagram,
         chave_pix,
+        canal_redes,
+        aceita_chamados,
         cadastrado: true,
-        auth_provider: 'manual'
+        auth_provider: (state.perfil && state.perfil.auth_provider) ? state.perfil.auth_provider : 'manual'
       };
 
       try { localStorage.setItem('au_perfil', JSON.stringify(state.perfil)); } catch(e) {}
@@ -12445,14 +12576,19 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
             autor_token: state.autorToken,
             nome,
             whatsapp,
-            bairro,
-            cidade,
-            estado,
+            bairro: state.perfil.bairro,
+            cidade: state.perfil.cidade,
+            estado: state.perfil.estado,
             endereco,
             tipo_perfil,
+            ong_nome,
             bio,
             instagram,
-            chave_pix
+            chave_pix,
+            canal_redes,
+            aceita_chamados,
+            auth_provider: state.perfil.auth_provider,
+            email: state.perfil.email || ''
           })
         }).catch(() => {});
       } catch (_) {}
