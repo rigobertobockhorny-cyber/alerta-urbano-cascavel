@@ -270,3 +270,27 @@ Para fazer qualquer alteração futura no aplicativo:
    - Sobrescreve o arquivo `static/index.html`.
    - Copia automaticamente para a pasta de deploy na nuvem (`DEPLOY_NUVEM_ALERTA_URBANO`).
 5. **Pronto!** Teste no navegador ou faça o push para o servidor. O restante do aplicativo continua 100% íntegro, limpo e blindado!
+
+---
+
+## 7. MODO NOTURNO (DARK MODE UNIFICADO NAS 5 ABAS)
+
+> [!NOTE]
+> O Modo Noturno é alternado pelo botão da Lua/Sol no canto superior direito (`#btn-theme-toggle`). A preferência é salva no `localStorage` sob a chave `au_theme` e aplicada reativamente nas tags `<html>` e `<body>` via atributo `data-theme="dark"` e classe `.theme-dark`.
+
+### Regras de Cores do Modo Noturno:
+1. **Fundo do Palco (`.main-stage`):** Transiciona do verde floresta escuro (`#05180D`) no topo para grafite escuro profundo (`#0F1115`) no miolo e na base, eliminando qualquer vazamento verde claro sobre o menu inferior do celular.
+2. **Barras Fixas:** Topbar e Bottom Nav 100% Preto OLED (`#000000`) com divisores sutis em `rgba(255, 255, 255, 0.08)`.
+3. **Cards e Blocos:** Assumem o tom grafite nobre `#181A1F` com borda sutil de 1px em `rgba(255, 255, 255, 0.08)` e sombra suave de 4px (`rgba(0, 0, 0, 0.45)`).
+4. **Tipografia de Alto Contraste:** Títulos principais em Branco Puro (`#FFFFFF`), frases e subtítulos em Cinza Claro (`#CBD5E1` / `#E2E8F0`), badges de destaque em Verde Alerta (`#00B341`) e Amarelo Ouro (`#FED700`).
+5. **Aba Início:**
+   - Letreiro meteorológico: `#181A1F` com texto `#FFFFFF`.
+   - Card de Campanha: `#181A1F` com texto `#F8FAFC`.
+   - Esteira Quem Ama Cuida: cards `#181A1F` com títulos brancos e patinha verde/dourada.
+   - Showcase Protetor: `#181A1F` com bio destacada em `#23262E` e nomes legíveis.
+   - Esteira Apoie Aqui: bloquinhos `#181A1F` com `+ APOIE` em `#00B341` e `AQUI` em `#FED700`, marcas em alto contraste.
+6. **Aba Mapa:** Cartografia escura invertida com CartoDB/Esri Dark Streets e pílulas em `#181A1F`.
+7. **Aba Pets:** Mural e cards de animais em `#181A1F` com botões e badges em alto contraste.
+8. **Aba Parceiros:** Cabeçalho e cards de empresas em `#181A1F`, sub-cards de ofertas em `#23262E` com títulos brancos.
+9. **Aba Copiloto:** Hero Card e grupos de configuração em `#181A1F`, cards de ritmo em `#23262E` com textos brancos e botão do testador em destaque.
+10. **Cláusula Pétrea:** Zero alteração em larguras, alturas, alinhamentos e gaps de 18px. O layout permanece rigorosamente idêntico.

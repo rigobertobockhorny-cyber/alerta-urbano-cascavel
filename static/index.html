@@ -5267,6 +5267,570 @@
       letter-spacing: 0.3px;
     }
 
+    /* =========================================================================
+       MASTER DARK MODE — MODO NOTURNO DEFINITIVO PARA AS 5 ABAS (DIRETRIZ RIGO)
+       Harmonia visual completa • OLED Dark • Zero quebra de layout/dimensões
+       ========================================================================= */
+
+    /* 1. VARIÁVEIS GLOBAIS NO TEMA ESCURO */
+    [data-theme="dark"],
+    body.theme-dark {
+      --bg: #0F1115 !important;
+      --bg-elevated: #181A1F !important;
+      --bg-subtle: #22252C !important;
+      --text: #F8FAFC !important;
+      --text-muted: #CBD5E1 !important;
+      --text-dim: #94A3B8 !important;
+      --pet-areia: #181A1F !important;
+      --pet-bege: #0F1115 !important;
+      --pet-texto-escuro: #F8FAFC !important;
+    }
+
+    /* 2. ESTRUTURA GERAL E DEGRADÊ NOTURNO (.main-stage E ABAS) */
+    [data-theme="dark"] body,
+    body.theme-dark {
+      background: #000000 !important;
+      color: #F8FAFC !important;
+    }
+
+    [data-theme="dark"] .main-stage,
+    [data-theme="dark"] .tab-pane#tab-inicio.active,
+    [data-theme="dark"] #tab-inicio.active,
+    [data-theme="dark"] body.tab-mapa .main-stage,
+    [data-theme="dark"] body.tab-pets .main-stage,
+    [data-theme="dark"] body.tab-parceiros .main-stage,
+    [data-theme="dark"] body.tab-copiloto .main-stage,
+    body.theme-dark .main-stage,
+    body.theme-dark .tab-pane#tab-inicio.active,
+    body.theme-dark #tab-inicio.active {
+      background: linear-gradient(180deg, 
+        #05180D 0px, 
+        #072212 22px, 
+        #092615 38px, 
+        #0B1B12 54px, 
+        #0F1115 70px, 
+        #0F1115 calc(100% - 62px), 
+        #0C1610 calc(100% - 36px), 
+        #082012 calc(100% - 14px), 
+        #05180D 100%) !important;
+    }
+
+    [data-theme="dark"] .main-stage::after,
+    body.theme-dark .main-stage::after {
+      background: linear-gradient(180deg, 
+        rgba(5, 24, 13, 0) 0%, 
+        rgba(5, 24, 13, 0.40) 40%, 
+        #05180D 100%) !important;
+    }
+
+    [data-theme="dark"] .topbar,
+    body.theme-dark .topbar {
+      background: #000000 !important;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+    }
+
+    [data-theme="dark"] .topbar .brand-name,
+    body.theme-dark .topbar .brand-name {
+      color: #FFFFFF !important;
+    }
+
+    [data-theme="dark"] .topbar .brand-city span,
+    body.theme-dark .topbar .brand-city span {
+      color: #CBD5E1 !important;
+    }
+
+    [data-theme="dark"] .icon-btn,
+    body.theme-dark .icon-btn {
+      color: #F8FAFC !important;
+      background: rgba(255, 255, 255, 0.08) !important;
+      border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    }
+
+    [data-theme="dark"] .bottom-nav,
+    body.theme-dark .bottom-nav {
+      background: #000000 !important;
+      border-top: 1px solid rgba(255, 255, 255, 0.10) !important;
+    }
+
+    [data-theme="dark"] .nav-item,
+    body.theme-dark .nav-item {
+      color: #71717A !important;
+    }
+
+    [data-theme="dark"] .nav-item.active,
+    body.theme-dark .nav-item.active {
+      color: #FED700 !important;
+    }
+
+    /* 3. ABA 1: INÍCIO (DARK MODE OFICIAL) */
+    [data-theme="dark"] .city-alert-direct,
+    body.theme-dark .city-alert-direct {
+      background: rgba(24, 26, 31, 0.95) !important;
+      border: 1px solid rgba(255, 255, 255, 0.10) !important;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.45) !important;
+    }
+
+    [data-theme="dark"] .city-alert-direct .alert-direct-text,
+    [data-theme="dark"] .city-alert-direct.alerta-modo-branco .alert-direct-text,
+    [data-theme="dark"] .alert-direct-text,
+    body.theme-dark .city-alert-direct .alert-direct-text,
+    body.theme-dark .city-alert-direct.alerta-modo-branco .alert-direct-text,
+    body.theme-dark .alert-direct-text {
+      color: #FFFFFF !important;
+    }
+
+    [data-theme="dark"] .campaign-sand-card,
+    body.theme-dark .campaign-sand-card {
+      background: #181A1F !important;
+      border: 1px solid rgba(255, 255, 255, 0.08) !important;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45) !important;
+    }
+
+    [data-theme="dark"] .home-campaign-phrase,
+    body.theme-dark .home-campaign-phrase {
+      color: #F8FAFC !important;
+    }
+
+    [data-theme="dark"] .belt-block-pets .pet-title span,
+    [data-theme="dark"] .belt-block-pets .belt-title span,
+    [data-theme="dark"] .belt-title.pet-title span,
+    [data-theme="dark"] .belt-block-pets span[style*="color:#2E2417"],
+    body.theme-dark .belt-block-pets .pet-title span,
+    body.theme-dark .belt-block-pets .belt-title span,
+    body.theme-dark .belt-title.pet-title span,
+    body.theme-dark .belt-block-pets span[style*="color:#2E2417"] {
+      color: #FFFFFF !important;
+    }
+
+    [data-theme="dark"] .belt-block-pets .belt-svg,
+    [data-theme="dark"] .belt-block-pets svg[style*="color:#2E2417"],
+    body.theme-dark .belt-block-pets .belt-svg,
+    body.theme-dark .belt-block-pets svg[style*="color:#2E2417"] {
+      color: #00B341 !important;
+      fill: #00B341 !important;
+    }
+
+    [data-theme="dark"] .unified-belt-card,
+    body.theme-dark .unified-belt-card {
+      background: #181A1F !important;
+      border: 1px solid rgba(255, 255, 255, 0.10) !important;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.45) !important;
+    }
+
+    [data-theme="dark"] .belt-block-protetores .belt-title span,
+    body.theme-dark .belt-block-protetores .belt-title span {
+      color: #F8FAFC !important;
+    }
+
+    [data-theme="dark"] .belt-block-protetores .belt-title svg,
+    body.theme-dark .belt-block-protetores .belt-title svg {
+      stroke: #00B341 !important;
+    }
+
+    [data-theme="dark"] .showcase-protetor-card,
+    body.theme-dark .showcase-protetor-card {
+      background: #181A1F !important;
+      border: 1px solid rgba(255, 255, 255, 0.08) !important;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45) !important;
+    }
+
+    [data-theme="dark"] .showcase-nome,
+    [data-theme="dark"] .showcase-protetor-name,
+    body.theme-dark .showcase-nome,
+    body.theme-dark .showcase-protetor-name {
+      color: #FFFFFF !important;
+    }
+
+    [data-theme="dark"] .showcase-sub,
+    [data-theme="dark"] .showcase-protetor-meta,
+    body.theme-dark .showcase-sub,
+    body.theme-dark .showcase-protetor-meta {
+      color: #CBD5E1 !important;
+    }
+
+    [data-theme="dark"] .showcase-bio-row,
+    [data-theme="dark"] .showcase-protetor-quote,
+    body.theme-dark .showcase-bio-row,
+    body.theme-dark .showcase-protetor-quote {
+      background: rgba(255, 255, 255, 0.08) !important;
+      color: #E2E8F0 !important;
+      border-left: 3px solid #00B341 !important;
+    }
+
+    [data-theme="dark"] .showcase-pets-label,
+    body.theme-dark .showcase-pets-label {
+      color: #FFFFFF !important;
+    }
+
+    [data-theme="dark"] .showcase-pets-label span svg,
+    body.theme-dark .showcase-pets-label span svg {
+      color: #00B341 !important;
+    }
+
+    [data-theme="dark"] .showcase-pet-name,
+    body.theme-dark .showcase-pet-name {
+      color: #CBD5E1 !important;
+    }
+
+    [data-theme="dark"] .showcase-pet-thumb,
+    body.theme-dark .showcase-pet-thumb {
+      background: #23262E !important;
+      border-color: rgba(255, 255, 255, 0.12) !important;
+    }
+
+    [data-theme="dark"] .showcase-bottom-row,
+    body.theme-dark .showcase-bottom-row {
+      border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+    }
+
+    [data-theme="dark"] .showcase-bottom-row span,
+    body.theme-dark .showcase-bottom-row span {
+      color: #CBD5E1 !important;
+    }
+
+    [data-theme="dark"] .showcase-bottom-row span:last-child,
+    body.theme-dark .showcase-bottom-row span:last-child {
+      color: #00B341 !important;
+    }
+
+    [data-theme="dark"] .showcase-mini-chip,
+    body.theme-dark .showcase-mini-chip {
+      background: #242730 !important;
+      color: #F1F5F9 !important;
+      border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    }
+
+    [data-theme="dark"] .showcase-card-footer,
+    body.theme-dark .showcase-card-footer {
+      border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+      color: #CBD5E1 !important;
+    }
+
+    [data-theme="dark"] .quadradinho-apoio,
+    body.theme-dark .quadradinho-apoio {
+      background: #181A1F !important;
+      border: 1px solid rgba(255, 255, 255, 0.12) !important;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45) !important;
+    }
+
+    [data-theme="dark"] .quadradinho-apoio span,
+    body.theme-dark .quadradinho-apoio span {
+      filter: none !important;
+    }
+
+    [data-theme="dark"] .quadradinho-apoio span[style*="color:#2E2417"],
+    body.theme-dark .quadradinho-apoio span[style*="color:#2E2417"] {
+      color: #FFFFFF !important;
+    }
+
+    [data-theme="dark"] .quadradinho-apoio span[style*="color:#5A4730"],
+    body.theme-dark .quadradinho-apoio span[style*="color:#5A4730"] {
+      color: #FED700 !important;
+    }
+
+    [data-theme="dark"] .quadradinho-apoio span span,
+    body.theme-dark .quadradinho-apoio span span {
+      color: #FED700 !important;
+    }
+
+    /* 4. ABA 2: MAPA (DARK MODE OFICIAL) */
+    [data-theme="dark"] .map-pill,
+    body.theme-dark .map-pill {
+      background: #181A1F !important;
+      color: #CBD5E1 !important;
+      border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    }
+
+    [data-theme="dark"] .map-pill.active,
+    body.theme-dark .map-pill.active {
+      background: #00B341 !important;
+      color: #FFFFFF !important;
+      border-color: #009B3A !important;
+    }
+
+    [data-theme="dark"] #trail-bar,
+    body.theme-dark #trail-bar {
+      background: #181A1F !important;
+      border: 1px solid rgba(255, 255, 255, 0.12) !important;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45) !important;
+    }
+
+    [data-theme="dark"] #trail-bar-title,
+    body.theme-dark #trail-bar-title {
+      color: #FFFFFF !important;
+    }
+
+    [data-theme="dark"] #trail-bar-sub,
+    body.theme-dark #trail-bar-sub {
+      color: #CBD5E1 !important;
+    }
+
+    [data-theme="dark"] .map-tool-btn,
+    body.theme-dark .map-tool-btn {
+      background: #181A1F !important;
+      color: #FFFFFF !important;
+      border: 1px solid rgba(255, 255, 255, 0.14) !important;
+    }
+
+    /* 5. ABA 3: PETS (DARK MODE OFICIAL) */
+    [data-theme="dark"] #tab-pets .pets-fixed-header button,
+    body.theme-dark #tab-pets .pets-fixed-header button {
+      background: #181A1F !important;
+      color: #FFFFFF !important;
+      border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    }
+
+    [data-theme="dark"] #tab-pets .pets-fixed-header button[onclick*="maustratos"],
+    body.theme-dark #tab-pets .pets-fixed-header button[onclick*="maustratos"] {
+      background: rgba(220, 38, 38, 0.20) !important;
+      color: #FCA5A5 !important;
+      border-color: rgba(220, 38, 38, 0.40) !important;
+    }
+
+    [data-theme="dark"] .pet-pillars-segmented,
+    body.theme-dark .pet-pillars-segmented {
+      background: #181A1F !important;
+      border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    }
+
+    [data-theme="dark"] .pillar-tab,
+    body.theme-dark .pillar-tab {
+      color: #94A3B8 !important;
+    }
+
+    [data-theme="dark"] .pillar-tab.active,
+    body.theme-dark .pillar-tab.active {
+      background: #00B341 !important;
+      color: #FFFFFF !important;
+    }
+
+    [data-theme="dark"] #tab-pets .pet-card,
+    [data-theme="dark"] #tab-pets .pet-card-curado,
+    [data-theme="dark"] #tab-pets .empty-box,
+    body.theme-dark #tab-pets .pet-card,
+    body.theme-dark #tab-pets .pet-card-curado,
+    body.theme-dark #tab-pets .empty-box {
+      background: #181A1F !important;
+      border: 1px solid rgba(255, 255, 255, 0.08) !important;
+      color: #F8FAFC !important;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.45) !important;
+    }
+
+    [data-theme="dark"] #tab-pets .pet-card .pet-card-author-name,
+    [data-theme="dark"] #tab-pets .pet-card .pet-card-pet-name,
+    body.theme-dark #tab-pets .pet-card .pet-card-author-name,
+    body.theme-dark #tab-pets .pet-card .pet-card-pet-name {
+      color: #FFFFFF !important;
+    }
+
+    [data-theme="dark"] #tab-pets .pet-card .pet-card-desc,
+    [data-theme="dark"] #tab-pets .pet-card .pet-card-author-sub,
+    body.theme-dark #tab-pets .pet-card .pet-card-desc,
+    body.theme-dark #tab-pets .pet-card .pet-card-author-sub {
+      color: #CBD5E1 !important;
+    }
+
+    [data-theme="dark"] #tab-pets .pet-card .btn-pet-cta-primary,
+    body.theme-dark #tab-pets .pet-card .btn-pet-cta-primary {
+      background: #00B341 !important;
+      color: #FFFFFF !important;
+      border-color: #009B3A !important;
+    }
+
+    [data-theme="dark"] #tab-pets .pet-card .btn-pet-cta-secondary,
+    body.theme-dark #tab-pets .pet-card .btn-pet-cta-secondary {
+      background: rgba(255, 255, 255, 0.08) !important;
+      color: #FFFFFF !important;
+      border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    }
+
+    /* 6. ABA 4: PARCEIROS (DARK MODE OFICIAL) */
+    [data-theme="dark"] .parceiros-fixed-header > div,
+    body.theme-dark .parceiros-fixed-header > div {
+      background: #181A1F !important;
+      border: 1px solid rgba(255, 255, 255, 0.08) !important;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45) !important;
+    }
+
+    [data-theme="dark"] .parceiros-fixed-header h2,
+    [data-theme="dark"] .parceiros-fixed-header div[style*="font-size:16px"],
+    body.theme-dark .parceiros-fixed-header div[style*="font-size:16px"] {
+      color: #FFFFFF !important;
+    }
+
+    [data-theme="dark"] .parceiros-fixed-header div[style*="font-size:11px"],
+    body.theme-dark .parceiros-fixed-header div[style*="font-size:11px"] {
+      color: #CBD5E1 !important;
+    }
+
+    [data-theme="dark"] .btn-filtro-parceiro,
+    body.theme-dark .btn-filtro-parceiro {
+      background: #242730 !important;
+      color: #CBD5E1 !important;
+      border: 1px solid rgba(255, 255, 255, 0.10) !important;
+    }
+
+    [data-theme="dark"] .btn-filtro-parceiro.active,
+    body.theme-dark .btn-filtro-parceiro.active {
+      background: #00B341 !important;
+      color: #FFFFFF !important;
+      border-color: #009B3A !important;
+    }
+
+    [data-theme="dark"] #tab-parceiros .card-parceiro-item,
+    body.theme-dark #tab-parceiros .card-parceiro-item {
+      background: #181A1F !important;
+      border: 1px solid rgba(255, 255, 255, 0.08) !important;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.45) !important;
+      color: #F8FAFC !important;
+    }
+
+    [data-theme="dark"] .card-parceiro-item div[style*="color:#2E2417"],
+    body.theme-dark .card-parceiro-item div[style*="color:#2E2417"] {
+      color: #FFFFFF !important;
+    }
+
+    [data-theme="dark"] .card-parceiro-item p,
+    [data-theme="dark"] .card-parceiro-item div[style*="color:#5A4730"],
+    [data-theme="dark"] .card-parceiro-item div[style*="color:#6E5A3C"],
+    body.theme-dark .card-parceiro-item p,
+    body.theme-dark .card-parceiro-item div[style*="color:#5A4730"],
+    body.theme-dark .card-parceiro-item div[style*="color:#6E5A3C"] {
+      color: #CBD5E1 !important;
+    }
+
+    [data-theme="dark"] .card-parceiro-item div[style*="background:#F8FAFC"],
+    body.theme-dark .card-parceiro-item div[style*="background:#F8FAFC"] {
+      background: #23262E !important;
+      border-color: rgba(255, 255, 255, 0.08) !important;
+    }
+
+    [data-theme="dark"] .card-parceiro-item span[style*="color:#18181B"],
+    body.theme-dark .card-parceiro-item span[style*="color:#18181B"] {
+      color: #FFFFFF !important;
+    }
+
+    [data-theme="dark"] .card-parceiro-item div[style*="color:#64748B"],
+    body.theme-dark .card-parceiro-item div[style*="color:#64748B"] {
+      color: #CBD5E1 !important;
+    }
+
+    [data-theme="dark"] #tab-parceiros .parceiro-nome,
+    body.theme-dark #tab-parceiros .parceiro-nome {
+      color: #FFFFFF !important;
+    }
+
+    [data-theme="dark"] #tab-parceiros .parceiro-cat,
+    [data-theme="dark"] #tab-parceiros .parceiro-endereco,
+    [data-theme="dark"] #tab-parceiros .parceiro-desc,
+    body.theme-dark #tab-parceiros .parceiro-cat,
+    body.theme-dark #tab-parceiros .parceiro-endereco,
+    body.theme-dark #tab-parceiros .parceiro-desc {
+      color: #CBD5E1 !important;
+    }
+
+    [data-theme="dark"] #tab-parceiros .btn-parceiro-cta,
+    body.theme-dark #tab-parceiros .btn-parceiro-cta {
+      background: #00B341 !important;
+      color: #FFFFFF !important;
+    }
+
+    /* 7. ABA 5: COPILOTO (DARK MODE OFICIAL) */
+    [data-theme="dark"] #tab-copiloto .hero-copiloto,
+    [data-theme="dark"] #tab-copiloto .settings-group,
+    body.theme-dark #tab-copiloto .hero-copiloto,
+    body.theme-dark #tab-copiloto .settings-group {
+      background: #181A1F !important;
+      border: 1px solid rgba(255, 255, 255, 0.08) !important;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.45) !important;
+    }
+
+    [data-theme="dark"] #tab-copiloto h2,
+    [data-theme="dark"] #tab-copiloto .section-title,
+    [data-theme="dark"] #tab-copiloto .setting-title,
+    body.theme-dark #tab-copiloto h2,
+    body.theme-dark #tab-copiloto .section-title,
+    body.theme-dark #tab-copiloto .setting-title {
+      color: #FFFFFF !important;
+    }
+
+    [data-theme="dark"] #tab-copiloto p,
+    [data-theme="dark"] #tab-copiloto .setting-desc,
+    [data-theme="dark"] #tab-copiloto div[style*="color:#5A4730"],
+    body.theme-dark #tab-copiloto p,
+    body.theme-dark #tab-copiloto .setting-desc,
+    body.theme-dark #tab-copiloto div[style*="color:#5A4730"] {
+      color: #CBD5E1 !important;
+    }
+
+    [data-theme="dark"] #tab-copiloto .btn-bolha-desativar,
+    body.theme-dark #tab-copiloto .btn-bolha-desativar {
+      background: #242730 !important;
+      color: #F8FAFC !important;
+      border: 1px solid rgba(255, 255, 255, 0.14) !important;
+    }
+
+    [data-theme="dark"] #tab-copiloto div[style*="background:#EDE8DF"],
+    body.theme-dark #tab-copiloto div[style*="background:#EDE8DF"] {
+      background: #242730 !important;
+    }
+
+    [data-theme="dark"] #card-ritmo-6h,
+    [data-theme="dark"] #card-ritmo-12h,
+    [data-theme="dark"] #card-ritmo-24h,
+    body.theme-dark #card-ritmo-6h,
+    body.theme-dark #card-ritmo-12h,
+    body.theme-dark #card-ritmo-24h {
+      background: #23262E !important;
+      border-color: rgba(255, 255, 255, 0.08) !important;
+    }
+
+    [data-theme="dark"] #card-ritmo-6h div[style*="color:#2E2417"],
+    [data-theme="dark"] #card-ritmo-12h div[style*="color:#2E2417"],
+    [data-theme="dark"] #card-ritmo-24h div[style*="color:#2E2417"],
+    body.theme-dark #card-ritmo-6h div[style*="color:#2E2417"],
+    body.theme-dark #card-ritmo-12h div[style*="color:#2E2417"],
+    body.theme-dark #card-ritmo-24h div[style*="color:#2E2417"] {
+      color: #FFFFFF !important;
+    }
+
+    [data-theme="dark"] #card-ritmo-6h div[style*="color:#5A4730"],
+    [data-theme="dark"] #card-ritmo-12h div[style*="color:#5A4730"],
+    [data-theme="dark"] #card-ritmo-24h div[style*="color:#5A4730"],
+    body.theme-dark #card-ritmo-6h div[style*="color:#5A4730"],
+    body.theme-dark #card-ritmo-12h div[style*="color:#5A4730"],
+    body.theme-dark #card-ritmo-24h div[style*="color:#5A4730"] {
+      color: #CBD5E1 !important;
+    }
+
+    [data-theme="dark"] button[onclick*="abrirGuiaTestador"],
+    body.theme-dark button[onclick*="abrirGuiaTestador"] {
+      background: #23262E !important;
+      color: #00B341 !important;
+      border: 1.5px solid rgba(0, 155, 58, 0.40) !important;
+    }
+
+    /* 8. MODAIS, GAVETAS E PERFIL */
+    [data-theme="dark"] #modal-perfil,
+    body.theme-dark #modal-perfil {
+      background: #0F1115 !important;
+    }
+
+    [data-theme="dark"] #modal-perfil .profile-fs-header,
+    body.theme-dark #modal-perfil .profile-fs-header {
+      background: #000000 !important;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.10) !important;
+    }
+
+    [data-theme="dark"] #modal-perfil .perfil-hero,
+    [data-theme="dark"] #modal-perfil .perfil-card-box,
+    body.theme-dark #modal-perfil .perfil-hero,
+    body.theme-dark #modal-perfil .perfil-card-box {
+      background: #181A1F !important;
+      border: 1px solid rgba(255, 255, 255, 0.08) !important;
+      color: #F8FAFC !important;
+    }
+
 </style>
   <script>
     // Limpeza Total de Service Workers e Caches Legados (Garante carregamento 100% fresco e instantâneo)
@@ -5369,10 +5933,10 @@
           <div class="belt-block belt-block-pets">
             <div class="belt-head" style="display:flex; align-items:center; justify-content:space-between; margin-bottom:4px;">
               <div class="belt-title pet-title" style="display:flex; align-items:center; gap:6px;">
-                <svg class="belt-svg" viewBox="0 0 24 24" fill="currentColor" width="14" height="14" style="color:#2E2417;">
+                <svg class="belt-svg" viewBox="0 0 24 24" fill="currentColor" width="14" height="14" style="color:var(--accent-brand, #009B3A);">
                   <path d="M12 12c-2 0-3.5 1.5-3.5 3.3 0 1.6 1.2 2.7 3.5 2.7s3.5-1.1 3.5-2.7C15.5 13.5 14 12 12 12zm-5.8-2.3c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm11.6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-8.6-4.1c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm5.6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/>
                 </svg>
-                <span style="font-size:12px; font-weight:800; color:#2E2417; letter-spacing:0.2px;">Quem ama, cuida e procura junto</span>
+                <span style="font-size:12px; font-weight:800; color:var(--pet-texto-escuro, #2E2417); letter-spacing:0.2px;">Quem ama, cuida e procura junto</span>
               </div>
             </div>
             
@@ -7000,7 +7564,10 @@
       state.theme = tema;
       localStorage.setItem('au_theme', tema);
       document.documentElement.setAttribute('data-theme', tema);
-      document.getElementById('meta-theme-color').setAttribute('content', tema === 'dark' ? '#09090b' : '#f8fafc');
+      document.body.setAttribute('data-theme', tema);
+      document.body.classList.toggle('theme-dark', tema === 'dark');
+      const metaTheme = document.getElementById('meta-theme-color');
+      if (metaTheme) metaTheme.setAttribute('content', tema === 'dark' ? '#000000' : '#009B3A');
       const btn = document.getElementById('btn-theme-toggle');
       if (btn) {
         btn.innerHTML = tema === 'dark'
@@ -7008,6 +7575,7 @@
           : '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>';
       }
       atualizarCamadaBaseMapa();
+      try { if (typeof selecionarRitmoBusca === 'function' && typeof ritmoBuscaAtual !== 'undefined') selecionarRitmoBusca(ritmoBuscaAtual, false); } catch(_) {}
     }
 
     function alternarTema() {
@@ -7019,6 +7587,7 @@
       state.tab = aba;
       document.body.className = document.body.className.replace(/\btab-\w+\b/g, '').trim();
       document.body.classList.add('tab-' + aba);
+      if (state.theme === 'dark') document.body.classList.add('theme-dark');
       document.querySelectorAll('.tab-pane').forEach(p => {
         p.classList.remove('active');
         p.style.display = 'none';
@@ -10673,9 +11242,10 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
       const c24 = document.getElementById('check-ritmo-24h');
 
       if (r6 && r12 && r24) {
+        const bgRitmo = state.theme === 'dark' ? '#23262E' : '#EDE8DF';
         [r6, r12, r24].forEach(el => {
           el.style.border = '2px solid transparent';
-          el.style.background = '#EDE8DF';
+          el.style.background = bgRitmo;
         });
         [c6, c12, c24].forEach(el => {
           el.style.border = '2px solid #8A7656';
@@ -10687,7 +11257,7 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
         const activeCheck = document.getElementById('check-ritmo-' + ritmoBuscaAtual);
         if (activeCard && activeCheck) {
           activeCard.style.border = '2px solid #009B3A';
-          activeCard.style.background = '#EDE8DF';
+          activeCard.style.background = bgRitmo;
           activeCheck.style.border = '2px solid #009B3A';
           activeCheck.style.background = '#009B3A';
           activeCheck.innerHTML = '<div style="width:8px; height:8px; border-radius:50%; background:#fff;"></div>';
