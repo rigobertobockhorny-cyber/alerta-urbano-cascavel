@@ -4138,43 +4138,63 @@
     }
 
     /* ========================================================
-       SELETOR DE RAIO DO COPILOTO (OPÇÃO B - DIRETRIZ RIGO)
+       SELETOR DE RAIO E RITMO DO COPILOTO (PÍLULAS DUPLAS - DIRETRIZ RIGO)
        ======================================================== */
-    .btn-raio-pill {
+    .btn-raio-pill,
+    .btn-ritmo-pill {
       background: transparent !important;
       color: #5A4730 !important;
       border: none !important;
       outline: none !important;
       border-radius: 8px !important;
-      font-weight: 700 !important;
-      font-size: 11px !important;
-      height: 28px !important;
+      height: 38px !important;
       cursor: pointer !important;
       text-align: center !important;
       transition: all 0.15s ease !important;
       display: flex !important;
+      flex-direction: column !important;
       align-items: center !important;
       justify-content: center !important;
+      line-height: 1.15 !important;
+      padding: 2px 4px !important;
     }
-    .btn-raio-pill.active {
+    .btn-raio-pill.active,
+    .btn-ritmo-pill.active {
       background: #5A4730 !important;
       color: #FFFFFF !important;
       border: 1.5px solid #443B2C !important;
-      font-weight: 900 !important;
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15) !important;
     }
+    .btn-raio-pill span,
+    .btn-ritmo-pill span {
+      display: block !important;
+      pointer-events: none !important;
+    }
+    .btn-raio-pill.active span,
+    .btn-ritmo-pill.active span {
+      color: #FFFFFF !important;
+    }
     [data-theme="dark"] .btn-raio-pill,
-    body.theme-dark .btn-raio-pill {
+    [data-theme="dark"] .btn-ritmo-pill,
+    body.theme-dark .btn-raio-pill,
+    body.theme-dark .btn-ritmo-pill {
       color: #A1A1AA !important;
       background: transparent !important;
     }
     [data-theme="dark"] .btn-raio-pill.active,
-    body.theme-dark .btn-raio-pill.active {
+    [data-theme="dark"] .btn-ritmo-pill.active,
+    body.theme-dark .btn-raio-pill.active,
+    body.theme-dark .btn-ritmo-pill.active {
       background: #000000 !important;
       color: #FFFFFF !important;
       border: 1.5px solid #FFFFFF !important;
-      font-weight: 900 !important;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5) !important;
+    }
+    [data-theme="dark"] .btn-raio-pill.active span,
+    [data-theme="dark"] .btn-ritmo-pill.active span,
+    body.theme-dark .btn-raio-pill.active span,
+    body.theme-dark .btn-ritmo-pill.active span {
+      color: #FFFFFF !important;
     }
     /* ========================================================
        MODAL PERFIL & ACESSO (PADRÃO PRINT 2 DIRETRIZ RIGO)
@@ -6504,55 +6524,54 @@
       <label class="switch"><input type="checkbox" id="pref-pet" checked onchange="alternarAvisosPetCopiloto(this)"><span class="slider"></span></label>
     </div>
 
-    <!-- SELETOR DE DISTÂNCIA / RAIO EM 3 PÍLULAS (Opção B - Diretriz Rigo: 500m | 1.000m | 2.000m) -->
+    <!-- SELETOR DE DISTÂNCIA / RAIO EM 3 PÍLULAS DUPLAS (Opção B - Diretriz Rigo: 500m | 1.000m | 2.000m) -->
     <div id="wrap-seletor-raio-pet" style="padding:5px 12px 8px; border-top:1px dashed rgba(110,90,60,0.18); background:rgba(237,232,223,0.45);">
       <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:4px;">
         <span style="font-size:10px; font-weight:800; color:#2E2417;">Raio de Alerta por Voz:</span>
+        <span style="font-size:9.5px; color:#5A4730; font-weight:700;">Distância de disparo</span>
       </div>
       <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:5px; background:#EDE8DF; padding:3px; border-radius:10px;">
         <button type="button" id="btn-raio-500" class="btn-raio-pill" onclick="selecionarRaioCopiloto('500')">
-          500m
+          <span style="font-size:11.5px; font-weight:900;">500m</span>
+          <span style="font-size:8.5px; font-weight:700;">Bairro / Perto</span>
         </button>
         <button type="button" id="btn-raio-1000" class="btn-raio-pill active" onclick="selecionarRaioCopiloto('1000')">
-          1.000m
+          <span style="font-size:11.5px; font-weight:900;">1.000m</span>
+          <span style="font-size:8.5px; font-weight:700;">Recomendado</span>
         </button>
         <button type="button" id="btn-raio-2000" class="btn-raio-pill" onclick="selecionarRaioCopiloto('2000')">
-          2.000m
+          <span style="font-size:11.5px; font-weight:900;">2.000m</span>
+          <span style="font-size:8.5px; font-weight:700;">Amplo / 2 km</span>
         </button>
       </div>
     </div>
   </div>
 
-  <!-- Card 4: Ritmo de Busca na Cidade (Espremido, Sem Emojis, Botão Padrão Switch) -->
+  <!-- Card 4: Ritmo de Busca na Cidade (Seletor Segmentado de Pílulas Duplas - Diretriz Rigo) -->
   <div class="settings-group" style="margin-bottom:6px; border-radius:16px; background:#E4D5BC; box-shadow:0 3px 10px rgba(0,0,0,0.06); overflow:hidden;">
-    <div style="padding:8px 12px 2px; display:flex; align-items:center; justify-content:space-between;">
+    <div style="padding:8px 12px 3px; display:flex; align-items:center; justify-content:space-between;">
       <span style="font-size:13.5px; font-weight:900; color:#2E2417; letter-spacing:0.15px;">Ritmo de Busca na Cidade</span>
+      <span style="font-size:10px; color:#5A4730; font-weight:700;">Repetição de avisos</span>
     </div>
-    <div style="padding:0 12px 5px; font-size:10px; color:#5A4730; font-weight:600;">Repetição de avisos no mesmo local</div>
-    
-    <!-- Opção 1: Busca Padrão 24h (Recomendado) -->
-    <div class="setting-row" id="card-ritmo-24h" onclick="selecionarRitmoBusca('24h')" style="padding:5px 12px; border-top:1px solid rgba(0,0,0,0.05); display:flex; align-items:center; justify-content:space-between; cursor:pointer;">
-      <div style="display:flex; align-items:center; gap:5px;">
-        <span style="font-size:11.5px; font-weight:800; color:#2E2417;">Busca Padrão • 24 horas</span>
-        <span style="font-size:9.5px; background:#009B3A; color:#FFFFFF; padding:1px 5px; border-radius:6px; font-weight:700;">Recomendado</span>
+    <div style="padding:4px 12px 6px;">
+      <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:5px; background:#EDE8DF; padding:3px; border-radius:10px;">
+        <button type="button" id="btn-ritmo-24h" class="btn-ritmo-pill active" onclick="selecionarRitmoBusca('24h')">
+          <span style="font-size:11px; font-weight:900;">Busca Padrão</span>
+          <span style="font-size:8.5px; font-weight:700;">24h • Recomendado</span>
+        </button>
+        <button type="button" id="btn-ritmo-12h" class="btn-ritmo-pill" onclick="selecionarRitmoBusca('12h')">
+          <span style="font-size:11px; font-weight:900;">Busca Ativa</span>
+          <span style="font-size:8.5px; font-weight:700;">12 em 12 horas</span>
+        </button>
+        <button type="button" id="btn-ritmo-6h" class="btn-ritmo-pill" onclick="selecionarRitmoBusca('6h')">
+          <span style="font-size:11px; font-weight:900;">Busca Intensiva</span>
+          <span style="font-size:8.5px; font-weight:700;">6 em 6 horas</span>
+        </button>
       </div>
-      <label class="switch" style="pointer-events:none;"><input type="checkbox" id="switch-ritmo-24h" checked><span class="slider"></span></label>
     </div>
-
-    <!-- Opção 2: Busca Ativa 12h -->
-    <div class="setting-row" id="card-ritmo-12h" onclick="selecionarRitmoBusca('12h')" style="padding:5px 12px; border-top:1px solid rgba(0,0,0,0.05); display:flex; align-items:center; justify-content:space-between; cursor:pointer;">
-      <div>
-        <span style="font-size:11.5px; font-weight:800; color:#2E2417;">Busca Ativa • 12 em 12 horas</span>
-      </div>
-      <label class="switch" style="pointer-events:none;"><input type="checkbox" id="switch-ritmo-12h"><span class="slider"></span></label>
-    </div>
-
-    <!-- Opção 3: Busca Intensiva 6h -->
-    <div class="setting-row" id="card-ritmo-6h" onclick="selecionarRitmoBusca('6h')" style="padding:5px 12px; border-top:1px solid rgba(0,0,0,0.05); display:flex; align-items:center; justify-content:space-between; cursor:pointer;">
-      <div>
-        <span style="font-size:11.5px; font-weight:800; color:#2E2417;">Busca Intensiva • 6 em 6 horas</span>
-      </div>
-      <label class="switch" style="pointer-events:none;"><input type="checkbox" id="switch-ritmo-6h"><span class="slider"></span></label>
+    <div style="padding:0 12px 6px; display:flex; align-items:center; gap:5px; font-size:9.5px; color:#5A4730;">
+      <span>🐾</span>
+      <span>Pets que você busca (tutor ou amigo) têm <strong>raio de 2 km</strong> e prioridade máxima.</span>
     </div>
   </div>
 
@@ -11610,48 +11629,23 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
       }
     }
 
-    let ritmoBuscaAtual = '24h';
+    let ritmoBuscaAtual = localStorage.getItem('au_copiloto_ritmo') || '24h';
 
     function selecionarRitmoBusca(ritmo, emitirToast = true) {
       ritmoBuscaAtual = ritmo || '24h';
-      const s6 = document.getElementById('switch-ritmo-6h');
-      const s12 = document.getElementById('switch-ritmo-12h');
-      const s24 = document.getElementById('switch-ritmo-24h');
-      if (s6) s6.checked = (ritmoBuscaAtual === '6h');
-      if (s12) s12.checked = (ritmoBuscaAtual === '12h');
-      if (s24) s24.checked = (ritmoBuscaAtual === '24h');
+      localStorage.setItem('au_copiloto_ritmo', ritmoBuscaAtual);
 
-      const r6 = document.getElementById('card-ritmo-6h');
-      const r12 = document.getElementById('card-ritmo-12h');
-      const r24 = document.getElementById('card-ritmo-24h');
-      const c6 = document.getElementById('check-ritmo-6h');
-      const c12 = document.getElementById('check-ritmo-12h');
-      const c24 = document.getElementById('check-ritmo-24h');
+      const b24 = document.getElementById('btn-ritmo-24h');
+      const b12 = document.getElementById('btn-ritmo-12h');
+      const b6 = document.getElementById('btn-ritmo-6h');
 
-      if (r6 && r12 && r24 && c6 && c12 && c24) {
-        const bgRitmo = state.theme === 'dark' ? '#23262E' : '#EDE8DF';
-        [r6, r12, r24].forEach(el => {
-          el.style.border = '2px solid transparent';
-          el.style.background = bgRitmo;
-        });
-        [c6, c12, c24].forEach(el => {
-          el.style.border = '2px solid #8A7656';
-          el.style.background = 'transparent';
-          el.innerHTML = '';
-        });
+      [b24, b12, b6].forEach(btn => {
+        if (btn) btn.classList.remove('active');
+      });
 
-        const activeCard = document.getElementById('card-ritmo-' + ritmoBuscaAtual);
-        const activeCheck = document.getElementById('check-ritmo-' + ritmoBuscaAtual);
-        if (activeCard && activeCheck) {
-          const borderCor = state.theme === 'dark' ? '#FFFFFF' : '#009B3A';
-          const bgCheckCor = state.theme === 'dark' ? '#000000' : '#009B3A';
-          activeCard.style.border = '2px solid ' + borderCor;
-          activeCard.style.background = bgRitmo;
-          activeCheck.style.border = '2px solid ' + borderCor;
-          activeCheck.style.background = bgCheckCor;
-          activeCheck.innerHTML = '<div style="width:8px; height:8px; border-radius:50%; background:#fff;"></div>';
-        }
-      }
+      if (ritmoBuscaAtual === '6h' && b6) b6.classList.add('active');
+      else if (ritmoBuscaAtual === '12h' && b12) b12.classList.add('active');
+      else if (b24) b24.classList.add('active');
 
       salvarPrefsCopilotoSilencioso();
       if (emitirToast) {
@@ -11659,6 +11653,25 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
                     (ritmoBuscaAtual === '12h' ? 'Busca Ativa (12h) ativada' : 'Busca Padrão (24h) ativada');
         mostrarToast(txt);
       }
+    }
+
+    // =========================================================================
+    // PROTOCOLO REDE TÁTICA DE BUSCA: TUTOR & AMIGOS (DIRETRIZ OFICIAL RIGO)
+    // Se o usuário é Tutor do pet ou Amigo na rede (?ref_pet=ID ou engajamento),
+    // o raio de voz é expandido para 2.000m (2 km) com prioridade máxima imediata!
+    // =========================================================================
+    function obterRaioEfetivoParaPet(petId) {
+      try {
+        const amigos = JSON.parse(localStorage.getItem('radar_pets_amigos_prioritarios') || '[]');
+        const meuUsuario = JSON.parse(localStorage.getItem('au_usuario_logado') || '{}');
+        const pet = (state && state.alertas ? state.alertas : []).find(p => p.id === petId);
+        const souTutor = Boolean(pet && meuUsuario && meuUsuario.id && pet.tutor_id === meuUsuario.id);
+
+        if (souTutor || amigos.includes(Number(petId))) {
+          return 2000; // Prioridade tática máxima: 2.000 metros (2 km)
+        }
+      } catch (_) {}
+      return Number(localStorage.getItem('au_copiloto_raio_pet') || '1000');
     }
 
     let raioPetAtual = localStorage.getItem('au_copiloto_raio_pet') || '1000';
