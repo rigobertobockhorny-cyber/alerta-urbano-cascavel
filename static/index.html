@@ -4655,10 +4655,10 @@
 
     /* Quadradinhos de Apoio / Espaço Destinado a Patrocinadores (Diretriz Rigo) */
     .quadradinho-apoio {
-      width: 52px;
-      height: 44px;
+      width: 72px;
+      height: 48px;
       flex-shrink: 0;
-      border-radius: 12px;
+      border-radius: 13px;
       background: #FFFFFF;
       border: 1.5px solid rgba(0, 155, 58, 0.35);
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
@@ -7332,16 +7332,13 @@
       const track = document.getElementById('belt-apoio-track');
       if (!track) return;
 
-      // QUADRADINHOS DE APOIO / MARCAS PARCEIRAS (DIRETRIZ OFICIAL RIGO: ESPAÇO DESTINADO AOS APOIADORES)
+      // QUADRADINHOS DE APOIO / MARCAS PARCEIRAS (DIRETRIZ OFICIAL RIGO: APENAS AS 5 MARCAS HOMOLOGADAS)
       const slotsApoio = [
-        { id: 'havan', html: '<span style="font-size:10px; font-weight:900; color:#002B66; font-family:Arial Black, Impact, sans-serif; letter-spacing:0.5px;">HAVAN</span>' },
-        { id: 'pedigree', html: '<span style="font-size:10.5px; font-weight:900; color:#C4121A; font-family:Georgia, serif; font-style:italic;">Pedigree</span>' },
-        { id: 'premier', html: '<span style="font-size:9.5px; font-weight:900; color:#B48A27; font-family:serif;">PremieR</span><span style="font-size:6.5px; font-weight:800; color:#000000; letter-spacing:1px;">PET</span>' },
-        { id: 'zoetis', html: '<span style="font-size:10.5px; font-weight:900; color:#C2410C; letter-spacing:-0.2px;">zoetis</span>' },
-        { id: 'uber', html: '<span style="font-size:11px; font-weight:900; color:#000000;">Uber</span>' },
-        { id: 'cota1', html: '<span style="font-size:8px; font-weight:900; color:#009B3A; text-align:center; line-height:1.1;">+ APOIE<br><span style="font-size:6.5px; color:#5A4730;">AQUI</span></span>' },
-        { id: 'ifood', html: '<span style="font-size:10.5px; font-weight:900; color:#EA1D2C; font-style:italic;">iFood</span>' },
-        { id: 'petshop', html: '<span style="font-size:8.5px; font-weight:900; color:#2E2417; text-align:center; line-height:1.1;">PetShop<br><span style="font-size:6.5px; color:#009B3A;">Cascavel</span></span>' }
+        { id: 'pedigree', html: '<span style="font-size:12.5px; font-weight:900; color:#C4121A; font-family:Georgia, serif; font-style:italic; letter-spacing:0.2px;">Pedigree</span>' },
+        { id: 'cota1', html: '<span style="font-size:9.5px; font-weight:900; color:#009B3A; text-align:center; line-height:1.15; letter-spacing:0.2px;">+ APOIE<br><span style="font-size:7.5px; font-weight:800; color:#5A4730;">AQUI</span></span>' },
+        { id: 'ifood', html: '<span style="font-size:13.5px; font-weight:900; color:#EA1D2C; font-style:italic; letter-spacing:-0.2px;">iFood</span>' },
+        { id: 'petshop', html: '<span style="font-size:9.5px; font-weight:900; color:#2E2417; text-align:center; line-height:1.15;">PetShop<br><span style="font-size:7.5px; font-weight:800; color:#009B3A;">Cascavel</span></span>' },
+        { id: 'zoetis', html: '<span style="font-size:13px; font-weight:900; color:#C2410C; letter-spacing:-0.2px;">zoetis</span>' }
       ];
 
       const htmlSlots = slotsApoio.map(s => `
