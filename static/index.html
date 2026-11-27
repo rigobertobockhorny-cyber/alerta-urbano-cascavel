@@ -4428,13 +4428,14 @@
       transition: all 0.15s ease !important;
     }
     .pillar-tab.active,
-    #pets-main-pills .pillar-tab.active {
+    #pets-main-pills .pillar-tab.active,
+    #tab-copiloto .pillar-tab.active {
       background: #9E8560 !important; /* Marronzinho sólido oficial Rigo */
       color: #FFFFFF !important;
       font-weight: 900 !important;
-      border: none !important;
+      border: 1.5px solid #8A724E !important;
       outline: none !important;
-      box-shadow: none !important;
+      box-shadow: 0 2px 8px rgba(110, 90, 60, 0.25) !important;
     }
 
     /* 3. PARCEIROS: Filtros de categorias */
@@ -6010,17 +6011,34 @@
     [data-theme="dark"] #tab-copiloto .setting-title,
     body.theme-dark #tab-copiloto h2,
     body.theme-dark #tab-copiloto .section-title,
-    body.theme-dark #tab-copiloto .setting-title {
+    body.theme-dark #tab-copiloto .setting-title,
+    [data-theme="dark"] #tab-copiloto *[style*="color:#2E2417"],
+    body.theme-dark #tab-copiloto *[style*="color:#2E2417"] {
       color: #FFFFFF !important;
     }
 
     [data-theme="dark"] #tab-copiloto p,
     [data-theme="dark"] #tab-copiloto .setting-desc,
     [data-theme="dark"] #tab-copiloto div[style*="color:#5A4730"],
+    [data-theme="dark"] #tab-copiloto *[style*="color:#5A4730"],
     body.theme-dark #tab-copiloto p,
     body.theme-dark #tab-copiloto .setting-desc,
-    body.theme-dark #tab-copiloto div[style*="color:#5A4730"] {
+    body.theme-dark #tab-copiloto div[style*="color:#5A4730"],
+    body.theme-dark #tab-copiloto *[style*="color:#5A4730"] {
       color: #CBD5E1 !important;
+    }
+
+    /* Wrap seletor de raio pet no Modo Noturno */
+    [data-theme="dark"] #tab-copiloto #wrap-seletor-raio-pet,
+    body.theme-dark #tab-copiloto #wrap-seletor-raio-pet {
+      background: rgba(30, 33, 40, 0.75) !important;
+      border-top: 1px dashed rgba(255, 255, 255, 0.12) !important;
+    }
+
+    [data-theme="dark"] #tab-copiloto .settings-group,
+    body.theme-dark #tab-copiloto .settings-group {
+      background: #1E2128 !important;
+      border: 1px solid rgba(255, 255, 255, 0.08) !important;
     }
 
     /* Botão ATIVAR PATINHA: PRETO SÓLIDO (Zero Verde - Diretriz Rigo) */
@@ -11672,7 +11690,12 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
       }
     }
 
-    let ritmoBuscaAtual = localStorage.getItem('au_copiloto_ritmo') || '12h';
+    let ritmoBuscaAtual = localStorage.getItem('au_copiloto_ritmo');
+    if (!ritmoBuscaAtual || !localStorage.getItem('au_copiloto_ritmo_v31312')) {
+      ritmoBuscaAtual = '12h';
+      localStorage.setItem('au_copiloto_ritmo', '12h');
+      localStorage.setItem('au_copiloto_ritmo_v31312', 'true');
+    }
 
     function selecionarRitmoBusca(ritmo, emitirToast = true) {
       ritmoBuscaAtual = ritmo || '12h';
