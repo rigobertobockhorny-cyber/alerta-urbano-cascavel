@@ -1738,7 +1738,22 @@
       background: rgba(255, 255, 255, 0.05);
     }
     .perfil-nav-row.danger {
-      color: #ef4444;
+      color: #dc2626 !important;
+    }
+    .perfil-nav-row.danger .perfil-nav-title {
+      color: #dc2626 !important;
+    }
+    .perfil-nav-row.danger .perfil-nav-icon svg {
+      stroke: #dc2626 !important;
+    }
+    .perfil-nav-row.danger .pet-nav-chevron svg {
+      stroke: #dc2626 !important;
+    }
+    .perfil-nav-row:not(.danger) .perfil-nav-title {
+      color: #18181B !important;
+    }
+    .perfil-nav-row:not(.danger) .perfil-nav-icon svg {
+      stroke: #18181B !important;
     }
     .perfil-nav-left {
       display: flex;
@@ -4563,8 +4578,8 @@
 
 
     /* ==================== NOVA ARQUITETURA DE CORES HOME (ZERO SCROLL - PADRÃO RIGO) ==================== */
-    .tab-pane#tab-inicio,
-    #tab-inicio,
+    .tab-pane#tab-inicio.active,
+    #tab-inicio.active,
     .home-pane.active {
       display: flex !important;
       flex-direction: column !important;
@@ -4598,6 +4613,14 @@
        SEÇÃO METEOROLÓGICA DIRETO NO DEGRADÊ (DIRETRIZ RIGO)
        Zero faixas • Zero caixas • 100% integrado ao verde Brasil
        ======================================================== */
+    
+    #tab-inicio:not(.active) {
+      display: none !important;
+    }
+    #tab-copiloto {
+      background: #EDE8DF;
+    }
+
     .home-weather-direct {
       width: 100%;
       box-sizing: border-box;
@@ -5013,7 +5036,7 @@
           <!-- Linha 1: Ícone Sol/Lua + Temperatura Branca + Condição & Máx/Mín -->
           <div style="display:flex; align-items:center; justify-content:space-between; width:100%;">
             <div style="display:flex; align-items:center; gap:8px;">
-              <span id="w-ico" style="font-size:26px; line-height:1; filter:drop-shadow(0 2px 4px rgba(0,0,0,0.35));">🌙</span>
+              <span id="w-ico" style="display:flex; align-items:center; justify-content:center; width:28px; height:28px; filter:drop-shadow(0 2px 4px rgba(0,0,0,0.35));"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></span>
               <span id="w-temp" style="font-size:24px; font-weight:900; line-height:1; color:#FFFFFF; letter-spacing:0.4px; text-shadow:0 1px 3px rgba(0,0,0,0.35);">--°</span>
             </div>
             <div style="text-align:right;">
@@ -5022,16 +5045,14 @@
             </div>
           </div>
 
-          <!-- Linha 2: Card de Alerta Meteorológico / Defesa Civil (Cor Total + Ticker Contínuo - Diretriz Rigo) -->
-          <div class="city-alert-direct alerta-modo-branco" id="city-alert-box" onclick="alternarModoAlertaTeste()" title="Toque para alternar modos de teste (Branco, Laranja e Vermelho)">
-            <span id="city-alert-ico" style="font-size:13px; line-height:1; flex-shrink:0;">🛡️</span>
+          <!-- Linha 2: Card de Alerta Meteorológico (Zero Emojis • Zero Escudos • Sem Botão Testar - Diretriz Rigo) -->
+          <div class="city-alert-direct alerta-modo-branco" id="city-alert-box">
             <div class="alert-ticker-viewport">
               <div class="alert-ticker-track" id="city-alert-ticker-track">
-                <span class="alert-direct-text" id="city-alert-msg-1">🛡️ DEFESA CIVIL DE CASCAVEL: TEMPO ESTÁVEL E SEM ALERTAS • CÉU LIMPO E TEMPERATURA AGRADÁVEL • PROTEJA SEUS PETS COM ÁGUA FRESCA E CARINHO •</span>
-                <span class="alert-direct-text" id="city-alert-msg-2">🛡️ DEFESA CIVIL DE CASCAVEL: TEMPO ESTÁVEL E SEM ALERTAS • CÉU LIMPO E TEMPERATURA AGRADÁVEL • PROTEJA SEUS PETS COM ÁGUA FRESCA E CARINHO •</span>
+                <span class="alert-direct-text" id="city-alert-msg-1">SEM ALERTA METEOROLÓGICO PARA A REGIÃO • TEMPO ESTÁVEL E AGRADÁVEL • PROTEJA SEUS PETS COM ÁGUA FRESCA E CARINHO •</span>
+                <span class="alert-direct-text" id="city-alert-msg-2">SEM ALERTA METEOROLÓGICO PARA A REGIÃO • TEMPO ESTÁVEL E AGRADÁVEL • PROTEJA SEUS PETS COM ÁGUA FRESCA E CARINHO •</span>
               </div>
             </div>
-            <span class="alert-direct-hint" id="city-alert-hint">Testar</span>
           </div>
         </div>
 
@@ -5100,8 +5121,8 @@
         <div id="map"></div>
 
         <div class="map-top-pills" style="background:#E4D5BC; padding:3px; border-radius:999px; border:1px solid rgba(110,90,60,0.22); box-shadow:0 3px 10px rgba(0,0,0,0.12);">
-          <button type="button" class="map-pill active" data-pilar="pet" onclick="filtrarMapa('pet', this)" style="border-radius:999px; font-weight:800; font-size:12px; padding:6px 16px;">🐾 Pets Perdidos</button>
-          <button type="button" class="map-pill" data-pilar="parceiros" onclick="filtrarMapa('parceiros', this)" style="border-radius:999px; font-weight:800; font-size:12px; padding:6px 16px;">🤝 Parceiros Locais</button>
+          <button type="button" class="map-pill active" data-pilar="pet" onclick="filtrarMapa('pet', this)" style="border-radius:999px; font-weight:800; font-size:12px; padding:6px 16px;">Pets Perdidos</button>
+          <button type="button" class="map-pill" data-pilar="parceiros" onclick="filtrarMapa('parceiros', this)" style="border-radius:999px; font-weight:800; font-size:12px; padding:6px 16px;">Parceiros Locais</button>
         </div>
 
         <div class="trail-bar" id="trail-bar" style="background:#E4D5BC; border:1.5px solid rgba(110,90,60,0.28); border-radius:14px; box-shadow:0 4px 14px rgba(74,46,27,0.15);">
@@ -5229,12 +5250,12 @@
           <p style="font-size:13px; line-height:1.45; color:#5A4730; margin:0 auto 18px; max-width:320px;">
             A patinha flutuante acompanha você sobre o Waze, Google Maps e Uber, avisando por áudio ao passar perto de um pet sumido em Cascavel.
           </p>
-          <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
-            <button type="button" class="btn-bolha-hero" onclick="ativarBolhaFlutuante()" style="height:48px; padding:0 12px; font-size:13px; font-weight:900; letter-spacing:0.3px; border-radius:14px; background:#009B3A; color:#FFFFFF; border:none; cursor:pointer; box-shadow:0 4px 12px rgba(0,155,58,0.30);">
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; width:100%; box-sizing:border-box;">
+            <button type="button" class="btn-bolha-hero" onclick="ativarBolhaFlutuante()" style="height:48px; padding:0 8px; font-size:12.5px; font-weight:900; letter-spacing:0.3px; border-radius:14px; background:#009B3A; color:#FFFFFF; border:none; cursor:pointer; box-shadow:0 4px 12px rgba(0,155,58,0.30); display:flex; align-items:center; justify-content:center; text-align:center;">
               ATIVAR PATINHA
             </button>
-            <button type="button" class="btn-bolha-desativar" onclick="desativarBolhaFlutuante()" style="height:48px; padding:0 12px; font-size:13px; font-weight:900; letter-spacing:0.3px; border-radius:14px; background:#EDE8DF; color:#443B2C; border:1px solid rgba(110,90,60,0.3); cursor:pointer;">
-              DESATIVAR
+            <button type="button" class="btn-bolha-desativar" onclick="desativarBolhaFlutuante()" style="height:48px; padding:0 8px; font-size:12.5px; font-weight:900; letter-spacing:0.3px; border-radius:14px; background:#FAF7F2; color:#443B2C; border:1.5px solid rgba(110,90,60,0.35); cursor:pointer; box-shadow:0 2px 6px rgba(0,0,0,0.06); display:flex; align-items:center; justify-content:center; text-align:center;">
+              DESATIVAR PATINHA
             </button>
           </div>
         </div>
@@ -5982,10 +6003,10 @@
             <label class="form-label" style="font-size:10px; font-weight:800; margin-bottom:4px; display:block; color:#2E2417;">Como você atua na proteção animal?</label>
             <div style="display:flex; gap:6px;">
               <button type="button" id="btn-tipo-tutor" onclick="selecionarTipoPerfilCadastro('tutor')" style="flex:1; height:34px; border-radius:8px; font-size:11.5px; font-weight:800; cursor:pointer; background:#009B3A; color:#FFFFFF; border:none; transition:all 0.2s;">
-                🐾 Tutor / Cidadão
+                Tutor / Cidadão
               </button>
               <button type="button" id="btn-tipo-protetor" onclick="selecionarTipoPerfilCadastro('protetor')" style="flex:1.2; height:34px; border-radius:8px; font-size:11.5px; font-weight:800; cursor:pointer; background:#FFFFFF; color:#2E2417; border:1.5px solid rgba(0,0,0,0.15); transition:all 0.2s;">
-                🛡️ Protetor(a) / ONG
+                Protetor(a) / ONG
               </button>
             </div>
             <input type="hidden" id="cadastro-input-tipo-perfil" value="tutor">
@@ -5993,7 +6014,7 @@
 
           <!-- Campos extras para Protetores & ONGs -->
           <div id="wrap-campos-protetor" style="display:none; background:#F4EFE6; border:1px dashed rgba(110,90,60,0.3); border-radius:10px; padding:10px; margin-bottom:10px;">
-            <div style="font-size:11px; font-weight:800; color:#2E2417; margin-bottom:6px;">🛡️ Sua Página Pública de Protetor(a)</div>
+            <div style="font-size:11px; font-weight:800; color:#2E2417; margin-bottom:6px;">Sua Página Pública de Protetor(a)</div>
             <div style="margin-bottom:6px;">
               <label class="form-label" for="cadastro-input-bio" style="font-size:10px; font-weight:800; margin-bottom:2px; display:block;">Sua Causa / Apresentação</label>
               <textarea class="form-input" id="cadastro-input-bio" rows="2" placeholder="Conte brevemente sobre seus resgates e atuação em Cascavel..." style="width:100%; font-size:11.5px; padding:6px; border-radius:6px; box-sizing:border-box; resize:none;"></textarea>
@@ -6068,7 +6089,7 @@
                 ✓ Conta Ativa
               </span>
               <span id="perfil-badge-protetor" style="display:none; align-items:center; gap:4px; font-size:10px; font-weight:800; color:#1E40AF; background:#DBEAFE; padding:2px 8px; border-radius:999px; border:1px solid #93C5FD;">
-                🛡️ Protetor(a) Verificado(a)
+                Protetor(a) Verificado(a)
               </span>
             </div>
           </div>
@@ -6146,12 +6167,12 @@
             </div>
           </div>
 
-          <!-- Linha 4.1: Tolerância Zero (UGC) -->
+          <!-- Linha 4.1: Tolerância Zero (UGC) - Ícone preto normal sem fundo vermelho -->
           <div class="perfil-nav-row" onclick="abrirModalTermos('tolerancia')">
             <div class="perfil-nav-left">
-              <div class="perfil-nav-icon" style="background:rgba(220,38,38,0.12); color:#dc2626;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></div>
+              <div class="perfil-nav-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></div>
               <div>
-                <div class="perfil-nav-title" style="color:#dc2626;">Tolerância Zero & Conduta (UGC)</div>
+                <div class="perfil-nav-title">Tolerância Zero & Conduta (UGC)</div>
                 <div class="perfil-nav-sub">Diretrizes da comunidade e moderação 24h</div>
               </div>
             </div>
@@ -7242,7 +7263,13 @@
           }
         }
 
-        if (icoEl) icoEl.textContent = iconeFinal;
+        if (icoEl) {
+          if (isNoite) {
+            icoEl.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>';
+          } else {
+            icoEl.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>';
+          }
+        }
         if (tempEl) tempEl.textContent = `${c.temp}°`;
         if (condEl) condEl.textContent = condFinal;
         if (hlEl) hlEl.textContent = `Máx ${c.max}° · Mín ${c.min}°`;
@@ -7558,7 +7585,7 @@
 
       container.innerHTML = lista.map(p => {
         const foto = p.foto_url || '/static/darkplanner_pessoas/mulher_01_mariana.jpg';
-        const badge = p.tipo_perfil === 'ong' ? '🏛️ ONG OFICIAL' : '🛡️ PROTETOR';
+        const badge = p.tipo_perfil === 'ong' ? 'ONG OFICIAL' : 'PROTETOR';
         const assistidos = p.total_assistidos || (p.animais ? p.animais.length : 4);
         const nomeCurto = escapeHtml(p.nome);
 
@@ -7597,7 +7624,7 @@
       ];
 
       const htmlSlots = slotsApoio.map(s => `
-        <div class="quadradinho-apoio" onclick="mostrarToast('⭐ Espaço Oficial de Apoio Alerta Pet Brasil!')" title="Espaço Destinado a Apoiadores">
+        <div class="quadradinho-apoio" onclick="mostrarToast('Espaço Oficial de Apoio Alerta Pet Brasil!')" title="Espaço Destinado a Apoiadores">
           ${s.html}
         </div>
       `).join('');
@@ -7660,26 +7687,19 @@
       let textoAlerta = '';
       if (nivelEfetivo === 'vermelho') {
         box.classList.add('alerta-modo-vermelho');
-        if (ico) ico.textContent = '🚨';
-        textoAlerta = '🚨 ALERTA VERMELHO DA DEFESA CIVIL PARA CASCAVEL • RISCO SEVERO DE TEMPESTADE E GRANIZO • PROTEÇÃO MÁXIMA DOS PETS: MANTENHA TODOS DENTRO DE CASA •';
+        textoAlerta = 'ALERTA METEOROLÓGICO VERMELHO NA REGIÃO • RISCO SEVERO DE TEMPESTADE E GRANIZO • PROTEJA SEUS PETS DENTRO DE CASA •';
         if (logoBtn) logoBtn.classList.add('alerta-vermelho');
       } else if (nivelEfetivo === 'laranja') {
         box.classList.add('alerta-modo-laranja');
-        if (ico) ico.textContent = '⚠️';
-        textoAlerta = '⚠️ ALERTA LARANJA DA DEFESA CIVIL PARA CASCAVEL • PREVISÃO DE CHUVAS FORTES E VENTOS • RECOLHA E ABRIGUE OS ANIMAIS EM LOCAL COBERTO E SEGURO •';
+        textoAlerta = 'ALERTA METEOROLÓGICO LARANJA NA REGIÃO • PREVISÃO DE CHUVAS FORTES E VENTOS • ABRIGUE SEUS PETS EM LOCAL SEGURO •';
         if (logoBtn) logoBtn.classList.add('alerta-laranja');
       } else {
         box.classList.add('alerta-modo-branco');
-        if (ico) ico.textContent = '🛡️';
-        textoAlerta = '🛡️ DEFESA CIVIL DE CASCAVEL: TEMPO ESTÁVEL E SEM ALERTAS • CÉU LIMPO E TEMPERATURA AGRADÁVEL • PROTEJA SEUS PETS COM ÁGUA FRESCA E CARINHO •';
+        textoAlerta = 'SEM ALERTA METEOROLÓGICO PARA A REGIÃO • TEMPO ESTÁVEL E AGRADÁVEL • PROTEJA SEUS PETS COM ÁGUA FRESCA E CARINHO •';
       }
 
       if (msg1) msg1.textContent = textoAlerta;
       if (msg2) msg2.textContent = textoAlerta;
-
-      if (hint) {
-        hint.textContent = _modoAlertaTesteForcado ? `Teste: ${nivelEfetivo.toUpperCase()}` : 'Testar';
-      }
     }
 
     // =========================================================================
@@ -10072,6 +10092,7 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
     let vozCopilotoAtual = localStorage.getItem('au_copiloto_voz') || 'feminina';
 
     function selecionarVozCopiloto(genero, emitirSom = true) {
+      if (genero !== 'masculina' && genero !== 'feminina') genero = 'feminina';
       vozCopilotoAtual = genero;
       localStorage.setItem('au_copiloto_voz', genero);
 
@@ -10081,15 +10102,23 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
         if (genero === 'feminina') {
           btnFem.classList.add('active');
           btnMasc.classList.remove('active');
+          btnFem.style.background = '#009B3A';
+          btnFem.style.color = '#FFFFFF';
+          btnMasc.style.background = 'transparent';
+          btnMasc.style.color = '#443B2C';
         } else {
           btnMasc.classList.add('active');
           btnFem.classList.remove('active');
+          btnMasc.style.background = '#009B3A';
+          btnMasc.style.color = '#FFFFFF';
+          btnFem.style.background = 'transparent';
+          btnFem.style.color = '#443B2C';
         }
       }
       salvarPrefsCopilotoSilencioso();
       if (emitirSom) {
-        const vPref = (genero === 'masculina') ? 'masc' : 'fem';
-        const audioUrl = `/static/vozes_frases_oficiais/${vPref === 'masc' ? 'guido' : 'natalia'}_01_apresentacao.mp3?v=20261126`;
+        const locutor = (genero === 'masculina') ? 'guido' : 'natalia';
+        const audioUrl = `/static/vozes_frases_oficiais/${locutor}_01_apresentacao.mp3?v=20261127`;
         try {
           if (!ttsAudioPlayer) ttsAudioPlayer = new Audio();
           ttsAudioPlayer.pause();
@@ -10097,18 +10126,27 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
           ttsAudioPlayer.src = audioUrl;
           ttsAudioPlayer.play().catch(() => {});
         } catch (_) {}
-        mostrarToast(`Voz ${genero === 'feminina' ? 'Natália (Feminina Oficial)' : 'Guido (Masculino Oficial)'} selecionada!`);
+        mostrarToast(`Voz ${genero === 'feminina' ? 'Natália (Feminina Oficial)' : 'Guido (Masculino Oficial)'} selecionada`);
       }
     }
 
     function carregarPrefsCopiloto() {
       try {
-        const prefs = JSON.parse(localStorage.getItem('au_copiloto_prefs') || '{"pet":true,"seg":true,"uti":true,"voz":"feminina"}');
-        document.getElementById('pref-pet').checked = prefs.pet !== false;
-        document.getElementById('pref-seg').checked = prefs.seg !== false;
-        document.getElementById('pref-uti').checked = prefs.uti !== false;
-        selecionarVozCopiloto(prefs.voz || 'feminina', false);
-      } catch (_) {}
+        const prefs = JSON.parse(localStorage.getItem('au_copiloto_prefs') || '{}');
+        const vozSalva = localStorage.getItem('au_copiloto_voz') || prefs.voz || 'feminina';
+        vozCopilotoAtual = vozSalva;
+        
+        const elPet = document.getElementById('pref-pet');
+        const elSeg = document.getElementById('pref-seg');
+        const elUti = document.getElementById('pref-uti');
+        if (elPet) elPet.checked = prefs.pet !== false;
+        if (elSeg) elSeg.checked = prefs.seg !== false;
+        if (elUti) elUti.checked = prefs.uti !== false;
+
+        selecionarVozCopiloto(vozSalva, false);
+      } catch (_) {
+        selecionarVozCopiloto(vozCopilotoAtual || 'feminina', false);
+      }
     }
 
     function salvarPrefsCopilotoSilencioso() {
