@@ -5585,6 +5585,55 @@
           </div>
         </div>
 
+        <!-- Card 4: Ritmo de Busca na Cidade -->
+        <div class="section-head" style="margin-top:14px; margin-bottom:6px;">
+          <div class="section-title" style="font-size:13px; font-weight:900; color:#2E2417;">Ritmo de Busca na Cidade</div>
+        </div>
+        <div class="settings-group" style="margin-bottom:14px; padding:14px 16px; border-radius:18px; background:#E4D5BC; box-shadow:0 4px 14px rgba(0,0,0,0.06);">
+          <div style="font-size:12px; color:#5A4730; font-weight:700; margin-bottom:10px;">
+            Intervalo de repetição de aviso caso você passe novamente pelo mesmo endereço ou animal:
+          </div>
+          <div style="display:flex; flex-direction:column; gap:8px;">
+            <!-- Opção 1: Busca Intensiva (6h) -->
+            <div id="card-ritmo-6h" onclick="selecionarRitmoBusca('6h')" style="display:flex; align-items:center; justify-content:space-between; padding:12px 14px; background:#EDE8DF; border:2px solid transparent; border-radius:14px; cursor:pointer; transition:all 0.15s ease;">
+              <div style="display:flex; align-items:center; gap:10px;">
+                <div style="width:36px; height:36px; border-radius:10px; background:#FED700; color:#2E2417; display:flex; align-items:center; justify-content:center; font-size:18px; font-weight:900;">⚡</div>
+                <div>
+                  <div style="font-size:13px; font-weight:800; color:#2E2417;">Busca Intensiva • 6 em 6 horas</div>
+                  <div style="font-size:11px; color:#5A4730; margin-top:2px;">Para motoristas de app, entregadores e patrulha ativa</div>
+                </div>
+              </div>
+              <div id="check-ritmo-6h" style="width:20px; height:20px; border-radius:50%; border:2px solid #8A7656; display:flex; align-items:center; justify-content:center;"></div>
+            </div>
+
+            <!-- Opção 2: Busca Ativa (12h) -->
+            <div id="card-ritmo-12h" onclick="selecionarRitmoBusca('12h')" style="display:flex; align-items:center; justify-content:space-between; padding:12px 14px; background:#EDE8DF; border:2px solid transparent; border-radius:14px; cursor:pointer; transition:all 0.15s ease;">
+              <div style="display:flex; align-items:center; gap:10px;">
+                <div style="width:36px; height:36px; border-radius:10px; background:#C2AB87; color:#FFFFFF; display:flex; align-items:center; justify-content:center; font-size:18px; font-weight:900;">🧭</div>
+                <div>
+                  <div style="font-size:13px; font-weight:800; color:#2E2417;">Busca Ativa • 12 em 12 horas</div>
+                  <div style="font-size:11px; color:#5A4730; margin-top:2px;">Ideal para rotina diária (ida pela manhã e volta à noite)</div>
+                </div>
+              </div>
+              <div id="check-ritmo-12h" style="width:20px; height:20px; border-radius:50%; border:2px solid #8A7656; display:flex; align-items:center; justify-content:center;"></div>
+            </div>
+
+            <!-- Opção 3: Busca Padrão (24h) -->
+            <div id="card-ritmo-24h" onclick="selecionarRitmoBusca('24h')" style="display:flex; align-items:center; justify-content:space-between; padding:12px 14px; background:#EDE8DF; border:2px solid #009B3A; border-radius:14px; cursor:pointer; transition:all 0.15s ease;">
+              <div style="display:flex; align-items:center; gap:10px;">
+                <div style="width:36px; height:36px; border-radius:10px; background:#009B3A; color:#FFFFFF; display:flex; align-items:center; justify-content:center; font-size:18px; font-weight:900;">🛡️</div>
+                <div>
+                  <div style="font-size:13px; font-weight:800; color:#2E2417;">Busca Padrão • 24 horas <span style="font-size:10px; background:#009B3A; color:#fff; padding:2px 6px; border-radius:8px; margin-left:4px;">Recomendado</span></div>
+                  <div style="font-size:11px; color:#5A4730; margin-top:2px;">1 aviso por dia por animal no mesmo endereço</div>
+                </div>
+              </div>
+              <div id="check-ritmo-24h" style="width:20px; height:20px; border-radius:50%; border:2px solid #009B3A; background:#009B3A; display:flex; align-items:center; justify-content:center;">
+                <div style="width:8px; height:8px; border-radius:50%; background:#fff;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <!-- Botão Guia e Missões do Testador -->
         <div style="margin-top:10px; padding:0 2px;">
           <button type="button" onclick="abrirGuiaTestador()" style="width:100%; height:48px; background:#EDE8DF; color:#009B3A; font-weight:900; font-size:12.5px; letter-spacing:0.4px; border:1.5px solid rgba(0,155,58,0.35); border-radius:14px; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px; box-shadow:0 3px 10px rgba(0,155,58,0.12); transition:all 0.15s ease;">
@@ -7378,7 +7427,7 @@
             uLat = -24.928124; // Casa Rigo / Florais do Paraná / Maracaí
             uLng = -53.432286;
           }
-          verificarRadarProximidadeWeb(uLat, uLng);
+          // Com app aberto em primeiro plano, NUNCA dispara alertas automáticos
         }, 2500);
       } catch (e) {
         console.error('Erro ao carregar dados:', e);
@@ -9232,7 +9281,7 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
       setTimeout(() => {
         let uLat = state.userLat || -24.928124;
         let uLng = state.userLng || -53.432286;
-        verificarRadarProximidadeWeb(uLat, uLng);
+        // Com app aberto em primeiro plano, NUNCA dispara alertas automáticos
       }, 700);
     }
 
@@ -10588,6 +10637,47 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
       }
     }
 
+    let ritmoBuscaAtual = '24h';
+
+    function selecionarRitmoBusca(ritmo, emitirToast = true) {
+      ritmoBuscaAtual = ritmo || '24h';
+      const r6 = document.getElementById('card-ritmo-6h');
+      const r12 = document.getElementById('card-ritmo-12h');
+      const r24 = document.getElementById('card-ritmo-24h');
+      const c6 = document.getElementById('check-ritmo-6h');
+      const c12 = document.getElementById('check-ritmo-12h');
+      const c24 = document.getElementById('check-ritmo-24h');
+
+      if (r6 && r12 && r24) {
+        [r6, r12, r24].forEach(el => {
+          el.style.border = '2px solid transparent';
+          el.style.background = '#EDE8DF';
+        });
+        [c6, c12, c24].forEach(el => {
+          el.style.border = '2px solid #8A7656';
+          el.style.background = 'transparent';
+          el.innerHTML = '';
+        });
+
+        const activeCard = document.getElementById('card-ritmo-' + ritmoBuscaAtual);
+        const activeCheck = document.getElementById('check-ritmo-' + ritmoBuscaAtual);
+        if (activeCard && activeCheck) {
+          activeCard.style.border = '2px solid #009B3A';
+          activeCard.style.background = '#EDE8DF';
+          activeCheck.style.border = '2px solid #009B3A';
+          activeCheck.style.background = '#009B3A';
+          activeCheck.innerHTML = '<div style="width:8px; height:8px; border-radius:50%; background:#fff;"></div>';
+        }
+      }
+
+      salvarPrefsCopilotoSilencioso();
+      if (emitirToast) {
+        const txt = ritmoBuscaAtual === '6h' ? 'Busca Intensiva (6h) ativada' :
+                    (ritmoBuscaAtual === '12h' ? 'Busca Ativa (12h) ativada' : 'Busca Padrão (24h) ativada');
+        mostrarToast(txt);
+      }
+    }
+
     function carregarPrefsCopiloto() {
       try {
         const prefs = JSON.parse(localStorage.getItem('au_copiloto_prefs') || '{}');
@@ -10602,8 +10692,12 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
         if (elUti) elUti.checked = prefs.uti !== false;
 
         selecionarVozCopiloto(vozSalva, false);
+
+        const ritmoSalvo = localStorage.getItem('au_copiloto_ritmo') || prefs.ritmo_busca || '24h';
+        selecionarRitmoBusca(ritmoSalvo, false);
       } catch (_) {
         selecionarVozCopiloto(vozCopilotoAtual || 'feminina', false);
+        selecionarRitmoBusca('24h', false);
       }
     }
 
@@ -10612,9 +10706,11 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
         pet: document.getElementById('pref-pet') ? document.getElementById('pref-pet').checked : true,
         seg: document.getElementById('pref-seg') ? document.getElementById('pref-seg').checked : true,
         uti: document.getElementById('pref-uti') ? document.getElementById('pref-uti').checked : true,
-        voz: vozCopilotoAtual
+        voz: vozCopilotoAtual,
+        ritmo_busca: ritmoBuscaAtual
       };
       localStorage.setItem('au_copiloto_prefs', JSON.stringify(prefs));
+      localStorage.setItem('au_copiloto_ritmo', ritmoBuscaAtual);
       try {
         if (window.AndroidAlerta && typeof window.AndroidAlerta.salvarPreferenciasCopiloto === 'function') {
           window.AndroidAlerta.salvarPreferenciasCopiloto(JSON.stringify(prefs));
@@ -10731,29 +10827,16 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
       state.userLng = Number(lng);
       atualizarStatusGps('ok', `Conectado (±${Math.round(acc || 15)}m)`);
       atualizarMarcadorUsuario();
-      verificarRadarProximidadeWeb(state.userLat, state.userLng);
+      // REGRA OFICIAL RIGO: Com app aberto, ZERO alertas invasivos de voz ou cards na tela!
     }
 
     function verificarRadarProximidadeWeb(lat, lng) {
-      const agora = Date.now();
-
-      // 1. Debounce operacional
-      if (agora - _ultimoRadarCheck < 1500) return;
-      _ultimoRadarCheck = agora;
-
-      // 2. Trava absoluta de execução (Mutex Global)
-      if (_bloqueioRadarAtivo) return;
-
-      // 3. Trava de Áudio Tocando: se a voz já está tocando, NUNCA sobrepõe ou reinicia
-      if (ttsAudioPlayer && !ttsAudioPlayer.paused && ttsAudioPlayer.currentTime < (ttsAudioPlayer.duration || 10)) {
-        return;
-      }
-
-      // 4. Trava de Card na Tela: se o card do radar já está visível, aguarda o card fechar
-      const cardAberto = document.getElementById('card-radar-topo-web');
-      if (cardAberto && cardAberto.style.display !== 'none') {
-        return;
-      }
+      // REGRA OFICIAL SUPREMA RIGO:
+      // Com o aplicativo aberto em primeiro plano, NENHUM áudio ou card invasivo é emitido.
+      // O usuário navega e pesquisa livremente pelas abas.
+      // Avisos sonoros e sobreposição acontecem EXCLUSIVAMENTE quando a Patinha Flutuante for ativada!
+      return;
+    }
 
       // =========================================================================
       // FILA TÁTICA SEQUENCIAL DE TRÂNSITO (REGRA OFICIAL RIGO)
@@ -11037,68 +11120,10 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
     }
 
     function dispararAlertaRadarWeb(pet) {
-      // 1. Limpa qualquer sessão e card anteriores
-      fecharCardRadarTopoWeb(true);
-
-      const rawInfo = ((pet.sexo || '') + ' ' + (pet.titulo || '') + ' ' + (pet.descricao || '') + ' ' + (pet.especie || '')).toLowerCase();
-      const ehFemea = rawInfo.includes('fem') || rawInfo.includes('gata') || rawInfo.includes('cadela');
-      const ehMacho = !ehFemea && (rawInfo.includes('mach') || rawInfo.includes('gato') || rawInfo.includes('cachorro') || rawInfo.includes('cão') || rawInfo.includes('cao'));
-
-      let tipoAnimal = 'cao';
-      if (pet.id === 5514 || rawInfo.includes('gato') || rawInfo.includes('gata') || rawInfo.includes('felino') || rawInfo.includes('tico')) {
-        tipoAnimal = 'gato';
-      } else if (rawInfo.includes('ave') || rawInfo.includes('passaro') || rawInfo.includes('calopsita')) {
-        tipoAnimal = 'ave';
-      } else if (rawInfo.includes('coelh')) {
-        tipoAnimal = 'coelho';
-      } else if (rawInfo.includes('hamster') || rawInfo.includes('cavalo') || rawInfo.includes('outro') || rawInfo.includes('tartaruga')) {
-        tipoAnimal = 'animal';
-      }
-
-      const locutor = (vozCopilotoAtual === 'masculina') ? 'guido' : 'natalia';
-      let audioFile = '';
-      if (tipoAnimal === 'cao') audioFile = `${locutor}_02_alerta_cao.mp3`;
-      else if (tipoAnimal === 'gato') audioFile = `${locutor}_03_alerta_gato.mp3`;
-      else if (tipoAnimal === 'ave') audioFile = `${locutor}_04_alerta_ave.mp3`;
-      else if (tipoAnimal === 'coelho') audioFile = `${locutor}_14_alerta_coelho.mp3`;
-      else audioFile = `${locutor}_12_alerta_animal.mp3`;
-
-      const audioUrl = `/static/vozes_frases_oficiais/${audioFile}?v=20261126`;
-
-      let fraseFalada = `Atenção! Protetor Alerta Pet, ${tipoAnimal} perdido nesta região. Olhos atentos na pista!`;
-      if (tipoAnimal === 'gato') fraseFalada = `Atenção! Protetor Alerta Pet, gato perdido nesta região. Olhos atentos na pista!`;
-      if (tipoAnimal === 'cao') fraseFalada = `Atenção! Protetor Alerta Pet, cão perdido nesta região. Olhos atentos na pista!`;
-
-      _sessaoAlertaAtiva = {
-        pet,
-        ehFemea,
-        ehMacho,
-        audioUrl,
-        fraseFalada,
-        cardAberto: false,
-        timerSeguranca: null
-      };
-
-      tocarVinhetaExclusiva();
-
-      // Prioridade 1: App Nativo Android via Bridge
-      if (window.AndroidAlerta && typeof window.AndroidAlerta.tocarAlertaNativo === 'function') {
-        try {
-          window.AndroidAlerta.tocarAlertaNativo(audioUrl, fraseFalada, pet.titulo || '', String(pet.id));
-          clearTimeout(_timerAlertaFallback);
-          _timerAlertaFallback = setTimeout(() => {
-            if (_sessaoAlertaAtiva && !_sessaoAlertaAtiva.cardAberto) {
-              executarVozWebSincronizada(_sessaoAlertaAtiva);
-            }
-          }, 2200);
-          return;
-        } catch (eBridge) {
-          console.warn('Bridge tocarAlertaNativo falhou, fallback para web:', eBridge);
-        }
-      }
-
-      // Prioridade 2: Web Audio / PWA
-      executarVozWebSincronizada(_sessaoAlertaAtiva);
+      // REGRA OFICIAL SUPREMA RIGO:
+      // Com o aplicativo aberto em primeiro plano, NUNCA canta por áudio nem sobrepõe cards na tela!
+      // Avisos sonoros e sobreposição acontecem EXCLUSIVAMENTE quando a Patinha Flutuante for ativada!
+      return;
     }
 
     let ttsAudioPlayer = null;
