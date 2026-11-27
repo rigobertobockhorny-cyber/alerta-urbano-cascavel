@@ -7381,6 +7381,9 @@
         if (rAlertas && rAlertas.ok) {
           state.alertas = await rAlertas.json();
           try { localStorage.setItem('apb_cached_alertas', JSON.stringify(state.alertas)); } catch(_) {}
+          if (window.AndroidAlerta && typeof window.AndroidAlerta.sincronizarAlertasOffline === 'function') {
+            try { window.AndroidAlerta.sincronizarAlertasOffline(JSON.stringify(state.alertas)); } catch(_) {}
+          }
         }
       } catch (_) {}
 
@@ -10731,6 +10734,13 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
 
     function ativarBolhaFlutuante() {
       salvarPrefsCopiloto();
+      if (window.AndroidAlerta && typeof window.AndroidAlerta.sincronizarAlertasOffline === 'function') {
+        try {
+          if (state && Array.isArray(state.alertas) && state.alertas.length > 0) {
+            window.AndroidAlerta.sincronizarAlertasOffline(JSON.stringify(state.alertas));
+          }
+        } catch (_) {}
+      }
       if (window.AndroidAlerta && typeof window.AndroidAlerta.minimizarParaBolha === 'function') {
         window.AndroidAlerta.minimizarParaBolha();
       } else {
