@@ -155,6 +155,10 @@ def init_db():
         ("orgao_destino", "TEXT DEFAULT ''"),
         ("uf", "TEXT DEFAULT 'PR'"),
         ("estado", "TEXT DEFAULT 'PR'"),
+        ("ultimo_avistamento_at", "TEXT DEFAULT ''"),
+        ("ultimo_avistamento_lat", "REAL DEFAULT 0"),
+        ("ultimo_avistamento_lng", "REAL DEFAULT 0"),
+        ("ultimo_avistamento_bairro", "TEXT DEFAULT ''"),
     ]
     for col_name, col_def in novas_colunas:
         if col_name not in cols:
@@ -2143,6 +2147,7 @@ def descartar_avistamento_tutor(av_id):
 
 
 @app.route("/api/pets/<int:pet_id>/avistamento", methods=["POST"])
+@app.route("/api/pets/<int:pet_id>/avistamentos", methods=["POST"])
 def registrar_avistamento_pet(pet_id):
     """
     Registra um ponto de avistamento vinculado a um Pet Desaparecido:
@@ -2224,7 +2229,18 @@ def registrar_avistamento_pet(pet_id):
         agora,
     ))
     avistamento_id = cur.lastrowid
-    cur.execute("UPDATE alertas SET confirmacoes = confirmacoes + 1, peso = peso + 1 WHERE id = ?", (pet_id,))
+    # REJUVENESCIMENTO POR AVISTAMENTO (DIRETRIZ CIENTÍFICA RIGO):
+    # O avistamento rejuvenesce o pet para a Janela de Ouro (cadência de 4h) e move o epicentro da busca
+    cur.execute("""
+        UPDATE alertas 
+        SET confirmacoes = confirmacoes + 1, 
+            peso = peso + 1,
+            ultimo_avistamento_at = ?,
+            ultimo_avistamento_lat = ?,
+            ultimo_avistamento_lng = ?,
+            ultimo_avistamento_bairro = ?
+        WHERE id = ?
+    """, (agora, float(lat), float(lng), bairro, pet_id))
 
     # Busca token Firebase do tutor para disparar Push na tela bloqueada
     tutor_fcm = ""

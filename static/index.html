@@ -6567,9 +6567,9 @@
           <span style="font-size:8px; font-weight:700; margin-top:1px;">12 em 12 horas</span>
           <span class="pill-badge-rec" style="font-size:7.5px; background:#009B3A; color:#FFFFFF; padding:1px 5px; border-radius:5px; font-weight:800; margin-top:2px; display:inline-block;">Recomendado</span>
         </button>
-        <button type="button" id="btn-ritmo-6h" class="btn-ritmo-pill" onclick="selecionarRitmoBusca('6h')">
+        <button type="button" id="btn-ritmo-4h" class="btn-ritmo-pill" onclick="selecionarRitmoBusca('4h')">
           <span style="font-size:10.5px; font-weight:900;">Busca Intensiva</span>
-          <span style="font-size:8px; font-weight:700; margin-top:1px;">6 em 6 horas</span>
+          <span style="font-size:8px; font-weight:700; margin-top:1px;">4 em 4 horas</span>
         </button>
       </div>
     </div>
@@ -10736,7 +10736,7 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
       let seletorBuscaPetHtml = '';
       if (ehPet && !ehAvistado && a.tipo !== 'pet_adocao' && a.tipo !== 'pet_denuncia_maustratos') {
         const modoAtual = typeof obterModoBuscaPet === 'function' ? obterModoBuscaPet(a.id) : 'padrao';
-        const lblModo = modoAtual === 'intensiva' ? 'Busca Intensiva (6h • 2.000m)' : (modoAtual === 'ativa' ? 'Busca Ativa (12h • 1.000m)' : 'Busca Padrão (24h • 500m)');
+        const lblModo = modoAtual === 'intensiva' ? 'Busca Intensiva (4h • 2.000m)' : (modoAtual === 'ativa' ? 'Busca Ativa (12h • 1.000m)' : 'Busca Padrão (24h • 500m)');
         seletorBuscaPetHtml = `
           <div style="margin-top:12px; border-radius:16px; background:#E4D5BC; box-shadow:0 3px 10px rgba(0,0,0,0.06); padding:10px 12px; border:1px solid rgba(110,90,60,0.18);">
             <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:5px;">
@@ -10754,11 +10754,11 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
               </button>
               <button type="button" id="btn-pet-modo-intensiva-${a.id}" class="btn-ritmo-pill ${modoAtual === 'intensiva' ? 'active' : ''}" onclick="definirModoBuscaPet(${a.id}, 'intensiva')">
                 <span style="font-size:10.5px; font-weight:900;">Intensiva</span>
-                <span style="font-size:8px; font-weight:700;">6h • 2.000m</span>
+                <span style="font-size:8px; font-weight:700;">4h • 2.000m</span>
               </button>
             </div>
             <div style="margin-top:6px; font-size:9.5px; color:#5A4730; line-height:1.3; text-align:center;">
-              Na <strong>Busca Intensiva</strong>, o Copiloto abre o radar para 2.000m e prioriza avisos por voz.
+              Na <strong>Busca Intensiva</strong>, o Copiloto abre o radar para 2.000m e repete avisos a cada 4 horas na Janela de Ouro.
             </div>
           </div>
         `;
@@ -11673,24 +11673,25 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
     }
 
     function selecionarRitmoBusca(ritmo, emitirToast = true) {
+      if (ritmo === '6h') ritmo = '4h'; // Normalização para Janela de Ouro 4 Horas (Diretriz Suprema Rigo)
       ritmoBuscaAtual = ritmo || '12h';
       localStorage.setItem('au_copiloto_ritmo', ritmoBuscaAtual);
 
       const b24 = document.getElementById('btn-ritmo-24h');
       const b12 = document.getElementById('btn-ritmo-12h');
-      const b6 = document.getElementById('btn-ritmo-6h');
+      const b4 = document.getElementById('btn-ritmo-4h') || document.getElementById('btn-ritmo-6h');
 
-      [b24, b12, b6].forEach(btn => {
+      [b24, b12, b4].forEach(btn => {
         if (btn) btn.classList.remove('active');
       });
 
-      if (ritmoBuscaAtual === '6h' && b6) b6.classList.add('active');
+      if ((ritmoBuscaAtual === '4h' || ritmoBuscaAtual === '6h') && b4) b4.classList.add('active');
       else if (ritmoBuscaAtual === '24h' && b24) b24.classList.add('active');
       else if (b12) b12.classList.add('active');
 
       salvarPrefsCopilotoSilencioso();
       if (emitirToast) {
-        const txt = ritmoBuscaAtual === '6h' ? 'Busca Intensiva (6h) ativada' :
+        const txt = (ritmoBuscaAtual === '4h' || ritmoBuscaAtual === '6h') ? 'Busca Intensiva (4h • Janela de Ouro) ativada' :
                     (ritmoBuscaAtual === '24h' ? 'Busca Padrão (24h) ativada' : 'Busca Ativa (12h • Recomendado) ativada');
         mostrarToast(txt);
       }
@@ -11749,7 +11750,7 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
 
         if (modo === 'intensiva') {
           if (bIntensiva) bIntensiva.classList.add('active');
-          if (lbl) lbl.textContent = 'Busca Intensiva (6h • 2.000m)';
+          if (lbl) lbl.textContent = 'Busca Intensiva (4h • 2.000m)';
         } else if (modo === 'ativa') {
           if (bAtiva) bAtiva.classList.add('active');
           if (lbl) lbl.textContent = 'Busca Ativa (12h • 1.000m)';
