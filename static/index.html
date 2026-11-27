@@ -4956,14 +4956,14 @@
       overflow: hidden;
       width: 100%;
       position: relative;
-      padding: 0 !important;
+      padding: 0 0 6px 0 !important;
     }
     .apoie-scroll-viewport::-webkit-scrollbar {
       display: none;
     }
     .apoie-text-track {
       display: inline-flex;
-      gap: 10px;
+      gap: 12px;
       align-items: center;
       white-space: nowrap;
       will-change: transform;
@@ -5201,15 +5201,15 @@
       background: #009B3A;
     }
 
-    /* Quadradinhos de Apoio / Espaço Destinado a Patrocinadores (Diretriz Rigo: Blocos mais gordinhos e altinhos) */
+    /* Quadradinhos de Apoio / Espaço Destinado a Patrocinadores (Diretriz Rigo: Blocos maiores, gordinhos e altinhos que avançam sobre o degradê) */
     .quadradinho-apoio {
-      width: 94px;
-      height: 52px;
+      width: 106px;
+      height: 64px;
       flex-shrink: 0;
-      border-radius: 13px;
+      border-radius: 16px;
       background: #FFFFFF !important; /* Totalmente branco sólido puro */
       border: none !important; /* Sem margem, sem cor nas bordas - Diretriz Oficial Rigo */
-      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.16) !important;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.20) !important;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -5217,7 +5217,7 @@
       cursor: pointer;
       transition: transform 0.15s ease;
       overflow: hidden;
-      padding: 2px 4px;
+      padding: 3px 6px;
       box-sizing: border-box;
       position: relative !important;
       z-index: 502 !important; /* Botão 100% à frente do degradê */
@@ -8140,18 +8140,18 @@
       const track = document.getElementById('belt-apoio-track');
       if (!track) return;
 
-      // QUADRADINHOS DE APOIO / MARCAS PARCEIRAS (DIRETRIZ OFICIAL RIGO: INTERCALAR MARCA E APOIE AQUI • ESTRUTURA GORDINHA E ALTINHA 96x58)
-      const cotaApoie = { id: 'cota-apoie', html: '<span style="font-size:11.5px; font-weight:900; color:#009B3A; text-align:center; line-height:1.2; letter-spacing:0.3px;">+ APOIE<br><span style="font-size:9.5px; font-weight:800; color:#5A4730;">AQUI</span></span>' };
+      // QUADRADINHOS DE APOIO / MARCAS PARCEIRAS (DIRETRIZ OFICIAL RIGO: INTERCALAR MARCA E APOIE AQUI • ESTRUTURA GORDINHA E ALTINHA 106x64)
+      const cotaApoie = { id: 'cota-apoie', html: '<span style="font-size:12.5px; font-weight:900; color:#009B3A; text-align:center; line-height:1.2; letter-spacing:0.3px;">+ APOIE<br><span style="font-size:10.5px; font-weight:800; color:#5A4730;">AQUI</span></span>' };
 
       const slotsApoio = [
         cotaApoie,
-        { id: 'ifood', html: '<span style="font-size:15px; font-weight:900; color:#EA1D2C; font-style:italic; letter-spacing:-0.2px;">iFood</span>' },
+        { id: 'ifood', html: '<span style="font-size:16.5px; font-weight:900; color:#EA1D2C; font-style:italic; letter-spacing:-0.2px;">iFood</span>' },
         cotaApoie,
-        { id: 'petshop', html: '<span style="font-size:11px; font-weight:900; color:#2E2417; text-align:center; line-height:1.15;">PetShop<br><span style="font-size:8.5px; font-weight:800; color:#009B3A;">Cascavel</span></span>' },
+        { id: 'petshop', html: '<span style="font-size:12px; font-weight:900; color:#2E2417; text-align:center; line-height:1.15;">PetShop<br><span style="font-size:9.5px; font-weight:800; color:#009B3A;">Cascavel</span></span>' },
         cotaApoie,
-        { id: 'zoetis', html: '<span style="font-size:14.5px; font-weight:900; color:#C2410C; letter-spacing:-0.2px;">zoetis</span>' },
+        { id: 'zoetis', html: '<span style="font-size:16px; font-weight:900; color:#C2410C; letter-spacing:-0.2px;">zoetis</span>' },
         cotaApoie,
-        { id: 'pedigree', html: '<span style="font-size:14px; font-weight:900; color:#C4121A; font-family:Georgia, serif; font-style:italic; letter-spacing:0.3px;">Pedigree</span>' }
+        { id: 'pedigree', html: '<span style="font-size:15px; font-weight:900; color:#C4121A; font-family:Georgia, serif; font-style:italic; letter-spacing:0.3px;">Pedigree</span>' }
       ];
 
       const htmlSlots = slotsApoio.map(s => `

@@ -87,7 +87,7 @@ c:\PROJETOS\5-FERRAMENTAS\ALERTA_URBANO_CASCAVEL\
   - Fundo do corpo central: `#EDE8DF` (Areia Arenoso Suave).
   - Cards de Destaque (Campanha e Protetores): `#E4D5BC` (Areia Dourada Arenosa Oficial), **SEM BORDAS / SEM MARGEM MARROM** (`border: none !important;`).
   - Bloco Meteorológico: Degradê Verde-Brasil (`#009B3A` a `#007028`) com texto e números brancos (`#FFFFFF`).
-  - Blocos da Esteira Apoie Aqui: Fundo `#FFFFFF`, **SEM BORDAS VERDES** (`border: none !important;`), dimensões confortáveis `width: 92px; height: 50px;`, cantos arredondados `border-radius: 13px;`.
+  - Blocos da Esteira Apoie Aqui: Fundo `#FFFFFF` sólido puro, **SEM BORDAS VERDES / SEM MARGEM** (`border: none !important;`), dimensões ampliadas e encorpadas `width: 106px; height: 64px;`, cantos arredondados `border-radius: 16px;`, sombra suave encorpada `box-shadow: 0 4px 12px rgba(0,0,0,0.20)`. Os blocos expandem-se para baixo em direção ao degradê verde na base, preservando o ritmo uniforme de 18px em relação à Comunidade de Protetores e `z-index: 502` (ficando 100% à frente do degradê, sem sobreposição indesejada).
   - Esteira Quem Ama Cuida: **CORTE RETO PURO NAS LATERAIS** (`mask-image: none !important;`), com zero efeito degradê, zero máscara fosca ou esfumaçada. Os cards entram e saem em linha reta perfeita.
   - Texto Principal dos Títulos: `#2E2417` (Marrom Terroso Profundo).
   - Subtítulos e Rótulos: `#5A4730` e `#6E5A3C`.
