@@ -4698,47 +4698,52 @@
     }
 
     /* ========================================================
-       CARD ARENOSO DE CAMPANHAS (AMPLIADO E COM SUSPIRO - DIRETRIZ RIGO)
-       Cor Areia Oficial Encorpada (#E4D5BC), maior altura, sem corte de texto
+       CARD ARENOSO DE CAMPANHAS (BLOCO RIGIDAMENTE FIXO - DIRETRIZ RIGO)
+       Bloco sólido fixo: NUNCA expande nem encolhe. Altura cravada em 52px.
        ======================================================== */
     .campaign-sand-card {
       background: #E4D5BC !important; /* Areia Oficial Encorpada */
       border: 1.5px solid rgba(110, 90, 60, 0.32) !important;
-      border-radius: 18px !important;
-      box-shadow: 0 4px 14px rgba(74, 46, 27, 0.10) !important;
-      margin: 10px 12px 10px !important; /* Totalmente no fundo areia, fora do degradê verde */
-      padding: 16px 20px !important;
+      border-radius: 14px !important;
+      box-shadow: 0 3px 10px rgba(74, 46, 27, 0.08) !important;
+      margin: 4px 12px 4px !important;
+      padding: 6px 14px !important;
       text-align: center;
       position: relative;
       z-index: 5;
-      overflow: visible !important;
+      overflow: hidden !important;
       box-sizing: border-box !important;
-      min-height: 94px !important; /* Bloco grandão e destacado conforme Rigo */
+      height: 52px !important;
+      min-height: 52px !important;
+      max-height: 52px !important;
+      flex-shrink: 0 !important;
       display: flex;
       align-items: center;
       justify-content: center;
     }
 
     .home-campaign-phrase {
-      font-size: 13.5px !important;
-      font-weight: 800;
-      color: #2E2417; /* Marrom escuro acolhedor sobre areia */
-      line-height: 1.45 !important;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      font-size: 12px !important;
+      font-weight: 800 !important;
+      color: #2E2417 !important;
+      line-height: 1.3 !important;
+      display: -webkit-box !important;
+      -webkit-line-clamp: 2 !important;
+      -webkit-box-orient: vertical !important;
+      overflow: hidden !important;
       font-style: italic;
-      transition: opacity 0.6s ease-in-out, transform 0.6s ease-in-out;
-      opacity: 1;
-      padding: 2px 4px !important;
-      box-sizing: border-box !important;
-      overflow: visible !important;
+      text-align: center;
       width: 100%;
+      box-sizing: border-box !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+      opacity: 1;
     }
 
     .home-campaign-phrase.fade-out {
       opacity: 0;
-      transform: translateY(3px);
+      transform: translateY(2px);
     }
 
     /* Ondulações Eliminadas - Transição 100% no Degradê Conforme Diretriz Rigo */
@@ -4799,221 +4804,46 @@
     }
 
     /* ========================================================
-       SHOWCASE CARD ÚNICO DE PROTETORES (DIRETRIZ OFICIAL RIGO)
-       1 Card Grande Visível por Vez • Swipe Horizontal • Auto 10s
+       COMUNIDADE DE PROTETORES (PADRÃO PRINT 2 - SWIPE HORIZONTAL)
+       Cards lado a lado com foto verde, badge, nome e Ver Perfil
        ======================================================== */
-    .showcase-protetor-viewport {
-      width: 100%;
-      overflow: hidden;
-      position: relative;
-      border-radius: 18px;
-      user-select: none;
-      -webkit-user-select: none;
-      touch-action: pan-y;
-      box-sizing: border-box;
-    }
-
-    .showcase-protetor-track {
+    .swipe-protetores-container {
       display: flex;
-      width: 100%;
-      will-change: transform;
-      transition: transform 0.42s cubic-bezier(0.25, 1, 0.5, 1);
-    }
-
-    .showcase-protetor-card {
-      flex: 0 0 100%;
-      width: 100%;
-      box-sizing: border-box;
-      background: #FAF7F2;
-      border: 1.5px solid rgba(110, 90, 60, 0.22);
-      border-radius: 18px;
-      padding: 13px 14px 12px;
-      box-shadow: 0 3px 12px rgba(74, 46, 27, 0.08);
-      display: flex;
-      flex-direction: column;
-      gap: 9px;
-      position: relative;
-      cursor: pointer;
-    }
-
-    .showcase-top-row {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .showcase-avatar-box {
-      width: 54px;
-      height: 54px;
-      border-radius: 14px;
-      border: 2.5px solid #009B3A;
-      overflow: hidden;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
-      background: #FFFFFF;
-      flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .showcase-avatar-img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .showcase-info-col {
-      flex: 1;
-      min-width: 0;
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-
-    .showcase-badge-row {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .showcase-badge {
-      font-size: 8.5px;
-      font-weight: 900;
-      background: #EBFDF2;
-      color: #009B3A;
-      padding: 2px 8px;
-      border-radius: 999px;
-      letter-spacing: 0.3px;
-      display: inline-flex;
-      align-items: center;
-    }
-
-    .showcase-nome {
-      font-size: 13.5px;
-      font-weight: 900;
-      color: #2E2417;
-      line-height: 1.25;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .showcase-sub {
-      font-size: 10.5px;
-      font-weight: 700;
-      color: #6E5A3C;
-    }
-
-    .showcase-bio-row {
-      font-size: 11px !important;
-      font-weight: 600 !important;
-      color: #4A3C2A !important;
-      line-height: 1.35 !important;
-      font-style: italic !important;
-      display: -webkit-box !important;
-      -webkit-line-clamp: 2 !important;
-      -webkit-box-orient: vertical !important;
-      overflow: hidden !important;
-      height: 34px !important;
-      min-height: 34px !important;
-      max-height: 34px !important;
-      background: rgba(228, 213, 188, 0.35) !important;
-      padding: 2px 10px 0px !important;
-      border-radius: 10px !important;
-      border-left: 3px solid #009B3A !important;
-      box-sizing: border-box !important;
-    }
-
-    .showcase-pets-section {
-      display: flex;
-      flex-direction: column;
-      gap: 5px;
-      padding-top: 2px;
-    }
-
-    .showcase-pets-label {
-      font-size: 10px;
-      font-weight: 800;
-      color: #5A4730;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .showcase-pets-strip {
-      display: flex;
-      gap: 8px;
+      gap: 10px;
       overflow-x: auto;
-      scrollbar-width: none;
+      padding: 2px 2px 4px;
+      scroll-snap-type: x mandatory;
       -webkit-overflow-scrolling: touch;
-      padding: 1px 0 3px;
+      scrollbar-width: none;
     }
-    .showcase-pets-strip::-webkit-scrollbar {
+    .swipe-protetores-container::-webkit-scrollbar {
       display: none;
     }
 
-    .showcase-pet-thumb-wrap {
-      flex: 0 0 54px;
+    .card-perfil-swipe {
+      flex: 0 0 168px !important;
+      width: 168px !important;
+      height: 154px !important;
+      min-height: 154px !important;
+      max-height: 154px !important;
+      box-sizing: border-box !important;
+      scroll-snap-align: start;
+      background: #FAF7F2;
+      border: 1.5px solid rgba(110, 90, 60, 0.22);
+      border-radius: 18px;
+      padding: 8px 8px 6px;
+      box-shadow: 0 3px 10px rgba(74, 46, 27, 0.08);
       display: flex;
       flex-direction: column;
       align-items: center;
-      cursor: pointer;
-    }
-
-    .showcase-pet-thumb {
-      width: 50px;
-      height: 50px;
-      border-radius: 12px;
-      border: 1.5px solid rgba(110, 90, 60, 0.25);
-      object-fit: cover;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-      background: #FFFFFF;
-    }
-
-    .showcase-pet-name {
-      font-size: 9.5px;
-      font-weight: 800;
-      color: #2E2417;
-      margin-top: 3px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      max-width: 52px;
       text-align: center;
-    }
-
-    .showcase-bottom-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border-top: 1px solid rgba(110, 90, 60, 0.16);
-      padding-top: 6px;
-      margin-top: 2px;
-    }
-
-    .showcase-btn-perfil {
-      font-size: 11px;
-      font-weight: 900;
-      color: #009B3A;
-      display: flex;
-      align-items: center;
-      gap: 4px;
       cursor: pointer;
-      text-decoration: none;
+      flex-shrink: 0;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
     }
 
-    .protetor-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: rgba(110, 90, 60, 0.3);
-      cursor: pointer;
-      transition: all 0.25s ease;
-    }
-    .protetor-dot.active {
-      width: 16px;
-      border-radius: 999px;
-      background: #009B3A;
+    .card-perfil-swipe:active {
+      transform: scale(0.98);
     }
 
     /* Quadradinhos de Apoio / Espaço Destinado a Patrocinadores (Diretriz Rigo: 4 cards na tela) */
@@ -5178,7 +5008,7 @@
           </div>
 
           <!-- Bloco Amarelo: Quem ama, cuida e procura junto (Com suspiro harmonioso • Velocidade relaxante) -->
-          <div class="belt-block belt-block-pets" style="margin-top:10px; margin-bottom:12px;">
+          <div class="belt-block belt-block-pets" style="margin-top:4px; margin-bottom:4px;">
             <div class="belt-head" style="display:flex; align-items:center; justify-content:space-between; margin-bottom:4px;">
               <div class="belt-title pet-title" style="display:flex; align-items:center; gap:6px;">
                 <svg class="belt-svg" viewBox="0 0 24 24" fill="currentColor" width="14" height="14" style="color:#2E2417;">
@@ -5195,26 +5025,23 @@
             </div>
           </div>
 
-          <!-- Bloco Azul/Roxo: Comunidade de Protetores (CARD ÚNICO GRANDE • 1 por tela • Swipe + Auto 10s • Diretriz Rigo) -->
-          <div class="belt-block belt-block-protetores" style="margin-top:8px; margin-bottom:4px;">
-            <div class="belt-head" style="display:flex; align-items:center; justify-content:space-between; margin-bottom:6px;">
-              <div class="belt-title" style="display:flex; align-items:center; gap:6px;">
-                <svg viewBox="0 0 24 24" fill="none" stroke="#2E2417" stroke-width="2.2" width="14" height="14">
+          <!-- Bloco Roxo: Comunidade de Protetores (PADRÃO PRINT 2 • Swipe Horizontal • 2 por tela) -->
+          <div class="belt-block belt-block-protetores" style="margin-top:2px; margin-bottom:2px;">
+            <div class="belt-head" style="display:flex; align-items:center; justify-content:space-between; margin-bottom:2px;">
+              <div class="belt-title" style="display:flex; align-items:center; gap:5px;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#2E2417" stroke-width="2.2" width="13" height="13">
                   <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
                   <circle cx="9" cy="7" r="4"></circle>
                   <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
                   <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
                 </svg>
-                <span style="font-size:12px; font-weight:800; color:#2E2417; letter-spacing:0.2px;">Comunidade de Protetores</span>
+                <span style="font-size:11.5px; font-weight:800; color:#2E2417; letter-spacing:0.2px;">Comunidade de Protetores</span>
               </div>
-              <div id="protetores-carousel-dots" style="display:flex; align-items:center; gap:5px;"></div>
             </div>
 
-            <!-- Viewport do Card Único Grande de Protetor com Galeria de Pets -->
-            <div class="showcase-protetor-viewport" id="showcase-protetor-viewport">
-              <div class="showcase-protetor-track" id="showcase-protetor-track">
-                <!-- Card grande de cada protetor gerado dinamicamente -->
-              </div>
+            <!-- Container Horizontal para passar com o dedo (Swipe) -->
+            <div class="swipe-protetores-container" id="swipe-protetores-container">
+              <!-- Cards de perfil social inseridos dinamicamente -->
             </div>
           </div>
         </div>
@@ -7651,188 +7478,69 @@
     // =========================================================================
     // COMUNIDADE DE PROTETORES: CARD ÚNICO GRANDE COM SWIPE & AUTO 10S (DIRETRIZ RIGO)
     // =========================================================================
-    let _idxProtetorAtual = 0;
-    let _timerAutoProtetor = null;
-
-    function irParaProtetor(idx) {
-      const track = document.getElementById('showcase-protetor-track');
-      const dots = document.querySelectorAll('.protetor-dot');
-      if (!track) return;
-      const total = track.children.length;
-      if (total === 0) return;
-      _idxProtetorAtual = (idx + total) % total;
-      track.style.transform = `translateX(-${_idxProtetorAtual * 100}%)`;
-      dots.forEach((d, i) => d.classList.toggle('active', i === _idxProtetorAtual));
-    }
-
-    function iniciarCarrosselProtetores(total) {
-      const viewport = document.getElementById('showcase-protetor-viewport');
-      if (!viewport || total <= 1) return;
-
-      if (_timerAutoProtetor) clearInterval(_timerAutoProtetor);
-
-      // Auto-avanço suave a cada 10 segundos conforme diretriz Rigo
-      _timerAutoProtetor = setInterval(() => {
-        irParaProtetor(_idxProtetorAtual + 1);
-      }, 10000);
-
-      // Suporte a swipe no dedo com touchstart, touchmove, touchend
-      if (!viewport.dataset.swipeAtivo) {
-        viewport.dataset.swipeAtivo = 'true';
-        let startX = 0;
-        let deltaX = 0;
-        let isTouching = false;
-
-        viewport.addEventListener('touchstart', (e) => {
-          if (e.touches.length !== 1) return;
-          startX = e.touches[0].clientX;
-          deltaX = 0;
-          isTouching = true;
-          if (_timerAutoProtetor) clearInterval(_timerAutoProtetor);
-        }, { passive: true });
-
-        viewport.addEventListener('touchmove', (e) => {
-          if (!isTouching || e.touches.length !== 1) return;
-          deltaX = e.touches[0].clientX - startX;
-        }, { passive: true });
-
-        viewport.addEventListener('touchend', () => {
-          if (!isTouching) return;
-          isTouching = false;
-          if (deltaX < -45) {
-            irParaProtetor(_idxProtetorAtual + 1);
-          } else if (deltaX > 45) {
-            irParaProtetor(_idxProtetorAtual - 1);
-          }
-          if (_timerAutoProtetor) clearInterval(_timerAutoProtetor);
-          _timerAutoProtetor = setInterval(() => {
-            irParaProtetor(_idxProtetorAtual + 1);
-          }, 10000);
-        }, { passive: true });
-      }
-    }
-
+    // =========================================================================
+    // COMUNIDADE DE PROTETORES: CARDS COMPACTOS EM SWIPE (PADRÃO ESTRITO DO PRINT 2)
+    // 2 CARDS LADO A LADO • FOTO COM BORDA VERDE • BADGE • NOME • VER PERFIL
+    // =========================================================================
     function renderizarEsteiraProtetores() {
-      const track = document.getElementById('showcase-protetor-track');
-      const dotsContainer = document.getElementById('protetores-carousel-dots');
-      if (!track) return;
+      const container = document.getElementById('swipe-protetores-container');
+      if (!container) return;
 
       const protetores = state.protetores || [];
       const lista = protetores.length > 0 ? protetores : [
         {
-          nome: 'Mariana Silva (Resgate Independente)',
+          nome: 'Mariana Silva (Resgate In...)',
           tipo_perfil: 'protetor',
           foto_url: '/static/darkplanner_pessoas/mulher_01_mariana.jpg',
           bairro: 'Cascavel Velho',
-          bio: 'Resgatista voluntária e independente atuando há mais de 6 anos em Cascavel. Foco no acolhimento de mãezinhas com ninhadas, tratamento veterinário, castração e adoção responsável.',
-          animais: [
-            { titulo: 'Fred • Golden Retriever', foto_url: '/static/darkplanner_pets/cachorro_05_rottweiler_jovem.jpg', id: 5535 },
-            { titulo: 'Frida • Pinscher', foto_url: '/static/darkplanner_pets/cachorra_05_pinscher.jpg', id: 5525 },
-            { titulo: 'Fred • Calico', foto_url: '/static/darkplanner_pets/gato_05_tigrado_marrom.jpg', id: 5515 },
-            { titulo: 'Frida • Frajola', foto_url: '/static/darkplanner_pets/gata_05_frajola.jpg', id: 5505 }
-          ]
+          total_assistidos: 4
         },
         {
-          nome: 'Coletivo Patinhas do Oeste',
+          nome: 'Coletivo Patinhas do Oe...',
           tipo_perfil: 'ong',
           foto_url: '/static/darkplanner_pessoas/mulher_02_camila.jpg',
           bairro: 'Alto Alegre',
-          bio: 'Rede colaborativa de protetores e lares temporários de Cascavel. Socorremos animais atropelados ou vítimas de abandono com castração solidária e encaminhamento consciente.',
-          animais: [
-            { titulo: 'Thor • Pastor Alemão', foto_url: '/static/darkplanner_pets/cachorro_01_labrador.jpg', id: 5501 },
-            { titulo: 'Mel • Caramelo', foto_url: '/static/darkplanner_pets/cachorra_02_caramelo.jpg', id: 5502 },
-            { titulo: 'Mimi • Siamês', foto_url: '/static/darkplanner_pets/gato_01_laranja.jpg', id: 5503 },
-            { titulo: 'Luna • Branca', foto_url: '/static/darkplanner_pets/gata_02_branca.jpg', id: 5504 }
-          ]
+          total_assistidos: 4
         },
         {
-          nome: 'Carlos Eduardo (Lar São Francisco)',
+          nome: 'Carlos Eduardo (Lar São Fran...)',
           tipo_perfil: 'protetor',
           foto_url: '/static/darkplanner_pessoas/homem_01_carlos.jpg',
           bairro: 'Santa Cruz',
-          bio: 'Dedicado ao resgate de cães idosos e animais especiais com tratamento ortopédico e fisioterapia veterinária em Cascavel.',
-          animais: [
-            { titulo: 'Bob • Vira-Lata', foto_url: '/static/darkplanner_pets/cachorro_03_husky.jpg', id: 5506 },
-            { titulo: 'Bidu • Schnauzer', foto_url: '/static/darkplanner_pets/cachorro_04_buldogue.jpg', id: 5507 },
-            { titulo: 'Nina • Frajolinha', foto_url: '/static/darkplanner_pets/gato_03_preto.jpg', id: 5508 },
-            { titulo: 'Amora • Tigradinha', foto_url: '/static/darkplanner_pets/gata_04_siames.jpg', id: 5509 }
-          ]
+          total_assistidos: 4
+        },
+        {
+          nome: 'Associação Amigos dos Bi...',
+          tipo_perfil: 'ong',
+          foto_url: '/static/darkplanner_pessoas/homem_06_marcos.jpg',
+          bairro: 'Centro',
+          total_assistidos: 6
         }
       ];
 
-      if (dotsContainer) {
-        dotsContainer.innerHTML = lista.map((_, i) => `
-          <div class="protetor-dot ${i === _idxProtetorAtual ? 'active' : ''}" onclick="irParaProtetor(${i})"></div>
-        `).join('');
-      }
-
-      track.innerHTML = lista.map(p => {
+      container.innerHTML = lista.map(p => {
         const foto = p.foto_url || '/static/darkplanner_pessoas/mulher_01_mariana.jpg';
         const badge = p.tipo_perfil === 'ong' ? '🏛️ ONG OFICIAL' : '🛡️ PROTETOR';
-        const petsList = (p.animais && p.animais.length) ? p.animais : [];
-        const qtdAnimais = petsList.length || p.total_resgates || 4;
-        const bairro = p.bairro || 'Cascavel';
-        const bio = p.bio || 'Voluntário na proteção e acolhimento animal em Cascavel.';
-
-        const petsHtml = petsList.slice(0, 4).map(pet => {
-          const petFoto = pet.foto_url || '/static/darkplanner_pets/cachorra_02_caramelo.jpg';
-          let petNome = (pet.titulo || 'Pet').split('•')[0].trim();
-          petNome = petNome.replace(/^Ninhada\s+(\d+)?\s*(Filhotes)?/i, '$1 Filhotes').trim();
-          if (petNome.length > 13) petNome = petNome.substring(0, 12) + '…';
-          const petId = pet.id || '';
-          return `
-            <div class="showcase-pet-thumb-wrap" onclick="event.stopPropagation(); ${petId ? `abrirDetalheById(${petId})` : `trocarAba('pets')`}">
-              <img class="showcase-pet-thumb" src="${escapeAttr(petFoto)}" alt="${escapeAttr(petNome)}" loading="lazy" onerror="this.onerror=null; this.src='/static/darkplanner_pets/cachorra_02_caramelo.jpg';">
-              <span class="showcase-pet-name">${escapeHtml(petNome)}</span>
-            </div>
-          `;
-        }).join('');
+        const assistidos = p.total_assistidos || (p.animais ? p.animais.length : 4);
+        const nomeCurto = escapeHtml(p.nome);
 
         return `
-          <div class="showcase-protetor-card" onclick="trocarAba('pets')">
-            <div class="showcase-top-row">
-              <div class="showcase-avatar-box">
-                <img class="showcase-avatar-img" src="${escapeAttr(foto)}" alt="${escapeAttr(p.nome)}" onerror="this.onerror=null; this.src='/static/darkplanner_pessoas/mulher_01_mariana.jpg';">
-              </div>
-              <div class="showcase-info-col">
-                <div class="showcase-badge-row">
-                  <span class="showcase-badge">${badge}</span>
-                  ${p.verificado ? '<span style="font-size:10px; color:#009B3A; font-weight:900;" title="Verificado">✓</span>' : ''}
-                </div>
-                <div class="showcase-nome">${escapeHtml(p.nome)}</div>
-                <div class="showcase-sub">${qtdAnimais} animais assistidos • ${escapeHtml(bairro)}</div>
-              </div>
+          <div class="card-perfil-swipe" onclick="trocarAba('pets')" title="Ver perfil de ${escapeAttr(p.nome)}">
+            <div style="width:64px; height:64px; border-radius:18px; border:2.5px solid #009B3A; overflow:hidden; margin-bottom:4px; box-shadow:0 2px 6px rgba(0,0,0,0.12); background:#FFFFFF; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+              <img src="${escapeAttr(foto)}" alt="${escapeAttr(p.nome)}" style="width:100%; height:100%; object-fit:cover;" onerror="this.onerror=null; this.src='/static/darkplanner_pessoas/mulher_01_mariana.jpg';">
             </div>
-
-            <div class="showcase-bio-row">
-              "${escapeHtml(bio)}"
-            </div>
-
-            <div class="showcase-pets-section">
-              <div class="showcase-pets-label">
-                <span>🐾 Animais sob cuidados (${qtdAnimais}):</span>
-                <span style="font-size:9.5px; color:#009B3A; font-weight:700;">Toque no pet para ver</span>
-              </div>
-              <div class="showcase-pets-strip">
-                ${petsHtml}
-              </div>
-            </div>
-
-            <div class="showcase-bottom-row">
-              <span style="font-size:9.5px; color:#6E5A3C; font-weight:700;">Rede de Proteção Animal</span>
-              <span class="showcase-btn-perfil" onclick="event.stopPropagation(); trocarAba('pets')">
-                Ver Perfil Completo ›
-              </span>
+            <span style="font-size:8.5px; font-weight:900; background:#EBFDF2; color:#009B3A; padding:2px 8px; border-radius:999px; margin-bottom:3px; letter-spacing:0.3px; white-space:nowrap;">${badge}</span>
+            <div style="font-size:11.5px; font-weight:900; color:#2E2417; line-height:1.2; width:100%; max-width:150px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; text-align:center;">${nomeCurto}</div>
+            <div style="font-size:9.5px; font-weight:700; color:#6E5A3C; margin-top:2px;">${assistidos} animais assistidos</div>
+            <div style="margin-top:auto; width:100%; padding-top:4px; border-top:1px solid rgba(110,90,60,0.15); display:flex; align-items:center; justify-content:center;">
+              <span style="font-size:10.5px; font-weight:900; color:#009B3A;">Ver Perfil ›</span>
             </div>
           </div>
         `;
       }).join('');
-
-      iniciarCarrosselProtetores(lista.length);
-      irParaProtetor(_idxProtetorAtual);
     }
 
-    function renderizarEsteiraApoioHome() {
+        function renderizarEsteiraApoioHome() {
       const track = document.getElementById('belt-apoio-track');
       if (!track) return;
 
