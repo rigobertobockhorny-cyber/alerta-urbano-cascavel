@@ -94,15 +94,15 @@ c:\PROJETOS\5-FERRAMENTAS\ALERTA_URBANO_CASCAVEL\
 * **Métrica de Suspiro e Posicionamento Oficial (Diretriz Suprema Rigo):**
   - **Suspiro da Pílula Meteorológica:** Suspiro nítido de **14px** abaixo da pílula meteorológica (`.city-alert-direct` com `margin-bottom: 14px !important;`), eliminando qualquer proximidade ou aspecto grudado ao bloco terroso.
   - **Fim do Degradê Verde ANTES do Bloco Terroso:** O degradê verde-brasil transiciona para areia (`#EDE8DF`) a partir de 22px até alcançar 100% areia sólida em 70px. O bloco terroso da campanha (`.campaign-sand-card` em `#E4D5BC`, altura 54px) começa em ~74px, repousando **100% PARA BAIXO DO DEGRADÊ**, exclusivamente na cor areia pura, com zero verde em seu fundo.
-  - **Distribuição dos Suspiros da Home (Ritmo Harmônico de ~10px a 12px):**
+  - **Distribuição dos Suspiros da Home (Ritmo Harmônico Uniforme de 18px entre Todas as Seções):**
     1. Seção Meteorológica (Verde no topo).
     2. Suspiro nítido de 14px abaixo da pílula meteorológica.
     3. Card de Campanha (`height: 54px; font-size: 12px;` em areia `#E4D5BC` sem bordas, 100% abaixo do degradê).
-    4. Suspiro de 10px.
+    4. **Distância Vertical 1:** **18px** exatos entre Card Terroso da Campanha e Esteira Quem Ama Cuida.
     5. Esteira de Pets "Quem ama, cuida e procura junto" (corte reto nas laterais).
-    6. Suspiro de 10px.
+    6. **Distância Vertical 2:** **18px** exatos entre Esteira Quem Ama Cuida e Comunidade de Protetores.
     7. Card Único Grande da Comunidade de Protetores (`.showcase-protetor-card` em `#E4D5BC` sem bordas).
-    8. Suspiro de 10px.
+    8. **Distância Vertical 3:** **18px** exatos entre Comunidade de Protetores e Apoie Aqui (eliminando completamente qualquer proximidade ou sensação de estar grudado).
     9. Esteira "Apoie Aqui" (quadradinhos brancos fluidos repousando harmoniosamente na base acima da dock).
 
 #### Pilar 2: Motor (Comportamento & Interações)
