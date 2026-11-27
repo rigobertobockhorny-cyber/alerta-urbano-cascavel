@@ -82,6 +82,17 @@ c:\PROJETOS\5-FERRAMENTAS\ALERTA_URBANO_CASCAVEL\
 
 ### ABA 1: INÍCIO (`id="tab-inicio"`)
 
+> [!IMPORTANT]
+> ### 🔒 CLÁUSULA PÉTREA DE LAYOUT: ABA INÍCIO (HOMOLOGAÇÃO DEFINITIVA RIGO)
+> **LAYOUT PADRÃO 100% HOMOLOGADO, CRAVADO E CONGELADO POR DIRETRIZ SUPREMA DE RIGO.**
+> **É TERMINANTEMENTE PROIBIDO ALTERAR:**
+> 1. Dimensões de qualquer bloco ou card (larguras e alturas).
+> 2. Posições e coordenadas verticais/horizontais.
+> 3. Espaçamentos e Suspiros (Gaps de 18px uniformes e suspiro de 14px na pílula).
+> 4. Estrutura dinâmica das esteiras e transições.
+> 
+> **A PARTIR DESTE MARCO, QUALQUER ATUALIZAÇÃO É ESTREITAMENTE INTERNA (CONTEÚDO, DADOS, TEXTOS E IMAGENS DENTRO DOS CARDS EXISTENTES), SEM NUNCA MODIFICAR A ESTRUTURA, TAMANHO OU POSIÇÃO.**
+
 #### Pilar 1: Visual (Design System)
 * **Cores Oficiais:**
   - Fundo do corpo central: `#EDE8DF` (Areia Arenoso Suave).
