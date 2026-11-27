@@ -4587,14 +4587,12 @@
       position: relative;
     }
 
-    /* Viewport Deslizante no Dedo para Apoie-nos */
+    /* Viewport da Esteira de Apoio Interativa e Contínua (Diretriz Rigo: Arraste no dedo + Retoma após 3.5s) */
     .apoie-scroll-viewport {
-      overflow-x: auto;
+      overflow: hidden;
       width: 100%;
       position: relative;
       padding: 4px 0;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: none;
     }
     .apoie-scroll-viewport::-webkit-scrollbar {
       display: none;
@@ -4604,16 +4602,14 @@
       gap: 10px;
       align-items: center;
       white-space: nowrap;
-      animation: scroll-apoie 24s linear infinite;
       will-change: transform;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: pan-y;
+      cursor: grab;
     }
-    .apoie-scroll-viewport:hover .apoie-text-track,
-    .apoie-scroll-viewport:active .apoie-text-track {
-      animation-play-state: paused;
-    }
-    @keyframes scroll-apoie {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
+    .apoie-text-track:active {
+      cursor: grabbing;
     }
 
     /* Área Central Areia Encorpada (Fluindo de forma contínua no degradê - Diretriz Rigo) */
@@ -6859,7 +6855,7 @@
       return `${tag} • ${fonte}: ${tituloLimpo} em Cascavel`;
     }
 
-    function ativarEsteiraArrastavel(el, pxPorSegundo = 28) {
+    function ativarEsteiraArrastavel(el, pxPorSegundo = 28, resumeDelayMs = 3500) {
       if (!el) return;
       el.style.animation = 'none';
 
@@ -6870,6 +6866,7 @@
           halfWidth: 0,
           state: 'running',
           resumeTimer: null,
+          resumeDelay: resumeDelayMs || 3500,
           startX: 0,
           startY: 0,
           startCurrentX: 0,
@@ -6910,6 +6907,7 @@
           sc.startY = touch.clientY;
           sc.startCurrentX = sc.currentX;
           sc.hasDragged = false;
+          sc.state = 'paused'; // Pausa imediata ao tocar com o dedo (Diretriz Rigo)
           if (sc.resumeTimer) {
             clearTimeout(sc.resumeTimer);
             sc.resumeTimer = null;
@@ -6943,13 +6941,12 @@
         }
 
         function onEnd() {
-          if (sc.state === 'dragging') {
-            sc.state = 'paused';
+          if (sc.state === 'dragging' || sc.state === 'paused') {
             if (sc.resumeTimer) clearTimeout(sc.resumeTimer);
             sc.resumeTimer = setTimeout(() => {
               sc.state = 'running';
               sc.lastTime = performance.now();
-            }, 1400); // Retoma o fluxo contínuo 1.4s após soltar
+            }, sc.resumeDelay || 3500); // Retoma 3.5 segundos após soltar o dedo (Diretriz Rigo)
             // Reseta hasDragged após curto delay para permitir cliques subsequentes
             setTimeout(() => { sc.hasDragged = false; }, 200);
           }
@@ -6975,6 +6972,7 @@
         }, true);
       } else {
         el._scroller.speed = pxPorSegundo;
+        if (resumeDelayMs) el._scroller.resumeDelay = resumeDelayMs;
         const hw = el.scrollWidth / 2;
         if (hw > 20) el._scroller.halfWidth = hw;
         if (el._scroller.state === 'paused' && !el.classList.contains('static')) {
@@ -6984,8 +6982,9 @@
       }
     }
 
-    function calibrarVelocidadeEsteira(el, pxPorSegundo) {
-      ativarEsteiraArrastavel(el, pxPorSegundo);
+    function calibrarVelocidadeEsteira(el, pxPorSegundo, resumeDelayMs = 3500) {
+      ativarEsteiraArrastavel(el, pxPorSegundo, resumeDelayMs);
+    }
     }
 
     function renderizarDashboard() {
@@ -7362,6 +7361,7 @@
       `).join('');
 
       track.innerHTML = htmlSlots + htmlSlots;
+      calibrarVelocidadeEsteira(track, 24, 3500);
     }
 
     function renderizarEsteiraParceirosHome() {
