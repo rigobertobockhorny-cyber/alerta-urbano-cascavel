@@ -933,19 +933,27 @@ def api_clima():
             cur_w = raw.get("current", {})
             day_w = raw.get("daily", {})
             
-            # Detecção de Dia vs Noite precisa
+            # Detecção de Dia vs Noite precisa com fuso horário oficial de Cascavel (UTC-3)
+            from datetime import timezone, timedelta
+            tz_cvel = timezone(timedelta(hours=-3))
+            hora_local_cvel = datetime.now(tz_cvel).hour
+            is_night_time = (hora_local_cvel >= 19 or hora_local_cvel < 6)
+
             is_day_val = cur_w.get("is_day")
-            if is_day_val is None:
-                hora_local = datetime.now().hour
-                is_day = 1 if (6 <= hora_local < 19) else 0
+            if is_night_time or is_day_val == 0:
+                is_day = 0
             else:
-                is_day = int(is_day_val)
+                is_day = int(is_day_val) if is_day_val is not None else 1
 
             wcode = int(cur_w.get("weather_code", 0))
             if is_day == 1:
                 cond_txt, cond_ico = WMO_DESC_DAY.get(wcode, ("Tempo instável", "⛅"))
             else:
-                cond_txt, cond_ico = WMO_DESC_NIGHT.get(wcode, ("Tempo instável", "🌙"))
+                cond_txt, cond_ico = WMO_DESC_NIGHT.get(wcode, ("Noite de céu limpo", "🌙"))
+                if cond_ico in ["☀️", "🌤️", "⛅"]:
+                    cond_ico = "🌙"
+                if "sol" in cond_txt.lower():
+                    cond_txt = "Noite de céu limpo"
 
             # Previsão 5 dias no formato oficial do Rigo (Dia da Semana, Ícone, Máx/Mín)
             dias_abrev = ["SEG.", "TER.", "QUA.", "QUI.", "SEX.", "SÁB.", "DOM."]
@@ -1037,7 +1045,9 @@ def api_clima():
     resp_data = dict(_CLIMA_CACHE["data"])
     resp_data["nivel_alerta"] = nivel
     resp_data["alertas"] = alertas_clima
-    return jsonify(resp_data)
+    resp = jsonify(resp_data)
+    resp.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+    return resp
 
 
 @app.route("/api/perfil", methods=["GET", "POST"])
