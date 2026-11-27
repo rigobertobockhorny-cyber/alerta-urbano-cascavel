@@ -624,7 +624,7 @@
     .home-pane.active {
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      justify-content: flex-start;
       overflow-y: hidden !important;
       overflow-x: hidden !important;
       padding: 0 !important;
@@ -4606,7 +4606,7 @@
     .home-pane.active {
       display: flex !important;
       flex-direction: column !important;
-      justify-content: space-between !important;
+      justify-content: flex-start !important;
       overflow-y: hidden !important;
       overflow-x: hidden !important;
       min-height: 100% !important;
@@ -4879,25 +4879,25 @@
     }
 
     /* ========================================================
-       CARD ARENOSO DE CAMPANHAS (BLOCO RIGIDAMENTE FIXO - DIRETRIZ RIGO)
-       Bloco sólido fixo: NUNCA expande nem encolhe. Altura cravada em 52px.
+       CARD ARENOSO DE CAMPANHAS AMPLIADO (DIRETRIZ OFICIAL RIGO)
+       Caixa ampliada para nobre presença visual • Texto aumentado • Respiro em relação ao clima
        ======================================================== */
     .campaign-sand-card {
       background: #E4D5BC !important; /* Areia Oficial Encorpada */
-      border: 1.5px solid rgba(110, 90, 60, 0.32) !important;
-      border-radius: 14px !important;
-      box-shadow: 0 3px 10px rgba(74, 46, 27, 0.08) !important;
-      margin: 4px 0 4px !important;
+      border: 1.5px solid rgba(110, 90, 60, 0.35) !important;
+      border-radius: 16px !important;
+      box-shadow: 0 4px 12px rgba(74, 46, 27, 0.08) !important;
+      margin: 0 !important;
       width: 100% !important;
-      padding: 6px 14px !important;
+      padding: 8px 16px !important;
       text-align: center;
       position: relative;
       z-index: 5;
       overflow: hidden !important;
       box-sizing: border-box !important;
-      height: 52px !important;
-      min-height: 52px !important;
-      max-height: 52px !important;
+      height: 70px !important;
+      min-height: 70px !important;
+      max-height: 70px !important;
       flex-shrink: 0 !important;
       display: flex;
       align-items: center;
@@ -4905,10 +4905,10 @@
     }
 
     .home-campaign-phrase {
-      font-size: 12px !important;
+      font-size: 13.5px !important;
       font-weight: 800 !important;
       color: #2E2417 !important;
-      line-height: 1.3 !important;
+      line-height: 1.38 !important;
       display: -webkit-box !important;
       -webkit-line-clamp: 2 !important;
       -webkit-box-orient: vertical !important;
@@ -4943,12 +4943,12 @@
     /* Faixa Apoie-nos no Degradê (Transparente, sem pílulas, sem marrom - Diretriz Rigo) */
     .home-apoie-zone {
       background: transparent !important;
-      padding: 2px 14px 4px !important;
+      padding: 0 !important;
       color: #FFFFFF;
       flex-shrink: 0;
-      margin-top: 2px;
+      margin: 0 !important;
       position: relative;
-      z-index: 500 !important; /* Sempre acima do degradê de fundo */
+      z-index: 500 !important; /* Sempre acima do degradÃª de fundo */
     }
 
     /* Viewport da Esteira de Apoio Interativa e Contínua (Diretriz Rigo: Arraste no dedo + Retoma após 3.5s) */
@@ -4956,7 +4956,7 @@
       overflow: hidden;
       width: 100%;
       position: relative;
-      padding: 4px 0;
+      padding: 0 !important;
     }
     .apoie-scroll-viewport::-webkit-scrollbar {
       display: none;
@@ -4976,14 +4976,20 @@
       cursor: grabbing;
     }
 
-    /* Área Central Areia Encorpada (Fluindo de forma contínua no degradê - Diretriz Rigo) */
+    /* Ãrea Central Areia Encorpada (Fluindo de forma contÃ­nua no degradÃª - Diretriz Rigo) */
     .home-body-sand {
       background: transparent !important;
-      padding: 0 14px 2px;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      flex: 1;
+      padding: 10px 14px 4px !important;
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 8px !important;
+      flex: 1 1 auto !important;
+      min-height: 0 !important;
+    }
+    .home-body-sand .belt-block-pets,
+    .home-body-sand .belt-block-protetores,
+    .home-body-sand .home-apoie-zone {
+      margin: 0 !important;
     }
 
     /* ========================================================
@@ -5341,18 +5347,18 @@
           </div>
         </div>
 
-        <!-- 2. CORPO AREIA OFICIAL (#EDE8DF): CARD DE CAMPANHA + ESTEIRA PETS + SHOWCASE PROTETORES (DIRETRIZ OFICIAL RIGO) -->
-        <div class="home-body-sand" style="padding-top:2px;">
+        <!-- 2. CORPO AREIA OFICIAL (#EDE8DF): CARD DE CAMPANHA + ESTEIRA PETS + SHOWCASE PROTETORES + ESTEIRA APOIE (DIRETRIZ OFICIAL RIGO) -->
+        <div class="home-body-sand">
           
-          <!-- Bloco Vermelho: Card Arenoso de Campanhas Ampliado (Com suspiro em relação ao clima • Sem corte de texto) -->
+          <!-- Bloco 1: Card Arenoso de Campanhas Ampliado (Com suspiro em relação ao clima • Sem corte de texto • Letra maior) -->
           <div class="campaign-sand-card">
             <div id="home-campaign-text" class="home-campaign-phrase">
               Quem ama, cuida e procura junto: a maior rede de proteção, resgate e reencontro animal.
             </div>
           </div>
 
-          <!-- Bloco Amarelo: Quem ama, cuida e procura junto (Com suspiro harmonioso • Velocidade relaxante) -->
-          <div class="belt-block belt-block-pets" style="margin-top:4px; margin-bottom:4px;">
+          <!-- Bloco 2: Quem ama, cuida e procura junto (Suspiro 8px idêntico • Velocidade relaxante) -->
+          <div class="belt-block belt-block-pets">
             <div class="belt-head" style="display:flex; align-items:center; justify-content:space-between; margin-bottom:4px;">
               <div class="belt-title pet-title" style="display:flex; align-items:center; gap:6px;">
                 <svg class="belt-svg" viewBox="0 0 24 24" fill="currentColor" width="14" height="14" style="color:#2E2417;">
@@ -5369,8 +5375,8 @@
             </div>
           </div>
 
-          <!-- Bloco Comunidade de Protetores: 1 Card Único Grande com Galeria de Pets + Auto-Troca 5.5s + Swipe (Diretriz Oficial Rigo) -->
-          <div class="belt-block belt-block-protetores" style="margin-top:2px; margin-bottom:2px;">
+          <!-- Bloco 3: Comunidade de Protetores (Suspiro 8px idêntico • 1 Card Único Grande com Galeria de Pets) -->
+          <div class="belt-block belt-block-protetores">
             <div class="belt-head" style="display:flex; align-items:center; justify-content:space-between; margin-bottom:4px;">
               <div class="belt-title" style="display:flex; align-items:center; gap:5px;">
                 <svg viewBox="0 0 24 24" fill="none" stroke="#2E2417" stroke-width="2.2" width="13" height="13">
@@ -5391,16 +5397,16 @@
               </div>
             </div>
           </div>
-        </div>
 
-        <!-- 3. ESTEIRA DE QUADRADINHOS DE APOIO / MARCAS (DIRETRIZ OFICIAL RIGO: ESPAÇO VISUAL DESTINADO ÀS COTAS DE APOIO) -->
-        <div class="home-apoie-zone" id="home-apoie-zone" style="padding:2px 14px 4px; margin-top:2px;">
-          <!-- Esteira de Quadradinhos de Apoio que corre suave e pode ser passada no dedo -->
-          <div class="apoie-scroll-viewport" id="apoie-scroll-viewport">
-            <div class="apoie-text-track" id="belt-apoio-track">
-              <!-- Quadradinhos de apoio preenchidos via JS -->
+          <!-- Bloco 4: Esteira de Apoio / Quadradinhos Brancos (Suspiro 8px idêntico • Diretriz Oficial Rigo) -->
+          <div class="home-apoie-zone" id="home-apoie-zone">
+            <div class="apoie-scroll-viewport" id="apoie-scroll-viewport">
+              <div class="apoie-text-track" id="belt-apoio-track">
+                <!-- Quadradinhos de apoio preenchidos via JS -->
+              </div>
             </div>
           </div>
+
         </div>
       </section>
 
@@ -10830,159 +10836,12 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
       // REGRA OFICIAL RIGO: Com app aberto, ZERO alertas invasivos de voz ou cards na tela!
     }
 
-    function verificarRadarProximidadeWeb(lat, lng) {
+        function verificarRadarProximidadeWeb(lat, lng) {
       // REGRA OFICIAL SUPREMA RIGO:
       // Com o aplicativo aberto em primeiro plano, NENHUM áudio ou card invasivo é emitido.
       // O usuário navega e pesquisa livremente pelas abas.
       // Avisos sonoros e sobreposição acontecem EXCLUSIVAMENTE quando a Patinha Flutuante for ativada!
       return;
-    }
-
-      // =========================================================================
-      // FILA TÁTICA SEQUENCIAL DE TRÂNSITO (REGRA OFICIAL RIGO)
-      // Se houver animal retido na fila (ex: dois pets na mesma rua a 20m de distância),
-      // e já se passaram 100 segundos (1m40s) desde o último áudio, anuncia o próximo!
-      // =========================================================================
-      // Expira itens com mais de 6 minutos de retenção
-      _filaEsperaRadarTransito = _filaEsperaRadarTransito.filter(item => (agora - item.capturadoEm) < 360000);
-
-      if (_filaEsperaRadarTransito.length > 0 && (agora - _ultimoAvisoVozGlobalMs >= RADAR_ANTIFADIGA_GLOBAL_MS)) {
-        const itemFila = _filaEsperaRadarTransito.shift();
-        if (itemFila && itemFila.pet) {
-          _bloqueioRadarAtivo = true;
-          _ultimoAvisoVozGlobalMs = agora;
-          registrarAvisoHora();
-          try {
-            const petNomeKey = (itemFila.pet.titulo || '').toLowerCase().replace(/[^a-z0-9]/g, '');
-            localStorage.setItem('radar_pet_cd_' + itemFila.pet.id, agora.toString());
-            localStorage.setItem('radar_pet_nome_cd_' + petNomeKey, agora.toString());
-            if (!window._cooldownMemoriaPets) window._cooldownMemoriaPets = {};
-            window._cooldownMemoriaPets[itemFila.pet.id] = agora;
-            window._cooldownMemoriaPets[petNomeKey] = agora;
-          } catch (_) {}
-
-          dispararAlertaRadarWeb(itemFila.pet);
-          setTimeout(() => { _bloqueioRadarAtivo = false; }, 4000);
-          return;
-        }
-      }
-
-      // REGRA DE CADÊNCIA GLOBAL: Se ainda NÃO deu o tempo de respiro (100s / 1m40s), silêncio absoluto!
-      if (agora - _ultimoAvisoVozGlobalMs < RADAR_ANTIFADIGA_GLOBAL_MS) {
-        return;
-      }
-
-      const pLat = lat || state.userLat || -24.928124;
-      const pLng = lng || state.userLng || -53.432286;
-
-      if (!state.alertas || !state.alertas.length) return;
-
-      const petsPerdidos = state.alertas.filter(a => {
-        if (a.pilar !== 'pet') return false;
-        if (a.tipo === 'pet_adocao' || a.status_pet === 'adocao') return false;
-        if (a.tipo === 'pet_sos_rua' || a.status_pet === 'sos_rua') return false;
-        if (a.status_pet === 'avistado' || a.status_pet === 'encontrado' || a.tipo === 'pet_avistado' || a.tipo === 'pet_encontrado') return false;
-        if (a.sigiloso || a.tipo === 'pet_denuncia_maustratos') return false;
-        return a.lat != null && a.lng != null && !isNaN(Number(a.lat)) && !isNaN(Number(a.lng));
-      });
-
-      if (!petsPerdidos.length) return;
-
-      // Identifica Meus Pets (Tutor) e Pets Prioritários de Amigos
-      const token = state.autorToken;
-      let amigosPets = [];
-      try {
-        amigosPets = JSON.parse(localStorage.getItem('radar_pets_amigos_prioritarios') || '[]');
-      } catch (_) {}
-
-      const petsNoRaio = [];
-      for (const pet of petsPerdidos) {
-        if (!window._cooldownMemoriaPets) window._cooldownMemoriaPets = {};
-        const petNomeKey = (pet.titulo || '').toLowerCase().replace(/[^a-z0-9]/g, '');
-        const ultimoAvisoId = Math.max(
-          Number(localStorage.getItem('radar_pet_cd_' + pet.id) || 0),
-          window._cooldownMemoriaPets[pet.id] || 0
-        );
-        const ultimoAvisoNome = Math.max(
-          Number(localStorage.getItem('radar_pet_nome_cd_' + petNomeKey) || 0),
-          window._cooldownMemoriaPets[petNomeKey] || 0
-        );
-
-        if ((agora - ultimoAvisoId < RADAR_DOZE_HORAS_MS) || (agora - ultimoAvisoNome < RADAR_DOZE_HORAS_MS)) {
-          continue; // Animal já anunciado recentemente
-        }
-
-        const d = calcularDistanciaM(pLat, pLng, Number(pet.lat), Number(pet.lng));
-        if (d != null && d <= RADAR_RAIO_METROS) {
-          const ehMeuPet = Boolean(token && pet.autor_token && pet.autor_token === token);
-          const ehPetAmigo = amigosPets.includes(pet.id);
-
-          petsNoRaio.push({
-            ...pet,
-            distM: Math.round(d),
-            ehMeuPet,
-            ehPetAmigo,
-            pesoPrioridade: ehMeuPet ? 100 : (ehPetAmigo ? 50 : 10)
-          });
-        }
-      }
-
-      if (!petsNoRaio.length) return;
-
-      // Ordena por Prioridade: 1º Meu Pet (Dono) > 2º Pet de Amigo Solidário > 3º Menor Distância
-      petsNoRaio.sort((a, b) => {
-        if (b.pesoPrioridade !== a.pesoPrioridade) {
-          return b.pesoPrioridade - a.pesoPrioridade;
-        }
-        return a.distM - b.distM;
-      });
-
-      const petEscolhido = petsNoRaio[0];
-
-      // SE HOUVER OUTROS PETS NA MESMA REGIÃO (ex: 20m, 50m, mesma quadra):
-      // Guarda os demais na Fila Sequencial de Trânsito para tocarem daqui a 1m40s!
-      if (petsNoRaio.length > 1) {
-        for (let i = 1; i < petsNoRaio.length; i++) {
-          const outroPet = petsNoRaio[i];
-          const jaNaFila = _filaEsperaRadarTransito.some(item => item.pet.id === outroPet.id);
-          if (!jaNaFila && _filaEsperaRadarTransito.length < 3) {
-            _filaEsperaRadarTransito.push({
-              pet: outroPet,
-              capturadoEm: agora,
-              distOriginal: outroPet.distM
-            });
-          }
-        }
-      }
-
-      const avisosHora = obterHistoricoAvisosHora();
-      if (avisosHora.length >= RADAR_MAX_AVISOS_POR_HORA) {
-        return; // Teto atingido
-      }
-
-      // DISPARO ÚNICO E BLINDADO (MUTEX ATIVO):
-      _bloqueioRadarAtivo = true;
-      _ultimoAvisoVozGlobalMs = agora;
-      registrarAvisoHora();
-
-      // Grava o cooldown por 30 minutos
-      try {
-        if (!window._cooldownMemoriaPets) window._cooldownMemoriaPets = {};
-        const petNomeKey = (petEscolhido.titulo || '').toLowerCase().replace(/[^a-z0-9]/g, '');
-        localStorage.setItem('radar_pet_cd_' + petEscolhido.id, agora.toString());
-        localStorage.setItem('radar_pet_nome_cd_' + petNomeKey, agora.toString());
-        sessionStorage.setItem('radar_aviso_sessao_' + petEscolhido.id, '1');
-        sessionStorage.setItem('radar_aviso_sessao_' + petNomeKey, '1');
-        window._cooldownMemoriaPets[petEscolhido.id] = agora;
-        window._cooldownMemoriaPets[petNomeKey] = agora;
-      } catch (_) {}
-
-      dispararAlertaRadarWeb(petEscolhido);
-
-      // Libera o mutex após 4 segundos
-      setTimeout(() => {
-        _bloqueioRadarAtivo = false;
-      }, 4000);
     }
 
     // =========================================================================
