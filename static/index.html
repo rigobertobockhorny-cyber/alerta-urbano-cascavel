@@ -4165,10 +4165,10 @@
     }
     .btn-raio-pill.active,
     .btn-ritmo-pill.active {
-      background: #5A4730 !important;
+      background: #9E8560 !important;
       color: #FFFFFF !important;
-      border: 1.5px solid #443B2C !important;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15) !important;
+      border: 1.5px solid #8A724E !important;
+      box-shadow: 0 2px 8px rgba(110, 90, 60, 0.25) !important;
     }
     .btn-raio-pill span:not(.pill-badge-rec),
     .btn-ritmo-pill span:not(.pill-badge-rec) {
@@ -4737,10 +4737,10 @@
       box-sizing: border-box !important;
       padding: 0 12px !important;
       cursor: pointer !important;
-      background: #009B3A !important;
+      background: #9E8560 !important;
       color: #FFFFFF !important;
-      border: none !important;
-      box-shadow: 0 3px 10px rgba(0, 155, 58, 0.28) !important;
+      border: 1.5px solid #8A724E !important;
+      box-shadow: 0 3px 10px rgba(110, 90, 60, 0.28) !important;
     }
 
     .btn-bolha-hero:active {
@@ -6473,7 +6473,7 @@
     </button>
   </div>
 
-  <!-- Card 1: Hero Copiloto (Abaixado para o nível final do degradê, sem a patinha no topo) -->
+  <!-- Card 1: Hero Copiloto -->
   <div class="hero-copiloto" style="padding:12px 14px 10px; margin-bottom:8px; border-radius:18px; background:#E4D5BC; box-shadow:0 3px 12px rgba(0,0,0,0.06); text-align:center;">
     <h2 style="font-size:15px; font-weight:900; color:#2E2417; margin:0 0 3px; letter-spacing:0.2px;">Copiloto Alerta Pet</h2>
     <p style="font-size:11px; line-height:1.35; color:#5A4730; margin:0 auto 8px; max-width:320px;">
@@ -6490,14 +6490,14 @@
           <path class="paw-viva-path" d="M439.1 170.0 L417.9 170.0 L398.7 179.6 L382.4 196.9 L371.8 218.0 L368.9 231.5 L368.9 251.7 L370.9 261.3 L376.6 272.8 L382.4 279.5 L393.0 286.3 L401.6 289.2 L414.1 289.2 L426.6 285.3 L435.2 280.5 L451.6 265.1 L464.1 243.0 L468.9 222.8 L468.9 209.4 L464.1 192.1 L453.5 177.7 Z" fill="#FED700" stroke="#2E2417" stroke-width="6"/>
         </svg>
       </div>
-      <!-- Botão Ativar Patinha na direita (Desativar excluído por diretriz de Rigo) -->
-      <button type="button" class="btn-bolha-hero" onclick="ativarBolhaFlutuante()" style="flex:1; max-width:200px; height:42px; padding:0 12px; font-size:12.5px; font-weight:900; letter-spacing:0.3px; border-radius:13px; background:#009B3A; color:#FFFFFF; border:none; cursor:pointer; box-shadow:0 3px 10px rgba(0,155,58,0.28); display:flex; align-items:center; justify-content:center; text-align:center;">
+      <!-- Botão Ativar Patinha na direita (Mesma cor arenosa #9E8560 oficial Rigo) -->
+      <button type="button" class="btn-bolha-hero" onclick="ativarBolhaFlutuante()" style="flex:1; max-width:200px; height:42px; padding:0 12px; font-size:12.5px; font-weight:900; letter-spacing:0.3px; border-radius:13px; background:#9E8560; color:#FFFFFF; border:1.5px solid #8A724E; cursor:pointer; box-shadow:0 3px 10px rgba(110,90,60,0.28); display:flex; align-items:center; justify-content:center; text-align:center;">
         ATIVAR PATINHA
       </button>
     </div>
   </div>
 
-  <!-- Card 2: Voz Oficial da Patinha (Espremido e Fininho) -->
+  <!-- Card 2: Voz Oficial da Patinha (Feminina Oficial e Masculino Oficial - Sem nomes pessoais) -->
   <div class="settings-group" style="margin-bottom:8px; padding:8px 12px 8px; border-radius:16px; background:#E4D5BC; box-shadow:0 3px 10px rgba(0,0,0,0.06);">
     <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:6px;">
       <span style="font-size:13.5px; font-weight:900; color:#2E2417; letter-spacing:0.15px;">Voz Oficial da Patinha</span>
@@ -6505,10 +6505,10 @@
     </div>
     <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px; background:#EDE8DF; padding:3px; border-radius:10px;">
       <button type="button" id="btn-voz-fem" class="pillar-tab active" onclick="selecionarVozCopiloto('feminina')" style="height:32px; font-size:11.5px; font-weight:800; border-radius:8px; border:none; cursor:pointer; text-align:center; transition:all 0.15s ease;">
-        Natália (Feminina Oficial)
+        Feminina Oficial
       </button>
       <button type="button" id="btn-voz-masc" class="pillar-tab" onclick="selecionarVozCopiloto('masculina')" style="height:32px; font-size:11.5px; font-weight:800; border-radius:8px; border:none; cursor:pointer; text-align:center; transition:all 0.15s ease;">
-        Guido (Masculino Oficial)
+        Masculino Oficial
       </button>
     </div>
   </div>
@@ -6517,7 +6517,7 @@
   <div class="settings-group" style="margin-bottom:8px; border-radius:16px; background:#E4D5BC; box-shadow:0 3px 10px rgba(0,0,0,0.06); overflow:hidden;">
     <div style="padding:8px 12px 4px; font-size:13.5px; font-weight:900; color:#2E2417; letter-spacing:0.15px;">O que avisar por voz na rua</div>
     
-    <!-- Item 1: Alertas Climáticos + Switch Liga/Desliga (1º Item - Diretriz Rigo) -->
+    <!-- Item 1: Alertas Climáticos + Switch Liga/Desliga -->
     <div class="setting-row" style="padding:5px 12px; display:flex; align-items:center; justify-content:space-between;">
       <div style="display:flex; align-items:center; gap:5px;">
         <span style="font-size:11.5px; font-weight:800; color:#2E2417;">Alertas Climáticos</span>
@@ -6526,7 +6526,7 @@
       <label class="switch"><input type="checkbox" id="pref-uti" checked onchange="salvarPrefsCopiloto()"><span class="slider"></span></label>
     </div>
 
-    <!-- Item 2: Pets Desaparecidos + Switch Liga/Desliga (2º Item - Diretriz Rigo) -->
+    <!-- Item 2: Pets Desaparecidos + Switch Liga/Desliga -->
     <div class="setting-row" style="padding:5px 12px; border-top:1px solid rgba(0,0,0,0.05); display:flex; align-items:center; justify-content:space-between;">
       <div style="display:flex; align-items:center; gap:5px;">
         <span style="font-size:11.5px; font-weight:800; color:#2E2417;">Pets Desaparecidos</span>
@@ -6535,16 +6535,16 @@
       <label class="switch"><input type="checkbox" id="pref-pet" checked onchange="alternarAvisosPetCopiloto(this)"><span class="slider"></span></label>
     </div>
 
-    <!-- SELETOR DE DISTÂNCIA / RAIO EM 3 PÍLULAS DUPLAS (Opção B - Diretriz Rigo: 500m | 1.000m | 2.000m) -->
+    <!-- SELETOR DE RAIO DE BUSCA EM 3 PÍLULAS DUPLAS (500m | 1.000m | 2.000m - Diretriz Rigo) -->
     <div id="wrap-seletor-raio-pet" style="padding:5px 12px 8px; border-top:1px dashed rgba(110,90,60,0.18); background:rgba(237,232,223,0.45);">
       <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:4px;">
-        <span style="font-size:10px; font-weight:800; color:#2E2417;">Raio de Alerta por Voz:</span>
-        <span style="font-size:9.5px; color:#5A4730; font-weight:700;">Distância de disparo</span>
+        <span style="font-size:10px; font-weight:800; color:#2E2417;">Raio de busca:</span>
+        <span style="font-size:9.5px; color:#5A4730; font-weight:800;" id="badge-raio-atual">1.000m (Recomendado)</span>
       </div>
       <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:5px; background:#EDE8DF; padding:3px; border-radius:10px; align-items:stretch;">
         <button type="button" id="btn-raio-500" class="btn-raio-pill" onclick="selecionarRaioCopiloto('500')">
           <span style="font-size:11.5px; font-weight:900;">500m</span>
-          <span style="font-size:8.5px; font-weight:700; margin-top:2px;">Bairro / Perto</span>
+          <span style="font-size:8.5px; font-weight:700; margin-top:2px;">Perto</span>
         </button>
         <button type="button" id="btn-raio-1000" class="btn-raio-pill active" onclick="selecionarRaioCopiloto('1000')">
           <span style="font-size:11.5px; font-weight:900;">1.000m</span>
@@ -6552,13 +6552,13 @@
         </button>
         <button type="button" id="btn-raio-2000" class="btn-raio-pill" onclick="selecionarRaioCopiloto('2000')">
           <span style="font-size:11.5px; font-weight:900;">2.000m</span>
-          <span style="font-size:8.5px; font-weight:700; margin-top:2px;">Amplo / 2 km</span>
+          <span style="font-size:8.5px; font-weight:700; margin-top:2px;">Amplo</span>
         </button>
       </div>
     </div>
   </div>
 
-  <!-- Card 4: Ritmo de Busca na Cidade (Seletor Segmentado de Pílulas Duplas - Diretriz Rigo) -->
+  <!-- Card 4: Ritmo de Busca na Cidade (12h Ativa Recomendado • 24h Padrão • 6h Intensiva) -->
   <div class="settings-group" style="margin-bottom:6px; border-radius:16px; background:#E4D5BC; box-shadow:0 3px 10px rgba(0,0,0,0.06); overflow:hidden;">
     <div style="padding:8px 12px 3px; display:flex; align-items:center; justify-content:space-between;">
       <span style="font-size:13.5px; font-weight:900; color:#2E2417; letter-spacing:0.15px;">Ritmo de Busca na Cidade</span>
@@ -6566,14 +6566,14 @@
     </div>
     <div style="padding:4px 12px 6px;">
       <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:5px; background:#EDE8DF; padding:3px; border-radius:10px; align-items:stretch;">
-        <button type="button" id="btn-ritmo-24h" class="btn-ritmo-pill active" onclick="selecionarRitmoBusca('24h')">
+        <button type="button" id="btn-ritmo-24h" class="btn-ritmo-pill" onclick="selecionarRitmoBusca('24h')">
           <span style="font-size:10.5px; font-weight:900;">Busca Padrão</span>
           <span style="font-size:8px; font-weight:700; margin-top:1px;">24 em 24 horas</span>
-          <span class="pill-badge-rec" style="font-size:7.5px; background:#009B3A; color:#FFFFFF; padding:1px 5px; border-radius:5px; font-weight:800; margin-top:2px; display:inline-block;">Recomendado</span>
         </button>
-        <button type="button" id="btn-ritmo-12h" class="btn-ritmo-pill" onclick="selecionarRitmoBusca('12h')">
+        <button type="button" id="btn-ritmo-12h" class="btn-ritmo-pill active" onclick="selecionarRitmoBusca('12h')">
           <span style="font-size:10.5px; font-weight:900;">Busca Ativa</span>
           <span style="font-size:8px; font-weight:700; margin-top:1px;">12 em 12 horas</span>
+          <span class="pill-badge-rec" style="font-size:7.5px; background:#009B3A; color:#FFFFFF; padding:1px 5px; border-radius:5px; font-weight:800; margin-top:2px; display:inline-block;">Recomendado</span>
         </button>
         <button type="button" id="btn-ritmo-6h" class="btn-ritmo-pill" onclick="selecionarRitmoBusca('6h')">
           <span style="font-size:10.5px; font-weight:900;">Busca Intensiva</span>
@@ -11644,17 +11644,17 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
         if (genero === 'feminina') {
           btnFem.classList.add('active');
           btnMasc.classList.remove('active');
-          btnFem.style.background = '#009B3A';
-          btnFem.style.color = '#FFFFFF';
-          btnMasc.style.background = 'transparent';
-          btnMasc.style.color = '#443B2C';
+          btnFem.style.background = '';
+          btnFem.style.color = '';
+          btnMasc.style.background = '';
+          btnMasc.style.color = '';
         } else {
           btnMasc.classList.add('active');
           btnFem.classList.remove('active');
-          btnMasc.style.background = '#009B3A';
-          btnMasc.style.color = '#FFFFFF';
-          btnFem.style.background = 'transparent';
-          btnFem.style.color = '#443B2C';
+          btnMasc.style.background = '';
+          btnMasc.style.color = '';
+          btnFem.style.background = '';
+          btnFem.style.color = '';
         }
       }
       salvarPrefsCopilotoSilencioso();
@@ -11668,14 +11668,14 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
           ttsAudioPlayer.src = audioUrl;
           ttsAudioPlayer.play().catch(() => {});
         } catch (_) {}
-        mostrarToast(`Voz ${genero === 'feminina' ? 'Natália (Feminina Oficial)' : 'Guido (Masculino Oficial)'} selecionada`);
+        mostrarToast(`Voz ${genero === 'feminina' ? 'Feminina Oficial' : 'Masculino Oficial'} selecionada`);
       }
     }
 
-    let ritmoBuscaAtual = localStorage.getItem('au_copiloto_ritmo') || '24h';
+    let ritmoBuscaAtual = localStorage.getItem('au_copiloto_ritmo') || '12h';
 
     function selecionarRitmoBusca(ritmo, emitirToast = true) {
-      ritmoBuscaAtual = ritmo || '24h';
+      ritmoBuscaAtual = ritmo || '12h';
       localStorage.setItem('au_copiloto_ritmo', ritmoBuscaAtual);
 
       const b24 = document.getElementById('btn-ritmo-24h');
@@ -11687,13 +11687,13 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
       });
 
       if (ritmoBuscaAtual === '6h' && b6) b6.classList.add('active');
-      else if (ritmoBuscaAtual === '12h' && b12) b12.classList.add('active');
-      else if (b24) b24.classList.add('active');
+      else if (ritmoBuscaAtual === '24h' && b24) b24.classList.add('active');
+      else if (b12) b12.classList.add('active');
 
       salvarPrefsCopilotoSilencioso();
       if (emitirToast) {
         const txt = ritmoBuscaAtual === '6h' ? 'Busca Intensiva (6h) ativada' :
-                    (ritmoBuscaAtual === '12h' ? 'Busca Ativa (12h) ativada' : 'Busca Padrão (24h) ativada');
+                    (ritmoBuscaAtual === '24h' ? 'Busca Padrão (24h) ativada' : 'Busca Ativa (12h • Recomendado) ativada');
         mostrarToast(txt);
       }
     }
@@ -11822,7 +11822,7 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
 
       salvarPrefsCopilotoSilencioso();
       if (emitirToast) {
-        mostrarToast(`Raio de alerta: ${raioPetAtual === '2000' ? '2.000m (2 km)' : raioPetAtual + ' metros'}`);
+        mostrarToast(`Raio de busca: ${raioPetAtual === '2000' ? '2.000m (Amplo)' : (raioPetAtual === '500' ? '500m (Perto)' : '1.000m (Recomendado)')}`);
       }
     }
 
@@ -11861,12 +11861,12 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
         const raioSalvo = localStorage.getItem('au_copiloto_raio_pet') || prefs.raio_pet || '1000';
         selecionarRaioCopiloto(raioSalvo, false);
 
-        const ritmoSalvo = localStorage.getItem('au_copiloto_ritmo') || prefs.ritmo_busca || '24h';
+        const ritmoSalvo = localStorage.getItem('au_copiloto_ritmo') || prefs.ritmo_busca || '12h';
         selecionarRitmoBusca(ritmoSalvo, false);
       } catch (_) {
         selecionarVozCopiloto(vozCopilotoAtual || 'feminina', false);
         selecionarRaioCopiloto('1000', false);
-        selecionarRitmoBusca('24h', false);
+        selecionarRitmoBusca('12h', false);
       }
     }
 
