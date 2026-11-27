@@ -4221,6 +4221,10 @@
     #modal-perfil .fs-body {
       scrollbar-width: none !important;
       -ms-overflow-style: none !important;
+      margin-bottom: calc(env(safe-area-inset-bottom, 0px) + 76px) !important;
+      padding: 0 0 10px !important;
+      overflow-y: auto !important;
+      overflow-x: hidden !important;
     }
     #modal-perfil .fs-body::-webkit-scrollbar {
       display: none !important;
@@ -7209,15 +7213,15 @@
   <!-- ==================== TELA COMPLETA: MEU PERFIL & CADASTRO ==================== -->
   <div class="full-screen-view" id="modal-perfil">
     <!-- Topo Centralizado de Acesso & Cadastro com Degradê Brasil -->
-    <div class="fs-header profile-fs-header" style="justify-content:center; position:relative;">
+    <div class="fs-header profile-fs-header" style="justify-content:center; position:relative; padding-top:calc(env(safe-area-inset-top, 0px) + 14px); padding-bottom:6px;">
       <div style="text-align:center;">
-        <div style="font-size:18px; font-weight:900; color:#FFFFFF; letter-spacing:0.3px;" id="perfil-header-title">Acesso & Cadastro</div>
-        <div style="font-size:11px; font-weight:800; color:#FED700; letter-spacing:0.5px;" id="perfil-header-sub">Alerta Pet Brasil</div>
+        <div style="font-size:21px; font-weight:900; color:#FFFFFF; letter-spacing:0.3px; line-height:1.2;" id="perfil-header-title">Acesso & Cadastro</div>
+        <div style="font-size:12.5px; font-weight:800; color:#FED700; letter-spacing:0.5px; margin-top:3px;" id="perfil-header-sub">Alerta Pet Brasil</div>
       </div>
     </div>
 
     <!-- Botão Voltar separado no início da área de conteúdo com suspiro -->
-    <div style="max-width:540px; margin:0 auto; width:100%; padding:6px 16px 2px; display:flex; align-items:center; justify-content:flex-start;">
+    <div style="max-width:540px; margin:0 auto; width:100%; padding:10px 16px 4px; display:flex; align-items:center; justify-content:flex-start;">
       <button type="button" class="btn-voltar-acesso" onclick="fecharModal('modal-perfil')">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
         <span>Voltar</span>
@@ -7226,9 +7230,9 @@
 
     <div class="fs-body" style="max-width:540px; margin:0 auto; width:100%; overflow-y:auto;">
       <!-- ESTADO 1: TELA DE CADASTRO / LOGIN (PADRÃO PRINT 2 DIRETRIZ RIGO) -->
-      <div id="perfil-view-cadastro" style="display:none; padding:4px 0 24px;">
+      <div id="perfil-view-cadastro" style="display:none; padding:2px 0 10px;">
         <!-- Frase de Destaque Grande e em Preto com Suspiro -->
-        <div style="text-align:center; padding:10px 16px 14px;">
+        <div style="text-align:center; padding:14px 16px 14px;">
           <div style="font-size:15px; font-weight:900; color:#2E2417; line-height:1.35; letter-spacing:0.1px;">
             Cadastre-se para publicar, reencontrar e resgatar animais
           </div>
