@@ -72,7 +72,7 @@
       color: #FFFFFF !important;
     }
     [data-theme="dark"] .home-green-canopy {
-      background: #009B3A;
+      background: transparent !important;
       padding: 4px 12px 4px;
       display: flex;
       flex-direction: column;
@@ -81,11 +81,11 @@
       z-index: 10;
     }
     [data-theme="dark"] .weather-strip-green {
-      background: rgba(0, 40, 15, 0.40);
+      background: #14161B !important;
       border-radius: 12px;
       padding: 6px 10px 5px;
-      border: 1px solid rgba(254, 215, 0, 0.22);
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
       flex-shrink: 0;
     }
     [data-theme="dark"] .home-river-wave,
@@ -108,14 +108,15 @@
     [data-theme="dark"] .belt-title.uti-title,
     [data-theme="dark"] .belt-title.seg-title,
     [data-theme="dark"] .belt-title span {
-      color: #FED700 !important; /* Dourado Alerta brilhante e legível no preto! */
+      color: #FFFFFF !important; /* Branco puro no modo escuro (Diretriz Rigo) */
     }
     [data-theme="dark"] .belt-svg {
-      color: #FED700 !important;
-      stroke: #FED700 !important;
+      color: #FFFFFF !important;
+      stroke: none !important;
+      fill: #FFFFFF !important;
     }
     [data-theme="dark"] .belt-title.pet-title .belt-svg {
-      fill: #FED700 !important;
+      fill: #FFFFFF !important;
       stroke: none !important;
     }
     [data-theme="dark"] .belt-info-card {
@@ -5303,24 +5304,15 @@
     body.theme-dark .main-stage,
     body.theme-dark .tab-pane#tab-inicio.active,
     body.theme-dark #tab-inicio.active {
-      background: linear-gradient(180deg, 
-        #05180D 0px, 
-        #072212 22px, 
-        #092615 38px, 
-        #0B1B12 54px, 
-        #0F1115 70px, 
-        #0F1115 calc(100% - 62px), 
-        #0C1610 calc(100% - 36px), 
-        #082012 calc(100% - 14px), 
-        #05180D 100%) !important;
+      background: #000000 !important;
     }
 
     [data-theme="dark"] .main-stage::after,
-    body.theme-dark .main-stage::after {
-      background: linear-gradient(180deg, 
-        rgba(5, 24, 13, 0) 0%, 
-        rgba(5, 24, 13, 0.40) 40%, 
-        #05180D 100%) !important;
+    [data-theme="dark"] .main-stage::before,
+    body.theme-dark .main-stage::after,
+    body.theme-dark .main-stage::before {
+      display: none !important;
+      background: none !important;
     }
 
     [data-theme="dark"] .topbar,
@@ -5362,11 +5354,16 @@
       color: #FED700 !important;
     }
 
-    /* 3. ABA 1: INÍCIO (DARK MODE OFICIAL) */
+    /* 3. ABA 1: INÍCIO (DARK MODE OFICIAL PRETO SÓLIDO COM CARDS FOSCOS) */
+    [data-theme="dark"] .home-weather-direct,
+    body.theme-dark .home-weather-direct {
+      background: transparent !important;
+    }
+
     [data-theme="dark"] .city-alert-direct,
     body.theme-dark .city-alert-direct {
-      background: rgba(24, 26, 31, 0.95) !important;
-      border: 1px solid rgba(255, 255, 255, 0.10) !important;
+      background: #14161B !important;
+      border: 1px solid rgba(255, 255, 255, 0.08) !important;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.45) !important;
     }
 
@@ -5381,16 +5378,17 @@
 
     [data-theme="dark"] .campaign-sand-card,
     body.theme-dark .campaign-sand-card {
-      background: #181A1F !important;
+      background: #14161B !important;
       border: 1px solid rgba(255, 255, 255, 0.08) !important;
       box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45) !important;
     }
 
     [data-theme="dark"] .home-campaign-phrase,
     body.theme-dark .home-campaign-phrase {
-      color: #F8FAFC !important;
+      color: #FFFFFF !important;
     }
 
+    /* QUEM AMA CUIDA: Título e Patinha 100% BRANCOS (Diretriz Rigo) */
     [data-theme="dark"] .belt-block-pets .pet-title span,
     [data-theme="dark"] .belt-block-pets .belt-title span,
     [data-theme="dark"] .belt-title.pet-title span,
@@ -5403,33 +5401,53 @@
     }
 
     [data-theme="dark"] .belt-block-pets .belt-svg,
-    [data-theme="dark"] .belt-block-pets svg[style*="color:#2E2417"],
+    [data-theme="dark"] .belt-block-pets svg,
     body.theme-dark .belt-block-pets .belt-svg,
-    body.theme-dark .belt-block-pets svg[style*="color:#2E2417"] {
-      color: #00B341 !important;
-      fill: #00B341 !important;
+    body.theme-dark .belt-block-pets svg {
+      color: #FFFFFF !important;
+      fill: #FFFFFF !important;
+      stroke: none !important;
     }
 
     [data-theme="dark"] .unified-belt-card,
     body.theme-dark .unified-belt-card {
-      background: #181A1F !important;
-      border: 1px solid rgba(255, 255, 255, 0.10) !important;
+      background: #14161B !important;
+      border: 1px solid rgba(255, 255, 255, 0.08) !important;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.45) !important;
     }
 
+    /* COMUNIDADE DE PROTETORES: Título e Ícone 100% BRANCOS (Diretriz Rigo) */
     [data-theme="dark"] .belt-block-protetores .belt-title span,
-    body.theme-dark .belt-block-protetores .belt-title span {
-      color: #F8FAFC !important;
+    [data-theme="dark"] .belt-block-protetores .belt-title,
+    [data-theme="dark"] .belt-block-protetores span[style*="color:#2E2417"],
+    body.theme-dark .belt-block-protetores .belt-title span,
+    body.theme-dark .belt-block-protetores .belt-title,
+    body.theme-dark .belt-block-protetores span[style*="color:#2E2417"] {
+      color: #FFFFFF !important;
     }
 
     [data-theme="dark"] .belt-block-protetores .belt-title svg,
-    body.theme-dark .belt-block-protetores .belt-title svg {
-      stroke: #00B341 !important;
+    [data-theme="dark"] .belt-block-protetores svg,
+    body.theme-dark .belt-block-protetores .belt-title svg,
+    body.theme-dark .belt-block-protetores svg {
+      stroke: #FFFFFF !important;
+      color: #FFFFFF !important;
+      fill: none !important;
+    }
+
+    [data-theme="dark"] .protetor-dot,
+    body.theme-dark .protetor-dot {
+      background: rgba(255, 255, 255, 0.25) !important;
+    }
+
+    [data-theme="dark"] .protetor-dot.active,
+    body.theme-dark .protetor-dot.active {
+      background: #FFFFFF !important;
     }
 
     [data-theme="dark"] .showcase-protetor-card,
     body.theme-dark .showcase-protetor-card {
-      background: #181A1F !important;
+      background: #14161B !important;
       border: 1px solid rgba(255, 255, 255, 0.08) !important;
       box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45) !important;
     }
@@ -5452,9 +5470,9 @@
     [data-theme="dark"] .showcase-protetor-quote,
     body.theme-dark .showcase-bio-row,
     body.theme-dark .showcase-protetor-quote {
-      background: rgba(255, 255, 255, 0.08) !important;
+      background: rgba(255, 255, 255, 0.05) !important;
       color: #E2E8F0 !important;
-      border-left: 3px solid #00B341 !important;
+      border-left: 3px solid #FFFFFF !important;
     }
 
     [data-theme="dark"] .showcase-pets-label,
@@ -5464,7 +5482,8 @@
 
     [data-theme="dark"] .showcase-pets-label span svg,
     body.theme-dark .showcase-pets-label span svg {
-      color: #00B341 !important;
+      color: #FFFFFF !important;
+      fill: #FFFFFF !important;
     }
 
     [data-theme="dark"] .showcase-pet-name,
@@ -5474,8 +5493,8 @@
 
     [data-theme="dark"] .showcase-pet-thumb,
     body.theme-dark .showcase-pet-thumb {
-      background: #23262E !important;
-      border-color: rgba(255, 255, 255, 0.12) !important;
+      background: #1E2128 !important;
+      border-color: rgba(255, 255, 255, 0.10) !important;
     }
 
     [data-theme="dark"] .showcase-bottom-row,
@@ -5490,7 +5509,7 @@
 
     [data-theme="dark"] .showcase-bottom-row span:last-child,
     body.theme-dark .showcase-bottom-row span:last-child {
-      color: #00B341 !important;
+      color: #FED700 !important;
     }
 
     [data-theme="dark"] .showcase-mini-chip,
@@ -5508,8 +5527,8 @@
 
     [data-theme="dark"] .quadradinho-apoio,
     body.theme-dark .quadradinho-apoio {
-      background: #181A1F !important;
-      border: 1px solid rgba(255, 255, 255, 0.12) !important;
+      background: #14161B !important;
+      border: 1px solid rgba(255, 255, 255, 0.08) !important;
       box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45) !important;
     }
 
@@ -5933,10 +5952,10 @@
           <div class="belt-block belt-block-pets">
             <div class="belt-head" style="display:flex; align-items:center; justify-content:space-between; margin-bottom:4px;">
               <div class="belt-title pet-title" style="display:flex; align-items:center; gap:6px;">
-                <svg class="belt-svg" viewBox="0 0 24 24" fill="currentColor" width="14" height="14" style="color:var(--accent-brand, #009B3A);">
+                <svg class="belt-svg" viewBox="0 0 24 24" fill="currentColor" width="14" height="14">
                   <path d="M12 12c-2 0-3.5 1.5-3.5 3.3 0 1.6 1.2 2.7 3.5 2.7s3.5-1.1 3.5-2.7C15.5 13.5 14 12 12 12zm-5.8-2.3c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm11.6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-8.6-4.1c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm5.6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/>
                 </svg>
-                <span style="font-size:12px; font-weight:800; color:var(--pet-texto-escuro, #2E2417); letter-spacing:0.2px;">Quem ama, cuida e procura junto</span>
+                <span class="belt-title-text" style="font-size:12px; font-weight:800; letter-spacing:0.2px;">Quem ama, cuida e procura junto</span>
               </div>
             </div>
             
@@ -5951,13 +5970,13 @@
           <div class="belt-block belt-block-protetores">
             <div class="belt-head" style="display:flex; align-items:center; justify-content:space-between; margin-bottom:4px;">
               <div class="belt-title" style="display:flex; align-items:center; gap:5px;">
-                <svg viewBox="0 0 24 24" fill="none" stroke="#2E2417" stroke-width="2.2" width="13" height="13">
+                <svg class="belt-svg-protetores" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="13" height="13">
                   <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
                   <circle cx="9" cy="7" r="4"></circle>
                   <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
                   <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
                 </svg>
-                <span style="font-size:11.5px; font-weight:800; color:#2E2417; letter-spacing:0.2px;">Comunidade de Protetores</span>
+                <span class="belt-title-text" style="font-size:11.5px; font-weight:800; letter-spacing:0.2px;">Comunidade de Protetores</span>
               </div>
               <div id="protetores-carousel-dots" style="display:flex; align-items:center; gap:5px;"></div>
             </div>
@@ -7576,6 +7595,15 @@
       }
       atualizarCamadaBaseMapa();
       try { if (typeof selecionarRitmoBusca === 'function' && typeof ritmoBuscaAtual !== 'undefined') selecionarRitmoBusca(ritmoBuscaAtual, false); } catch(_) {}
+      try {
+        if (window.AndroidBridge && typeof window.AndroidBridge.atualizarCoresBarrasSistema === 'function') {
+          if (tema === 'dark') {
+            window.AndroidBridge.atualizarCoresBarrasSistema('#000000', '#000000');
+          } else {
+            window.AndroidBridge.atualizarCoresBarrasSistema('#009B3A', '#000000');
+          }
+        }
+      } catch (_) {}
     }
 
     function alternarTema() {

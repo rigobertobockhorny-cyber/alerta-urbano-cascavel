@@ -273,24 +273,25 @@ Para fazer qualquer alteração futura no aplicativo:
 
 ---
 
-## 7. MODO NOTURNO (DARK MODE UNIFICADO NAS 5 ABAS)
+## 7. MODO NOTURNO (DARK MODE OFICIAL PRETO SÓLIDO NAS 5 ABAS)
 
 > [!NOTE]
-> O Modo Noturno é alternado pelo botão da Lua/Sol no canto superior direito (`#btn-theme-toggle`). A preferência é salva no `localStorage` sob a chave `au_theme` e aplicada reativamente nas tags `<html>` e `<body>` via atributo `data-theme="dark"` e classe `.theme-dark`.
+> O Modo Noturno é alternado pelo botão da Lua/Sol no canto superior direito (`#btn-theme-toggle`). A preferência é salva no `localStorage` sob a chave `au_theme` e aplicada reativamente nas tags `<html>` e `<body>` via atributo `data-theme="dark"` e classe `.theme-dark`. Além disso, a ponte nativa `AndroidBridge.atualizarCoresBarrasSistema('#000000', '#000000')` sincroniza a barra de navegação do sistema operacional do celular (os 3 botões físicos/virtuais).
 
-### Regras de Cores do Modo Noturno:
-1. **Fundo do Palco (`.main-stage`):** Transiciona do verde floresta escuro (`#05180D`) no topo para grafite escuro profundo (`#0F1115`) no miolo e na base, eliminando qualquer vazamento verde claro sobre o menu inferior do celular.
-2. **Barras Fixas:** Topbar e Bottom Nav 100% Preto OLED (`#000000`) com divisores sutis em `rgba(255, 255, 255, 0.08)`.
-3. **Cards e Blocos:** Assumem o tom grafite nobre `#181A1F` com borda sutil de 1px em `rgba(255, 255, 255, 0.08)` e sombra suave de 4px (`rgba(0, 0, 0, 0.45)`).
-4. **Tipografia de Alto Contraste:** Títulos principais em Branco Puro (`#FFFFFF`), frases e subtítulos em Cinza Claro (`#CBD5E1` / `#E2E8F0`), badges de destaque em Verde Alerta (`#00B341`) e Amarelo Ouro (`#FED700`).
-5. **Aba Início:**
-   - Letreiro meteorológico: `#181A1F` com texto `#FFFFFF`.
-   - Card de Campanha: `#181A1F` com texto `#F8FAFC`.
-   - Esteira Quem Ama Cuida: cards `#181A1F` com títulos brancos e patinha verde/dourada.
-   - Showcase Protetor: `#181A1F` com bio destacada em `#23262E` e nomes legíveis.
-   - Esteira Apoie Aqui: bloquinhos `#181A1F` com `+ APOIE` em `#00B341` e `AQUI` em `#FED700`, marcas em alto contraste.
-6. **Aba Mapa:** Cartografia escura invertida com CartoDB/Esri Dark Streets e pílulas em `#181A1F`.
-7. **Aba Pets:** Mural e cards de animais em `#181A1F` com botões e badges em alto contraste.
-8. **Aba Parceiros:** Cabeçalho e cards de empresas em `#181A1F`, sub-cards de ofertas em `#23262E` com títulos brancos.
-9. **Aba Copiloto:** Hero Card e grupos de configuração em `#181A1F`, cards de ritmo em `#23262E` com textos brancos e botão do testador em destaque.
-10. **Cláusula Pétrea:** Zero alteração em larguras, alturas, alinhamentos e gaps de 18px. O layout permanece rigorosamente idêntico.
+### Regras Oficiais de Cores do Modo Noturno (Diretriz Suprema Rigo):
+1. **Fundo do Palco (`.main-stage` e Abas):** 100% Preto Sólido OLED (`#000000`), exatamente igual ao preto sólido do menu inferior e topo. Zero degradê esverdeado, zero auras ou reflexos verdes na tela.
+2. **Barras Fixas e Sistema Operacional:**
+   - Topbar e Bottom Nav em Preto Puro (`#000000`) com divisores sutis em `rgba(255, 255, 255, 0.08)`.
+   - Barra de Navegação do Android (botões do celular): 100% Preto Sólido (`#000000`), eliminando qualquer faixa verde na base do dispositivo.
+3. **Cards e Blocos em Sobretom Preto Fosco:**
+   - Card de Alerta Meteorológico, Card Terroso de Campanhas, Cards da Esteira Pets, Card da Comunidade de Protetores e Blocos da Esteira Apoie Aqui assumem o tom Preto Fosco Nobre (`#14161B`) com borda suave de 1px em `rgba(255, 255, 255, 0.08)` e sombra suave de 4px (`rgba(0, 0, 0, 0.45)`).
+4. **Títulos e Ícones dos Blocos 100% Brancos:**
+   - **Quem ama, cuida e procura junto:** Título em Branco Puro (`#FFFFFF`) e ícone da Patinha em Branco Puro (`#FFFFFF`).
+   - **Comunidade de Protetores:** Título em Branco Puro (`#FFFFFF`) e logo/ícone de proteção em Branco Puro (`#FFFFFF`).
+   - **Indicador de Carrossel:** Dot ativo em Branco Puro (`#FFFFFF`) e inativos em branco translúcido (`rgba(255, 255, 255, 0.25)`).
+5. **Tipografia e Contraste dos Cards:** Textos principais em Branco Puro (`#FFFFFF`), frases e subtítulos em Cinza Claro (`#CBD5E1` / `#E2E8F0`), badges e destaques operacionais em Dourado (`#FED700`) e Verde (`#00B341`).
+6. **Aba Mapa:** Cartografia escura invertida com CartoDB/Esri Dark Streets e pílulas em `#14161B`.
+7. **Aba Pets:** Mural e cards de animais em `#14161B` com botões e badges em alto contraste.
+8. **Aba Parceiros:** Cabeçalho e cards de empresas em `#14161B`, sub-cards de ofertas em `#1E2128` com títulos brancos.
+9. **Aba Copiloto:** Hero Card e grupos de configuração em `#14161B`, cards de ritmo em `#1E2128` com textos brancos e botão do testador em destaque.
+10. **Cláusula Pétrea de Layout:** Dimensões, larguras, alturas, alinhamentos, esteiras 106x64px e gaps uniformes de 18px são IMUTÁVEIS e rigorosamente preservados.
