@@ -553,16 +553,24 @@
     .icon-btn:active { transform: scale(0.92); }
     .gps-dot {
       position: absolute;
-      top: 6px;
-      right: 6px;
-      width: 7px;
-      height: 7px;
+      top: 5px;
+      right: 5px;
+      width: 9px;
+      height: 9px;
       border-radius: 50%;
-      background: #f59e0b;
-      border: 1.5px solid var(--bg-elevated);
+      background: #EF4444; /* Padrão: Vermelho vivo sem conta ativa (Regra Rigo) */
+      border: 1.5px solid #FFFFFF;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.45);
+      transition: background-color 0.25s ease, transform 0.2s ease;
+      z-index: 5;
+      pointer-events: none;
     }
-    .gps-dot.ok { background: #10b981; }
-    .gps-dot.err { background: #ef4444; }
+    .gps-dot.desconectado, .gps-dot.err, .gps-dot:not(.ativo):not(.ok) {
+      background: #EF4444 !important; /* Vermelho vivo quando sem conta ativa (Regra Rigo) */
+    }
+    .gps-dot.ativo, .gps-dot.ok {
+      background: #10B981 !important; /* Verde vivo quando conta ativa (Regra Rigo) */
+    }
 
     /* Área Central das Abas */
     .main-stage {
@@ -6224,12 +6232,12 @@
         <button type="button" class="icon-btn" id="btn-theme-toggle" onclick="alternarTema()" title="Alternar Modo Noturno / Claro" aria-label="Alternar tema">
           <!-- Ícone atualizado por JS -->
         </button>
-        <button type="button" class="icon-btn" id="btn-topbar-perfil" onclick="abrirPerfil()" title="Status GPS e Perfil" aria-label="Perfil">
+        <button type="button" class="icon-btn" id="btn-topbar-perfil" onclick="abrirPerfil()" title="Status da Conta e Perfil" aria-label="Perfil">
           <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
             <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
             <circle cx="12" cy="7" r="4"></circle>
           </svg>
-          <span class="gps-dot" id="gps-dot"></span>
+          <span class="gps-dot desconectado" id="gps-dot"></span>
         </button>
       </div>
     </header>
@@ -12542,14 +12550,55 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
     }
 
     function atualizarStatusGps(status, texto) {
-      const dot = document.getElementById('gps-dot');
-      if (dot) {
-        dot.classList.remove('ok', 'err');
-        if (status === 'ok') dot.classList.add('ok');
-        if (status === 'err') dot.classList.add('err');
-      }
       const txt = document.getElementById('perfil-gps-txt');
       if (txt) txt.textContent = texto;
+    }
+
+    /* ==================== INDICADOR STATUS DA CONTA (REGRA SUPREMA RIGO) ==================== */
+    function atualizarIndicadorStatusConta() {
+      const dot = document.getElementById('gps-dot');
+      if (!dot) return;
+      let p = state.perfil || {};
+      if (!p.nome || p.cadastrado === undefined) {
+        try { p = JSON.parse(localStorage.getItem('au_perfil') || '{}'); state.perfil = p; } catch(e) {}
+      }
+      const estaCadastrado = Boolean(p && p.cadastrado === true);
+      dot.classList.remove('ativo', 'desconectado', 'ok', 'err');
+      if (estaCadastrado) {
+        dot.classList.add('ativo');
+        dot.setAttribute('title', 'Conta Ativa: ' + (p.nome || 'Usuário'));
+      } else {
+        dot.classList.add('desconectado');
+        dot.setAttribute('title', 'Sem conta ativa - Toque para cadastrar');
+      }
+    }
+
+    function comprimirFotoAvatar(dataUrl, maxW, maxH, quality, callback) {
+      const img = new Image();
+      img.onload = function() {
+        let w = img.width;
+        let h = img.height;
+        if (w > maxW || h > maxH) {
+          if (w > h) {
+            h = Math.round((h * maxW) / w);
+            w = maxW;
+          } else {
+            w = Math.round((w * maxH) / h);
+            h = maxH;
+          }
+        }
+        const canvas = document.createElement('canvas');
+        canvas.width = w;
+        canvas.height = h;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, w, h);
+        const compressed = canvas.toDataURL('image/jpeg', quality || 0.82);
+        callback(compressed);
+      };
+      img.onerror = function() {
+        callback(dataUrl);
+      };
+      img.src = dataUrl;
     }
 
     /* ==================== PERFIL COMPLETO & CADASTRO ==================== */
@@ -12559,7 +12608,68 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
         if (salvo) {
           state.perfil = JSON.parse(salvo);
         }
+        // Se nativo tiver perfil salvo, mescla para garantir persistência indelével
+        if (window.AndroidAlerta && typeof window.AndroidAlerta.obterPerfilNativo === 'function') {
+          const natStr = window.AndroidAlerta.obterPerfilNativo();
+          if (natStr) {
+            try {
+              const pNat = JSON.parse(natStr);
+              if (pNat && pNat.cadastrado) {
+                state.perfil = Object.assign({}, pNat, state.perfil);
+              }
+            } catch (_) {}
+          }
+        }
+        // Restaura foto de chave dedicada ou do nativo caso não esteja presente
+        if (!state.perfil.foto_url) {
+          const fotoDedicada = localStorage.getItem('au_perfil_foto_base64');
+          if (fotoDedicada) {
+            state.perfil.foto_url = fotoDedicada;
+          } else if (window.AndroidAlerta && typeof window.AndroidAlerta.obterFotoPerfilNativa === 'function') {
+            const fotoNat = window.AndroidAlerta.obterFotoPerfilNativa();
+            if (fotoNat) state.perfil.foto_url = fotoNat;
+          }
+        }
       } catch (e) {}
+
+      // Atualiza imediatamente o indicador visual no topo (Vermelho se sem conta, Verde se com conta)
+      atualizarIndicadorStatusConta();
+
+      // Sincroniza em segundo plano com o banco caso haja autor_token
+      if (state.autorToken) {
+        fetch(`/api/perfil?autor_token=${encodeURIComponent(state.autorToken)}`)
+          .then(r => r.json())
+          .then(data => {
+            if (data && data.perfil) {
+              const serv = data.perfil;
+              let mudou = false;
+              if (serv.foto_url && !state.perfil.foto_url) {
+                state.perfil.foto_url = serv.foto_url;
+                mudou = true;
+              }
+              if (serv.nome && (!state.perfil.nome || !state.perfil.cadastrado)) {
+                state.perfil = Object.assign({}, serv, state.perfil, { cadastrado: true });
+                mudou = true;
+              }
+              if (mudou) {
+                try {
+                  localStorage.setItem('au_perfil', JSON.stringify(state.perfil));
+                  if (state.perfil.foto_url) localStorage.setItem('au_perfil_foto_base64', state.perfil.foto_url);
+                  if (window.AndroidAlerta && typeof window.AndroidAlerta.salvarPerfilNativo === 'function') {
+                    window.AndroidAlerta.salvarPerfilNativo(JSON.stringify(state.perfil));
+                  }
+                  if (window.AndroidAlerta && typeof window.AndroidAlerta.salvarFotoPerfilNativa === 'function' && state.perfil.foto_url) {
+                    window.AndroidAlerta.salvarFotoPerfilNativa(state.perfil.foto_url);
+                  }
+                } catch(_) {}
+                atualizarIndicadorStatusConta();
+                if (document.getElementById('modal-perfil')?.classList.contains('open')) {
+                  atualizarVisualLogado();
+                }
+              }
+            }
+          }).catch(() => {});
+      }
     }
 
     function formatarZapDinamico(input) {
@@ -12630,6 +12740,7 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
         mp.style.display = 'flex';
         mp.classList.add('open');
       }
+      atualizarIndicadorStatusConta();
     }
 
     function atualizarVisualLogado() {
@@ -12922,10 +13033,22 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
         canal_redes,
         aceita_chamados,
         cadastrado: true,
+        foto_url: (state.perfil && state.perfil.foto_url) ? state.perfil.foto_url : (localStorage.getItem('au_perfil_foto_base64') || ''),
         auth_provider: (state.perfil && state.perfil.auth_provider) ? state.perfil.auth_provider : 'manual'
       };
 
-      try { localStorage.setItem('au_perfil', JSON.stringify(state.perfil)); } catch(e) {}
+      try {
+        localStorage.setItem('au_perfil', JSON.stringify(state.perfil));
+        if (state.perfil.foto_url) {
+          localStorage.setItem('au_perfil_foto_base64', state.perfil.foto_url);
+        }
+        if (window.AndroidAlerta && typeof window.AndroidAlerta.salvarPerfilNativo === 'function') {
+          window.AndroidAlerta.salvarPerfilNativo(JSON.stringify(state.perfil));
+        }
+        if (window.AndroidAlerta && typeof window.AndroidAlerta.salvarFotoPerfilNativa === 'function' && state.perfil.foto_url) {
+          window.AndroidAlerta.salvarFotoPerfilNativa(state.perfil.foto_url);
+        }
+      } catch(e) {}
 
       try {
         fetch('/api/perfil', {
@@ -12939,6 +13062,7 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
             cidade: state.perfil.cidade,
             estado: state.perfil.estado,
             endereco,
+            foto_url: state.perfil.foto_url || '',
             tipo_perfil,
             ong_nome,
             bio,
@@ -12952,6 +13076,7 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
         }).catch(() => {});
       } catch (_) {}
 
+      atualizarIndicadorStatusConta();
       mostrarToast('Cadastro concluído com sucesso!');
       abrirPerfil(false);
     }
@@ -12977,7 +13102,12 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
       }
 
       state.perfil = Object.assign({}, state.perfil, { nome, whatsapp, bairro, cidade, estado, endereco });
-      try { localStorage.setItem('au_perfil', JSON.stringify(state.perfil)); } catch(e) {}
+      try {
+        localStorage.setItem('au_perfil', JSON.stringify(state.perfil));
+        if (window.AndroidAlerta && typeof window.AndroidAlerta.salvarPerfilNativo === 'function') {
+          window.AndroidAlerta.salvarPerfilNativo(JSON.stringify(state.perfil));
+        }
+      } catch(e) {}
 
       try {
         fetch('/api/perfil', {
@@ -12990,11 +13120,13 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
             bairro,
             cidade,
             estado,
-            endereco
+            endereco,
+            foto_url: state.perfil.foto_url || ''
           })
         }).catch(() => {});
       } catch (_) {}
 
+      atualizarIndicadorStatusConta();
       atualizarVisualLogado();
 
       const box = document.getElementById('perfil-caixa-edicao');
@@ -13042,9 +13174,19 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
 
     function desconectarContaUsuario() {
       if (confirm('Deseja sair da sua conta neste aparelho?')) {
-        state.perfil = { cadastrado: false, nome: '', whatsapp: '', bairro: '', cidade: 'Cascavel', estado: 'PR' };
-        try { localStorage.removeItem('au_perfil'); } catch(e) {}
+        state.perfil = { cadastrado: false, nome: '', whatsapp: '', bairro: '', cidade: 'Cascavel', estado: 'PR', foto_url: '' };
+        try {
+          localStorage.removeItem('au_perfil');
+          localStorage.removeItem('au_perfil_foto_base64');
+          if (window.AndroidAlerta && typeof window.AndroidAlerta.salvarPerfilNativo === 'function') {
+            window.AndroidAlerta.salvarPerfilNativo('');
+          }
+          if (window.AndroidAlerta && typeof window.AndroidAlerta.salvarFotoPerfilNativa === 'function') {
+            window.AndroidAlerta.salvarFotoPerfilNativa('');
+          }
+        } catch(e) {}
         limparFormularioCadastro();
+        atualizarIndicadorStatusConta();
         mostrarToast('Você saiu da sua conta.');
         abrirPerfil(true);
       }
@@ -13053,12 +13195,21 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
     function excluirContaUsuarioGooglePlay() {
       if (confirm('Atenção: Deseja realmente excluir permanentemente sua conta e todos os dados associados? Esta ação não pode ser desfeita (em conformidade com a Google Play Store e LGPD).')) {
         const token = state.autorToken;
-        state.perfil = { cadastrado: false, nome: '', whatsapp: '', bairro: '', cidade: 'Cascavel', estado: 'PR' };
+        state.perfil = { cadastrado: false, nome: '', whatsapp: '', bairro: '', cidade: 'Cascavel', estado: 'PR', foto_url: '' };
         try {
           localStorage.removeItem('au_perfil');
+          localStorage.removeItem('au_perfil_foto_base64');
           localStorage.removeItem('alerta_pets_curtidos');
           localStorage.removeItem('alerta_usuarios_bloqueados');
+          if (window.AndroidAlerta && typeof window.AndroidAlerta.salvarPerfilNativo === 'function') {
+            window.AndroidAlerta.salvarPerfilNativo('');
+          }
+          if (window.AndroidAlerta && typeof window.AndroidAlerta.salvarFotoPerfilNativa === 'function') {
+            window.AndroidAlerta.salvarFotoPerfilNativa('');
+          }
         } catch(e) {}
+
+        atualizarIndicadorStatusConta();
 
         if (token) {
           fetch('/api/perfil/excluir', {
@@ -13146,20 +13297,52 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
     async function uploadFotoPerfil(input) {
       const file = input.files && input.files[0];
       if (!file) return;
-      const fd = new FormData();
-      fd.append('foto', file);
-      try {
-        const resp = await fetch('/api/upload', { method: 'POST', body: fd });
-        const data = await resp.json();
-        if (resp.ok && data.url) {
-          state.perfil = Object.assign({}, state.perfil, { foto_url: data.url });
-          try { localStorage.setItem('au_perfil', JSON.stringify(state.perfil)); } catch(e) {}
+      
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const rawUrl = e.target.result;
+        comprimirFotoAvatar(rawUrl, 200, 200, 0.82, function(fotoComprimida) {
+          state.perfil = Object.assign({}, state.perfil, { foto_url: fotoComprimida });
+          
+          try {
+            localStorage.setItem('au_perfil', JSON.stringify(state.perfil));
+            localStorage.setItem('au_perfil_foto_base64', fotoComprimida);
+          } catch(errLs) {}
+
+          try {
+            if (window.AndroidAlerta && typeof window.AndroidAlerta.salvarFotoPerfilNativa === 'function') {
+              window.AndroidAlerta.salvarFotoPerfilNativa(fotoComprimida);
+            }
+            if (window.AndroidAlerta && typeof window.AndroidAlerta.salvarPerfilNativo === 'function') {
+              window.AndroidAlerta.salvarPerfilNativo(JSON.stringify(state.perfil));
+            }
+          } catch(errAnd) {}
+
           atualizarVisualLogado();
-          mostrarToast('Foto de perfil atualizada!');
-        }
-      } catch (_) {
-        mostrarToast('Erro ao enviar foto de perfil');
-      }
+          mostrarToast('Foto de perfil salva com sucesso!');
+
+          // Sincroniza foto permanente com o banco SQLite do servidor
+          try {
+            fetch('/api/perfil', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                autor_token: state.autorToken,
+                nome: state.perfil.nome || '',
+                whatsapp: state.perfil.whatsapp || '',
+                bairro: state.perfil.bairro || 'Centro',
+                cidade: state.perfil.cidade || 'Cascavel',
+                estado: state.perfil.estado || 'PR',
+                foto_url: fotoComprimida
+              })
+            }).catch(() => {});
+          } catch(_) {}
+        });
+      };
+      reader.onerror = function() {
+        mostrarToast('Erro ao processar imagem selecionada.');
+      };
+      reader.readAsDataURL(file);
     }
 
     function renderizarMeusPetsPerfil() {
@@ -13396,6 +13579,9 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
         if (el.classList.contains('full-screen-view')) {
           el.style.display = 'none';
         }
+      }
+      if (id === 'modal-perfil') {
+        atualizarIndicadorStatusConta();
       }
     }
 
