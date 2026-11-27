@@ -2908,16 +2908,18 @@
       background: rgba(16, 185, 129, 0.22) !important;
       color: #ffffff !important;
     }
-    #tab-inicio .belt-title.pet-title, #tab-inicio .belt-title.pet-title span {
+    body:not(.theme-dark):not([data-theme="dark"]) #tab-inicio .belt-title.pet-title, 
+    body:not(.theme-dark):not([data-theme="dark"]) #tab-inicio .belt-title.pet-title span {
       color: #2E2417 !important;
     }
-    #tab-inicio .belt-title.pet-title .belt-svg {
+    body:not(.theme-dark):not([data-theme="dark"]) #tab-inicio .belt-title.pet-title .belt-svg {
       fill: #2E2417 !important;
     }
-    #tab-inicio .belt-block-parceiros .belt-title, #tab-inicio .belt-block-parceiros .belt-title span {
+    body:not(.theme-dark):not([data-theme="dark"]) #tab-inicio .belt-block-parceiros .belt-title, 
+    body:not(.theme-dark):not([data-theme="dark"]) #tab-inicio .belt-block-parceiros .belt-title span {
       color: #2E2417 !important;
     }
-    #tab-inicio .belt-block-parceiros .belt-svg {
+    body:not(.theme-dark):not([data-theme="dark"]) #tab-inicio .belt-block-parceiros .belt-svg {
       stroke: #2E2417 !important;
     }
 
@@ -5389,10 +5391,20 @@
     }
 
     /* QUEM AMA CUIDA: Título e Patinha 100% BRANCOS (Diretriz Rigo) */
+    [data-theme="dark"] #tab-inicio .belt-title.pet-title,
+    [data-theme="dark"] #tab-inicio .belt-title.pet-title span,
+    [data-theme="dark"] #tab-inicio .belt-title-text,
+    [data-theme="dark"] #tab-inicio .belt-block-pets .pet-title span,
+    [data-theme="dark"] #tab-inicio .belt-block-pets .belt-title span,
     [data-theme="dark"] .belt-block-pets .pet-title span,
     [data-theme="dark"] .belt-block-pets .belt-title span,
     [data-theme="dark"] .belt-title.pet-title span,
     [data-theme="dark"] .belt-block-pets span[style*="color:#2E2417"],
+    body.theme-dark #tab-inicio .belt-title.pet-title,
+    body.theme-dark #tab-inicio .belt-title.pet-title span,
+    body.theme-dark #tab-inicio .belt-title-text,
+    body.theme-dark #tab-inicio .belt-block-pets .pet-title span,
+    body.theme-dark #tab-inicio .belt-block-pets .belt-title span,
     body.theme-dark .belt-block-pets .pet-title span,
     body.theme-dark .belt-block-pets .belt-title span,
     body.theme-dark .belt-title.pet-title span,
@@ -5400,8 +5412,14 @@
       color: #FFFFFF !important;
     }
 
+    [data-theme="dark"] #tab-inicio .belt-title.pet-title .belt-svg,
+    [data-theme="dark"] #tab-inicio .belt-svg,
+    [data-theme="dark"] #tab-inicio .belt-block-pets .belt-svg,
     [data-theme="dark"] .belt-block-pets .belt-svg,
     [data-theme="dark"] .belt-block-pets svg,
+    body.theme-dark #tab-inicio .belt-title.pet-title .belt-svg,
+    body.theme-dark #tab-inicio .belt-svg,
+    body.theme-dark #tab-inicio .belt-block-pets .belt-svg,
     body.theme-dark .belt-block-pets .belt-svg,
     body.theme-dark .belt-block-pets svg {
       color: #FFFFFF !important;
