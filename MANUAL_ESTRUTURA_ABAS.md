@@ -290,8 +290,21 @@ Para fazer qualquer alteração futura no aplicativo:
    - **Comunidade de Protetores:** Título em Branco Puro (`#FFFFFF`) e logo/ícone de proteção em Branco Puro (`#FFFFFF`).
    - **Indicador de Carrossel:** Dot ativo em Branco Puro (`#FFFFFF`) e inativos em branco translúcido (`rgba(255, 255, 255, 0.25)`).
 5. **Tipografia e Contraste dos Cards:** Textos principais em Branco Puro (`#FFFFFF`), frases e subtítulos em Cinza Claro (`#CBD5E1` / `#E2E8F0`), badges e destaques operacionais em Dourado (`#FED700`) e Verde (`#00B341`).
-6. **Aba Mapa:** Cartografia escura invertida com CartoDB/Esri Dark Streets e pílulas em `#14161B`.
-7. **Aba Pets:** Mural e cards de animais em `#14161B` com botões e badges em alto contraste.
-8. **Aba Parceiros:** Cabeçalho e cards de empresas em `#14161B`, sub-cards de ofertas em `#1E2128` com títulos brancos.
-9. **Aba Copiloto:** Hero Card e grupos de configuração em `#14161B`, cards de ritmo em `#1E2128` com textos brancos e botão do testador em destaque.
+6. **Aba Mapa no Modo Noturno:**
+   - **Cartografia:** O mapa NÃO escurece; permanece na coloração amarelada natural e clara idêntica ao modo diurno (`World_Street_Map` sem filtro de inversão).
+   - **Abas e Topo:** Barra superior preta sólida (`#000000`).
+   - **Pílulas Pets e Parceiros:** Preto e Branco de alto contraste — Selecionado em Preto Sólido (`#000000`) com borda branca; Não-selecionado em Branco Puro (`#FFFFFF`) com texto preto.
+7. **Aba Pets no Modo Noturno:**
+   - **Botões Superiores de Ação e Filtro:** Todos em Preto Sólido (`#000000`) com texto branco e borda sutil de 1.5px (zero verde e zero vermelho, inclusive SOS/Denúncia).
+   - **Segmented dos 4 Pilares:** Pilar ativo em Preto Sólido (`#000000`) com borda branca e texto branco (zero verde); inativos transparentes com texto discreto.
+   - **Cards de Pets:** Fundo preto fosco (`#14161B`) com botões CTA em preto sólido.
+8. **Aba Parceiros no Modo Noturno:**
+   - **Fundo e Cabeçalho:** Palco em preto total (`#000000`), cabeçalho em preto fosco (`#14161B`).
+   - **Botões e Chips:** Zero verde e zero marrom. Botão "Seja Parceiro" em Preto Sólido (`#000000`). Chips de filtro ativos em Preto Sólido com borda branca; inativos em preto fosco. Todos os botões internos em preto sólido.
+9. **Aba Copiloto no Modo Noturno:**
+   - **Hero Card & Configurações:** Preto fosco (`#14161B`) com textos de alto contraste.
+   - **Botões Principais:** Botão "ATIVAR PATINHA" em Preto Sólido (`#000000`) com borda e texto brancos (zero verde); "DESATIVAR PATINHA" em preto fosco.
+   - **Locutor Oficial:** Voz selecionada em Preto Sólido (`#000000`), inativa em preto fosco.
+   - **Switches & Ritmo de Busca:** Chaves de ativação em Preto Sólido e Branco (zero verde); indicador do ritmo ativo em Preto Sólido com borda branca.
+   - **Botão do Testador:** "GUIA E MISSÕES DO TESTADOR" em Preto Sólido (`#000000`) com texto e ícone brancos.
 10. **Cláusula Pétrea de Layout:** Dimensões, larguras, alturas, alinhamentos, esteiras 106x64px e gaps uniformes de 18px são IMUTÁVEIS e rigorosamente preservados.

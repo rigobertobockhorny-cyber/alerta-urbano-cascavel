@@ -2356,7 +2356,7 @@
       color: var(--text-dim) !important;
     }
     #map.esri-dark-streets .leaflet-tile-pane {
-      filter: invert(100%) hue-rotate(180deg) brightness(88%) contrast(94%) saturate(65%);
+      filter: none !important;
     }
 
     /* ==================== ABA 3: PETS (MURAL COMPLETO) ==================== */
@@ -5570,24 +5570,36 @@
       color: #FED700 !important;
     }
 
-    /* 4. ABA 2: MAPA (DARK MODE OFICIAL) */
+    /* 4. ABA 2: MAPA (DARK MODE OFICIAL PRETO E BRANCO) */
+    /* Mapa nunca fica escuro: mantém o mapa amarelado padrão do modo claro */
+    #map.esri-dark-streets .leaflet-tile-pane,
+    [data-theme="dark"] #map .leaflet-tile-pane,
+    body.theme-dark #map .leaflet-tile-pane {
+      filter: none !important;
+    }
+
+    /* Pílulas Pets e Parceiros: Selecionado PRETO, Sem seleção BRANCO (Diretriz Rigo) */
     [data-theme="dark"] .map-pill,
     body.theme-dark .map-pill {
-      background: #181A1F !important;
-      color: #CBD5E1 !important;
-      border: 1px solid rgba(255, 255, 255, 0.12) !important;
+      background: #FFFFFF !important;
+      color: #000000 !important;
+      border: 1.5px solid rgba(0, 0, 0, 0.20) !important;
+      font-weight: 800 !important;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25) !important;
     }
 
     [data-theme="dark"] .map-pill.active,
     body.theme-dark .map-pill.active {
-      background: #00B341 !important;
+      background: #000000 !important;
       color: #FFFFFF !important;
-      border-color: #009B3A !important;
+      border: 1.5px solid #FFFFFF !important;
+      font-weight: 900 !important;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.50) !important;
     }
 
     [data-theme="dark"] #trail-bar,
     body.theme-dark #trail-bar {
-      background: #181A1F !important;
+      background: #14161B !important;
       border: 1px solid rgba(255, 255, 255, 0.12) !important;
       box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45) !important;
     }
@@ -5604,41 +5616,51 @@
 
     [data-theme="dark"] .map-tool-btn,
     body.theme-dark .map-tool-btn {
-      background: #181A1F !important;
+      background: #000000 !important;
       color: #FFFFFF !important;
-      border: 1px solid rgba(255, 255, 255, 0.14) !important;
+      border: 1.5px solid rgba(255, 255, 255, 0.25) !important;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4) !important;
     }
 
-    /* 5. ABA 3: PETS (DARK MODE OFICIAL) */
+    [data-theme="dark"] .map-tool-btn.active,
+    body.theme-dark .map-tool-btn.active {
+      background: #000000 !important;
+      color: #FED700 !important;
+      border: 1.5px solid #FED700 !important;
+    }
+
+    /* 5. ABA 3: PETS (DARK MODE OFICIAL PRETO SÓLIDO ZERO VERDE/VERMELHO) */
+    /* Todos os botões superiores de ação e filtro em Preto Sólido (Diretriz Rigo) */
     [data-theme="dark"] #tab-pets .pets-fixed-header button,
-    body.theme-dark #tab-pets .pets-fixed-header button {
-      background: #181A1F !important;
-      color: #FFFFFF !important;
-      border: 1px solid rgba(255, 255, 255, 0.12) !important;
-    }
-
     [data-theme="dark"] #tab-pets .pets-fixed-header button[onclick*="maustratos"],
+    body.theme-dark #tab-pets .pets-fixed-header button,
     body.theme-dark #tab-pets .pets-fixed-header button[onclick*="maustratos"] {
-      background: rgba(220, 38, 38, 0.20) !important;
-      color: #FCA5A5 !important;
-      border-color: rgba(220, 38, 38, 0.40) !important;
+      background: #000000 !important;
+      color: #FFFFFF !important;
+      border: 1.5px solid rgba(255, 255, 255, 0.25) !important;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4) !important;
     }
 
     [data-theme="dark"] .pet-pillars-segmented,
     body.theme-dark .pet-pillars-segmented {
-      background: #181A1F !important;
+      background: #14161B !important;
       border: 1px solid rgba(255, 255, 255, 0.08) !important;
     }
 
     [data-theme="dark"] .pillar-tab,
     body.theme-dark .pillar-tab {
-      color: #94A3B8 !important;
+      color: #A1A1AA !important;
+      background: transparent !important;
     }
 
+    /* Aba dos 4 pilares selecionada: PRETO SÓLIDO (Zero Verde - Diretriz Rigo) */
     [data-theme="dark"] .pillar-tab.active,
     body.theme-dark .pillar-tab.active {
-      background: #00B341 !important;
+      background: #000000 !important;
       color: #FFFFFF !important;
+      border: 1.5px solid rgba(255, 255, 255, 0.35) !important;
+      font-weight: 900 !important;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5) !important;
     }
 
     [data-theme="dark"] #tab-pets .pet-card,
@@ -5647,7 +5669,7 @@
     body.theme-dark #tab-pets .pet-card,
     body.theme-dark #tab-pets .pet-card-curado,
     body.theme-dark #tab-pets .empty-box {
-      background: #181A1F !important;
+      background: #14161B !important;
       border: 1px solid rgba(255, 255, 255, 0.08) !important;
       color: #F8FAFC !important;
       box-shadow: 0 4px 16px rgba(0, 0, 0, 0.45) !important;
@@ -5667,24 +5689,21 @@
       color: #CBD5E1 !important;
     }
 
+    /* Botões CTA dos cards de pets: PRETO SÓLIDO (Zero Verde - Diretriz Rigo) */
     [data-theme="dark"] #tab-pets .pet-card .btn-pet-cta-primary,
-    body.theme-dark #tab-pets .pet-card .btn-pet-cta-primary {
-      background: #00B341 !important;
-      color: #FFFFFF !important;
-      border-color: #009B3A !important;
-    }
-
     [data-theme="dark"] #tab-pets .pet-card .btn-pet-cta-secondary,
+    body.theme-dark #tab-pets .pet-card .btn-pet-cta-primary,
     body.theme-dark #tab-pets .pet-card .btn-pet-cta-secondary {
-      background: rgba(255, 255, 255, 0.08) !important;
+      background: #000000 !important;
       color: #FFFFFF !important;
-      border: 1px solid rgba(255, 255, 255, 0.15) !important;
+      border: 1.5px solid rgba(255, 255, 255, 0.25) !important;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35) !important;
     }
 
-    /* 6. ABA 4: PARCEIROS (DARK MODE OFICIAL) */
+    /* 6. ABA 4: PARCEIROS (DARK MODE OFICIAL PRETO SÓLIDO ZERO VERDE/MARROM) */
     [data-theme="dark"] .parceiros-fixed-header > div,
     body.theme-dark .parceiros-fixed-header > div {
-      background: #181A1F !important;
+      background: #14161B !important;
       border: 1px solid rgba(255, 255, 255, 0.08) !important;
       box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45) !important;
     }
@@ -5700,23 +5719,40 @@
       color: #CBD5E1 !important;
     }
 
+    [data-theme="dark"] .parceiros-fixed-header div[style*="color:#009B3A"],
+    body.theme-dark .parceiros-fixed-header div[style*="color:#009B3A"] {
+      color: #FED700 !important;
+    }
+
+    /* Botão Seja Parceiro do Topo: PRETO SÓLIDO (Zero Verde - Diretriz Rigo) */
+    [data-theme="dark"] button[onclick*="abrirModalSejaParceiro"],
+    body.theme-dark button[onclick*="abrirModalSejaParceiro"] {
+      background: #000000 !important;
+      color: #FFFFFF !important;
+      border: 1.5px solid rgba(255, 255, 255, 0.30) !important;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4) !important;
+    }
+
+    /* Chips de filtro: Inativo PRETO FOSCO, Ativo PRETO SÓLIDO (Zero Verde - Diretriz Rigo) */
     [data-theme="dark"] .btn-filtro-parceiro,
     body.theme-dark .btn-filtro-parceiro {
-      background: #242730 !important;
+      background: #1E2128 !important;
       color: #CBD5E1 !important;
-      border: 1px solid rgba(255, 255, 255, 0.10) !important;
+      border: 1px solid rgba(255, 255, 255, 0.12) !important;
     }
 
     [data-theme="dark"] .btn-filtro-parceiro.active,
     body.theme-dark .btn-filtro-parceiro.active {
-      background: #00B341 !important;
+      background: #000000 !important;
       color: #FFFFFF !important;
-      border-color: #009B3A !important;
+      border: 1.5px solid #FFFFFF !important;
+      font-weight: 900 !important;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5) !important;
     }
 
     [data-theme="dark"] #tab-parceiros .card-parceiro-item,
     body.theme-dark #tab-parceiros .card-parceiro-item {
-      background: #181A1F !important;
+      background: #14161B !important;
       border: 1px solid rgba(255, 255, 255, 0.08) !important;
       box-shadow: 0 4px 16px rgba(0, 0, 0, 0.45) !important;
       color: #F8FAFC !important;
@@ -5738,7 +5774,7 @@
 
     [data-theme="dark"] .card-parceiro-item div[style*="background:#F8FAFC"],
     body.theme-dark .card-parceiro-item div[style*="background:#F8FAFC"] {
-      background: #23262E !important;
+      background: #1E2128 !important;
       border-color: rgba(255, 255, 255, 0.08) !important;
     }
 
@@ -5766,18 +5802,23 @@
       color: #CBD5E1 !important;
     }
 
+    /* Botões CTA dos parceiros: PRETO SÓLIDO (Zero Verde e Zero Marrom - Diretriz Rigo) */
     [data-theme="dark"] #tab-parceiros .btn-parceiro-cta,
-    body.theme-dark #tab-parceiros .btn-parceiro-cta {
-      background: #00B341 !important;
+    [data-theme="dark"] #tab-parceiros button,
+    body.theme-dark #tab-parceiros .btn-parceiro-cta,
+    body.theme-dark #tab-parceiros button {
+      background: #000000 !important;
       color: #FFFFFF !important;
+      border: 1.5px solid rgba(255, 255, 255, 0.25) !important;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35) !important;
     }
 
-    /* 7. ABA 5: COPILOTO (DARK MODE OFICIAL) */
+    /* 7. ABA 5: COPILOTO (DARK MODE OFICIAL PRETO SÓLIDO ZERO VERDE) */
     [data-theme="dark"] #tab-copiloto .hero-copiloto,
     [data-theme="dark"] #tab-copiloto .settings-group,
     body.theme-dark #tab-copiloto .hero-copiloto,
     body.theme-dark #tab-copiloto .settings-group {
-      background: #181A1F !important;
+      background: #14161B !important;
       border: 1px solid rgba(255, 255, 255, 0.08) !important;
       box-shadow: 0 4px 16px rgba(0, 0, 0, 0.45) !important;
     }
@@ -5800,26 +5841,70 @@
       color: #CBD5E1 !important;
     }
 
+    /* Botão ATIVAR PATINHA: PRETO SÓLIDO (Zero Verde - Diretriz Rigo) */
+    [data-theme="dark"] #tab-copiloto .btn-bolha-hero,
+    body.theme-dark #tab-copiloto .btn-bolha-hero {
+      background: #000000 !important;
+      color: #FFFFFF !important;
+      border: 1.5px solid rgba(255, 255, 255, 0.35) !important;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5) !important;
+    }
+
+    /* Botão DESATIVAR PATINHA: PRETO FOSCO (Diretriz Rigo) */
     [data-theme="dark"] #tab-copiloto .btn-bolha-desativar,
     body.theme-dark #tab-copiloto .btn-bolha-desativar {
-      background: #242730 !important;
+      background: #1E2128 !important;
       color: #F8FAFC !important;
       border: 1px solid rgba(255, 255, 255, 0.14) !important;
     }
 
+    /* Seletor de Locutor Oficial: Inativo PRETO FOSCO, Ativo PRETO SÓLIDO */
     [data-theme="dark"] #tab-copiloto div[style*="background:#EDE8DF"],
     body.theme-dark #tab-copiloto div[style*="background:#EDE8DF"] {
-      background: #242730 !important;
+      background: #14161B !important;
     }
 
+    [data-theme="dark"] #tab-copiloto #btn-voz-fem,
+    [data-theme="dark"] #tab-copiloto #btn-voz-masc,
+    body.theme-dark #tab-copiloto #btn-voz-fem,
+    body.theme-dark #tab-copiloto #btn-voz-masc {
+      background: #1E2128 !important;
+      color: #A1A1AA !important;
+      border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    }
+
+    [data-theme="dark"] #tab-copiloto #btn-voz-fem.active,
+    [data-theme="dark"] #tab-copiloto #btn-voz-masc.active,
+    body.theme-dark #tab-copiloto #btn-voz-fem.active,
+    body.theme-dark #tab-copiloto #btn-voz-masc.active {
+      background: #000000 !important;
+      color: #FFFFFF !important;
+      border: 1.5px solid #FFFFFF !important;
+      font-weight: 900 !important;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5) !important;
+    }
+
+    /* Switches sem verde: PRETO com borda branca */
+    [data-theme="dark"] #tab-copiloto .switch input:checked + .slider,
+    body.theme-dark #tab-copiloto .switch input:checked + .slider {
+      background: #000000 !important;
+      border: 1.5px solid #FFFFFF !important;
+    }
+
+    [data-theme="dark"] #tab-copiloto .slider::before,
+    body.theme-dark #tab-copiloto .slider::before {
+      background: #FFFFFF !important;
+    }
+
+    /* Cards de Ritmo de Busca em Preto Fosco */
     [data-theme="dark"] #card-ritmo-6h,
     [data-theme="dark"] #card-ritmo-12h,
     [data-theme="dark"] #card-ritmo-24h,
     body.theme-dark #card-ritmo-6h,
     body.theme-dark #card-ritmo-12h,
     body.theme-dark #card-ritmo-24h {
-      background: #23262E !important;
-      border-color: rgba(255, 255, 255, 0.08) !important;
+      background: #14161B !important;
+      border: 1.5px solid rgba(255, 255, 255, 0.08) !important;
     }
 
     [data-theme="dark"] #card-ritmo-6h div[style*="color:#2E2417"],
@@ -5840,11 +5925,33 @@
       color: #CBD5E1 !important;
     }
 
+    /* Badge e Ícone do Ritmo: Zero Verde */
+    [data-theme="dark"] #card-ritmo-24h span[style*="background:#009B3A"],
+    body.theme-dark #card-ritmo-24h span[style*="background:#009B3A"] {
+      background: #000000 !important;
+      color: #FFFFFF !important;
+      border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    }
+
+    [data-theme="dark"] #card-ritmo-24h div[style*="background:#009B3A"],
+    body.theme-dark #card-ritmo-24h div[style*="background:#009B3A"] {
+      background: #000000 !important;
+      color: #FFFFFF !important;
+      border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    }
+
+    /* Botão GUIA E MISSÕES DO TESTADOR: PRETO SÓLIDO (Zero Verde - Diretriz Rigo) */
     [data-theme="dark"] button[onclick*="abrirGuiaTestador"],
     body.theme-dark button[onclick*="abrirGuiaTestador"] {
-      background: #23262E !important;
-      color: #00B341 !important;
-      border: 1.5px solid rgba(0, 155, 58, 0.40) !important;
+      background: #000000 !important;
+      color: #FFFFFF !important;
+      border: 1.5px solid rgba(255, 255, 255, 0.30) !important;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.4) !important;
+    }
+
+    [data-theme="dark"] button[onclick*="abrirGuiaTestador"] svg,
+    body.theme-dark button[onclick*="abrirGuiaTestador"] svg {
+      stroke: #FFFFFF !important;
     }
 
     /* 8. MODAIS, GAVETAS E PERFIL */
@@ -7765,7 +7872,7 @@
           opacity: 0.85
         }).addTo(map);
       } else {
-        if (mapEl) mapEl.classList.toggle('esri-dark-streets', state.theme === 'dark');
+        if (mapEl) mapEl.classList.remove('esri-dark-streets');
         baseTileLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
           maxZoom: 19,
           attribution: 'Esri Maps'
@@ -11302,10 +11409,12 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
         const activeCard = document.getElementById('card-ritmo-' + ritmoBuscaAtual);
         const activeCheck = document.getElementById('check-ritmo-' + ritmoBuscaAtual);
         if (activeCard && activeCheck) {
-          activeCard.style.border = '2px solid #009B3A';
+          const borderCor = state.theme === 'dark' ? '#FFFFFF' : '#009B3A';
+          const bgCheckCor = state.theme === 'dark' ? '#000000' : '#009B3A';
+          activeCard.style.border = '2px solid ' + borderCor;
           activeCard.style.background = bgRitmo;
-          activeCheck.style.border = '2px solid #009B3A';
-          activeCheck.style.background = '#009B3A';
+          activeCheck.style.border = '2px solid ' + borderCor;
+          activeCheck.style.background = bgCheckCor;
           activeCheck.innerHTML = '<div style="width:8px; height:8px; border-radius:50%; background:#fff;"></div>';
         }
       }
