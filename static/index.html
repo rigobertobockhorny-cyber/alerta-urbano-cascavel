@@ -4680,8 +4680,9 @@
         rgba(0, 155, 58, 0.80) 80%, 
         #009B3A 100%) !important;
       pointer-events: none !important;
-      z-index: 450 !important;
+      z-index: 10 !important; /* Fica no fundo (z-index 10), BEM ATRÁS de qualquer botão (z-index 500+) */
     }
+    body.tab-inicio .main-stage::after,
     body.tab-mapa .main-stage::after {
       display: none !important;
     }
@@ -4940,6 +4941,7 @@
       flex-shrink: 0;
       margin-top: 4px;
       position: relative;
+      z-index: 500 !important; /* Sempre acima do degradê de fundo */
     }
 
     /* Viewport da Esteira de Apoio Interativa e Contínua (Diretriz Rigo: Arraste no dedo + Retoma após 3.5s) */
@@ -5026,9 +5028,9 @@
       height: 50px;
       flex-shrink: 0;
       border-radius: 13px;
-      background: #FFFFFF;
-      border: 1.5px solid rgba(0, 155, 58, 0.35);
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+      background: #FFFFFF !important; /* Totalmente branco sólido puro */
+      border: 1.5px solid rgba(0, 155, 58, 0.35) !important;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15) !important;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -5038,6 +5040,8 @@
       overflow: hidden;
       padding: 2px 4px;
       box-sizing: border-box;
+      position: relative !important;
+      z-index: 502 !important; /* Botão 100% à frente do degradê */
     }
     .quadradinho-apoio:active {
       transform: scale(0.93);
