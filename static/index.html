@@ -7332,13 +7332,18 @@
       const track = document.getElementById('belt-apoio-track');
       if (!track) return;
 
-      // QUADRADINHOS DE APOIO / MARCAS PARCEIRAS (DIRETRIZ OFICIAL RIGO: APENAS AS 5 MARCAS HOMOLOGADAS • 4 CARDS NA TELA)
+      // QUADRADINHOS DE APOIO / MARCAS PARCEIRAS (DIRETRIZ OFICIAL RIGO: INTERCALAR MARCA E APOIE AQUI • ESTRUTURA CONGELADA 88x50)
+      const cotaApoie = { id: 'cota-apoie', html: '<span style="font-size:10.5px; font-weight:900; color:#009B3A; text-align:center; line-height:1.15; letter-spacing:0.3px;">+ APOIE<br><span style="font-size:8.5px; font-weight:800; color:#5A4730;">AQUI</span></span>' };
+
       const slotsApoio = [
-        { id: 'pedigree', html: '<span style="font-size:14px; font-weight:900; color:#C4121A; font-family:Georgia, serif; font-style:italic; letter-spacing:0.3px;">Pedigree</span>' },
-        { id: 'cota1', html: '<span style="font-size:10.5px; font-weight:900; color:#009B3A; text-align:center; line-height:1.15; letter-spacing:0.3px;">+ APOIE<br><span style="font-size:8.5px; font-weight:800; color:#5A4730;">AQUI</span></span>' },
+        cotaApoie,
         { id: 'ifood', html: '<span style="font-size:15px; font-weight:900; color:#EA1D2C; font-style:italic; letter-spacing:-0.2px;">iFood</span>' },
+        cotaApoie,
         { id: 'petshop', html: '<span style="font-size:11px; font-weight:900; color:#2E2417; text-align:center; line-height:1.15;">PetShop<br><span style="font-size:8.5px; font-weight:800; color:#009B3A;">Cascavel</span></span>' },
-        { id: 'zoetis', html: '<span style="font-size:14.5px; font-weight:900; color:#C2410C; letter-spacing:-0.2px;">zoetis</span>' }
+        cotaApoie,
+        { id: 'zoetis', html: '<span style="font-size:14.5px; font-weight:900; color:#C2410C; letter-spacing:-0.2px;">zoetis</span>' },
+        cotaApoie,
+        { id: 'pedigree', html: '<span style="font-size:14px; font-weight:900; color:#C4121A; font-family:Georgia, serif; font-style:italic; letter-spacing:0.3px;">Pedigree</span>' }
       ];
 
       const htmlSlots = slotsApoio.map(s => `
