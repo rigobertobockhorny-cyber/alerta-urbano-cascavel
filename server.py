@@ -798,6 +798,10 @@ def api_falar():
             nome_arq = f"{locutor}_07_atualizacao_ave.mp3"
         elif any(k in texto_lower for k in ["coelh", "lebre"]):
             nome_arq = f"{locutor}_15_atualizacao_coelho.mp3"
+        elif any(k in texto_lower for k in ["rastro registrado", "do seu pet", "seu pet"]):
+            nome_arq = f"{locutor}_16_atualizacao_rastro_tutor.mp3"
+        elif any(k in texto_lower for k in ["rastro confirmado", "deslocamento ativo", "rastro"]):
+            nome_arq = f"{locutor}_17_atualizacao_rastro_amigos.mp3"
         else:
             nome_arq = f"{locutor}_13_atualizacao_animal.mp3"
     else:
@@ -863,40 +867,63 @@ def upload_foto():
 
 _CLIMA_CACHE = {"ts": 0, "data": None}
 
-WMO_DESC = {
+WMO_DESC_DAY = {
     0: ("Céu limpo", "☀️"),
     1: ("Predomínio de sol", "🌤️"),
     2: ("Parcialmente nublado", "⛅"),
     3: ("Nublado", "☁️"),
     45: ("Nevoeiro", "🌫️"),
-    48: ("Nevoeiro", "🌫️"),
+    48: ("Nevoeiro com geada", "🌫️"),
     51: ("Garoa leve", "🌦️"),
     53: ("Garoa moderada", "🌦️"),
     55: ("Garoa forte", "🌧️"),
     61: ("Chuva leve", "🌦️"),
     63: ("Chuva moderada", "🌧️"),
     65: ("Chuva forte", "🌧️"),
-    80: ("Pancadas leves", "🌦️"),
-    81: ("Pancadas de chuva", "🌧️"),
-    82: ("Chuva intensa", "⛈️"),
+    80: ("Pancadas de chuva", "🌦️"),
+    81: ("Pancadas moderadas", "🌧️"),
+    82: ("Chuva torrencial", "⛈️"),
     95: ("Tempestade", "⛈️"),
     96: ("Tempestade com granizo", "⛈️"),
     99: ("Tempestade severa", "⛈️"),
 }
 
+WMO_DESC_NIGHT = {
+    0: ("Céu estrelado", "🌙"),
+    1: ("Noite de céu limpo", "🌙"),
+    2: ("Noite com poucas nuvens", "🌙"),
+    3: ("Noite nublada", "☁️"),
+    45: ("Nevoeiro noturno", "🌫️"),
+    48: ("Nevoeiro noturno", "🌫️"),
+    51: ("Garoa leve", "🌧️"),
+    53: ("Garoa moderada", "🌧️"),
+    55: ("Garoa forte", "🌧️"),
+    61: ("Chuva leve", "🌧️"),
+    63: ("Chuva moderada", "🌧️"),
+    65: ("Chuva forte", "🌧️"),
+    80: ("Pancadas de chuva", "🌧️"),
+    81: ("Pancadas de chuva", "🌧️"),
+    82: ("Chuva torrencial", "⛈️"),
+    95: ("Tempestade noturna", "⛈️"),
+    96: ("Tempestade com granizo", "⛈️"),
+    99: ("Tempestade severa", "⛈️"),
+}
+
+WMO_DESC = WMO_DESC_DAY
+
 
 @app.route("/api/clima", methods=["GET"])
 def api_clima():
-    """Retorna clima em tempo real de Cascavel (Open-Meteo, cache 10min) + alertas oficiais ativos."""
+    """Retorna clima em tempo real de Cascavel com distinção rigorosa de dia/noite (Open-Meteo, cache 60s) + alertas."""
     cidade = request.args.get("cidade", "Cascavel").strip()
     agora_ts = time.time()
 
-    if not _CLIMA_CACHE["data"] or (agora_ts - _CLIMA_CACHE["ts"] > 600):
+    if not _CLIMA_CACHE["data"] or (agora_ts - _CLIMA_CACHE["ts"] > 60):
         try:
             url = (
                 "https://api.open-meteo.com/v1/forecast"
                 "?latitude=-24.9555&longitude=-53.4550"
-                "&current=temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,wind_speed_10m,precipitation"
+                "&current=temperature_2m,relative_humidity_2m,apparent_temperature,is_day,weather_code,wind_speed_10m,precipitation"
                 "&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max"
                 "&timezone=America%2FSao_Paulo&forecast_days=5"
             )
@@ -905,8 +932,20 @@ def api_clima():
                 raw = json.loads(resp.read().decode("utf-8"))
             cur_w = raw.get("current", {})
             day_w = raw.get("daily", {})
+            
+            # Detecção de Dia vs Noite precisa
+            is_day_val = cur_w.get("is_day")
+            if is_day_val is None:
+                hora_local = datetime.now().hour
+                is_day = 1 if (6 <= hora_local < 19) else 0
+            else:
+                is_day = int(is_day_val)
+
             wcode = int(cur_w.get("weather_code", 0))
-            cond_txt, cond_ico = WMO_DESC.get(wcode, ("Tempo instável", "⛅"))
+            if is_day == 1:
+                cond_txt, cond_ico = WMO_DESC_DAY.get(wcode, ("Tempo instável", "⛅"))
+            else:
+                cond_txt, cond_ico = WMO_DESC_NIGHT.get(wcode, ("Tempo instável", "🌙"))
 
             # Previsão 5 dias no formato oficial do Rigo (Dia da Semana, Ícone, Máx/Mín)
             dias_abrev = ["SEG.", "TER.", "QUA.", "QUI.", "SEX.", "SÁB.", "DOM."]
@@ -923,7 +962,7 @@ def api_clima():
                 except Exception:
                     dia_str = f"D+{i}"
                 wc = int(codes[i]) if i < len(codes) else 0
-                _, ico = WMO_DESC.get(wc, ("Tempo instável", "⛅"))
+                _, ico = WMO_DESC_DAY.get(wc, ("Tempo instável", "⛅"))
                 tmax = round(float(maxs[i])) if i < len(maxs) else 25
                 tmin = round(float(mins[i])) if i < len(mins) else 18
                 p5d.append({
@@ -936,6 +975,7 @@ def api_clima():
 
             _CLIMA_CACHE["data"] = {
                 "cidade": cidade,
+                "is_day": is_day,
                 "temp": round(float(cur_w.get("temperature_2m", 23))),
                 "sensacao": round(float(cur_w.get("apparent_temperature", 23))),
                 "umidade": int(cur_w.get("relative_humidity_2m", 65)),

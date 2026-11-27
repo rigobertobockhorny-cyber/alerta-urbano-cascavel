@@ -1,0 +1,1955 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mesa de Validação Oficial de Áudios • Padrão PET PERDIDO • Alerta Pet Brasil</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #080D14;
+      --card-bg: #101826;
+      --card-hover: #152033;
+      --border-dark: #1E2D44;
+      --border-focus: #00E676;
+      --text-white: #FFFFFF;
+      --text-muted: #94A3B8;
+      --text-dim: #64748B;
+      --green-neon: #00E676;
+      --green-dark: #008744;
+      --yellow-gold: #FFB300;
+      --pink-fem: #FF2A85;
+      --blue-masc: #00B0FF;
+      --danger-red: #FF334B;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-white);
+      font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+      min-height: 100vh;
+      padding-bottom: 140px;
+      line-height: 1.5;
+    }
+
+    /* HEADER */
+    .top-header {
+      background: linear-gradient(180deg, #131E30 0%, #080D14 100%);
+      border-bottom: 1px solid var(--border-dark);
+      padding: 40px 24px 30px;
+      text-align: center;
+      position: relative;
+    }
+
+    .badge-soberano {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(0, 230, 118, 0.12);
+      border: 1px solid rgba(0, 230, 118, 0.4);
+      color: var(--green-neon);
+      font-size: 11.5px;
+      font-weight: 800;
+      padding: 6px 18px;
+      border-radius: 999px;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      margin-bottom: 16px;
+      box-shadow: 0 0 20px rgba(0, 230, 118, 0.15);
+    }
+
+    .top-header h1 {
+      font-size: 32px;
+      font-weight: 900;
+      letter-spacing: -0.5px;
+      margin-bottom: 10px;
+    }
+
+    .top-header h1 span.highlight {
+      color: var(--green-neon);
+      text-shadow: 0 0 25px rgba(0, 230, 118, 0.4);
+    }
+
+    .top-header p.subtitle {
+      font-size: 15px;
+      color: var(--text-muted);
+      max-width: 840px;
+      margin: 0 auto 20px;
+      line-height: 1.6;
+    }
+
+    .rule-box {
+      background: rgba(255, 179, 0, 0.08);
+      border: 1px solid rgba(255, 179, 0, 0.35);
+      border-radius: 12px;
+      padding: 14px 24px;
+      max-width: 880px;
+      margin: 0 auto;
+      text-align: center;
+      font-size: 13.5px;
+      color: #FFE082;
+      font-weight: 600;
+    }
+
+    .rule-box strong {
+      color: #FFF;
+      background: rgba(255, 179, 0, 0.25);
+      padding: 2px 8px;
+      border-radius: 6px;
+    }
+
+    /* STATS STRIP */
+    .stats-strip {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin: 28px auto 0;
+      max-width: 1000px;
+    }
+
+    .stat-pill {
+      background: #111A29;
+      border: 1px solid var(--border-dark);
+      border-radius: 10px;
+      padding: 10px 18px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+    }
+
+    .stat-pill strong {
+      font-size: 16px;
+      color: var(--green-neon);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* FILTER AND ACTION BAR */
+    .controls-bar {
+      max-width: 1200px;
+      margin: 32px auto 0;
+      padding: 0 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .filter-tabs {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      background: #111A29;
+      border: 1px solid var(--border-dark);
+      color: var(--text-muted);
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 12.5px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .tab-btn:hover, .tab-btn.active {
+      background: var(--green-neon);
+      color: #000;
+      border-color: var(--green-neon);
+      box-shadow: 0 0 15px rgba(0, 230, 118, 0.3);
+    }
+
+    .bulk-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .bulk-btn {
+      background: #162438;
+      border: 1px solid #263852;
+      color: #FFF;
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 12.5px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .bulk-btn:hover {
+      background: #1E3350;
+      border-color: var(--border-focus);
+    }
+
+    .bulk-btn.btn-all-approved {
+      background: rgba(0, 230, 118, 0.15);
+      border-color: var(--green-neon);
+      color: var(--green-neon);
+    }
+
+    .bulk-btn.btn-all-approved:hover {
+      background: var(--green-neon);
+      color: #000;
+    }
+
+    /* MAIN CONTAINER */
+    .container {
+      max-width: 1200px;
+      margin: 24px auto 0;
+      padding: 0 20px;
+    }
+
+    /* CARD */
+    .phrase-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-dark);
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 24px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+      transition: all 0.25s ease;
+      position: relative;
+    }
+
+    .phrase-card:hover {
+      border-color: #2D4160;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    .phrase-card.fully-approved {
+      border-color: rgba(0, 230, 118, 0.5);
+      background: linear-gradient(180deg, #101c2c 0%, #101826 100%);
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .phrase-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      background: #162438;
+      border: 1px solid #233754;
+      border-radius: 12px;
+      font-size: 17px;
+      font-weight: 900;
+      color: var(--green-neon);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .title-wrap h3.phrase-title {
+      font-size: 18px;
+      font-weight: 800;
+      margin-bottom: 4px;
+      color: #FFF;
+    }
+
+    .category-badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 3px 10px;
+      border-radius: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .badge-welcome { background: rgba(0, 176, 255, 0.15); color: #40C4FF; border: 1px solid rgba(0, 176, 255, 0.3); }
+    .badge-alert { background: rgba(255, 51, 75, 0.15); color: #FF5252; border: 1px solid rgba(255, 51, 75, 0.3); }
+    .badge-update { background: rgba(0, 230, 118, 0.15); color: #00E676; border: 1px solid rgba(0, 230, 118, 0.3); }
+    .badge-weather { background: rgba(255, 179, 0, 0.15); color: #FFB300; border: 1px solid rgba(255, 179, 0, 0.3); }
+    .badge-rastro { background: rgba(186, 104, 200, 0.15); color: #E1BEE7; border: 1px solid rgba(186, 104, 200, 0.3); }
+
+    .card-status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 800;
+      background: #182232;
+      border: 1px solid var(--border-dark);
+      color: var(--text-muted);
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--text-dim);
+    }
+
+    .card-status-pill.status-approved {
+      background: rgba(0, 230, 118, 0.15);
+      border-color: var(--green-neon);
+      color: var(--green-neon);
+    }
+    .card-status-pill.status-approved .status-dot {
+      background: var(--green-neon);
+      box-shadow: 0 0 10px var(--green-neon);
+    }
+
+    .card-status-pill.status-partial {
+      background: rgba(255, 179, 0, 0.15);
+      border-color: var(--yellow-gold);
+      color: var(--yellow-gold);
+    }
+    .card-status-pill.status-partial .status-dot {
+      background: var(--yellow-gold);
+    }
+
+    /* SPOKEN BOX */
+    .spoken-box {
+      background: #0B121C;
+      border: 1px solid #1A273A;
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-bottom: 20px;
+    }
+
+    .spoken-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11.5px;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--text-dim);
+      margin-bottom: 8px;
+      letter-spacing: 0.5px;
+    }
+
+    .spoken-rule {
+      color: var(--green-neon);
+    }
+
+    .spoken-phrase {
+      font-size: 16.5px;
+      font-weight: 600;
+      color: #E2E8F0;
+      line-height: 1.5;
+    }
+
+    .hl-word {
+      font-weight: 800;
+      padding: 1px 6px;
+      border-radius: 4px;
+    }
+
+    .hl-perdido {
+      background: rgba(0, 230, 118, 0.25);
+      color: #00E676;
+      border-bottom: 2px solid #00E676;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .hl-destaque {
+      color: #FFF;
+      text-decoration: underline;
+      text-decoration-color: var(--yellow-gold);
+    }
+
+    .hl-tag {
+      color: #90CAF9;
+    }
+
+    /* PLAYERS ROW */
+    .players-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    @media (max-width: 768px) {
+      .players-row { grid-template-columns: 1fr; }
+    }
+
+    .voice-box {
+      background: #0C1420;
+      border: 1px solid var(--border-dark);
+      border-radius: 12px;
+      padding: 16px;
+      transition: all 0.2s;
+    }
+
+    .voice-box.approved {
+      border-color: rgba(0, 230, 118, 0.4);
+      background: #0E1A29;
+    }
+
+    .voice-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .voice-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .gender-pill {
+      font-size: 10.5px;
+      font-weight: 900;
+      padding: 3px 8px;
+      border-radius: 4px;
+      letter-spacing: 0.5px;
+    }
+
+    .fem-pill {
+      background: rgba(255, 42, 133, 0.2);
+      color: var(--pink-fem);
+      border: 1px solid rgba(255, 42, 133, 0.35);
+    }
+
+    .masc-pill {
+      background: rgba(0, 176, 255, 0.2);
+      color: var(--blue-masc);
+      border: 1px solid rgba(0, 176, 255, 0.35);
+    }
+
+    .voice-name {
+      font-size: 15px;
+      font-weight: 800;
+      color: #FFF;
+    }
+
+    .voice-role {
+      font-size: 11.5px;
+      color: var(--text-dim);
+    }
+
+    .audio-time {
+      font-size: 12px;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--text-muted);
+    }
+
+    audio {
+      width: 100%;
+      height: 40px;
+      border-radius: 8px;
+      margin-bottom: 12px;
+      outline: none;
+    }
+
+    .action-btn-row {
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn-approve {
+      flex: 1;
+      padding: 9px 12px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.2s;
+      border: 1px solid #23344B;
+      background: #142032;
+      color: #CBD5E1;
+    }
+
+    .btn-approve:hover {
+      background: #1B2B44;
+      border-color: #384F70;
+    }
+
+    .btn-approve.is-approved {
+      background: rgba(0, 230, 118, 0.2);
+      border-color: var(--green-neon);
+      color: var(--green-neon);
+      font-weight: 800;
+    }
+
+    .check-mark {
+      display: inline-block;
+      font-weight: 900;
+    }
+
+    /* STICKY BOTTOM BAR */
+    .sticky-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(10, 16, 26, 0.95);
+      backdrop-filter: blur(12px);
+      border-top: 1px solid var(--border-dark);
+      padding: 14px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+      box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .progress-wrap {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .progress-bar-bg {
+      width: 220px;
+      height: 10px;
+      background: #182232;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #00C853, #00E676);
+      transition: width 0.3s ease;
+    }
+
+    .progress-text {
+      font-size: 13.5px;
+      font-weight: 800;
+      color: #FFF;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .footer-actions {
+      display: flex;
+      gap: 12px;
+    }
+
+    .btn-export {
+      background: var(--green-neon);
+      color: #000;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 13.5px;
+      font-weight: 900;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 0 20px rgba(0, 230, 118, 0.3);
+      transition: all 0.2s;
+    }
+
+    .btn-export:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 25px rgba(0, 230, 118, 0.5);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="top-header">
+    <div class="badge-soberano">
+      🛡️ Mesa Executiva de Validação Auditiva • Padrão Pet Perdido
+    </div>
+    <h1>Alerta Pet Brasil • <span class="highlight">Catálogo Oficial de Vozes</span></h1>
+    <p class="subtitle">
+      Painel oficial de conferência e aprovação dos 34 áudios neurais (17 Natalia + 17 Guido).<br>
+      Substituição soberana e integral de qualquer menção a <em>"desaparecido"</em> pelo termo <strong>"PERDIDO"</strong>.
+    </p>
+
+    <div class="rule-box">
+      ⚠️ <strong>REGRA DE VALIDAÇÃO DO RIGO:</strong> O termo <em>"desaparecido"</em> foi banido. Todo áudio oficial agora diz estritamente <strong>"PERDIDO"</strong> (ou <strong>"PERDIDA"</strong>). Ouça cada player e valide a clareza, tom e pronúncia.
+    </div>
+
+    <!-- STATS STRIP -->
+    <div class="stats-strip">
+      <div class="stat-pill">
+        <span>Total de Frases:</span>
+        <strong>17</strong>
+      </div>
+      <div class="stat-pill">
+        <span>Voz Feminina:</span>
+        <strong style="color: var(--pink-fem);">Natalia (17)</strong>
+      </div>
+      <div class="stat-pill">
+        <span>Voz Masculina:</span>
+        <strong style="color: var(--blue-masc);">Guido (17)</strong>
+      </div>
+      <div class="stat-pill">
+        <span>Total de Gravações:</span>
+        <strong>34 Áudios</strong>
+      </div>
+      <div class="stat-pill">
+        <span>Progresso de Validação:</span>
+        <strong id="stat-progress">0 / 34</strong>
+      </div>
+    </div>
+  </header>
+
+  <!-- CONTROLS & FILTER BAR -->
+  <section class="controls-bar">
+    <div class="filter-tabs">
+      <button class="tab-btn active" onclick="filterCards('all')">Todas (17)</button>
+      <button class="tab-btn" onclick="filterCards('alert')">Alertas Perdido (5)</button>
+      <button class="tab-btn" onclick="filterCards('update')">Atualização de Rota (5)</button>
+      <button class="tab-btn" onclick="filterCards('weather')">Clima (4)</button>
+      <button class="tab-btn" onclick="filterCards('rastro')">Rastro (2)</button>
+      <button class="tab-btn" onclick="filterCards('welcome')">Boas-Vindas (1)</button>
+    </div>
+
+    <div class="bulk-actions">
+      <button class="bulk-btn" onclick="playAllSequential('fem')">▶ Ouvir Todas Natalia</button>
+      <button class="bulk-btn" onclick="playAllSequential('masc')">▶ Ouvir Todos Guido</button>
+      <button class="bulk-btn" onclick="stopAllPlayback()">⏹ Parar</button>
+      <button class="bulk-btn btn-all-approved" onclick="approveAll()">✓ Aprovar Todos os 34</button>
+      <button class="bulk-btn" onclick="resetAll()">🔄 Resetar</button>
+    </div>
+  </section>
+
+  <!-- CONTAINER DOS CARDS -->
+  <main class="container" id="cards-container">
+    
+        <div class="phrase-card" id="card-01_apresentacao" data-category="welcome">
+          <div class="card-header">
+            <div class="header-left">
+              <span class="phrase-num">01</span>
+              <div class="title-wrap">
+                <h3 class="phrase-title">Apresentação Oficial do Copiloto</h3>
+                <span class="category-badge badge-welcome">Boas-Vindas</span>
+              </div>
+            </div>
+            <div class="card-status-pill" id="badge-status-01_apresentacao">
+              <span class="status-dot"></span> <span class="status-text">Pendente</span>
+            </div>
+          </div>
+
+          <div class="spoken-box">
+            <div class="spoken-label">
+              <span>Texto Falado Oficial (Voz do Copiloto):</span>
+              <span class="spoken-rule">Regra: <strong>PERDIDO</strong> cravado</span>
+            </div>
+            <div class="spoken-phrase">"Olá! Seja bem-vindo ao <span class="hl-word hl-tag">Alerta</span> Pet Brasil. Eu sou o seu copiloto de proteção animal, e estarei com você para cuidar dos animais da nossa cidade."</div>
+          </div>
+
+          <div class="players-row">
+            <!-- VOZ FEMININA: NATALIA -->
+            <div class="voice-box voice-fem" id="voice-fem-01_apresentacao">
+              <div class="voice-top">
+                <div class="voice-meta">
+                  <span class="gender-pill fem-pill">♀ FEM</span>
+                  <span class="voice-name">Natalia</span>
+                  <span class="voice-role">Voz Feminina Oficial</span>
+                </div>
+                <span class="audio-time">⏱️ 9.8s</span>
+              </div>
+              <audio id="audio-fem-01_apresentacao" controls preload="metadata">
+                <source src="vozes_frases_oficiais/natalia_01_apresentacao.mp3?v=20261126v2" type="audio/mpeg">
+              </audio>
+              <div class="action-btn-row">
+                <button class="btn-approve btn-approve-fem" id="btn-fem-01_apresentacao" onclick="toggleApprove('01_apresentacao', 'fem')">
+                  <span class="check-mark">✓</span> <span class="btn-txt">Aprovar Natalia</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- VOZ MASCULINA: GUIDO -->
+            <div class="voice-box voice-masc" id="voice-masc-01_apresentacao">
+              <div class="voice-top">
+                <div class="voice-meta">
+                  <span class="gender-pill masc-pill">♂ MASC</span>
+                  <span class="voice-name">Guido</span>
+                  <span class="voice-role">Voz Masculina Oficial</span>
+                </div>
+                <span class="audio-time">⏱️ 11.0s</span>
+              </div>
+              <audio id="audio-masc-01_apresentacao" controls preload="metadata">
+                <source src="vozes_frases_oficiais/guido_01_apresentacao.mp3?v=20261126v2" type="audio/mpeg">
+              </audio>
+              <div class="action-btn-row">
+                <button class="btn-approve btn-approve-masc" id="btn-masc-01_apresentacao" onclick="toggleApprove('01_apresentacao', 'masc')">
+                  <span class="check-mark">✓</span> <span class="btn-txt">Aprovar Guido</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+
+        <div class="phrase-card" id="card-02_alerta_cao" data-category="alert">
+          <div class="card-header">
+            <div class="header-left">
+              <span class="phrase-num">02</span>
+              <div class="title-wrap">
+                <h3 class="phrase-title">Alerta: Cãozinho Perdido</h3>
+                <span class="category-badge badge-alert">Alerta Pet Perdido</span>
+              </div>
+            </div>
+            <div class="card-status-pill" id="badge-status-02_alerta_cao">
+              <span class="status-dot"></span> <span class="status-text">Pendente</span>
+            </div>
+          </div>
+
+          <div class="spoken-box">
+            <div class="spoken-label">
+              <span>Texto Falado Oficial (Voz do Copiloto):</span>
+              <span class="spoken-rule">Regra: <strong>PERDIDO</strong> cravado</span>
+            </div>
+            <div class="spoken-phrase">"<span class="hl-word hl-tag">Atenção:</span> cãozinho <span class="hl-word hl-perdido">perdido</span> na sua região. <span class="hl-word hl-destaque">Olhos</span> <span class="hl-word hl-destaque">atentos.</span>"</div>
+          </div>
+
+          <div class="players-row">
+            <!-- VOZ FEMININA: NATALIA -->
+            <div class="voice-box voice-fem" id="voice-fem-02_alerta_cao">
+              <div class="voice-top">
+                <div class="voice-meta">
+                  <span class="gender-pill fem-pill">♀ FEM</span>
+                  <span class="voice-name">Natalia</span>
+                  <span class="voice-role">Voz Feminina Oficial</span>
+                </div>
+                <span class="audio-time">⏱️ 5.0s</span>
+              </div>
+              <audio id="audio-fem-02_alerta_cao" controls preload="metadata">
+                <source src="vozes_frases_oficiais/natalia_02_alerta_cao.mp3?v=20261126v2" type="audio/mpeg">
+              </audio>
+              <div class="action-btn-row">
+                <button class="btn-approve btn-approve-fem" id="btn-fem-02_alerta_cao" onclick="toggleApprove('02_alerta_cao', 'fem')">
+                  <span class="check-mark">✓</span> <span class="btn-txt">Aprovar Natalia</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- VOZ MASCULINA: GUIDO -->
+            <div class="voice-box voice-masc" id="voice-masc-02_alerta_cao">
+              <div class="voice-top">
+                <div class="voice-meta">
+                  <span class="gender-pill masc-pill">♂ MASC</span>
+                  <span class="voice-name">Guido</span>
+                  <span class="voice-role">Voz Masculina Oficial</span>
+                </div>
+                <span class="audio-time">⏱️ 5.5s</span>
+              </div>
+              <audio id="audio-masc-02_alerta_cao" controls preload="metadata">
+                <source src="vozes_frases_oficiais/guido_02_alerta_cao.mp3?v=20261126v2" type="audio/mpeg">
+              </audio>
+              <div class="action-btn-row">
+                <button class="btn-approve btn-approve-masc" id="btn-masc-02_alerta_cao" onclick="toggleApprove('02_alerta_cao', 'masc')">
+                  <span class="check-mark">✓</span> <span class="btn-txt">Aprovar Guido</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+
+        <div class="phrase-card" id="card-03_alerta_gato" data-category="alert">
+          <div class="card-header">
+            <div class="header-left">
+              <span class="phrase-num">03</span>
+              <div class="title-wrap">
+                <h3 class="phrase-title">Alerta: Gatinho Perdido</h3>
+                <span class="category-badge badge-alert">Alerta Pet Perdido</span>
+              </div>
+            </div>
+            <div class="card-status-pill" id="badge-status-03_alerta_gato">
+              <span class="status-dot"></span> <span class="status-text">Pendente</span>
+            </div>
+          </div>
+
+          <div class="spoken-box">
+            <div class="spoken-label">
+              <span>Texto Falado Oficial (Voz do Copiloto):</span>
+              <span class="spoken-rule">Regra: <strong>PERDIDO</strong> cravado</span>
+            </div>
+            <div class="spoken-phrase">"<span class="hl-word hl-tag">Atenção:</span> gatinho <span class="hl-word hl-perdido">perdido</span> na sua região. <span class="hl-word hl-destaque">Olhos</span> <span class="hl-word hl-destaque">atentos.</span>"</div>
+          </div>
+
+          <div class="players-row">
+            <!-- VOZ FEMININA: NATALIA -->
+            <div class="voice-box voice-fem" id="voice-fem-03_alerta_gato">
+              <div class="voice-top">
+                <div class="voice-meta">
+                  <span class="gender-pill fem-pill">♀ FEM</span>
+                  <span class="voice-name">Natalia</span>
+                  <span class="voice-role">Voz Feminina Oficial</span>
+                </div>
+                <span class="audio-time">⏱️ 4.8s</span>
+              </div>
+              <audio id="audio-fem-03_alerta_gato" controls preload="metadata">
+                <source src="vozes_frases_oficiais/natalia_03_alerta_gato.mp3?v=20261126v2" type="audio/mpeg">
+              </audio>
+              <div class="action-btn-row">
+                <button class="btn-approve btn-approve-fem" id="btn-fem-03_alerta_gato" onclick="toggleApprove('03_alerta_gato', 'fem')">
+                  <span class="check-mark">✓</span> <span class="btn-txt">Aprovar Natalia</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- VOZ MASCULINA: GUIDO -->
+            <div class="voice-box voice-masc" id="voice-masc-03_alerta_gato">
+              <div class="voice-top">
+                <div class="voice-meta">
+                  <span class="gender-pill masc-pill">♂ MASC</span>
+                  <span class="voice-name">Guido</span>
+                  <span class="voice-role">Voz Masculina Oficial</span>
+                </div>
+                <span class="audio-time">⏱️ 5.5s</span>
+              </div>
+              <audio id="audio-masc-03_alerta_gato" controls preload="metadata">
+                <source src="vozes_frases_oficiais/guido_03_alerta_gato.mp3?v=20261126v2" type="audio/mpeg">
+              </audio>
+              <div class="action-btn-row">
+                <button class="btn-approve btn-approve-masc" id="btn-masc-03_alerta_gato" onclick="toggleApprove('03_alerta_gato', 'masc')">
+                  <span class="check-mark">✓</span> <span class="btn-txt">Aprovar Guido</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+
+        <div class="phrase-card" id="card-04_alerta_ave" data-category="alert">
+          <div class="card-header">
+            <div class="header-left">
+              <span class="phrase-num">04</span>
+              <div class="title-wrap">
+                <h3 class="phrase-title">Alerta: Ave Perdida</h3>
+                <span class="category-badge badge-alert">Alerta Pet Perdido</span>
+              </div>
+            </div>
+            <div class="card-status-pill" id="badge-status-04_alerta_ave">
+              <span class="status-dot"></span> <span class="status-text">Pendente</span>
+            </div>
+          </div>
+
+          <div class="spoken-box">
+            <div class="spoken-label">
+              <span>Texto Falado Oficial (Voz do Copiloto):</span>
+              <span class="spoken-rule">Regra: <strong>PERDIDO</strong> cravado</span>
+            </div>
+            <div class="spoken-phrase">"<span class="hl-word hl-tag">Atenção:</span> ave <span class="hl-word hl-perdido">perdida</span> na sua região. <span class="hl-word hl-destaque">Olhos</span> <span class="hl-word hl-destaque">atentos.</span>"</div>
+          </div>
+
+          <div class="players-row">
+            <!-- VOZ FEMININA: NATALIA -->
+            <div class="voice-box voice-fem" id="voice-fem-04_alerta_ave">
+              <div class="voice-top">
+                <div class="voice-meta">
+                  <span class="gender-pill fem-pill">♀ FEM</span>
+                  <span class="voice-name">Natalia</span>
+                  <span class="voice-role">Voz Feminina Oficial</span>
+                </div>
+                <span class="audio-time">⏱️ 4.6s</span>
+              </div>
+              <audio id="audio-fem-04_alerta_ave" controls preload="metadata">
+                <source src="vozes_frases_oficiais/natalia_04_alerta_ave.mp3?v=20261126v2" type="audio/mpeg">
+              </audio>
+              <div class="action-btn-row">
+                <button class="btn-approve btn-approve-fem" id="btn-fem-04_alerta_ave" onclick="toggleApprove('04_alerta_ave', 'fem')">
+                  <span class="check-mark">✓</span> <span class="btn-txt">Aprovar Natalia</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- VOZ MASCULINA: GUIDO -->
+            <div class="voice-box voice-masc" id="voice-masc-04_alerta_ave">
+              <div class="voice-top">
+                <div class="voice-meta">
+                  <span class="gender-pill masc-pill">♂ MASC</span>
+                  <span class="voice-name">Guido</span>
+                  <span class="voice-role">Voz Masculina Oficial</span>
+                </div>
+                <span class="audio-time">⏱️ 5.2s</span>
+              </div>
+              <audio id="audio-masc-04_alerta_ave" controls preload="metadata">
+                <source src="vozes_frases_oficiais/guido_04_alerta_ave.mp3?v=20261126v2" type="audio/mpeg">
+              </audio>
+              <div class="action-btn-row">
+                <button class="btn-approve btn-approve-masc" id="btn-masc-04_alerta_ave" onclick="toggleApprove('04_alerta_ave', 'masc')">
+                  <span class="check-mark">✓</span> <span class="btn-txt">Aprovar Guido</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+
+        <div class="phrase-card" id="card-05_atualizacao_cao" data-category="update">
+          <div class="card-header">
+            <div class="header-left">
+              <span class="phrase-num">05</span>
+              <div class="title-wrap">
+                <h3 class="phrase-title">Atualização de Rota: Cãozinho Perdido</h3>
+                <span class="category-badge badge-update">Atualização de Rota</span>
+              </div>
+            </div>
+            <div class="card-status-pill" id="badge-status-05_atualizacao_cao">
+              <span class="status-dot"></span> <span class="status-text">Pendente</span>
+            </div>
+          </div>
+
+          <div class="spoken-box">
+            <div class="spoken-label">
+              <span>Texto Falado Oficial (Voz do Copiloto):</span>
+              <span class="spoken-rule">Regra: <strong>PERDIDO</strong> cravado</span>
+            </div>
+            <div class="spoken-phrase">"<span class="hl-word hl-tag">Atualização:</span> cãozinho <span class="hl-word hl-perdido">perdido</span> na sua região. <span class="hl-word hl-destaque">Olhos</span> <span class="hl-word hl-destaque">atentos.</span>"</div>
+          </div>
+
+          <div class="players-row">
+            <!-- VOZ FEMININA: NATALIA -->
+            <div class="voice-box voice-fem" id="voice-fem-05_atualizacao_cao">
+              <div class="voice-top">
+                <div class="voice-meta">
+                  <span class="gender-pill fem-pill">♀ FEM</span>
+                  <span class="voice-name">Natalia</span>
+                  <span class="voice-role">Voz Feminina Oficial</span>
+                </div>
+                <span class="audio-time">⏱️ 5.2s</span>
+              </div>
+              <audio id="audio-fem-05_atualizacao_cao" controls preload="metadata">
+                <source src="vozes_frases_oficiais/natalia_05_atualizacao_cao.mp3?v=20261126v2" type="audio/mpeg">
+              </audio>
+              <div class="action-btn-row">
+                <button class="btn-approve btn-approve-fem" id="btn-fem-05_atualizacao_cao" onclick="toggleApprove('05_atualizacao_cao', 'fem')">
+                  <span class="check-mark">✓</span> <span class="btn-txt">Aprovar Natalia</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- VOZ MASCULINA: GUIDO -->
+            <div class="voice-box voice-masc" id="voice-masc-05_atualizacao_cao">
+              <div class="voice-top">
+                <div class="voice-meta">
+                  <span class="gender-pill masc-pill">♂ MASC</span>
+                  <span class="voice-name">Guido</span>
+                  <span class="voice-role">Voz Masculina Oficial</span>
+                </div>
+                <span class="audio-time">⏱️ 5.7s</span>
+              </div>
+              <audio id="audio-masc-05_atualizacao_cao" controls preload="metadata">
+                <source src="vozes_frases_oficiais/guido_05_atualizacao_cao.mp3?v=20261126v2" type="audio/mpeg">
+              </audio>
+              <div class="action-btn-row">
+                <button class="btn-approve btn-approve-masc" id="btn-masc-05_atualizacao_cao" onclick="toggleApprove('05_atualizacao_cao', 'masc')">
+                  <span class="check-mark">✓</span> <span class="btn-txt">Aprovar Guido</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+
+        <div class="phrase-card" id="card-06_atualizacao_gato" data-category="update">
+          <div class="card-header">
+            <div class="header-left">
+              <span class="phrase-num">06</span>
+              <div class="title-wrap">
+                <h3 class="phrase-title">Atualização de Rota: Gatinho Perdido</h3>
+                <span class="category-badge badge-update">Atualização de Rota</span>
+              </div>
+            </div>
+            <div class="card-status-pill" id="badge-status-06_atualizacao_gato">
+              <span class="status-dot"></span> <span class="status-text">Pendente</span>
+            </div>
+          </div>
+
+          <div class="spoken-box">
+            <div class="spoken-label">
+              <span>Texto Falado Oficial (Voz do Copiloto):</span>
+              <span class="spoken-rule">Regra: <strong>PERDIDO</strong> cravado</span>
+            </div>
+            <div class="spoken-phrase">"<span class="hl-word hl-tag">Atualização:</span> gatinho <span class="hl-word hl-perdido">perdido</span> na sua região. <span class="hl-word hl-destaque">Olhos</span> <span class="hl-word hl-destaque">atentos.</span>"</div>
+          </div>
+
+          <div class="players-row">
+            <!-- VOZ FEMININA: NATALIA -->
+            <div class="voice-box voice-fem" id="voice-fem-06_atualizacao_gato">
+              <div class="voice-top">
+                <div class="voice-meta">
+                  <span class="gender-pill fem-pill">♀ FEM</span>
+                  <span class="voice-name">Natalia</span>
+                  <span class="voice-role">Voz Feminina Oficial</span>
+                </div>
+                <span class="audio-time">⏱️ 5.1s</span>
+              </div>
+              <audio id="audio-fem-06_atualizacao_gato" controls preload="metadata">
+                <source src="vozes_frases_oficiais/natalia_06_atualizacao_gato.mp3?v=20261126v2" type="audio/mpeg">
+              </audio>
+              <div class="action-btn-row">
+                <button class="btn-approve btn-approve-fem" id="btn-fem-06_atualizacao_gato" onclick="toggleApprove('06_atualizacao_gato', 'fem')">
+                  <span class="check-mark">✓</span> <span class="btn-txt">Aprovar Natalia</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- VOZ MASCULINA: GUIDO -->
+            <div class="voice-box voice-masc" id="voice-masc-06_atualizacao_gato">
+              <div class="voice-top">
+                <div class="voice-meta">
+                  <span class="gender-pill masc-pill">♂ MASC</span>
+                  <span class="voice-name">Guido</span>
+                  <span class="voice-role">Voz Masculina Oficial</span>
+                </div>
+                <span class="audio-time">⏱️ 5.6s</span>
+              </div>
+              <audio id="audio-masc-06_atualizacao_gato" controls preload="metadata">
+                <source src="vozes_frases_oficiais/guido_06_atualizacao_gato.mp3?v=20261126v2" type="audio/mpeg">
+              </audio>
+              <div class="action-btn-row">
+                <button class="btn-approve btn-approve-masc" id="btn-masc-06_atualizacao_gato" onclick="toggleApprove('06_atualizacao_gato', 'masc')">
+                  <span class="check-mark">✓</span> <span class="btn-txt">Aprovar Guido</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+
+        <div class="phrase-card" id="card-07_atualizacao_ave" data-category="update">
+          <div class="card-header">
+            <div class="header-left">
+              <span class="phrase-num">07</span>
+              <div class="title-wrap">
+                <h3 class="phrase-title">Atualização de Rota: Ave Perdida</h3>
+                <span class="category-badge badge-update">Atualização de Rota</span>
+              </div>
+            </div>
+            <div class="card-status-pill" id="badge-status-07_atualizacao_ave">
+              <span class="status-dot"></span> <span class="status-text">Pendente</span>
+            </div>
+          </div>
+
+          <div class="spoken-box">
+            <div class="spoken-label">
+              <span>Texto Falado Oficial (Voz do Copiloto):</span>
+              <span class="spoken-rule">Regra: <strong>PERDIDO</strong> cravado</span>
+            </div>
+            <div class="spoken-phrase">"<span class="hl-word hl-tag">Atualização:</span> ave <span class="hl-word hl-perdido">perdida</span> na sua região. <span class="hl-word hl-destaque">Olhos</span> <span class="hl-word hl-destaque">atentos.</span>"</div>
+          </div>
+
+          <div class="players-row">
+            <!-- VOZ FEMININA: NATALIA -->
+            <div class="voice-box voice-fem" id="voice-fem-07_atualizacao_ave">
+              <div class="voice-top">
+                <div class="voice-meta">
+                  <span class="gender-pill fem-pill">♀ FEM</span>
+                  <span class="voice-name">Natalia</span>
+                  <span class="voice-role">Voz Feminina Oficial</span>
+                </div>
+                <span class="audio-time">⏱️ 4.9s</span>
+              </div>
+              <audio id="audio-fem-07_atualizacao_ave" controls preload="metadata">
+                <source src="vozes_frases_oficiais/natalia_07_atualizacao_ave.mp3?v=20261126v2" type="audio/mpeg">
+              </audio>
+              <div class="action-btn-row">
+                <button class="btn-approve btn-approve-fem" id="btn-fem-07_atualizacao_ave" onclick="toggleApprove('07_atualizacao_ave', 'fem')">
+                  <span class="check-mark">✓</span> <span class="btn-txt">Aprovar Natalia</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- VOZ MASCULINA: GUIDO -->
+            <div class="voice-box voice-masc" id="voice-masc-07_atualizacao_ave">
+              <div class="voice-top">
+                <div class="voice-meta">
+                  <span class="gender-pill masc-pill">♂ MASC</span>
+                  <span class="voice-name">Guido</span>
+                  <span class="voice-role">Voz Masculina Oficial</span>
+                </div>
+                <span class="audio-time">⏱️ 5.4s</span>
+              </div>
+              <audio id="audio-masc-07_atualizacao_ave" controls preload="metadata">
+                <source src="vozes_frases_oficiais/guido_07_atualizacao_ave.mp3?v=20261126v2" type="audio/mpeg">
+              </audio>
+              <div class="action-btn-row">
+                <button class="btn-approve btn-approve-masc" id="btn-masc-07_atualizacao_ave" onclick="toggleApprove('07_atualizacao_ave', 'masc')">
+                  <span class="check-mark">✓</span> <span class="btn-txt">Aprovar Guido</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+
+        <div class="phrase-card" id="card-08_clima_tempestade" data-category="weather">
+          <div class="card-header">
+            <div class="header-left">
+              <span class="phrase-num">08</span>
+              <div class="title-wrap">
+                <h3 class="phrase-title">Alerta Meteorológico: Tempestade</h3>
+                <span class="category-badge badge-weather">Alerta Climático</span>
+              </div>
+            </div>
+            <div class="card-status-pill" id="badge-status-08_clima_tempestade">
+              <span class="status-dot"></span> <span class="status-text">Pendente</span>
+            </div>
+          </div>
+
+          <div class="spoken-box">
+            <div class="spoken-label">
+              <span>Texto Falado Oficial (Voz do Copiloto):</span>
+              <span class="spoken-rule">Regra: <strong>PERDIDO</strong> cravado</span>
+            </div>
+            <div class="spoken-phrase">"<span class="hl-word hl-tag">Alerta</span> meteorológico: tempestade e ventos fortes. Abrigue os seus pets."</div>
+          </div>
+
+          <div class="players-row">
+            <!-- VOZ FEMININA: NATALIA -->
+            <div class="voice-box voice-fem" id="voice-fem-08_clima_tempestade">
+              <div class="voice-top">
+                <div class="voice-meta">
+                  <span class="gender-pill fem-pill">♀ FEM</span>
+                  <span class="voice-name">Natalia</span>
+                  <span class="voice-role">Voz Feminina Oficial</span>
+                </div>
+                <span class="audio-time">⏱️ 5.8s</span>
+              </div>
+              <audio id="audio-fem-08_clima_tempestade" controls preload="metadata">
+                <source src="vozes_frases_oficiais/natalia_08_clima_tempestade.mp3?v=20261126v2" type="audio/mpeg">
+              </audio>
+              <div class="action-btn-row">
+                <button class="btn-approve btn-approve-fem" id="btn-fem-08_clima_tempestade" onclick="toggleApprove('08_clima_tempestade', 'fem')">
+                  <span class="check-mark">✓</span> <span class="btn-txt">Aprovar Natalia</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- VOZ MASCULINA: GUIDO -->
+            <div class="voice-box voice-masc" id="voice-masc-08_clima_tempestade">
+              <div class="voice-top">
+                <div class="voice-meta">
+                  <span class="gender-pill masc-pill">♂ MASC</span>
+                  <span class="voice-name">Guido</span>
+                  <span class="voice-role">Voz Masculina Oficial</span>
+                </div>
+                <span class="audio-time">⏱️ 6.3s</span>
+              </div>
+              <audio id="audio-masc-08_clima_tempestade" controls preload="metadata">
+                <source src="vozes_frases_oficiais/guido_08_clima_tempestade.mp3?v=20261126v2" type="audio/mpeg">
+              </audio>
+              <div class="action-btn-row">
+                <button class="btn-approve btn-approve-masc" id="btn-masc-08_clima_tempestade" onclick="toggleApprove('08_clima_tempestade', 'masc')">
+                  <span class="check-mark">✓</span> <span class="btn-txt">Aprovar Guido</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+
+        <div class="phrase-card" id="card-09_clima_granizo" data-category="weather">
+          <div class="card-header">
+            <div class="header-left">
+              <span class="phrase-num">09</span>
+              <div class="title-wrap">
+                <h3 class="phrase-title">Alerta Meteorológico: Chuva de Granizo</h3>
+                <span class="category-badge badge-weather">Alerta Climático</span>
+              </div>
+            </div>
+            <div class="card-status-pill" id="badge-status-09_clima_granizo">
+              <span class="status-dot"></span> <span class="status-text">Pendente</span>
+            </div>
+          </div>
+
+          <div class="spoken-box">
+            <div class="spoken-label">
+              <span>Texto Falado Oficial (Voz do Copiloto):</span>
+              <span class="spoken-rule">Regra: <strong>PERDIDO</strong> cravado</span>
+            </div>
+            <div class="spoken-phrase">"<span class="hl-word hl-tag">Alerta</span> meteorológico: chuva de granizo na sua região. Abrigue os seus pets."</div>
+          </div>
+
+          <div class="players-row">
+            <!-- VOZ FEMININA: NATALIA -->
+            <div class="voice-box voice-fem" id="voice-fem-09_clima_granizo">
+              <div class="voice-top">
+                <div class="voice-meta">
+                  <span class="gender-pill fem-pill">♀ FEM</span>
+                  <span class="voice-name">Natalia</span>
+                  <span class="voice-role">Voz Feminina Oficial</span>
+                </div>
+                <span class="audio-time">⏱️ 5.8s</span>
+              </div>
+              <audio id="audio-fem-09_clima_granizo" controls preload="metadata">
+                <source src="vozes_frases_oficiais/natalia_09_clima_granizo.mp3?v=20261126v2" type="audio/mpeg">
+              </audio>
+              <div class="action-btn-row">
+                <button class="btn-approve btn-approve-fem" id="btn-fem-09_clima_granizo" onclick="toggleApprove('09_clima_granizo', 'fem')">
+                  <span class="check-mark">✓</span> <span class="btn-txt">Aprovar Natalia</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- VOZ MASCULINA: GUIDO -->
+            <div class="voice-box voice-masc" id="voice-masc-09_clima_granizo">
+              <div class="voice-top">
+                <div class="voice-meta">
+                  <span class="gender-pill masc-pill">♂ MASC</span>
+                  <span class="voice-name">Guido</span>
+                  <span class="voice-role">Voz Masculina Oficial</span>
+                </div>
+                <span class="audio-time">⏱️ 6.5s</span>
+              </div>
+              <audio id="audio-masc-09_clima_granizo" controls preload="metadata">
+                <source src="vozes_frases_oficiais/guido_09_clima_granizo.mp3?v=20261126v2" type="audio/mpeg">
+              </audio>
+              <div class="action-btn-row">
+                <button class="btn-approve btn-approve-masc" id="btn-masc-09_clima_granizo" onclick="toggleApprove('09_clima_granizo', 'masc')">
+                  <span class="check-mark">✓</span> <span class="btn-txt">Aprovar Guido</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+
+        <div class="phrase-card" id="card-10_clima_frio" data-category="weather">
+          <div class="card-header">
+            <div class="header-left">
+              <span class="phrase-num">10</span>
+              <div class="title-wrap">
+                <h3 class="phrase-title">Alerta Meteorológico: Frio Intenso e Geada</h3>
+                <span class="category-badge badge-weather">Alerta Climático</span>
+              </div>
+            </div>
+            <div class="card-status-pill" id="badge-status-10_clima_frio">
+              <span class="status-dot"></span> <span class="status-text">Pendente</span>
+            </div>
+          </div>
+
+          <div class="spoken-box">
+            <div class="spoken-label">
+              <span>Texto Falado Oficial (Voz do Copiloto):</span>
+              <span class="spoken-rule">Regra: <strong>PERDIDO</strong> cravado</span>
+            </div>
+            <div class="spoken-phrase">"<span class="hl-word hl-tag">Alerta</span> meteorológico: frio intenso e geada. Proteja seus pets em local aquecido."</div>
+          </div>
+
+          <div class="players-row">
+            <!-- VOZ FEMININA: NATALIA -->
+            <div class="voice-box voice-fem" id="voice-fem-10_clima_frio">
+              <div class="voice-top">
+                <div class="voice-meta">
+                  <span class="gender-pill fem-pill">♀ FEM</span>
+                  <span class="voice-name">Natalia</span>
+                  <span class="voice-role">Voz Feminina Oficial</span>
+                </div>
+                <span class="audio-time">⏱️ 6.2s</span>
+              </div>
+              <audio id="audio-fem-10_clima_frio" controls preload="metadata">
+                <source src="vozes_frases_oficiais/natalia_10_clima_frio.mp3?v=20261126v2" type="audio/mpeg">
+              </audio>
+              <div class="action-btn-row">
+                <button class="btn-approve btn-approve-fem" id="btn-fem-10_clima_frio" onclick="toggleApprove('10_clima_frio', 'fem')">
+                  <span class="check-mark">✓</span> <span class="btn-txt">Aprovar Natalia</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- VOZ MASCULINA: GUIDO -->
+            <div class="voice-box voice-masc" id="voice-masc-10_clima_frio">
+              <div class="voice-top">
+                <div class="voice-meta">
+                  <span class="gender-pill masc-pill">♂ MASC</span>
+                  <span class="voice-name">Guido</span>
+                  <span class="voice-role">Voz Masculina Oficial</span>
+                </div>
+                <span class="audio-time">⏱️ 6.9s</span>
+              </div>
+              <audio id="audio-masc-10_clima_frio" controls preload="metadata">
+                <source src="vozes_frases_oficiais/guido_10_clima_frio.mp3?v=20261126v2" type="audio/mpeg">
+              </audio>
+              <div class="action-btn-row">
+                <button class="btn-approve btn-approve-masc" id="btn-masc-10_clima_frio" onclick="toggleApprove('10_clima_frio', 'masc')">
+                  <span class="check-mark">✓</span> <span class="btn-txt">Aprovar Guido</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+
+        <div class="phrase-card" id="card-11_clima_calor" data-category="weather">
+          <div class="card-header">
+            <div class="header-left">
+              <span class="phrase-num">11</span>
+              <div class="title-wrap">
+                <h3 class="phrase-title">Alerta Meteorológico: Calor Excessivo</h3>
+                <span class="category-badge badge-weather">Alerta Climático</span>
+              </div>
+            </div>
+            <div class="card-status-pill" id="badge-status-11_clima_calor">
+              <span class="status-dot"></span> <span class="status-text">Pendente</span>
+            </div>
+          </div>
+
+          <div class="spoken-box">
+            <div class="spoken-label">
+              <span>Texto Falado Oficial (Voz do Copiloto):</span>
+              <span class="spoken-rule">Regra: <strong>PERDIDO</strong> cravado</span>
+            </div>
+            <div class="spoken-phrase">"<span class="hl-word hl-tag">Alerta</span> meteorológico: calor excessivo. Deixe água fresca disponível para o seu pet."</div>
+          </div>
+
+          <div class="players-row">
+            <!-- VOZ FEMININA: NATALIA -->
+            <div class="voice-box voice-fem" id="voice-fem-11_clima_calor">
+              <div class="voice-top">
+                <div class="voice-meta">
+                  <span class="gender-pill fem-pill">♀ FEM</span>
+                  <span class="voice-name">Natalia</span>
+                  <span class="voice-role">Voz Feminina Oficial</span>
+                </div>
+                <span class="audio-time">⏱️ 6.4s</span>
+              </div>
+              <audio id="audio-fem-11_clima_calor" controls preload="metadata">
+                <source src="vozes_frases_oficiais/natalia_11_clima_calor.mp3?v=20261126v2" type="audio/mpeg">
+              </audio>
+              <div class="action-btn-row">
+                <button class="btn-approve btn-approve-fem" id="btn-fem-11_clima_calor" onclick="toggleApprove('11_clima_calor', 'fem')">
+                  <span class="check-mark">✓</span> <span class="btn-txt">Aprovar Natalia</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- VOZ MASCULINA: GUIDO -->
+            <div class="voice-box voice-masc" id="voice-masc-11_clima_calor">
+              <div class="voice-top">
+                <div class="voice-meta">
+                  <span class="gender-pill masc-pill">♂ MASC</span>
+                  <span class="voice-name">Guido</span>
+                  <span class="voice-role">Voz Masculina Oficial</span>
+                </div>
+                <span class="audio-time">⏱️ 7.0s</span>
+              </div>
+              <audio id="audio-masc-11_clima_calor" controls preload="metadata">
+                <source src="vozes_frases_oficiais/guido_11_clima_calor.mp3?v=20261126v2" type="audio/mpeg">
+              </audio>
+              <div class="action-btn-row">
+                <button class="btn-approve btn-approve-masc" id="btn-masc-11_clima_calor" onclick="toggleApprove('11_clima_calor', 'masc')">
+                  <span class="check-mark">✓</span> <span class="btn-txt">Aprovar Guido</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+
+        <div class="phrase-card" id="card-12_alerta_animal" data-category="alert">
+          <div class="card-header">
+            <div class="header-left">
+              <span class="phrase-num">12</span>
+              <div class="title-wrap">
+                <h3 class="phrase-title">Alerta Geral: Animal Perdido</h3>
+                <span class="category-badge badge-alert">Alerta Geral</span>
+              </div>
+            </div>
+            <div class="card-status-pill" id="badge-status-12_alerta_animal">
+              <span class="status-dot"></span> <span class="status-text">Pendente</span>
+            </div>
+          </div>
+
+          <div class="spoken-box">
+            <div class="spoken-label">
+              <span>Texto Falado Oficial (Voz do Copiloto):</span>
+              <span class="spoken-rule">Regra: <strong>PERDIDO</strong> cravado</span>
+            </div>
+            <div class="spoken-phrase">"<span class="hl-word hl-tag">Atenção:</span> animal <span class="hl-word hl-perdido">perdido</span> na sua região. <span class="hl-word hl-destaque">Olhos</span> <span class="hl-word hl-destaque">atentos.</span>"</div>
+          </div>
+
+          <div class="players-row">
+            <!-- VOZ FEMININA: NATALIA -->
+            <div class="voice-box voice-fem" id="voice-fem-12_alerta_animal">
+              <div class="voice-top">
+                <div class="voice-meta">
+                  <span class="gender-pill fem-pill">♀ FEM</span>
+                  <span class="voice-name">Natalia</span>
+                  <span class="voice-role">Voz Feminina Oficial</span>
+                </div>
+                <span class="audio-time">⏱️ 4.8s</span>
+              </div>
+              <audio id="audio-fem-12_alerta_animal" controls preload="metadata">
+                <source src="vozes_frases_oficiais/natalia_12_alerta_animal.mp3?v=20261126v2" type="audio/mpeg">
+              </audio>
+              <div class="action-btn-row">
+                <button class="btn-approve btn-approve-fem" id="btn-fem-12_alerta_animal" onclick="toggleApprove('12_alerta_animal', 'fem')">
+                  <span class="check-mark">✓</span> <span class="btn-txt">Aprovar Natalia</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- VOZ MASCULINA: GUIDO -->
+            <div class="voice-box voice-masc" id="voice-masc-12_alerta_animal">
+              <div class="voice-top">
+                <div class="voice-meta">
+                  <span class="gender-pill masc-pill">♂ MASC</span>
+                  <span class="voice-name">Guido</span>
+                  <span class="voice-role">Voz Masculina Oficial</span>
+                </div>
+                <span class="audio-time">⏱️ 5.4s</span>
+              </div>
+              <audio id="audio-masc-12_alerta_animal" controls preload="metadata">
+                <source src="vozes_frases_oficiais/guido_12_alerta_animal.mp3?v=20261126v2" type="audio/mpeg">
+              </audio>
+              <div class="action-btn-row">
+                <button class="btn-approve btn-approve-masc" id="btn-masc-12_alerta_animal" onclick="toggleApprove('12_alerta_animal', 'masc')">
+                  <span class="check-mark">✓</span> <span class="btn-txt">Aprovar Guido</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+
+        <div class="phrase-card" id="card-13_atualizacao_animal" data-category="update">
+          <div class="card-header">
+            <div class="header-left">
+              <span class="phrase-num">13</span>
+              <div class="title-wrap">
+                <h3 class="phrase-title">Atualização de Rota: Animal Perdido</h3>
+                <span class="category-badge badge-update">Atualização de Rota</span>
+              </div>
+            </div>
+            <div class="card-status-pill" id="badge-status-13_atualizacao_animal">
+              <span class="status-dot"></span> <span class="status-text">Pendente</span>
+            </div>
+          </div>
+
+          <div class="spoken-box">
+            <div class="spoken-label">
+              <span>Texto Falado Oficial (Voz do Copiloto):</span>
+              <span class="spoken-rule">Regra: <strong>PERDIDO</strong> cravado</span>
+            </div>
+            <div class="spoken-phrase">"<span class="hl-word hl-tag">Atualização:</span> animal <span class="hl-word hl-perdido">perdido</span> na sua região. <span class="hl-word hl-destaque">Olhos</span> <span class="hl-word hl-destaque">atentos.</span>"</div>
+          </div>
+
+          <div class="players-row">
+            <!-- VOZ FEMININA: NATALIA -->
+            <div class="voice-box voice-fem" id="voice-fem-13_atualizacao_animal">
+              <div class="voice-top">
+                <div class="voice-meta">
+                  <span class="gender-pill fem-pill">♀ FEM</span>
+                  <span class="voice-name">Natalia</span>
+                  <span class="voice-role">Voz Feminina Oficial</span>
+                </div>
+                <span class="audio-time">⏱️ 5.1s</span>
+              </div>
+              <audio id="audio-fem-13_atualizacao_animal" controls preload="metadata">
+                <source src="vozes_frases_oficiais/natalia_13_atualizacao_animal.mp3?v=20261126v2" type="audio/mpeg">
+              </audio>
+              <div class="action-btn-row">
+                <button class="btn-approve btn-approve-fem" id="btn-fem-13_atualizacao_animal" onclick="toggleApprove('13_atualizacao_animal', 'fem')">
+                  <span class="check-mark">✓</span> <span class="btn-txt">Aprovar Natalia</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- VOZ MASCULINA: GUIDO -->
+            <div class="voice-box voice-masc" id="voice-masc-13_atualizacao_animal">
+              <div class="voice-top">
+                <div class="voice-meta">
+                  <span class="gender-pill masc-pill">♂ MASC</span>
+                  <span class="voice-name">Guido</span>
+                  <span class="voice-role">Voz Masculina Oficial</span>
+                </div>
+                <span class="audio-time">⏱️ 5.5s</span>
+              </div>
+              <audio id="audio-masc-13_atualizacao_animal" controls preload="metadata">
+                <source src="vozes_frases_oficiais/guido_13_atualizacao_animal.mp3?v=20261126v2" type="audio/mpeg">
+              </audio>
+              <div class="action-btn-row">
+                <button class="btn-approve btn-approve-masc" id="btn-masc-13_atualizacao_animal" onclick="toggleApprove('13_atualizacao_animal', 'masc')">
+                  <span class="check-mark">✓</span> <span class="btn-txt">Aprovar Guido</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+
+        <div class="phrase-card" id="card-14_alerta_coelho" data-category="alert">
+          <div class="card-header">
+            <div class="header-left">
+              <span class="phrase-num">14</span>
+              <div class="title-wrap">
+                <h3 class="phrase-title">Alerta: Coelhinho Perdido</h3>
+                <span class="category-badge badge-alert">Alerta Pet Perdido</span>
+              </div>
+            </div>
+            <div class="card-status-pill" id="badge-status-14_alerta_coelho">
+              <span class="status-dot"></span> <span class="status-text">Pendente</span>
+            </div>
+          </div>
+
+          <div class="spoken-box">
+            <div class="spoken-label">
+              <span>Texto Falado Oficial (Voz do Copiloto):</span>
+              <span class="spoken-rule">Regra: <strong>PERDIDO</strong> cravado</span>
+            </div>
+            <div class="spoken-phrase">"<span class="hl-word hl-tag">Atenção:</span> coelhinho <span class="hl-word hl-perdido">perdido</span> na sua região. <span class="hl-word hl-destaque">Olhos</span> <span class="hl-word hl-destaque">atentos.</span>"</div>
+          </div>
+
+          <div class="players-row">
+            <!-- VOZ FEMININA: NATALIA -->
+            <div class="voice-box voice-fem" id="voice-fem-14_alerta_coelho">
+              <div class="voice-top">
+                <div class="voice-meta">
+                  <span class="gender-pill fem-pill">♀ FEM</span>
+                  <span class="voice-name">Natalia</span>
+                  <span class="voice-role">Voz Feminina Oficial</span>
+                </div>
+                <span class="audio-time">⏱️ 4.9s</span>
+              </div>
+              <audio id="audio-fem-14_alerta_coelho" controls preload="metadata">
+                <source src="vozes_frases_oficiais/natalia_14_alerta_coelho.mp3?v=20261126v2" type="audio/mpeg">
+              </audio>
+              <div class="action-btn-row">
+                <button class="btn-approve btn-approve-fem" id="btn-fem-14_alerta_coelho" onclick="toggleApprove('14_alerta_coelho', 'fem')">
+                  <span class="check-mark">✓</span> <span class="btn-txt">Aprovar Natalia</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- VOZ MASCULINA: GUIDO -->
+            <div class="voice-box voice-masc" id="voice-masc-14_alerta_coelho">
+              <div class="voice-top">
+                <div class="voice-meta">
+                  <span class="gender-pill masc-pill">♂ MASC</span>
+                  <span class="voice-name">Guido</span>
+                  <span class="voice-role">Voz Masculina Oficial</span>
+                </div>
+                <span class="audio-time">⏱️ 5.5s</span>
+              </div>
+              <audio id="audio-masc-14_alerta_coelho" controls preload="metadata">
+                <source src="vozes_frases_oficiais/guido_14_alerta_coelho.mp3?v=20261126v2" type="audio/mpeg">
+              </audio>
+              <div class="action-btn-row">
+                <button class="btn-approve btn-approve-masc" id="btn-masc-14_alerta_coelho" onclick="toggleApprove('14_alerta_coelho', 'masc')">
+                  <span class="check-mark">✓</span> <span class="btn-txt">Aprovar Guido</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+
+        <div class="phrase-card" id="card-15_atualizacao_coelho" data-category="update">
+          <div class="card-header">
+            <div class="header-left">
+              <span class="phrase-num">15</span>
+              <div class="title-wrap">
+                <h3 class="phrase-title">Atualização de Rota: Coelhinho Perdido</h3>
+                <span class="category-badge badge-update">Atualização de Rota</span>
+              </div>
+            </div>
+            <div class="card-status-pill" id="badge-status-15_atualizacao_coelho">
+              <span class="status-dot"></span> <span class="status-text">Pendente</span>
+            </div>
+          </div>
+
+          <div class="spoken-box">
+            <div class="spoken-label">
+              <span>Texto Falado Oficial (Voz do Copiloto):</span>
+              <span class="spoken-rule">Regra: <strong>PERDIDO</strong> cravado</span>
+            </div>
+            <div class="spoken-phrase">"<span class="hl-word hl-tag">Atualização:</span> coelhinho <span class="hl-word hl-perdido">perdido</span> na sua região. <span class="hl-word hl-destaque">Olhos</span> <span class="hl-word hl-destaque">atentos.</span>"</div>
+          </div>
+
+          <div class="players-row">
+            <!-- VOZ FEMININA: NATALIA -->
+            <div class="voice-box voice-fem" id="voice-fem-15_atualizacao_coelho">
+              <div class="voice-top">
+                <div class="voice-meta">
+                  <span class="gender-pill fem-pill">♀ FEM</span>
+                  <span class="voice-name">Natalia</span>
+                  <span class="voice-role">Voz Feminina Oficial</span>
+                </div>
+                <span class="audio-time">⏱️ 5.1s</span>
+              </div>
+              <audio id="audio-fem-15_atualizacao_coelho" controls preload="metadata">
+                <source src="vozes_frases_oficiais/natalia_15_atualizacao_coelho.mp3?v=20261126v2" type="audio/mpeg">
+              </audio>
+              <div class="action-btn-row">
+                <button class="btn-approve btn-approve-fem" id="btn-fem-15_atualizacao_coelho" onclick="toggleApprove('15_atualizacao_coelho', 'fem')">
+                  <span class="check-mark">✓</span> <span class="btn-txt">Aprovar Natalia</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- VOZ MASCULINA: GUIDO -->
+            <div class="voice-box voice-masc" id="voice-masc-15_atualizacao_coelho">
+              <div class="voice-top">
+                <div class="voice-meta">
+                  <span class="gender-pill masc-pill">♂ MASC</span>
+                  <span class="voice-name">Guido</span>
+                  <span class="voice-role">Voz Masculina Oficial</span>
+                </div>
+                <span class="audio-time">⏱️ 5.7s</span>
+              </div>
+              <audio id="audio-masc-15_atualizacao_coelho" controls preload="metadata">
+                <source src="vozes_frases_oficiais/guido_15_atualizacao_coelho.mp3?v=20261126v2" type="audio/mpeg">
+              </audio>
+              <div class="action-btn-row">
+                <button class="btn-approve btn-approve-masc" id="btn-masc-15_atualizacao_coelho" onclick="toggleApprove('15_atualizacao_coelho', 'masc')">
+                  <span class="check-mark">✓</span> <span class="btn-txt">Aprovar Guido</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+
+        <div class="phrase-card" id="card-16_atualizacao_rastro_tutor" data-category="rastro">
+          <div class="card-header">
+            <div class="header-left">
+              <span class="phrase-num">16</span>
+              <div class="title-wrap">
+                <h3 class="phrase-title">Atualização de Rastro: Notificação do Tutor</h3>
+                <span class="category-badge badge-rastro">Rastro do Pet</span>
+              </div>
+            </div>
+            <div class="card-status-pill" id="badge-status-16_atualizacao_rastro_tutor">
+              <span class="status-dot"></span> <span class="status-text">Pendente</span>
+            </div>
+          </div>
+
+          <div class="spoken-box">
+            <div class="spoken-label">
+              <span>Texto Falado Oficial (Voz do Copiloto):</span>
+              <span class="spoken-rule">Regra: <strong>PERDIDO</strong> cravado</span>
+            </div>
+            <div class="spoken-phrase">"<span class="hl-word hl-tag">Atualização.</span> Novo rastro registrado do seu pet. Toque na tela para ver a localização."</div>
+          </div>
+
+          <div class="players-row">
+            <!-- VOZ FEMININA: NATALIA -->
+            <div class="voice-box voice-fem" id="voice-fem-16_atualizacao_rastro_tutor">
+              <div class="voice-top">
+                <div class="voice-meta">
+                  <span class="gender-pill fem-pill">♀ FEM</span>
+                  <span class="voice-name">Natalia</span>
+                  <span class="voice-role">Voz Feminina Oficial</span>
+                </div>
+                <span class="audio-time">⏱️ 6.4s</span>
+              </div>
+              <audio id="audio-fem-16_atualizacao_rastro_tutor" controls preload="metadata">
+                <source src="vozes_frases_oficiais/natalia_16_atualizacao_rastro_tutor.mp3?v=20261126v2" type="audio/mpeg">
+              </audio>
+              <div class="action-btn-row">
+                <button class="btn-approve btn-approve-fem" id="btn-fem-16_atualizacao_rastro_tutor" onclick="toggleApprove('16_atualizacao_rastro_tutor', 'fem')">
+                  <span class="check-mark">✓</span> <span class="btn-txt">Aprovar Natalia</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- VOZ MASCULINA: GUIDO -->
+            <div class="voice-box voice-masc" id="voice-masc-16_atualizacao_rastro_tutor">
+              <div class="voice-top">
+                <div class="voice-meta">
+                  <span class="gender-pill masc-pill">♂ MASC</span>
+                  <span class="voice-name">Guido</span>
+                  <span class="voice-role">Voz Masculina Oficial</span>
+                </div>
+                <span class="audio-time">⏱️ 7.0s</span>
+              </div>
+              <audio id="audio-masc-16_atualizacao_rastro_tutor" controls preload="metadata">
+                <source src="vozes_frases_oficiais/guido_16_atualizacao_rastro_tutor.mp3?v=20261126v2" type="audio/mpeg">
+              </audio>
+              <div class="action-btn-row">
+                <button class="btn-approve btn-approve-masc" id="btn-masc-16_atualizacao_rastro_tutor" onclick="toggleApprove('16_atualizacao_rastro_tutor', 'masc')">
+                  <span class="check-mark">✓</span> <span class="btn-txt">Aprovar Guido</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+
+        <div class="phrase-card" id="card-17_atualizacao_rastro_amigos" data-category="rastro">
+          <div class="card-header">
+            <div class="header-left">
+              <span class="phrase-num">17</span>
+              <div class="title-wrap">
+                <h3 class="phrase-title">Atualização de Rastro: Comunidade e Protetores</h3>
+                <span class="category-badge badge-rastro">Rastro do Pet</span>
+              </div>
+            </div>
+            <div class="card-status-pill" id="badge-status-17_atualizacao_rastro_amigos">
+              <span class="status-dot"></span> <span class="status-text">Pendente</span>
+            </div>
+          </div>
+
+          <div class="spoken-box">
+            <div class="spoken-label">
+              <span>Texto Falado Oficial (Voz do Copiloto):</span>
+              <span class="spoken-rule">Regra: <strong>PERDIDO</strong> cravado</span>
+            </div>
+            <div class="spoken-phrase">"<span class="hl-word hl-tag">Atualização.</span> Novo rastro confirmado na sua região. Animal em deslocamento ativo."</div>
+          </div>
+
+          <div class="players-row">
+            <!-- VOZ FEMININA: NATALIA -->
+            <div class="voice-box voice-fem" id="voice-fem-17_atualizacao_rastro_amigos">
+              <div class="voice-top">
+                <div class="voice-meta">
+                  <span class="gender-pill fem-pill">♀ FEM</span>
+                  <span class="voice-name">Natalia</span>
+                  <span class="voice-role">Voz Feminina Oficial</span>
+                </div>
+                <span class="audio-time">⏱️ 6.5s</span>
+              </div>
+              <audio id="audio-fem-17_atualizacao_rastro_amigos" controls preload="metadata">
+                <source src="vozes_frases_oficiais/natalia_17_atualizacao_rastro_amigos.mp3?v=20261126v2" type="audio/mpeg">
+              </audio>
+              <div class="action-btn-row">
+                <button class="btn-approve btn-approve-fem" id="btn-fem-17_atualizacao_rastro_amigos" onclick="toggleApprove('17_atualizacao_rastro_amigos', 'fem')">
+                  <span class="check-mark">✓</span> <span class="btn-txt">Aprovar Natalia</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- VOZ MASCULINA: GUIDO -->
+            <div class="voice-box voice-masc" id="voice-masc-17_atualizacao_rastro_amigos">
+              <div class="voice-top">
+                <div class="voice-meta">
+                  <span class="gender-pill masc-pill">♂ MASC</span>
+                  <span class="voice-name">Guido</span>
+                  <span class="voice-role">Voz Masculina Oficial</span>
+                </div>
+                <span class="audio-time">⏱️ 7.7s</span>
+              </div>
+              <audio id="audio-masc-17_atualizacao_rastro_amigos" controls preload="metadata">
+                <source src="vozes_frases_oficiais/guido_17_atualizacao_rastro_amigos.mp3?v=20261126v2" type="audio/mpeg">
+              </audio>
+              <div class="action-btn-row">
+                <button class="btn-approve btn-approve-masc" id="btn-masc-17_atualizacao_rastro_amigos" onclick="toggleApprove('17_atualizacao_rastro_amigos', 'masc')">
+                  <span class="check-mark">✓</span> <span class="btn-txt">Aprovar Guido</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+  </main>
+
+  <!-- STICKY FOOTER -->
+  <footer class="sticky-bar">
+    <div class="progress-wrap">
+      <div class="progress-bar-bg">
+        <div class="progress-bar-fill" id="progress-fill"></div>
+      </div>
+      <span class="progress-text" id="footer-progress-text">0 / 34 Aprovados (0%)</span>
+    </div>
+
+    <div class="footer-actions">
+      <button class="btn-export" onclick="exportReport()">
+        📄 Salvar Relatório de Aprovação do Rigo
+      </button>
+    </div>
+  </footer>
+
+  <script>
+    const totalItems = 34; // 17 fem + 17 masc
+    let approved = JSON.parse(localStorage.getItem('alerta_pet_audios_perdido_aprovados') || '{}');
+
+    function saveState() {
+      localStorage.setItem('alerta_pet_audios_perdido_aprovados', JSON.stringify(approved));
+      updateUI();
+    }
+
+    function toggleApprove(fid, voice) {
+      const key = `${fid}_${voice}`;
+      if (approved[key]) {
+        delete approved[key];
+      } else {
+        approved[key] = true;
+      }
+      saveState();
+    }
+
+    function approveAll() {
+      const phrasesList = ["01_apresentacao", "02_alerta_cao", "03_alerta_gato", "04_alerta_ave", "05_atualizacao_cao", "06_atualizacao_gato", "07_atualizacao_ave", "08_clima_tempestade", "09_clima_granizo", "10_clima_frio", "11_clima_calor", "12_alerta_animal", "13_atualizacao_animal", "14_alerta_coelho", "15_atualizacao_coelho", "16_atualizacao_rastro_tutor", "17_atualizacao_rastro_amigos"];
+      phrasesList.forEach(id => {
+        approved[`${id}_fem`] = true;
+        approved[`${id}_masc`] = true;
+      });
+      saveState();
+    }
+
+    function resetAll() {
+      if (confirm('Deseja resetar o status de validação desta mesa?')) {
+        approved = {};
+        saveState();
+      }
+    }
+
+    function updateUI() {
+      let count = 0;
+      const phrasesList = ["01_apresentacao", "02_alerta_cao", "03_alerta_gato", "04_alerta_ave", "05_atualizacao_cao", "06_atualizacao_gato", "07_atualizacao_ave", "08_clima_tempestade", "09_clima_granizo", "10_clima_frio", "11_clima_calor", "12_alerta_animal", "13_atualizacao_animal", "14_alerta_coelho", "15_atualizacao_coelho", "16_atualizacao_rastro_tutor", "17_atualizacao_rastro_amigos"];
+
+      phrasesList.forEach(id => {
+        const femAppr = !!approved[`${id}_fem`];
+        const mascAppr = !!approved[`${id}_masc`];
+        if (femAppr) count++;
+        if (mascAppr) count++;
+
+        // Atualizar botoes fem
+        const btnFem = document.getElementById(`btn-fem-${id}`);
+        const boxFem = document.getElementById(`voice-fem-${id}`);
+        if (btnFem && boxFem) {
+          if (femAppr) {
+            btnFem.classList.add('is-approved');
+            btnFem.querySelector('.btn-txt').textContent = 'Natalia Aprovada ✓';
+            boxFem.classList.add('approved');
+          } else {
+            btnFem.classList.remove('is-approved');
+            btnFem.querySelector('.btn-txt').textContent = 'Aprovar Natalia';
+            boxFem.classList.remove('approved');
+          }
+        }
+
+        // Atualizar botoes masc
+        const btnMasc = document.getElementById(`btn-masc-${id}`);
+        const boxMasc = document.getElementById(`voice-masc-${id}`);
+        if (btnMasc && boxMasc) {
+          if (mascAppr) {
+            btnMasc.classList.add('is-approved');
+            btnMasc.querySelector('.btn-txt').textContent = 'Guido Aprovado ✓';
+            boxMasc.classList.add('approved');
+          } else {
+            btnMasc.classList.remove('is-approved');
+            btnMasc.querySelector('.btn-txt').textContent = 'Aprovar Guido';
+            boxMasc.classList.remove('approved');
+          }
+        }
+
+        // Atualizar Card status
+        const card = document.getElementById(`card-${id}`);
+        const statusBadge = document.getElementById(`badge-status-${id}`);
+        if (statusBadge && card) {
+          statusBadge.className = 'card-status-pill';
+          card.classList.remove('fully-approved');
+
+          if (femAppr && mascAppr) {
+            statusBadge.classList.add('status-approved');
+            statusBadge.querySelector('.status-text').textContent = '✓ 100% Homologado';
+            card.classList.add('fully-approved');
+          } else if (femAppr || mascAppr) {
+            statusBadge.classList.add('status-partial');
+            statusBadge.querySelector('.status-text').textContent = femAppr ? 'Natalia Aprovada' : 'Guido Aprovado';
+          } else {
+            statusBadge.querySelector('.status-text').textContent = 'Pendente';
+          }
+        }
+      });
+
+      // Atualizar progresso geral
+      const pct = Math.round((count / totalItems) * 100);
+      document.getElementById('stat-progress').textContent = `${count} / ${totalItems} (${pct}%)`;
+      document.getElementById('footer-progress-text').textContent = `${count} / ${totalItems} Aprovados (${pct}%)`;
+      document.getElementById('progress-fill').style.width = `${pct}%`;
+    }
+
+    function filterCards(cat) {
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+
+      const cards = document.querySelectorAll('.phrase-card');
+      cards.forEach(c => {
+        if (cat === 'all' || c.getAttribute('data-category') === cat) {
+          c.style.display = 'block';
+        } else {
+          c.style.display = 'none';
+        }
+      });
+    }
+
+    let currentPlaylist = [];
+    let playlistIndex = 0;
+
+    function stopAllPlayback() {
+      currentPlaylist = [];
+      document.querySelectorAll('audio').forEach(a => {
+        a.pause();
+        a.currentTime = 0;
+      });
+    }
+
+    function playAllSequential(voice) {
+      stopAllPlayback();
+      const phrasesList = ["01_apresentacao", "02_alerta_cao", "03_alerta_gato", "04_alerta_ave", "05_atualizacao_cao", "06_atualizacao_gato", "07_atualizacao_ave", "08_clima_tempestade", "09_clima_granizo", "10_clima_frio", "11_clima_calor", "12_alerta_animal", "13_atualizacao_animal", "14_alerta_coelho", "15_atualizacao_coelho", "16_atualizacao_rastro_tutor", "17_atualizacao_rastro_amigos"];
+      currentPlaylist = phrasesList.map(id => document.getElementById(`audio-${voice}-${id}`)).filter(Boolean);
+      playlistIndex = 0;
+
+      function playNext() {
+        if (playlistIndex < currentPlaylist.length) {
+          const a = currentPlaylist[playlistIndex];
+          a.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          a.play();
+          a.onended = () => {
+            playlistIndex++;
+            playNext();
+          };
+        }
+      }
+
+      playNext();
+    }
+
+    function exportReport() {
+      const count = Object.keys(approved).length;
+      const pct = Math.round((count / totalItems) * 100);
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify({
+        projeto: "Alerta Pet Brasil - Cascavel",
+        data_validacao: new Date().toISOString(),
+        termo_obrigatorio: "PERDIDO",
+        total_audios: totalItems,
+        total_aprovados: count,
+        percentual: pct,
+        detalhes: approved
+      }, null, 2));
+
+      const dlAnchor = document.createElement('a');
+      dlAnchor.setAttribute("href", dataStr);
+      dlAnchor.setAttribute("download", `RELATORIO_VALIDACAO_AUDIOS_PERDIDO_${new Date().toISOString().slice(0,10)}.json`);
+      document.body.appendChild(dlAnchor);
+      dlAnchor.click();
+      dlAnchor.remove();
+      alert(`Relatório gerado com sucesso! ${count} de ${totalItems} áudios aprovados.`);
+    }
+
+    // Iniciar UI
+    window.addEventListener('DOMContentLoaded', () => {
+      updateUI();
+    });
+  </script>
+</body>
+</html>
