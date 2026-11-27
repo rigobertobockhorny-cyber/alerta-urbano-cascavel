@@ -301,7 +301,15 @@ Para fazer qualquer alteração futura no aplicativo:
 8. **Aba Parceiros no Modo Noturno:**
    - **Fundo e Cabeçalho:** Palco em preto total (`#000000`), cabeçalho em preto fosco (`#14161B`).
    - **Botões e Chips:** Zero verde e zero marrom. Botão "Seja Parceiro" em Preto Sólido (`#000000`). Chips de filtro ativos em Preto Sólido com borda branca; inativos em preto fosco. Todos os botões internos em preto sólido.
-9. **Aba Copiloto no Modo Noturno:**
+9. **Aba Copiloto (Estrutura Homologada Zero Scroll):**
+   - **Encaixe em Tela Única:** 100% visível sem qualquer barra de rolagem (zero scroll vertical em 390x844, com folga de ~158px acima do dock).
+   - **Botão Superior:** "GUIA E MISSÕES DO TESTADOR" em pílula compacta de 28px no topo (zona verde no modo diurno e preto fosco no noturno).
+   - **Hero Card:** Abaixado para o nível do final do degradê. Título no topo, texto padronizado nacional ("na sua região"), patinha amarela oscilante à esquerda e botão "ATIVAR PATINHA" à direita. Botão redundante "DESATIVAR PATINHA" excluído.
+   - **Voz Oficial:** Compacto em 32px com alternância Natália / Guido.
+   - **O que avisar por voz:** 1 linha por item com switch toggle padronizado.
+   - **Ritmo de Busca:** Zero emojis, explicação em 1 linha e botões de seleção idênticos aos switches padronizados (24h com tag Recomendado, 12h, 6h).
+
+10. **Aba Copiloto no Modo Noturno:**
    - **Hero Card & Configurações:** Preto fosco (`#14161B`) com textos de alto contraste.
    - **Botões Principais:** Botão "ATIVAR PATINHA" em Preto Sólido (`#000000`) com borda e texto brancos (zero verde); "DESATIVAR PATINHA" em preto fosco.
    - **Locutor Oficial:** Voz selecionada em Preto Sólido (`#000000`), inativa em preto fosco.
