@@ -580,7 +580,22 @@
     .tab-pane.active { display: block; }
     /* ONDAS PERMANENTES: Ativas em todas as abas (Inicio, Mapa, Pets, Parceiros, Copiloto) */
     body.tab-mapa .main-stage {
-      background: #009B3A !important;
+      background: linear-gradient(180deg, 
+        #009B3A 0px, 
+        #009B3A 35px, 
+        #21853D 42px, 
+        #4D985B 48px, 
+        #7DAB80 54px, 
+        #B0C3AA 58px, 
+        #D5DDD0 62px, 
+        #EDE8DF 66px, 
+        #EDE8DF calc(100% - 62px), 
+        #D5DDD0 calc(100% - 48px), 
+        #B0C3AA calc(100% - 36px), 
+        #7DAB80 calc(100% - 24px), 
+        #4D985B calc(100% - 14px), 
+        #21853D calc(100% - 6px), 
+        #009B3A 100%) !important;
     }
     .tab-pane#tab-inicio {
       background: linear-gradient(180deg, 
@@ -4390,6 +4405,18 @@
       width: 100% !important;
       border-bottom: none !important;
     }
+    .pets-fixed-header .header-label-title {
+      color: #FFFFFF !important;
+      font-weight: 900 !important;
+      letter-spacing: 0.5px !important;
+      text-transform: uppercase !important;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.45) !important;
+    }
+    .pets-fixed-header .header-label-sub {
+      color: rgba(255, 255, 255, 0.92) !important;
+      font-weight: 700 !important;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35) !important;
+    }
     .pets-scroll-viewport,
     .parceiros-scroll-viewport {
       flex: 1 !important;
@@ -4598,30 +4625,14 @@
 
     /* =========================================================================
        DEGRADÊ UNIFICADO BRASIL (DIRETRIZ OFICIAL RIGO: VERDE - AREIA - VERDE)
-       Padrão visual unificado em todas as telas: Início, Pets, Parceiros e Copiloto
+       O degradê mestre reside no .main-stage fixo. As abas deslizam na frente.
        ========================================================================= */
     .tab-pane#tab-inicio,
     #tab-inicio,
     #tab-pets,
     #tab-parceiros,
     #tab-copiloto {
-      background: linear-gradient(180deg, 
-        #009B3A 0px, 
-        #009B3A 35px, 
-        #21853D 42px, 
-        #4D985B 48px, 
-        #7DAB80 54px, 
-        #B0C3AA 58px, 
-        #D5DDD0 62px, 
-        #EDE8DF 66px, 
-        #EDE8DF calc(100% - 62px), 
-        #D5DDD0 calc(100% - 48px), 
-        #B0C3AA calc(100% - 36px), 
-        #7DAB80 calc(100% - 24px), 
-        #4D985B calc(100% - 14px), 
-        #21853D calc(100% - 6px), 
-        #009B3A 100%) !important;
-      background-attachment: fixed !important;
+      background: transparent !important;
     }
 
     /* ========================================================
@@ -5212,8 +5223,8 @@
         <div class="pets-fixed-header" style="background:transparent; padding:6px 12px 4px;">
           <!-- LINHA DE REGISTRO RÁPIDO SLIM COM ROLAGEM HORIZONTAL SUAVE -->
           <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:4px;">
-            <span style="font-size:10.5px; font-weight:900; letter-spacing:0.5px; color:#FFFFFF; text-shadow:0 1px 2px rgba(0,0,0,0.35); text-transform:uppercase;">Rede de Proteção Animal</span>
-            <span style="font-size:9.5px; color:rgba(255,255,255,0.9); font-weight:700;">Toque para registrar</span>
+            <span class="header-label-title" style="font-size:10.5px; font-weight:900; letter-spacing:0.5px; color:#FFFFFF; text-shadow:0 1px 3px rgba(0,0,0,0.45); text-transform:uppercase;">Rede de Proteção Animal</span>
+            <span class="header-label-sub" style="font-size:9.5px; color:rgba(255,255,255,0.92); font-weight:700; text-shadow:0 1px 2px rgba(0,0,0,0.35);">Toque para registrar</span>
           </div>
           <div style="display:flex; gap:6px; overflow-x:auto; padding-bottom:4px; -webkit-overflow-scrolling:touch; scrollbar-width:none;">
             <button type="button" onclick="abrirModalPet('pet_perdido')" style="flex-shrink:0; height:28px; padding:0 10px; font-size:11px; font-weight:800; border-radius:999px; background:#FFFFFF; color:#2E2417; border:1px solid rgba(0,0,0,0.14); cursor:pointer;">+ Pet Desaparecido</button>
