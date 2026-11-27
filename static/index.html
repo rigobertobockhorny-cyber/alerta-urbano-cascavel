@@ -4572,128 +4572,173 @@
       flex-shrink: 0;
     }
 
-    /* Linha de Alerta da Cidade Direto no Degradê */
+    /* ========================================================
+       CARD DE ALERTA METEOROLÓGICO / DEFESA CIVIL (COR TOTAL + TICKER)
+       Diretriz Oficial Rigo: Moldura Preta no Esboço, Cor Total Sólida
+       ======================================================== */
     .city-alert-direct {
+      margin-top: 6px;
+      padding: 0 8px;
+      height: 30px;
+      min-height: 30px;
+      border-radius: 8px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 6px;
-      margin-top: 3px;
-      padding: 2px 0 0;
+      gap: 8px;
       cursor: pointer;
       user-select: none;
-      background: transparent !important;
-      border: none !important;
-    }
-
-    .alert-direct-text {
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: 0.3px;
-      white-space: nowrap;
+      -webkit-user-select: none;
+      box-sizing: border-box;
+      transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
       overflow: hidden;
-      text-overflow: ellipsis;
-      transition: color 0.3s ease, filter 0.3s ease;
+      z-index: 10;
     }
 
-    .alert-direct-hint {
-      font-size: 8.5px;
-      font-weight: 800;
-      padding: 1px 5px;
-      border-radius: 4px;
-      letter-spacing: 0.2px;
-      flex-shrink: 0;
-      opacity: 0.8;
-      transition: all 0.2s ease;
+    /* MODO 1: TEMPO ESTÁVEL / SEM ALERTA (BRANCO SÓLIDO LIMPO) */
+    .city-alert-direct.alerta-modo-branco {
+      background: #FFFFFF !important;
+      border: 1px solid rgba(0, 0, 0, 0.08) !important;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
     }
-
-    /* MODO 1: NORMAL / TEMPO ESTÁVEL (Cinza Prateado / Branco suave no verde) */
     .city-alert-direct.alerta-modo-branco .alert-direct-text {
-      color: #E2E8F0 !important;
-      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
-      animation: pulseTranquiloDireto 4s infinite ease-in-out;
+      color: #1E293B !important;
+      font-weight: 800;
     }
     .city-alert-direct.alerta-modo-branco .alert-direct-hint {
-      color: #E2E8F0;
-      background: rgba(255, 255, 255, 0.12);
-      border: 1px solid rgba(255, 255, 255, 0.22);
+      color: #009B3A;
+      background: #EBFDF2;
+      border: 1px solid rgba(0, 155, 58, 0.25);
     }
 
-    /* MODO 2: ALERTA LARANJA (Defesa Civil / Simepar) */
+    /* MODO 2: ALERTA LARANJA (LARANJA SÓLIDO VIBRANTE) */
+    .city-alert-direct.alerta-modo-laranja {
+      background: #F97316 !important; /* Laranja Defesa Civil */
+      border: 1px solid #EA580C !important;
+      box-shadow: 0 3px 10px rgba(249, 115, 22, 0.45);
+      animation: pulseCardLaranja 2s infinite ease-in-out;
+    }
     .city-alert-direct.alerta-modo-laranja .alert-direct-text {
-      color: #FFB300 !important;
-      text-shadow: 0 0 8px rgba(255, 179, 0, 0.8), 0 1px 3px rgba(0, 0, 0, 0.6);
-      animation: pulseLaranjaDireto 1.8s infinite ease-in-out;
+      color: #FFFFFF !important;
+      font-weight: 900;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
     }
     .city-alert-direct.alerta-modo-laranja .alert-direct-hint {
-      color: #000;
-      background: #FFB300;
-      border: 1px solid #FFA000;
-      font-weight: 900;
+      color: #7C2D12;
+      background: #FFEDD5;
+      border: 1px solid #FDBA74;
     }
 
-    /* MODO 3: ALERTA VERMELHO (Grande Perigo / Defesa Civil) */
+    /* MODO 3: ALERTA VERMELHO (VERMELHO SÓLIDO VIBRANTE) */
+    .city-alert-direct.alerta-modo-vermelho {
+      background: #DC2626 !important; /* Vermelho Alerta Máximo */
+      border: 1px solid #B91C1C !important;
+      box-shadow: 0 3px 12px rgba(220, 38, 38, 0.55);
+      animation: pulseCardVermelho 0.9s infinite ease-in-out;
+    }
     .city-alert-direct.alerta-modo-vermelho .alert-direct-text {
-      color: #FF334B !important;
-      text-shadow: 0 0 10px rgba(255, 51, 75, 0.9), 0 1px 4px rgba(0, 0, 0, 0.7);
-      animation: pulseVermelhoDireto 0.85s infinite ease-in-out;
+      color: #FFFFFF !important;
+      font-weight: 900;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
     }
     .city-alert-direct.alerta-modo-vermelho .alert-direct-hint {
-      color: #FFF;
-      background: #D50000;
-      border: 1px solid #FF1744;
+      color: #7F1D1D;
+      background: #FEE2E2;
+      border: 1px solid #FCA5A5;
+    }
+
+    @keyframes pulseCardLaranja {
+      0%, 100% { box-shadow: 0 2px 8px rgba(249, 115, 22, 0.35); }
+      50% { box-shadow: 0 4px 14px rgba(249, 115, 22, 0.6); }
+    }
+
+    @keyframes pulseCardVermelho {
+      0%, 100% { box-shadow: 0 2px 8px rgba(220, 38, 38, 0.45); }
+      50% { box-shadow: 0 4px 16px rgba(220, 38, 38, 0.8); }
+    }
+
+    /* Viewport e Ticker Contínuo do Alerta */
+    .alert-ticker-viewport {
+      flex: 1;
+      min-width: 0;
+      overflow: hidden;
+      white-space: nowrap;
+      position: relative;
+      mask-image: linear-gradient(to right, transparent, black 12px, black calc(100% - 12px), transparent);
+      -webkit-mask-image: linear-gradient(to right, transparent, black 12px, black calc(100% - 12px), transparent);
+    }
+    .alert-ticker-track {
+      display: inline-flex;
+      white-space: nowrap;
+      will-change: transform;
+      animation: alertTickerSlide 34s linear infinite;
+    }
+    .alert-ticker-viewport:hover .alert-ticker-track {
+      animation-play-state: paused;
+    }
+    @keyframes alertTickerSlide {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .alert-direct-text {
+      font-size: 11px;
+      letter-spacing: 0.35px;
+      padding-right: 32px;
+      display: inline-block;
+    }
+    .alert-direct-hint {
+      font-size: 8.5px;
       font-weight: 900;
-    }
-
-    @keyframes pulseTranquiloDireto {
-      0%, 100% { opacity: 0.95; }
-      50% { opacity: 0.35; }
-    }
-
-    @keyframes pulseLaranjaDireto {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.35; transform: scale(0.97); }
-    }
-
-    @keyframes pulseVermelhoDireto {
-      0%, 100% { opacity: 1; transform: scale(1.02); }
-      50% { opacity: 0.25; transform: scale(0.96); }
+      padding: 2px 6px;
+      border-radius: 5px;
+      letter-spacing: 0.2px;
+      flex-shrink: 0;
+      text-transform: uppercase;
     }
 
     /* ========================================================
-       CARD ARENOSO DE CAMPANHAS (DIRETRIZ OFICIAL RIGO)
-       Cor e acabamento idênticos às Parcerias/Copiloto (#E4D5BC)
-       Posicionado exatamente onde o Rigo marcou o retângulo vermelho
+       CARD ARENOSO DE CAMPANHAS (AMPLIADO E COM SUSPIRO - DIRETRIZ RIGO)
+       Cor Areia Oficial Encorpada (#E4D5BC), maior altura, sem corte de texto
        ======================================================== */
     .campaign-sand-card {
       background: #E4D5BC !important; /* Areia Oficial Encorpada */
-      border: 1px solid rgba(110, 90, 60, 0.25) !important;
-      border-radius: 14px !important;
-      box-shadow: 0 2px 8px rgba(74, 46, 27, 0.08);
-      margin: 8px 12px 10px !important;
-      padding: 9px 14px !important;
+      border: 1px solid rgba(110, 90, 60, 0.28) !important;
+      border-radius: 16px !important;
+      box-shadow: 0 3px 10px rgba(74, 46, 27, 0.08);
+      margin: 14px 12px 14px !important;
+      padding: 16px 20px !important;
       text-align: center;
       position: relative;
       z-index: 5;
+      overflow: visible !important;
+      box-sizing: border-box !important;
+      min-height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .home-campaign-phrase {
-      font-size: 12.5px;
+      font-size: 13.5px !important;
       font-weight: 800;
       color: #2E2417; /* Marrom escuro acolhedor sobre areia */
-      line-height: 1.35;
-      min-height: 34px;
+      line-height: 1.45 !important;
       display: flex;
       align-items: center;
       justify-content: center;
       font-style: italic;
-      transition: opacity 0.55s ease-in-out, transform 0.55s ease-in-out;
+      transition: opacity 0.6s ease-in-out, transform 0.6s ease-in-out;
       opacity: 1;
+      padding: 2px 4px !important;
+      box-sizing: border-box !important;
+      overflow: visible !important;
+      width: 100%;
     }
 
     .home-campaign-phrase.fade-out {
       opacity: 0;
-      transform: translateY(2px);
+      transform: translateY(3px);
     }
 
     /* Ondulações Eliminadas - Transição 100% no Degradê Conforme Diretriz Rigo */
@@ -4753,40 +4798,219 @@
       flex: 1;
     }
 
-    /* Container de Perfis Sociais com Swipe no Dedo */
-    .swipe-protetores-container {
-      display: flex;
-      gap: 10px;
-      overflow-x: auto;
-      padding: 4px 2px 8px;
-      scroll-snap-type: x mandatory;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: none;
-    }
-    .swipe-protetores-container::-webkit-scrollbar {
-      display: none;
+    /* ========================================================
+       SHOWCASE CARD ÚNICO DE PROTETORES (DIRETRIZ OFICIAL RIGO)
+       1 Card Grande Visível por Vez • Swipe Horizontal • Auto 10s
+       ======================================================== */
+    .showcase-protetor-viewport {
+      width: 100%;
+      overflow: hidden;
+      position: relative;
+      border-radius: 18px;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: pan-y;
+      box-sizing: border-box;
     }
 
-    /* Card de Perfil de Rede Social para Swipe (Calibrado para Logos e Zero Scroll - Diretriz Rigo) */
-    .card-perfil-swipe {
-      flex: 0 0 170px;
-      height: 172px;
-      min-height: 172px;
-      scroll-snap-align: start;
+    .showcase-protetor-track {
+      display: flex;
+      width: 100%;
+      will-change: transform;
+      transition: transform 0.42s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    .showcase-protetor-card {
+      flex: 0 0 100%;
+      width: 100%;
+      box-sizing: border-box;
       background: #FAF7F2;
       border: 1.5px solid rgba(110, 90, 60, 0.22);
       border-radius: 18px;
-      padding: 10px 8px 8px;
-      box-shadow: 0 3px 10px rgba(74, 46, 27, 0.08);
+      padding: 13px 14px 12px;
+      box-shadow: 0 3px 12px rgba(74, 46, 27, 0.08);
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .showcase-top-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .showcase-avatar-box {
+      width: 62px;
+      height: 62px;
+      border-radius: 16px;
+      border: 2.5px solid #009B3A;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+      background: #FFFFFF;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .showcase-avatar-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .showcase-info-col {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .showcase-badge-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .showcase-badge {
+      font-size: 8.5px;
+      font-weight: 900;
+      background: #EBFDF2;
+      color: #009B3A;
+      padding: 2px 8px;
+      border-radius: 999px;
+      letter-spacing: 0.3px;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .showcase-nome {
+      font-size: 13.5px;
+      font-weight: 900;
+      color: #2E2417;
+      line-height: 1.25;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .showcase-sub {
+      font-size: 10.5px;
+      font-weight: 700;
+      color: #6E5A3C;
+    }
+
+    .showcase-bio-row {
+      font-size: 11px;
+      font-weight: 600;
+      color: #4A3C2A;
+      line-height: 1.35;
+      font-style: italic;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      max-height: calc(1.35em * 2);
+      background: rgba(228, 213, 188, 0.28);
+      padding: 6px 10px;
+      border-radius: 10px;
+      border-left: 3px solid #009B3A;
+    }
+
+    .showcase-pets-section {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      padding-top: 2px;
+    }
+
+    .showcase-pets-label {
+      font-size: 10px;
+      font-weight: 800;
+      color: #5A4730;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .showcase-pets-strip {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+      padding: 1px 0 3px;
+    }
+    .showcase-pets-strip::-webkit-scrollbar {
+      display: none;
+    }
+
+    .showcase-pet-thumb-wrap {
+      flex: 0 0 54px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      text-align: center;
       cursor: pointer;
-      transition: transform 0.15s ease, box-shadow 0.15s ease;
     }
-    .card-perfil-swipe:active {
-      transform: scale(0.97);
+
+    .showcase-pet-thumb {
+      width: 50px;
+      height: 50px;
+      border-radius: 12px;
+      border: 1.5px solid rgba(110, 90, 60, 0.25);
+      object-fit: cover;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+      background: #FFFFFF;
+    }
+
+    .showcase-pet-name {
+      font-size: 9.5px;
+      font-weight: 800;
+      color: #2E2417;
+      margin-top: 3px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 52px;
+      text-align: center;
+    }
+
+    .showcase-bottom-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid rgba(110, 90, 60, 0.16);
+      padding-top: 6px;
+      margin-top: 2px;
+    }
+
+    .showcase-btn-perfil {
+      font-size: 11px;
+      font-weight: 900;
+      color: #009B3A;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .protetor-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: rgba(110, 90, 60, 0.3);
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+    .protetor-dot.active {
+      width: 16px;
+      border-radius: 999px;
+      background: #009B3A;
     }
 
     /* Quadradinhos de Apoio / Espaço Destinado a Patrocinadores (Diretriz Rigo: 4 cards na tela) */
@@ -4927,34 +5151,37 @@
             </div>
           </div>
 
-          <!-- Linha 2: Alerta da Cidade Direto no Degradê (Sem Caixa, Sem Faixa Branca) -->
+          <!-- Linha 2: Card de Alerta Meteorológico / Defesa Civil (Cor Total + Ticker Contínuo - Diretriz Rigo) -->
           <div class="city-alert-direct alerta-modo-branco" id="city-alert-box" onclick="alternarModoAlertaTeste()" title="Toque para alternar modos de teste (Branco, Laranja e Vermelho)">
-            <div style="display:flex; align-items:center; gap:6px; flex:1; min-width:0;">
-              <span id="city-alert-ico" style="font-size:12px; line-height:1;">🛡️</span>
-              <span class="alert-direct-text" id="city-alert-msg">SEM ALERTA EM CASCAVEL • TEMPO ESTÁVEL</span>
+            <span id="city-alert-ico" style="font-size:13px; line-height:1; flex-shrink:0;">🛡️</span>
+            <div class="alert-ticker-viewport">
+              <div class="alert-ticker-track" id="city-alert-ticker-track">
+                <span class="alert-direct-text" id="city-alert-msg-1">🛡️ DEFESA CIVIL DE CASCAVEL: TEMPO ESTÁVEL E SEM ALERTAS • CÉU LIMPO E TEMPERATURA AGRADÁVEL • PROTEJA SEUS PETS COM ÁGUA FRESCA E CARINHO •</span>
+                <span class="alert-direct-text" id="city-alert-msg-2">🛡️ DEFESA CIVIL DE CASCAVEL: TEMPO ESTÁVEL E SEM ALERTAS • CÉU LIMPO E TEMPERATURA AGRADÁVEL • PROTEJA SEUS PETS COM ÁGUA FRESCA E CARINHO •</span>
+              </div>
             </div>
             <span class="alert-direct-hint" id="city-alert-hint">Testar</span>
           </div>
         </div>
 
-        <!-- 2. CORPO AREIA OFICIAL (#EDE8DF): CARD ARENOSO DE CAMPANHAS + ESTEIRAS (ZERO SCROLL - DIRETRIZ RIGO) -->
+        <!-- 2. CORPO AREIA OFICIAL (#EDE8DF): CARD DE CAMPANHA + ESTEIRA PETS + SHOWCASE PROTETORES (DIRETRIZ OFICIAL RIGO) -->
         <div class="home-body-sand" style="padding-top:2px;">
           
-          <!-- Card Arenoso de Campanhas (Exatamente onde Rigo marcou o retângulo vermelho) -->
+          <!-- Bloco Vermelho: Card Arenoso de Campanhas Ampliado (Com suspiro em relação ao clima • Sem corte de texto) -->
           <div class="campaign-sand-card">
             <div id="home-campaign-text" class="home-campaign-phrase">
               Quem ama, cuida e procura junto: a maior rede de proteção, resgate e reencontro animal.
             </div>
           </div>
 
-          <!-- Bloco 1: Quem ama, cuida e procura junto (Nome Histórico Oficial Rigo - Step 21453) -->
-          <div class="belt-block belt-block-pets" style="margin-top:2px; margin-bottom:2px;">
-            <div class="belt-head" style="display:flex; align-items:center; justify-content:space-between; margin-bottom:2px;">
-              <div class="belt-title pet-title" style="display:flex; align-items:center; gap:5px;">
-                <svg class="belt-svg" viewBox="0 0 24 24" fill="currentColor" width="13" height="13" style="color:#2E2417;">
+          <!-- Bloco Amarelo: Quem ama, cuida e procura junto (Com suspiro harmonioso • Velocidade relaxante) -->
+          <div class="belt-block belt-block-pets" style="margin-top:10px; margin-bottom:12px;">
+            <div class="belt-head" style="display:flex; align-items:center; justify-content:space-between; margin-bottom:4px;">
+              <div class="belt-title pet-title" style="display:flex; align-items:center; gap:6px;">
+                <svg class="belt-svg" viewBox="0 0 24 24" fill="currentColor" width="14" height="14" style="color:#2E2417;">
                   <path d="M12 12c-2 0-3.5 1.5-3.5 3.3 0 1.6 1.2 2.7 3.5 2.7s3.5-1.1 3.5-2.7C15.5 13.5 14 12 12 12zm-5.8-2.3c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm11.6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-8.6-4.1c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm5.6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/>
                 </svg>
-                <span style="font-size:11.5px; font-weight:800; color:#2E2417; letter-spacing:0.2px;">Quem ama, cuida e procura junto</span>
+                <span style="font-size:12px; font-weight:800; color:#2E2417; letter-spacing:0.2px;">Quem ama, cuida e procura junto</span>
               </div>
             </div>
             
@@ -4965,23 +5192,26 @@
             </div>
           </div>
 
-          <!-- Bloco 2: Comunidade de Protetores (Juntadinha com Esteira dos Animais para Zero Scroll - Diretriz Rigo) -->
-          <div class="belt-block belt-block-protetores" style="margin-top:2px; margin-bottom:2px;">
-            <div class="belt-head" style="display:flex; align-items:center; justify-content:space-between; margin-bottom:2px;">
-              <div class="belt-title" style="display:flex; align-items:center; gap:5px;">
-                <svg viewBox="0 0 24 24" fill="none" stroke="#2E2417" stroke-width="2.2" width="13" height="13">
+          <!-- Bloco Azul/Roxo: Comunidade de Protetores (CARD ÚNICO GRANDE • 1 por tela • Swipe + Auto 10s • Diretriz Rigo) -->
+          <div class="belt-block belt-block-protetores" style="margin-top:8px; margin-bottom:4px;">
+            <div class="belt-head" style="display:flex; align-items:center; justify-content:space-between; margin-bottom:6px;">
+              <div class="belt-title" style="display:flex; align-items:center; gap:6px;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#2E2417" stroke-width="2.2" width="14" height="14">
                   <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
                   <circle cx="9" cy="7" r="4"></circle>
                   <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
                   <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
                 </svg>
-                <span style="font-size:11.5px; font-weight:800; color:#2E2417; letter-spacing:0.2px;">Comunidade de Protetores</span>
+                <span style="font-size:12px; font-weight:800; color:#2E2417; letter-spacing:0.2px;">Comunidade de Protetores</span>
               </div>
+              <div id="protetores-carousel-dots" style="display:flex; align-items:center; gap:5px;"></div>
             </div>
 
-            <!-- Container Horizontal para passar com o dedo (Swipe) -->
-            <div class="swipe-protetores-container" id="swipe-protetores-container">
-              <!-- Cards de perfil social inseridos dinamicamente -->
+            <!-- Viewport do Card Único Grande de Protetor com Galeria de Pets -->
+            <div class="showcase-protetor-viewport" id="showcase-protetor-viewport">
+              <div class="showcase-protetor-track" id="showcase-protetor-track">
+                <!-- Card grande de cada protetor gerado dinamicamente -->
+              </div>
             </div>
           </div>
         </div>
@@ -7205,7 +7435,7 @@
       const beltPets = document.getElementById('belt-pets-track');
       if (beltPets) {
         if (!pets.length) {
-          calibrarVelocidadeEsteira(beltPets, 26);
+          calibrarVelocidadeEsteira(beltPets, 16);
         } else {
           const cardsHtml = pets.map(p => {
             let badgeText = 'Perdido';
@@ -7238,7 +7468,7 @@
           while (loopHtml.length < 800) loopHtml += cardsHtml;
           beltPets.className = 'belt-track';
           beltPets.innerHTML = loopHtml + loopHtml;
-          calibrarVelocidadeEsteira(beltPets, 28);
+          calibrarVelocidadeEsteira(beltPets, 16);
         }
       }
 
@@ -7415,37 +7645,188 @@
       }
     ];
 
+    // =========================================================================
+    // COMUNIDADE DE PROTETORES: CARD ÚNICO GRANDE COM SWIPE & AUTO 10S (DIRETRIZ RIGO)
+    // =========================================================================
+    let _idxProtetorAtual = 0;
+    let _timerAutoProtetor = null;
+
+    function irParaProtetor(idx) {
+      const track = document.getElementById('showcase-protetor-track');
+      const dots = document.querySelectorAll('.protetor-dot');
+      if (!track) return;
+      const total = track.children.length;
+      if (total === 0) return;
+      _idxProtetorAtual = (idx + total) % total;
+      track.style.transform = `translateX(-${_idxProtetorAtual * 100}%)`;
+      dots.forEach((d, i) => d.classList.toggle('active', i === _idxProtetorAtual));
+    }
+
+    function iniciarCarrosselProtetores(total) {
+      const viewport = document.getElementById('showcase-protetor-viewport');
+      if (!viewport || total <= 1) return;
+
+      if (_timerAutoProtetor) clearInterval(_timerAutoProtetor);
+
+      // Auto-avanço suave a cada 10 segundos conforme diretriz Rigo
+      _timerAutoProtetor = setInterval(() => {
+        irParaProtetor(_idxProtetorAtual + 1);
+      }, 10000);
+
+      // Suporte a swipe no dedo com touchstart, touchmove, touchend
+      if (!viewport.dataset.swipeAtivo) {
+        viewport.dataset.swipeAtivo = 'true';
+        let startX = 0;
+        let deltaX = 0;
+        let isTouching = false;
+
+        viewport.addEventListener('touchstart', (e) => {
+          if (e.touches.length !== 1) return;
+          startX = e.touches[0].clientX;
+          deltaX = 0;
+          isTouching = true;
+          if (_timerAutoProtetor) clearInterval(_timerAutoProtetor);
+        }, { passive: true });
+
+        viewport.addEventListener('touchmove', (e) => {
+          if (!isTouching || e.touches.length !== 1) return;
+          deltaX = e.touches[0].clientX - startX;
+        }, { passive: true });
+
+        viewport.addEventListener('touchend', () => {
+          if (!isTouching) return;
+          isTouching = false;
+          if (deltaX < -45) {
+            irParaProtetor(_idxProtetorAtual + 1);
+          } else if (deltaX > 45) {
+            irParaProtetor(_idxProtetorAtual - 1);
+          }
+          if (_timerAutoProtetor) clearInterval(_timerAutoProtetor);
+          _timerAutoProtetor = setInterval(() => {
+            irParaProtetor(_idxProtetorAtual + 1);
+          }, 10000);
+        }, { passive: true });
+      }
+    }
+
     function renderizarEsteiraProtetores() {
-      const container = document.getElementById('swipe-protetores-container');
-      if (!container) return;
+      const track = document.getElementById('showcase-protetor-track');
+      const dotsContainer = document.getElementById('protetores-carousel-dots');
+      if (!track) return;
 
       const protetores = state.protetores || [];
       const lista = protetores.length > 0 ? protetores : [
-        { nome: 'Marcos Resgatista', tipo_perfil: 'protetor', foto_url: '/static/testadores/rigo.png', animais: [{}, {}], bio: 'Guardião Voluntário Cascavel' },
-        { nome: 'Ana Protetora', tipo_perfil: 'protetor', foto_url: '/static/testadores/andre.png', animais: [{}], bio: 'Resgates e Cuidados' },
-        { nome: 'ONG Patinhas Cascavel', tipo_perfil: 'ong', foto_url: '/static/testadores/irmao.png', animais: [{}, {}, {}], bio: 'Acolhimento e Adoção' },
-        { nome: 'Clube dos Protetores', tipo_perfil: 'ong', foto_url: '/static/testadores/rigo.png', animais: [{}, {}], bio: 'Rede de Proteção Animal' }
+        {
+          nome: 'Mariana Silva (Resgate Independente)',
+          tipo_perfil: 'protetor',
+          foto_url: '/static/darkplanner_pessoas/mulher_01_mariana.jpg',
+          bairro: 'Cascavel Velho',
+          bio: 'Resgatista voluntária e independente atuando há mais de 6 anos em Cascavel. Foco no acolhimento de mãezinhas com ninhadas, tratamento veterinário, castração e adoção responsável.',
+          animais: [
+            { titulo: 'Fred • Golden Retriever', foto_url: '/static/darkplanner_pets/cachorro_05_rottweiler_jovem.jpg', id: 5535 },
+            { titulo: 'Frida • Pinscher', foto_url: '/static/darkplanner_pets/cachorra_05_pinscher.jpg', id: 5525 },
+            { titulo: 'Fred • Calico', foto_url: '/static/darkplanner_pets/gato_05_tigrado_marrom.jpg', id: 5515 },
+            { titulo: 'Frida • Frajola', foto_url: '/static/darkplanner_pets/gata_05_frajola.jpg', id: 5505 }
+          ]
+        },
+        {
+          nome: 'Coletivo Patinhas do Oeste',
+          tipo_perfil: 'ong',
+          foto_url: '/static/darkplanner_pessoas/mulher_02_camila.jpg',
+          bairro: 'Alto Alegre',
+          bio: 'Rede colaborativa de protetores e lares temporários de Cascavel. Socorremos animais atropelados ou vítimas de abandono com castração solidária e encaminhamento consciente.',
+          animais: [
+            { titulo: 'Thor • Pastor Alemão', foto_url: '/static/darkplanner_pets/cachorro_01_labrador.jpg', id: 5501 },
+            { titulo: 'Mel • Caramelo', foto_url: '/static/darkplanner_pets/cachorra_02_caramelo.jpg', id: 5502 },
+            { titulo: 'Mimi • Siamês', foto_url: '/static/darkplanner_pets/gato_01_laranja.jpg', id: 5503 },
+            { titulo: 'Luna • Branca', foto_url: '/static/darkplanner_pets/gata_02_branca.jpg', id: 5504 }
+          ]
+        },
+        {
+          nome: 'Carlos Eduardo (Lar São Francisco)',
+          tipo_perfil: 'protetor',
+          foto_url: '/static/darkplanner_pessoas/homem_01_rodrigo.jpg',
+          bairro: 'Santa Cruz',
+          bio: 'Dedicado ao resgate de cães idosos e animais especiais com tratamento ortopédico e fisioterapia veterinária em Cascavel.',
+          animais: [
+            { titulo: 'Bob • Vira-Lata', foto_url: '/static/darkplanner_pets/cachorro_03_husky.jpg', id: 5506 },
+            { titulo: 'Bidu • Schnauzer', foto_url: '/static/darkplanner_pets/cachorro_04_buldogue.jpg', id: 5507 },
+            { titulo: 'Nina • Frajolinha', foto_url: '/static/darkplanner_pets/gato_03_preto.jpg', id: 5508 },
+            { titulo: 'Amora • Tigradinha', foto_url: '/static/darkplanner_pets/gata_04_siames.jpg', id: 5509 }
+          ]
+        }
       ];
 
-      container.innerHTML = lista.map(p => {
-        const foto = p.foto_url || '/static/testadores/rigo.png';
+      if (dotsContainer) {
+        dotsContainer.innerHTML = lista.map((_, i) => `
+          <div class="protetor-dot ${i === _idxProtetorAtual ? 'active' : ''}" onclick="irParaProtetor(${i})"></div>
+        `).join('');
+      }
+
+      track.innerHTML = lista.map(p => {
+        const foto = p.foto_url || '/static/darkplanner_pessoas/mulher_01_mariana.jpg';
         const badge = p.tipo_perfil === 'ong' ? '🏛️ ONG OFICIAL' : '🛡️ PROTETOR';
-        const qtdPets = (p.animais && p.animais.length) ? p.animais.length : 2;
-        return `
-          <div class="card-perfil-swipe" onclick="trocarAba('pets')">
-            <div style="width:72px; height:72px; border-radius:18px; border:2.5px solid #009B3A; overflow:hidden; margin-bottom:5px; box-shadow:0 2px 8px rgba(0,0,0,0.10); background:#FFFFFF; display:flex; align-items:center; justify-content:center;">
-              <img src="${foto}" alt="${escapeAttr(p.nome)}" style="width:100%; height:100%; object-fit:cover;" onerror="this.onerror=null; this.src='/static/testadores/rigo.png';">
+        const petsList = (p.animais && p.animais.length) ? p.animais : [];
+        const qtdAnimais = petsList.length || p.total_resgates || 4;
+        const bairro = p.bairro || 'Cascavel';
+        const bio = p.bio || 'Voluntário na proteção e acolhimento animal em Cascavel.';
+
+        const petsHtml = petsList.slice(0, 4).map(pet => {
+          const petFoto = pet.foto_url || '/static/darkplanner_pets/cachorra_02_caramelo.jpg';
+          let petNome = (pet.titulo || 'Pet').split('•')[0].trim();
+          petNome = petNome.replace(/^Ninhada\s+(\d+)?\s*(Filhotes)?/i, '$1 Filhotes').trim();
+          if (petNome.length > 13) petNome = petNome.substring(0, 12) + '…';
+          const petId = pet.id || '';
+          return `
+            <div class="showcase-pet-thumb-wrap" onclick="event.stopPropagation(); ${petId ? `abrirDetalheById(${petId})` : `trocarAba('pets')`}">
+              <img class="showcase-pet-thumb" src="${escapeAttr(petFoto)}" alt="${escapeAttr(petNome)}" loading="lazy" onerror="this.onerror=null; this.src='/static/darkplanner_pets/cachorra_02_caramelo.jpg';">
+              <span class="showcase-pet-name">${escapeHtml(petNome)}</span>
             </div>
-            <span style="font-size:8.5px; font-weight:900; background:#EBFDF2; color:#009B3A; padding:2px 8px; border-radius:999px; margin-bottom:4px; letter-spacing:0.3px;">${badge}</span>
-            <div style="font-size:12px; font-weight:900; color:#2E2417; line-height:1.2; max-width:155px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${escapeHtml(p.nome)}</div>
-            <div style="font-size:9.5px; font-weight:700; color:#6E5A3C; margin-top:2px;">${qtdPets} animais assistidos</div>
-            <div style="margin-top:auto; width:100%; padding-top:5px; border-top:1px solid rgba(110,90,60,0.15); display:flex; justify-content:center;">
-              <span style="font-size:10.5px; font-weight:900; color:#009B3A;">Ver Perfil ›</span>
+          `;
+        }).join('');
+
+        return `
+          <div class="showcase-protetor-card" onclick="trocarAba('pets')">
+            <div class="showcase-top-row">
+              <div class="showcase-avatar-box">
+                <img class="showcase-avatar-img" src="${escapeAttr(foto)}" alt="${escapeAttr(p.nome)}" onerror="this.onerror=null; this.src='/static/darkplanner_pessoas/mulher_01_mariana.jpg';">
+              </div>
+              <div class="showcase-info-col">
+                <div class="showcase-badge-row">
+                  <span class="showcase-badge">${badge}</span>
+                  ${p.verificado ? '<span style="font-size:10px; color:#009B3A; font-weight:900;" title="Verificado">✓</span>' : ''}
+                </div>
+                <div class="showcase-nome">${escapeHtml(p.nome)}</div>
+                <div class="showcase-sub">${qtdAnimais} animais assistidos • ${escapeHtml(bairro)}</div>
+              </div>
+            </div>
+
+            <div class="showcase-bio-row">
+              "${escapeHtml(bio)}"
+            </div>
+
+            <div class="showcase-pets-section">
+              <div class="showcase-pets-label">
+                <span>🐾 Animais sob cuidados (${qtdAnimais}):</span>
+                <span style="font-size:9.5px; color:#009B3A; font-weight:700;">Toque no pet para ver</span>
+              </div>
+              <div class="showcase-pets-strip">
+                ${petsHtml}
+              </div>
+            </div>
+
+            <div class="showcase-bottom-row">
+              <span style="font-size:9.5px; color:#6E5A3C; font-weight:700;">Rede de Proteção Animal</span>
+              <span class="showcase-btn-perfil" onclick="event.stopPropagation(); trocarAba('pets')">
+                Ver Perfil Completo ›
+              </span>
             </div>
           </div>
         `;
       }).join('');
-      return;
+
+      iniciarCarrosselProtetores(lista.length);
+      irParaProtetor(_idxProtetorAtual);
     }
 
     function renderizarEsteiraApoioHome() {
@@ -7473,7 +7854,7 @@
       `).join('');
 
       track.innerHTML = htmlSlots + htmlSlots;
-      calibrarVelocidadeEsteira(track, 24, 3500);
+      calibrarVelocidadeEsteira(track, 14, 3500);
     }
 
     function renderizarEsteiraParceirosHome() {
@@ -7505,11 +7886,12 @@
     function atualizarBlocoAlertaCidade() {
       const c = state.clima;
       const box = document.getElementById('city-alert-box');
-      const txt = document.getElementById('city-alert-msg');
+      const msg1 = document.getElementById('city-alert-msg-1');
+      const msg2 = document.getElementById('city-alert-msg-2');
       const ico = document.getElementById('city-alert-ico');
       const hint = document.getElementById('city-alert-hint');
       const logoBtn = document.querySelector('.logo-bubble-btn');
-      if (!box || !txt) return;
+      if (!box) return;
 
       let nivelEfetivo = 'branco';
       if (_modoAlertaTesteForcado) {
@@ -7526,21 +7908,25 @@
         logoBtn.classList.remove('alerta-laranja', 'alerta-vermelho');
       }
 
+      let textoAlerta = '';
       if (nivelEfetivo === 'vermelho') {
         box.classList.add('alerta-modo-vermelho');
         if (ico) ico.textContent = '🚨';
-        txt.textContent = 'ALERTA VERMELHO DA DEFESA CIVIL • PERIGO SEVERO';
+        textoAlerta = '🚨 ALERTA VERMELHO DA DEFESA CIVIL PARA CASCAVEL • RISCO SEVERO DE TEMPESTADE E GRANIZO • PROTEÇÃO MÁXIMA DOS PETS: MANTENHA TODOS DENTRO DE CASA •';
         if (logoBtn) logoBtn.classList.add('alerta-vermelho');
       } else if (nivelEfetivo === 'laranja') {
         box.classList.add('alerta-modo-laranja');
         if (ico) ico.textContent = '⚠️';
-        txt.textContent = 'ALERTA LARANJA DA DEFESA CIVIL • RISCO DE TEMPESTADE';
+        textoAlerta = '⚠️ ALERTA LARANJA DA DEFESA CIVIL PARA CASCAVEL • PREVISÃO DE CHUVAS FORTES E VENTOS • RECOLHA E ABRIGUE OS ANIMAIS EM LOCAL COBERTO E SEGURO •';
         if (logoBtn) logoBtn.classList.add('alerta-laranja');
       } else {
         box.classList.add('alerta-modo-branco');
         if (ico) ico.textContent = '🛡️';
-        txt.textContent = 'SEM ALERTA EM CASCAVEL • TEMPO ESTÁVEL';
+        textoAlerta = '🛡️ DEFESA CIVIL DE CASCAVEL: TEMPO ESTÁVEL E SEM ALERTAS • CÉU LIMPO E TEMPERATURA AGRADÁVEL • PROTEJA SEUS PETS COM ÁGUA FRESCA E CARINHO •';
       }
+
+      if (msg1) msg1.textContent = textoAlerta;
+      if (msg2) msg2.textContent = textoAlerta;
 
       if (hint) {
         hint.textContent = _modoAlertaTesteForcado ? `Teste: ${nivelEfetivo.toUpperCase()}` : 'Testar';
@@ -7576,7 +7962,7 @@
             elText.textContent = CAMPANHAS_ROTATIVAS[_idxCampanhaAtual];
             elText.classList.remove('fade-out');
           }, 600);
-        }, 4500);
+        }, 6500);
       }
     }
 

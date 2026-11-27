@@ -702,8 +702,9 @@ def rota_validar_vozes():
 
 @app.route("/mesa-vozes")
 @app.route("/MESA_VALIDACAO_VOZES_OFICIAIS.html")
+@app.route("/MESA_VALIDACAO_AUDIOS_PET_PERDIDO.html")
 def rota_mesa_vozes():
-    resp = make_response(send_from_directory("static", "MESA_VALIDACAO_VOZES_OFICIAIS.html"))
+    resp = make_response(send_from_directory("static", "MESA_VALIDACAO_AUDIOS_PET_PERDIDO.html"))
     resp.headers["Cache-Control"] = "no-cache, no-store, must-revalidate, max-age=0"
     return resp
 
@@ -711,7 +712,10 @@ def rota_mesa_vozes():
 @app.route("/vozes_frases_oficiais/<path:filename>")
 def rota_arquivos_vozes_frases(filename):
     desktop_vozes = r"C:\Users\rigob\OneDrive\Desktop\Alerta Urbano\vozes_frases_oficiais"
-    return send_from_directory(desktop_vozes, filename)
+    if os.path.exists(desktop_vozes) and os.path.exists(os.path.join(desktop_vozes, filename)):
+        return send_from_directory(desktop_vozes, filename)
+    static_vozes = os.path.join(BASE_DIR, "static", "vozes_frases_oficiais")
+    return send_from_directory(static_vozes, filename)
 
 
 @app.route("/vozes_darkplanner/<path:filename>")
