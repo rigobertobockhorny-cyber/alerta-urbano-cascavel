@@ -2126,47 +2126,10 @@
       background: var(--bg);
       z-index: 1;
     }
-    .map-top-pills {
-      position: absolute;
-      top: 12px;
-      left: 10px;
-      right: 10px;
-      z-index: 400;
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 6px;
-      box-sizing: border-box;
-    }
+    
     .map-top-pills::-webkit-scrollbar { display: none; }
-    .map-pill {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-      min-width: 0;
-      box-sizing: border-box;
-      padding: 8px 2px;
-      border-radius: 999px;
-      border: 1.5px solid rgba(110, 90, 60, 0.3) !important;
-      background: #E4D5BC !important; /* COR AREIA (SEM SELEÇÃO) */
-      color: #2E2417 !important;
-      font-size: 11.5px;
-      font-weight: 800;
-      text-align: center;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      cursor: pointer;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
-      transition: all 0.2s ease;
-    }
-    .map-pill.active {
-      background: #EDE8DF !important; /* COR BEGE (SELECIONADO - REGRA OFICIAL RIGO) */
-      color: #2E2417 !important;
-      border: 2px solid #5A4730 !important;
-      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.18) !important;
-      font-weight: 900 !important;
-    }
+    
+    
     .map-tools {
       position: absolute;
       right: 12px;
@@ -2944,18 +2907,8 @@
     }
 
     /* Destaques do Mapa no Verde (REGRA OFICIAL RIGO: ZERO PRETO) */
-    #tab-mapa .map-pill {
-      background: #E4D5BC !important; /* AREIA */
-      color: #2E2417 !important;
-      border: 1.5px solid rgba(110, 90, 60, 0.3) !important;
-    }
-    #tab-mapa .map-pill.active {
-      background: #EDE8DF !important; /* BEGE SELECIONADO */
-      color: #2E2417 !important;
-      font-weight: 900 !important;
-      border: 2px solid #5A4730 !important;
-      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.18) !important;
-    }
+    #tab-mapa 
+    #tab-mapa 
 
     /* Copiloto em Branco Puro com Botão Preto Sólido (Zero Verde e Zero Degradê) */
     #tab-copiloto .hero-copiloto {
@@ -3902,19 +3855,8 @@
     
 
     /* PILULAS DO MAPA (AREIA, ATIVO EM BEGE) */
-    .map-pill {
-      background: var(--pet-areia) !important;
-      color: var(--pet-texto-escuro) !important;
-      border: 1.5px solid rgba(110, 90, 60, 0.25) !important;
-      font-weight: 800 !important;
-    }
-    .map-pill.active {
-      background: var(--pet-bege) !important;
-      color: #000000 !important;
-      border: 2px solid var(--pet-marrom-dark) !important;
-      font-weight: 900 !important;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
-    }
+    
+    
 
     /* FERRAMENTAS DO MAPA (AREIA / BEGE ATIVO) */
     .map-tool-btn {
@@ -4303,28 +4245,11 @@
        REGRA OFICIAL RIGO: BOTÕES SEM MARGEM / SEM BORDA
        1. MAPA: Pílulas Pets / Parceiros (Abaixados e Sem Margem)
        ======================================================== */
-    .map-top-pills {
-      top: 30px !important;
-    }
+    
     .map-pill,
-    #tab-mapa .map-pill {
-      background: #EDE8DF !important; /* Bege Claro sem seleção */
-      color: #5A4730 !important;
-      border: none !important;
-      outline: none !important;
-      font-weight: 700 !important;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.12) !important;
-      transition: all 0.15s ease !important;
-    }
+    #tab-mapa 
     .map-pill.active,
-    #tab-mapa .map-pill.active {
-      background: #9E8560 !important; /* Marronzinho sólido oficial */
-      color: #FFFFFF !important;
-      font-weight: 900 !important;
-      border: none !important;
-      outline: none !important;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.16) !important;
-    }
+    #tab-mapa 
 
     /* 2. PETS: Pílulas Desaparecidos, Resgatados, Reencontro, Adoção (SÓ A ESCRITA QUANDO INATIVO) */
     .pillar-tab,
@@ -4534,6 +4459,72 @@
 
 
     
+    
+    /* =========================================================================
+       PÍLULAS DA ABA MAPA (DIRETRIZ OFICIAL RIGO: ZERO ESTEIRA • SOLTAS NO TOPO)
+       Mesmo tamanho (110px) • Posição elevada (top:10px) • Ativa escurinha, inativa clarinha
+       ========================================================================= */
+    .map-top-pills {
+      position: absolute !important;
+      top: 10px !important;
+      left: 50% !important;
+      transform: translateX(-50%) !important;
+      z-index: 400 !important;
+      display: flex !important;
+      flex-direction: row !important;
+      gap: 8px !important;
+      align-items: center !important;
+      justify-content: center !important;
+      background: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+      padding: 0 !important;
+      width: auto !important;
+      max-width: none !important;
+    }
+
+    .map-pill {
+      width: 110px !important;
+      min-width: 110px !important;
+      max-width: 110px !important;
+      height: 34px !important;
+      min-height: 34px !important;
+      max-height: 34px !important;
+      border-radius: 999px !important;
+      font-size: 12.5px !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      text-align: center !important;
+      box-sizing: border-box !important;
+      padding: 0 4px !important;
+      cursor: pointer !important;
+      user-select: none !important;
+      transition: all 0.15s ease !important;
+    }
+
+    /* Pílula Ativa: Mais Marronzinha / Escurinha (Diretriz Rigo) */
+    .map-pill.active {
+      background: #5A4730 !important;
+      color: #FFFFFF !important;
+      font-weight: 900 !important;
+      border: 1.5px solid #443B2C !important;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.22) !important;
+    }
+
+    /* Pílula Inativa: Mais Clarinha (Diretriz Rigo) */
+    .map-pill:not(.active) {
+      background: #EDE8DF !important;
+      color: #5A4730 !important;
+      font-weight: 800 !important;
+      border: 1.5px solid rgba(110, 90, 60, 0.28) !important;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.10) !important;
+    }
+
+    .map-pill:active {
+      transform: scale(0.96) !important;
+    }
+
     /* =========================================================================
        BOTÕES HERO COPILOTO: ALINHAMENTO MILIMÉTRICO RIGOROSO (DIRETRIZ RIGO)
        Zero margin-top • Mesma altura (48px) • Verde Oficial vs Areia Suave
@@ -5133,9 +5124,9 @@
       <section class="tab-pane map-pane" id="tab-mapa">
         <div id="map"></div>
 
-        <div class="map-top-pills" style="background:#E4D5BC; padding:3px; border-radius:999px; border:1px solid rgba(110,90,60,0.22); box-shadow:0 3px 10px rgba(0,0,0,0.12);">
-          <button type="button" class="map-pill active" data-pilar="pet" onclick="filtrarMapa('pet', this)" style="border-radius:999px; font-weight:800; font-size:12px; padding:6px 16px;">Pets Perdidos</button>
-          <button type="button" class="map-pill" data-pilar="parceiros" onclick="filtrarMapa('parceiros', this)" style="border-radius:999px; font-weight:800; font-size:12px; padding:6px 16px;">Parceiros Locais</button>
+        <div class="map-top-pills">
+          <button type="button" class="map-pill active" data-pilar="pet" onclick="filtrarMapa('pet', this)">Pets</button>
+          <button type="button" class="map-pill" data-pilar="parceiros" onclick="filtrarMapa('parceiros', this)">Parceiros</button>
         </div>
 
         <div class="trail-bar" id="trail-bar" style="background:#E4D5BC; border:1.5px solid rgba(110,90,60,0.28); border-radius:14px; box-shadow:0 4px 14px rgba(74,46,27,0.15);">
