@@ -4246,11 +4246,6 @@
        1. MAPA: Pílulas Pets / Parceiros (Abaixados e Sem Margem)
        ======================================================== */
     
-    .map-pill,
-    #tab-mapa 
-    .map-pill.active,
-    #tab-mapa 
-
     /* 2. PETS: Pílulas Desaparecidos, Resgatados, Reencontro, Adoção (SÓ A ESCRITA QUANDO INATIVO) */
     .pillar-tab,
     #pets-main-pills .pillar-tab {
@@ -4504,6 +4499,7 @@
     }
 
     /* Pílula Ativa: Mais Marronzinha / Escurinha (Diretriz Rigo) */
+    #tab-mapa .map-pill.active,
     .map-pill.active {
       background: #5A4730 !important;
       color: #FFFFFF !important;
@@ -4513,6 +4509,7 @@
     }
 
     /* Pílula Inativa: Mais Clarinha (Diretriz Rigo) */
+    #tab-mapa .map-pill:not(.active),
     .map-pill:not(.active) {
       background: #EDE8DF !important;
       color: #5A4730 !important;
