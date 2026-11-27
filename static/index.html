@@ -4145,21 +4145,38 @@
     #modal-perfil {
       background: linear-gradient(180deg, 
         #009B3A 0px, 
-        #009B3A 22px, 
-        #1EA54F 30px, 
-        #3BAE63 38px, 
-        #59B878 46px, 
-        #76C18C 54px, 
-        #9ECFA8 60px, 
-        #C9DFC9 66px, 
-        #EDE8DF 72px, 
-        #EDE8DF calc(100% - 72px), 
-        #D5DDD0 calc(100% - 56px), 
-        #B0C3AA calc(100% - 42px), 
-        #7DAB80 calc(100% - 28px), 
-        #4D985B calc(100% - 16px), 
-        #21853D calc(100% - 8px), 
+        #009B3A 55px, 
+        #1EA54F 80px, 
+        #3BAE63 105px, 
+        #59B878 128px, 
+        #76C18C 145px, 
+        #9ECFA8 158px, 
+        #C9DFC9 168px, 
+        #EDE8DF 178px, 
+        #EDE8DF calc(100% - 200px), 
+        #C9DFC9 calc(100% - 170px), 
+        #9ECFA8 calc(100% - 145px), 
+        #76C18C calc(100% - 120px), 
+        #59B878 calc(100% - 95px), 
+        #3BAE63 calc(100% - 72px), 
+        #1EA54F calc(100% - 50px), 
+        #009B3A calc(100% - 30px), 
         #009B3A 100%) !important;
+    }
+    body:not(.theme-dark):not([data-theme="dark"]) #modal-perfil::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 75px;
+      background: linear-gradient(180deg, 
+        rgba(0, 155, 58, 0) 0%, 
+        rgba(0, 155, 58, 0.35) 30%, 
+        rgba(0, 155, 58, 0.85) 75%, 
+        #009B3A 100%) !important;
+      pointer-events: none !important;
+      z-index: 10 !important;
     }
     #modal-perfil .profile-fs-header {
       background: transparent !important;
@@ -6050,6 +6067,11 @@
     [data-theme="dark"] #modal-perfil,
     body.theme-dark #modal-perfil {
       background: #000000 !important;
+    }
+
+    [data-theme="dark"] #modal-perfil::after,
+    body.theme-dark #modal-perfil::after {
+      display: none !important;
     }
 
     [data-theme="dark"] #modal-perfil .profile-fs-header,
