@@ -594,11 +594,12 @@
     .home-pane.active {
       display: flex;
       flex-direction: column;
-      justify-content: flex-start;
-      overflow-y: auto !important;
-      -webkit-overflow-scrolling: touch;
+      justify-content: space-between;
+      overflow-y: hidden !important;
+      overflow-x: hidden !important;
       padding: 0 !important;
       gap: 0;
+      height: 100% !important;
       min-height: 100%;
     }
     .tab-pane.map-pane {
@@ -4101,11 +4102,11 @@
       cursor: pointer;
     }
 
-    /* ESTEIRA PETS: 2 POR TELA, QUADRADINHO, AMPLO COM RESPIRO */
+    /* ESTEIRA PETS: QUADRADINHO AJUSTADO PARA CABER SEM SCROLL NA HOME (DIRETRIZ RIGO) */
     .unified-belt-card.pet-belt-card,
     #belt-pets-track .unified-belt-card {
-      width: 142px !important;
-      height: 138px !important;
+      width: 130px !important;
+      height: 122px !important;
       border-radius: 14px !important;
       border: 1.5px solid rgba(110, 90, 60, 0.25) !important;
       box-shadow: 0 3px 10px rgba(0, 0, 0, 0.10) !important;
@@ -4514,18 +4515,19 @@
     }
 
 
-    /* ==================== NOVA ARQUITETURA DE CORES HOME (PADRÃO RIGO) ==================== */
+    /* ==================== NOVA ARQUITETURA DE CORES HOME (ZERO SCROLL - PADRÃO RIGO) ==================== */
     .tab-pane#tab-inicio,
     #tab-inicio,
     .home-pane.active {
       display: flex !important;
       flex-direction: column !important;
-      overflow-y: auto !important;
-      -webkit-overflow-scrolling: touch !important;
+      justify-content: space-between !important;
+      overflow-y: hidden !important;
+      overflow-x: hidden !important;
       min-height: 100% !important;
-      height: auto !important;
+      height: 100% !important;
       padding: 0 !important;
-      padding-bottom: 6px !important;
+      padding-bottom: 2px !important;
       background: linear-gradient(180deg, 
         #009B3A 0%, 
         #009B3A 10%, 
@@ -4629,16 +4631,17 @@
       display: none;
     }
 
-    /* Card de Perfil de Rede Social para Swipe (Ampliado para Logos e Perfis Oficiais - Diretriz Rigo) */
+    /* Card de Perfil de Rede Social para Swipe (Calibrado para Logos e Zero Scroll - Diretriz Rigo) */
     .card-perfil-swipe {
-      flex: 0 0 195px;
-      min-height: 220px;
+      flex: 0 0 170px;
+      height: 168px;
+      min-height: 168px;
       scroll-snap-align: start;
       background: #FAF7F2;
       border: 1.5px solid rgba(110, 90, 60, 0.22);
-      border-radius: 20px;
-      padding: 16px 12px 14px;
-      box-shadow: 0 4px 14px rgba(74, 46, 27, 0.10);
+      border-radius: 18px;
+      padding: 8px 8px 6px;
+      box-shadow: 0 3px 10px rgba(74, 46, 27, 0.08);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -4769,7 +4772,7 @@
           </div>
 
           <!-- Pílula Slim de Alerta Climático: Subida e Integrada logo abaixo do clima -->
-          <div class="alert-ticker" id="alert-ticker" onclick="abrirClimaBanner()" style="margin:4px 0 2px 0; padding:3px 10px; border-radius:999px; background:rgba(0,0,0,0.22); cursor:pointer;">
+          <div class="alert-ticker" id="alert-ticker" onclick="abrirClimaBanner()" style="margin:2px 0 0 0; padding:2px 10px; border-radius:999px; background:rgba(0,0,0,0.22); cursor:pointer;">
             <div class="ticker-track" id="ticker-track">
               <span class="ticker-item" style="color:#FFFFFF; font-weight:800; font-size:10px; letter-spacing:0.4px;">🐾 CASCAVEL • RADAR E MONITORAMENTO CLIMÁTICO ATIVO</span>
               <span class="ticker-item" style="color:#FFFFFF; font-weight:800; font-size:10px; letter-spacing:0.4px;">🐾 CASCAVEL • RADAR E MONITORAMENTO CLIMÁTICO ATIVO</span>
@@ -4777,24 +4780,24 @@
           </div>
         </div>
 
-        <!-- 2. CORPO AREIA OFICIAL (#EDE8DF): FRASE EM COR ESCURA + ESTEIRAS COM TÍTULOS HISTÓRICOS OFICIAIS -->
-        <div class="home-body-sand" style="padding-top:10px;">
+        <!-- 2. CORPO AREIA OFICIAL (#EDE8DF): FRASE EM COR ESCURA + ESTEIRAS JUNTINHAS (ZERO SCROLL - DIRETRIZ RIGO) -->
+        <div class="home-body-sand" style="padding-top:2px;">
           
-          <!-- Frase Oficial Rigo: Suspiro generoso e respirável, em cor escura #2E2417 no Areia #EDE8DF -->
-          <div style="padding:12px 18px 14px; text-align:center;">
-            <div id="home-campaign-text" style="font-size:14.5px; font-weight:900; color:#2E2417; line-height:1.4; min-height:30px; display:flex; align-items:center; justify-content:center; font-style:italic;">
+          <!-- Frase Oficial Rigo: Legibilidade máxima no Areia #EDE8DF com respiro equilibrado -->
+          <div style="padding:4px 14px 2px; text-align:center;">
+            <div id="home-campaign-text" style="font-size:13px; font-weight:900; color:#2E2417; line-height:1.3; min-height:20px; display:flex; align-items:center; justify-content:center; font-style:italic;">
               Quem ama, cuida e procura junto: a maior rede de proteção, resgate e reencontro animal.
             </div>
           </div>
 
           <!-- Bloco 1: Quem ama, cuida e procura junto (Nome Histórico Oficial Rigo - Step 21453) -->
-          <div class="belt-block belt-block-pets" style="margin-top:12px; margin-bottom:14px;">
-            <div class="belt-head" style="display:flex; align-items:center; justify-content:space-between; margin-bottom:6px;">
-              <div class="belt-title pet-title" style="display:flex; align-items:center; gap:6px;">
-                <svg class="belt-svg" viewBox="0 0 24 24" fill="currentColor" width="14" height="14" style="color:#2E2417;">
+          <div class="belt-block belt-block-pets" style="margin-top:2px; margin-bottom:2px;">
+            <div class="belt-head" style="display:flex; align-items:center; justify-content:space-between; margin-bottom:2px;">
+              <div class="belt-title pet-title" style="display:flex; align-items:center; gap:5px;">
+                <svg class="belt-svg" viewBox="0 0 24 24" fill="currentColor" width="13" height="13" style="color:#2E2417;">
                   <path d="M12 12c-2 0-3.5 1.5-3.5 3.3 0 1.6 1.2 2.7 3.5 2.7s3.5-1.1 3.5-2.7C15.5 13.5 14 12 12 12zm-5.8-2.3c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm11.6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-8.6-4.1c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm5.6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/>
                 </svg>
-                <span style="font-size:12px; font-weight:800; color:#2E2417; letter-spacing:0.2px;">Quem ama, cuida e procura junto</span>
+                <span style="font-size:11.5px; font-weight:800; color:#2E2417; letter-spacing:0.2px;">Quem ama, cuida e procura junto</span>
               </div>
             </div>
             
@@ -4805,17 +4808,17 @@
             </div>
           </div>
 
-          <!-- Bloco 2: Comunidade de Protetores (Nome Histórico Oficial Rigo - Step 22065) -->
-          <div class="belt-block belt-block-protetores" style="margin-top:14px; margin-bottom:6px;">
-            <div class="belt-head" style="display:flex; align-items:center; justify-content:space-between; margin-bottom:6px;">
-              <div class="belt-title" style="display:flex; align-items:center; gap:6px;">
-                <svg viewBox="0 0 24 24" fill="none" stroke="#2E2417" stroke-width="2.2" width="14" height="14">
+          <!-- Bloco 2: Comunidade de Protetores (Juntadinha com Esteira dos Animais para Zero Scroll - Diretriz Rigo) -->
+          <div class="belt-block belt-block-protetores" style="margin-top:2px; margin-bottom:2px;">
+            <div class="belt-head" style="display:flex; align-items:center; justify-content:space-between; margin-bottom:2px;">
+              <div class="belt-title" style="display:flex; align-items:center; gap:5px;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#2E2417" stroke-width="2.2" width="13" height="13">
                   <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
                   <circle cx="9" cy="7" r="4"></circle>
                   <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
                   <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
                 </svg>
-                <span style="font-size:12.5px; font-weight:800; color:#2E2417; letter-spacing:0.2px;">Comunidade de Protetores</span>
+                <span style="font-size:11.5px; font-weight:800; color:#2E2417; letter-spacing:0.2px;">Comunidade de Protetores</span>
               </div>
             </div>
 
@@ -4827,7 +4830,7 @@
         </div>
 
         <!-- 3. FAIXA EXCLUSIVA APOIE-NOS: APENAS A ESCRITA EM BRANCO NO DEGRADÊ (Sem pílulas, sem emojis coloridos, sem coração - Diretriz Rigo) -->
-        <div class="home-apoie-zone" id="home-apoie-zone" style="padding:6px 0 10px; margin-top:4px;">
+        <div class="home-apoie-zone" id="home-apoie-zone" style="padding:4px 0 6px; margin-top:2px;">
           <!-- Esteira de Apoie-nos que corre suave e pode ser passada no dedo -->
           <div class="apoie-scroll-viewport" id="apoie-scroll-viewport">
             <div class="apoie-text-track" id="belt-apoio-track">
@@ -7287,14 +7290,14 @@
         const qtdPets = (p.animais && p.animais.length) ? p.animais.length : 2;
         return `
           <div class="card-perfil-swipe" onclick="trocarAba('pets')">
-            <div style="width:80px; height:80px; border-radius:20px; border:3px solid #009B3A; overflow:hidden; margin-bottom:8px; box-shadow:0 3px 10px rgba(0,0,0,0.12); background:#FFFFFF; display:flex; align-items:center; justify-content:center;">
+            <div style="width:64px; height:64px; border-radius:16px; border:2.5px solid #009B3A; overflow:hidden; margin-bottom:4px; box-shadow:0 2px 8px rgba(0,0,0,0.10); background:#FFFFFF; display:flex; align-items:center; justify-content:center;">
               <img src="${foto}" alt="${escapeAttr(p.nome)}" style="width:100%; height:100%; object-fit:cover;" onerror="this.onerror=null; this.src='/static/testadores/rigo.png';">
             </div>
-            <span style="font-size:9.5px; font-weight:900; background:#EBFDF2; color:#009B3A; padding:3px 10px; border-radius:999px; margin-bottom:6px; letter-spacing:0.3px;">${badge}</span>
-            <div style="font-size:13px; font-weight:900; color:#2E2417; line-height:1.25; max-width:170px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${escapeHtml(p.nome)}</div>
-            <div style="font-size:11px; font-weight:700; color:#6E5A3C; margin-top:3px;">${qtdPets} animais assistidos</div>
-            <div style="margin-top:auto; width:100%; padding-top:8px; border-top:1px solid rgba(110,90,60,0.15); display:flex; justify-content:center;">
-              <span style="font-size:11.5px; font-weight:900; color:#009B3A;">Ver Perfil ›</span>
+            <span style="font-size:8.5px; font-weight:900; background:#EBFDF2; color:#009B3A; padding:2px 7px; border-radius:999px; margin-bottom:3px; letter-spacing:0.3px;">${badge}</span>
+            <div style="font-size:11.5px; font-weight:900; color:#2E2417; line-height:1.2; max-width:150px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${escapeHtml(p.nome)}</div>
+            <div style="font-size:9.5px; font-weight:700; color:#6E5A3C; margin-top:1px;">${qtdPets} animais assistidos</div>
+            <div style="margin-top:auto; width:100%; padding-top:4px; border-top:1px solid rgba(110,90,60,0.15); display:flex; justify-content:center;">
+              <span style="font-size:10px; font-weight:900; color:#009B3A;">Ver Perfil ›</span>
             </div>
           </div>
         `;
