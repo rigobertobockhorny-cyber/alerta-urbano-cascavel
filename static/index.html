@@ -7355,7 +7355,7 @@
               </div>
               <div style="flex:1;">
                 <label class="form-label" for="cadastro-input-whatsapp" style="font-size:10.5px; font-weight:800; margin-bottom:3px; display:block; color:#2E2417;">WhatsApp</label>
-                <input type="tel" class="form-input" id="cadastro-input-whatsapp" placeholder="(45) 99999-9999" style="width:100%; height:38px; padding:6px 8px; font-size:12px; border-radius:8px; box-sizing:border-box;">
+                <input type="tel" class="form-input" id="cadastro-input-whatsapp" placeholder="(45) 99999-9999" oninput="formatarZapDinamico(this)" style="width:100%; height:38px; padding:6px 8px; font-size:12px; border-radius:8px; box-sizing:border-box;">
               </div>
             </div>
 
@@ -7367,13 +7367,13 @@
               </div>
               <div style="flex:1;">
                 <label class="form-label" for="cadastro-input-cidade" style="font-size:10.5px; font-weight:800; margin-bottom:3px; display:block; color:#2E2417;">Cidade</label>
-                <input type="text" class="form-input" id="cadastro-input-cidade" placeholder="Sua cidade" style="width:100%; height:38px; padding:6px 10px; font-size:12.5px; border-radius:8px; box-sizing:border-box;">
+                <input type="text" class="form-input" id="cadastro-input-cidade" value="Cascavel" placeholder="Sua cidade" style="width:100%; height:38px; padding:6px 10px; font-size:12.5px; border-radius:8px; box-sizing:border-box;">
               </div>
               <div style="width:62px;">
                 <label class="form-label" for="cadastro-select-estado" style="font-size:10.5px; font-weight:800; margin-bottom:3px; display:block; color:#2E2417;">UF</label>
                 <select class="form-select" id="cadastro-select-estado" style="width:100%; height:38px; padding:6px 4px; font-size:12px; border-radius:8px; box-sizing:border-box;">
-                  <option value="" disabled selected>UF</option>
-                  <option value="AC">AC</option><option value="AL">AL</option><option value="AP">AP</option><option value="AM">AM</option><option value="BA">BA</option><option value="CE">CE</option><option value="DF">DF</option><option value="ES">ES</option><option value="GO">GO</option><option value="MA">MA</option><option value="MT">MT</option><option value="MS">MS</option><option value="MG">MG</option><option value="PA">PA</option><option value="PB">PB</option><option value="PR" selected>PR</option><option value="PE">PE</option><option value="PI">PI</option><option value="RJ">RJ</option><option value="RN">RN</option><option value="RS">RS</option><option value="RO">RO</option><option value="RR">RR</option><option value="SC">SC</option><option value="SP">SP</option><option value="SE">SE</option><option value="TO">TO</option>
+                  <option value="PR" selected>PR</option>
+                  <option value="AC">AC</option><option value="AL">AL</option><option value="AP">AP</option><option value="AM">AM</option><option value="BA">BA</option><option value="CE">CE</option><option value="DF">DF</option><option value="ES">ES</option><option value="GO">GO</option><option value="MA">MA</option><option value="MT">MT</option><option value="MS">MS</option><option value="MG">MG</option><option value="PA">PA</option><option value="PB">PB</option><option value="PE">PE</option><option value="PI">PI</option><option value="RJ">RJ</option><option value="RN">RN</option><option value="RS">RS</option><option value="RO">RO</option><option value="RR">RR</option><option value="SC">SC</option><option value="SP">SP</option><option value="SE">SE</option><option value="TO">TO</option>
                 </select>
               </div>
             </div>
@@ -12563,12 +12563,26 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
       } catch (e) {}
     }
 
+    function formatarZapDinamico(input) {
+      if (!input) return;
+      let v = input.value.replace(/\D/g, '');
+      if (v.length > 11) v = v.slice(0, 11);
+      if (v.length > 6) {
+        input.value = `(${v.slice(0, 2)}) ${v.slice(2, 7)}-${v.slice(7)}`;
+      } else if (v.length > 2) {
+        input.value = `(${v.slice(0, 2)}) ${v.slice(2)}`;
+      } else if (v.length > 0) {
+        input.value = `(${v}`;
+      }
+    }
+
     function abrirPerfil(forcarCadastro = false) {
       let p = state.perfil || {};
-      if (!p.nome) {
+      if (!p.nome || p.cadastrado === undefined) {
         try { p = JSON.parse(localStorage.getItem('au_perfil') || '{}'); state.perfil = p; } catch(e) {}
       }
-      const estaCadastrado = Boolean(p.cadastrado || (p.nome && p.nome.trim() !== ''));
+      // DIRETRIZ SUPREMA RIGO: Só é considerado cadastrado se p.cadastrado === true (após clicar no botão Concluir Acesso & Entrar)
+      const estaCadastrado = Boolean(p && p.cadastrado === true);
 
       const viewCadastro = document.getElementById('perfil-view-cadastro');
       const viewLogado = document.getElementById('perfil-view-logado');
@@ -12580,6 +12594,29 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
         if (viewLogado) viewLogado.style.display = 'none';
         if (headerTitle) headerTitle.innerText = 'Acesso & Cadastro';
         if (headerSub) headerSub.innerText = 'Alerta Pet Brasil';
+
+        // Preenche campos caso haja dados parciais em andamento
+        const nomeInput = document.getElementById('cadastro-input-nome');
+        if (nomeInput && p.nome && !nomeInput.value) nomeInput.value = p.nome;
+        const zapInput = document.getElementById('cadastro-input-whatsapp');
+        if (zapInput && p.whatsapp && !zapInput.value) zapInput.value = p.whatsapp;
+        const bairroInput = document.getElementById('cadastro-input-bairro');
+        if (bairroInput && p.bairro && p.bairro !== 'Centro' && !bairroInput.value) bairroInput.value = p.bairro;
+        const cidadeInput = document.getElementById('cadastro-input-cidade');
+        if (cidadeInput && !cidadeInput.value) cidadeInput.value = (p.cidade || 'Cascavel');
+        const estadoSelect = document.getElementById('cadastro-select-estado');
+        if (estadoSelect && (p.estado || p.uf)) estadoSelect.value = (p.estado || p.uf);
+
+        // Estado visual do botão Google
+        const avisoGoogle = document.getElementById('google-conectado-aviso');
+        const btnGoogleText = document.getElementById('btn-google-text');
+        if (p.auth_provider === 'google' && (p.email || p.nome)) {
+          if (avisoGoogle) avisoGoogle.style.display = 'block';
+          if (btnGoogleText) btnGoogleText.textContent = `✓ Conectado: ${(p.nome || p.email).split(' ')[0]}`;
+        } else {
+          if (avisoGoogle) avisoGoogle.style.display = 'none';
+          if (btnGoogleText) btnGoogleText.textContent = 'Continuar com o Google';
+        }
       } else {
         if (viewCadastro) viewCadastro.style.display = 'none';
         if (viewLogado) viewLogado.style.display = 'block';
@@ -12696,18 +12733,36 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
       console.log('[Google Auth Nativo] Conta recebida do Android:', email, nome);
 
       let p = state.perfil || {};
-      const nomeFinal = (p.nome && p.nome !== 'Tutor Pet') ? p.nome : (nome || email.split('@')[0]);
+      const nomeFinal = (p.nome && p.nome !== 'Tutor Pet' && p.cadastrado) ? p.nome : (nome || email.split('@')[0]);
 
+      // Se já era um usuário que havia CONCLUÍDO cadastro anteriormente nesta conta:
+      if (p.cadastrado === true && p.whatsapp) {
+        state.perfil = {
+          ...p,
+          nome: nomeFinal,
+          email: email,
+          auth_provider: 'google'
+        };
+        try { localStorage.setItem('au_perfil', JSON.stringify(state.perfil)); } catch(e) {}
+        fecharGoogleAuth();
+        mostrarToast(`✓ Bem-vindo(a) de volta, ${nomeFinal}!`);
+        abrirPerfil(false);
+        return;
+      }
+
+      // NOVO CADASTRO OU CADASTRO PENDENTE:
+      // Mantém cadastrado como FALSE! O cadastro SÓ conclui ao clicar no botão Concluir Acesso & Entrar!
       state.perfil = {
         ...p,
         nome: nomeFinal,
         email: email,
-        auth_provider: 'google'
+        auth_provider: 'google',
+        cadastrado: false
       };
 
       try { localStorage.setItem('au_perfil', JSON.stringify(state.perfil)); } catch(e) {}
 
-      // Preenche os campos para o usuário completar WhatsApp e Tipo de Perfil
+      // Preenche os campos para o usuário completar WhatsApp e Bairro
       const nomeInput = document.getElementById('cadastro-input-nome');
       if (nomeInput) nomeInput.value = nomeFinal;
 
@@ -12717,17 +12772,14 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
       const btnGoogleText = document.getElementById('btn-google-text');
       if (btnGoogleText) btnGoogleText.textContent = `✓ Conectado: ${nomeFinal.split(' ')[0]}`;
 
+      const cidInput = document.getElementById('cadastro-input-cidade');
+      if (cidInput && !cidInput.value) cidInput.value = 'Cascavel';
+
       fecharGoogleAuth();
 
-      // Se já possui WhatsApp cadastrado, conclui direto. Se não, foca no WhatsApp
-      if (p.whatsapp && p.cadastrado) {
-        mostrarToast(`✓ Bem-vindo(a) de volta, ${nomeFinal}!`);
-        abrirPerfil(false);
-      } else {
-        mostrarToast(`✓ Conta Google conectada! Complete seu WhatsApp abaixo.`);
-        const zapInput = document.getElementById('cadastro-input-whatsapp');
-        if (zapInput) zapInput.focus();
-      }
+      mostrarToast(`✓ Conta Google conectada! Complete seu WhatsApp e bairro e clique em Concluir Acesso.`);
+      const zapInput = document.getElementById('cadastro-input-whatsapp');
+      if (zapInput) zapInput.focus();
     };
 
     window.falhaGoogleSignInNativo = function(err) {
@@ -12770,13 +12822,28 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
       }
 
       let p = state.perfil || {};
-      const nomeFinal = nome || email.split('@')[0];
+      const nomeFinal = (p.nome && p.nome !== 'Tutor Pet' && p.cadastrado) ? p.nome : (nome || email.split('@')[0]);
+
+      if (p.cadastrado === true && p.whatsapp) {
+        state.perfil = {
+          ...p,
+          nome: nomeFinal,
+          email: email,
+          auth_provider: 'google'
+        };
+        try { localStorage.setItem('au_perfil', JSON.stringify(state.perfil)); } catch(e) {}
+        fecharGoogleAuth();
+        mostrarToast(`✓ Bem-vindo(a), ${nomeFinal}!`);
+        abrirPerfil(false);
+        return;
+      }
 
       state.perfil = {
         ...p,
         nome: nomeFinal,
         email: email,
-        auth_provider: 'google'
+        auth_provider: 'google',
+        cadastrado: false
       };
 
       try { localStorage.setItem('au_perfil', JSON.stringify(state.perfil)); } catch(e) {}
@@ -12791,16 +12858,14 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
       const btnGoogleText = document.getElementById('btn-google-text');
       if (btnGoogleText) btnGoogleText.textContent = `✓ Conectado: ${nomeFinal.split(' ')[0]}`;
 
+      const cidInput = document.getElementById('cadastro-input-cidade');
+      if (cidInput && !cidInput.value) cidInput.value = 'Cascavel';
+
       fecharGoogleAuth();
 
-      if (p.whatsapp && p.cadastrado) {
-        mostrarToast(`✓ Bem-vindo(a), ${nomeFinal}!`);
-        abrirPerfil(false);
-      } else {
-        mostrarToast(`✓ Google conectado! Complete seu perfil e WhatsApp abaixo.`);
-        const zapInput = document.getElementById('cadastro-input-whatsapp');
-        if (zapInput) zapInput.focus();
-      }
+      mostrarToast(`✓ Google conectado! Complete seu WhatsApp e bairro e clique em Concluir Acesso.`);
+      const zapInput = document.getElementById('cadastro-input-whatsapp');
+      if (zapInput) zapInput.focus();
     }
 
     function concluirCadastroManual() {
@@ -12820,11 +12885,25 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
       const termos = document.getElementById('cadastro-termos-check')?.checked;
 
       if (!termos) {
-        mostrarToast('É obrigatório aceitar os Termos de Uso e Diretrizes.');
+        mostrarToast('É obrigatório concordar com os Termos e a Privacidade LGPD.');
         return;
       }
       if (!nome) {
-        mostrarToast('Por favor, digite seu nome completo.');
+        mostrarToast('Por favor, informe seu nome completo.');
+        const el = document.getElementById('cadastro-input-nome');
+        if (el) el.focus();
+        return;
+      }
+      if (!whatsapp) {
+        mostrarToast('Por favor, informe seu WhatsApp para receber avisos sobre pets.');
+        const el = document.getElementById('cadastro-input-whatsapp');
+        if (el) el.focus();
+        return;
+      }
+      if (!bairro) {
+        mostrarToast('Por favor, informe seu bairro.');
+        const el = document.getElementById('cadastro-input-bairro');
+        if (el) el.focus();
         return;
       }
 
@@ -12832,7 +12911,7 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
         ...state.perfil,
         nome,
         whatsapp,
-        bairro: bairro || 'Centro',
+        bairro,
         cidade: cidade || 'Cascavel',
         estado: estado || 'PR',
         endereco,
@@ -12935,10 +13014,38 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
       }
     }
 
+    function limparFormularioCadastro() {
+      const campos = [
+        'cadastro-input-nome',
+        'cadastro-input-whatsapp',
+        'cadastro-input-bairro',
+        'cadastro-input-ong-nome',
+        'cadastro-input-bio',
+        'cadastro-input-instagram',
+        'cadastro-input-chave-pix',
+        'cadastro-input-redes'
+      ];
+      campos.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.value = '';
+      });
+      const cid = document.getElementById('cadastro-input-cidade');
+      if (cid) cid.value = 'Cascavel';
+      const uf = document.getElementById('cadastro-select-estado');
+      if (uf) uf.value = 'PR';
+      const tCheck = document.getElementById('cadastro-termos-check');
+      if (tCheck) tCheck.checked = true;
+      const avisoG = document.getElementById('google-conectado-aviso');
+      if (avisoG) avisoG.style.display = 'none';
+      const btnG = document.getElementById('btn-google-text');
+      if (btnG) btnG.textContent = 'Continuar com o Google';
+    }
+
     function desconectarContaUsuario() {
       if (confirm('Deseja sair da sua conta neste aparelho?')) {
-        state.perfil = { cadastrado: false, nome: '', whatsapp: '', bairro: 'Centro' };
+        state.perfil = { cadastrado: false, nome: '', whatsapp: '', bairro: '', cidade: 'Cascavel', estado: 'PR' };
         try { localStorage.removeItem('au_perfil'); } catch(e) {}
+        limparFormularioCadastro();
         mostrarToast('Você saiu da sua conta.');
         abrirPerfil(true);
       }
@@ -12947,7 +13054,7 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
     function excluirContaUsuarioGooglePlay() {
       if (confirm('Atenção: Deseja realmente excluir permanentemente sua conta e todos os dados associados? Esta ação não pode ser desfeita (em conformidade com a Google Play Store e LGPD).')) {
         const token = state.autorToken;
-        state.perfil = { cadastrado: false, nome: '', whatsapp: '', bairro: 'Centro' };
+        state.perfil = { cadastrado: false, nome: '', whatsapp: '', bairro: '', cidade: 'Cascavel', estado: 'PR' };
         try {
           localStorage.removeItem('au_perfil');
           localStorage.removeItem('alerta_pets_curtidos');
@@ -12961,6 +13068,8 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
             body: JSON.stringify({ autor_token: token })
           }).catch(() => {});
         }
+
+        limparFormularioCadastro();
 
         ['perfil-nome', 'perfil-whatsapp', 'perfil-endereco'].forEach(id => {
           const el = document.getElementById(id);
@@ -13023,13 +13132,13 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
 
     function verificarUsuarioLogado(acaoNome) {
       let p = state.perfil || {};
-      if (!p.nome) {
+      if (!p.nome || p.cadastrado === undefined) {
         try { p = JSON.parse(localStorage.getItem('au_perfil') || '{}'); state.perfil = p; } catch(e) {}
       }
-      const estaCadastrado = Boolean(p.cadastrado || (p.nome && p.nome.trim() !== ''));
+      const estaCadastrado = Boolean(p && p.cadastrado === true);
       if (!estaCadastrado) {
         abrirPerfil(true);
-        mostrarToast(`Para ${acaoNome || 'esta ação'}, conecte sua conta Google ou faça seu cadastro.`);
+        mostrarToast(`Para ${acaoNome || 'esta ação'}, complete seus dados e clique em Concluir Acesso & Entrar.`);
         return false;
       }
       return true;
