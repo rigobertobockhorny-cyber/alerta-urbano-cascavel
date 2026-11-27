@@ -3796,12 +3796,15 @@
       --accent-brand-soft: #FED700;
     }
 
-    /* UNIFICAÇÃO DA PALETA: FUNDO MIN-HEIGHT EM TODAS AS TELAS */
+    /* UNIFICAÇÃO DA PALETA: ALTURA CONFINADA AO MAIN-STAGE (ZERO OVERFLOW 100VH) */
     #tab-pets,
     #tab-parceiros,
     #tab-copiloto {
-      min-height: 100vh;
+      min-height: 0 !important;
+      height: 100% !important;
+      max-height: 100% !important;
       box-sizing: border-box;
+      background: transparent !important;
     }
 
     /* CARDS E BLOCOS EM AREIA */
@@ -4629,14 +4632,11 @@
 
     /* =========================================================================
        DEGRADÊ UNIFICADO BRASIL (DIRETRIZ OFICIAL RIGO: VERDE - AREIA - VERDE)
-       Aplicado tanto no .main-stage quanto diretamente em cada aba ativa
+       Degradê mestre aplicado na base .main-stage com abas transparentes
        ========================================================================= */
     .main-stage,
     .tab-pane#tab-inicio.active,
-    #tab-inicio.active,
-    #tab-pets.active,
-    #tab-parceiros.active,
-    #tab-copiloto.active {
+    #tab-inicio.active {
       background: linear-gradient(180deg, 
         #009B3A 0px, 
         #009B3A 35px, 
@@ -4653,6 +4653,37 @@
         #4D985B calc(100% - 14px), 
         #21853D calc(100% - 6px), 
         #009B3A 100%) !important;
+    }
+
+    #tab-pets.active,
+    #tab-parceiros.active,
+    #tab-copiloto.active {
+      background: transparent !important;
+    }
+
+    /* =========================================================================
+       AURA VERDE NA BASE DE TODAS AS TELAS (DIRETRIZ OFICIAL RIGO)
+       Garante que o degradê verde inferior seja 100% visível logo acima do rodapé
+       em todas as telas (Início, Pets, Parceiros e Copiloto)
+       ========================================================================= */
+    .main-stage::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 54px;
+      background: linear-gradient(180deg, 
+        rgba(0, 155, 58, 0) 0%, 
+        rgba(0, 155, 58, 0.15) 20%, 
+        rgba(0, 155, 58, 0.40) 50%, 
+        rgba(0, 155, 58, 0.80) 80%, 
+        #009B3A 100%) !important;
+      pointer-events: none !important;
+      z-index: 450 !important;
+    }
+    body.tab-mapa .main-stage::after {
+      display: none !important;
     }
 
     /* ========================================================
