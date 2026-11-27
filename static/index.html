@@ -10743,7 +10743,7 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
       let seletorBuscaPetHtml = '';
       if (ehPet && !ehAvistado && a.tipo !== 'pet_adocao' && a.tipo !== 'pet_denuncia_maustratos') {
         const modoAtual = typeof obterModoBuscaPet === 'function' ? obterModoBuscaPet(a.id) : 'padrao';
-        const lblModo = modoAtual === 'intensiva' ? 'Busca Intensiva (6h • 2 km)' : (modoAtual === 'ativa' ? 'Busca Ativa (12h • 1.5 km)' : 'Busca Padrão (24h • 1 km)');
+        const lblModo = modoAtual === 'intensiva' ? 'Busca Intensiva (6h • 2.000m)' : (modoAtual === 'ativa' ? 'Busca Ativa (12h • 1.000m)' : 'Busca Padrão (24h • 500m)');
         seletorBuscaPetHtml = `
           <div style="margin-top:12px; border-radius:16px; background:#E4D5BC; box-shadow:0 3px 10px rgba(0,0,0,0.06); padding:10px 12px; border:1px solid rgba(110,90,60,0.18);">
             <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:5px;">
@@ -10753,20 +10753,19 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
             <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:5px; background:#EDE8DF; padding:3px; border-radius:10px;">
               <button type="button" id="btn-pet-modo-padrao-${a.id}" class="btn-ritmo-pill ${modoAtual === 'padrao' ? 'active' : ''}" onclick="definirModoBuscaPet(${a.id}, 'padrao')">
                 <span style="font-size:10.5px; font-weight:900;">Padrão</span>
-                <span style="font-size:8px; font-weight:700;">24h • 1 km</span>
+                <span style="font-size:8px; font-weight:700;">24h • 500m</span>
               </button>
               <button type="button" id="btn-pet-modo-ativa-${a.id}" class="btn-ritmo-pill ${modoAtual === 'ativa' ? 'active' : ''}" onclick="definirModoBuscaPet(${a.id}, 'ativa')">
                 <span style="font-size:10.5px; font-weight:900;">Ativa</span>
-                <span style="font-size:8px; font-weight:700;">12h • 1.5 km</span>
+                <span style="font-size:8px; font-weight:700;">12h • 1.000m</span>
               </button>
               <button type="button" id="btn-pet-modo-intensiva-${a.id}" class="btn-ritmo-pill ${modoAtual === 'intensiva' ? 'active' : ''}" onclick="definirModoBuscaPet(${a.id}, 'intensiva')">
                 <span style="font-size:10.5px; font-weight:900;">Intensiva</span>
-                <span style="font-size:8px; font-weight:700;">6h • 2 km</span>
+                <span style="font-size:8px; font-weight:700;">6h • 2.000m</span>
               </button>
             </div>
-            <div style="margin-top:6px; font-size:9.5px; color:#5A4730; line-height:1.3; display:flex; align-items:center; gap:4px;">
-              <span>🐾</span>
-              <span>Na <strong>Busca Intensiva</strong>, o Copiloto abre o radar para 2 km e prioriza avisos por voz.</span>
+            <div style="margin-top:6px; font-size:9.5px; color:#5A4730; line-height:1.3; text-align:center;">
+              Na <strong>Busca Intensiva</strong>, o Copiloto abre o radar para 2.000m e prioriza avisos por voz.
             </div>
           </div>
         `;
@@ -11700,11 +11699,11 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
     }
 
     // =========================================================================
-    // PROTOCOLO REDE TÁTICA DE BUSCA: VOCABULÁRIO & MODOS POR PET (DIRETRIZ RIGO)
+    // PROTOCOLO REDE TÁTICA DE BUSCA: TRÍADE OFICIAL RIGO (500m • 1.000m • 2.000m)
     // Modos de Busca:
-    // 1. 'padrao': 24 horas • 1.000m (comunitário)
-    // 2. 'ativa': 12 horas • 1.500m (engajamento ativo)
-    // 3. 'intensiva': 6 horas • 2.000m (Rede Solidária / Tutor / Link)
+    // 1. 'padrao': 24 horas • 500m (comportamento geral da cidade / comunitário)
+    // 2. 'ativa': 12 horas • 1.000m (engajamento voluntário declarado)
+    // 3. 'intensiva': 6 horas • 2.000m (Rede Solidária / Tutor / Link WhatsApp)
     // =========================================================================
     function obterModosBuscaPets() {
       try {
@@ -11752,23 +11751,23 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
 
         if (modo === 'intensiva') {
           if (bIntensiva) bIntensiva.classList.add('active');
-          if (lbl) lbl.textContent = 'Busca Intensiva (6h • 2 km)';
+          if (lbl) lbl.textContent = 'Busca Intensiva (6h • 2.000m)';
         } else if (modo === 'ativa') {
           if (bAtiva) bAtiva.classList.add('active');
-          if (lbl) lbl.textContent = 'Busca Ativa (12h • 1.5 km)';
+          if (lbl) lbl.textContent = 'Busca Ativa (12h • 1.000m)';
         } else {
           if (bPadrao) bPadrao.classList.add('active');
-          if (lbl) lbl.textContent = 'Busca Padrão (24h • 1 km)';
+          if (lbl) lbl.textContent = 'Busca Padrão (24h • 500m)';
         }
 
         if (emitirToast) {
           const pet = (state && state.alertas ? state.alertas : []).find(p => p.id === petId);
           const nome = pet ? pet.titulo : 'animal';
           const txt = modo === 'intensiva'
-            ? `🔥 Busca Intensiva ativada para ${nome}! Raio ampliado para 2 km na Patinha.`
+            ? `🔥 Busca Intensiva ativada para ${nome}! Raio ampliado para 2.000m na Patinha.`
             : (modo === 'ativa'
-                ? `⚡ Busca Ativa ativada para ${nome}! Raio ampliado para 1.5 km.`
-                : `🐾 Busca Padrão (24h) ativada para ${nome}.`);
+                ? `⚡ Busca Ativa ativada para ${nome}! Raio ampliado para 1.000m.`
+                : `🐾 Busca Padrão (24h • 500m) ativada para ${nome}.`);
           mostrarToast(txt);
         }
       } catch (_) {}
@@ -11777,8 +11776,8 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
     function obterRaioEfetivoParaPet(petId) {
       const modo = obterModoBuscaPet(petId);
       if (modo === 'intensiva') return 2000;
-      if (modo === 'ativa') return 1500;
-      return Number(localStorage.getItem('au_copiloto_raio_pet') || '1000');
+      if (modo === 'ativa') return 1000;
+      return 500;
     }
 
     function obterCooldownEfetivoParaPet(petId) {
