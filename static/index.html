@@ -4653,10 +4653,10 @@
       transform: scale(0.97);
     }
 
-    /* Quadradinhos de Apoio / Espaço Destinado a Patrocinadores (Diretriz Rigo) */
+    /* Quadradinhos de Apoio / Espaço Destinado a Patrocinadores (Diretriz Rigo: 4 cards na tela) */
     .quadradinho-apoio {
-      width: 72px;
-      height: 48px;
+      width: 88px;
+      height: 50px;
       flex-shrink: 0;
       border-radius: 13px;
       background: #FFFFFF;
@@ -7332,13 +7332,13 @@
       const track = document.getElementById('belt-apoio-track');
       if (!track) return;
 
-      // QUADRADINHOS DE APOIO / MARCAS PARCEIRAS (DIRETRIZ OFICIAL RIGO: APENAS AS 5 MARCAS HOMOLOGADAS)
+      // QUADRADINHOS DE APOIO / MARCAS PARCEIRAS (DIRETRIZ OFICIAL RIGO: APENAS AS 5 MARCAS HOMOLOGADAS • 4 CARDS NA TELA)
       const slotsApoio = [
-        { id: 'pedigree', html: '<span style="font-size:12.5px; font-weight:900; color:#C4121A; font-family:Georgia, serif; font-style:italic; letter-spacing:0.2px;">Pedigree</span>' },
-        { id: 'cota1', html: '<span style="font-size:9.5px; font-weight:900; color:#009B3A; text-align:center; line-height:1.15; letter-spacing:0.2px;">+ APOIE<br><span style="font-size:7.5px; font-weight:800; color:#5A4730;">AQUI</span></span>' },
-        { id: 'ifood', html: '<span style="font-size:13.5px; font-weight:900; color:#EA1D2C; font-style:italic; letter-spacing:-0.2px;">iFood</span>' },
-        { id: 'petshop', html: '<span style="font-size:9.5px; font-weight:900; color:#2E2417; text-align:center; line-height:1.15;">PetShop<br><span style="font-size:7.5px; font-weight:800; color:#009B3A;">Cascavel</span></span>' },
-        { id: 'zoetis', html: '<span style="font-size:13px; font-weight:900; color:#C2410C; letter-spacing:-0.2px;">zoetis</span>' }
+        { id: 'pedigree', html: '<span style="font-size:14px; font-weight:900; color:#C4121A; font-family:Georgia, serif; font-style:italic; letter-spacing:0.3px;">Pedigree</span>' },
+        { id: 'cota1', html: '<span style="font-size:10.5px; font-weight:900; color:#009B3A; text-align:center; line-height:1.15; letter-spacing:0.3px;">+ APOIE<br><span style="font-size:8.5px; font-weight:800; color:#5A4730;">AQUI</span></span>' },
+        { id: 'ifood', html: '<span style="font-size:15px; font-weight:900; color:#EA1D2C; font-style:italic; letter-spacing:-0.2px;">iFood</span>' },
+        { id: 'petshop', html: '<span style="font-size:11px; font-weight:900; color:#2E2417; text-align:center; line-height:1.15;">PetShop<br><span style="font-size:8.5px; font-weight:800; color:#009B3A;">Cascavel</span></span>' },
+        { id: 'zoetis', html: '<span style="font-size:14.5px; font-weight:900; color:#C2410C; letter-spacing:-0.2px;">zoetis</span>' }
       ];
 
       const htmlSlots = slotsApoio.map(s => `
