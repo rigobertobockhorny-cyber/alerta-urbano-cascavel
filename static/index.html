@@ -2560,6 +2560,44 @@
       from { transform: translateY(-120%); opacity: 0; }
       to { transform: translateY(0); opacity: 1; }
     }
+
+    /* =========================================================================
+       CARD DE ALERTA DE PET E REENCONTRO (DIRETRIZ OFICIAL RIGO: AJUSTE FINO)
+       Não esconde a barra de status do celular (hora, WhatsApp, bateria, câmera).
+       Posicionado com precisão logo abaixo da barra fixa do sistema, sem descer
+       para o meio da tela (ajuste fino milimétrico com safe-area).
+       ========================================================================= */
+    #card-radar-topo-web {
+      position: fixed !important;
+      top: max(38px, calc(env(safe-area-inset-top, 0px) + 8px)) !important;
+      left: 14px !important;
+      right: 14px !important;
+      max-width: 380px !important;
+      margin: 0 auto !important;
+      z-index: 100005 !important;
+      border-radius: 22px !important;
+      box-shadow: 0 16px 36px rgba(0,0,0,0.35) !important;
+      padding: 14px 14px 14px 14px !important;
+      display: flex;
+      flex-direction: column;
+      animation: slideDownRadar 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      font-family: inherit;
+      box-sizing: border-box !important;
+      transition: all 0.3s ease;
+      overflow: hidden !important;
+    }
+
+    #card-reencontro-celebracao-web {
+      position: fixed !important;
+      top: max(38px, calc(env(safe-area-inset-top, 0px) + 8px)) !important;
+      left: 14px !important;
+      right: 14px !important;
+      max-width: 400px !important;
+      margin: 0 auto !important;
+      z-index: 100020 !important;
+      box-sizing: border-box !important;
+      animation: slideDownRadar 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
     .sheet-handle {
       width: 38px;
       height: 4px;
@@ -10605,7 +10643,7 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
         card.id = 'card-radar-topo-web';
         card.style.cssText = `
           position: fixed;
-          top: 6px;
+          top: max(38px, calc(env(safe-area-inset-top, 0px) + 8px));
           left: 14px;
           right: 14px;
           max-width: 380px;
@@ -10710,6 +10748,7 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
         ${btnInferiorHtml}
       `;
 
+      card.style.top = 'max(38px, calc(env(safe-area-inset-top, 0px) + 8px))';
       card.style.display = 'flex';
 
       // Ciclo de vida estritamente gerenciado por _sessaoAlertaAtiva e callbacks do áudio
@@ -10775,7 +10814,7 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
         card.id = 'card-reencontro-celebracao-web';
         card.style.cssText = `
           position: fixed;
-          top: 14px;
+          top: max(38px, calc(env(safe-area-inset-top, 0px) + 8px));
           left: 14px;
           right: 14px;
           max-width: 400px;
@@ -10848,6 +10887,7 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
       }
     }
     window.testarCardReencontro = mostrarCardReencontroCelebracaoWeb;
+    window.mostrarCardAlertaTopoWeb = mostrarCardAlertaTopoWeb;
 
     /* ==================== AÇÃO OFICIAL RIGO: CLIQUE NA LOGO DO TOPO ATIVA BOLINHA FLUTUANTE ==================== */
     function clicarLogoHeader() {
