@@ -85,9 +85,10 @@ c:\PROJETOS\5-FERRAMENTAS\ALERTA_URBANO_CASCAVEL\
 #### Pilar 1: Visual (Design System)
 * **Cores Oficiais:**
   - Fundo do corpo central: `#EDE8DF` (Areia Arenoso Suave).
-  - Cards de Destaque (Campanha e Protetores): `#E4D5BC` (Areia Dourada Arenosa Oficial).
+  - Cards de Destaque (Campanha e Protetores): `#E4D5BC` (Areia Dourada Arenosa Oficial), **SEM BORDAS / SEM MARGEM MARROM** (`border: none !important;`).
   - Bloco Meteorológico: Degradê Verde-Brasil (`#009B3A` a `#007028`) com texto e números brancos (`#FFFFFF`).
   - Blocos da Esteira Apoie Aqui: Fundo `#FFFFFF`, **SEM BORDAS VERDES** (`border: none !important;`), cantos arredondados `border-radius: 12px;`.
+  - Esteira Quem Ama Cuida: **CORTE RETO PURO NAS LATERAIS** (`mask-image: none !important;`), com zero efeito degradê, zero máscara fosca ou esfumaçada. Os cards entram e saem em linha reta perfeita.
   - Texto Principal dos Títulos: `#2E2417` (Marrom Terroso Profundo).
   - Subtítulos e Rótulos: `#5A4730` e `#6E5A3C`.
 * **Métrica de Suspiro Oficial (Rigo):**
