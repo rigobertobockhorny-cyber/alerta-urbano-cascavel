@@ -739,7 +739,10 @@ def manifest():
 
 @app.route("/sw.js")
 def service_worker():
-    resp = send_from_directory("static", "sw.js", mimetype="application/javascript")
+    resp = make_response(send_from_directory("static", "sw.js", mimetype="application/javascript"))
+    resp.headers["Cache-Control"] = "no-cache, no-store, must-revalidate, max-age=0"
+    resp.headers["Pragma"] = "no-cache"
+    resp.headers["Expires"] = "0"
     resp.headers["Service-Worker-Allowed"] = "/"
     return resp
 

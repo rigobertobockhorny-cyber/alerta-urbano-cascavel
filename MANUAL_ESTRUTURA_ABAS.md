@@ -87,19 +87,19 @@ c:\PROJETOS\5-FERRAMENTAS\ALERTA_URBANO_CASCAVEL\
   - Fundo do corpo central: `#EDE8DF` (Areia Arenoso Suave).
   - Cards de Destaque (Campanha e Protetores): `#E4D5BC` (Areia Dourada Arenosa Oficial), **SEM BORDAS / SEM MARGEM MARROM** (`border: none !important;`).
   - Bloco Meteorológico: Degradê Verde-Brasil (`#009B3A` a `#007028`) com texto e números brancos (`#FFFFFF`).
-  - Blocos da Esteira Apoie Aqui: Fundo `#FFFFFF`, **SEM BORDAS VERDES** (`border: none !important;`), cantos arredondados `border-radius: 12px;`.
+  - Blocos da Esteira Apoie Aqui: Fundo `#FFFFFF`, **SEM BORDAS VERDES** (`border: none !important;`), dimensões ampliadas `width: 96px; height: 58px;` (formato mais gordinho e altinho conforme diretriz Rigo), cantos arredondados `border-radius: 14px;`.
   - Esteira Quem Ama Cuida: **CORTE RETO PURO NAS LATERAIS** (`mask-image: none !important;`), com zero efeito degradê, zero máscara fosca ou esfumaçada. Os cards entram e saem em linha reta perfeita.
   - Texto Principal dos Títulos: `#2E2417` (Marrom Terroso Profundo).
   - Subtítulos e Rótulos: `#5A4730` e `#6E5A3C`.
 * **Métrica de Suspiro Oficial (Rigo):**
-  - Suspiro vertical rigorosamente calibrado em **8.0px** entre todas as 4 seções:
-    1. Card de Campanha (`height: 70px; font-size: 13.5px;`).
-    2. Suspiro: `8px`.
-    3. Esteira "Quem ama, cuida e procura junto".
-    4. Suspiro: `8px`.
-    5. Card Único Grande da Comunidade de Protetores (`.showcase-protetor-card` em `#E4D5BC`).
-    6. Suspiro: `8px`.
-    7. Esteira "Apoie Aqui" (quadradinhos brancos fluidos).
+  - Distribuição vertical harmoniosa com `justify-content: space-between !important;` e `gap: 12px !important;`:
+    1. Card de Campanha (`height: 70px; font-size: 13.5px;` em areia `#E4D5BC` sem bordas).
+    2. Suspiro proporcional e confortável.
+    3. Esteira de Pets "Quem ama, cuida e procura junto" (corte reto nas laterais).
+    4. Suspiro proporcional e confortável.
+    5. Card Único Grande da Comunidade de Protetores (`.showcase-protetor-card` em `#E4D5BC` sem bordas).
+    6. Suspiro proporcional e confortável.
+    7. Esteira "Apoie Aqui" com blocos mais gordinhos e altinhos (96x58px) repousando harmoniosamente na base sem subir nem ser espremida.
 
 #### Pilar 2: Motor (Comportamento & Interações)
 * **Rotação de Protetores:** O card da Comunidade de Protetores exibe **apenas 1 protetor por tela** em tamanho grande, com sua mini-galeria de pets. Alterna automaticamente a cada 6 segundos ou por deslize do dedo (swipe horizontal).

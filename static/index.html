@@ -4979,17 +4979,23 @@
     /* Ãrea Central Areia Encorpada (Fluindo de forma contÃ­nua no degradÃª - Diretriz Rigo) */
     .home-body-sand {
       background: transparent !important;
-      padding: 10px 14px 4px !important;
+      padding: 8px 14px 6px !important;
       display: flex !important;
       flex-direction: column !important;
-      gap: 8px !important;
+      justify-content: space-between !important;
+      gap: 12px !important;
       flex: 1 1 auto !important;
       min-height: 0 !important;
     }
-    .home-body-sand .belt-block-pets,
-    .home-body-sand .belt-block-protetores,
+    .home-body-sand .belt-block-pets {
+      margin: 2px 0 !important;
+    }
+    .home-body-sand .belt-block-protetores {
+      margin: 2px 0 !important;
+    }
     .home-body-sand .home-apoie-zone {
       margin: 0 !important;
+      padding: 2px 0 !important;
     }
 
     /* ========================================================
@@ -5196,12 +5202,12 @@
       background: #009B3A;
     }
 
-    /* Quadradinhos de Apoio / Espaço Destinado a Patrocinadores (Diretriz Rigo: 4 cards na tela) */
+    /* Quadradinhos de Apoio / Espaço Destinado a Patrocinadores (Diretriz Rigo: Blocos mais gordinhos e altinhos) */
     .quadradinho-apoio {
-      width: 88px;
-      height: 50px;
+      width: 96px;
+      height: 58px;
       flex-shrink: 0;
-      border-radius: 13px;
+      border-radius: 14px;
       background: #FFFFFF !important; /* Totalmente branco sólido puro */
       border: none !important; /* Sem margem, sem cor nas bordas - Diretriz Oficial Rigo */
       box-shadow: 0 3px 8px rgba(0, 0, 0, 0.16) !important;
@@ -5212,7 +5218,7 @@
       cursor: pointer;
       transition: transform 0.15s ease;
       overflow: hidden;
-      padding: 2px 4px;
+      padding: 3px 6px;
       box-sizing: border-box;
       position: relative !important;
       z-index: 502 !important; /* Botão 100% à frente do degradê */
@@ -5264,16 +5270,19 @@
 
 </style>
   <script>
-    // Registro Imediato da Blindagem Anti-Cold Start (Service Worker)
+    // Limpeza Total de Service Workers e Caches Legados (Garante carregamento 100% fresco e instantâneo)
     if ('serviceWorker' in navigator) {
-      window.addEventListener('load', function() {
-        navigator.serviceWorker.register('/sw.js', { scope: '/' })
-          .then(function(reg) {
-            console.log('[AlertaUrbano] Blindagem PWA/ServiceWorker ativa:', reg.scope);
-          })
-          .catch(function(err) {
-            console.warn('[AlertaUrbano] Erro ao registrar SW:', err);
-          });
+      navigator.serviceWorker.getRegistrations().then(function(registrations) {
+        for (let r of registrations) {
+          r.unregister();
+        }
+      });
+    }
+    if (window.caches) {
+      caches.keys().then(function(keys) {
+        for (let k of keys) {
+          caches.delete(k);
+        }
       });
     }
   </script>
@@ -8132,8 +8141,8 @@
       const track = document.getElementById('belt-apoio-track');
       if (!track) return;
 
-      // QUADRADINHOS DE APOIO / MARCAS PARCEIRAS (DIRETRIZ OFICIAL RIGO: INTERCALAR MARCA E APOIE AQUI • ESTRUTURA CONGELADA 88x50)
-      const cotaApoie = { id: 'cota-apoie', html: '<span style="font-size:10.5px; font-weight:900; color:#009B3A; text-align:center; line-height:1.15; letter-spacing:0.3px;">+ APOIE<br><span style="font-size:8.5px; font-weight:800; color:#5A4730;">AQUI</span></span>' };
+      // QUADRADINHOS DE APOIO / MARCAS PARCEIRAS (DIRETRIZ OFICIAL RIGO: INTERCALAR MARCA E APOIE AQUI • ESTRUTURA GORDINHA E ALTINHA 96x58)
+      const cotaApoie = { id: 'cota-apoie', html: '<span style="font-size:11.5px; font-weight:900; color:#009B3A; text-align:center; line-height:1.2; letter-spacing:0.3px;">+ APOIE<br><span style="font-size:9.5px; font-weight:800; color:#5A4730;">AQUI</span></span>' };
 
       const slotsApoio = [
         cotaApoie,
