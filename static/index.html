@@ -702,8 +702,8 @@
       width: 38px;
       height: 38px;
       border-radius: 50%;
-      border: 2px solid var(--cor-destaque-ouro, #FED700);
-      background: var(--cor-botao-areia, #DECDB6);
+      border: 1px solid rgba(46, 36, 23, 0.15); /* Sem margem amarela (Diretriz Rigo) */
+      background: var(--cor-botao-areia, #DECDB6); /* Bolinha terrosa aveludada suave */
       display: flex;
       align-items: center;
       justify-content: center;
@@ -711,7 +711,7 @@
       overflow: hidden;
       padding: 0;
       position: relative;
-      box-shadow: 0 2px 6px rgba(46, 36, 23, 0.12);
+      box-shadow: 0 1px 4px rgba(46, 36, 23, 0.08);
       transition: transform 0.15s ease;
       flex-shrink: 0;
     }
@@ -725,8 +725,11 @@
       display: block;
     }
     .avatar-initial-circle {
-      font-size: 15px;
-      font-weight: 900;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
       color: var(--cor-botao-texto, #2E2417);
     }
 
@@ -6887,7 +6890,12 @@
           <!-- Bolinha Avatar do Usuário (Estilo Facebook • Acesso Unificado ao Perfil) -->
           <button type="button" class="btn-topbar-avatar" id="btn-topbar-perfil" onclick="abrirPerfil()" title="Meu Perfil" aria-label="Meu Perfil">
             <img id="topbar-avatar-img" src="/static/testadores/rigo.png" alt="Perfil" style="display:none;" />
-            <span id="topbar-avatar-initial" class="avatar-initial-circle">U</span>
+            <span id="topbar-avatar-initial" class="avatar-initial-circle">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+              </svg>
+            </span>
           </button>
         </div>
       </div>
