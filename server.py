@@ -241,6 +241,48 @@ def init_db():
         cur.execute("ALTER TABLE usuarios ADD COLUMN total_resgates INTEGER DEFAULT 0;")
     if "verificado" not in ucols:
         cur.execute("ALTER TABLE usuarios ADD COLUMN verificado INTEGER DEFAULT 0;")
+    if "ong_id" not in ucols:
+        cur.execute("ALTER TABLE usuarios ADD COLUMN ong_id INTEGER DEFAULT NULL;")
+    if "ong_nome" not in ucols:
+        cur.execute("ALTER TABLE usuarios ADD COLUMN ong_nome TEXT DEFAULT '';")
+    if "verificado_ong" not in ucols:
+        cur.execute("ALTER TABLE usuarios ADD COLUMN verificado_ong INTEGER DEFAULT 0;")
+
+    # Tabela Oficial de ONGs e Associações (Estrutura Rede de Proteção Animal • Diretriz Rigo)
+    cur.execute("""
+        CREATE TABLE IF NOT EXISTS ongs (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            nome TEXT NOT NULL,
+            cnpj TEXT DEFAULT '',
+            responsavel_nome TEXT DEFAULT '',
+            email TEXT DEFAULT '',
+            whatsapp TEXT DEFAULT '',
+            bairro TEXT DEFAULT 'Centro',
+            cidade TEXT DEFAULT 'Cascavel',
+            estado TEXT DEFAULT 'PR',
+            bio TEXT DEFAULT '',
+            instagram TEXT DEFAULT '',
+            chave_pix TEXT DEFAULT '',
+            foto_url TEXT DEFAULT '',
+            admin_token TEXT DEFAULT '',
+            codigo_convite TEXT UNIQUE NOT NULL,
+            status TEXT DEFAULT 'pendente',
+            approval_token TEXT DEFAULT '',
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )
+    """)
+    # Seed inicial da ONG oficial de Cascavel se a tabela estiver vazia
+    cur.execute("SELECT COUNT(*) FROM ongs")
+    if cur.fetchone()[0] == 0:
+        cur.execute("""
+            INSERT INTO ongs (nome, cnpj, responsavel_nome, email, whatsapp, bairro, cidade, estado, bio, instagram, chave_pix, foto_url, admin_token, codigo_convite, status, approval_token)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        """, (
+            "Coletivo Patinhas do Oeste", "00.000.000/0001-00", "Coordenação Patinhas do Oeste",
+            "rigoberto.bocorni@gmail.com", "45998143263", "Alto Alegre", "Cascavel", "PR",
+            "Rede colaborativa de protetores e lares temporários de Cascavel. Socorremos animais em risco e conectamos parceiros à causa animal.",
+            "@patinhasdooeste", "45998143263", "", "ong_seed_patinhas", "PATINHAS-CVEL", "aprovada", "seed_ok"
+        ))
 
     # Tabela de Parceiros Comerciais e Empresas Amigas de Cascavel (v3.8)
     cur.execute("""
@@ -1117,9 +1159,13 @@ def api_perfil():
         if not token:
             return jsonify({"perfil": None})
         conn = get_db()
-        row = conn.execute("SELECT autor_token, nome, whatsapp, bairro, cidade, estado, uf, endereco, foto_url, tipo_perfil, bio, instagram, chave_pix, total_resgates, verificado FROM usuarios WHERE autor_token = ?", (token,)).fetchone()
+        row = conn.execute("SELECT autor_token, nome, whatsapp, bairro, cidade, estado, uf, endereco, foto_url, tipo_perfil, bio, instagram, chave_pix, total_resgates, verificado, ong_id, ong_nome, verificado_ong FROM usuarios WHERE autor_token = ?", (token,)).fetchone()
+        minha_ong = conn.execute("SELECT id, nome, codigo_convite, status, cidade, estado FROM ongs WHERE admin_token = ? ORDER BY id DESC LIMIT 1", (token,)).fetchone()
         conn.close()
-        return jsonify({"perfil": dict(row) if row else None})
+        perfil_dict = dict(row) if row else None
+        if perfil_dict and minha_ong:
+            perfil_dict["minha_ong"] = dict(minha_ong)
+        return jsonify({"perfil": perfil_dict})
 
     data = request.json or {}
     token = (data.get("autor_token") or "").strip()[:100]
@@ -1421,10 +1467,10 @@ def listar_protetores():
     conn = get_db()
     cur = conn.cursor()
     cur.execute("""
-        SELECT id, autor_token, nome, whatsapp, bairro, cidade, foto_url, tipo_perfil, bio, instagram, chave_pix, total_resgates, verificado
+        SELECT id, autor_token, nome, whatsapp, bairro, cidade, foto_url, tipo_perfil, bio, instagram, chave_pix, total_resgates, verificado, ong_id, ong_nome, verificado_ong
         FROM usuarios
         WHERE tipo_perfil IN ('protetor', 'ong')
-        ORDER BY verificado DESC, id ASC
+        ORDER BY verificado_ong DESC, verificado DESC, id ASC
     """)
     protetores = [dict(row) for row in cur.fetchall()]
     
@@ -2382,13 +2428,22 @@ def desativar_alerta(alerta_id):
         return jsonify({"error": "Registro não encontrado."}), 404
 
     db_autor_token = alerta["autor_token"]
-    if db_autor_token and token != db_autor_token and token != ADMIN_TOKEN:
+    eh_ong_do_autor = False
+    if db_autor_token and token and token != db_autor_token:
+        row_u = cur.execute("SELECT ong_id FROM usuarios WHERE autor_token = ?", (db_autor_token,)).fetchone()
+        if row_u and row_u["ong_id"]:
+            row_o = cur.execute("SELECT admin_token FROM ongs WHERE id = ?", (row_u["ong_id"],)).fetchone()
+            if row_o and row_o["admin_token"] == token:
+                eh_ong_do_autor = True
+
+    if db_autor_token and token != db_autor_token and token != ADMIN_TOKEN and not eh_ong_do_autor:
         conn.close()
         return jsonify({
-            "error": "Acesso negado. Apenas o autor que cadastrou este registro tem permissão para encerrá-lo."
+            "error": "Acesso negado. Apenas o autor ou a ONG vinculada tem permissão para excluir este registro."
         }), 403
 
     eh_encontrado = request.path.endswith("/encontrado") or request.path.endswith("/reencontrado") or request.path.endswith("/confirmar-reencontro")
+    eh_exclusao_definitiva = (request.method == "DELETE") or bool(data.get("permanente"))
     origem = data.get("origem_reencontro") or "app_alerta_pet"
     feedback = (data.get("feedback_reencontro") or "").strip()
     agora_iso = datetime.now().isoformat()
@@ -2404,6 +2459,10 @@ def desativar_alerta(alerta_id):
                 contato_avistador = '' 
             WHERE id = ? OR pet_pai_id = ?
         """, (origem, feedback, agora_iso, alerta_id, alerta_id))
+    elif eh_exclusao_definitiva:
+        # Exclusão definitiva do app, mapa, trilha e mesa operacional (Diretriz Rigo)
+        cur.execute("DELETE FROM avistamentos_trilha WHERE pet_id = ?", (alerta_id,))
+        cur.execute("DELETE FROM alertas WHERE id = ? OR pet_pai_id = ?", (alerta_id, alerta_id))
     else:
         cur.execute("""
             UPDATE alertas 
@@ -2415,7 +2474,299 @@ def desativar_alerta(alerta_id):
 
     conn.commit()
     conn.close()
-    return jsonify({"status": "ok", "desativado": alerta_id, "encontrado": eh_encontrado, "origem": origem})
+    return jsonify({"status": "ok", "desativado": alerta_id, "excluido": eh_exclusao_definitiva, "encontrado": eh_encontrado, "origem": origem})
+
+
+@app.route("/api/alertas/<int:alerta_id>/editar", methods=["POST", "PUT"])
+def editar_alerta_usuario(alerta_id):
+    """Permite ao autor (ou ONG vinculada) editar título, bairro e descrição de sua ocorrência."""
+    data = request.json or {}
+    token = (data.get("autor_token") or "").strip()
+    conn = get_db()
+    cur = conn.cursor()
+    row = cur.execute("SELECT id, autor_token FROM alertas WHERE id = ?", (alerta_id,)).fetchone()
+    if not row:
+        conn.close()
+        return jsonify({"error": "Registro não encontrado."}), 404
+    if row["autor_token"] and token != row["autor_token"] and token != ADMIN_TOKEN:
+        conn.close()
+        return jsonify({"error": "Apenas o autor pode editar este registro."}), 403
+    titulo = (data.get("titulo") or "").strip()[:120]
+    bairro = (data.get("bairro") or "").strip()[:80]
+    descricao = (data.get("descricao") or "").strip()[:800]
+    if titulo:
+        cur.execute("UPDATE alertas SET titulo = ? WHERE id = ?", (titulo, alerta_id))
+    if bairro:
+        cur.execute("UPDATE alertas SET bairro = ? WHERE id = ?", (bairro, alerta_id))
+    if descricao:
+        cur.execute("UPDATE alertas SET descricao = ? WHERE id = ?", (descricao, alerta_id))
+    conn.commit()
+    conn.close()
+    return jsonify({"status": "ok", "id": alerta_id})
+
+
+# ==================== REDE DE PROTEÇÃO ANIMAL: ONGs, CÓDIGOS E PROTETORES ====================
+ADMIN_EMAIL_ONGS = "rigoberto.bocorni@gmail.com"
+
+
+def _gerar_codigo_ong(nome):
+    import re, secrets
+    base = re.sub(r"[^A-Z0-9]", "", (nome or "ONG").upper())[:8] or "ONG"
+    suf = secrets.token_hex(2).upper()
+    return f"{base}-{suf}"
+
+
+def _notificar_email_nova_ong(ong_dict, link_aprovar):
+    """Envia e-mail de aprovação para rigoberto.bocorni@gmail.com se SMTP estiver configurado."""
+    smtp_host = os.environ.get("SMTP_HOST", "").strip()
+    smtp_user = os.environ.get("SMTP_USER", "").strip()
+    smtp_pass = os.environ.get("SMTP_PASS", "").strip()
+    smtp_port = int(os.environ.get("SMTP_PORT", "587") or 587)
+    if not (smtp_host and smtp_user and smtp_pass):
+        print(f"[ONG-APROVACAO] Nova ONG '{ong_dict['nome']}' pendente. Aprovar em: {link_aprovar}")
+        return False
+    try:
+        import smtplib
+        from email.mime.text import MIMEText
+        corpo = (
+            f"Nova solicitação de cadastro de ONG no Alerta Pet Brasil:\n\n"
+            f"ONG: {ong_dict['nome']}\n"
+            f"CNPJ: {ong_dict.get('cnpj') or '-'}\n"
+            f"Responsável: {ong_dict.get('responsavel_nome') or '-'}\n"
+            f"WhatsApp: {ong_dict.get('whatsapp') or '-'}\n"
+            f"Cidade/UF: {ong_dict.get('cidade')}/{ong_dict.get('estado')}\n"
+            f"Código reservado: {ong_dict['codigo_convite']}\n\n"
+            f"Para APROVAR esta ONG e liberar o código para os protetores, clique no link:\n"
+            f"{link_aprovar}\n"
+        )
+        msg = MIMEText(corpo, "plain", "utf-8")
+        msg["Subject"] = f"[Alerta Pet Brasil] Aprovar ONG: {ong_dict['nome']}"
+        msg["From"] = smtp_user
+        msg["To"] = ADMIN_EMAIL_ONGS
+        with smtplib.SMTP(smtp_host, smtp_port, timeout=10) as s:
+            s.starttls()
+            s.login(smtp_user, smtp_pass)
+            s.sendmail(smtp_user, [ADMIN_EMAIL_ONGS], msg.as_string())
+        return True
+    except Exception as e:
+        print(f"[ONG-EMAIL] Falha ao enviar SMTP: {e}")
+        return False
+
+
+@app.route("/api/ongs", methods=["GET"])
+def api_listar_ongs():
+    """Lista todas as ONGs aprovadas com seus protetores verificados e animais assistidos."""
+    conn = get_db()
+    cur = conn.cursor()
+    cur.execute("""
+        SELECT id, nome, cnpj, responsavel_nome, whatsapp, bairro, cidade, estado, bio, instagram, chave_pix, foto_url, codigo_convite, status, created_at
+        FROM ongs
+        WHERE status = 'aprovada'
+        ORDER BY id ASC
+    """)
+    ongs = [dict(r) for r in cur.fetchall()]
+    for o in ongs:
+        cur.execute("""
+            SELECT id, autor_token, nome, whatsapp, bairro, cidade, foto_url, bio, instagram, total_resgates, verificado_ong
+            FROM usuarios
+            WHERE ong_id = ? AND tipo_perfil IN ('protetor', 'ong')
+            ORDER BY verificado_ong DESC, id ASC
+        """, (o["id"],))
+        o["protetores"] = [dict(p) for p in cur.fetchall()]
+        o["total_protetores"] = len(o["protetores"])
+        o["total_verificados"] = sum(1 for p in o["protetores"] if p.get("verificado_ong"))
+    conn.close()
+    return jsonify({"ongs": ongs})
+
+
+@app.route("/api/ongs/solicitar", methods=["POST"])
+def api_solicitar_ong():
+    """Cadastra uma ONG com status pendente e gera link de aprovação para o Rigo."""
+    import secrets
+    data = request.json or {}
+    nome = (data.get("nome") or "").strip()[:120]
+    cnpj = (data.get("cnpj") or "").strip()[:30]
+    responsavel = (data.get("responsavel_nome") or "").strip()[:100]
+    email = (data.get("email") or "").strip()[:120]
+    whatsapp = normalizar_telefone(data.get("whatsapp") or "")
+    bairro = (data.get("bairro") or "Centro").strip()[:80]
+    cidade = (data.get("cidade") or "Cascavel").strip()[:80]
+    estado = (data.get("estado") or "PR").strip()[:10]
+    bio = (data.get("bio") or "").strip()[:600]
+    instagram = (data.get("instagram") or "").strip()[:80]
+    chave_pix = (data.get("chave_pix") or "").strip()[:100]
+    admin_token = (data.get("autor_token") or "").strip()[:100]
+
+    if not nome or not whatsapp:
+        return jsonify({"error": "Informe o nome da ONG e o WhatsApp do responsável."}), 400
+
+    codigo = _gerar_codigo_ong(nome)
+    approval_token = secrets.token_urlsafe(18)
+
+    conn = get_db()
+    cur = conn.cursor()
+    cur.execute("""
+        INSERT INTO ongs (nome, cnpj, responsavel_nome, email, whatsapp, bairro, cidade, estado, bio, instagram, chave_pix, admin_token, codigo_convite, status, approval_token)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'pendente', ?)
+    """, (nome, cnpj, responsavel, email, whatsapp, bairro, cidade, estado, bio, instagram, chave_pix, admin_token, codigo, approval_token))
+    ong_id = cur.lastrowid
+    if admin_token:
+        cur.execute("""
+            UPDATE usuarios SET tipo_perfil = 'ong', ong_id = ?, ong_nome = ? WHERE autor_token = ?
+        """, (ong_id, nome, admin_token))
+    conn.commit()
+    conn.close()
+
+    base_url = request.host_url.rstrip("/")
+    link_aprovar = f"{base_url}/api/ongs/aprovar/{approval_token}"
+    enviado = _notificar_email_nova_ong({
+        "nome": nome, "cnpj": cnpj, "responsavel_nome": responsavel,
+        "whatsapp": whatsapp, "cidade": cidade, "estado": estado, "codigo_convite": codigo
+    }, link_aprovar)
+    return jsonify({
+        "status": "pendente",
+        "ong_id": ong_id,
+        "codigo_convite": codigo,
+        "email_enviado": enviado,
+        "email_destino": ADMIN_EMAIL_ONGS,
+        "mensagem": f"Solicitação enviada para aprovação ({ADMIN_EMAIL_ONGS}). Assim que aprovada, o código {codigo} será liberado."
+    })
+
+
+@app.route("/api/ongs/aprovar/<approval_token>", methods=["GET"])
+def api_aprovar_ong(approval_token):
+    """Aprovação com 1 clique pelo Rigo (link enviado para rigoberto.bocorni@gmail.com)."""
+    conn = get_db()
+    cur = conn.cursor()
+    row = cur.execute("SELECT id, nome, responsavel_nome, whatsapp, codigo_convite, admin_token, status FROM ongs WHERE approval_token = ?", (approval_token,)).fetchone()
+    if not row:
+        conn.close()
+        return "<h2>Link de aprovação inválido ou expirado.</h2>", 404
+    cur.execute("UPDATE ongs SET status = 'aprovada' WHERE id = ?", (row["id"],))
+    if row["admin_token"]:
+        cur.execute("UPDATE usuarios SET verificado = 1, verificado_ong = 1 WHERE autor_token = ?", (row["admin_token"],))
+    conn.commit()
+    conn.close()
+    base_url = request.host_url.rstrip("/")
+    link_convite = f"{base_url}/?ong_codigo={row['codigo_convite']}"
+    return f"""
+    <!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>ONG Aprovada • Alerta Pet Brasil</title>
+    <style>body{{font-family:system-ui,sans-serif;background:#EDE8DF;color:#2E2417;padding:24px;max-width:480px;margin:0 auto;}}
+    .card{{background:#fff;border-radius:18px;padding:22px;box-shadow:0 8px 24px rgba(0,0,0,.08);}}
+    .cod{{background:#E4D5BC;padding:12px;border-radius:12px;font-size:20px;font-weight:900;text-align:center;letter-spacing:1.5px;margin:12px 0;}}
+    a.btn{{display:block;text-align:center;background:#009B3A;color:#fff;padding:12px;border-radius:12px;text-decoration:none;font-weight:800;margin-top:12px;}}</style></head>
+    <body><div class="card">
+      <h2 style="color:#009B3A;margin-top:0;">✓ ONG Aprovada!</h2>
+      <p><b>{row['nome']}</b> agora está ativa na aba <b>Rede</b> do Alerta Pet Brasil.</p>
+      <p>Código oficial da ONG para enviar ao responsável:</p>
+      <div class="cod">{row['codigo_convite']}</div>
+      <p style="font-size:13px;">Link de convite para os protetores:<br><b>{link_convite}</b></p>
+      <a class="btn" href="https://wa.me/55{row['whatsapp']}?text=Ol%C3%A1!%20A%20ONG%20{row['nome']}%20foi%20aprovada%20no%20Alerta%20Pet%20Brasil.%20C%C3%B3digo%20oficial:%20{row['codigo_convite']}%20Link:%20{link_convite}">Enviar código no WhatsApp da ONG</a>
+    </div></body></html>
+    """
+
+
+@app.route("/api/protetor/vincular-ong", methods=["POST"])
+def api_vincular_protetor_ong():
+    """Vincula um usuário (tutor ou protetor) a uma ONG aprovada usando o código de convite."""
+    data = request.json or {}
+    token = (data.get("autor_token") or "").strip()
+    codigo = (data.get("codigo_convite") or "").strip().upper()
+    if not token or not codigo:
+        return jsonify({"error": "Informe o código de convite da ONG."}), 400
+    conn = get_db()
+    cur = conn.cursor()
+    ong = cur.execute("SELECT id, nome, status FROM ongs WHERE UPPER(codigo_convite) = ?", (codigo,)).fetchone()
+    if not ong:
+        conn.close()
+        return jsonify({"error": "Código de ONG não encontrado. Confira com a direção da ONG."}), 404
+    if ong["status"] != "aprovada":
+        conn.close()
+        return jsonify({"error": "Esta ONG ainda aguarda aprovação da administração."}), 403
+    cur.execute("""
+        UPDATE usuarios
+        SET tipo_perfil = 'protetor', ong_id = ?, ong_nome = ?, verificado_ong = 0, updated_at = CURRENT_TIMESTAMP
+        WHERE autor_token = ?
+    """, (ong["id"], ong["nome"], token))
+    conn.commit()
+    conn.close()
+    return jsonify({
+        "status": "ok",
+        "ong_id": ong["id"],
+        "ong_nome": ong["nome"],
+        "verificado_ong": 0,
+        "mensagem": f"Vinculado à {ong['nome']}! Assim que a ONG confirmar seu nome, seu selo Protetor Verificado será ativado."
+    })
+
+
+@app.route("/api/protetor/desvincular-ong", methods=["POST"])
+def api_desvincular_protetor_ong():
+    """Permite ao protetor sair da ONG atual mantendo seu perfil público (pode se filiar a outra ONG)."""
+    data = request.json or {}
+    token = (data.get("autor_token") or "").strip()
+    if not token:
+        return jsonify({"error": "Token ausente."}), 400
+    conn = get_db()
+    conn.execute("""
+        UPDATE usuarios
+        SET ong_id = NULL, ong_nome = '', verificado_ong = 0, updated_at = CURRENT_TIMESTAMP
+        WHERE autor_token = ?
+    """, (token,))
+    conn.commit()
+    conn.close()
+    return jsonify({"status": "ok", "mensagem": "Você saiu da ONG. Seu perfil público continua ativo e você pode se filiar a outra ONG quando quiser."})
+
+
+@app.route("/api/ong/minha-rede", methods=["GET"])
+def api_ong_minha_rede():
+    """Painel de gestão da ONG: vê código de convite e lista de protetores para verificar ou remover."""
+    token = (request.args.get("autor_token") or "").strip()
+    if not token:
+        return jsonify({"ong": None, "protetores": []})
+    conn = get_db()
+    cur = conn.cursor()
+    ong = cur.execute("SELECT id, nome, codigo_convite, status, cidade, estado FROM ongs WHERE admin_token = ? ORDER BY id DESC LIMIT 1", (token,)).fetchone()
+    if not ong:
+        conn.close()
+        return jsonify({"ong": None, "protetores": []})
+    prots = cur.execute("""
+        SELECT id, autor_token, nome, whatsapp, bairro, cidade, foto_url, verificado_ong, created_at
+        FROM usuarios
+        WHERE ong_id = ? AND autor_token != ?
+        ORDER BY verificado_ong ASC, id DESC
+    """, (ong["id"], token)).fetchall()
+    conn.close()
+    return jsonify({"ong": dict(ong), "protetores": [dict(p) for p in prots]})
+
+
+@app.route("/api/ong/gerenciar-protetor", methods=["POST"])
+def api_ong_gerenciar_protetor():
+    """A ONG marca um protetor como 'Protetor Verificado' ou remove/desvincula alguém fora da rede."""
+    data = request.json or {}
+    admin_tok = (data.get("autor_token") or "").strip()
+    alvo_tok = (data.get("protetor_token") or "").strip()
+    acao = (data.get("acao") or "").strip()
+    if not admin_tok or not alvo_tok:
+        return jsonify({"error": "Dados incompletos."}), 400
+    conn = get_db()
+    cur = conn.cursor()
+    ong = cur.execute("SELECT id, nome FROM ongs WHERE admin_token = ?", (admin_tok,)).fetchone()
+    if not ong and admin_tok != ADMIN_TOKEN:
+        conn.close()
+        return jsonify({"error": "Apenas a direção da ONG pode gerenciar protetores."}), 403
+    if acao == "verificar":
+        cur.execute("UPDATE usuarios SET verificado_ong = 1, verificado = 1 WHERE autor_token = ?", (alvo_tok,))
+    elif acao == "remover_verificacao":
+        cur.execute("UPDATE usuarios SET verificado_ong = 0, verificado = 0 WHERE autor_token = ?", (alvo_tok,))
+    elif acao == "expulsar":
+        cur.execute("UPDATE usuarios SET ong_id = NULL, ong_nome = '', verificado_ong = 0, verificado = 0 WHERE autor_token = ?", (alvo_tok,))
+    else:
+        conn.close()
+        return jsonify({"error": "Ação inválida."}), 400
+    conn.commit()
+    conn.close()
+    return jsonify({"status": "ok", "acao": acao})
 
 
 @app.route("/api/reencontros/metricas", methods=["GET"])

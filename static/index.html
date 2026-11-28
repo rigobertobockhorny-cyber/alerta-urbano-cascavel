@@ -6306,7 +6306,7 @@
 
 
     <!-- ==================== CONTEÚDO DAS 4 ABAS ==================== -->
-        <!-- ==================== CONTEÚDO DAS 4 ABAS ==================== -->
+        <!-- ==================== CONTEÚDO DAS 6 ABAS ==================== -->
     <main class="main-stage">
       <section class="tab-pane home-pane active" id="tab-inicio">
 
@@ -6481,6 +6481,43 @@
       </section>
 
       <!-- ABA 4: PARCEIROS PET (COMÉRCIO AMIGO DOS ANIMAIS & SERVIÇOS ESSENCIAIS) -->
+
+
+      <section class="tab-pane" id="tab-rede" style="padding:10px 14px 24px; box-sizing:border-box; max-width:520px; margin:0 auto;">
+        <!-- Cabeçalho da 6ª Aba: Rede de Proteção Animal (Diretriz Rigo) -->
+        <div style="display:flex; align-items:center; justify-content:space-between; gap:8px; margin-bottom:10px;">
+          <div>
+            <div style="font-size:15.5px; font-weight:900; color:#2E2417; letter-spacing:0.1px;">Rede de Proteção Animal</div>
+            <div style="font-size:11px; font-weight:700; color:#6B5A43;">ONGs aprovadas e protetores verificados da cidade</div>
+          </div>
+          <button type="button" onclick="abrirCadastroOngModal()" style="flex-shrink:0; height:32px; padding:0 12px; border-radius:999px; background:#9E8560; color:#FFFFFF; border:1.5px solid #8A724E; font-size:11px; font-weight:900; cursor:pointer; box-shadow:0 2px 6px rgba(110,90,60,0.22);">+ Cadastrar ONG</button>
+        </div>
+
+        <!-- Sub-abas: Protetores Verificados | ONGs & Associações -->
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px; background:rgba(228,213,188,0.65); padding:4px; border-radius:12px; border:1px solid rgba(110,90,60,0.22); margin-bottom:12px;">
+          <button type="button" id="btn-rede-protetores" class="active" onclick="trocarSubAbaRede('protetores')" style="height:32px; border-radius:9px; border:none; background:#9E8560; color:#FFFFFF; font-size:12px; font-weight:900; cursor:pointer;">Protetores</button>
+          <button type="button" id="btn-rede-ongs" onclick="trocarSubAbaRede('ongs')" style="height:32px; border-radius:9px; border:none; background:transparent; color:#2E2417; font-size:12px; font-weight:800; cursor:pointer;">ONGs & Associações</button>
+        </div>
+
+        <!-- Chamada rápida para protetor vincular-se com código da ONG -->
+        <div style="background:#E4D5BC; border:1.5px solid rgba(110,90,60,0.24); border-radius:14px; padding:10px 12px; margin-bottom:12px; display:flex; align-items:center; justify-content:space-between; gap:10px;">
+          <div style="min-width:0;">
+            <div style="font-size:12px; font-weight:900; color:#2E2417;">É protetor vinculado a uma ONG?</div>
+            <div style="font-size:10.5px; font-weight:700; color:#6B5A43;">Use o código da sua ONG para receber o selo verificado</div>
+          </div>
+          <button type="button" onclick="abrirModalVincularOng()" style="flex-shrink:0; height:32px; padding:0 11px; border-radius:10px; background:#EDE8DF; color:#2E2417; border:1.5px solid #9E8560; font-size:11px; font-weight:900; cursor:pointer;">Usar código</button>
+        </div>
+
+        <!-- Lista de Protetores (Estilo LinkedIn do Protetor) -->
+        <div id="rede-lista-protetores" style="display:flex; flex-direction:column; gap:12px;">
+          <div style="text-align:center; padding:24px; color:#6B5A43; font-size:12px; font-weight:700;">Carregando rede de protetores...</div>
+        </div>
+
+        <!-- Lista de ONGs Aprovadas -->
+        <div id="rede-lista-ongs" style="display:none; flex-direction:column; gap:12px;">
+          <div style="text-align:center; padding:24px; color:#6B5A43; font-size:12px; font-weight:700;">Carregando ONGs aprovadas...</div>
+        </div>
+      </section>
 
 
       <section class="tab-pane" id="tab-parceiros">
@@ -6691,6 +6728,16 @@
           <path d="M12 12c-2 0-3.5 1.5-3.5 3.3 0 1.6 1.2 2.7 3.5 2.7s3.5-1.1 3.5-2.7C15.5 13.5 14 12 12 12zm-5.8-2.3c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm11.6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-8.6-4.1c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm5.6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/>
         </svg>
         <span>Pets</span>
+      </button>
+
+      <button type="button" class="nav-item" id="nav-rede" onclick="trocarAba('rede')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+          <circle cx="9" cy="7" r="4"></circle>
+          <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+          <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+        </svg>
+        <span>Rede</span>
       </button>
 
       <button type="button" class="nav-item" id="nav-parceiros" onclick="trocarAba('parceiros')">
@@ -7382,8 +7429,14 @@
 
             <!-- Campos Específicos para Protetor / ONG -->
             <div id="wrap-campos-protetor" style="display:none; background:#EDE8DF; border:1.5px solid rgba(110,90,60,0.28); border-radius:14px; padding:12px; margin-bottom:12px;">
-              <div style="font-size:12px; font-weight:900; color:#2E2417; margin-bottom:8px;">
-                <span>Sua Página Pública de Protetor / ONG</span>
+              <div style="display:flex; align-items:center; justify-content:space-between; gap:8px; margin-bottom:8px;">
+                <span style="font-size:12px; font-weight:900; color:#2E2417;">Vínculo com ONG (Protetor)</span>
+                <button type="button" onclick="abrirCadastroOngModal()" style="border:none; background:none; color:#009B3A; font-size:11px; font-weight:900; text-decoration:underline; cursor:pointer; padding:0;">Cadastrar nova ONG</button>
+              </div>
+              <div style="margin-bottom:8px;">
+                <label class="form-label" for="cadastro-input-codigo-ong" style="font-size:10.5px; font-weight:800; color:#2E2417; margin-bottom:3px; display:block;">Código de Convite da ONG (ex: PATINHAS-CVEL)</label>
+                <input type="text" class="form-input" id="cadastro-input-codigo-ong" placeholder="Digite o código enviado pela sua ONG" style="width:100%; height:36px; padding:6px 10px; font-size:12px; font-weight:800; text-transform:uppercase; border-radius:8px; box-sizing:border-box;">
+                <div style="font-size:10px; color:#6B5A43; margin-top:3px;">Após entrar com o código, a direção da ONG confirma seu perfil para ativar o selo <b>Protetor verificado</b>.</div>
               </div>
               <div style="margin-bottom:8px;">
                 <label class="form-label" for="cadastro-input-ong-nome" style="font-size:10.5px; font-weight:800; color:#2E2417; margin-bottom:3px; display:block;">Nome da ONG ou Projeto de Resgate</label>
@@ -7479,7 +7532,11 @@
               <span id="perfil-badge-protetor" class="perfil-status-item" style="display:none;">
                 <span class="perfil-status-sep">·</span>
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><polyline points="9 12 11 14 15 10"></polyline></svg>
-                Protetor verificado
+                <span id="perfil-badge-protetor-txt">Protetor verificado</span>
+              </span>
+              <span id="perfil-badge-pendente" class="perfil-status-item" style="display:none; color:#9E8560;">
+                <span class="perfil-status-sep">·</span>
+                <span id="perfil-badge-pendente-txt">Aguardando verificação da ONG</span>
               </span>
             </div>
           </div>
@@ -7521,7 +7578,21 @@
               <div class="perfil-nav-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></div>
               <div>
                 <div class="perfil-nav-title">Meus Registros & Avistamentos</div>
-                <div class="perfil-nav-sub" id="perfil-resumo-registros">Alertas e pets cadastrados por você</div>
+                <div class="perfil-nav-sub" id="perfil-resumo-registros">Editar, encerrar ou excluir seus pets cadastrados</div>
+              </div>
+            </div>
+            <div class="pet-nav-chevron">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </div>
+          </div>
+
+          <!-- Linha 2.5: Vínculo com ONG / Painel da Rede (Diretriz Rigo) -->
+          <div class="perfil-nav-row" onclick="alternarGavetaOng()">
+            <div class="perfil-nav-left">
+              <div class="perfil-nav-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#009B3A" stroke-width="2.2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg></div>
+              <div>
+                <div class="perfil-nav-title">Rede de ONGs & Protetor</div>
+                <div class="perfil-nav-sub" id="perfil-resumo-ong">Vincular-se a uma ONG com código ou gerenciar sua ONG</div>
               </div>
             </div>
             <div class="pet-nav-chevron">
@@ -7648,7 +7719,67 @@
           <div class="perfil-section-lbl"><span>Seus Alertas e Pets no Ar</span></div>
           <div id="perfil-lista-meus-pets" style="display:flex; flex-direction:column; gap:8px;"></div>
         </div>
+
+        <!-- Seção Expansível: Vínculo com ONG & Painel de Gestão da ONG (Diretriz Rigo) -->
+        <div id="perfil-caixa-ong" class="perfil-card-box" style="display:none; margin-bottom:16px; padding:14px;">
+          <div style="font-size:14px; font-weight:900; color:var(--text); margin-bottom:8px;">Rede de Proteção • ONG & Protetor</div>
+          <div id="perfil-ong-status-box" style="margin-bottom:10px; font-size:12px; color:#6B5A43;"></div>
+          <div id="perfil-ong-vincular-form" style="display:flex; gap:8px; margin-bottom:10px;">
+            <input type="text" id="perfil-input-codigo-ong" class="form-input" placeholder="Código da ONG (ex: PATINHAS-CVEL)" style="flex:1; height:38px; text-transform:uppercase; font-weight:800; font-size:12px;">
+            <button type="button" onclick="vincularProtetorComCodigo()" style="height:38px; padding:0 14px; border-radius:10px; background:#9E8560; color:#fff; border:none; font-size:12px; font-weight:900; cursor:pointer;">Vincular</button>
+          </div>
+          <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:10px;">
+            <button type="button" id="btn-sair-ong-atual" onclick="sairDaOngAtual()" style="display:none; height:32px; padding:0 12px; border-radius:9px; background:#FEE2E2; color:#B91C1C; border:1px solid #FCA5A5; font-size:11.5px; font-weight:800; cursor:pointer;">Sair desta ONG</button>
+            <button type="button" onclick="abrirCadastroOngModal()" style="height:32px; padding:0 12px; border-radius:9px; background:#EDE8DF; color:#2E2417; border:1px solid #9E8560; font-size:11.5px; font-weight:800; cursor:pointer;">+ Cadastrar minha ONG</button>
+          </div>
+          <!-- Painel Exclusivo do Presidente da ONG -->
+          <div id="painel-gestao-minha-ong" style="display:none; border-top:1px solid rgba(110,90,60,0.22); padding-top:10px; margin-top:8px;">
+            <div style="font-size:12.5px; font-weight:900; color:#009B3A; margin-bottom:6px;">Painel da Sua ONG</div>
+            <div id="painel-ong-codigo-box" style="background:#EDE8DF; padding:10px; border-radius:10px; margin-bottom:10px; font-size:11.5px;"></div>
+            <div style="font-size:11.5px; font-weight:800; color:#2E2417; margin-bottom:6px;">Protetores na sua rede:</div>
+            <div id="painel-ong-lista-protetores" style="display:flex; flex-direction:column; gap:8px;"></div>
+          </div>
+        </div>
       </div>
+    </div>
+  </div>
+
+  <!-- MODAL: CADASTRAR NOVA ONG (ENVIA APROVAÇÃO PARA RIGOBERTO.BOCORNI@GMAIL.COM) -->
+  <div class="sheet-backdrop" id="modal-cadastro-ong" onclick="if(event.target===this) fecharModal('modal-cadastro-ong')" style="z-index:10100;">
+    <div class="sheet" style="max-height:88vh; overflow-y:auto; background:#EDE8DF; border-radius:22px 22px 0 0; padding:18px 16px 26px;">
+      <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:10px;">
+        <div>
+          <div style="font-size:16px; font-weight:900; color:#2E2417;">Cadastrar ONG / Associação</div>
+          <div style="font-size:11px; font-weight:700; color:#6B5A43;">Aprovação pela direção do Alerta Pet Brasil</div>
+        </div>
+        <button type="button" onclick="fecharModal('modal-cadastro-ong')" style="border:none; background:#E4D5BC; color:#2E2417; width:32px; height:32px; border-radius:50%; font-weight:900; cursor:pointer;">✕</button>
+      </div>
+      <div class="form-group" style="margin-bottom:8px;">
+        <label class="form-label">Nome Oficial da ONG *</label>
+        <input type="text" class="form-input" id="ong-cad-nome" placeholder="Ex: Associação Protetora de Cascavel">
+      </div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:8px;">
+        <div class="form-group"><label class="form-label">CNPJ (Opcional)</label><input type="text" class="form-input" id="ong-cad-cnpj" placeholder="00.000.000/0001-00"></div>
+        <div class="form-group"><label class="form-label">WhatsApp Oficial *</label><input type="tel" class="form-input" id="ong-cad-whatsapp" placeholder="(45) 99999-9999" oninput="formatarZapDinamico(this)"></div>
+      </div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:8px;">
+        <div class="form-group"><label class="form-label">Presidente / Responsável *</label><input type="text" class="form-input" id="ong-cad-responsavel" placeholder="Seu nome"></div>
+        <div class="form-group"><label class="form-label">E-mail da ONG</label><input type="email" class="form-input" id="ong-cad-email" placeholder="contato@ong.org"></div>
+      </div>
+      <div style="display:grid; grid-template-columns:1fr 1fr 70px; gap:8px; margin-bottom:8px;">
+        <div class="form-group"><label class="form-label">Bairro</label><input type="text" class="form-input" id="ong-cad-bairro" placeholder="Centro"></div>
+        <div class="form-group"><label class="form-label">Cidade</label><input type="text" class="form-input" id="ong-cad-cidade" value="Cascavel"></div>
+        <div class="form-group"><label class="form-label">UF</label><input type="text" class="form-input" id="ong-cad-estado" value="PR" maxlength="2"></div>
+      </div>
+      <div class="form-group" style="margin-bottom:8px;">
+        <label class="form-label">Sobre a ONG e atuação na cidade</label>
+        <textarea class="form-input" id="ong-cad-bio" rows="2" placeholder="Conte o trabalho da ONG, resgates e como apoiar..."></textarea>
+      </div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:12px;">
+        <div class="form-group"><label class="form-label">Instagram</label><input type="text" class="form-input" id="ong-cad-instagram" placeholder="@suaong"></div>
+        <div class="form-group"><label class="form-label">Chave Pix</label><input type="text" class="form-input" id="ong-cad-pix" placeholder="CNPJ ou celular"></div>
+      </div>
+      <button type="button" onclick="enviarSolicitacaoOng()" style="width:100%; height:44px; border-radius:12px; background:#9E8560; color:#fff; border:1.5px solid #8A724E; font-size:13.5px; font-weight:900; cursor:pointer;">Enviar Solicitação para Aprovação</button>
     </div>
   </div>
 
@@ -8093,6 +8224,8 @@
         renderizarAbaParceiros();
       } else if (aba === 'pets') {
         renderizarPetsAba();
+      } else if (aba === 'rede') {
+        renderizarAbaRede();
       } else if (aba === 'inicio') {
         renderizarDashboard();
       }
@@ -12907,10 +13040,30 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
       if (editEndereco && p.endereco) editEndereco.value = p.endereco;
 
       const isProt = (p.tipo_perfil === 'protetor' || p.tipo_perfil === 'ong');
+      const isVerifOng = Boolean(p.verificado_ong || p.verificado);
       const badgeProt = document.getElementById('perfil-badge-protetor');
+      const badgeProtTxt = document.getElementById('perfil-badge-protetor-txt');
+      const badgePend = document.getElementById('perfil-badge-pendente');
+      const badgePendTxt = document.getElementById('perfil-badge-pendente-txt');
       const rowProt = document.getElementById('row-minha-pagina-protetor');
-      if (badgeProt) badgeProt.style.display = isProt ? 'inline-flex' : 'none';
+      const resumoOng = document.getElementById('perfil-resumo-ong');
+
+      if (badgeProt) {
+        badgeProt.style.display = (isProt && isVerifOng) ? 'inline-flex' : 'none';
+        if (badgeProtTxt) badgeProtTxt.textContent = p.ong_nome ? `Protetor verificado • ${p.ong_nome}` : 'Protetor verificado';
+      }
+      if (badgePend) {
+        badgePend.style.display = (isProt && !isVerifOng) ? 'inline-flex' : 'none';
+        if (badgePendTxt) badgePendTxt.textContent = p.ong_nome ? `Aguardando verificação (${p.ong_nome})` : 'Aguardando vínculo com ONG';
+      }
       if (rowProt) rowProt.style.display = isProt ? 'flex' : 'none';
+      if (resumoOng) {
+        if (p.ong_nome) {
+          resumoOng.textContent = isVerifOng ? `Verificado pela ONG ${p.ong_nome}` : `Vinculado à ${p.ong_nome} (aguardando verificação)`;
+        } else {
+          resumoOng.textContent = 'Vincular-se a uma ONG com código ou gerenciar sua ONG';
+        }
+      }
     }
 
     function conectarGoogleAuth() {
@@ -13193,6 +13346,26 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
             auth_provider: state.perfil.auth_provider,
             email: state.perfil.email || ''
           })
+        }).then(() => {
+          const codOng = (document.getElementById('cadastro-input-codigo-ong')?.value || '').trim().toUpperCase();
+          if (codOng) {
+            fetch('/api/protetor/vincular-ong', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ autor_token: state.autorToken, codigo_convite: codOng })
+            }).then(r => r.json()).then(res => {
+              if (res && res.status === 'ok') {
+                state.perfil.ong_id = res.ong_id;
+                state.perfil.ong_nome = res.ong_nome;
+                state.perfil.verificado_ong = 0;
+                try { localStorage.setItem('au_perfil', JSON.stringify(state.perfil)); } catch(_) {}
+                atualizarUIPerfil();
+                mostrarToast(res.mensagem || 'Vinculado à ONG!');
+              } else if (res && res.error) {
+                mostrarToast(res.error);
+              }
+            }).catch(() => {});
+          }
         }).catch(() => {});
       } catch (_) {}
 
@@ -13469,24 +13642,344 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
       const box = document.getElementById('perfil-lista-meus-pets');
       const resumo = document.getElementById('perfil-resumo-registros');
       if (!box) return;
-      const meus = state.alertas.filter(a => a.pilar === 'pet' && a.autor_token && a.autor_token === state.autorToken);
-      if (resumo) resumo.textContent = `${meus.length} registro(s) publicado(s)`;
+      const meus = (state.alertas || []).filter(a => a.pilar === 'pet' && a.autor_token && a.autor_token === state.autorToken);
+      if (resumo) resumo.textContent = `${meus.length} registro(s) publicado(s) • Editar ou excluir`;
       if (!meus.length) {
         box.innerHTML = '<div class="empty-box" style="padding:14px; text-align:center; color:var(--text-muted); font-weight:600;">Você ainda não cadastrou nenhum pet ou alerta.</div>';
         return;
       }
       box.innerHTML = meus.map(p => `
-        <div class="perfil-card-box" style="margin-bottom:0; padding:12px; display:flex; align-items:center; justify-content:space-between; gap:10px;">
-          <div style="min-width:0;">
-            <div style="font-size:13.5px; font-weight:800; color:var(--text);">${escapeHtml(p.titulo)}</div>
-            <div style="font-size:11px; color:var(--text-muted); font-weight:600;">${escapeHtml(p.bairro || 'Cascavel')}</div>
+        <div class="perfil-card-box" style="margin-bottom:0; padding:12px; display:flex; flex-direction:column; gap:8px;">
+          <div style="display:flex; align-items:center; justify-content:space-between; gap:10px;">
+            <div style="min-width:0;">
+              <div style="font-size:13.5px; font-weight:800; color:var(--text);">${escapeHtml(p.titulo)}</div>
+              <div style="font-size:11px; color:var(--text-muted); font-weight:600;">${escapeHtml(p.bairro || 'Cascavel')} • ${escapeHtml(p.status_pet || 'perdido').toUpperCase()}</div>
+            </div>
           </div>
-          <div style="display:flex; gap:6px; flex-shrink:0;">
+          <div style="display:flex; gap:6px; flex-wrap:wrap;">
+            <button type="button" class="btn-slim" onclick="editarMeuPetRapido(${p.id})" style="background:#EDE8DF; color:#2E2417; border:1px solid #9E8560;">Editar</button>
             <button type="button" class="btn-slim" onclick="renovarMeuPet(${p.id})">+48h</button>
             <button type="button" class="btn-slim ok" onclick="encerrarMeuPet(${p.id})">Encontrei</button>
+            <button type="button" class="btn-slim" onclick="excluirMeuPetDefinitivo(${p.id})" style="background:#FEE2E2; color:#B91C1C; border:1px solid #FCA5A5; margin-left:auto;">Excluir</button>
           </div>
         </div>
       `).join('');
+    }
+
+    async function editarMeuPetRapido(id) {
+      const pet = (state.alertas || []).find(a => a.id === id);
+      if (!pet) return;
+      const novoTitulo = prompt('Editar nome / título do pet:', pet.titulo || '');
+      if (novoTitulo === null) return;
+      const novoBairro = prompt('Editar bairro:', pet.bairro || 'Cascavel');
+      if (novoBairro === null) return;
+      const novaDesc = prompt('Editar descrição:', pet.descricao || '');
+      if (novaDesc === null) return;
+      try {
+        const r = await fetch(`/api/alertas/${id}/editar`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            autor_token: state.autorToken,
+            titulo: novoTitulo.trim(),
+            bairro: novoBairro.trim(),
+            descricao: novaDesc.trim()
+          })
+        });
+        const j = await r.json().catch(() => ({}));
+        if (!r.ok) { mostrarToast(j.error || 'Erro ao editar registro.'); return; }
+        mostrarToast('Registro atualizado!');
+        await carregarDados();
+        renderizarMeusPetsPerfil();
+      } catch (_) {
+        mostrarToast('Falha de conexão ao editar.');
+      }
+    }
+
+    async function excluirMeuPetDefinitivo(id) {
+      if (!confirm('Deseja EXCLUIR definitivamente este registro do aplicativo, do mapa e do sistema? Esta ação não pode ser desfeita.')) return;
+      try {
+        const r = await fetch(`/api/alertas/${id}?autor_token=${encodeURIComponent(state.autorToken)}`, {
+          method: 'DELETE',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ autor_token: state.autorToken, permanente: true })
+        });
+        const j = await r.json().catch(() => ({}));
+        if (!r.ok) { mostrarToast(j.error || 'Não foi possível excluir.'); return; }
+        state.alertas = (state.alertas || []).filter(a => a.id !== id);
+        mostrarToast('Registro excluído definitivamente!');
+        renderizarMeusPetsPerfil();
+        renderizarDashboard();
+        if (state.tab === 'pets') renderizarPetsAba();
+        if (state.tab === 'mapa' && typeof renderizarMapa === 'function') renderizarMapa();
+      } catch (_) {
+        mostrarToast('Erro de conexão ao excluir registro.');
+      }
+    }
+
+    /* ==================== 6ª ABA: REDE DE PROTEÇÃO ANIMAL (ONGs & PROTETORES) ==================== */
+    state.redeSubAba = 'protetores';
+
+    function trocarSubAbaRede(sub) {
+      state.redeSubAba = sub;
+      const btnP = document.getElementById('btn-rede-protetores');
+      const btnO = document.getElementById('btn-rede-ongs');
+      const listP = document.getElementById('rede-lista-protetores');
+      const listO = document.getElementById('rede-lista-ongs');
+      if (sub === 'ongs') {
+        if (btnO) { btnO.style.background = '#9E8560'; btnO.style.color = '#FFFFFF'; }
+        if (btnP) { btnP.style.background = 'transparent'; btnP.style.color = '#2E2417'; }
+        if (listP) listP.style.display = 'none';
+        if (listO) listO.style.display = 'flex';
+      } else {
+        if (btnP) { btnP.style.background = '#9E8560'; btnP.style.color = '#FFFFFF'; }
+        if (btnO) { btnO.style.background = 'transparent'; btnO.style.color = '#2E2417'; }
+        if (listP) listP.style.display = 'flex';
+        if (listO) listO.style.display = 'none';
+      }
+      renderizarAbaRede();
+    }
+
+    async function renderizarAbaRede() {
+      const listP = document.getElementById('rede-lista-protetores');
+      const listO = document.getElementById('rede-lista-ongs');
+      try {
+        const [rP, rO] = await Promise.all([
+          fetch('/api/protetores').catch(() => null),
+          fetch('/api/ongs').catch(() => null)
+        ]);
+        const dP = (rP && rP.ok) ? await rP.json() : { protetores: [] };
+        const dO = (rO && rO.ok) ? await rO.json() : { ongs: [] };
+        const protetores = dP.protetores || [];
+        const ongs = dO.ongs || [];
+
+        if (listP) {
+          if (!protetores.length) {
+            listP.innerHTML = '<div style="background:#E4D5BC; border-radius:16px; padding:18px; text-align:center; color:#6B5A43; font-size:12.5px; font-weight:700;">Nenhum protetor vinculado ainda. Use o código de uma ONG para entrar na Rede!</div>';
+          } else {
+            listP.innerHTML = protetores.map(p => {
+              const verif = Boolean(p.verificado_ong || p.verificado);
+              const inicial = (p.nome || 'P').charAt(0).toUpperCase();
+              const avatar = p.foto_url
+                ? `<img src="${escapeHtml(p.foto_url)}" style="width:52px;height:52px;border-radius:50%;object-fit:cover;border:2px solid #9E8560;">`
+                : `<div style="width:52px;height:52px;border-radius:50%;background:#9E8560;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:20px;">${inicial}</div>`;
+              return `
+                <div onclick="abrirPerfilPublicoProtetor('${escapeHtml(p.autor_token || String(p.id))}')" style="background:#FFFFFF; border:1.5px solid rgba(110,90,60,0.22); border-radius:18px; padding:14px; box-shadow:0 4px 12px rgba(0,0,0,0.06); cursor:pointer;">
+                  <div style="display:flex; align-items:center; gap:12px;">
+                    ${avatar}
+                    <div style="flex:1; min-width:0;">
+                      <div style="font-size:14.5px; font-weight:900; color:#2E2417;">${escapeHtml(p.nome || 'Protetor')}</div>
+                      <div style="font-size:11.5px; font-weight:700; color:#6B5A43;">${escapeHtml(p.ong_nome || 'Rede de Proteção')} • ${escapeHtml(p.bairro || p.cidade || 'Cascavel')}</div>
+                      <div style="margin-top:4px; font-size:11px; font-weight:800; color:${verif ? '#009B3A' : '#9E8560'};">
+                        ${verif ? '🛡 Protetor verificado pela ONG' : '● Conta ativa • Aguardando verificação da ONG'}
+                      </div>
+                    </div>
+                  </div>
+                  ${p.bio ? `<div style="margin-top:10px; font-size:12px; color:#4A3B28; line-height:1.4;">${escapeHtml(p.bio)}</div>` : ''}
+                  <div style="margin-top:10px; display:flex; align-items:center; justify-content:space-between; font-size:11px; font-weight:800; color:#6B5A43; border-top:1px solid rgba(0,0,0,0.06); padding-top:8px;">
+                    <span>🐾 ${(p.animais || []).length} pet(s) sob cuidado</span>
+                    <span style="color:#009B3A;">Ver perfil completo ›</span>
+                  </div>
+                </div>
+              `;
+            }).join('');
+          }
+        }
+
+        if (listO) {
+          if (!ongs.length) {
+            listO.innerHTML = '<div style="background:#E4D5BC; border-radius:16px; padding:18px; text-align:center; color:#6B5A43; font-size:12.5px; font-weight:700;">Nenhuma ONG aprovada ainda. Cadastre a primeira ONG!</div>';
+          } else {
+            listO.innerHTML = ongs.map(o => `
+              <div style="background:#FFFFFF; border:1.5px solid rgba(0,155,58,0.28); border-radius:18px; padding:14px; box-shadow:0 4px 12px rgba(0,0,0,0.06);">
+                <div style="display:flex; align-items:center; justify-content:space-between; gap:8px;">
+                  <div>
+                    <div style="font-size:15px; font-weight:900; color:#2E2417;">${escapeHtml(o.nome)}</div>
+                    <div style="font-size:11.5px; font-weight:700; color:#6B5A43;">${escapeHtml(o.bairro || '')} • ${escapeHtml(o.cidade || 'Cascavel')} - ${escapeHtml(o.estado || 'PR')}</div>
+                  </div>
+                  <span style="font-size:10.5px; font-weight:900; color:#009B3A;">✓ ONG Oficial</span>
+                </div>
+                ${o.bio ? `<div style="margin-top:8px; font-size:12px; color:#4A3B28; line-height:1.4;">${escapeHtml(o.bio)}</div>` : ''}
+                <div style="margin-top:10px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px; border-top:1px solid rgba(0,0,0,0.06); padding-top:8px; font-size:11.5px; font-weight:800; color:#6B5A43;">
+                  <span>👥 ${o.total_verificados || 0} protetor(es) verificado(s)</span>
+                  ${o.whatsapp ? `<a href="https://wa.me/55${String(o.whatsapp).replace(/\\D/g,'')}" target="_blank" style="color:#009B3A; text-decoration:none; font-weight:900;">Falar no WhatsApp ›</a>` : ''}
+                </div>
+              </div>
+            `).join('');
+          }
+        }
+      } catch (_) {}
+    }
+
+    function abrirCadastroOngModal() {
+      const m = document.getElementById('modal-cadastro-ong');
+      if (m) { m.style.display = 'flex'; m.classList.add('open'); }
+    }
+
+    async function enviarSolicitacaoOng() {
+      const nome = (document.getElementById('ong-cad-nome')?.value || '').trim();
+      const cnpj = (document.getElementById('ong-cad-cnpj')?.value || '').trim();
+      const whatsapp = (document.getElementById('ong-cad-whatsapp')?.value || '').trim();
+      const responsavel_nome = (document.getElementById('ong-cad-responsavel')?.value || '').trim();
+      const email = (document.getElementById('ong-cad-email')?.value || '').trim();
+      const bairro = (document.getElementById('ong-cad-bairro')?.value || '').trim();
+      const cidade = (document.getElementById('ong-cad-cidade')?.value || 'Cascavel').trim();
+      const estado = (document.getElementById('ong-cad-estado')?.value || 'PR').trim();
+      const bio = (document.getElementById('ong-cad-bio')?.value || '').trim();
+      const instagram = (document.getElementById('ong-cad-instagram')?.value || '').trim();
+      const chave_pix = (document.getElementById('ong-cad-pix')?.value || '').trim();
+
+      if (!nome || !whatsapp) {
+        mostrarToast('Informe o nome oficial da ONG e o WhatsApp.');
+        return;
+      }
+      try {
+        const r = await fetch('/api/ongs/solicitar', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            autor_token: state.autorToken, nome, cnpj, whatsapp, responsavel_nome, email,
+            bairro, cidade, estado, bio, instagram, chave_pix
+          })
+        });
+        const j = await r.json().catch(() => ({}));
+        if (!r.ok) { mostrarToast(j.error || 'Erro ao enviar solicitação.'); return; }
+        fecharModal('modal-cadastro-ong');
+        mostrarToast(j.mensagem || 'Solicitação enviada para aprovação!');
+      } catch (_) {
+        mostrarToast('Falha de conexão ao cadastrar ONG.');
+      }
+    }
+
+    function abrirModalVincularOng() {
+      abrirPerfil(false);
+      setTimeout(() => {
+        const box = document.getElementById('perfil-caixa-ong');
+        if (box) { box.style.display = 'block'; carregarPainelMinhaOng(); }
+        const inp = document.getElementById('perfil-input-codigo-ong');
+        if (inp) inp.focus();
+      }, 220);
+    }
+
+    function alternarGavetaOng() {
+      const box = document.getElementById('perfil-caixa-ong');
+      if (!box) return;
+      const vis = box.style.display !== 'none';
+      box.style.display = vis ? 'none' : 'block';
+      if (!vis) carregarPainelMinhaOng();
+    }
+
+    async function vincularProtetorComCodigo() {
+      const cod = (document.getElementById('perfil-input-codigo-ong')?.value || '').trim().toUpperCase();
+      if (!cod) { mostrarToast('Digite o código de convite da ONG.'); return; }
+      try {
+        const r = await fetch('/api/protetor/vincular-ong', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ autor_token: state.autorToken, codigo_convite: cod })
+        });
+        const j = await r.json().catch(() => ({}));
+        if (!r.ok) { mostrarToast(j.error || 'Código inválido.'); return; }
+        state.perfil = { ...state.perfil, tipo_perfil: 'protetor', ong_id: j.ong_id, ong_nome: j.ong_nome, verificado_ong: 0 };
+        try { localStorage.setItem('au_perfil', JSON.stringify(state.perfil)); } catch(_) {}
+        atualizarUIPerfil();
+        carregarPainelMinhaOng();
+        mostrarToast(j.mensagem || 'Vinculado à ONG!');
+      } catch (_) {
+        mostrarToast('Erro ao vincular código.');
+      }
+    }
+
+    async function sairDaOngAtual() {
+      if (!confirm('Deseja sair desta ONG? Seu perfil público continua ativo e você poderá se filiar a outra ONG.')) return;
+      try {
+        const r = await fetch('/api/protetor/desvincular-ong', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ autor_token: state.autorToken })
+        });
+        const j = await r.json().catch(() => ({}));
+        if (!r.ok) { mostrarToast(j.error || 'Erro ao sair da ONG.'); return; }
+        state.perfil = { ...state.perfil, ong_id: null, ong_nome: '', verificado_ong: 0 };
+        try { localStorage.setItem('au_perfil', JSON.stringify(state.perfil)); } catch(_) {}
+        atualizarUIPerfil();
+        carregarPainelMinhaOng();
+        mostrarToast(j.mensagem || 'Você saiu da ONG.');
+      } catch (_) {}
+    }
+
+    async function carregarPainelMinhaOng() {
+      const statusBox = document.getElementById('perfil-ong-status-box');
+      const btnSair = document.getElementById('btn-sair-ong-atual');
+      const painelOng = document.getElementById('painel-gestao-minha-ong');
+      const codBox = document.getElementById('painel-ong-codigo-box');
+      const listaEl = document.getElementById('painel-ong-lista-protetores');
+      const p = state.perfil || {};
+      if (statusBox) {
+        if (p.ong_nome) {
+          statusBox.innerHTML = p.verificado_ong
+            ? `Você é <b>Protetor Verificado</b> na ONG <b>${escapeHtml(p.ong_nome)}</b>.`
+            : `Você entrou na ONG <b>${escapeHtml(p.ong_nome)}</b>. Aguardando a direção confirmar sua verificação.`;
+        } else {
+          statusBox.textContent = 'Você ainda não está vinculado a uma ONG. Informe o código enviado pela ONG para entrar na rede.';
+        }
+      }
+      if (btnSair) btnSair.style.display = p.ong_nome ? 'inline-block' : 'none';
+      try {
+        const r = await fetch(`/api/ong/minha-rede?autor_token=${encodeURIComponent(state.autorToken)}`);
+        if (!r.ok) return;
+        const j = await r.json();
+        if (j.ong && painelOng) {
+          painelOng.style.display = 'block';
+          const link = `${location.origin}/?ong_codigo=${j.ong.codigo_convite}`;
+          if (codBox) {
+            codBox.innerHTML = `
+              <div><b>${escapeHtml(j.ong.nome)}</b> (${j.ong.status === 'aprovada' ? '✓ Aprovada' : '⏳ Aguardando aprovação'})</div>
+              <div style="margin-top:4px;">Código oficial: <b style="font-size:13px;letter-spacing:1px;">${escapeHtml(j.ong.codigo_convite)}</b></div>
+              <div style="margin-top:4px;word-break:break-all;font-size:10.5px;color:#6B5A43;">Link de convite: ${escapeHtml(link)}</div>
+            `;
+          }
+          if (listaEl) {
+            const prots = j.protetores || [];
+            if (!prots.length) {
+              listaEl.innerHTML = '<div style="font-size:11.5px;color:#6B5A43;">Nenhum protetor vinculado ainda. Compartilhe o código oficial acima.</div>';
+            } else {
+              listaEl.innerHTML = prots.map(pr => `
+                <div style="background:#EDE8DF; padding:8px 10px; border-radius:10px; display:flex; align-items:center; justify-content:space-between; gap:8px;">
+                  <div style="min-width:0;">
+                    <div style="font-size:12px;font-weight:800;color:#2E2417;">${escapeHtml(pr.nome || 'Protetor')}</div>
+                    <div style="font-size:10.5px;color:${pr.verificado_ong ? '#009B3A' : '#9E8560'};font-weight:700;">
+                      ${pr.verificado_ong ? '🛡 Verificado' : '⏳ Pendente de verificação'}
+                    </div>
+                  </div>
+                  <div style="display:flex;gap:5px;flex-shrink:0;">
+                    ${pr.verificado_ong
+                      ? `<button type="button" class="btn-slim" onclick="gerenciarProtetorOng('${escapeHtml(pr.autor_token)}','remover_verificacao')">Revogar</button>`
+                      : `<button type="button" class="btn-slim ok" onclick="gerenciarProtetorOng('${escapeHtml(pr.autor_token)}','verificar')">Verificar</button>`}
+                    <button type="button" class="btn-slim" onclick="gerenciarProtetorOng('${escapeHtml(pr.autor_token)}','expulsar')" style="background:#FEE2E2;color:#B91C1C;">Remover</button>
+                  </div>
+                </div>
+              `).join('');
+            }
+          }
+        } else if (painelOng) {
+          painelOng.style.display = 'none';
+        }
+      } catch (_) {}
+    }
+
+    async function gerenciarProtetorOng(protetorToken, acao) {
+      try {
+        const r = await fetch('/api/ong/gerenciar-protetor', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ autor_token: state.autorToken, protetor_token: protetorToken, acao })
+        });
+        const j = await r.json().catch(() => ({}));
+        if (!r.ok) { mostrarToast(j.error || 'Erro ao atualizar protetor.'); return; }
+        mostrarToast(acao === 'verificar' ? 'Protetor verificado com sucesso!' : (acao === 'expulsar' ? 'Protetor removido da rede.' : 'Verificação removida.'));
+        carregarPainelMinhaOng();
+      } catch (_) {}
     }
 
     /* ==================== MÓDULO PARCEIROS & PROMOÇÕES DE CASCAVEL ==================== */
@@ -13751,6 +14244,26 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
 
       // Captura Deep Link de Busca Solidária de Amigos (?ref_pet=ID)
       capturarDeepLinkPetSolidario();
+
+      // Captura Deep Link de Convite de ONG (?ong_codigo=CODIGO)
+      try {
+        const codUrl = (urlParams.get('ong_codigo') || '').trim().toUpperCase();
+        if (codUrl) {
+          setTimeout(() => {
+            if (state.perfil && state.perfil.cadastrado) {
+              abrirModalVincularOng();
+              const inp = document.getElementById('perfil-input-codigo-ong');
+              if (inp) inp.value = codUrl;
+            } else {
+              abrirPerfil(true);
+              selecionarTipoPerfilCadastro('protetor');
+              const inp = document.getElementById('cadastro-input-codigo-ong');
+              if (inp) inp.value = codUrl;
+            }
+            mostrarToast(`Código da ONG ${codUrl} preenchido!`);
+          }, 800);
+        }
+      } catch (_) {}
 
       // Abertura automática do Guia do Testador na primeira visita
       try {
