@@ -3333,7 +3333,8 @@
       color: #18181B;
       box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
     }
-    .pet-status-pill.desaparecido {
+    .pet-status-pill.desaparecido,
+    .pet-status-pill.perdido {
       background: #DC2626 !important;
       color: #FFFFFF !important;
       border: 1.5px solid #B91C1C !important;
@@ -3351,10 +3352,11 @@
       border: 1.5px solid #047857 !important;
       font-weight: 900 !important;
     }
-    .pet-status-pill.encontrado {
-      background: #10B981 !important;
+    .pet-status-pill.encontrado,
+    .pet-status-pill.reencontro {
+      background: #7C3AED !important;
       color: #FFFFFF !important;
-      border: 1.5px solid #059669 !important;
+      border: 1.5px solid #6D28D9 !important;
       font-weight: 900 !important;
     }
     [data-theme="dark"] .pet-status-pill {
@@ -3362,7 +3364,8 @@
       color: #FFFFFF;
       border-color: rgba(255, 255, 255, 0.25);
     }
-    [data-theme="dark"] .pet-status-pill.desaparecido {
+    [data-theme="dark"] .pet-status-pill.desaparecido,
+    [data-theme="dark"] .pet-status-pill.perdido {
       background: #DC2626 !important;
       color: #FFFFFF !important;
       border: 1.5px solid #B91C1C !important;
@@ -4200,15 +4203,15 @@
       color: #FFFFFF !important;
     }
     /* ========================================================
-       MODAL PERFIL & ACESSO (PADRÃO PRINT 2 DIRETRIZ RIGO)
-       Fundo Degradê Verde-Areia-Verde Suave • Botões Areia Escura #9E8560 Copiloto
+       TELA BASE DEGRADÊ OFICIAL (MODAL PERFIL & MODAL DETALHE PET)
+       Fundo Degradê Verde-Areia-Verde Suave • Botões Areia Escura #9E8560
        ======================================================== */
-    #modal-perfil {
+    #modal-perfil,
+    #modal-detalhe {
       top: 0 !important;
       left: 0 !important;
       right: 0 !important;
       bottom: calc(env(safe-area-inset-bottom, 0px) + 56px) !important;
-      z-index: 2500 !important;
       background: linear-gradient(180deg, 
         #009B3A 0px, 
         #009B3A calc(env(safe-area-inset-top, 0px) + 68px), 
@@ -4221,7 +4224,11 @@
         #21853D calc(100% - 6px), 
         #009B3A 100%) !important;
     }
-    body:not(.theme-dark):not([data-theme="dark"]) #modal-perfil::after {
+    #modal-perfil { z-index: 2500 !important; }
+    #modal-detalhe { z-index: 2600 !important; }
+
+    body:not(.theme-dark):not([data-theme="dark"]) #modal-perfil::after,
+    body:not(.theme-dark):not([data-theme="dark"]) #modal-detalhe::after {
       content: "";
       position: absolute;
       left: 0;
@@ -4237,24 +4244,30 @@
       pointer-events: none !important;
       z-index: 20 !important;
     }
-    #modal-perfil .profile-fs-header {
+    #modal-perfil .profile-fs-header,
+    #modal-detalhe .profile-fs-header,
+    #modal-detalhe .fs-header {
       background: transparent !important;
       border-bottom: none !important;
       color: #FFFFFF !important;
       position: relative !important;
       z-index: 5 !important;
     }
-    #modal-perfil .fs-body {
+    #modal-perfil .fs-body,
+    #modal-detalhe .fs-body,
+    #modal-detalhe .fs-content {
       scrollbar-width: none !important;
       -ms-overflow-style: none !important;
       margin-bottom: 0 !important;
-      padding: 0 0 54px !important;
+      padding: 0 16px 54px !important;
       overflow-y: auto !important;
       overflow-x: hidden !important;
       position: relative !important;
       z-index: 5 !important;
     }
-    #modal-perfil .fs-body::-webkit-scrollbar {
+    #modal-perfil .fs-body::-webkit-scrollbar,
+    #modal-detalhe .fs-body::-webkit-scrollbar,
+    #modal-detalhe .fs-content::-webkit-scrollbar {
       display: none !important;
       width: 0 !important;
       height: 0 !important;
@@ -4497,8 +4510,12 @@
       border: 1.5px solid #D8B4FE !important;
       color: #4C1D95 !important;
     }
+    .pet-card .btn-pet-cta-primary,
+    .pet-card .btn-pet-cta-secondary,
     #tab-pets .pet-card .btn-pet-cta-primary,
-    #tab-pets .pet-card .btn-pet-cta-secondary {
+    #tab-pets .pet-card .btn-pet-cta-secondary,
+    #modal-detalhe .pet-card .btn-pet-cta-primary,
+    #modal-detalhe .pet-card .btn-pet-cta-secondary {
       background: #FFFFFF !important;
       color: #18181B !important;
       border: 1px solid rgba(0, 0, 0, 0.12) !important;
@@ -4507,17 +4524,23 @@
       border-radius: 12px !important;
       height: 38px !important;
     }
-    #tab-pets .pet-card.tema-azul .btn-pet-cta-primary {
+    .pet-card.tema-azul .btn-pet-cta-primary,
+    #tab-pets .pet-card.tema-azul .btn-pet-cta-primary,
+    #modal-detalhe .pet-card.tema-azul .btn-pet-cta-primary {
       background: #0284C7 !important;
       color: #FFFFFF !important;
       border: none !important;
     }
-    #tab-pets .pet-card.tema-rosa .btn-pet-cta-primary {
+    .pet-card.tema-rosa .btn-pet-cta-primary,
+    #tab-pets .pet-card.tema-rosa .btn-pet-cta-primary,
+    #modal-detalhe .pet-card.tema-rosa .btn-pet-cta-primary {
       background: #DB2777 !important;
       color: #FFFFFF !important;
       border: none !important;
     }
-    #tab-pets .pet-card.tema-roxo .btn-pet-cta-primary {
+    .pet-card.tema-roxo .btn-pet-cta-primary,
+    #tab-pets .pet-card.tema-roxo .btn-pet-cta-primary,
+    #modal-detalhe .pet-card.tema-roxo .btn-pet-cta-primary {
       background: #7C3AED !important;
       color: #FFFFFF !important;
       border: none !important;
@@ -6147,17 +6170,23 @@
 
     /* 8. MODAIS, GAVETAS E PERFIL NO MODO NOTURNO */
     [data-theme="dark"] #modal-perfil,
-    body.theme-dark #modal-perfil {
+    [data-theme="dark"] #modal-detalhe,
+    body.theme-dark #modal-perfil,
+    body.theme-dark #modal-detalhe {
       background: #000000 !important;
     }
 
     [data-theme="dark"] #modal-perfil::after,
-    body.theme-dark #modal-perfil::after {
+    [data-theme="dark"] #modal-detalhe::after,
+    body.theme-dark #modal-perfil::after,
+    body.theme-dark #modal-detalhe::after {
       display: none !important;
     }
 
     [data-theme="dark"] #modal-perfil .profile-fs-header,
-    body.theme-dark #modal-perfil .profile-fs-header {
+    [data-theme="dark"] #modal-detalhe .profile-fs-header,
+    body.theme-dark #modal-perfil .profile-fs-header,
+    body.theme-dark #modal-detalhe .profile-fs-header {
       background: #000000 !important;
       border-bottom: 1px solid rgba(255, 255, 255, 0.10) !important;
     }
@@ -6827,22 +6856,25 @@
     </div>
   </div>
 
-  <!-- ==================== TELA COMPLETA: DETALHES DO PET / OCORRÊNCIA EM TELA CHEIA ==================== -->
-  <div class="full-screen-view" id="modal-detalhe" style="display:none; flex-direction:column; background:#EDE8DF; z-index:2600;">
-    <div class="fs-header" id="detalhe-fs-header" style="background:#009B3A; color:#FFFFFF; padding:calc(env(safe-area-inset-top, 0px) + 12px) 16px 14px; display:flex; align-items:center; justify-content:space-between; flex-shrink:0;">
-      <button type="button" class="fs-back" onclick="fecharModal('modal-detalhe')" style="background:#000000; color:#FFFFFF; border:none; border-radius:999px; padding:7px 15px; font-weight:800; cursor:pointer;">‹ Voltar</button>
+  <!-- ==================== TELA COMPLETA: DETALHES DO PET / OCORRÊNCIA EM TELA CHEIA (PADRÃO TELA BASE RIGO) ==================== -->
+  <div class="full-screen-view" id="modal-detalhe" style="display:none; flex-direction:column; z-index:2600;">
+    <!-- Topo Centralizado com Degradê Brasil Oficial -->
+    <div class="fs-header profile-fs-header" style="justify-content:center; position:relative; padding-top:calc(env(safe-area-inset-top, 0px) + 14px); padding-bottom:6px;">
       <div style="text-align:center;">
-        <div style="font-size:16px; font-weight:900; color:#FFFFFF;" id="detalhe-header-title">Ficha do Animal</div>
-        <div style="font-size:10.5px; font-weight:800; color:#FED700; letter-spacing:0.5px;" id="detalhe-header-sub">Alerta Pet Brasil</div>
+        <div style="font-size:21px; font-weight:900; color:#FFFFFF; letter-spacing:0.3px; line-height:1.2;" id="detalhe-header-title">Ficha do Animal</div>
+        <div style="font-size:12.5px; font-weight:800; color:#FED700; letter-spacing:0.5px; margin-top:3px;" id="detalhe-header-sub">Alerta Pet Brasil</div>
       </div>
-      <div style="width:48px;"></div>
     </div>
-    <div class="profile-river-wave" style="background:#009B3A; line-height:0; flex-shrink:0;">
-      <svg viewBox="0 0 500 16" preserveAspectRatio="none" style="width:100%; height:16px; display:block;">
-        <path d="M 0,0 L 500,0 L 500,4 C 420,16 330,2 240,12 C 150,18 80,4 0,14 Z" fill="#EDE8DF"/>
-      </svg>
+
+    <!-- Botão Voltar separado no início da área de conteúdo com suspiro -->
+    <div style="max-width:540px; margin:0 auto; width:100%; padding:12px 16px 6px; display:flex; align-items:center; justify-content:flex-start;">
+      <button type="button" class="btn-voltar-acesso" onclick="fecharModal('modal-detalhe')">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        <span>Voltar</span>
+      </button>
     </div>
-    <div class="fs-content" id="detalhe-conteudo" style="flex:1; overflow-y:auto; padding:16px 18px calc(env(safe-area-inset-bottom, 0px) + 60px); -webkit-overflow-scrolling:touch; max-width:560px; margin:0 auto; width:100%; box-sizing:border-box;">
+
+    <div class="fs-body" id="detalhe-conteudo" style="max-width:540px; margin:0 auto; width:100%; overflow-y:auto; padding:0 16px 54px;">
     </div>
   </div>
 
@@ -8612,7 +8644,11 @@
         const hlEl = document.getElementById('w-hl');
 
         let iconeFinal = c.icone || (isNoite ? '🌙' : '☀️');
-        let condFinal = c.condicao || (isNoite ? 'Noite de céu limpo' : 'Monitorando');
+        let condFinal = c.condicao || (isNoite ? 'Noite de céu limpo' : 'Tempo estável');
+
+        if (!condFinal || condFinal.toLowerCase().includes('monitora')) {
+          condFinal = isNoite ? 'Noite de céu limpo' : 'Tempo estável';
+        }
 
         if (isNoite) {
           if (iconeFinal === '☀️' || iconeFinal === '🌤️' || iconeFinal === '⛅') {
@@ -8694,27 +8730,40 @@
         } else {
           const cardsHtml = pets.map(p => {
             let badgeText = 'Perdido';
-            let badgeStyle = 'background:rgba(220,38,38,0.92); color:#FFFFFF;';
+            let badgeStyle = 'background:rgba(220,38,38,0.95); color:#FFFFFF;';
             if (p.tipo === 'pet_adocao' || p.status_pet === 'adocao') {
               badgeText = 'Adoção';
-              badgeStyle = 'background:rgba(0,155,58,0.92); color:#FFFFFF;';
+              badgeStyle = 'background:rgba(0,155,58,0.95); color:#FFFFFF;';
             } else if (p.tipo === 'pet_resgatado' || p.status_pet === 'resgatado') {
               badgeText = 'Resgatado';
-              badgeStyle = 'background:rgba(37,99,235,0.92); color:#FFFFFF;';
+              badgeStyle = 'background:rgba(37,99,235,0.95); color:#FFFFFF;';
             } else if (p.tipo === 'pet_reencontro' || p.status_pet === 'reencontro' || p.status_pet === 'encontrado') {
               badgeText = 'Reencontro';
-              badgeStyle = 'background:rgba(124,58,237,0.92); color:#FFFFFF;';
+              badgeStyle = 'background:rgba(124,58,237,0.95); color:#FFFFFF;';
             }
             const img = p.foto_url
               ? `<img class="unified-belt-img" src="${escapeAttr(p.foto_url)}" alt="${escapeAttr(p.titulo)}" loading="lazy" onerror="this.onerror=null; this.src='/static/darkplanner_pets/cachorra_02_caramelo.jpg';">`
               : `<div class="unified-belt-img" style="display:flex;align-items:center;justify-content:center;background:#18181B;color:#a8a29e;"><svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor"><circle cx="4.5" cy="5" r="1.6"/><circle cx="7.5" cy="3.5" r="1.6"/><circle cx="10.5" cy="5" r="1.6"/><circle cx="7.5" cy="9.2" r="2.8"/></svg></div>`;
+            
+            // Regra Rigo: Tríade com Nome do Animal, Cor/Raça e Bairro
+            const rawTitulo = p.titulo || 'Pet';
+            let nomeAnimal = rawTitulo;
+            let corRaca = p.raca || p.cor || p.especie || '';
+            if (rawTitulo.includes('•')) {
+              const partes = rawTitulo.split('•');
+              nomeAnimal = partes[0].trim();
+              if (!corRaca) corRaca = partes[1].trim();
+            }
+            const bairroAnimal = p.bairro || 'Cascavel';
+            const subTexto = corRaca ? `${corRaca} • ${bairroAnimal}` : bairroAnimal;
+
             return `
               <div class="unified-belt-card" onclick="abrirDetalheById(${p.id})">
                 ${img}
                 <span class="unified-belt-pill" style="${badgeStyle}">${badgeText}</span>
                 <div class="unified-belt-grad">
-                  <div class="unified-belt-title">${escapeHtml(p.titulo)}</div>
-                  <div class="unified-belt-sub">${escapeHtml(p.bairro || 'Cascavel')}</div>
+                  <div class="unified-belt-title">${escapeHtml(nomeAnimal)}</div>
+                  <div class="unified-belt-sub">${escapeHtml(subTexto)}</div>
                 </div>
               </div>
             `;
@@ -9931,229 +9980,247 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
         return;
       }
 
+      el.innerHTML = pets.map((p, idx) => gerarHtmlCardPet(p, idx, false)).join('');
+    }
+
+    /* =========================================================================
+       GERADOR OFICIAL DO CARD ÚNICO DO PET (PADRÃO RIGO - PRINT 2)
+       Compartilhado entre: Feed da Aba Pet e Ficha Detalhada (Modal Detalhe)
+       Cores temáticas de sexo (Rosa/Azul/Roxo) • Zero Marrom nos botões do animal
+       ========================================================================= */
+    function gerarHtmlCardPet(p, idx = 0, isModal = false) {
+      if (!p) return '';
       let curtidos = [];
       try { curtidos = JSON.parse(localStorage.getItem('alerta_pets_curtidos') || '[]'); } catch(e) {}
 
-      el.innerHTML = pets.map((p, idx) => {
-        const ehAdocao = (pilarAtivo === 'adocao') || (p.tipo === 'pet_adocao') || (p.status_pet === 'adocao');
-        const av = p.status_pet === 'avistado' || p.status_pet === 'encontrado' || p.tipo === 'pet_avistado' || p.tipo === 'pet_encontrado';
-        const ehImprensa = p.fonte_tipo === 'imprensa' || (!p.tem_tutor_notificavel && p.link_noticia);
-        const distTxt = (state.userLat && state.userLng) ? formatarDistancia(calcularDistanciaM(state.userLat, state.userLng, p.lat, p.lng)) : '';
-        const isLiked = curtidos.includes(p.id);
+      const ehAdocao = (p.tipo === 'pet_adocao') || (p.status_pet === 'adocao');
+      const ehResgate = (p.tipo === 'pet_resgatado') || (p.status_pet === 'resgatado');
+      const ehReencontro = (p.tipo === 'pet_reencontro') || (p.tipo === 'pet_reencontrado') || (p.status_pet === 'reencontro') || (p.status_pet === 'reencontrado') || (p.status_pet === 'encontrado');
+      const av = p.status_pet === 'avistado' || p.tipo === 'pet_avistado';
+      const ehPerdido = !ehAdocao && !ehResgate && !ehReencontro && !av;
+      const ehImprensa = p.fonte_tipo === 'imprensa' || (!p.tem_tutor_notificavel && p.link_noticia);
+      const distTxt = (state.userLat && state.userLng && p.lat && p.lng) ? formatarDistancia(calcularDistanciaM(state.userLat, state.userLng, p.lat, p.lng)) : '';
+      const isLiked = curtidos.includes(p.id);
 
-        // Autor e Subtítulo com Rua real e Nome do Tutor
-        let autorNome = p.autor_nome || p.fonte_nome || 'Tutor em Cascavel';
-        let localRua = p.rua ? p.rua : '';
-        let localBairro = p.bairro ? p.bairro : 'Cascavel';
-        let localStr = localRua ? `${localRua} • ${localBairro}` : localBairro;
-        let autorSub = localStr + ' • ' + tempoRelativo(p.created_at);
-        let autorLetra = 'T';
-        if (ehImprensa) {
-          autorNome = 'Imprensa Local';
-          autorLetra = 'I';
-        } else if (autorNome && autorNome !== 'Tutor em Cascavel') {
-          autorLetra = autorNome.charAt(0).toUpperCase();
-        }
+      // Autor e Subtítulo com Rua real e Nome do Tutor
+      let autorNome = p.autor_nome || p.fonte_nome || 'Tutor em Cascavel';
+      let localRua = p.rua ? p.rua : '';
+      let localBairro = p.bairro ? p.bairro : 'Cascavel';
+      let localStr = localRua ? `${localRua} • ${localBairro}` : localBairro;
+      let autorSub = localStr + ' • ' + tempoRelativo(p.created_at);
+      let autorLetra = 'T';
+      if (ehImprensa) {
+        autorNome = 'Imprensa Local';
+        autorLetra = 'I';
+      } else if (autorNome && autorNome !== 'Tutor em Cascavel') {
+        autorLetra = autorNome.charAt(0).toUpperCase();
+      }
 
-        const temaInfo = obterTemaGeneroPet(p);
-        const presetsPosicoesPatas = [
-          [
-            { estilo: 'top:-30px; right:-25px; width:160px; height:160px;', rot: 18, opac: 0.38 },
-            { estilo: 'bottom:-40px; left:-30px; width:185px; height:185px;', rot: -22, opac: 0.32 },
-            { estilo: 'bottom:55px; right:-35px; width:140px; height:140px;', rot: 12, opac: 0.35 }
-          ],
-          [
-            { estilo: 'top:-35px; left:-25px; width:165px; height:165px;', rot: -18, opac: 0.38 },
-            { estilo: 'bottom:-45px; right:-25px; width:190px; height:190px;', rot: 25, opac: 0.32 },
-            { estilo: 'bottom:60px; left:-35px; width:135px; height:135px;', rot: -14, opac: 0.35 }
-          ],
-          [
-            { estilo: 'top:-28px; right:12%; width:150px; height:150px;', rot: 15, opac: 0.36 },
-            { estilo: 'bottom:-38px; left:-25px; width:175px; height:175px;', rot: -20, opac: 0.32 },
-            { estilo: 'bottom:-30px; right:-30px; width:155px; height:155px;', rot: 18, opac: 0.34 }
-          ],
-          [
-            { estilo: 'top:-30px; left:15%; width:150px; height:150px;', rot: -16, opac: 0.36 },
-            { estilo: 'bottom:-40px; right:-30px; width:180px; height:180px;', rot: 22, opac: 0.32 },
-            { estilo: 'bottom:-32px; left:-32px; width:150px; height:150px;', rot: -18, opac: 0.34 }
-          ]
-        ];
+      const temaInfo = obterTemaGeneroPet(p);
+      const presetsPosicoesPatas = [
+        [
+          { estilo: 'top:-30px; right:-25px; width:160px; height:160px;', rot: 18, opac: 0.38 },
+          { estilo: 'bottom:-40px; left:-30px; width:185px; height:185px;', rot: -22, opac: 0.32 },
+          { estilo: 'bottom:55px; right:-35px; width:140px; height:140px;', rot: 12, opac: 0.35 }
+        ],
+        [
+          { estilo: 'top:-35px; left:-25px; width:165px; height:165px;', rot: -18, opac: 0.38 },
+          { estilo: 'bottom:-45px; right:-25px; width:190px; height:190px;', rot: 25, opac: 0.32 },
+          { estilo: 'bottom:60px; left:-35px; width:135px; height:135px;', rot: -14, opac: 0.35 }
+        ],
+        [
+          { estilo: 'top:-28px; right:12%; width:150px; height:150px;', rot: 15, opac: 0.36 },
+          { estilo: 'bottom:-38px; left:-25px; width:175px; height:175px;', rot: -20, opac: 0.32 },
+          { estilo: 'bottom:-30px; right:-30px; width:155px; height:155px;', rot: 18, opac: 0.34 }
+        ],
+        [
+          { estilo: 'top:-30px; left:15%; width:150px; height:150px;', rot: -16, opac: 0.36 },
+          { estilo: 'bottom:-40px; right:-30px; width:180px; height:180px;', rot: 22, opac: 0.32 },
+          { estilo: 'bottom:-32px; left:-32px; width:150px; height:150px;', rot: -18, opac: 0.34 }
+        ]
+      ];
 
-        const parPos = presetsPosicoesPatas[idx % presetsPosicoesPatas.length];
+      const parPos = presetsPosicoesPatas[idx % presetsPosicoesPatas.length];
 
-        const patasFundoHtml = `
-          <div class="pet-card-bg-paws" aria-hidden="true">
-            ${gerarSvgPataFundo(temaInfo.coresPatas[0], parPos[0].estilo, parPos[0].opac, parPos[0].rot)}
-            ${gerarSvgPataFundo(temaInfo.coresPatas[1], parPos[1].estilo, parPos[1].opac, parPos[1].rot)}
-            ${gerarSvgPataFundo(temaInfo.coresPatas[2], parPos[2].estilo, parPos[2].opac, parPos[2].rot)}
+      const patasFundoHtml = `
+        <div class="pet-card-bg-paws" aria-hidden="true">
+          ${gerarSvgPataFundo(temaInfo.coresPatas[0], parPos[0].estilo, parPos[0].opac, parPos[0].rot)}
+          ${gerarSvgPataFundo(temaInfo.coresPatas[1], parPos[1].estilo, parPos[1].opac, parPos[1].rot)}
+          ${gerarSvgPataFundo(temaInfo.coresPatas[2], parPos[2].estilo, parPos[2].opac, parPos[2].rot)}
+        </div>
+      `;
+
+      let petNomeExibicao = p.titulo || 'Animal';
+      if (av && petNomeExibicao.toLowerCase().includes('desaparecido')) {
+        petNomeExibicao = 'Animal Avistado';
+      }
+
+      // Regra Rigo: Pílulas Oficiais
+      let statusPillLabel = 'PERDIDO';
+      let statusPillClass = 'perdido';
+      if (ehAdocao) {
+        statusPillLabel = 'PARA ADOÇÃO';
+        statusPillClass = 'adocao';
+      } else if (ehReencontro) {
+        statusPillLabel = 'FINAL FELIZ';
+        statusPillClass = 'reencontro';
+      } else if (ehResgate) {
+        statusPillLabel = 'ANIMAL RESGATADO';
+        statusPillClass = 'avistado';
+      } else if (av) {
+        statusPillLabel = 'ANIMAL AVISTADO';
+        statusPillClass = 'avistado';
+      }
+
+      // Foto com letterbox preto
+      const mediaHtml = p.foto_url
+        ? `<div class="pet-card-media" style="position:relative; z-index:2; background:#000000;" onclick="abrirFotoZoom('${escapeAttr(p.foto_url)}', '${escapeAttr(p.titulo)}')">
+             <img src="${escapeAttr(p.foto_url)}" alt="${escapeAttr(p.titulo)}" style="width:100%; height:100%; object-fit:contain;" loading="lazy">
+             ${distTxt ? `<div class="pet-card-dist-badge">${distTxt}</div>` : ''}
+           </div>`
+        : `<div class="pet-card-media" style="position:relative; z-index:2; display:flex;align-items:center;justify-content:center;background:#18181b;color:#71717a;" onclick="${isModal ? '' : `abrirDetalheById(${p.id})`}">
+             <svg width="44" height="44" viewBox="0 0 24 24" fill="currentColor" opacity="0.4"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+           </div>`;
+
+      // Botões de Ação Padronizados
+      let actionButtonsHtml = '';
+      if (ehAdocao) {
+        actionButtonsHtml = `
+          <div class="pet-card-action-btns">
+            <button type="button" class="btn-pet-cta-primary" onclick="abrirContatoAdocao(${p.id})">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+              <span>Quero Adotar</span>
+            </button>
+            <button type="button" class="btn-pet-cta-secondary" onclick="abrirDetalheById(${p.id})">
+              <span>Ver História</span>
+            </button>
           </div>
         `;
+      } else if (ehResgate) {
+        actionButtonsHtml = `
+          <div class="pet-card-action-btns">
+            <button type="button" class="btn-pet-cta-primary" onclick="abrirContatoAdocao(${p.id})">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+              <span>Quero Acolher</span>
+            </button>
+            <button type="button" class="btn-pet-cta-secondary" onclick="abrirDetalheById(${p.id})">
+              <span>Ver História</span>
+            </button>
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:center; padding:0 16px 10px; font-size:11px; font-weight:800; color:#6E5A3C;">
+            <span style="cursor:pointer;" onclick="abrirDetalheById(${p.id})">❤️ Apoiar tratamento / ração</span>
+            <span style="cursor:pointer; color:#009B3A;" onclick="compartilharPet(${p.id}, event)">Compartilhar ›</span>
+          </div>
+        `;
+      } else if (ehReencontro) {
+        // Regra Rigo: Apenas "Ver Como Foi" (sem celebrar reencontro)
+        actionButtonsHtml = `
+          <div class="pet-card-action-btns">
+            <button type="button" class="btn-pet-cta-secondary" style="width:100%;" onclick="abrirDetalheById(${p.id})">
+              <span>Ver Como Foi</span>
+            </button>
+          </div>
+        `;
+      } else {
+        // PERDIDO: dois botões lado a lado compactos
+        actionButtonsHtml = `
+          <div class="pet-card-action-btns">
+            <button type="button" class="btn-pet-cta-primary" onclick="abrirModalAvistamento(${p.id}, false, 'avistamento')">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+              <span>Marcar Onde Vi</span>
+            </button>
+            <button type="button" class="btn-pet-cta-primary" onclick="verTrilhaPetNoMapa(${p.id})">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+              <span>Ver Rastro</span>
+            </button>
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:center; padding:0 16px 10px; font-size:11px; font-weight:800; color:#6E5A3C;">
+            <span style="cursor:pointer;" onclick="abrirModalAvistamento(${p.id}, false, 'resgatado')">🐾 Pet foi resgatado? Clique aqui</span>
+            <span style="cursor:pointer; color:#009B3A;" onclick="compartilharPet(${p.id}, event)">Compartilhar ›</span>
+          </div>
+        `;
+      }
 
-        let petNomeExibicao = p.titulo || 'Animal Avistado';
-        if (av && petNomeExibicao.toLowerCase().includes('desaparecido')) {
-          petNomeExibicao = 'Animal Avistado';
-        }
+      const descLimpa = (p.descricao || 'Sem descrição adicional informada.')
+        .replace(/\s*O post.*?apareceu primeiro em.*$/gi, '')
+        .replace(/\s*apareceu primeiro em.*$/gi, '')
+        .replace(/\[…\]$/g, '')
+        .trim();
 
-        let statusPillLabel = 'Desaparecido';
-        let statusPillClass = 'desaparecido';
-        if (ehAdocao) {
-          statusPillLabel = 'Para Adoção';
-          statusPillClass = 'adocao';
-        } else if (p.status_pet === 'encontrado' || p.tipo === 'pet_encontrado') {
-          statusPillLabel = 'Encontrado';
-          statusPillClass = 'encontrado';
-        } else if (av) {
-          statusPillLabel = 'Animal Avistado';
-          statusPillClass = 'avistado';
-        }
+      const acaoCardClick = isModal ? '' : `onclick="abrirDetalheById(${p.id})"`;
 
-        // Foto com fundo preto de letterbox (SEM pílula tampando a imagem - pedido do Rigo)
-        const mediaHtml = p.foto_url
-          ? `<div class="pet-card-media" style="position:relative; z-index:2; background:#000000;" onclick="abrirFotoZoom('${escapeAttr(p.foto_url)}', '${escapeAttr(p.titulo)}')">
-               <img src="${escapeAttr(p.foto_url)}" alt="${escapeAttr(p.titulo)}" style="width:100%; height:100%; object-fit:contain;" loading="lazy">
-               ${distTxt ? `<div class="pet-card-dist-badge">${distTxt}</div>` : ''}
-             </div>`
-          : `<div class="pet-card-media" style="position:relative; z-index:2; display:flex;align-items:center;justify-content:center;background:#18181b;color:#71717a;" onclick="abrirDetalheById(${p.id})">
-               <svg width="44" height="44" viewBox="0 0 24 24" fill="currentColor" opacity="0.4"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
-             </div>`;
+      return `
+        <div class="pet-card ${temaInfo.tema}" id="pet-card-${p.id}">
+          <!-- Camada de Fundo: Patas Oficiais Grandes Sem Margem -->
+          ${patasFundoHtml}
 
-        // Botões de Ação Especializados por Pilar (Padrão Oficial Rigo)
-        const ehResgate = (pilarAtivo === 'resgatados') || (p.tipo === 'pet_resgatado') || (p.status_pet === 'resgatado');
-        const ehReencontro = (pilarAtivo === 'reencontro') || (p.tipo === 'pet_reencontrado') || (p.status_pet === 'reencontrado') || (p.status_pet === 'encontrado');
-
-        let actionButtonsHtml = '';
-        if (ehAdocao) {
-          actionButtonsHtml = `
-            <div class="pet-card-action-btns">
-              <button type="button" class="btn-pet-cta-primary" onclick="abrirContatoAdocao(${p.id})">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
-                <span>Quero Adotar</span>
-              </button>
-              <button type="button" class="btn-pet-cta-secondary" onclick="abrirDetalheById(${p.id})">
-                <span>Ver História</span>
-              </button>
-            </div>
-          `;
-        } else if (ehResgate) {
-          actionButtonsHtml = `
-            <div class="pet-card-action-btns">
-              <button type="button" class="btn-pet-cta-primary" onclick="abrirContatoAdocao(${p.id})">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
-                <span>Quero Acolher</span>
-              </button>
-              <button type="button" class="btn-pet-cta-secondary" onclick="abrirDetalheById(${p.id})">
-                <span>Ver História</span>
-              </button>
-            </div>
-            <div style="display:flex; justify-content:space-between; align-items:center; padding:0 16px 10px; font-size:11px; font-weight:800; color:#6E5A3C;">
-              <span style="cursor:pointer;" onclick="abrirDetalheById(${p.id})">❤️ Apoiar tratamento / ração</span>
-              <span style="cursor:pointer; color:#009B3A;" onclick="compartilharPet(${p.id}, event)">Compartilhar ›</span>
-            </div>
-          `;
-        } else if (ehReencontro) {
-          actionButtonsHtml = `
-            <div class="pet-card-action-btns">
-              <button type="button" class="btn-pet-cta-primary" onclick="curtirAlerta(${p.id}, event); mostrarToast('🎉 Parabéns! Reencontro celebrado com a comunidade!');">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-                <span>Celebrar Reencontro</span>
-              </button>
-              <button type="button" class="btn-pet-cta-secondary" onclick="abrirDetalheById(${p.id})">
-                <span>Ver Como Foi</span>
-              </button>
-            </div>
-          `;
-        } else {
-          // DESAPARECIDOS (Com Botão Oficial de Ver Rastro)
-          actionButtonsHtml = `
-            <div class="pet-card-action-btns">
-              <button type="button" class="btn-pet-cta-primary" onclick="abrirModalAvistamento(${p.id}, false, 'avistamento')">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
-                <span>Marcar Onde Vi</span>
-              </button>
-              <button type="button" class="btn-pet-cta-primary" onclick="verTrilhaPetNoMapa(${p.id})">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-                <span>Ver Rastro</span>
-              </button>
-            </div>
-            <div style="display:flex; justify-content:space-between; align-items:center; padding:0 16px 10px; font-size:11px; font-weight:800; color:#6E5A3C;">
-              <span style="cursor:pointer;" onclick="abrirModalAvistamento(${p.id}, false, 'resgatado')">🐾 Pet foi resgatado? Clique aqui</span>
-              <span style="cursor:pointer; color:#009B3A;" onclick="compartilharPet(${p.id}, event)">Compartilhar ›</span>
-            </div>
-          `;
-        }
-
-        return `
-          <div class="pet-card ${temaInfo.tema}" id="pet-card-${p.id}">
-            <!-- Camada de Fundo: Patas Oficiais Grandes Sem Margem -->
-            ${patasFundoHtml}
-
-            <!-- Header do Card com Autor e 3 Pontinhos -->
-            <div class="pet-card-header" style="position:relative; z-index:2;">
-              <div class="pet-card-author">
-                <div class="pet-card-author-avatar">${autorLetra}</div>
-                <div>
-                  <div class="pet-card-author-name">${escapeHtml(autorNome)}</div>
-                  <div class="pet-card-author-sub">${escapeHtml(autorSub)}</div>
-                </div>
-              </div>
-              <button type="button" class="pet-card-dots-btn" aria-label="Opções" onclick="abrirMenuPetCard(${p.id}, event)">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                  <circle cx="12" cy="5" r="2"></circle>
-                  <circle cx="12" cy="12" r="2"></circle>
-                  <circle cx="12" cy="19" r="2"></circle>
-                </svg>
-              </button>
-            </div>
-
-            <!-- Mídia com Fundo Preto de Letterbox (acima do bloco sólido e bolhas) -->
-            ${mediaHtml}
-
-            <!-- Conteúdo: Nome do Pet com Pílula Discreta e Descrição -->
-            <div class="pet-card-content" style="position:relative; z-index:2;" onclick="abrirDetalheById(${p.id})">
-              <div style="display:flex; align-items:center; justify-content:space-between; gap:8px; margin-bottom:5px;">
-                <div class="pet-card-pet-name">${escapeHtml(petNomeExibicao)}</div>
-                <span class="pet-status-pill ${statusPillClass}">${statusPillLabel}</span>
-              </div>
-              <div class="pet-card-desc">${escapeHtml(p.descricao || 'Sem descrição adicional informada.')}</div>
-            </div>
-
-            <!-- Linha Social com Negrito e Alto Contraste -->
-            <div class="pet-card-social-row" style="position:relative; z-index:2;">
-              <div class="pet-social-left">
-                <button type="button" class="btn-pet-icon ${isLiked ? 'liked' : ''}" onclick="curtirPet(${p.id}, this, event)">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="${isLiked ? '#dc2626' : 'none'}" stroke="currentColor" stroke-width="2.5">
-                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-                  </svg>
-                  <span class="like-label" style="font-weight:800;">${isLiked ? 'Apoiado' : 'Apoiar'}</span>
-                </button>
-                <button type="button" class="btn-pet-icon" onclick="abrirDetalheById(${p.id})">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-                  </svg>
-                  <span style="font-weight:800;">${p.avistamentos_count ? p.avistamentos_count + ' avist.' : 'Detalhes'}</span>
-                </button>
-              </div>
+          <!-- Header do Card com Autor e 3 Pontinhos -->
+          <div class="pet-card-header" style="position:relative; z-index:2;">
+            <div class="pet-card-author">
+              <div class="pet-card-author-avatar">${autorLetra}</div>
               <div>
-                <button type="button" class="btn-pet-icon" onclick="compartilharPet(${p.id}, event)">
-                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                    <circle cx="18" cy="5" r="3"></circle>
-                    <circle cx="6" cy="12" r="3"></circle>
-                    <circle cx="18" cy="19" r="3"></circle>
-                    <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
-                    <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
-                  </svg>
-                  <span style="font-weight:800;">Compartilhar</span>
-                </button>
+                <div class="pet-card-author-name">${escapeHtml(autorNome)}</div>
+                <div class="pet-card-author-sub">${escapeHtml(autorSub)}</div>
               </div>
             </div>
+            <button type="button" class="pet-card-dots-btn" aria-label="Opções" onclick="abrirMenuPetCard(${p.id}, event)">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <circle cx="12" cy="5" r="2"></circle>
+                <circle cx="12" cy="12" r="2"></circle>
+                <circle cx="12" cy="19" r="2"></circle>
+              </svg>
+            </button>
+          </div>
 
-            <!-- Botões Principais de Ação com Largura Igual -->
-            <div style="position:relative; z-index:2;">
-              ${actionButtonsHtml}
+          <!-- Mídia com Fundo Preto de Letterbox -->
+          ${mediaHtml}
+
+          <!-- Conteúdo: Nome do Pet com Pílula Discreta e Descrição -->
+          <div class="pet-card-content" style="position:relative; z-index:2;" ${acaoCardClick}>
+            <div style="display:flex; align-items:center; justify-content:space-between; gap:8px; margin-bottom:5px;">
+              <div class="pet-card-pet-name">${escapeHtml(petNomeExibicao)}</div>
+              <span class="pet-status-pill ${statusPillClass}">${statusPillLabel}</span>
+            </div>
+            <div class="pet-card-desc">${escapeHtml(descLimpa)}</div>
+          </div>
+
+          <!-- Linha Social -->
+          <div class="pet-card-social-row" style="position:relative; z-index:2;">
+            <div class="pet-social-left">
+              <button type="button" class="btn-pet-icon ${isLiked ? 'liked' : ''}" onclick="curtirPet(${p.id}, this, event)">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="${isLiked ? '#dc2626' : 'none'}" stroke="currentColor" stroke-width="2.5">
+                  <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                </svg>
+                <span class="like-label" style="font-weight:800;">${isLiked ? 'Apoiado' : 'Apoiar'}</span>
+              </button>
+              <button type="button" class="btn-pet-icon" onclick="${isModal ? '' : `abrirDetalheById(${p.id})`}">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                </svg>
+                <span style="font-weight:800;">${p.avistamentos_count ? p.avistamentos_count + ' avist.' : 'Detalhes'}</span>
+              </button>
+            </div>
+            <div>
+              <button type="button" class="btn-pet-icon" onclick="compartilharPet(${p.id}, event)">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <circle cx="18" cy="5" r="3"></circle>
+                  <circle cx="6" cy="12" r="3"></circle>
+                  <circle cx="18" cy="19" r="3"></circle>
+                  <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+                  <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+                </svg>
+                <span style="font-weight:800;">Compartilhar</span>
+              </button>
             </div>
           </div>
-        `;
-      }).join('');
+
+          <!-- Botões Principais de Ação -->
+          <div style="position:relative; z-index:2;">
+            ${actionButtonsHtml}
+          </div>
+        </div>
+      `;
+    }
     }
 
     /* ==================== AÇÕES E INTERAÇÕES DO NOVO CARD DE PETS ==================== */
@@ -10680,132 +10747,122 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
       const ehAvistado = a.status_pet === 'avistado' || a.tipo === 'pet_avistado';
       const ehImprensaPet = ehPet && (a.fonte_tipo === 'imprensa' || (!a.tem_tutor_notificavel && a.link_noticia));
 
-      let photoHtml = a.foto_url
-        ? `<div style="position:relative; width:100%; height:230px; border-radius:16px; overflow:hidden; background:#000000; margin-bottom:12px; cursor:pointer;" onclick="abrirFotoZoom('${escapeAttr(a.foto_url)}', '${escapeAttr(a.titulo)}')">
-             <img src="${escapeAttr(a.foto_url)}" style="width:100%; height:100%; object-fit:contain;" alt="Foto">
-           </div>`
-        : '';
-      let extraMeta = '';
-      if (ehPet) {
-        const partes = [a.especie, a.porte, a.recompensa ? 'Recompensa: ' + a.recompensa : ''].filter(Boolean);
-        if (partes.length) extraMeta = `<div style="font-size:12px;color:var(--accent-pet);font-weight:700;margin-top:6px;">${escapeHtml(partes.join(' • '))}</div>`;
-      }
-
-      let tagTexto = 'Oficial';
-      if (ehPet) {
-        if (a.tipo === 'pet_adocao') tagTexto = 'Adoção Responsável';
-        else if (a.tipo === 'pet_denuncia_maustratos') tagTexto = 'Denúncia de Maus-Tratos';
-        else if (a.tipo === 'pet_sos_rua') tagTexto = 'Socorro Urgente na Via';
-        else if (ehAvistado) tagTexto = 'Pet Avistado';
-        else tagTexto = 'Pet Desaparecido';
-      } else if (a.pilar === 'seguranca') {
-        tagTexto = 'Segurança';
-      } else if (a.pilar === 'transito') {
-        if (a.tipo === 'ponto_seguro' || a.tipo === 'policia_presente') tagTexto = 'Ponto Seguro (Polícia / GM)';
-        else tagTexto = 'Trânsito / Via Bloqueada';
-      } else {
-        tagTexto = 'Utilidade Pública';
-      }
-
       const hTitle = document.getElementById('detalhe-header-title');
       const hSub = document.getElementById('detalhe-header-sub');
       if (hTitle) hTitle.innerText = ehPet ? (a.titulo || 'Ficha do Animal') : 'Detalhes da Ocorrência';
-      if (hSub) hSub.innerText = tagTexto.toUpperCase();
+      if (hSub) hSub.innerText = 'ALERTA PET BRASIL';
 
-      let botoes = '';
-      if (a.tipo === 'pet_adocao') {
-        botoes += `<button type="button" class="btn-full" style="background:#009B3A; color:#FFFFFF; font-weight:800; border:none; display:flex; align-items:center; justify-content:center; gap:8px;" onclick="abrirContatoAdocao(${a.id})"><span>Quero Adotar (Protocolo Responsável)</span></button>`;
-        botoes += `<button type="button" class="btn-full" style="background:#FFFFFF; color:#2E2417; font-weight:800; border:1px solid rgba(0,0,0,0.18); margin-top:6px; display:flex; align-items:center; justify-content:center; gap:8px;" onclick="imprimirTermoAdocao(${a.id})"><span>📄 Baixar Termo de Adoção para Assinatura</span></button>`;
-      }
-      if (a.tipo === 'pet_denuncia_maustratos') {
-        botoes += `<button type="button" class="btn-full danger" onclick="abrirDossieDenuncia(${a.id})">Copiar Dossiê Oficial e Abrir Ouvidoria 156</button>`;
-      }
-      if (ehPet && !ehAvistado && a.tipo !== 'pet_adocao' && a.tipo !== 'pet_denuncia_maustratos') {
-        if (ehImprensaPet) {
-          botoes += `<button type="button" class="btn-full" onclick="abrirModalAvistamento(${a.id}, true, 'avistamento')">Marcar no Mapa onde Vi este Pet</button>`;
-        } else {
-          botoes += `<button type="button" class="btn-full pet" style="background:#0284C7; color:#FFFFFF; border:none;" onclick="abrirModalAvistamento(${a.id}, false, 'avistamento')">Marcar Onde Vi (Na Trilha do Mapa)</button>`;
-          botoes += `<button type="button" class="btn-full whatsapp" style="background:#059669; color:#FFFFFF; border:none; margin-top:6px;" onclick="abrirModalAvistamento(${a.id}, false, 'resgatado')">Pet Resgatado (Enviar Foto ao Tutor)</button>`;
-          botoes += `<button type="button" class="btn-full" style="background:#25D366; color:#ffffff; font-weight:800; border:none; margin-top:6px; display:flex; align-items:center; justify-content:center; gap:8px;" onclick="falarComTutorWhatsApp(${a.id})"><span>Falar com Tutor no WhatsApp</span></button>`;
+      if (ehPet) {
+        // PADRONIZAÇÃO SUPREMA: Card Único do Animal (Print 2) em Tela Base Degradê Oficial
+        const cardPetHtml = gerarHtmlCardPet(a, 0, true);
+
+        // Ritmo de Busca para Pets Perdidos
+        let seletorBuscaPetHtml = '';
+        const ehAdocao = (a.tipo === 'pet_adocao') || (a.status_pet === 'adocao');
+        const ehReencontro = (a.tipo === 'pet_reencontro') || (a.tipo === 'pet_reencontrado') || (a.status_pet === 'reencontro') || (a.status_pet === 'encontrado');
+        if (!ehAvistado && !ehAdocao && !ehReencontro && a.tipo !== 'pet_denuncia_maustratos') {
+          const modoAtual = typeof obterModoBuscaPet === 'function' ? obterModoBuscaPet(a.id) : 'padrao';
+          const lblModo = modoAtual === 'intensiva' ? 'Busca Intensiva (4h • 2.000m)' : (modoAtual === 'ativa' ? 'Busca Ativa (12h • 1.000m)' : 'Busca Padrão (24h • 500m)');
+          seletorBuscaPetHtml = `
+            <div style="margin-top:12px; border-radius:16px; background:#E4D5BC; box-shadow:0 3px 10px rgba(0,0,0,0.06); padding:10px 12px; border:1px solid rgba(110,90,60,0.18);">
+              <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:5px;">
+                <span style="font-size:12px; font-weight:900; color:#2E2417;">Seu Ritmo de Busca para este Pet:</span>
+                <span style="font-size:9.5px; font-weight:800; color:#5A4730;" id="label-modo-pet-${a.id}">${lblModo}</span>
+              </div>
+              <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:5px; background:#EDE8DF; padding:3px; border-radius:10px;">
+                <button type="button" id="btn-pet-modo-padrao-${a.id}" class="btn-ritmo-pill ${modoAtual === 'padrao' ? 'active' : ''}" onclick="definirModoBuscaPet(${a.id}, 'padrao')">
+                  <span style="font-size:10.5px; font-weight:900;">Padrão</span>
+                  <span style="font-size:8px; font-weight:700;">24h • 500m</span>
+                </button>
+                <button type="button" id="btn-pet-modo-ativa-${a.id}" class="btn-ritmo-pill ${modoAtual === 'ativa' ? 'active' : ''}" onclick="definirModoBuscaPet(${a.id}, 'ativa')">
+                  <span style="font-size:10.5px; font-weight:900;">Ativa</span>
+                  <span style="font-size:8px; font-weight:700;">12h • 1.000m</span>
+                </button>
+                <button type="button" id="btn-pet-modo-intensiva-${a.id}" class="btn-ritmo-pill ${modoAtual === 'intensiva' ? 'active' : ''}" onclick="definirModoBuscaPet(${a.id}, 'intensiva')">
+                  <span style="font-size:10.5px; font-weight:900;">Intensiva</span>
+                  <span style="font-size:8px; font-weight:700;">4h • 2.000m</span>
+                </button>
+              </div>
+              <div style="margin-top:6px; font-size:9.5px; color:#5A4730; line-height:1.3; text-align:center;">
+                Na <strong>Busca Intensiva</strong>, o Copiloto abre o radar para 2.000m e repete avisos a cada 4 horas na Janela de Ouro.
+              </div>
+            </div>
+          `;
         }
-        botoes += `<button type="button" class="btn-full" style="background:#FFFFFF; color:#2E2417; font-weight:800; border:1px solid rgba(0,0,0,0.18); margin-top:6px; display:flex; align-items:center; justify-content:center; gap:8px;" onclick="verTrilhaPetNoMapa(${a.id})"><span>Ver Trilha / Caminho no Mapa</span></button>`;
-      }
-      if (a.link_noticia) {
-        const lbl = ehImprensaPet ? `Ver Contato da Ocorrência ↗` : `Ler Matéria Completa ↗`;
-        botoes += `<a href="${escapeAttr(a.link_noticia)}" target="_blank" class="btn-full imprensa">${escapeHtml(lbl)}</a>`;
-      }
-      if (a.lat && a.lng && (!ehPet || ehAvistado)) {
-        botoes += `<button type="button" class="btn-full" onclick="focarPontoNoMapa(${a.lat}, ${a.lng}, '${escapeAttr(a.pilar)}')">Ver Região no Mapa</button>`;
-      }
-      if (ehPet && ehDono) {
-        botoes += `<button type="button" class="btn-full" onclick="renovarMeuPet(${a.id})">Renovar por +48h</button>`;
-        botoes += `<button type="button" class="btn-full danger" onclick="encerrarMeuPet(${a.id})">Marcar como Encontrado / Encerrar</button>`;
-      }
 
-      let notaTutorImprensa = ehImprensaPet
-        ? `<div style="margin-top:12px; padding:10px 12px; border-radius:12px; background:var(--bg-subtle); border:1px solid var(--border); font-size:11px; color:var(--text-muted); line-height:1.4;">
-             <b>Aviso Comunitário:</b> Registro público de proteção animal em Cascavel. Se você é o tutor ou tem informações deste animal, cadastre avistamentos ou envie mensagem de resgate.
-           </div>`
-        : '';
+        let acoesExtrasHtml = '';
+        const temWhatsApp = a.contato || a.whatsapp || a.telefone;
+        if (temWhatsApp && a.tipo !== 'pet_denuncia_maustratos') {
+          acoesExtrasHtml += `
+            <button type="button" class="btn-full" style="background:#25D366; color:#ffffff; font-weight:800; border:none; margin-top:8px; display:flex; align-items:center; justify-content:center; gap:8px;" onclick="falarComTutorWhatsApp(${a.id})">
+              <span>Falar com Tutor no WhatsApp</span>
+            </button>
+          `;
+        }
+        if (ehDono) {
+          acoesExtrasHtml += `
+            <button type="button" class="btn-full" style="background:#9E8560; color:#FFFFFF; font-weight:800; border:none; margin-top:8px;" onclick="renovarMeuPet(${a.id})">Renovar por +48h</button>
+            <button type="button" class="btn-full danger" style="margin-top:8px;" onclick="encerrarMeuPet(${a.id})">Marcar como Encontrado / Encerrar</button>
+          `;
+        }
 
-      const timelineSlot = (ehPet && !ehAvistado)
-        ? `<div id="detalhe-timeline-slot" class="timeline-box" style="display:none; margin-top:12px;"></div>`
-        : '';
+        const timelineSlot = (ehPet && !ehAvistado)
+          ? `<div id="detalhe-timeline-slot" class="timeline-box" style="display:none; margin-top:12px;"></div>`
+          : '';
 
-      const descricaoLimpa = (a.descricao || 'Sem descrição adicional.')
-        .replace(/\s*O post.*?apareceu primeiro em.*$/gi, '')
-        .replace(/\s*apareceu primeiro em.*$/gi, '')
-        .replace(/\[…\]$/g, '')
-        .trim();
+        let notaTutorImprensa = ehImprensaPet
+          ? `<div style="margin-top:12px; padding:10px 12px; border-radius:12px; background:rgba(0,0,0,0.05); border:1px solid rgba(0,0,0,0.08); font-size:11px; color:#5A4730; line-height:1.4;">
+               <b>Aviso Comunitário:</b> Registro público de proteção animal em Cascavel. Se você é o tutor ou tem informações deste animal, cadastre avistamentos ou envie mensagem de resgate.
+             </div>`
+          : '';
 
-      let seletorBuscaPetHtml = '';
-      if (ehPet && !ehAvistado && a.tipo !== 'pet_adocao' && a.tipo !== 'pet_denuncia_maustratos') {
-        const modoAtual = typeof obterModoBuscaPet === 'function' ? obterModoBuscaPet(a.id) : 'padrao';
-        const lblModo = modoAtual === 'intensiva' ? 'Busca Intensiva (4h • 2.000m)' : (modoAtual === 'ativa' ? 'Busca Ativa (12h • 1.000m)' : 'Busca Padrão (24h • 500m)');
-        seletorBuscaPetHtml = `
-          <div style="margin-top:12px; border-radius:16px; background:#E4D5BC; box-shadow:0 3px 10px rgba(0,0,0,0.06); padding:10px 12px; border:1px solid rgba(110,90,60,0.18);">
-            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:5px;">
-              <span style="font-size:12px; font-weight:900; color:#2E2417;">Seu Ritmo de Busca para este Pet:</span>
-              <span style="font-size:9.5px; font-weight:800; color:#5A4730;" id="label-modo-pet-${a.id}">${lblModo}</span>
+        box.innerHTML = `
+          ${cardPetHtml}
+          ${seletorBuscaPetHtml}
+          ${timelineSlot}
+          ${acoesExtrasHtml ? `<div class="detail-actions" style="margin-top:6px; display:flex; flex-direction:column; gap:6px;">${acoesExtrasHtml}</div>` : ''}
+          ${notaTutorImprensa}
+        `;
+      } else {
+        // NÃO-PET (Segurança, Trânsito, Defesa Civil)
+        let photoHtml = a.foto_url
+          ? `<div style="position:relative; width:100%; height:230px; border-radius:16px; overflow:hidden; background:#000000; margin-bottom:12px; cursor:pointer;" onclick="abrirFotoZoom('${escapeAttr(a.foto_url)}', '${escapeAttr(a.titulo)}')">
+               <img src="${escapeAttr(a.foto_url)}" style="width:100%; height:100%; object-fit:contain;" alt="Foto">
+             </div>`
+          : '';
+
+        let tagTexto = 'Utilidade Pública';
+        if (a.pilar === 'seguranca') tagTexto = 'Segurança';
+        else if (a.pilar === 'transito') tagTexto = 'Trânsito';
+
+        let botoes = '';
+        if (a.link_noticia) {
+          botoes += `<a href="${escapeAttr(a.link_noticia)}" target="_blank" class="btn-full imprensa">Ler Matéria Completa ↗</a>`;
+        }
+        if (a.lat && a.lng) {
+          botoes += `<button type="button" class="btn-full" onclick="focarPontoNoMapa(${a.lat}, ${a.lng}, '${escapeAttr(a.pilar)}')">Ver Região no Mapa</button>`;
+        }
+
+        const descLimpa = (a.descricao || 'Sem descrição adicional.')
+          .replace(/\s*O post.*?apareceu primeiro em.*$/gi, '')
+          .replace(/\s*apareceu primeiro em.*$/gi, '')
+          .replace(/\[…\]$/g, '')
+          .trim();
+
+        box.innerHTML = `
+          <div style="background:#FFFFFF; border-radius:18px; padding:16px; box-shadow:0 3px 12px rgba(0,0,0,0.06); border:1px solid rgba(0,0,0,0.08);">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+              <span class="source-tag ${a.pilar}" style="font-size:11px; font-weight:800; padding:4px 10px; border-radius:8px;">${tagTexto}</span>
+              <span style="font-size:11.5px; color:#71717A; font-weight:700;">${tempoRelativo(a.created_at)}</span>
             </div>
-            <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:5px; background:#EDE8DF; padding:3px; border-radius:10px;">
-              <button type="button" id="btn-pet-modo-padrao-${a.id}" class="btn-ritmo-pill ${modoAtual === 'padrao' ? 'active' : ''}" onclick="definirModoBuscaPet(${a.id}, 'padrao')">
-                <span style="font-size:10.5px; font-weight:900;">Padrão</span>
-                <span style="font-size:8px; font-weight:700;">24h • 500m</span>
-              </button>
-              <button type="button" id="btn-pet-modo-ativa-${a.id}" class="btn-ritmo-pill ${modoAtual === 'ativa' ? 'active' : ''}" onclick="definirModoBuscaPet(${a.id}, 'ativa')">
-                <span style="font-size:10.5px; font-weight:900;">Ativa</span>
-                <span style="font-size:8px; font-weight:700;">12h • 1.000m</span>
-              </button>
-              <button type="button" id="btn-pet-modo-intensiva-${a.id}" class="btn-ritmo-pill ${modoAtual === 'intensiva' ? 'active' : ''}" onclick="definirModoBuscaPet(${a.id}, 'intensiva')">
-                <span style="font-size:10.5px; font-weight:900;">Intensiva</span>
-                <span style="font-size:8px; font-weight:700;">4h • 2.000m</span>
-              </button>
-            </div>
-            <div style="margin-top:6px; font-size:9.5px; color:#5A4730; line-height:1.3; text-align:center;">
-              Na <strong>Busca Intensiva</strong>, o Copiloto abre o radar para 2.000m e repete avisos a cada 4 horas na Janela de Ouro.
-            </div>
+            ${photoHtml}
+            <div style="font-size:19px; font-weight:900; line-height:1.25; color:#18181B;">${escapeHtml(a.titulo)}</div>
+            <div style="font-size:12.5px; color:#52525B; font-weight:700; margin-top:4px;">${escapeHtml(a.bairro || 'Cascavel')}</div>
+            <div style="font-size:13.5px; color:#27272A; line-height:1.55; margin-top:12px; white-space:pre-line;">${escapeHtml(descLimpa)}</div>
           </div>
+          ${botoes ? `<div class="detail-actions" style="margin-top:14px; display:flex; flex-direction:column; gap:6px;">${botoes}</div>` : ''}
         `;
       }
-
-      box.innerHTML = `
-        <div style="background:#FFFFFF; border-radius:18px; padding:16px; box-shadow:0 3px 12px rgba(0,0,0,0.06); border:1px solid rgba(0,0,0,0.08);">
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
-            <span class="source-tag ${a.pilar}" style="font-size:11px; font-weight:800; padding:4px 10px; border-radius:8px;">${tagTexto}</span>
-            <span style="font-size:11.5px; color:#71717A; font-weight:700;">${tempoRelativo(a.created_at)}</span>
-          </div>
-          ${photoHtml}
-          <div style="font-size:19px; font-weight:900; line-height:1.25; color:#18181B;">${escapeHtml(a.titulo)}</div>
-          <div style="font-size:12.5px; color:#52525B; font-weight:700; margin-top:4px;">${escapeHtml(a.bairro || 'Cascavel')}</div>
-          ${extraMeta}
-          <div style="font-size:13.5px; color:#27272A; line-height:1.55; margin-top:12px; white-space:pre-line;">${escapeHtml(descricaoLimpa)}</div>
-          ${timelineSlot}
-        </div>
-        ${seletorBuscaPetHtml}
-        <div class="detail-actions" style="margin-top:14px; display:flex; flex-direction:column; gap:6px;">${botoes}</div>
-        ${notaTutorImprensa}
-      `;
 
       const md = document.getElementById('modal-detalhe');
       if (md) {
