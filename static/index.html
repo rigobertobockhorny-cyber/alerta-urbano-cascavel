@@ -573,6 +573,15 @@
     }
 
     /* Área Central das Abas */
+    /* Status do Perfil em linha discreta (substitui pílulas verde/azul • Diretriz Rigo) */
+    .perfil-status-linha { margin-top:5px; display:flex; align-items:center; flex-wrap:wrap; gap:6px; font-size:11px; font-weight:800; color:#6B5A43; letter-spacing:0.2px; }
+    .perfil-status-item { display:inline-flex; align-items:center; gap:5px; }
+    .perfil-status-dot { width:7px; height:7px; border-radius:50%; background:#009B3A; box-shadow:0 0 0 2px rgba(0,155,58,0.18); }
+    .perfil-status-sep { color:#B8A58A; margin-right:1px; }
+    #perfil-badge-protetor svg { color:#9E8560; }
+    [data-theme="dark"] .perfil-status-linha { color:#D6C7AE; }
+    [data-theme="dark"] .perfil-status-sep { color:#7A6A55; }
+    [data-theme="dark"] #perfil-badge-protetor svg { color:#C9B48F; }
     .main-stage {
       flex: 1;
       position: relative;
@@ -7464,12 +7473,13 @@
           <div style="flex:1; min-width:0;">
             <div id="perfil-display-nome" class="perfil-hero-nome">Nome do Usuário</div>
             <div id="perfil-display-sub" class="perfil-hero-sub">Centro • Cascavel - PR</div>
-            <div style="margin-top:6px; display:flex; gap:6px; flex-wrap:wrap;">
-              <span style="display:inline-flex; align-items:center; gap:4px; font-size:10px; font-weight:800; color:#009B3A; background:rgba(0, 155, 58, 0.12); padding:2px 8px; border-radius:999px; border:1px solid rgba(0, 155, 58, 0.25);">
-                ✓ Conta Ativa
-              </span>
-              <span id="perfil-badge-protetor" style="display:none; align-items:center; gap:4px; font-size:10px; font-weight:800; color:#1E40AF; background:#DBEAFE; padding:2px 8px; border-radius:999px; border:1px solid #93C5FD;">
-                Protetor(a) Verificado(a)
+            <!-- Status discreto em linha (sem pílulas coloridas • Diretriz Rigo) -->
+            <div class="perfil-status-linha">
+              <span class="perfil-status-item"><span class="perfil-status-dot"></span>Conta ativa</span>
+              <span id="perfil-badge-protetor" class="perfil-status-item" style="display:none;">
+                <span class="perfil-status-sep">·</span>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><polyline points="9 12 11 14 15 10"></polyline></svg>
+                Protetor verificado
               </span>
             </div>
           </div>
