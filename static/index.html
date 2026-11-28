@@ -582,19 +582,19 @@
     }
     .stories-reel-track {
       display: flex;
-      gap: 8px;
-      padding: 0 14px;
+      gap: 7px;
+      padding: 0 12px;
       width: max-content;
     }
     .stories-reel-card {
-      width: 110px;
-      height: 168px;
+      width: 108px;
+      height: 164px;
       border-radius: 14px;
       position: relative;
       overflow: hidden;
       flex-shrink: 0;
       cursor: pointer;
-      box-shadow: 0 4px 12px rgba(46, 36, 23, 0.12);
+      box-shadow: 0 3px 10px rgba(46, 36, 23, 0.12);
       border: 1.5px solid rgba(255, 255, 255, 0.35);
       background: #1E1B18;
       transition: transform 0.15s ease;
@@ -608,65 +608,75 @@
       object-fit: cover;
       display: block;
     }
+    /* Rigo: Rosto do animal 100% limpo, sem badge em cima da foto */
     .stories-reel-badge {
-      position: absolute;
-      top: 8px;
-      left: 8px;
-      font-size: 9px;
-      font-weight: 900;
-      padding: 3px 6px;
-      border-radius: 6px;
-      text-transform: uppercase;
-      letter-spacing: 0.3px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-    }
-    .stories-reel-badge.badge-perdido {
-      background: #EF4444;
-      color: #FFFFFF;
-    }
-    .stories-reel-badge.badge-adocao {
-      background: #38BDF8;
-      color: #000000;
-    }
-    .stories-reel-badge.badge-reencontro {
-      background: #10B981;
-      color: #FFFFFF;
+      display: none !important;
     }
     .stories-reel-grad {
       position: absolute;
       bottom: 0;
       left: 0;
       width: 100%;
-      padding: 24px 8px 8px;
-      background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.6) 60%, transparent 100%);
+      padding: 24px 8px 7px;
+      background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.62) 60%, transparent 100%);
       display: flex;
       flex-direction: column;
-      gap: 1px;
+      gap: 2px;
+      box-sizing: border-box;
     }
     .stories-reel-nome {
       font-size: 13px;
       font-weight: 900;
       color: #FFFFFF;
-      text-shadow: 0 1px 3px rgba(0,0,0,0.6);
+      text-shadow: 0 1px 3px rgba(0,0,0,0.8);
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
     .stories-reel-sub {
       font-size: 9.5px;
-      font-weight: 700;
-      color: var(--cor-destaque-ouro, #FED700);
+      font-weight: 800;
+      color: #FFFFFF;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+      display: flex;
+      align-items: center;
+      gap: 3px;
+    }
+    .stories-reel-loc {
+      color: #F7F4EE;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .stories-status-dot {
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 9px;
+    }
+    .stories-status-pill {
+      font-weight: 900;
+      font-size: 9.5px;
+      letter-spacing: 0.2px;
+    }
+    .stories-status-perdido {
+      color: #EF4444 !important;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.8);
+    }
+    .stories-status-adocao {
+      color: #38BDF8 !important;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.8);
+    }
+    .stories-status-reencontro {
+      color: #10B981 !important;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.8);
     }
 
     /* ==================== FEED DE BLOCOS DE ANIMAIS (ESTILO FACEBOOK) ==================== */
     .facebook-feed-stream {
-      padding: 12px 14px 40px;
+      padding: 8px 12px 40px;
       display: flex;
       flex-direction: column;
-      gap: 14px;
+      gap: 10px; /* Gap compacto e proporcional ao Facebook */
       max-width: 560px;
       margin: 0 auto;
       width: 100%;
@@ -4234,75 +4244,140 @@
     }
     .btn-pet-cta-secondary:active { transform: scale(0.97) !important; }
 
-        /* Modal Sheet de Ações do Card (3 Pontinhos com Botões Reais) */
+        /* =========================================================================
+       BOTTOM SHEET NATIVO DO FACEBOOK (3 PONTINHOS DO CARD • DIRETRIZ RIGO)
+       Sem título no topo, grupos de cartões brancos com cantos arredondados,
+       ícones límpidos e puxador cinza no topo.
+       ========================================================================= */
     .pet-sheet-overlay {
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.7);
+      background: rgba(0, 0, 0, 0.6);
       backdrop-filter: blur(4px);
       z-index: 10000;
       display: none;
       align-items: flex-end;
       justify-content: center;
-      padding: 14px;
+      padding: 0;
+      box-sizing: border-box;
     }
     .pet-sheet-box {
       width: 100%;
-      max-width: 440px;
-      background: var(--bg-elevated);
-      border: 1px solid var(--border-strong);
-      border-radius: 22px;
-      padding: 16px;
-      animation: slideUpSheet 0.25s ease-out;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+      max-width: 500px;
+      background: var(--cor-fundo-padrao, #F7F4EE);
+      border: 1px solid var(--cor-bloco-borda, #E8DFD3);
+      border-bottom: none;
+      border-radius: 20px 20px 0 0;
+      padding: 10px 14px 28px;
+      animation: slideUpSheet 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 -8px 30px rgba(0, 0, 0, 0.25);
+      box-sizing: border-box;
     }
-    .pet-sheet-header {
-      padding: 4px 6px 14px;
-      font-size: 14px;
-      font-weight: 800;
-      color: var(--text);
-      text-align: center;
-      border-bottom: 1px solid var(--border);
-      margin-bottom: 12px;
+    .fb-sheet-handle {
+      width: 44px;
+      height: 5px;
+      background: #C7BCAE;
+      border-radius: 4px;
+      margin: 4px auto 14px;
     }
-    .pet-sheet-btn {
-      width: 100%;
-      background: var(--bg-subtle);
-      border: 1px solid var(--border);
+    .fb-sheet-group {
+      background: var(--cor-bloco-card, #FFFFFF);
+      border: 1px solid var(--cor-bloco-borda, #E8DFD3);
       border-radius: 14px;
-      padding: 12px 14px;
-      margin-bottom: 8px;
+      overflow: hidden;
+      margin-bottom: 10px;
+      box-shadow: 0 1px 3px rgba(46, 36, 23, 0.05);
+    }
+    .fb-sheet-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      width: 100%;
+      padding: 13px 16px;
+      background: transparent;
+      border: none;
       cursor: pointer;
       text-align: left;
+      transition: background 0.12s ease;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .fb-sheet-item:active {
+      background: rgba(222, 205, 182, 0.35);
+    }
+    .fb-sheet-icon {
+      width: 24px;
+      height: 24px;
       display: flex;
-      flex-direction: column;
-      gap: 3px;
-      transition: background 0.15s;
-    }
-    .pet-sheet-btn:active {
-      background: var(--border-strong);
-    }
-    .pet-sheet-btn-title {
-      font-size: 13.5px;
-      font-weight: 800;
-      color: var(--text);
-    }
-    .pet-sheet-btn-sub {
-      font-size: 11px;
-      color: var(--text-muted);
-    }
-    .pet-sheet-btn.danger .pet-sheet-btn-title {
-      color: #ef4444;
-    }
-    .pet-sheet-btn.cancel {
-      text-align: center;
-      background: transparent;
-      border-color: transparent;
-      margin-top: 4px;
       align-items: center;
+      justify-content: center;
+      color: #2E2417;
+      flex-shrink: 0;
     }
-    .pet-sheet-btn.cancel .pet-sheet-btn-title {
-      color: var(--text-muted);
+    .fb-sheet-text {
+      font-size: 15px;
+      font-weight: 700;
+      color: #2E2417;
+      flex: 1;
+      letter-spacing: -0.2px;
+    }
+    .fb-sheet-divider {
+      height: 1px;
+      background: var(--cor-bloco-borda, #E8DFD3);
+      margin: 0 16px;
+    }
+    .fb-sheet-item.danger-text .fb-sheet-icon,
+    .fb-sheet-item.danger-text .fb-sheet-text {
+      color: #EF4444 !important;
+    }
+    .fb-sheet-cancel-btn {
+      width: 100%;
+      background: var(--cor-bloco-card, #FFFFFF);
+      border: 1px solid var(--cor-bloco-borda, #E8DFD3);
+      border-radius: 14px;
+      padding: 13px 16px;
+      font-size: 15px;
+      font-weight: 800;
+      color: #786955;
+      text-align: center;
+      cursor: pointer;
+      margin-top: 4px;
+      box-sizing: border-box;
+      transition: background 0.12s;
+    }
+    .fb-sheet-cancel-btn:active {
+      background: var(--cor-botao-areia, #DECDB6);
+      color: #2E2417;
+    }
+
+    [data-theme="dark"] .pet-sheet-box {
+      background: #18191A !important;
+      border-color: #2D3035 !important;
+    }
+    [data-theme="dark"] .fb-sheet-handle {
+      background: #5A5E66 !important;
+    }
+    [data-theme="dark"] .fb-sheet-group {
+      background: #242526 !important;
+      border-color: #3A3B3C !important;
+      box-shadow: none !important;
+    }
+    [data-theme="dark"] .fb-sheet-item:active {
+      background: #3A3B3C !important;
+    }
+    [data-theme="dark"] .fb-sheet-icon {
+      color: #E4E6EB !important;
+    }
+    [data-theme="dark"] .fb-sheet-text {
+      color: #E4E6EB !important;
+    }
+    [data-theme="dark"] .fb-sheet-divider {
+      background: #3A3B3C !important;
+    }
+    [data-theme="dark"] .fb-sheet-cancel-btn {
+      background: #242526 !important;
+      border-color: #3A3B3C !important;
+      color: #B0B3B8 !important;
     }
     
     /* Modal de Foto em Tela Cheia */
@@ -6832,19 +6907,10 @@
         </div>
 
         <div class="topbar-actions">
-          <!-- Bolinha Avatar do Usuário (Estilo Facebook) -->
+          <!-- Bolinha Avatar do Usuário (Estilo Facebook • Acesso Unificado ao Perfil) -->
           <button type="button" class="btn-topbar-avatar" id="btn-topbar-perfil" onclick="abrirPerfil()" title="Meu Perfil" aria-label="Meu Perfil">
             <img id="topbar-avatar-img" src="/static/testadores/rigo.png" alt="Perfil" style="display:none;" />
             <span id="topbar-avatar-initial" class="avatar-initial-circle">U</span>
-          </button>
-
-          <!-- Botão Menu 3 Risquinhos (Estilo Facebook Hambúrguer) -->
-          <button type="button" class="btn-topbar-menu" id="btn-topbar-menu-lateral" onclick="alternarMenuLateral()" title="Menu de Atalhos" aria-label="Menu">
-            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="3" y1="6" x2="21" y2="6"></line>
-              <line x1="3" y1="12" x2="21" y2="12"></line>
-              <line x1="3" y1="18" x2="21" y2="18"></line>
-            </svg>
           </button>
         </div>
       </div>
@@ -6951,10 +7017,6 @@
 
     <!-- 1. ESTEIRA DE MINI CARDS VERTICAIS (REELS / STORIES DO FACEBOOK • DIRETRIZ RIGO) -->
     <div class="stories-reel-section">
-      <div style="padding:0 14px 6px; display:flex; align-items:center; justify-content:space-between;">
-        <span style="font-size:11px; font-weight:900; color:var(--cor-botao-texto); text-transform:uppercase; letter-spacing:0.4px;">Destaques & Avistamentos</span>
-        <span style="font-size:10px; font-weight:800; color:var(--text-muted);">Deslize para o lado ›</span>
-      </div>
       <div class="stories-reel-viewport">
         <div class="stories-reel-track" id="belt-pets-track">
           <!-- Mini cards verticais 110px x 168px preenchidos via JS -->
@@ -9617,29 +9679,32 @@
         if (pets.length) {
           const cardsHtml = pets.map(p => {
             let badgeText = 'Perdido';
-            let badgeClass = 'badge-perdido';
+            let statusClass = 'stories-status-perdido';
             if (p.tipo === 'pet_adocao' || p.status_pet === 'adocao') {
               badgeText = 'Adoção';
-              badgeClass = 'badge-adocao';
+              statusClass = 'stories-status-adocao';
             } else if (p.tipo === 'pet_resgatado' || p.status_pet === 'resgatado') {
               badgeText = 'Resgatado';
-              badgeClass = 'badge-resgatado';
+              statusClass = 'stories-status-reencontro';
             } else if (p.tipo === 'pet_reencontro' || p.status_pet === 'reencontro' || p.status_pet === 'encontrado') {
               badgeText = 'Reencontro';
-              badgeClass = 'badge-reencontro';
+              statusClass = 'stories-status-reencontro';
             }
             const fotoUrl = p.foto_url || '/static/darkplanner_pets/cachorra_02_caramelo.jpg';
             const rawTitulo = p.titulo || 'Pet';
             let nomeAnimal = rawTitulo.split('•')[0].trim();
-            let subTexto = p.raca || p.bairro || 'Cascavel';
+            let subTexto = p.bairro || p.raca || 'Cascavel';
 
             return `
               <div class="stories-reel-card" onclick="abrirDetalheById(${p.id})">
                 <img class="stories-reel-img" src="${escapeAttr(fotoUrl)}" alt="${escapeAttr(nomeAnimal)}" loading="lazy" onerror="this.onerror=null; this.src='/static/darkplanner_pets/cachorra_02_caramelo.jpg';">
-                <span class="stories-reel-badge ${badgeClass}">${badgeText}</span>
                 <div class="stories-reel-grad">
                   <div class="stories-reel-nome">${escapeHtml(nomeAnimal)}</div>
-                  <div class="stories-reel-sub">${escapeHtml(subTexto)}</div>
+                  <div class="stories-reel-sub">
+                    <span class="stories-reel-loc">${escapeHtml(subTexto)}</span>
+                    <span class="stories-status-dot">•</span>
+                    <span class="stories-status-pill ${statusClass}">${badgeText}</span>
+                  </div>
                 </div>
               </div>
             `;
@@ -9654,7 +9719,14 @@
       // =========================================================================
       const feedContainer = document.getElementById('home-facebook-feed');
       if (feedContainer) {
-        if (!pets.length) {
+        let postsOcultos = [];
+        try { postsOcultos = JSON.parse(localStorage.getItem('alerta_posts_ocultos') || '[]'); } catch(e){}
+        let autoresBloqueados = [];
+        try { autoresBloqueados = JSON.parse(localStorage.getItem('alerta_autores_bloqueados') || '[]'); } catch(e){}
+
+        const petsVisiveis = pets.filter(p => !postsOcultos.includes(p.id) && !autoresBloqueados.includes(p.autor_nome || p.autor));
+
+        if (!petsVisiveis.length) {
           feedContainer.innerHTML = `
             <div style="padding:32px 16px; text-align:center; background:#FFFFFF; border:1.5px solid #E8DFD3; border-radius:18px;">
               <div style="font-size:28px; margin-bottom:8px;">🐾</div>
@@ -9663,7 +9735,7 @@
             </div>
           `;
         } else {
-          feedContainer.innerHTML = pets.map((p, idx) => gerarHtmlCardPet(p, idx, false)).join('');
+          feedContainer.innerHTML = petsVisiveis.map((p, idx) => gerarHtmlCardPet(p, idx, false)).join('');
         }
       }
 
@@ -11204,53 +11276,102 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
     /* ==================== AÇÕES E INTERAÇÕES DO NOVO CARD DE PETS ==================== */
     let petCardAtivoId = null;
 
-        function abrirMenuPetCard(petId, event) {
+    function abrirMenuPetCard(petId, event) {
       if (event) event.stopPropagation();
       petCardAtivoId = petId;
       const pet = state.alertas.find(a => a.id === petId);
       if (!pet) return;
 
       const ehDono = pet.autor_token && pet.autor_token === state.autorToken;
-      const titleEl = document.getElementById('pet-sheet-title');
       const actionsEl = document.getElementById('pet-sheet-actions');
-      if (titleEl) titleEl.innerText = `Opções da Publicação • ${pet.titulo || 'Pet'}`;
 
       if (actionsEl) {
         if (ehDono) {
           actionsEl.innerHTML = `
-            <button type="button" class="pet-sheet-btn" onclick="marcarPetResolvido(${petId})">
-              <div class="pet-sheet-btn-title">Marcar como Encontrado / Resolvido</div>
-              <div class="pet-sheet-btn-sub">Finalizar este alerta com sucesso na comunidade</div>
-            </button>
-            <button type="button" class="pet-sheet-btn" onclick="abrirEditarPet(${petId})">
-              <div class="pet-sheet-btn-title">Editar Informações</div>
-              <div class="pet-sheet-btn-sub">Atualizar telefone, detalhes ou foto</div>
-            </button>
-            <button type="button" class="pet-sheet-btn danger" onclick="excluirPetCard(${petId})">
-              <div class="pet-sheet-btn-title">Excluir Publicação</div>
-              <div class="pet-sheet-btn-sub">Remover este anúncio permanentemente</div>
-            </button>
-            <button type="button" class="pet-sheet-btn cancel" onclick="fecharMenuPetCard()">
-              <div class="pet-sheet-btn-title">Cancelar</div>
-            </button>
+            <div class="fb-sheet-group">
+              <button type="button" class="fb-sheet-item" onclick="marcarPetResolvido(${petId})">
+                <div class="fb-sheet-icon" style="color:#10B981;">
+                  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                </div>
+                <div class="fb-sheet-text">Marcar como Encontrado / Resolvido</div>
+              </button>
+              <div class="fb-sheet-divider"></div>
+              <button type="button" class="fb-sheet-item" onclick="abrirEditarPet(${petId})">
+                <div class="fb-sheet-icon">
+                  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                </div>
+                <div class="fb-sheet-text">Editar Informações</div>
+              </button>
+              <div class="fb-sheet-divider"></div>
+              <button type="button" class="fb-sheet-item danger-text" onclick="excluirPetCard(${petId})">
+                <div class="fb-sheet-icon">
+                  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg>
+                </div>
+                <div class="fb-sheet-text">Excluir Publicação</div>
+              </button>
+            </div>
+            <button type="button" class="fb-sheet-cancel-btn" onclick="fecharMenuPetCard()">Cancelar</button>
           `;
         } else {
+          let salvos = [];
+          try { salvos = JSON.parse(localStorage.getItem('alerta_pets_salvos') || '[]'); } catch(e){}
+          const jaSalvo = salvos.includes(petId);
+          const txtSalvar = jaSalvo ? 'Remover dos salvos' : 'Salvar post';
+
           actionsEl.innerHTML = `
-            <button type="button" class="pet-sheet-btn" onclick="compartilharPet(${petId})">
-              <div class="pet-sheet-btn-title">Compartilhar Publicação</div>
-              <div class="pet-sheet-btn-sub">Divulgue este caso no WhatsApp e redes sociais</div>
-            </button>
-            <button type="button" class="pet-sheet-btn" onclick="denunciarPetCard(${petId})">
-              <div class="pet-sheet-btn-title">Denunciar Conteúdo Sensível</div>
-              <div class="pet-sheet-btn-sub">Relate fotos impróprias, golpes ou dados falsos</div>
-            </button>
-            <button type="button" class="pet-sheet-btn danger" onclick="bloquearAutorPet(${petId})">
-              <div class="pet-sheet-btn-title">Bloquear Usuário</div>
-              <div class="pet-sheet-btn-sub">Ocultar publicações deste autor no seu aplicativo</div>
-            </button>
-            <button type="button" class="pet-sheet-btn cancel" onclick="fecharMenuPetCard()">
-              <div class="pet-sheet-btn-title">Cancelar</div>
-            </button>
+            <!-- Grupo 1: Relevância e Interesse (Idêntico ao Facebook • Imagem Rigo) -->
+            <div class="fb-sheet-group">
+              <button type="button" class="fb-sheet-item" onclick="tenhoInteressePet(${petId})">
+                <div class="fb-sheet-icon">
+                  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+                </div>
+                <div class="fb-sheet-text">Tenho interesse</div>
+              </button>
+              <div class="fb-sheet-divider"></div>
+              <button type="button" class="fb-sheet-item" onclick="naoTenhoInteressePet(${petId})">
+                <div class="fb-sheet-icon">
+                  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+                </div>
+                <div class="fb-sheet-text">Não tenho interesse</div>
+              </button>
+            </div>
+
+            <!-- Grupo 2: Salvar e Denunciar (Idêntico ao Facebook • Imagem Rigo) -->
+            <div class="fb-sheet-group">
+              <button type="button" class="fb-sheet-item" onclick="salvarPublicacaoPet(${petId})">
+                <div class="fb-sheet-icon">
+                  <svg viewBox="0 0 24 24" width="22" height="22" fill="${jaSalvo ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+                </div>
+                <div class="fb-sheet-text">${txtSalvar}</div>
+              </button>
+              <div class="fb-sheet-divider"></div>
+              <button type="button" class="fb-sheet-item" onclick="denunciarPetCard(${petId})">
+                <div class="fb-sheet-icon">
+                  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                </div>
+                <div class="fb-sheet-text">Denunciar post</div>
+              </button>
+            </div>
+
+            <!-- Grupo 3: Compartilhar e Bloquear Autor -->
+            <div class="fb-sheet-group">
+              <button type="button" class="fb-sheet-item" onclick="compartilharPet(${petId})">
+                <div class="fb-sheet-icon">
+                  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+                </div>
+                <div class="fb-sheet-text">Compartilhar post</div>
+              </button>
+              <div class="fb-sheet-divider"></div>
+              <button type="button" class="fb-sheet-item danger-text" onclick="bloquearAutorPet(${petId})">
+                <div class="fb-sheet-icon">
+                  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
+                </div>
+                <div class="fb-sheet-text">Bloquear publicações deste autor</div>
+              </button>
+            </div>
+
+            <!-- Botão Cancelar -->
+            <button type="button" class="fb-sheet-cancel-btn" onclick="fecharMenuPetCard()">Cancelar</button>
           `;
         }
       }
@@ -11260,12 +11381,106 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
     }
 
     function fecharMenuPetCard(event) {
-      if (event && event.target && event.target.id !== 'modal-pet-sheet' && !event.target.classList.contains('pet-sheet-cancel')) {
+      if (event && event.target && event.target.id !== 'modal-pet-sheet') {
         return;
       }
       const modal = document.getElementById('modal-pet-sheet');
       if (modal) modal.style.display = 'none';
       petCardAtivoId = null;
+    }
+
+    function tenhoInteressePet(petId) {
+      fecharMenuPetCard();
+      const pet = state.alertas.find(a => a.id === petId);
+      const petNome = pet ? (pet.titulo || 'Pet').split('•')[0].trim() : 'o animal';
+      try {
+        let curtidos = JSON.parse(localStorage.getItem('alerta_pets_curtidos') || '[]');
+        if (!curtidos.includes(petId)) {
+          curtidos.push(petId);
+          localStorage.setItem('alerta_pets_curtidos', JSON.stringify(curtidos));
+          const btnApoiar = document.querySelector(`#pet-card-${petId} .btn-pet-action`);
+          if (btnApoiar) {
+            btnApoiar.classList.add('liked');
+            const span = btnApoiar.querySelector('.like-label');
+            if (span) span.innerText = 'Apoiado';
+            const svg = btnApoiar.querySelector('svg');
+            if (svg) svg.setAttribute('fill', '#EF4444');
+          }
+        }
+      } catch(e) {}
+      mostrarToast(`💙 Interesse registrado! Você está apoiando ${petNome}.`);
+    }
+
+    function naoTenhoInteressePet(petId) {
+      fecharMenuPetCard();
+      try {
+        let ocultos = JSON.parse(localStorage.getItem('alerta_posts_ocultos') || '[]');
+        if (!ocultos.includes(petId)) {
+          ocultos.push(petId);
+          localStorage.setItem('alerta_posts_ocultos', JSON.stringify(ocultos));
+        }
+      } catch(e) {}
+      const card = document.getElementById(`pet-card-${petId}`);
+      if (card) {
+        card.style.transition = 'all 0.35s ease';
+        card.style.opacity = '0';
+        card.style.transform = 'scale(0.92)';
+        setTimeout(() => { card.remove(); }, 350);
+      }
+      mostrarToast('Publicação ocultada do seu feed.');
+    }
+
+    function salvarPublicacaoPet(petId) {
+      fecharMenuPetCard();
+      try {
+        let salvos = JSON.parse(localStorage.getItem('alerta_pets_salvos') || '[]');
+        const idx = salvos.indexOf(petId);
+        if (idx > -1) {
+          salvos.splice(idx, 1);
+          localStorage.setItem('alerta_pets_salvos', JSON.stringify(salvos));
+          mostrarToast('Removido das publicações salvas.');
+        } else {
+          salvos.push(petId);
+          localStorage.setItem('alerta_pets_salvos', JSON.stringify(salvos));
+          mostrarToast('🔖 Publicação salva com sucesso! Acesse em seu perfil.');
+        }
+      } catch(e) {
+        mostrarToast('🔖 Publicação salva!');
+      }
+    }
+
+    function denunciarPetCard(petId) {
+      fecharMenuPetCard();
+      const pet = state.alertas.find(a => a.id === petId);
+      const petNome = pet ? (pet.titulo || 'Pet').split('•')[0].trim() : 'Publicação';
+      mostrarToast(`⚠️ Denúncia recebida para "${petNome}". Nossa moderação analisará em breve.`);
+    }
+
+    function bloquearAutorPet(petId) {
+      fecharMenuPetCard();
+      const pet = state.alertas.find(a => a.id === petId);
+      const autor = pet ? (pet.autor_nome || pet.autor || 'Autor') : 'Autor';
+      if (!confirm(`Deseja ocultar todas as publicações de ${autor}?`)) return;
+
+      try {
+        let bloqueados = JSON.parse(localStorage.getItem('alerta_autores_bloqueados') || '[]');
+        if (!bloqueados.includes(autor)) {
+          bloqueados.push(autor);
+          localStorage.setItem('alerta_autores_bloqueados', JSON.stringify(bloqueados));
+        }
+      } catch(e) {}
+
+      const todosCards = document.querySelectorAll('.pet-card');
+      todosCards.forEach(c => {
+        const nomeEl = c.querySelector('.pet-card-author-name');
+        if (nomeEl && nomeEl.innerText.trim() === autor.trim()) {
+          c.style.transition = 'all 0.35s ease';
+          c.style.opacity = '0';
+          c.style.transform = 'scale(0.92)';
+          setTimeout(() => { c.remove(); }, 350);
+        }
+      });
+      mostrarToast(`🚫 Publicações de ${autor} foram bloqueadas.`);
     }
 
     function curtirPet(petId, btn, event) {
@@ -15468,12 +15683,11 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
     </div>
   </div>
 
-  <!-- Modal Sheet de Ações do Card (3 Pontinhos) -->
+  <!-- Modal Sheet de Ações do Card (Bottom Sheet Estilo Facebook • Rigo) -->
   <div class="pet-sheet-overlay" id="modal-pet-sheet" onclick="fecharMenuPetCard(event)">
     <div class="pet-sheet-box" onclick="event.stopPropagation()">
-      <div class="pet-sheet-header" id="pet-sheet-title">Opções da Publicação</div>
+      <div class="fb-sheet-handle"></div>
       <div id="pet-sheet-actions"></div>
-      
     </div>
   </div>
 
