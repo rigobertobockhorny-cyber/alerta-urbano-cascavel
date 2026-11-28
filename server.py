@@ -922,9 +922,36 @@ def upload_foto():
         return jsonify({"error": "Arquivo vazio"}), 400
     if file and allowed_file(file.filename):
         os.makedirs(app.config["UPLOAD_FOLDER"], exist_ok=True)
-        filename = f"upload_{int(time.time())}_{secure_filename(file.filename)}"
+        nome_limpo = secure_filename(file.filename) or "foto.jpg"
+        base_sem_ext = os.path.splitext(nome_limpo)[0]
+        ext_orig = os.path.splitext(nome_limpo)[1].lower()
+
+        # DIRETRIZ RIGO FASE 2: Backend salva prioritariamente em WebP leve (<80 KB)
+        ext_final = ".webp" if ext_orig in [".png", ".jpg", ".jpeg", ".webp"] else ext_orig
+        filename = f"upload_{int(time.time())}_{base_sem_ext}{ext_final}"
         filepath = os.path.join(app.config["UPLOAD_FOLDER"], filename)
-        file.save(filepath)
+
+        try:
+            from PIL import Image
+            im = Image.open(file.stream)
+            w, h = im.size
+            max_dim = 1080
+            if max(w, h) > max_dim:
+                scale = max_dim / max(w, h)
+                im = im.resize((int(w * scale), int(h * scale)), Image.Resampling.LANCZOS)
+            
+            if ext_final == ".webp":
+                im.save(filepath, "WEBP", quality=78, method=4)
+            elif ext_orig in [".jpg", ".jpeg"]:
+                im = im.convert("RGB")
+                im.save(filepath, "JPEG", quality=78, optimize=True)
+            else:
+                im.save(filepath, optimize=True)
+        except Exception as e_pil:
+            print(f"[UPLOAD] Salva direta por fallback Pillow: {e_pil}")
+            file.stream.seek(0)
+            file.save(filepath)
+
         return jsonify({"ok": True, "url": f"/static/uploads/{filename}"}), 201
     return jsonify({"error": "Formato de arquivo não suportado (use PNG, JPG, JPEG ou WEBP)"}), 400
 
