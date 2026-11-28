@@ -6308,6 +6308,7 @@
             <div style="display:flex; align-items:center; gap:8px;">
               <span id="w-ico" style="display:flex; align-items:center; justify-content:center; width:28px; height:28px; filter:drop-shadow(0 2px 4px rgba(0,0,0,0.35));"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></span>
               <span id="w-temp" style="font-size:24px; font-weight:900; line-height:1; color:#FFFFFF; letter-spacing:0.4px; text-shadow:0 1px 3px rgba(0,0,0,0.35);">--°</span>
+              <span id="w-cidade" style="font-size:12.5px; font-weight:800; color:#FFFFFF; letter-spacing:0.2px; text-shadow:0 1px 3px rgba(0,0,0,0.35); max-width:130px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">Cascavel</span>
             </div>
             <div style="text-align:right;">
               <div id="w-cond" style="font-size:11.5px; font-weight:800; color:#FFFFFF; letter-spacing:0.3px; text-shadow:0 1px 3px rgba(0,0,0,0.35);">Noite de céu limpo</div>
@@ -6440,7 +6441,7 @@
             <span class="header-label-sub" style="font-size:9.5px; color:rgba(255,255,255,0.92); font-weight:700; text-shadow:0 1px 2px rgba(0,0,0,0.35);">Toque para registrar</span>
           </div>
           <div style="display:flex; gap:6px; overflow-x:auto; padding-bottom:4px; -webkit-overflow-scrolling:touch; scrollbar-width:none;">
-            <button type="button" onclick="abrirModalPet('pet_perdido')" style="flex-shrink:0; height:28px; padding:0 10px; font-size:11px; font-weight:800; border-radius:999px; background:#FFFFFF; color:#2E2417; border:1px solid rgba(0,0,0,0.14); cursor:pointer;">+ Pet Desaparecido</button>
+            <button type="button" onclick="abrirModalPet('pet_perdido')" style="flex-shrink:0; height:28px; padding:0 10px; font-size:11px; font-weight:800; border-radius:999px; background:#FFFFFF; color:#2E2417; border:1px solid rgba(0,0,0,0.14); cursor:pointer;">+ Pet Perdido</button>
             <button type="button" onclick="abrirModalPet('pet_resgatado')" style="flex-shrink:0; height:28px; padding:0 10px; font-size:11px; font-weight:800; border-radius:999px; background:#FFFFFF; color:#2E2417; border:1px solid rgba(0,0,0,0.14); cursor:pointer;">+ Animal Resgatado</button>
             <button type="button" onclick="abrirModalPet('pet_reencontrado')" style="flex-shrink:0; height:28px; padding:0 10px; font-size:11px; font-weight:800; border-radius:999px; background:#FFFFFF; color:#2E2417; border:1px solid rgba(0,0,0,0.14); cursor:pointer;">+ Final Feliz</button>
             <button type="button" onclick="abrirModalPet('pet_adocao')" style="flex-shrink:0; height:28px; padding:0 10px; font-size:11px; font-weight:800; border-radius:999px; background:#FFFFFF; color:#2E2417; border:1px solid rgba(0,0,0,0.14); cursor:pointer;">+ Para Adoção</button>
@@ -6450,7 +6451,7 @@
           <!-- 4 PILARES OFICIAIS: DESAPARECIDOS | RESGATADOS | REENCONTRO | PARA ADOÇÃO -->
           <div class="pet-pillars-segmented" id="pets-main-pills" style="margin-top:2px; margin-bottom:2px; background:#E4D5BC; border-radius:8px; padding:2px; display:grid; grid-template-columns:repeat(4, 1fr); gap:3px; border:none;">
             <button type="button" class="pillar-tab active" id="btn-pillar-desaparecidos" onclick="alternarPilarPet('desaparecidos')" style="height:28px; font-size:11px; padding:0;">
-              <span>Desaparecidos</span>
+              <span>Perdidos</span>
             </button>
             <button type="button" class="pillar-tab" id="btn-pillar-resgatados" onclick="alternarPilarPet('resgatados')" style="height:28px; font-size:11px; padding:0;">
               <span>Resgate</span>
@@ -6582,7 +6583,7 @@
     <!-- Item 2: Pets Desaparecidos + Switch Liga/Desliga -->
     <div class="setting-row" style="padding:5px 12px; border-top:1px solid rgba(0,0,0,0.05); display:flex; align-items:center; justify-content:space-between;">
       <div style="display:flex; align-items:center; gap:5px;">
-        <span style="font-size:11.5px; font-weight:800; color:#2E2417;">Pets Desaparecidos</span>
+        <span style="font-size:11.5px; font-weight:800; color:#2E2417;">Pets Perdidos</span>
         <span style="font-size:10.5px; color:#5A4730; display:inline-flex; align-items:center;" id="label-raio-pet-resumo">• Raio 1.000m</span>
       </div>
       <label class="switch"><input type="checkbox" id="pref-pet" checked onchange="alternarAvisosPetCopiloto(this)"><span class="slider"></span></label>
@@ -6722,7 +6723,7 @@
 
         <!-- Opcional para vincular avistamento a um pet desaparecido -->
         <div class="form-group" id="wrap-pet-pai" style="display:none;">
-          <label class="form-label">É algum destes pets desaparecidos? (Opcional)</label>
+          <label class="form-label">É algum destes pets perdidos? (Opcional)</label>
           <select class="form-select" id="pet-pai-select">
             <option value="">Não / Cadastrar como novo pet avistado</option>
           </select>
@@ -8678,6 +8679,8 @@
           }
         }
         if (tempEl) tempEl.textContent = `${c.temp}°`;
+        const cidEl = document.getElementById('w-cidade');
+        if (cidEl) cidEl.textContent = c.cidade || 'Cascavel';
         if (condEl) condEl.textContent = condFinal;
         if (hlEl) hlEl.textContent = `Máx ${c.max}° · Mín ${c.min}°`;
       }
@@ -9984,10 +9987,10 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
           </div>`;
         } else {
           el.innerHTML = `<div class="empty-box" style="padding:28px 16px; text-align:center; background:#E4D5BC; border:1px solid rgba(110,90,60,0.22); border-radius:18px;">
-            <div style="font-size:15px; font-weight:800; color:#2E2417; margin-bottom:6px;">Nenhum pet desaparecido no momento</div>
+            <div style="font-size:15px; font-weight:800; color:#2E2417; margin-bottom:6px;">Nenhum pet perdido no momento</div>
             <div style="font-size:12px; color:#5A4730; max-width:280px; margin:0 auto 16px;">Cadastre o sumiço do seu animal para alertar a rede de motoristas e cidadãos de Cascavel.</div>
             <button type="button" class="btn-pet-cta-primary" style="max-width:250px; margin:0 auto; background:#EDE8DF; color:#2E2417;" onclick="abrirModalPet('pet_perdido')">
-              + Cadastrar Pet Desaparecido
+              + Cadastrar Pet Perdido
             </button>
           </div>`;
         }
@@ -10513,7 +10516,7 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
 
       // Paleta Oficial Alerta Pet Brasil
       let badgeBg = '#DC2626'; // Vermelho Desaparecido
-      let badgeTxt = 'DESAPARECIDO • BUSCA ATIVA';
+      let badgeTxt = 'PERDIDO • BUSCA ATIVA';
 
       if (st === 'reencontro' || tp === 'pet_reencontro' || st === 'encontrado' || st === 'reencontrado') {
         badgeBg = '#009B3A';
@@ -11095,10 +11098,10 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
         descInp.placeholder = 'Informe ponto de referência da rua e estado de saúde para os protetores...';
         btn.textContent = 'Publicar Alerta de Socorro na Via';
       } else {
-        if (modalTitle) modalTitle.textContent = 'Registrar Pet Desaparecido';
+        if (modalTitle) modalTitle.textContent = 'Registrar Pet Perdido';
         titInp.placeholder = 'Ex.: Bob (Cachorro Caramelo)';
         descInp.placeholder = 'Cor, coleira, rua próxima ou comportamento...';
-        btn.textContent = 'Publicar Busca de Pet Desaparecido';
+        btn.textContent = 'Publicar Busca de Pet Perdido';
       }
     }
 
@@ -12097,7 +12100,27 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
       state.userLng = Number(lng);
       atualizarStatusGps('ok', `Conectado (±${Math.round(acc || 15)}m)`);
       atualizarMarcadorUsuario();
+      atualizarClimaPorGps(state.userLat, state.userLng);
       // REGRA OFICIAL RIGO: Com app aberto, ZERO alertas invasivos de voz ou cards na tela!
+    }
+
+    // DIRETRIZ RIGO: Meteorologia segue o GPS (onde o celular ESTÁ). O topo segue o cadastro.
+    async function atualizarClimaPorGps(lat, lng) {
+      if (!lat || !lng) return;
+      const chave = `${lat.toFixed(1)},${lng.toFixed(1)}`;
+      const agora = Date.now();
+      if (window._climaGpsChave === chave && (agora - (window._climaGpsTs || 0)) < 10 * 60 * 1000) return;
+      if (window._climaGpsBusy) return;
+      window._climaGpsBusy = true;
+      try {
+        const r = await fetch(`/api/clima?lat=${lat.toFixed(4)}&lng=${lng.toFixed(4)}`).catch(() => null);
+        if (r && r.ok) {
+          state.clima = await r.json();
+          window._climaGpsChave = chave;
+          window._climaGpsTs = agora;
+          renderizarDashboard();
+        }
+      } catch (_) {} finally { window._climaGpsBusy = false; }
     }
 
         function verificarRadarProximidadeWeb(lat, lng) {

@@ -876,7 +876,32 @@ def upload_foto():
     return jsonify({"error": "Formato de arquivo não suportado (use PNG, JPG, JPEG ou WEBP)"}), 400
 
 
-_CLIMA_CACHE = {"ts": 0, "data": None}
+_CLIMA_CACHE = {"ts": 0, "data": None, "key": None}
+_CIDADE_GEO_CACHE = {}
+
+
+def _resolver_cidade_por_coord(lat, lng, chave):
+    """Geocodificação reversa (OpenStreetMap Nominatim) com cache por grade de ~10 km."""
+    if chave in _CIDADE_GEO_CACHE:
+        return _CIDADE_GEO_CACHE[chave]
+    nome = None
+    try:
+        import ssl
+        ctx = ssl.create_default_context()
+        ctx.check_hostname = False
+        ctx.verify_mode = ssl.CERT_NONE
+        url = (f"https://nominatim.openstreetmap.org/reverse?format=json&zoom=10"
+               f"&accept-language=pt-BR&lat={lat:.4f}&lon={lng:.4f}")
+        req = urllib.request.Request(url, headers={"User-Agent": "AlertaPetBrasil/3.13 (contato@alertapetbrasil.com.br)"})
+        with urllib.request.urlopen(req, context=ctx, timeout=6) as resp:
+            j = json.loads(resp.read().decode("utf-8"))
+        ad = j.get("address", {}) or {}
+        nome = ad.get("city") or ad.get("town") or ad.get("municipality") or ad.get("village")
+    except Exception as e:
+        print(f"[CLIMA] Geocodificação reversa falhou: {e}")
+    if nome:
+        _CIDADE_GEO_CACHE[chave] = nome
+    return nome
 
 WMO_DESC_DAY = {
     0: ("Céu limpo", "☀️"),
@@ -929,11 +954,22 @@ def api_clima():
     cidade = request.args.get("cidade", "Cascavel").strip()
     agora_ts = time.time()
 
-    if not _CLIMA_CACHE["data"] or (agora_ts - _CLIMA_CACHE["ts"] > 60):
+    # DIRETRIZ RIGO: clima segue o GPS do celular (onde a pessoa ESTÁ); topo segue o cadastro (cidade de origem)
+    try:
+        lat_q = float(request.args.get("lat") or -24.9555)
+        lng_q = float(request.args.get("lng") or -53.4550)
+    except Exception:
+        lat_q, lng_q = -24.9555, -53.4550
+    chave_geo = f"{round(lat_q, 1)},{round(lng_q, 1)}"
+    if request.args.get("lat"):
+        cidade = _resolver_cidade_por_coord(lat_q, lng_q, chave_geo) or cidade
+
+    if (not _CLIMA_CACHE["data"] or (agora_ts - _CLIMA_CACHE["ts"] > 60)
+            or _CLIMA_CACHE.get("key") != chave_geo):
         try:
             url = (
                 "https://api.open-meteo.com/v1/forecast"
-                "?latitude=-24.9555&longitude=-53.4550"
+                f"?latitude={lat_q:.4f}&longitude={lng_q:.4f}"
                 "&current=temperature_2m,relative_humidity_2m,apparent_temperature,is_day,weather_code,wind_speed_10m,precipitation"
                 "&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max"
                 "&timezone=America%2FSao_Paulo&forecast_days=5"
@@ -1014,6 +1050,7 @@ def api_clima():
                 "previsao_5_dias": p5d,
             }
             _CLIMA_CACHE["ts"] = agora_ts
+            _CLIMA_CACHE["key"] = chave_geo
         except Exception as e:
             print(f"[CLIMA] Falha Open-Meteo: {e}")
             if not _CLIMA_CACHE["data"]:
