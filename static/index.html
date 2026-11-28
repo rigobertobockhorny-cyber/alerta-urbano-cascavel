@@ -2023,49 +2023,279 @@
       margin: 0 auto;
     }
     
-    /* ==================== PERFIL & CADASTRO (ALTO CONTRASTE VERDE / AMARELO / PRETO) ==================== */
-    #modal-perfil .profile-fs-header {
-      background: #009B3A !important;
-      border-bottom: none !important;
-      padding: calc(env(safe-area-inset-top, 0px) + 12px) 16px 8px;
+    /* ==================== PERFIL ESTILO FACEBOOK (IDENTIDADE ARENOSA / TERROSA OFICIAL) ==================== */
+    #modal-perfil {
+      top: 0 !important;
+      left: 0 !important;
+      right: 0 !important;
+      bottom: 0 !important;
+      background: var(--cor-fundo-padrao, #F7F4EE) !important;
+      z-index: 2500 !important;
+      display: none;
+      flex-direction: column;
+      overflow-y: auto !important;
+      -webkit-overflow-scrolling: touch;
     }
-    #modal-perfil .profile-back-btn {
-      background: #000000 !important;
-      color: #ffffff !important;
-      border: 1px solid rgba(255, 255, 255, 0.25) !important;
-      font-weight: 800 !important;
-      border-radius: 999px !important;
-      padding: 7px 14px !important;
-      cursor: pointer;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    #modal-perfil::after {
+      display: none !important;
     }
-    #modal-perfil #perfil-header-title {
-      color: #ffffff !important;
-      font-size: 16px !important;
-      font-weight: 900 !important;
+    .perfil-topo-fb {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: calc(env(safe-area-inset-top, 0px) + 8px) 16px 8px;
+      background: var(--cor-fundo-padrao, #F7F4EE);
+      border-bottom: 1.5px solid var(--cor-bloco-borda, #E8DFD3);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      flex-shrink: 0;
     }
-    #modal-perfil #perfil-header-sub {
-      color: #FED700 !important;
-      font-size: 10.5px !important;
-      font-weight: 800 !important;
-      letter-spacing: 0.5px;
-    }
-    .profile-river-wave {
+    .perfil-capa-wrap {
       width: 100%;
-      height: 18px;
-      line-height: 0;
-      margin-top: -1px;
+      height: 170px;
+      position: relative;
+      background: linear-gradient(135deg, #DECDB6 0%, #C8B69B 100%);
       overflow: hidden;
       flex-shrink: 0;
     }
-    .profile-river-wave svg {
+    .perfil-capa-wrap img {
       width: 100%;
       height: 100%;
+      object-fit: cover;
       display: block;
     }
-    [data-theme="dark"] #modal-perfil .profile-fs-header {
-      background: #000000 !important;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+    .btn-trocar-capa-fb {
+      position: absolute;
+      bottom: 10px;
+      right: 12px;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(8px);
+      color: #1E1B18;
+      border: 1px solid rgba(0, 0, 0, 0.15);
+      border-radius: 8px;
+      padding: 5px 10px;
+      font-size: 11.5px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+    }
+    .perfil-info-row-fb {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 0 16px 8px;
+      position: relative;
+      z-index: 10;
+    }
+    .perfil-avatar-wrap-fb {
+      width: 92px;
+      height: 92px;
+      border-radius: 50%;
+      border: 3.5px solid #FFFFFF;
+      background: var(--cor-botao-areia, #DECDB6);
+      box-shadow: 0 3px 12px rgba(46, 36, 23, 0.18);
+      position: relative;
+      flex-shrink: 0;
+      margin-top: -46px;
+      cursor: pointer;
+    }
+    .perfil-avatar-inner {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #DECDB6;
+    }
+    .perfil-avatar-inner img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .perfil-avatar-cam-badge {
+      position: absolute;
+      bottom: 0px;
+      right: 0px;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: #FFFFFF;
+      border: 2px solid #FFFFFF;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.22);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #1E1B18;
+    }
+    .perfil-texto-fb {
+      flex: 1;
+      min-width: 0;
+      padding-top: 6px;
+      padding-bottom: 4px;
+    }
+    .perfil-nome-fb {
+      font-size: 19px;
+      font-weight: 900;
+      color: var(--cor-botao-texto, #2E2417);
+      line-height: 1.15;
+      letter-spacing: -0.3px;
+      word-break: break-word;
+    }
+    .perfil-sub-fb {
+      font-size: 12px;
+      font-weight: 700;
+      color: #786955;
+      margin-top: 3px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .perfil-status-badges-fb {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 4px;
+      flex-wrap: wrap;
+    }
+    .badge-status-conta {
+      font-size: 10.5px;
+      font-weight: 800;
+      color: #10B981;
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+    }
+    .badge-status-protetor {
+      font-size: 10.5px;
+      font-weight: 800;
+      color: #B45309;
+      background: #FEF3C7;
+      padding: 1px 6px;
+      border-radius: 6px;
+    }
+    .btn-editar-perfil-fb {
+      width: 100%;
+      background: var(--cor-bloco-card, #FFFFFF);
+      border: 1.5px solid var(--cor-bloco-borda, #E8DFD3);
+      border-radius: 12px;
+      padding: 10px 16px;
+      font-size: 13.5px;
+      font-weight: 800;
+      color: var(--cor-botao-texto, #2E2417);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      cursor: pointer;
+      box-shadow: 0 1px 3px rgba(46, 36, 23, 0.05);
+      transition: background 0.12s;
+    }
+    .btn-editar-perfil-fb:active {
+      background: var(--cor-botao-areia, #DECDB6);
+    }
+    .perfil-menu-container-fb {
+      padding: 4px 14px 40px;
+      max-width: 560px;
+      margin: 0 auto;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .perfil-nav-card-fb {
+      background: var(--cor-bloco-card, #FFFFFF);
+      border: 1.5px solid var(--cor-bloco-borda, #E8DFD3);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 1px 4px rgba(46, 36, 23, 0.05);
+    }
+    .perfil-nav-item-fb {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 16px;
+      cursor: pointer;
+      transition: background 0.12s;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .perfil-nav-item-fb:active {
+      background: rgba(222, 205, 182, 0.3);
+    }
+    .nav-icon-fb {
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #2E2417;
+      flex-shrink: 0;
+    }
+    .nav-text-fb {
+      flex: 1;
+      min-width: 0;
+    }
+    .nav-title-fb {
+      font-size: 14.5px;
+      font-weight: 800;
+      color: #2E2417;
+      letter-spacing: -0.2px;
+    }
+    .nav-sub-fb {
+      font-size: 11.5px;
+      font-weight: 600;
+      color: #786955;
+      margin-top: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .nav-arrow-fb {
+      font-size: 18px;
+      font-weight: 700;
+      color: #A89B8C;
+    }
+    .nav-divider-fb {
+      height: 1px;
+      background: var(--cor-bloco-borda, #E8DFD3);
+      margin: 0 16px;
+    }
+    .subtela-header-areia {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: calc(env(safe-area-inset-top, 0px) + 8px) 14px 10px;
+      background: var(--cor-fundo-padrao, #F7F4EE);
+      border-bottom: 1.5px solid var(--cor-bloco-borda, #E8DFD3);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      flex-shrink: 0;
+    }
+    .btn-subtela-voltar {
+      background: transparent;
+      border: none;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 13.5px;
+      font-weight: 800;
+      color: var(--cor-botao-texto, #2E2417);
+      cursor: pointer;
+      padding: 6px 8px;
+      border-radius: 8px;
+    }
+    .btn-subtela-voltar:active {
+      background: var(--cor-botao-areia, #DECDB6);
+    }
+    .subtela-titulo-areia {
+      font-size: 16px;
+      font-weight: 900;
+      color: var(--cor-botao-texto, #2E2417);
+      text-align: center;
     }
     [data-theme="dark"] .profile-river-wave {
       display: none !important;
@@ -4823,46 +5053,29 @@
       color: #FFFFFF !important;
     }
     /* ========================================================
-       TELA BASE DEGRADÊ OFICIAL (MODAL PERFIL & MODAL DETALHE PET)
-       Fundo Degradê Verde-Areia-Verde Suave • Botões Areia Escura #9E8560
+       TELA BASE LIMPA ARENOSA (MODAL PERFIL & MODAL DETALHE PET)
+       Fundo Areia #F7F4EE Limpo • Zero Verde • Diretriz Rigo
        ======================================================== */
-    #modal-perfil,
+    #modal-perfil {
+      top: 0 !important;
+      left: 0 !important;
+      right: 0 !important;
+      bottom: 0 !important;
+      background: var(--cor-fundo-padrao, #F7F4EE) !important;
+      z-index: 2500 !important;
+    }
     #modal-detalhe {
       top: 0 !important;
       left: 0 !important;
       right: 0 !important;
-      bottom: calc(env(safe-area-inset-bottom, 0px) + 56px) !important;
-      background: linear-gradient(180deg, 
-        #009B3A 0px, 
-        #009B3A calc(env(safe-area-inset-top, 0px) + 68px), 
-        #EDE8DF calc(env(safe-area-inset-top, 0px) + 158px), 
-        #EDE8DF calc(100% - 62px), 
-        #D5DDD0 calc(100% - 48px), 
-        #B0C3AA calc(100% - 36px), 
-        #7DAB80 calc(100% - 24px), 
-        #4D985B calc(100% - 14px), 
-        #21853D calc(100% - 6px), 
-        #009B3A 100%) !important;
+      bottom: 0 !important;
+      background: var(--cor-fundo-padrao, #F7F4EE) !important;
+      z-index: 2600 !important;
     }
-    #modal-perfil { z-index: 2500 !important; }
-    #modal-detalhe { z-index: 2600 !important; }
 
     body:not(.theme-dark):not([data-theme="dark"]) #modal-perfil::after,
     body:not(.theme-dark):not([data-theme="dark"]) #modal-detalhe::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      height: 54px;
-      background: linear-gradient(180deg, 
-        rgba(0, 155, 58, 0) 0%, 
-        rgba(0, 155, 58, 0.15) 20%, 
-        rgba(0, 155, 58, 0.40) 50%, 
-        rgba(0, 155, 58, 0.80) 80%, 
-        #009B3A 100%) !important;
-      pointer-events: none !important;
-      z-index: 20 !important;
+      display: none !important;
     }
     #modal-perfil .profile-fs-header,
     #modal-detalhe .profile-fs-header,
@@ -7672,19 +7885,17 @@
   </div>
 
   <!-- ==================== TELA COMPLETA: PÁGINA PÚBLICA DO PROTETOR (v3.11.9) ==================== -->
-  <div class="full-screen-view" id="modal-perfil-protetor" style="display:none; flex-direction:column; background:#EDE8DF; z-index:2700;">
-    <div class="fs-header" style="background:#009B3A; color:#FFFFFF; padding:calc(env(safe-area-inset-top, 0px) + 12px) 16px 14px; display:flex; align-items:center; justify-content:space-between; flex-shrink:0;">
-      <button type="button" class="fs-back" onclick="fecharPerfilPublicoProtetor()" style="background:#000000; color:#FFFFFF; border:none; border-radius:999px; padding:7px 15px; font-weight:800; cursor:pointer;">‹ Voltar</button>
+  <div class="full-screen-view" id="modal-perfil-protetor" style="display:none; flex-direction:column; background:var(--cor-fundo-padrao, #F7F4EE); z-index:2700;">
+    <div class="subtela-header-areia">
+      <button type="button" class="btn-subtela-voltar" onclick="fecharPerfilPublicoProtetor()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+        <span>Voltar</span>
+      </button>
       <div style="text-align:center;">
-        <div style="font-size:16px; font-weight:900; color:#FFFFFF;" id="protetor-fs-nome">Protetor de Animais</div>
-        <div style="font-size:10.5px; font-weight:800; color:#FED700; letter-spacing:0.5px;">REDE DE PROTEÇÃO CASCAVEL</div>
+        <div style="font-size:15px; font-weight:900; color:var(--cor-texto-principal, #2E2417);" id="protetor-fs-nome">Protetor de Animais</div>
+        <div style="font-size:10px; font-weight:800; color:var(--cor-texto-secundario, #6E5A3C); letter-spacing:0.5px;">REDE DE PROTEÇÃO CASCAVEL</div>
       </div>
-      <div style="width:48px;"></div>
-    </div>
-    <div class="profile-river-wave" style="background:#009B3A; line-height:0; flex-shrink:0;">
-      <svg viewBox="0 0 500 16" preserveAspectRatio="none" style="width:100%; height:16px; display:block;">
-        <path d="M 0,0 L 500,0 L 500,4 C 420,16 330,2 240,12 C 150,18 80,4 0,14 Z" fill="#EDE8DF"/>
-      </svg>
+      <div style="width:75px;"></div>
     </div>
     <div class="fs-content" id="protetor-fs-conteudo" style="flex:1; overflow-y:auto; padding:16px 18px calc(env(safe-area-inset-bottom, 0px) + 30px); -webkit-overflow-scrolling:touch; max-width:560px; margin:0 auto; width:100%; box-sizing:border-box;">
       <!-- Preenchido dinamicamente via JS -->
@@ -8082,27 +8293,22 @@
 
   <!-- ==================== TELA COMPLETA: MEU PERFIL & CADASTRO ==================== -->
   <div class="full-screen-view" id="modal-perfil">
-    <!-- Topo Centralizado de Acesso & Cadastro com Degradê Brasil -->
-    <div class="fs-header profile-fs-header" style="justify-content:center; position:relative; padding-top:calc(env(safe-area-inset-top, 0px) + 14px); padding-bottom:6px;">
-      <div style="text-align:center;">
-        <div style="font-size:21px; font-weight:900; color:#FFFFFF; letter-spacing:0.3px; line-height:1.2;" id="perfil-header-title">Acesso & Cadastro</div>
-        <div style="font-size:12.5px; font-weight:800; color:#FED700; letter-spacing:0.5px; margin-top:3px;" id="perfil-header-sub">Alerta Pet Brasil</div>
-      </div>
-    </div>
-
-    <!-- Botão Voltar separado no início da área de conteúdo com suspiro -->
-    <div style="max-width:540px; margin:0 auto; width:100%; padding:12px 16px 6px; display:flex; align-items:center; justify-content:flex-start;">
-      <button type="button" class="btn-voltar-acesso" onclick="fecharModal('modal-perfil')">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
-        <span>Voltar</span>
+    <!-- Topo Limpo do Perfil (Diretriz Oficial Rigo: sem botão marrom voltar, sem degradê verde) -->
+    <div class="perfil-topo-fb">
+      <div style="font-size:17px; font-weight:900; color:#2E2417;" id="perfil-header-title">Meu Perfil</div>
+      <button type="button" class="btn-fechar-perfil-fb" onclick="fecharModalPerfil()" aria-label="Fechar" style="background:transparent; border:none; color:#2E2417; cursor:pointer; padding:4px; display:flex; align-items:center; justify-content:center;">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
       </button>
     </div>
 
-    <div class="fs-body" style="max-width:540px; margin:0 auto; width:100%; overflow-y:auto;">
+    <div class="fs-body" style="width:100%; overflow-y:auto; -webkit-overflow-scrolling:touch; padding:0 !important;">
       <!-- ESTADO 1: TELA DE CADASTRO / LOGIN (PADRÃO PRINT 2 DIRETRIZ RIGO) -->
-      <div id="perfil-view-cadastro" style="display:none; padding:2px 0 10px;">
+      <div id="perfil-view-cadastro" style="display:none; padding:10px 16px 20px; max-width:540px; margin:0 auto;">
         <!-- Frase de Destaque Grande e em Preto com Suspiro -->
-        <div style="text-align:center; padding:14px 16px 14px;">
+        <div style="text-align:center; padding:10px 16px 14px;">
           <div style="font-size:15px; font-weight:900; color:#2E2417; line-height:1.35; letter-spacing:0.1px;">
             Cadastre-se para publicar, reencontrar e resgatar animais
           </div>
@@ -8237,281 +8443,286 @@
       </div>
 
       <!-- ESTADO 2: TELA DE PERFIL DO USUÁRIO LOGADO (ESTILO FACEBOOK OFICIAL RIGO) -->
-      <div id="perfil-view-logado" style="display:none; padding:0 0 24px;">
+      <div id="perfil-view-logado" style="display:none; padding:0 0 32px; width:100%;">
         
-        <!-- 1. Banner de Capa Estilo Facebook -->
-        <div class="perfil-cover-box" style="position:relative; width:100%; height:150px; background:linear-gradient(135deg, #DECDB6 0%, #C8B69B 100%); border-radius:18px 18px 0 0; overflow:hidden; box-shadow:inset 0 -10px 20px rgba(0,0,0,0.12);">
-          <img id="perfil-cover-img" src="/static/brand/banner_padrao_capa.jpg" onerror="this.style.display='none'" alt="Capa" style="width:100%; height:100%; object-fit:cover; display:none;" />
-          <button type="button" class="btn-trocar-capa" onclick="document.getElementById('perfil-input-capa').click()" style="position:absolute; bottom:10px; right:12px; background:rgba(46,36,23,0.75); backdrop-filter:blur(4px); color:#FFFFFF; border:1px solid rgba(255,255,255,0.25); border-radius:10px; padding:6px 12px; font-size:11px; font-weight:800; display:flex; align-items:center; gap:5px; cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,0.2);">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
-            <span>Capa</span>
+        <!-- 1. Banner de Capa de Fora a Fora (Edge-to-Edge sem margem branca) -->
+        <div class="perfil-capa-wrap">
+          <img id="perfil-cover-img" src="/static/brand/banner_padrao_capa.jpg" onerror="this.src='/static/brand/banner_padrao_capa.jpg'" alt="Foto de Capa" />
+          <button type="button" class="btn-trocar-capa-fb" onclick="document.getElementById('perfil-input-capa').click()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1E1B18" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+              <circle cx="12" cy="13" r="4"></circle>
+            </svg>
+            <span>Editar Capa</span>
           </button>
           <input type="file" id="perfil-input-capa" accept="image/*" style="display:none;" onchange="uploadFotoCapaPerfil(this)">
         </div>
 
-        <!-- 2. Header do Perfil com Avatar Sobreposto -->
-        <div class="perfil-card-box" style="background:#FFFFFF; border-radius:0 0 18px 18px; border:1.5px solid #E8DFD3; border-top:none; padding:0 16px 16px; margin-bottom:14px; box-shadow:0 4px 14px rgba(46,36,23,0.06);">
-          
-          <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-top:-48px; margin-bottom:12px;">
-            <!-- Bolinha do Avatar Sobreposta -->
-            <div class="perfil-avatar-wrap" onclick="document.getElementById('perfil-input-foto').click()" style="width:92px; height:92px; border-radius:50%; border:4px solid #FFFFFF; background:#DECDB6; box-shadow:0 4px 14px rgba(46,36,23,0.18); overflow:hidden; position:relative; cursor:pointer; flex-shrink:0;">
-              <div class="perfil-avatar-circle" style="width:100%; height:100%; display:flex; align-items:center; justify-content:center;">
-                <span id="perfil-avatar-letter" style="font-size:36px; font-weight:900; color:#2E2417;">U</span>
-                <img id="perfil-avatar-img" src="" alt="Foto" style="width:100%; height:100%; object-fit:cover; display:none;">
-              </div>
-              <div style="position:absolute; bottom:2px; right:2px; width:26px; height:26px; border-radius:50%; background:#FED700; color:#000; font-size:13px; font-weight:900; display:flex; align-items:center; justify-content:center; border:2px solid #FFF; box-shadow:0 2px 4px rgba(0,0,0,0.15);">📷</div>
+        <!-- 2. Header do Perfil: Foto na esquerda e Nome/Bairro/Status AO LADO -->
+        <div class="perfil-info-row-fb">
+          <!-- Bolinha do Avatar Sobreposta -->
+          <div class="perfil-avatar-wrap-fb" onclick="document.getElementById('perfil-input-foto').click()">
+            <div class="perfil-avatar-inner">
+              <span id="perfil-avatar-letter" style="font-size:36px; font-weight:900; color:#2E2417;">U</span>
+              <img id="perfil-avatar-img" src="" alt="Foto" style="width:100%; height:100%; object-fit:cover; display:none;">
+            </div>
+            <!-- Camerazinha preta sem amarelo (Diretriz Oficial Rigo) -->
+            <div class="perfil-avatar-cam-badge">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#1E1B18" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+                <circle cx="12" cy="13" r="4"></circle>
+              </svg>
             </div>
             <input type="file" id="perfil-input-foto" accept="image/*" style="display:none;" onchange="uploadFotoPerfil(this)">
-
-            <!-- Botão Editar Perfil -->
-            <button type="button" onclick="alternarEdicaoDados()" style="background:#DECDB6; color:#2E2417; border:1px solid #E8DFD3; border-radius:12px; padding:8px 14px; font-size:12px; font-weight:800; cursor:pointer; display:flex; align-items:center; gap:6px; box-shadow:0 2px 6px rgba(46,36,23,0.06);">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
-              <span>Editar Perfil</span>
-            </button>
           </div>
 
-          <!-- Nome e Localização -->
-          <div id="perfil-display-nome" style="font-size:22px; font-weight:900; color:#2E2417; line-height:1.2; letter-spacing:-0.2px;">Nome do Usuário</div>
-          <div id="perfil-display-sub" style="font-size:12.5px; font-weight:700; color:#786955; margin-top:3px;">Centro • Cascavel - PR</div>
-
-          <!-- Status discreto em linha -->
-          <div class="perfil-status-linha" style="margin-top:8px; display:flex; align-items:center; gap:6px; font-size:11px; font-weight:700; color:#786955;">
-            <span class="perfil-status-item" style="display:inline-flex; align-items:center; gap:4px; color:#10B981;"><span style="width:7px; height:7px; border-radius:50%; background:#10B981; display:inline-block;"></span>Conta ativa</span>
-            <span id="perfil-badge-protetor" class="perfil-status-item" style="display:none; color:#F59E0B;">
-              <span>·</span>
-              <span id="perfil-badge-protetor-txt">🛡️ Protetor verificado</span>
-            </span>
-          </div>
-
-          <!-- 3. VÍNCULO COM A ONG (CARD DE CONEXÃO OFICIAL COM LOGO CLICÁVEL) -->
-          <div id="perfil-ong-vinculo-box" style="margin-top:14px; padding:12px 14px; background:#F7F4EE; border:1.5px solid #E8DFD3; border-radius:14px; display:flex; align-items:center; justify-content:space-between; cursor:pointer; transition:transform 0.15s ease;" onclick="abrirPerfilOngVinculada()">
-            <div style="display:flex; align-items:center; gap:12px;">
-              <img id="perfil-ong-logo-thumb" src="/static/brand/ong_patinhas_oeste.svg" alt="ONG" style="width:42px; height:42px; border-radius:50%; object-fit:cover; border:2px solid #FED700; background:#FFFFFF; padding:2px; flex-shrink:0;" />
-              <div>
-                <div style="font-size:10px; font-weight:900; color:#8A724E; text-transform:uppercase; letter-spacing:0.5px;">🏢 Membro da Associação / ONG</div>
-                <div id="perfil-ong-nome-label" style="font-size:14px; font-weight:900; color:#2E2417; margin-top:2px;">Coletivo Patinhas do Oeste</div>
-              </div>
-            </div>
-            <div style="font-size:12px; font-weight:900; color:#8A724E; display:flex; align-items:center; gap:2px;">
-              <span>Ver ONG</span>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          <!-- Nome, Localização e Status AO LADO (como no Facebook) -->
+          <div class="perfil-texto-fb">
+            <div id="perfil-display-nome" class="perfil-nome-fb">Rigoberto Bockhorny</div>
+            <div id="perfil-display-sub" class="perfil-sub-fb">Cascavel, PR</div>
+            <div class="perfil-status-badges-fb">
+              <span class="badge-status-conta">🟢 Conta ativa</span>
+              <span id="perfil-badge-protetor" style="display:none;" class="badge-status-protetor">🛡️ Protetor Validado</span>
             </div>
           </div>
         </div>
 
-        <!-- Grupo de Navegação em Linhas Arenosas -->
-        <div class="perfil-card-box" style="padding:0; overflow:hidden; background:#FFFFFF; border:1.5px solid #E8DFD3; border-radius:16px;">
-          <!-- Linha 1: Minha Página Pública de Protetor -->
-          <div class="perfil-nav-row" id="row-minha-pagina-protetor" style="display:none;" onclick="abrirPerfilPublicoProtetor(state.autorToken)">
-            <div class="perfil-nav-left">
-              <div class="perfil-nav-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2E2417" stroke-width="2.2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></div>
-              <div>
-                <div class="perfil-nav-title" style="color:#2E2417; font-weight:900;">Minha Página Pública de Protetor(a)</div>
-                <div class="perfil-nav-sub">Veja sua galeria de resgates e adoções como o público vê</div>
-              </div>
-            </div>
-            <div class="pet-nav-chevron">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="9 18 15 12 9 6"></polyline></svg>
-            </div>
-          </div>
-
-          <!-- Linha 2: Editar Dados -->
-          <div class="perfil-nav-row" onclick="alternarEdicaoDados()">
-            <div class="perfil-nav-left">
-              <div class="perfil-nav-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg></div>
-              <div>
-                <div class="perfil-nav-title">Editar Meus Dados Cadastrais</div>
-                <div class="perfil-nav-sub">Atualize seu nome, telefone ou bairro</div>
-              </div>
-            </div>
-            <div class="pet-nav-chevron">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="9 18 15 12 9 6"></polyline></svg>
-            </div>
-          </div>
-
-          <!-- Linha 3: Meus Registros -->
-          <div class="perfil-nav-row" onclick="alternarGavetaMeusRegistros()">
-            <div class="perfil-nav-left">
-              <div class="perfil-nav-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></div>
-              <div>
-                <div class="perfil-nav-title">Meus Registros & Ocorrências</div>
-                <div class="perfil-nav-sub" id="perfil-resumo-registros">Editar, encerrar ou gerenciar seus pets cadastrados</div>
-              </div>
-            </div>
-            <div class="pet-nav-chevron">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="9 18 15 12 9 6"></polyline></svg>
-            </div>
-          </div>
-
-          <!-- Linha 4: Rede de ONGs / Vínculo -->
-          <div class="perfil-nav-row" onclick="alternarGavetaOng()">
-            <div class="perfil-nav-left">
-              <div class="perfil-nav-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2E2417" stroke-width="2.2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg></div>
-              <div>
-                <div class="perfil-nav-title">Rede de Proteção & ONGs</div>
-                <div class="perfil-nav-sub" id="perfil-resumo-ong">Vincular-se a uma ONG com código ou gerenciar associação</div>
-              </div>
-            </div>
-            <div class="pet-nav-chevron">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="9 18 15 12 9 6"></polyline></svg>
-            </div>
-          </div>
-
-          <!-- Linha 5: Termos de Uso -->
-          <div class="perfil-nav-row" onclick="abrirModalTermos('termos')">
-            <div class="perfil-nav-left">
-              <div class="perfil-nav-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg></div>
-              <div>
-                <div class="perfil-nav-title">Termos de Uso & Diretrizes</div>
-                <div class="perfil-nav-sub">Regras da comunidade e tolerância zero</div>
-              </div>
-            </div>
-            <div class="pet-nav-chevron">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="9 18 15 12 9 6"></polyline></svg>
-            </div>
-          </div>
-
-          <!-- Linha 6: Privacidade & LGPD -->
-          <div class="perfil-nav-row" onclick="abrirModalTermos('privacidade')">
-            <div class="perfil-nav-left">
-              <div class="perfil-nav-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg></div>
-              <div>
-                <div class="perfil-nav-title">Política de Privacidade & LGPD</div>
-                <div class="perfil-nav-sub">Seus dados protegidos e sob seu controle</div>
-              </div>
-            </div>
-            <div class="pet-nav-chevron">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="9 18 15 12 9 6"></polyline></svg>
-            </div>
-          </div>
-        </div>
-      </div>
-          <div class="perfil-nav-row" onclick="abrirModalTermos('privacidade')">
-            <div class="perfil-nav-left">
-              <div class="perfil-nav-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg></div>
-              <div>
-                <div class="perfil-nav-title">Política de Privacidade & LGPD</div>
-                <div class="perfil-nav-sub">Como tratamos e protegemos seus dados</div>
-              </div>
-            </div>
-            <div class="pet-nav-chevron">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="9 18 15 12 9 6"></polyline></svg>
-            </div>
-          </div>
-
-          <!-- Linha 4.1: Tolerância Zero (UGC) - Ícone preto normal sem fundo vermelho -->
-          <div class="perfil-nav-row" onclick="abrirModalTermos('tolerancia')">
-            <div class="perfil-nav-left">
-              <div class="perfil-nav-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></div>
-              <div>
-                <div class="perfil-nav-title">Tolerância Zero & Conduta (UGC)</div>
-                <div class="perfil-nav-sub">Diretrizes da comunidade e moderação 24h</div>
-              </div>
-            </div>
-            <div class="pet-nav-chevron">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="9 18 15 12 9 6"></polyline></svg>
-            </div>
-          </div>
-
-          <!-- Linha 5: Sair da Conta -->
-          <div class="perfil-nav-row" onclick="desconectarContaUsuario()">
-            <div class="perfil-nav-left">
-              <div class="perfil-nav-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg></div>
-              <div>
-                <div class="perfil-nav-title">Sair da Conta</div>
-                <div class="perfil-nav-sub">Desconectar seu login deste aparelho</div>
-              </div>
-            </div>
-            <div class="pet-nav-chevron">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="9 18 15 12 9 6"></polyline></svg>
-            </div>
-          </div>
-
-          <!-- Linha 6: Excluir Conta (Regra Google Play) -->
-          <div class="perfil-nav-row danger" onclick="excluirContaUsuarioGooglePlay()">
-            <div class="perfil-nav-left">
-              <div class="perfil-nav-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg></div>
-              <div>
-                <div class="perfil-nav-title" style="color:#ef4444;">Excluir Minha Conta</div>
-                <div class="perfil-nav-sub">Apagar permanentemente seus dados do sistema</div>
-              </div>
-            </div>
-            <div class="pet-nav-chevron" style="color:#ef4444;">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="9 18 15 12 9 6"></polyline></svg>
-            </div>
-          </div>
-        </div>
-
-        <!-- Seção Expansível: Formulário de Edição de Dados (Apenas 1 Botão Salvar) -->
-        <div id="perfil-caixa-edicao" class="perfil-card-box" style="display:none;">
-          <div style="font-size:14px; font-weight:900; color:var(--text); margin-bottom:12px;">Editar Meus Dados</div>
-          <div class="form-group">
-            <label class="form-label" for="perfil-edit-nome">Nome Completo</label>
-            <input type="text" class="form-input" id="perfil-edit-nome" placeholder="Seu nome completo">
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="perfil-edit-whatsapp">WhatsApp / Telefone</label>
-            <input type="tel" class="form-input" id="perfil-edit-whatsapp" placeholder="(45) 99999-9999">
-          </div>
-          <div class="form-row-2">
-            <div class="form-group">
-              <label class="form-label" for="perfil-edit-cidade">Cidade</label>
-              <input type="text" class="form-input" id="perfil-edit-cidade" placeholder="Sua cidade" value="Cascavel">
-            </div>
-            <div class="form-group">
-              <label class="form-label" for="perfil-edit-estado">Estado (UF)</label>
-              <select class="form-select" id="perfil-edit-estado">
-                <option value="PR" selected>PR</option>
-                <option value="AC">AC</option><option value="AL">AL</option><option value="AP">AP</option><option value="AM">AM</option>
-                <option value="BA">BA</option><option value="CE">CE</option><option value="DF">DF</option><option value="ES">ES</option>
-                <option value="GO">GO</option><option value="MA">MA</option><option value="MT">MT</option><option value="MS">MS</option>
-                <option value="MG">MG</option><option value="PA">PA</option><option value="PB">PB</option><option value="PE">PE</option>
-                <option value="PI">PI</option><option value="RJ">RJ</option><option value="RN">RN</option><option value="RS">RS</option>
-                <option value="RO">RO</option><option value="RR">RR</option><option value="SC">SC</option><option value="SP">SP</option>
-                <option value="SE">SE</option><option value="TO">TO</option>
-              </select>
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="perfil-edit-bairro">Bairro</label>
-            <input type="text" class="form-input" id="perfil-edit-bairro" list="lista-bairros" placeholder="Bairro onde mora" value="Centro">
-          </div>
-          <div class="form-group" style="margin-bottom:14px;">
-            <label class="form-label" for="perfil-edit-endereco">Endereço / Ponto de Referência (Opcional)</label>
-            <input type="text" class="form-input" id="perfil-edit-endereco" placeholder="Ex: Rua Paraná ou próximo à praça">
-          </div>
-          <button type="button" class="btn-submit btn-salvar-perfil" style="width:100%; height:44px; display:flex; align-items:center; justify-content:center; background:#9E8560; color:#FFFFFF; border:1.5px solid #8A724E; border-radius:12px; font-size:13.5px; font-weight:900; cursor:pointer; box-shadow:0 3px 10px rgba(110,90,60,0.28);" onclick="salvarEdicaoPerfil()">
-            Salvar Alterações
+        <!-- 3. Botão Editar Perfil em Destaque -->
+        <div style="padding: 10px 14px 6px;">
+          <button type="button" class="btn-editar-perfil-fb" onclick="abrirSubtelaPerfil('editar')">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3">
+              <path d="M12 20h9"></path>
+              <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+            </svg>
+            <span>Editar Perfil & Dados Cadastrais</span>
           </button>
         </div>
 
-        <!-- Seção Expansível: Meus Registros -->
-        <div id="perfil-caixa-registros" style="display:none; margin-bottom:16px;">
-          <div class="perfil-section-lbl"><span>Seus Alertas e Pets no Ar</span></div>
-          <div id="perfil-lista-meus-pets" style="display:flex; flex-direction:column; gap:8px;"></div>
+        <!-- 4. Menu do Perfil com Blocos Arredondados em Areia / Branco -->
+        <div class="perfil-menu-container-fb">
+          <div class="perfil-nav-card-fb">
+            <!-- Linha 1: Minha Página Pública de Protetor -->
+            <div class="perfil-nav-item-fb" id="row-minha-pagina-protetor" style="display:none;" onclick="abrirPerfilPublicoProtetor(state.autorToken)">
+              <div class="nav-icon-fb">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2E2417" stroke-width="2.2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+              </div>
+              <div class="nav-text-fb">
+                <div class="nav-title-fb">Minha Página Pública de Protetor(a)</div>
+                <div class="nav-sub-fb">Veja sua galeria de resgates e adoções como o público vê</div>
+              </div>
+              <div class="nav-arrow-fb">›</div>
+            </div>
+
+            <div class="nav-divider-fb" id="div-minha-pagina-protetor" style="display:none;"></div>
+
+            <!-- Linha 2: Editar Dados Cadastrais -->
+            <div class="perfil-nav-item-fb" onclick="abrirSubtelaPerfil('editar')">
+              <div class="nav-icon-fb">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+              </div>
+              <div class="nav-text-fb">
+                <div class="nav-title-fb">Editar Meus Dados Cadastrais</div>
+                <div class="nav-sub-fb">Atualize seu nome, WhatsApp, cidade e bairro</div>
+              </div>
+              <div class="nav-arrow-fb">›</div>
+            </div>
+
+            <div class="nav-divider-fb"></div>
+
+            <!-- Linha 3: Meus Registros & Alertas -->
+            <div class="perfil-nav-item-fb" onclick="abrirSubtelaPerfil('registros')">
+              <div class="nav-icon-fb">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+              </div>
+              <div class="nav-text-fb">
+                <div class="nav-title-fb">Meus Registros & Ocorrências</div>
+                <div class="nav-sub-fb" id="perfil-resumo-registros">Ver, editar ou encerrar seus pets cadastrados</div>
+              </div>
+              <div class="nav-arrow-fb">›</div>
+            </div>
+
+            <div class="nav-divider-fb"></div>
+
+            <!-- Linha 4: Rede de ONGs / Vínculo -->
+            <div class="perfil-nav-item-fb" onclick="abrirSubtelaPerfil('ongs')">
+              <div class="nav-icon-fb">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2E2417" stroke-width="2.2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+              </div>
+              <div class="nav-text-fb">
+                <div class="nav-title-fb">Rede de Proteção & ONGs</div>
+                <div class="nav-sub-fb" id="perfil-resumo-ong">Vincular-se a uma ONG com código ou gerenciar associação</div>
+              </div>
+              <div class="nav-arrow-fb">›</div>
+            </div>
+
+            <div class="nav-divider-fb"></div>
+
+            <!-- Linha 5: Termos de Uso -->
+            <div class="perfil-nav-item-fb" onclick="abrirSubtelaPerfil('termos')">
+              <div class="nav-icon-fb">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+              </div>
+              <div class="nav-text-fb">
+                <div class="nav-title-fb">Termos de Uso & Diretrizes</div>
+                <div class="nav-sub-fb">Regras da comunidade e convivência</div>
+              </div>
+              <div class="nav-arrow-fb">›</div>
+            </div>
+
+            <div class="nav-divider-fb"></div>
+
+            <!-- Linha 6: Privacidade & LGPD -->
+            <div class="perfil-nav-item-fb" onclick="abrirSubtelaPerfil('privacidade')">
+              <div class="nav-icon-fb">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+              </div>
+              <div class="nav-text-fb">
+                <div class="nav-title-fb">Política de Privacidade & LGPD</div>
+                <div class="nav-sub-fb">Seus dados protegidos e sob seu controle</div>
+              </div>
+              <div class="nav-arrow-fb">›</div>
+            </div>
+          </div>
+
+          <!-- Bloco Secundário: Ações de Conta -->
+          <div class="perfil-nav-card-fb" style="margin-top:12px;">
+            <div class="perfil-nav-item-fb" onclick="desconectarContaUsuario()">
+              <div class="nav-icon-fb">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+              </div>
+              <div class="nav-text-fb">
+                <div class="nav-title-fb">Sair da Conta</div>
+                <div class="nav-sub-fb">Desconectar seu login deste aparelho</div>
+              </div>
+              <div class="nav-arrow-fb">›</div>
+            </div>
+
+            <div class="nav-divider-fb"></div>
+
+            <div class="perfil-nav-item-fb" onclick="excluirContaUsuarioGooglePlay()">
+              <div class="nav-icon-fb" style="color:#EF4444;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+              </div>
+              <div class="nav-text-fb">
+                <div class="nav-title-fb" style="color:#EF4444;">Excluir Minha Conta</div>
+                <div class="nav-sub-fb">Apagar permanentemente seus dados do sistema</div>
+              </div>
+              <div class="nav-arrow-fb" style="color:#EF4444;">›</div>
+            </div>
+          </div>
         </div>
 
-        <!-- Seção Expansível: Vínculo com ONG & Painel de Gestão da ONG (Diretriz Rigo) -->
-        <div id="perfil-caixa-ong" class="perfil-card-box" style="display:none; margin-bottom:16px; padding:14px;">
-          <div style="font-size:14px; font-weight:900; color:var(--text); margin-bottom:8px;">Rede de Proteção • ONG & Protetor</div>
-          <div id="perfil-ong-status-box" style="margin-bottom:10px; font-size:12px; color:#6B5A43;"></div>
-          <div id="perfil-ong-vincular-form" style="display:flex; gap:8px; margin-bottom:10px;">
-            <input type="text" id="perfil-input-codigo-ong" class="form-input" placeholder="Código da ONG (ex: PATINHAS-CVEL)" style="flex:1; height:38px; text-transform:uppercase; font-weight:800; font-size:12px;">
-            <button type="button" onclick="vincularProtetorComCodigo()" style="height:38px; padding:0 14px; border-radius:10px; background:#9E8560; color:#fff; border:none; font-size:12px; font-weight:900; cursor:pointer;">Vincular</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       SUBTELAS DO PERFIL EM TELA CHEIA (FULLSCREEN AREIA • DIRETRIZ RIGO)
+       Abertura completa sem cardzinhos, com suporte total ao botão voltar
+       ========================================================================= -->
+
+  <!-- SUBTELA 1: EDITAR MEUS DADOS CADASTRAIS (FULLSCREEN AREIA) -->
+  <div class="full-screen-view subtela-perfil-fullscreen" id="modal-subtela-editar-perfil" style="display:none; z-index:2700; background:var(--cor-fundo-padrao, #F7F4EE); flex-direction:column; top:0; left:0; right:0; bottom:0;">
+    <div class="subtela-header-areia">
+      <button type="button" class="btn-subtela-voltar" onclick="fecharSubtelaPerfil()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        <span>Meu Perfil</span>
+      </button>
+      <div class="subtela-titulo-areia">Editar Meus Dados</div>
+      <div style="width:70px;"></div>
+    </div>
+
+    <div class="fs-content" style="flex:1; overflow-y:auto; padding:16px; max-width:540px; margin:0 auto; width:100%; box-sizing:border-box; -webkit-overflow-scrolling:touch;">
+      <div class="perfil-card-box" style="background:#FFFFFF; border:1.5px solid #E8DFD3; border-radius:18px; padding:18px 16px; margin-bottom:16px; box-shadow:0 2px 8px rgba(46,36,23,0.06);">
+        <div class="form-group" style="margin-bottom:12px;">
+          <label class="form-label" for="perfil-edit-nome" style="font-size:12px; font-weight:800; color:#2E2417; margin-bottom:4px; display:block;">NOME COMPLETO</label>
+          <input type="text" class="form-input" id="perfil-edit-nome" placeholder="Seu nome completo" style="width:100%; height:44px; padding:8px 12px; border-radius:10px; border:1.5px solid #E8DFD3; background:#FAF8F5; font-size:14px; font-weight:700; color:#2E2417; box-sizing:border-box;">
+        </div>
+        <div class="form-group" style="margin-bottom:12px;">
+          <label class="form-label" for="perfil-edit-whatsapp" style="font-size:12px; font-weight:800; color:#2E2417; margin-bottom:4px; display:block;">WHATSAPP / TELEFONE</label>
+          <input type="tel" class="form-input" id="perfil-edit-whatsapp" placeholder="(45) 99999-9999" oninput="formatarZapDinamico(this)" style="width:100%; height:44px; padding:8px 12px; border-radius:10px; border:1.5px solid #E8DFD3; background:#FAF8F5; font-size:14px; font-weight:700; color:#2E2417; box-sizing:border-box;">
+        </div>
+        <div style="display:grid; grid-template-columns:1fr 100px; gap:10px; margin-bottom:12px;">
+          <div class="form-group">
+            <label class="form-label" for="perfil-edit-cidade" style="font-size:12px; font-weight:800; color:#2E2417; margin-bottom:4px; display:block;">CIDADE</label>
+            <input type="text" class="form-input" id="perfil-edit-cidade" placeholder="Sua cidade" value="Cascavel" style="width:100%; height:44px; padding:8px 12px; border-radius:10px; border:1.5px solid #E8DFD3; background:#FAF8F5; font-size:14px; font-weight:700; color:#2E2417; box-sizing:border-box;">
           </div>
-          <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:10px;">
-            <button type="button" id="btn-sair-ong-atual" onclick="sairDaOngAtual()" style="display:none; height:32px; padding:0 12px; border-radius:9px; background:#FEE2E2; color:#B91C1C; border:1px solid #FCA5A5; font-size:11.5px; font-weight:800; cursor:pointer;">Sair desta ONG</button>
-            <button type="button" onclick="abrirCadastroOngModal()" style="height:32px; padding:0 12px; border-radius:9px; background:#EDE8DF; color:#2E2417; border:1px solid #9E8560; font-size:11.5px; font-weight:800; cursor:pointer;">+ Cadastrar minha ONG</button>
-          </div>
-          <!-- Painel Exclusivo do Presidente da ONG -->
-          <div id="painel-gestao-minha-ong" style="display:none; border-top:1px solid rgba(110,90,60,0.22); padding-top:10px; margin-top:8px;">
-            <div style="font-size:12.5px; font-weight:900; color:#009B3A; margin-bottom:6px;">Painel da Sua ONG</div>
-            <div id="painel-ong-codigo-box" style="background:#EDE8DF; padding:10px; border-radius:10px; margin-bottom:10px; font-size:11.5px;"></div>
-            <div style="font-size:11.5px; font-weight:800; color:#2E2417; margin-bottom:6px;">Protetores na sua rede:</div>
-            <div id="painel-ong-lista-protetores" style="display:flex; flex-direction:column; gap:8px;"></div>
+          <div class="form-group">
+            <label class="form-label" for="perfil-edit-estado" style="font-size:12px; font-weight:800; color:#2E2417; margin-bottom:4px; display:block;">ESTADO (UF)</label>
+            <select class="form-select" id="perfil-edit-estado" style="width:100%; height:44px; padding:8px 10px; border-radius:10px; border:1.5px solid #E8DFD3; background:#FAF8F5; font-size:14px; font-weight:700; color:#2E2417; box-sizing:border-box;">
+              <option value="PR" selected>PR</option>
+              <option value="SC">SC</option><option value="RS">RS</option><option value="SP">SP</option><option value="RJ">RJ</option><option value="MG">MG</option><option value="MS">MS</option><option value="MT">MT</option><option value="GO">GO</option><option value="DF">DF</option><option value="BA">BA</option><option value="OUTRO">Outro</option>
+            </select>
           </div>
         </div>
+        <div class="form-group" style="margin-bottom:12px;">
+          <label class="form-label" for="perfil-edit-bairro" style="font-size:12px; font-weight:800; color:#2E2417; margin-bottom:4px; display:block;">BAIRRO</label>
+          <input type="text" class="form-input" id="perfil-edit-bairro" list="lista-bairros" placeholder="Bairro onde mora" value="Centro" style="width:100%; height:44px; padding:8px 12px; border-radius:10px; border:1.5px solid #E8DFD3; background:#FAF8F5; font-size:14px; font-weight:700; color:#2E2417; box-sizing:border-box;">
+        </div>
+        <div class="form-group" style="margin-bottom:16px;">
+          <label class="form-label" for="perfil-edit-endereco" style="font-size:12px; font-weight:800; color:#2E2417; margin-bottom:4px; display:block;">ENDEREÇO / PONTO DE REFERÊNCIA (OPCIONAL)</label>
+          <input type="text" class="form-input" id="perfil-edit-endereco" placeholder="Ex: Rua Paraná ou próximo à praça" style="width:100%; height:44px; padding:8px 12px; border-radius:10px; border:1.5px solid #E8DFD3; background:#FAF8F5; font-size:14px; font-weight:700; color:#2E2417; box-sizing:border-box;">
+        </div>
+
+        <button type="button" class="btn-submit" onclick="salvarEdicaoPerfil()" style="width:100%; height:46px; display:flex; align-items:center; justify-content:center; background:#2E2417; color:#FFFFFF; border:none; border-radius:12px; font-size:14px; font-weight:900; cursor:pointer; box-shadow:0 3px 10px rgba(0,0,0,0.2);">
+          Salvar Alterações
+        </button>
       </div>
+    </div>
+  </div>
+
+  <!-- SUBTELA 2: MEUS REGISTROS & OCORRÊNCIAS (FULLSCREEN AREIA) -->
+  <div class="full-screen-view subtela-perfil-fullscreen" id="modal-subtela-meus-registros" style="display:none; z-index:2700; background:var(--cor-fundo-padrao, #F7F4EE); flex-direction:column; top:0; left:0; right:0; bottom:0;">
+    <div class="subtela-header-areia">
+      <button type="button" class="btn-subtela-voltar" onclick="fecharSubtelaPerfil()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        <span>Meu Perfil</span>
+      </button>
+      <div class="subtela-titulo-areia">Meus Registros & Alertas</div>
+      <div style="width:70px;"></div>
+    </div>
+
+    <div class="fs-content" style="flex:1; overflow-y:auto; padding:16px; max-width:540px; margin:0 auto; width:100%; box-sizing:border-box; -webkit-overflow-scrolling:touch;">
+      <div id="perfil-lista-meus-pets" style="display:flex; flex-direction:column; gap:10px;">
+        <!-- Preenchido dinamicamente com os pets do usuário -->
+      </div>
+    </div>
+  </div>
+
+  <!-- SUBTELA 3: REDE DE PROTEÇÃO & ONGS (FULLSCREEN AREIA) -->
+  <div class="full-screen-view subtela-perfil-fullscreen" id="modal-subtela-rede-ongs" style="display:none; z-index:2700; background:var(--cor-fundo-padrao, #F7F4EE); flex-direction:column; top:0; left:0; right:0; bottom:0;">
+    <div class="subtela-header-areia">
+      <button type="button" class="btn-subtela-voltar" onclick="fecharSubtelaPerfil()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        <span>Meu Perfil</span>
+      </button>
+      <div class="subtela-titulo-areia">Rede de Proteção & ONGs</div>
+      <div style="width:70px;"></div>
+    </div>
+
+    <div class="fs-content" style="flex:1; overflow-y:auto; padding:16px; max-width:540px; margin:0 auto; width:100%; box-sizing:border-box; -webkit-overflow-scrolling:touch;">
+      <div class="perfil-card-box" style="background:#FFFFFF; border:1.5px solid #E8DFD3; border-radius:18px; padding:18px 16px; margin-bottom:14px;">
+        <div style="font-size:15px; font-weight:900; color:#2E2417; margin-bottom:8px;">Vincular-se a uma ONG</div>
+        <div id="perfil-ong-status-box" style="margin-bottom:12px; font-size:13px; color:#786955;"></div>
+        <div id="perfil-ong-vincular-form" style="display:flex; gap:8px; margin-bottom:12px;">
+          <input type="text" id="perfil-input-codigo-ong" class="form-input" placeholder="Código da ONG (ex: PATINHAS-CVEL)" style="flex:1; height:42px; text-transform:uppercase; font-weight:800; font-size:13px; padding:6px 12px; border:1.5px solid #E8DFD3; border-radius:10px; background:#FAF8F5;">
+          <button type="button" onclick="vincularProtetorComCodigo()" style="height:42px; padding:0 16px; border-radius:10px; background:#2E2417; color:#FFFFFF; border:none; font-size:13px; font-weight:900; cursor:pointer;">Vincular</button>
+        </div>
+        <div style="display:flex; gap:8px; flex-wrap:wrap;">
+          <button type="button" id="btn-sair-ong-atual" onclick="sairDaOngAtual()" style="display:none; height:36px; padding:0 12px; border-radius:9px; background:#FEE2E2; color:#B91C1C; border:1px solid #FCA5A5; font-size:12px; font-weight:800; cursor:pointer;">Sair desta ONG</button>
+          <button type="button" onclick="abrirCadastroOngModal()" style="height:36px; padding:0 14px; border-radius:9px; background:var(--cor-botao-areia, #DECDB6); color:#2E2417; border:1px solid #E8DFD3; font-size:12px; font-weight:800; cursor:pointer;">+ Cadastrar minha ONG</button>
+        </div>
+
+        <!-- Painel Exclusivo do Presidente da ONG -->
+        <div id="painel-gestao-minha-ong" style="display:none; border-top:1.5px solid #E8DFD3; padding-top:12px; margin-top:12px;">
+          <div style="font-size:14px; font-weight:900; color:#2E2417; margin-bottom:6px;">🏢 Painel da Sua ONG</div>
+          <div id="painel-ong-codigo-box" style="background:#FAF8F5; padding:10px; border-radius:10px; border:1px solid #E8DFD3; margin-bottom:10px; font-size:12.5px;"></div>
+          <div style="font-size:12px; font-weight:800; color:#2E2417; margin-bottom:6px;">Protetores na sua rede:</div>
+          <div id="painel-ong-lista-protetores" style="display:flex; flex-direction:column; gap:8px;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
     </div>
   </div>
 
@@ -8555,19 +8766,17 @@
   </div>
 
     <!-- MODAL DE TERMOS DE USO, PRIVACIDADE (LGPD) E TOLERÂNCIA ZERO (UGC) -->
-  <div class="full-screen-view" id="modal-termos" style="display:none; z-index:10050; background:var(--bg);">
-    <div class="fs-header" style="background:#009B3A; border-bottom:none; color:#ffffff; padding:calc(env(safe-area-inset-top, 0px) + 12px) 16px 12px;">
-      <button type="button" class="fs-back" style="background:#ffffff; color:#000000; font-weight:800; border-radius:12px; padding:6px 14px; border:none; box-shadow:0 2px 6px rgba(0,0,0,0.15); cursor:pointer;" onclick="fecharModal('modal-termos')">‹ Voltar</button>
+  <div class="full-screen-view" id="modal-termos" style="display:none; z-index:10050; background:var(--cor-fundo-padrao, #F7F4EE);">
+    <div class="subtela-header-areia">
+      <button type="button" class="btn-subtela-voltar" onclick="fecharModal('modal-termos')">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+        <span>Meu Perfil</span>
+      </button>
       <div style="text-align:center;">
-        <div style="font-size:16px; font-weight:900; color:#ffffff;">Termos & Diretrizes</div>
-        <div style="font-size:10.5px; font-weight:800; color:rgba(255,255,255,0.85); letter-spacing:0.5px;">ALERTA PET BRASIL</div>
+        <div style="font-size:15px; font-weight:900; color:var(--cor-texto-principal, #2E2417);">Termos & Diretrizes</div>
+        <div style="font-size:10px; font-weight:800; color:var(--cor-texto-secundario, #6E5A3C); letter-spacing:0.5px;">ALERTA PET BRASIL</div>
       </div>
-      <div style="width:58px;"></div>
-    </div>
-    <div style="background:#009B3A; line-height:0;">
-      <svg viewBox="0 0 500 16" preserveAspectRatio="none" style="width:100%; height:16px; display:block;">
-        <path d="M 0,0 L 500,0 L 500,4 C 420,16 330,2 240,12 C 150,18 80,4 0,14 Z" fill="var(--bg)"/>
-      </svg>
+      <div style="width:75px;"></div>
     </div>
 
     <!-- Navegação de Abas do Modal -->
@@ -8588,11 +8797,11 @@
       
       <!-- ABA 1: TERMOS DE USO -->
       <div id="painel-termos-uso" class="painel-termos" style="display:block; background:#ffffff; border-radius:18px; padding:20px 18px; border:1px solid rgba(0,0,0,0.10); box-shadow:0 4px 16px rgba(0,0,0,0.06); color:#18181B; line-height:1.65;">
-        <div style="display:inline-block; background:rgba(0,155,58,0.12); color:#009B3A; font-weight:800; font-size:11px; padding:3px 8px; border-radius:6px; margin-bottom:6px;">VÓRTICE MÍDIA • CONTRATO EULA 2026</div>
-        <div style="font-size:18px; font-weight:900; color:#009B3A; margin-bottom:2px;">Termos e Condições Gerais de Uso</div>
+        <div style="display:inline-block; background:rgba(158,133,96,0.15); color:#8A724E; font-weight:800; font-size:11px; padding:3px 8px; border-radius:6px; margin-bottom:6px;">VÓRTICE MÍDIA • CONTRATO EULA 2026</div>
+        <div style="font-size:18px; font-weight:900; color:#2E2417; margin-bottom:2px;">Termos e Condições Gerais de Uso</div>
         <div style="font-size:11.5px; color:#71717A; margin-bottom:14px;">Rede Cívica, Proteção Comunitária e Copiloto Urbano de Cascavel - PR</div>
 
-        <div style="background:#F0FDF4; border-left:4px solid #009B3A; padding:10px 12px; border-radius:6px; margin-bottom:14px; font-size:12px; color:#14532D; font-weight:600;">
+        <div style="background:#FAF7F2; border-left:4px solid #8A724E; padding:10px 12px; border-radius:6px; margin-bottom:14px; font-size:12px; color:#2E2417; font-weight:600;">
           Ao instalar, acessar ou utilizar o aplicativo Alerta Urbano Cascavel, você declara expressamente que leu, entendeu e aceita integralmente estes Termos de Uso e a Política de Privacidade LGPD.
         </div>
 
@@ -8635,24 +8844,24 @@
         <p style="font-size:12px; margin-bottom:4px;">Estes Termos são regidos pela legislação da República Federativa do Brasil (Marco Civil da Internet, CDC e LGPD). Fica eleito o Foro da Comarca de Cascavel - PR para dirimir quaisquer litígios oriundos do uso da aplicação.</p>
 
         <div style="font-size:11.5px; color:#52525B; margin-top:10px; border-top:1px dashed #E4E4E7; padding-top:8px;">
-          Documento jurídico integral disponível em: <a href="/termos_uso.html" target="_blank" style="color:#009B3A; font-weight:800; text-decoration:underline;">termos_uso.html</a>
+          Documento jurídico integral disponível em: <a href="/termos_uso.html" target="_blank" style="color:#8A724E; font-weight:800; text-decoration:underline;">termos_uso.html</a>
         </div>
       </div>
 
       <!-- ABA 2: PRIVACIDADE E LGPD -->
       <div id="painel-privacidade-lgpd" class="painel-termos" style="display:none; background:#ffffff; border-radius:18px; padding:20px 18px; border:1px solid rgba(0,0,0,0.10); box-shadow:0 4px 16px rgba(0,0,0,0.06); color:#18181B; line-height:1.65;">
-        <div style="display:inline-block; background:rgba(0,155,58,0.12); color:#009B3A; font-weight:800; font-size:11px; padding:3px 8px; border-radius:6px; margin-bottom:6px;">GOVERNANÇA DE DADOS • LEI 13.709/2018</div>
-        <div style="font-size:18px; font-weight:900; color:#009B3A; margin-bottom:2px;">Política de Privacidade e Proteção de Dados (LGPD)</div>
+        <div style="display:inline-block; background:rgba(158,133,96,0.15); color:#8A724E; font-weight:800; font-size:11px; padding:3px 8px; border-radius:6px; margin-bottom:6px;">GOVERNANÇA DE DADOS • LEI 13.709/2018</div>
+        <div style="font-size:18px; font-weight:900; color:#2E2417; margin-bottom:2px;">Política de Privacidade e Proteção de Dados (LGPD)</div>
         <div style="font-size:11.5px; color:#71717A; margin-bottom:14px;">Padrão Google Play Data Safety e Transparência Cidadã</div>
 
-        <div style="background:#F0FDF4; border-left:4px solid #009B3A; padding:10px 12px; border-radius:6px; margin-bottom:14px; font-size:12px; color:#14532D; font-weight:600;">
+        <div style="background:#FAF7F2; border-left:4px solid #8A724E; padding:10px 12px; border-radius:6px; margin-bottom:14px; font-size:12px; color:#2E2417; font-weight:600;">
           Seus dados são tratados com base no princípio da minimização. Coletamos apenas o essencial para salvar vidas animais e alertar sobre riscos viários. Zero venda de dados. Zero anúncios invasivos.
         </div>
 
         <h4 style="font-size:13.5px; font-weight:800; color:#000000; margin:14px 0 4px;">1. Controlador e Encarregado de Dados (DPO)</h4>
         <p style="font-size:12px; margin-bottom:8px;"><strong>Controlador:</strong> Vórtice Mídia, sediada em Cascavel - PR.<br>
         <strong>Encarregado Geral de Proteção de Dados (DPO):</strong> Rigoberto Bockhorny.<br>
-        <strong>Canal Oficial de Atendimento LGPD:</strong> <a href="mailto:rigobertobockhorny@gmail.com" style="color:#009B3A; font-weight:700;">rigobertobockhorny@gmail.com</a></p>
+        <strong>Canal Oficial de Atendimento LGPD:</strong> <a href="mailto:rigobertobockhorny@gmail.com" style="color:#8A724E; font-weight:700;">rigobertobockhorny@gmail.com</a></p>
 
         <h4 style="font-size:13.5px; font-weight:800; color:#000000; margin:14px 0 4px;">2. Dados Coletados e Finalidades Estritas</h4>
         <ul style="font-size:12px; padding-left:18px; margin-bottom:10px; color:#27272A;">
@@ -8686,7 +8895,7 @@
         </div>
 
         <div style="font-size:11.5px; color:#52525B; margin-top:10px; border-top:1px dashed #E4E4E7; padding-top:8px;">
-          Política de Privacidade integral registrada disponível em: <a href="/politica_privacidade.html" target="_blank" style="color:#009B3A; font-weight:800; text-decoration:underline;">politica_privacidade.html</a>
+          Política de Privacidade integral registrada disponível em: <a href="/politica_privacidade.html" target="_blank" style="color:#8A724E; font-weight:800; text-decoration:underline;">politica_privacidade.html</a>
         </div>
       </div>
 
@@ -14138,14 +14347,16 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
         }
       }
 
-      // Atualiza Foto de Capa do Perfil
+      // Atualiza Foto de Capa do Perfil (Estilo Facebook Edge-to-Edge)
       const coverImg = document.getElementById('perfil-cover-img');
       if (coverImg) {
-        if (p.capa_url) {
-          coverImg.src = p.capa_url;
+        const savedCapa = p.capa_url || localStorage.getItem('au_perfil_capa_base64');
+        if (savedCapa && typeof savedCapa === 'string' && savedCapa.length > 20) {
+          coverImg.src = savedCapa;
           coverImg.style.display = 'block';
         } else {
-          coverImg.style.display = 'none';
+          coverImg.src = 'https://images.unsplash.com/photo-1534447677768-be436bb09401?w=1000&auto=format&fit=crop&q=80';
+          coverImg.style.display = 'block';
         }
       }
 
@@ -14567,10 +14778,61 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
       atualizarIndicadorStatusConta();
       atualizarVisualLogado();
 
-      const box = document.getElementById('perfil-caixa-edicao');
-      if (box) box.style.display = 'none';
+      fecharSubtelaPerfil(true);
+      mostrarToast('✓ Perfil atualizado com sucesso.');
+    }
 
-      mostrarToast('Perfil atualizado com sucesso.');
+    // ==================== SUBTELAS FULLSCREEN DO PERFIL (ESTILO FACEBOOK) ====================
+    function abrirSubtelaPerfil(tipo) {
+      // Oculta todas as subtelas antes de abrir a solicitada
+      ['editar-perfil', 'meus-registros', 'rede-ongs'].forEach(id => {
+        const el = document.getElementById(`modal-subtela-${id}`);
+        if (el) el.style.display = 'none';
+      });
+
+      if (tipo === 'termos' || tipo === 'privacidade' || tipo === 'tolerancia') {
+        abrirModalTermos(tipo);
+        return;
+      }
+
+      let targetId = '';
+      if (tipo === 'editar') targetId = 'modal-subtela-editar-perfil';
+      else if (tipo === 'registros') {
+        targetId = 'modal-subtela-meus-registros';
+        renderizarMeusPetsPerfil();
+      }
+      else if (tipo === 'ongs') targetId = 'modal-subtela-rede-ongs';
+
+      const modalSub = document.getElementById(targetId);
+      if (modalSub) {
+        modalSub.style.display = 'flex';
+        try { history.pushState({ modal: 'subtela_perfil', subtela: tipo }, ''); } catch(e) {}
+        if (tipo === 'editar') {
+          const p = state.perfil || {};
+          const editNome = document.getElementById('perfil-edit-nome');
+          const editWa = document.getElementById('perfil-edit-whatsapp');
+          const editCidade = document.getElementById('perfil-edit-cidade');
+          const editEstado = document.getElementById('perfil-edit-estado');
+          const editBairro = document.getElementById('perfil-edit-bairro');
+          const editEndereco = document.getElementById('perfil-edit-endereco');
+          if (editNome) editNome.value = p.nome || '';
+          if (editWa) editWa.value = p.whatsapp || '';
+          if (editCidade) editCidade.value = p.cidade || 'Cascavel';
+          if (editEstado) editEstado.value = p.estado || p.uf || 'PR';
+          if (editBairro) editBairro.value = p.bairro || 'Centro';
+          if (editEndereco) editEndereco.value = p.endereco || '';
+        }
+      }
+    }
+
+    function fecharSubtelaPerfil(fazerBack = true) {
+      ['modal-subtela-editar-perfil', 'modal-subtela-meus-registros', 'modal-subtela-rede-ongs'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.style.display = 'none';
+      });
+      if (fazerBack && history.state && history.state.modal === 'subtela_perfil') {
+        try { history.back(); } catch(e) {}
+      }
     }
 
     function alternarGavetaMeusRegistros() {
@@ -15391,6 +15653,22 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
 
     // ==================== BOTÃO VOLTAR DO CELULAR (POPSTATE NATIVO EM CAMADAS) ====================
     window.addEventListener('popstate', function(e) {
+      // 0. Subtelas do Perfil e Modal Termos (DIRETRIZ DE OURO RIGO: volta para o Meu Perfil, NUNCA chuta para o feed!)
+      const subtelasAbertas = [
+        'modal-subtela-editar-perfil',
+        'modal-subtela-meus-registros',
+        'modal-subtela-rede-ongs',
+        'modal-termos'
+      ];
+      for (const id of subtelasAbertas) {
+        const el = document.getElementById(id);
+        if (el && (el.style.display === 'flex' || el.style.display === 'block' || el.classList.contains('open'))) {
+          el.style.display = 'none';
+          el.classList.remove('open');
+          return; // Retorno antecipado garantindo que o Meu Perfil permanece visível!
+        }
+      }
+
       // 1. Se a tela de perfil público da ONG estiver aberta
       const modalProt = document.getElementById('modal-perfil-protetor');
       if (modalProt && (modalProt.classList.contains('open') || modalProt.style.display === 'flex')) {
@@ -15413,7 +15691,7 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
         return;
       }
 
-      // 4. Se a Tela de Perfil estiver aberta
+      // 4. Se a Tela de Perfil estiver aberta (agora na raiz do perfil: fecha o perfil e volta ao feed)
       const modalPerfil = document.getElementById('modal-perfil');
       if (modalPerfil && (modalPerfil.classList.contains('open') || modalPerfil.style.display === 'flex')) {
         modalPerfil.classList.remove('open');
@@ -15439,25 +15717,34 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
       }
     }
 
-    async function uploadFotoCapaPerfil(input) {
+    function uploadFotoCapaPerfil(input) {
       if (!input || !input.files || !input.files[0]) return;
       const file = input.files[0];
-      try {
-        mostrarToast('Processando foto de capa...');
-        const base64 = await comprimirImagemClientSide(file, 1280, 0.78);
-        const coverImg = document.getElementById('perfil-cover-img');
-        if (coverImg) {
-          coverImg.src = base64;
-          coverImg.style.display = 'block';
-        }
-        state.perfil = state.perfil || {};
-        state.perfil.capa_url = base64;
-        localStorage.setItem('au_perfil', JSON.stringify(state.perfil));
-        mostrarToast('✓ Foto de capa atualizada!');
-      } catch(e) {
-        console.warn('Erro ao atualizar capa:', e);
-        mostrarToast('Erro ao atualizar foto de capa.');
-      }
+      mostrarToast('Processando foto de capa...');
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const rawDataUrl = e.target.result;
+        comprimirFotoAvatar(rawDataUrl, 1200, 600, 0.85, function(compressedBase64) {
+          const coverImg = document.getElementById('perfil-cover-img');
+          if (coverImg) {
+            coverImg.src = compressedBase64;
+            coverImg.style.display = 'block';
+          }
+          state.perfil = state.perfil || {};
+          state.perfil.capa_url = compressedBase64;
+          try {
+            localStorage.setItem('au_perfil_capa_base64', compressedBase64);
+            localStorage.setItem('au_perfil', JSON.stringify(state.perfil));
+          } catch(err) {
+            console.warn('Storage quota ao salvar capa:', err);
+          }
+          mostrarToast('✓ Foto de capa atualizada!');
+        });
+      };
+      reader.onerror = function() {
+        mostrarToast('Erro ao ler foto de capa.');
+      };
+      reader.readAsDataURL(file);
     }
 
     function mostrarToast(msg) {
