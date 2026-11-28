@@ -1080,7 +1080,6 @@
       font-weight: 900;
       letter-spacing: 0.5px;
       text-transform: uppercase;
-      background: #000000 !important;
       color: #FFFFFF !important;
       border: 1px solid rgba(255, 255, 255, 0.35);
       z-index: 3;
@@ -1089,6 +1088,18 @@
       overflow: hidden;
       max-width: 96px;
       text-overflow: ellipsis;
+    }
+    .unified-belt-pill.pill-perdido {
+      background: #DC2626 !important;
+    }
+    .unified-belt-pill.pill-adocao {
+      background: #009B3A !important;
+    }
+    .unified-belt-pill.pill-resgatado {
+      background: #2563EB !important;
+    }
+    .unified-belt-pill.pill-reencontro {
+      background: #7C3AED !important;
     }
     .unified-belt-grad,
     .pet-belt-grad {
@@ -8730,16 +8741,16 @@
         } else {
           const cardsHtml = pets.map(p => {
             let badgeText = 'Perdido';
-            let badgeStyle = 'background:rgba(220,38,38,0.95); color:#FFFFFF;';
+            let badgeClass = 'pill-perdido';
             if (p.tipo === 'pet_adocao' || p.status_pet === 'adocao') {
               badgeText = 'Adoção';
-              badgeStyle = 'background:rgba(0,155,58,0.95); color:#FFFFFF;';
+              badgeClass = 'pill-adocao';
             } else if (p.tipo === 'pet_resgatado' || p.status_pet === 'resgatado') {
               badgeText = 'Resgatado';
-              badgeStyle = 'background:rgba(37,99,235,0.95); color:#FFFFFF;';
+              badgeClass = 'pill-resgatado';
             } else if (p.tipo === 'pet_reencontro' || p.status_pet === 'reencontro' || p.status_pet === 'encontrado') {
               badgeText = 'Reencontro';
-              badgeStyle = 'background:rgba(124,58,237,0.95); color:#FFFFFF;';
+              badgeClass = 'pill-reencontro';
             }
             const img = p.foto_url
               ? `<img class="unified-belt-img" src="${escapeAttr(p.foto_url)}" alt="${escapeAttr(p.titulo)}" loading="lazy" onerror="this.onerror=null; this.src='/static/darkplanner_pets/cachorra_02_caramelo.jpg';">`
@@ -8748,11 +8759,14 @@
             // Regra Rigo: Tríade com Nome do Animal, Cor/Raça e Bairro
             const rawTitulo = p.titulo || 'Pet';
             let nomeAnimal = rawTitulo;
-            let corRaca = p.raca || p.cor || p.especie || '';
+            let corRaca = '';
             if (rawTitulo.includes('•')) {
               const partes = rawTitulo.split('•');
               nomeAnimal = partes[0].trim();
-              if (!corRaca) corRaca = partes[1].trim();
+              corRaca = partes[1].trim();
+            }
+            if (!corRaca) {
+              corRaca = p.raca || p.cor || p.especie || '';
             }
             const bairroAnimal = p.bairro || 'Cascavel';
             const subTexto = corRaca ? `${corRaca} • ${bairroAnimal}` : bairroAnimal;
@@ -8760,7 +8774,7 @@
             return `
               <div class="unified-belt-card" onclick="abrirDetalheById(${p.id})">
                 ${img}
-                <span class="unified-belt-pill" style="${badgeStyle}">${badgeText}</span>
+                <span class="unified-belt-pill ${badgeClass}">${badgeText}</span>
                 <div class="unified-belt-grad">
                   <div class="unified-belt-title">${escapeHtml(nomeAnimal)}</div>
                   <div class="unified-belt-sub">${escapeHtml(subTexto)}</div>
