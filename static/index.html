@@ -358,7 +358,7 @@
       justify-content: space-between;
       background: var(--cor-fundo-padrao, #F7F4EE);
       border-bottom: 1.5px solid var(--cor-bloco-borda, #E8DFD3);
-      padding: 0 2px;
+      padding: 0 2px 2px;
       gap: 0;
       width: 100%;
       max-width: 100vw;
@@ -373,11 +373,11 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 6px 1px 5px;
+      padding: 3px 1px 3px;
       background: transparent;
       border: none;
       color: var(--text-muted, #786955);
-      font-size: 9.5px;
+      font-size: 9px;
       font-weight: 800;
       cursor: pointer;
       position: relative;
@@ -385,9 +385,9 @@
       box-sizing: border-box;
     }
     .fb-top-tab svg {
-      width: 20px;
-      height: 20px;
-      margin-bottom: 2px;
+      width: 19px;
+      height: 19px;
+      margin-bottom: 1px;
       transition: transform 0.15s ease, stroke 0.15s ease;
       flex-shrink: 0;
     }
@@ -397,7 +397,7 @@
       text-overflow: ellipsis;
       max-width: 100%;
       display: block;
-      font-size: 9.5px;
+      font-size: 9px;
       line-height: 1.1;
       letter-spacing: -0.2px;
     }
@@ -431,6 +431,136 @@
     }
     [data-theme="dark"] .fb-top-tab.active {
       color: #FFFFFF;
+    }
+
+    /* ==================== PÍLULA CLIMÁTICA & CONSELHOS PET ESTILO FACEBOOK ==================== */
+    .facebook-clima-pill-section {
+      padding: 10px 14px 4px;
+      width: 100%;
+      box-sizing: border-box;
+      background: var(--cor-fundo-padrao, #F7F4EE);
+    }
+    .facebook-clima-pill {
+      background: var(--cor-bloco-card, #FFFFFF);
+      border: 1.5px solid var(--cor-bloco-borda, #E8DFD3);
+      border-radius: 999px;
+      padding: 6px 14px 6px 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(46, 36, 23, 0.06);
+      transition: all 0.2s ease;
+      min-height: 48px;
+      box-sizing: border-box;
+    }
+    .facebook-clima-pill:active {
+      transform: scale(0.98);
+      background: #FAF8F5;
+    }
+    .clima-pill-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #FFF9E6;
+      border: 1.5px solid var(--cor-destaque-ouro, #FED700);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+      transition: all 0.25s ease;
+    }
+    .clima-pill-content {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      line-height: 1.15;
+    }
+    .clima-pill-meta {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 10px;
+      font-weight: 800;
+      color: var(--text-muted, #786955);
+      margin-bottom: 2px;
+    }
+    .clima-pill-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 1px 6px;
+      border-radius: 999px;
+      font-size: 9px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      background: #ECFDF5;
+      color: #065F46;
+      border: 1px solid rgba(16, 185, 129, 0.25);
+    }
+    .clima-pill-msg {
+      font-size: 11.5px;
+      font-weight: 800;
+      color: var(--cor-botao-texto, #2E2417);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      transition: opacity 0.25s ease;
+    }
+    .clima-pill-action {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #786955;
+      flex-shrink: 0;
+      padding-left: 2px;
+    }
+
+    /* Modos de Alerta da Pílula (Branco / Laranja / Vermelho) */
+    .facebook-clima-pill.alerta-laranja {
+      background: #FFFBEB !important;
+      border-color: #F59E0B !important;
+      box-shadow: 0 2px 10px rgba(245, 158, 11, 0.15) !important;
+    }
+    .facebook-clima-pill.alerta-laranja .clima-pill-avatar {
+      background: #FEF3C7;
+      border-color: #F59E0B;
+    }
+    .facebook-clima-pill.alerta-laranja .clima-pill-badge {
+      background: #F59E0B;
+      color: #FFFFFF;
+      border: none;
+    }
+    .facebook-clima-pill.alerta-laranja .clima-pill-msg {
+      color: #92400E;
+      font-weight: 900;
+    }
+
+    .facebook-clima-pill.alerta-vermelho {
+      background: #FEF2F2 !important;
+      border-color: #DC2626 !important;
+      box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.25), 0 4px 14px rgba(220, 38, 38, 0.2) !important;
+      animation: pulseAlertaPill 1.8s infinite;
+    }
+    .facebook-clima-pill.alerta-vermelho .clima-pill-avatar {
+      background: #FEE2E2;
+      border-color: #DC2626;
+    }
+    .facebook-clima-pill.alerta-vermelho .clima-pill-badge {
+      background: #DC2626;
+      color: #FFFFFF;
+      border: none;
+    }
+    .facebook-clima-pill.alerta-vermelho .clima-pill-msg {
+      color: #991B1B;
+      font-weight: 900;
+    }
+    @keyframes pulseAlertaPill {
+      0%, 100% { box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.25), 0 2px 8px rgba(220, 38, 38, 0.15); }
+      50% { box-shadow: 0 0 0 4px rgba(220, 38, 38, 0.45), 0 4px 16px rgba(220, 38, 38, 0.28); }
     }
 
     /* ==================== ESTEIRA STORIES / REELS ESTILO FACEBOOK ==================== */
@@ -549,7 +679,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: calc(env(safe-area-inset-top, 0px) + 6px) 12px 6px;
+      padding: calc(env(safe-area-inset-top, 0px) + 2px) 12px 1px;
       background: var(--cor-fundo-padrao, #F7F4EE) !important;
       border-bottom: none !important;
       box-shadow: none;
@@ -563,9 +693,9 @@
     }
     .topbar .brand-name {
       color: var(--cor-botao-texto, #2E2417) !important;
-      font-size: 19px !important;
+      font-size: 22px !important;
       font-weight: 900 !important;
-      letter-spacing: -0.4px !important;
+      letter-spacing: -0.5px !important;
       line-height: 1.1;
       white-space: nowrap;
     }
@@ -582,8 +712,8 @@
     }
 
     .btn-topbar-avatar {
-      width: 36px;
-      height: 36px;
+      width: 38px;
+      height: 38px;
       border-radius: 50%;
       border: 2px solid var(--cor-destaque-ouro, #FED700);
       background: var(--cor-botao-areia, #DECDB6);
@@ -614,8 +744,8 @@
     }
 
     .btn-topbar-menu {
-      width: 36px;
-      height: 36px;
+      width: 38px;
+      height: 38px;
       border-radius: 50%;
       background: var(--cor-bloco-card, #FFFFFF);
       color: var(--cor-botao-texto, #2E2417);
@@ -800,8 +930,8 @@
     
     /* ==================== PATINHA VIVA MINIMALISTA (CHROMA KEY VAZADA) ==================== */
     .logo-bubble-btn {
-      width: 44px;
-      height: 44px;
+      width: 48px;
+      height: 48px;
       border: none !important;
       border-radius: 0 !important;
       padding: 0;
@@ -1012,7 +1142,7 @@
       overflow-y: auto;
       -webkit-overflow-scrolling: touch;
       display: none;
-      padding: 104px 16px 24px;
+      padding: 86px 16px 24px;
       z-index: 5;
       box-sizing: border-box;
     }
@@ -1036,7 +1166,7 @@
       height: 100%;
       overflow-y: auto;
       -webkit-overflow-scrolling: touch;
-      padding-top: 104px;
+      padding-top: 86px;
       box-sizing: border-box;
     }
     .home-pane.active {
@@ -6792,6 +6922,33 @@
   <!-- CONTAINER DE ROLAGEM PRINCIPAL DO FEED (COM DETECÇÃO DE SCROLL PARA AUTO-HIDE DO TOPO) -->
   <div class="home-scroll-container" id="home-scroll-container" style="flex:1; overflow-y:auto; -webkit-overflow-scrolling:touch;">
     
+    <!-- 0. PÍLULA ESTILO FACEBOOK: CLIMA & PROTEÇÃO ANIMAL (DIRETRIZ OFICIAL RIGO) -->
+    <div class="facebook-clima-pill-section" id="facebook-clima-pill-section">
+      <div class="facebook-clima-pill" id="facebook-clima-pill" onclick="clicarPillClima()" title="Previsão do Tempo e Cuidados com o Pet">
+        <div class="clima-pill-avatar" id="clima-pill-avatar">
+          <span id="clima-pill-emoji">☀️</span>
+        </div>
+        <div class="clima-pill-content">
+          <div class="clima-pill-meta">
+            <span id="clima-pill-cidade-uf">Cascavel</span>
+            <span style="opacity:0.5;">•</span>
+            <span id="clima-pill-temp">24°C</span>
+            <span class="clima-pill-badge" id="clima-pill-badge">Tempo Estável</span>
+          </div>
+          <div class="clima-pill-msg" id="clima-pill-msg">
+            Aproveite o tempo bom para passear e brincar com seu pet! 🐾
+          </div>
+        </div>
+        <div class="clima-pill-action">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="16" x2="12" y2="12"></line>
+            <line x1="12" y1="8" x2="12.01" y2="8"></line>
+          </svg>
+        </div>
+      </div>
+    </div>
+
     <!-- 1. ESTEIRA DE MINI CARDS VERTICAIS (REELS / STORIES DO FACEBOOK • DIRETRIZ RIGO) -->
     <div class="stories-reel-section">
       <div style="padding:0 14px 6px; display:flex; align-items:center; justify-content:space-between;">
@@ -10024,6 +10181,77 @@
 
       if (msg1) msg1.textContent = textoAlerta;
       if (msg2) msg2.textContent = textoAlerta;
+
+      // Atualiza a nova Pílula de Clima e Cuidados Pet Estilo Facebook (Diretriz Oficial Rigo)
+      atualizarFacebookClimaPill(nivelEfetivo, c);
+    }
+
+    const DICAS_CUIDADO_BOM = [
+      "Aproveite o tempo bom para passear e brincar com seu pet! 🐾",
+      "Mantenha sempre água fresca e abrigo na sombra para o seu pet hoje 💧",
+      "Tempo agradável! Não esqueça de verificar a vacinação do seu amigo 🩺",
+      "Passeios ao ar livre fazem bem para a saúde e bem-estar do seu pet! 🐕",
+      "Dedique um tempo para escovar e dar aquele carinho no seu bichinho hoje ❤️"
+    ];
+    let _idxDicaBom = 0;
+    let _timerDicaBom = null;
+
+    function atualizarFacebookClimaPill(nivel, c) {
+      const pill = document.getElementById('facebook-clima-pill');
+      if (!pill) return;
+      const emojiEl = document.getElementById('clima-pill-emoji');
+      const cityEl = document.getElementById('clima-pill-cidade-uf');
+      const tempEl = document.getElementById('clima-pill-temp');
+      const badgeEl = document.getElementById('clima-pill-badge');
+      const msgEl = document.getElementById('clima-pill-msg');
+
+      pill.classList.remove('alerta-laranja', 'alerta-vermelho');
+
+      const cid = (state.perfil && state.perfil.cidade) ? state.perfil.cidade : (c && c.cidade ? c.cidade : 'Cascavel');
+      const temp = (c && c.temp !== undefined) ? `${c.temp}°C` : '24°C';
+
+      if (cityEl) cityEl.textContent = cid;
+      if (tempEl) tempEl.textContent = temp;
+
+      if (nivel === 'vermelho') {
+        pill.classList.add('alerta-vermelho');
+        if (emojiEl) emojiEl.textContent = '🚨';
+        if (badgeEl) badgeEl.textContent = 'Alerta Vermelho';
+        if (msgEl) msgEl.textContent = 'Atenção Máxima! Risco de tempestade severa. Recolha seus pets para dentro!';
+        if (_timerDicaBom) { clearInterval(_timerDicaBom); _timerDicaBom = null; }
+      } else if (nivel === 'laranja') {
+        pill.classList.add('alerta-laranja');
+        if (emojiEl) emojiEl.textContent = '⚠️';
+        if (badgeEl) badgeEl.textContent = 'Alerta Laranja';
+        if (msgEl) msgEl.textContent = 'Chuva e ventos previstos. Proteja e abrigue seus animais em local seguro!';
+        if (_timerDicaBom) { clearInterval(_timerDicaBom); _timerDicaBom = null; }
+      } else {
+        const isNoite = new Date().getHours() < 6 || new Date().getHours() >= 19;
+        if (emojiEl) emojiEl.textContent = (c && c.icone) ? c.icone : (isNoite ? '🌙' : '☀️');
+        if (badgeEl) badgeEl.textContent = isNoite ? 'Céu Limpo' : 'Tempo Bom';
+        if (msgEl) msgEl.textContent = DICAS_CUIDADO_BOM[_idxDicaBom];
+
+        if (!_timerDicaBom) {
+          _timerDicaBom = setInterval(() => {
+            const m = document.getElementById('clima-pill-msg');
+            if (!m) return;
+            m.style.opacity = '0';
+            setTimeout(() => {
+              _idxDicaBom = (_idxDicaBom + 1) % DICAS_CUIDADO_BOM.length;
+              m.textContent = DICAS_CUIDADO_BOM[_idxDicaBom];
+              m.style.opacity = '1';
+            }, 300);
+          }, 6000);
+        }
+      }
+    }
+
+    function clicarPillClima() {
+      const c = state.clima;
+      const cid = (state.perfil && state.perfil.cidade) ? state.perfil.cidade : 'Cascavel';
+      const temp = (c && c.temp !== undefined) ? `${c.temp}°C` : '24°C';
+      const cond = (c && c.condicao) ? c.condicao : 'Tempo estável';
+      mostrarToast(`🌤️ ${cid}: ${temp} • ${cond}. Cuide bem do seu melhor amigo!`);
     }
 
     // =========================================================================
