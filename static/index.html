@@ -507,9 +507,10 @@
 
     /* ==================== ESTEIRA STORIES / REELS ESTILO FACEBOOK ==================== */
     .stories-reel-section {
-      padding: 4px 0 2px;
+      padding: 6px 0 8px;
       background: var(--cor-fundo-padrao, #F7F4EE);
-      border-bottom: 1px solid var(--cor-bloco-borda, #E8DFD3);
+      border-bottom: 1.5px solid var(--cor-bloco-borda, #E8DFD3);
+      margin-bottom: 12px; /* Respiro cirúrgico entre esteira e o primeiro bloco do feed */
       width: 100%;
     }
     .stories-reel-viewport {
@@ -550,9 +551,34 @@
       object-fit: cover;
       display: block;
     }
-    /* Rigo: Rosto do animal 100% limpo, sem badge em cima da foto */
+    /* Pílula Oficial de Status nos Mini Cards (PERDIDO / ADOÇÃO • Diretriz Estrita Rigo) */
     .stories-reel-badge {
-      display: none !important;
+      position: absolute;
+      top: 6px;
+      left: 6px;
+      padding: 2.5px 7px;
+      border-radius: 10px;
+      font-size: 8.5px;
+      font-weight: 900;
+      letter-spacing: 0.4px;
+      text-transform: uppercase;
+      color: #FFFFFF !important;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.5);
+      z-index: 3;
+      pointer-events: none;
+      display: inline-flex !important;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+    }
+    .stories-reel-badge.badge-perdido {
+      background: #DC2626 !important;
+    }
+    .stories-reel-badge.badge-adocao {
+      background: #0284C7 !important;
+    }
+    .stories-reel-badge.badge-reencontro {
+      background: #059669 !important;
     }
     .stories-reel-grad {
       position: absolute;
@@ -592,14 +618,46 @@
 
     /* ==================== FEED DE BLOCOS DE ANIMAIS (ESTILO FACEBOOK) ==================== */
     .facebook-feed-stream {
-      padding: 4px 6px 36px; /* Diminui o espaçamento horizontal entre os blocos dos animais */
+      padding: 0 6px 36px; /* Margens laterais perfeitas • Sem sobra no topo */
       display: flex;
       flex-direction: column;
-      gap: 8px; /* Gap compacto entre cards */
+      gap: 4px; /* Blocos de animais bem pertinhos, estilo Facebook (Diretriz Estrita Rigo) */
       max-width: 560px;
       margin: 0 auto;
       width: 100%;
       box-sizing: border-box;
+    }
+    .facebook-feed-stream .pet-card {
+      margin-bottom: 0 !important; /* Espaçamento regido pelo gap de 4px */
+    }
+
+    /* Pílula Oficial de Status nos Blocos Grandes de Animais (PERDIDO / ADOÇÃO • Rigo) */
+    .pet-card-status-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 3px 10px;
+      border-radius: 12px;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      flex-shrink: 0;
+      color: #FFFFFF !important;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.25);
+      line-height: 1.2;
+    }
+    .pet-card-status-badge.badge-perdido {
+      background: #DC2626 !important; /* Vermelho vivo oficial */
+    }
+    .pet-card-status-badge.badge-adocao {
+      background: #0284C7 !important; /* Azul vivo oficial */
+    }
+    .pet-card-status-badge.badge-reencontro {
+      background: #059669 !important; /* Verde vivo */
+    }
+    .pet-card-status-badge.badge-avistado {
+      background: #EA580C !important; /* Laranja vivo */
     }
 
     /* ==================== TOPBAR ESTILO FACEBOOK ==================== */
@@ -9818,17 +9876,17 @@
       if (beltPets) {
         if (pets.length) {
           const cardsHtml = pets.map(p => {
-            let badgeText = 'Perdido';
-            let statusClass = 'stories-status-perdido';
+            let badgeText = 'PERDIDO';
+            let badgeClass = 'badge-perdido';
             if (p.tipo === 'pet_adocao' || p.status_pet === 'adocao') {
-              badgeText = 'Adoção';
-              statusClass = 'stories-status-adocao';
+              badgeText = 'ADOÇÃO';
+              badgeClass = 'badge-adocao';
             } else if (p.tipo === 'pet_resgatado' || p.status_pet === 'resgatado') {
-              badgeText = 'Resgatado';
-              statusClass = 'stories-status-reencontro';
+              badgeText = 'RESGATADO';
+              badgeClass = 'badge-reencontro';
             } else if (p.tipo === 'pet_reencontro' || p.status_pet === 'reencontro' || p.status_pet === 'encontrado') {
-              badgeText = 'Reencontro';
-              statusClass = 'stories-status-reencontro';
+              badgeText = 'REENCONTRO';
+              badgeClass = 'badge-reencontro';
             }
             const fotoUrl = p.foto_url || '/static/darkplanner_pets/cachorra_02_caramelo.jpg';
             const rawTitulo = p.titulo || 'Pet';
@@ -9838,6 +9896,7 @@
             return `
               <div class="stories-reel-card" onclick="abrirDetalheById(${p.id})">
                 <img class="stories-reel-img" src="${escapeAttr(fotoUrl)}" alt="${escapeAttr(nomeAnimal)}" loading="lazy" onerror="this.onerror=null; this.src='/static/darkplanner_pets/cachorra_02_caramelo.jpg';">
+                <span class="stories-reel-badge ${badgeClass}">${badgeText}</span>
                 <div class="stories-reel-grad">
                   <div class="stories-reel-nome">${escapeHtml(nomeAnimal)}</div>
                   <div class="stories-reel-sub">
@@ -11251,20 +11310,20 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
         petNomeExibicao = 'Animal Avistado';
       }
 
-      // Regra Rigo: Pílulas Oficiais
+      // Regra Rigo: Pílulas Oficiais (PERDIDO / ADOÇÃO / REENCONTRO)
       let statusPillLabel = 'PERDIDO';
       let statusPillClass = 'perdido';
       if (ehAdocao) {
-        statusPillLabel = 'PARA ADOÇÃO';
+        statusPillLabel = 'ADOÇÃO';
         statusPillClass = 'adocao';
       } else if (ehReencontro) {
-        statusPillLabel = 'FINAL FELIZ';
+        statusPillLabel = 'REENCONTRO';
         statusPillClass = 'reencontro';
       } else if (ehResgate) {
-        statusPillLabel = 'ANIMAL RESGATADO';
+        statusPillLabel = 'RESGATADO';
         statusPillClass = 'avistado';
       } else if (av) {
-        statusPillLabel = 'ANIMAL AVISTADO';
+        statusPillLabel = 'AVISTADO';
         statusPillClass = 'avistado';
       }
 
@@ -11371,9 +11430,12 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
           <!-- Mídia com Fundo Preto de Letterbox -->
           ${mediaHtml}
 
-          <!-- Conteúdo: Nome do Pet e Descrição (Sem Pílula • Diretriz Rigo) -->
+          <!-- Conteúdo: Nome do Pet e Descrição com Pílula de Status Oficial (Rigo) -->
           <div class="pet-card-content" style="position:relative; z-index:2;" ${acaoCardClick}>
-            <div class="pet-card-pet-name" style="margin-bottom:4px;">${escapeHtml(petNomeExibicao)}</div>
+            <div style="display:flex; align-items:center; justify-content:space-between; gap:8px; margin-bottom:6px;">
+              <div class="pet-card-pet-name">${escapeHtml(petNomeExibicao)}</div>
+              <span class="pet-card-status-badge badge-${statusPillClass}">${statusPillLabel}</span>
+            </div>
             <div class="pet-card-desc">${escapeHtml(descLimpa)}</div>
           </div>
 

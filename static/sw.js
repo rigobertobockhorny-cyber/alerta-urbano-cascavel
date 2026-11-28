@@ -1,5 +1,5 @@
-// Service Worker - Alerta Pet Brasil v3.13.18 (Terroso Profundo & Instant Branded Boot Shield)
-const CACHE_NAME = 'alerta-pet-brasil-v31318';
+// Service Worker - Alerta Pet Brasil v3.13.19 (Pílulas de Status, Feed Compacto Facebook & Terroso Profundo)
+const CACHE_NAME = 'alerta-pet-brasil-v31319';
 
 const COLD_START_HTML = `<!DOCTYPE html>
 <html lang="pt-BR">
