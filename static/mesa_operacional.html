@@ -910,6 +910,7 @@
 
     .profile-filter-tabs {
       display: flex;
+      flex-wrap: wrap;
       gap: 4px;
       margin-top: 10px;
       background: var(--bg-surface);
@@ -1072,6 +1073,62 @@
       background: rgba(56, 189, 248, 0.2);
       color: #38BDF8;
       border: 1px solid rgba(56, 189, 248, 0.4);
+    }
+
+    .badge-resgatado {
+      background: rgba(245, 158, 11, 0.2);
+      color: #F59E0B;
+      border: 1px solid rgba(245, 158, 11, 0.4);
+    }
+
+    .badge-reencontrado {
+      background: rgba(16, 185, 129, 0.2);
+      color: #10B981;
+      border: 1px solid rgba(16, 185, 129, 0.4);
+    }
+
+    .badge-cat-ong {
+      background: rgba(168, 85, 247, 0.2);
+      color: #C084FC;
+      border: 1px solid rgba(168, 85, 247, 0.4);
+      font-size: 8.5px;
+      font-weight: 800;
+      padding: 1px 5px;
+      border-radius: 4px;
+      margin-left: 4px;
+    }
+
+    .badge-cat-protetor {
+      background: rgba(245, 158, 11, 0.2);
+      color: #FBBF24;
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      font-size: 8.5px;
+      font-weight: 800;
+      padding: 1px 5px;
+      border-radius: 4px;
+      margin-left: 4px;
+    }
+
+    .badge-cat-tutor {
+      background: rgba(59, 130, 246, 0.2);
+      color: #60A5FA;
+      border: 1px solid rgba(59, 130, 246, 0.4);
+      font-size: 8.5px;
+      font-weight: 800;
+      padding: 1px 5px;
+      border-radius: 4px;
+      margin-left: 4px;
+    }
+
+    .badge-cat-voluntario {
+      background: rgba(34, 197, 94, 0.2);
+      color: #4ADE80;
+      border: 1px solid rgba(34, 197, 94, 0.4);
+      font-size: 8.5px;
+      font-weight: 800;
+      padding: 1px 5px;
+      border-radius: 4px;
+      margin-left: 4px;
     }
 
     .profile-pet-desc {
@@ -1762,6 +1819,9 @@
             <button type="button" class="prof-tab-btn" onclick="filtrarPerfisView('desaparecido', this)">🚨 Perdidos (<span id="count-prof-desap">0</span>)</button>
             <button type="button" class="prof-tab-btn" onclick="filtrarPerfisView('adocao', this)">🏠 Adoção (<span id="count-prof-adoc">0</span>)</button>
             <button type="button" class="prof-tab-btn" onclick="filtrarPerfisView('reencontrado', this)">🎉 Reencontrados (<span id="count-prof-reencontro">0</span>)</button>
+            <button type="button" class="prof-tab-btn" onclick="filtrarPerfisView('ong', this)">🏢 ONGs (<span id="count-prof-ong">0</span>)</button>
+            <button type="button" class="prof-tab-btn" onclick="filtrarPerfisView('protetor', this)">🛡️ Protetores (<span id="count-prof-protetor">0</span>)</button>
+            <button type="button" class="prof-tab-btn" onclick="filtrarPerfisView('tutores', this)">👤 Tutores & Vol. (<span id="count-prof-tutores">0</span>)</button>
             <button type="button" class="prof-tab-btn" onclick="filtrarPerfisView('fixado', this)">📍 No Mapa (<span id="count-prof-mapa">0</span>)</button>
           </div>
 
@@ -3299,18 +3359,23 @@
 
     function atualizarContadoresPerfis() {
       const todos = perfisOcorrencias.length;
-      const desap = perfisOcorrencias.filter(p => p.pet.tipo_ocorrencia === 'desaparecido').length;
-      const adoc = perfisOcorrencias.filter(p => p.pet.tipo_ocorrencia === 'adocao').length;
+      const desap = perfisOcorrencias.filter(p => p.pet && p.pet.tipo_ocorrencia === 'desaparecido').length;
+      const adoc = perfisOcorrencias.filter(p => p.pet && p.pet.tipo_ocorrencia === 'adocao').length;
+      const reencontro = perfisOcorrencias.filter(p => p.pet && (p.pet.tipo_ocorrencia === 'reencontrado' || p.pet.status === 'reencontrado')).length;
+      const ongs = perfisOcorrencias.filter(p => p.tutor && p.tutor.categoria === 'ong').length;
+      const protetores = perfisOcorrencias.filter(p => p.tutor && p.tutor.categoria === 'protetor').length;
+      const tutores = perfisOcorrencias.filter(p => p.tutor && (p.tutor.categoria === 'tutor' || p.tutor.categoria === 'voluntario')).length;
       const noMapa = perfisOcorrencias.filter(p => p.posicao_mapa && p.posicao_mapa.fixado).length;
 
-      const elTodos = document.getElementById('count-prof-todos');
-      if (elTodos) elTodos.textContent = todos;
-      const elDesap = document.getElementById('count-prof-desap');
-      if (elDesap) elDesap.textContent = desap;
-      const elAdoc = document.getElementById('count-prof-adoc');
-      if (elAdoc) elAdoc.textContent = adoc;
-      const elMapa = document.getElementById('count-prof-mapa');
-      if (elMapa) elMapa.textContent = noMapa;
+      const setEl = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
+      setEl('count-prof-todos', todos);
+      setEl('count-prof-desap', desap);
+      setEl('count-prof-adoc', adoc);
+      setEl('count-prof-reencontro', reencontro);
+      setEl('count-prof-ong', ongs);
+      setEl('count-prof-protetor', protetores);
+      setEl('count-prof-tutores', tutores);
+      setEl('count-prof-mapa', noMapa);
     }
 
     function filtrarPerfisView(tipo, btn) {
@@ -3326,11 +3391,17 @@
 
       let filtrados = perfisOcorrencias;
       if (filtroPerfisAtivo === 'desaparecido') {
-        filtrados = perfisOcorrencias.filter(p => p.pet.tipo_ocorrencia === 'desaparecido');
+        filtrados = perfisOcorrencias.filter(p => p.pet && p.pet.tipo_ocorrencia === 'desaparecido');
       } else if (filtroPerfisAtivo === 'adocao') {
-        filtrados = perfisOcorrencias.filter(p => p.pet.tipo_ocorrencia === 'adocao');
+        filtrados = perfisOcorrencias.filter(p => p.pet && p.pet.tipo_ocorrencia === 'adocao');
       } else if (filtroPerfisAtivo === 'reencontrado') {
-        filtrados = perfisOcorrencias.filter(p => p.pet.tipo_ocorrencia === 'reencontrado' || p.pet.status === 'reencontrado');
+        filtrados = perfisOcorrencias.filter(p => p.pet && (p.pet.tipo_ocorrencia === 'reencontrado' || p.pet.status === 'reencontrado'));
+      } else if (filtroPerfisAtivo === 'ong') {
+        filtrados = perfisOcorrencias.filter(p => p.tutor && p.tutor.categoria === 'ong');
+      } else if (filtroPerfisAtivo === 'protetor') {
+        filtrados = perfisOcorrencias.filter(p => p.tutor && p.tutor.categoria === 'protetor');
+      } else if (filtroPerfisAtivo === 'tutores') {
+        filtrados = perfisOcorrencias.filter(p => p.tutor && (p.tutor.categoria === 'tutor' || p.tutor.categoria === 'voluntario'));
       } else if (filtroPerfisAtivo === 'fixado') {
         filtrados = perfisOcorrencias.filter(p => p.posicao_mapa && p.posicao_mapa.fixado);
       }
@@ -3339,8 +3410,8 @@
         tray.innerHTML = `
           <div style="padding: 32px 16px; text-align: center; color: var(--text-muted);">
             <div style="font-size: 32px; margin-bottom: 8px;">🐾</div>
-            <div style="font-weight: 800; color: #FFF; font-size: 13px; margin-bottom: 4px;">Nenhum Pet Cadastrado</div>
-            <div style="font-size: 11px; line-height: 1.4;">Tudo pronto para cadastros reais.<br>Clique no botão vermelho acima para incluir o primeiro pet.</div>
+            <div style="font-weight: 800; color: #FFF; font-size: 13px; margin-bottom: 4px;">Nenhum Pet Nesta Categoria</div>
+            <div style="font-size: 11px; line-height: 1.4;">Alterne os filtros acima para visualizar os outros cadastros.</div>
           </div>
         `;
         return;
@@ -3349,8 +3420,27 @@
       tray.innerHTML = filtrados.map(p => {
         const fixado = p.posicao_mapa && p.posicao_mapa.fixado;
         const ehDesap = p.pet.tipo_ocorrencia === 'desaparecido';
-        const badgeClass = ehDesap ? 'badge-desaparecido' : 'badge-adocao';
-        const badgeTexto = ehDesap ? 'Desaparecido' : 'Para Adoção';
+        
+        const cat = (p.tutor && p.tutor.categoria) ? p.tutor.categoria : 'tutor';
+        let badgeCatHtml = '';
+        if (cat === 'ong') badgeCatHtml = '<span class="badge-cat-ong">🏢 ONG</span>';
+        else if (cat === 'protetor') badgeCatHtml = '<span class="badge-cat-protetor">🛡️ Protetor</span>';
+        else if (cat === 'voluntario') badgeCatHtml = '<span class="badge-cat-voluntario">🤝 Voluntário</span>';
+        else badgeCatHtml = '<span class="badge-cat-tutor">👤 Tutor</span>';
+
+        let badgeClass = 'badge-desaparecido';
+        let badgeTexto = 'Desaparecido';
+        if (p.pet.tipo_ocorrencia === 'adocao') {
+          badgeClass = 'badge-adocao';
+          badgeTexto = 'Para Adoção';
+        } else if (p.pet.tipo_ocorrencia === 'resgatado') {
+          badgeClass = 'badge-resgatado';
+          badgeTexto = 'Resgatado';
+        } else if (p.pet.tipo_ocorrencia === 'reencontrado' || p.pet.status === 'reencontrado') {
+          badgeClass = 'badge-reencontrado';
+          badgeTexto = 'Reencontrado';
+        }
+
         const cardClass = fixado ? 'profile-card no-mapa' : 'profile-card';
 
         return `
@@ -3359,7 +3449,10 @@
             <div class="profile-card-tutor">
               <img class="profile-tutor-avatar" src="${p.tutor.avatar}" alt="${escapeHtml(p.tutor.nome)}" loading="lazy">
               <div class="profile-tutor-info">
-                <div class="profile-tutor-name">${escapeHtml(p.tutor.nome)}</div>
+                <div class="profile-tutor-name" style="display:flex; align-items:center; flex-wrap:wrap; gap:4px;">
+                  <span>${escapeHtml(p.tutor.nome)}</span>
+                  ${badgeCatHtml}
+                </div>
                 <div class="profile-tutor-sub">📱 ${escapeHtml(p.tutor.telefone)} • 📍 ${escapeHtml(p.tutor.bairro_origem)}</div>
               </div>
             </div>

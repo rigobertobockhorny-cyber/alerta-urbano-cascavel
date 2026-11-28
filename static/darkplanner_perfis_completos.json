@@ -1,2244 +1,1010 @@
 [
   {
-    "id": "perfil_01",
+    "id": "pet_5707",
     "tutor": {
-      "nome": "Marcelo Rossi Prado",
-      "sexo": "M",
-      "avatar": "/static/darkplanner_pessoas/homem_01_carlos.jpg",
-      "telefone": "(45) 99949-8942",
-      "bairro_origem": "Centro"
+      "nome": "Mariana Souza",
+      "telefone": "45998011111",
+      "bairro_origem": "Alto Alegre",
+      "avatar": "/static/darkplanner_pessoas/mulher_01_mariana.jpg",
+      "categoria": "protetor",
+      "ong_nome": "Coletivo Patinhas do Oeste"
     },
     "pet": {
-      "id": "pet_01",
-      "nome": "Mel",
-      "categoria": "gata",
-      "tipo_ocorrencia": "desaparecido",
-      "sexo": "Fêmea",
-      "raca": "Siamês Legítimo",
-      "porte": "Pequeno",
-      "recompensa": "R$ 200,00",
-      "foto_url": "/static/darkplanner_pets/gata_01_siamesa.jpg",
-      "detalhes": "Desapareceu no bairro Centro. Muito dócil, atende pelo nome. Família e crianças desesperadas procurando."
-    },
-    "posicao_mapa": {
-      "fixado": true,
-      "lat": -24.917382,
-      "lng": -53.417743,
-      "rua": "Avenida das Pombas, 2020",
-      "bairro": "Florais do Paraná",
-      "referencia": "Visto no bairro Centro",
-      "data_fixacao": "2026-11-24T17:28:33.622Z"
-    },
-    "alerta_id": 5519
-  },
-  {
-    "id": "perfil_02",
-    "tutor": {
-      "nome": "Juliana Prado Vargas",
-      "sexo": "F",
-      "avatar": "/static/darkplanner_pessoas/mulher_02_camila.jpg",
-      "telefone": "(45) 99914-2962",
-      "bairro_origem": "Coqueiral"
-    },
-    "pet": {
-      "id": "pet_02",
-      "nome": "Pipoca",
-      "categoria": "gata",
-      "tipo_ocorrencia": "desaparecido",
-      "sexo": "Fêmea",
-      "raca": "Persa Fofo",
-      "porte": "Pequeno",
-      "recompensa": "R$ 800,00",
-      "foto_url": "/static/darkplanner_pets/gata_02_branca.jpg",
-      "detalhes": "Desapareceu no bairro Coqueiral. Muito dócil, atende pelo nome. Família e crianças desesperadas procurando."
-    },
-    "posicao_mapa": {
-      "fixado": true,
-      "lat": -24.927353,
-      "lng": -53.417724,
-      "rua": "Avenida das Pombas",
-      "bairro": "Florais do Paraná",
-      "referencia": "Visto no bairro Coqueiral",
-      "data_fixacao": "2026-11-24T17:29:00.786Z"
-    },
-    "alerta_id": 5520
-  },
-  {
-    "id": "perfil_03",
-    "tutor": {
-      "nome": "Rafael Zanetti Martins",
-      "sexo": "M",
-      "avatar": "/static/darkplanner_pessoas/homem_03_roberto.jpg",
-      "telefone": "(45) 99998-3528",
-      "bairro_origem": "Neva"
-    },
-    "pet": {
-      "id": "pet_03",
-      "nome": "Mia",
-      "categoria": "gata",
-      "tipo_ocorrencia": "desaparecido",
-      "sexo": "Fêmea",
-      "raca": "Frajola Dócil",
-      "porte": "Pequeno",
-      "recompensa": "R$ 200,00",
-      "foto_url": "/static/darkplanner_pets/gata_03_calico_tricolor.jpg",
-      "detalhes": "Desapareceu no bairro Neva. Muito dócil, atende pelo nome. Família e crianças desesperadas procurando."
-    },
-    "posicao_mapa": {
-      "fixado": true,
-      "lat": -24.935226,
-      "lng": -53.44493,
-      "rua": "Avenida Barão do Rio Branco",
-      "bairro": "São Cristóvão",
-      "referencia": "Visto no bairro Neva",
-      "data_fixacao": "2026-11-24T17:29:25.771Z"
-    },
-    "alerta_id": 5521
-  },
-  {
-    "id": "perfil_04",
-    "tutor": {
-      "nome": "Luisa Arraes Siqueira",
-      "sexo": "F",
-      "avatar": "/static/darkplanner_pessoas/mulher_04_beatriz.jpg",
-      "telefone": "(45) 99921-7816",
-      "bairro_origem": "Cancelli"
-    },
-    "pet": {
-      "id": "pet_04",
-      "nome": "Pandora",
-      "categoria": "gata",
-      "tipo_ocorrencia": "desaparecido",
-      "sexo": "Fêmea",
-      "raca": "Azul Russo",
-      "porte": "Pequeno",
-      "recompensa": "R$ 800,00",
-      "foto_url": "/static/darkplanner_pets/gata_04_preta.jpg",
-      "detalhes": "Desapareceu no bairro Cancelli. Muito dócil, atende pelo nome. Família e crianças desesperadas procurando."
-    },
-    "posicao_mapa": {
-      "fixado": true,
-      "lat": -24.965014,
-      "lng": -53.455916,
-      "rua": "Rua Vitória",
-      "bairro": "Vila Tolentino",
-      "referencia": "Visto no bairro Cancelli",
-      "data_fixacao": "2026-11-24T17:30:02.346Z"
-    },
-    "alerta_id": 5522
-  },
-  {
-    "id": "perfil_05",
-    "tutor": {
-      "nome": "Felipe Andrade Andrade",
-      "sexo": "M",
-      "avatar": "/static/darkplanner_pessoas/homem_05_rodrigo.jpg",
-      "telefone": "(45) 99952-8397",
-      "bairro_origem": "Parque São Paulo"
-    },
-    "pet": {
-      "id": "pet_05",
-      "nome": "Frida",
-      "categoria": "gata",
-      "tipo_ocorrencia": "adocao",
-      "sexo": "Fêmea",
-      "raca": "Tricolor Calico",
-      "porte": "Pequeno",
-      "recompensa": "Adoção Responsável Gratuita",
-      "foto_url": "/static/darkplanner_pets/gata_05_frajola.jpg",
-      "detalhes": "Resgatados no bairro Parque São Paulo, vermifugados e comendo ração úmida. Para doação responsável e com termo de posse."
-    },
-    "posicao_mapa": {
-      "fixado": true,
-      "lat": -24.963475,
-      "lng": -53.430489,
-      "rua": "Avenida Rocha Pombo",
-      "bairro": "Vila Militar",
-      "referencia": "Visto no bairro Parque São Paulo",
-      "data_fixacao": "2026-11-24T17:30:30.004Z"
-    },
-    "alerta_id": 5523
-  },
-  {
-    "id": "perfil_06",
-    "tutor": {
-      "nome": "Bruna Marquezine Vargas",
-      "sexo": "F",
-      "avatar": "/static/darkplanner_pessoas/mulher_06_ana_paula.jpg",
-      "telefone": "(45) 99951-2877",
-      "bairro_origem": "Santa Cruz"
-    },
-    "pet": {
-      "id": "pet_06",
-      "nome": "Jade",
-      "categoria": "gata",
-      "tipo_ocorrencia": "desaparecido",
-      "sexo": "Fêmea",
-      "raca": "Maine Coon Gigante",
-      "porte": "Pequeno",
-      "recompensa": "Sem Recompensa (Gratidão)",
-      "foto_url": "/static/darkplanner_pets/gata_06_persa_creme.jpg",
-      "detalhes": "Desapareceu no bairro Santa Cruz. Muito dócil, atende pelo nome. Família e crianças desesperadas procurando."
-    },
-    "posicao_mapa": {
-      "fixado": true,
-      "lat": -24.954157,
-      "lng": -53.480523,
-      "rua": "Avenida Brasil, 8594",
-      "bairro": "Coqueiral",
-      "referencia": "Visto no bairro Santa Cruz",
-      "data_fixacao": "2026-11-24T17:30:56.387Z"
-    },
-    "alerta_id": 5524
-  },
-  {
-    "id": "perfil_07",
-    "tutor": {
-      "nome": "Paulo Ricardo Rocha",
-      "sexo": "M",
-      "avatar": "/static/darkplanner_pessoas/homem_07_diego.jpg",
-      "telefone": "(45) 99914-5107",
-      "bairro_origem": "Claudete"
-    },
-    "pet": {
-      "id": "pet_07",
-      "nome": "Flor",
-      "categoria": "gata",
-      "tipo_ocorrencia": "desaparecido",
-      "sexo": "Fêmea",
-      "raca": "Gato Laranjinha",
-      "porte": "Pequeno",
-      "recompensa": "R$ 200,00",
-      "foto_url": "/static/darkplanner_pets/gata_07_ruiva_laranja.jpg",
-      "detalhes": "Desapareceu no bairro Claudete. Muito dócil, atende pelo nome. Família e crianças desesperadas procurando."
-    },
-    "posicao_mapa": {
-      "fixado": true,
-      "lat": -24.943563,
-      "lng": -53.468673,
-      "rua": "Rua Manaus",
-      "bairro": "Independência",
-      "referencia": "Visto no bairro Claudete",
-      "data_fixacao": "2026-11-24T17:31:11.628Z"
-    },
-    "alerta_id": 5525
-  },
-  {
-    "id": "perfil_08",
-    "tutor": {
-      "nome": "Camila Rocha Becker",
-      "sexo": "F",
-      "avatar": "/static/darkplanner_pessoas/mulher_08_larissa.jpg",
-      "telefone": "(45) 99917-5340",
-      "bairro_origem": "Cascavel Velho"
-    },
-    "pet": {
-      "id": "pet_08",
-      "nome": "Luna",
-      "categoria": "gata",
-      "tipo_ocorrencia": "desaparecido",
-      "sexo": "Fêmea",
-      "raca": "Angorá Branco",
-      "porte": "Pequeno",
-      "recompensa": "R$ 300,00",
-      "foto_url": "/static/darkplanner_pets/gata_08_cinza_tigrada.jpg",
-      "detalhes": "Desapareceu no bairro Cascavel Velho. Muito dócil, atende pelo nome. Família e crianças desesperadas procurando."
-    },
-    "posicao_mapa": {
-      "fixado": true,
-      "lat": -24.969787,
-      "lng": -53.417904,
-      "rua": "Rua Áustria",
-      "bairro": "Jardim Veneza",
-      "referencia": "Visto no bairro Cascavel Velho",
-      "data_fixacao": "2026-11-24T17:31:43.990Z"
-    },
-    "alerta_id": 5526
-  },
-  {
-    "id": "perfil_09",
-    "tutor": {
-      "nome": "Alexandre Borges Martins",
-      "sexo": "M",
-      "avatar": "/static/darkplanner_pessoas/homem_01_carlos.jpg",
-      "telefone": "(45) 99984-1316",
-      "bairro_origem": "Canadá"
-    },
-    "pet": {
-      "id": "pet_09",
-      "nome": "Belinha",
-      "categoria": "gata",
-      "tipo_ocorrencia": "desaparecido",
-      "sexo": "Fêmea",
-      "raca": "Gato Preto Sólido",
-      "porte": "Pequeno",
-      "recompensa": "R$ 200,00",
-      "foto_url": "/static/darkplanner_pets/gata_09_angora_branca.jpg",
-      "detalhes": "Desapareceu no bairro Canadá. Muito dócil, atende pelo nome. Família e crianças desesperadas procurando."
-    },
-    "posicao_mapa": {
-      "fixado": true,
-      "lat": -24.954303,
-      "lng": -53.452392,
-      "rua": "Avenida Brasil",
-      "bairro": "Vila Militar",
-      "referencia": "Visto no bairro Canadá",
-      "data_fixacao": "2026-11-24T17:32:03.991Z"
-    },
-    "alerta_id": 5527
-  },
-  {
-    "id": "perfil_10",
-    "tutor": {
-      "nome": "Bruna Marquezine Rocha",
-      "sexo": "F",
-      "avatar": "/static/darkplanner_pessoas/mulher_02_camila.jpg",
-      "telefone": "(45) 99963-3386",
-      "bairro_origem": "Country"
-    },
-    "pet": {
-      "id": "pet_10",
-      "nome": "Meg",
-      "categoria": "gata",
-      "tipo_ocorrencia": "desaparecido",
-      "sexo": "Fêmea",
-      "raca": "Bengal Oncinha",
-      "porte": "Pequeno",
-      "recompensa": "R$ 300,00",
-      "foto_url": "/static/darkplanner_pets/gata_10_tortoiseshell.jpg",
-      "detalhes": "Desapareceu no bairro Country. Muito dócil, atende pelo nome. Família e crianças desesperadas procurando."
-    },
-    "posicao_mapa": {
-      "fixado": true,
-      "lat": -24.948803,
-      "lng": -53.44693,
-      "rua": "Rua Vicente Machado",
-      "bairro": "Vila Militar",
-      "referencia": "Visto no bairro Country",
-      "data_fixacao": "2026-11-24T17:32:22.071Z"
-    },
-    "alerta_id": 5528
-  },
-  {
-    "id": "perfil_11",
-    "tutor": {
-      "nome": "Rafael Zanetti Borges",
-      "sexo": "M",
-      "avatar": "/static/darkplanner_pessoas/homem_03_roberto.jpg",
-      "telefone": "(45) 99950-6080",
-      "bairro_origem": "Maria Luíza"
-    },
-    "pet": {
-      "id": "pet_11",
-      "nome": "Marley",
-      "categoria": "gato",
-      "tipo_ocorrencia": "desaparecido",
-      "sexo": "Macho",
-      "raca": "Siamês Legítimo",
-      "porte": "Pequeno",
-      "recompensa": "R$ 800,00",
-      "foto_url": "/static/darkplanner_pets/gato_01_frajola.jpg",
-      "detalhes": "Desapareceu no bairro Maria Luíza. Muito dócil, atende pelo nome. Família e crianças desesperadas procurando."
-    },
-    "posicao_mapa": {
-      "fixado": true,
-      "lat": -24.953846,
-      "lng": -53.466318,
-      "rua": "Rua Paraná",
-      "bairro": "Vila Militar",
-      "referencia": "Visto no bairro Maria Luíza",
-      "data_fixacao": "2026-11-24T17:32:47.179Z"
-    },
-    "alerta_id": 5529
-  },
-  {
-    "id": "perfil_12",
-    "tutor": {
-      "nome": "Monique Alfradique Prado",
-      "sexo": "F",
-      "avatar": "/static/darkplanner_pessoas/mulher_04_beatriz.jpg",
-      "telefone": "(45) 99975-6773",
-      "bairro_origem": "Brasmadeira"
-    },
-    "pet": {
-      "id": "pet_12",
-      "nome": "Buddy",
-      "categoria": "gato",
-      "tipo_ocorrencia": "desaparecido",
-      "sexo": "Macho",
-      "raca": "Persa Fofo",
-      "porte": "Pequeno",
-      "recompensa": "Sem Recompensa (Gratidão)",
-      "foto_url": "/static/darkplanner_pets/gato_02_laranjinha.jpg",
-      "detalhes": "Desapareceu no bairro Brasmadeira. Muito dócil, atende pelo nome. Família e crianças desesperadas procurando."
-    },
-    "posicao_mapa": {
-      "fixado": true,
-      "lat": -24.921528,
-      "lng": -53.442585,
-      "rua": "Avenida Piquiri",
-      "bairro": "Brasmadeira",
-      "referencia": "Visto no bairro Brasmadeira",
-      "data_fixacao": "2026-11-24T17:33:21.662Z"
-    },
-    "alerta_id": 5530
-  },
-  {
-    "id": "perfil_13",
-    "tutor": {
-      "nome": "Samuel Rosa Mendes",
-      "sexo": "M",
-      "avatar": "/static/darkplanner_pessoas/homem_05_rodrigo.jpg",
-      "telefone": "(45) 99923-4077",
-      "bairro_origem": "Pacaembu"
-    },
-    "pet": {
-      "id": "pet_13",
-      "nome": "Pingo",
-      "categoria": "gato",
-      "tipo_ocorrencia": "desaparecido",
-      "sexo": "Macho",
-      "raca": "Frajola Dócil",
-      "porte": "Pequeno",
-      "recompensa": "R$ 800,00",
-      "foto_url": "/static/darkplanner_pets/gato_03_russian_blue.jpg",
-      "detalhes": "Desapareceu no bairro Pacaembu. Muito dócil, atende pelo nome. Família e crianças desesperadas procurando."
-    },
-    "posicao_mapa": {
-      "fixado": true,
-      "lat": -24.956194,
-      "lng": -53.4234,
-      "rua": "Rua Olindo Periollo",
-      "bairro": "Pacaembú",
-      "referencia": "Visto no bairro Pacaembu",
-      "data_fixacao": "2026-11-24T17:33:32.322Z"
-    },
-    "alerta_id": 5531
-  },
-  {
-    "id": "perfil_14",
-    "tutor": {
-      "nome": "Juliana Prado Nogueira",
-      "sexo": "F",
-      "avatar": "/static/darkplanner_pessoas/mulher_06_ana_paula.jpg",
-      "telefone": "(45) 99929-9100",
-      "bairro_origem": "Floresta"
-    },
-    "pet": {
-      "id": "pet_14",
-      "nome": "Tico",
-      "categoria": "gato",
-      "tipo_ocorrencia": "desaparecido",
-      "sexo": "Macho",
-      "raca": "Azul Russo",
-      "porte": "Pequeno",
-      "recompensa": "Sem Recompensa (Gratidão)",
-      "foto_url": "/static/darkplanner_pets/gato_04_preto_solido.jpg",
-      "detalhes": "Desapareceu no bairro Floresta. Muito dócil, atende pelo nome. Família e crianças desesperadas procurando."
-    },
-    "posicao_mapa": {
-      "fixado": true,
-      "lat": -24.928124,
-      "lng": -53.432286,
-      "rua": "Rua Maracaí",
-      "bairro": "Florais do Paraná",
-      "referencia": "Visto no bairro Floresta",
-      "data_fixacao": "2026-11-24T17:33:47.659Z"
-    },
-    "alerta_id": 5532
-  },
-  {
-    "id": "perfil_15",
-    "tutor": {
-      "nome": "Vitor Hugo Nogueira",
-      "sexo": "M",
-      "avatar": "/static/darkplanner_pessoas/homem_07_diego.jpg",
-      "telefone": "(45) 99965-1042",
-      "bairro_origem": "Morumbi"
-    },
-    "pet": {
-      "id": "pet_15",
-      "nome": "Fred",
-      "categoria": "gato",
-      "tipo_ocorrencia": "adocao",
-      "sexo": "Macho",
-      "raca": "Tricolor Calico",
-      "porte": "Pequeno",
-      "recompensa": "Adoção Responsável Gratuita",
-      "foto_url": "/static/darkplanner_pets/gato_05_tigrado_marrom.jpg",
-      "detalhes": "Resgatados no bairro Morumbi, vermifugados e comendo ração úmida. Para doação responsável e com termo de posse."
-    },
-    "posicao_mapa": {
-      "fixado": true,
-      "lat": -24.965749,
-      "lng": -53.472991,
-      "rua": "Rua Cuiabá, 3657",
-      "bairro": "Vila Tolentino",
-      "referencia": "Visto no bairro Morumbi",
-      "data_fixacao": "2026-11-24T17:34:13.048Z"
-    },
-    "alerta_id": 5533
-  },
-  {
-    "id": "perfil_16",
-    "tutor": {
-      "nome": "Priscila Fantin Borges",
-      "sexo": "F",
-      "avatar": "/static/darkplanner_pessoas/mulher_08_larissa.jpg",
-      "telefone": "(45) 99924-9156",
-      "bairro_origem": "Santo Onofre"
-    },
-    "pet": {
-      "id": "pet_16",
-      "nome": "Luke",
-      "categoria": "gato",
-      "tipo_ocorrencia": "desaparecido",
-      "sexo": "Macho",
-      "raca": "Maine Coon Gigante",
-      "porte": "Pequeno",
-      "recompensa": "R$ 800,00",
-      "foto_url": "/static/darkplanner_pets/gato_06_siamês.jpg",
-      "detalhes": "Desapareceu no bairro Santo Onofre. Muito dócil, atende pelo nome. Família e crianças desesperadas procurando."
-    },
-    "posicao_mapa": {
-      "fixado": true,
-      "lat": -24.940431,
-      "lng": -53.433654,
-      "rua": "Rua Jacarezinho",
-      "bairro": "São Cristóvão",
-      "referencia": "Visto no bairro Santo Onofre",
-      "data_fixacao": "2026-11-24T17:34:29.410Z"
-    },
-    "alerta_id": 5534
-  },
-  {
-    "id": "perfil_17",
-    "tutor": {
-      "nome": "Carlos Eduardo Pires",
-      "sexo": "M",
-      "avatar": "/static/darkplanner_pessoas/homem_01_carlos.jpg",
-      "telefone": "(45) 99946-8075",
-      "bairro_origem": "Alto Alegre"
-    },
-    "pet": {
-      "id": "pet_17",
-      "nome": "Chico",
-      "categoria": "gato",
-      "tipo_ocorrencia": "desaparecido",
-      "sexo": "Macho",
-      "raca": "Gato Laranjinha",
-      "porte": "Pequeno",
-      "recompensa": "Sem Recompensa (Gratidão)",
-      "foto_url": "/static/darkplanner_pets/gato_07_branco_olhos_azuis.jpg",
-      "detalhes": "Desapareceu no bairro Alto Alegre. Muito dócil, atende pelo nome. Família e crianças desesperadas procurando."
-    },
-    "posicao_mapa": {
-      "fixado": true,
-      "lat": -24.961997,
-      "lng": -53.486509,
-      "rua": "Rua Cuiabá",
-      "bairro": "Alto Alegre",
-      "referencia": "Visto no bairro Alto Alegre",
-      "data_fixacao": "2026-11-24T17:34:39.348Z"
-    },
-    "alerta_id": 5535
-  },
-  {
-    "id": "perfil_18",
-    "tutor": {
-      "nome": "Sabrina Sato Toledo",
-      "sexo": "F",
-      "avatar": "/static/darkplanner_pessoas/mulher_02_camila.jpg",
-      "telefone": "(45) 99962-5814",
-      "bairro_origem": "Recanto Tropical"
-    },
-    "pet": {
-      "id": "pet_18",
-      "nome": "Spike",
-      "categoria": "gato",
-      "tipo_ocorrencia": "desaparecido",
-      "sexo": "Macho",
-      "raca": "Angorá Branco",
-      "porte": "Pequeno",
-      "recompensa": "R$ 1.000,00",
-      "foto_url": "/static/darkplanner_pets/gato_08_bengal_onca.jpg",
-      "detalhes": "Desapareceu no bairro Recanto Tropical. Muito dócil, atende pelo nome. Família e crianças desesperadas procurando."
-    },
-    "posicao_mapa": {
-      "fixado": true,
-      "lat": -24.976177,
-      "lng": -53.462949,
-      "rua": "Rua Souza Naves Sul",
-      "bairro": "Parque São Paulo",
-      "referencia": "Visto no bairro Recanto Tropical",
-      "data_fixacao": "2026-11-24T17:34:57.942Z"
-    },
-    "alerta_id": 5536
-  },
-  {
-    "id": "perfil_19",
-    "tutor": {
-      "nome": "Renato Fagundes Mendes",
-      "sexo": "M",
-      "avatar": "/static/darkplanner_pessoas/homem_03_roberto.jpg",
-      "telefone": "(45) 99929-8206",
-      "bairro_origem": "Ciro Nardi"
-    },
-    "pet": {
-      "id": "pet_19",
-      "nome": "Theo",
-      "categoria": "gato",
-      "tipo_ocorrencia": "desaparecido",
-      "sexo": "Macho",
-      "raca": "Gato Preto Sólido",
-      "porte": "Pequeno",
-      "recompensa": "R$ 200,00",
-      "foto_url": "/static/darkplanner_pets/gato_09_maine_coon.jpg",
-      "detalhes": "Desapareceu no bairro Ciro Nardi. Muito dócil, atende pelo nome. Família e crianças desesperadas procurando."
-    },
-    "posicao_mapa": {
-      "fixado": true,
-      "lat": -24.970848,
-      "lng": -53.441083,
-      "rua": "Rua Cuiabá",
-      "bairro": "Maria Luiza",
-      "referencia": "Visto no bairro Ciro Nardi",
-      "data_fixacao": "2026-11-24T17:35:14.255Z"
-    },
-    "alerta_id": 5537
-  },
-  {
-    "id": "perfil_20",
-    "tutor": {
-      "nome": "Juliana Prado Alves",
-      "sexo": "F",
-      "avatar": "/static/darkplanner_pessoas/mulher_04_beatriz.jpg",
-      "telefone": "(45) 99957-9800",
-      "bairro_origem": "Pioneiros Catarinenses"
-    },
-    "pet": {
-      "id": "pet_20",
-      "nome": "Totó",
-      "categoria": "gato",
-      "tipo_ocorrencia": "desaparecido",
-      "sexo": "Macho",
-      "raca": "Bengal Oncinha",
-      "porte": "Pequeno",
-      "recompensa": "R$ 200,00",
-      "foto_url": "/static/darkplanner_pets/gato_10_amarelo_claro.jpg",
-      "detalhes": "Desapareceu no bairro Pioneiros Catarinenses. Muito dócil, atende pelo nome. Família e crianças desesperadas procurando."
-    },
-    "posicao_mapa": {
-      "fixado": true,
-      "lat": -24.969078,
-      "lng": -53.506379,
-      "rua": "Avenida Tito Muffato",
-      "bairro": "Esmeralda",
-      "referencia": "Visto no bairro Pioneiros Catarinenses",
-      "data_fixacao": "2026-11-24T17:35:28.025Z"
-    },
-    "alerta_id": 5538
-  },
-  {
-    "id": "perfil_21",
-    "tutor": {
-      "nome": "Mauricio Dias Becker",
-      "sexo": "M",
-      "avatar": "/static/darkplanner_pessoas/homem_05_rodrigo.jpg",
-      "telefone": "(45) 99939-4529",
-      "bairro_origem": "Guarujá"
-    },
-    "pet": {
-      "id": "pet_21",
-      "nome": "Mel",
-      "categoria": "cachorra",
-      "tipo_ocorrencia": "desaparecido",
-      "sexo": "Fêmea",
-      "raca": "Vira-lata Caramelo",
-      "porte": "Pequeno",
-      "recompensa": "R$ 800,00",
-      "foto_url": "/static/darkplanner_pets/cachorra_01_shih_tzu.jpg",
-      "detalhes": "Desapareceu no bairro Guarujá. Muito dócil, atende pelo nome. Família e crianças desesperadas procurando."
-    },
-    "posicao_mapa": {
-      "fixado": true,
-      "lat": -24.949119,
-      "lng": -53.489943,
-      "rua": "Rua Presidente Kennedy",
-      "bairro": "Coqueiral",
-      "referencia": "Visto no bairro Guarujá",
-      "data_fixacao": "2026-11-24T17:35:42.108Z"
-    },
-    "alerta_id": 5539
-  },
-  {
-    "id": "perfil_22",
-    "tutor": {
-      "nome": "Camila Rocha Peixoto",
-      "sexo": "F",
-      "avatar": "/static/darkplanner_pessoas/mulher_06_ana_paula.jpg",
-      "telefone": "(45) 99924-1686",
-      "bairro_origem": "14 de Novembro"
-    },
-    "pet": {
-      "id": "pet_22",
-      "nome": "Pipoca",
-      "categoria": "cachorra",
-      "tipo_ocorrencia": "desaparecido",
-      "sexo": "Fêmea",
-      "raca": "Pastor Alemão",
-      "porte": "Médio",
-      "recompensa": "R$ 300,00",
-      "foto_url": "/static/darkplanner_pets/cachorra_02_caramelo.jpg",
-      "detalhes": "Desapareceu no bairro 14 de Novembro. Muito dócil, atende pelo nome. Família e crianças desesperadas procurando."
-    },
-    "posicao_mapa": {
-      "fixado": true,
-      "lat": -24.975185,
-      "lng": -53.487175,
-      "rua": "Rua do Cowboy",
-      "bairro": "Pioneiros Catarinenses",
-      "referencia": "Visto no bairro 14 de Novembro",
-      "data_fixacao": "2026-11-24T17:35:57.150Z"
-    },
-    "alerta_id": 5540
-  },
-  {
-    "id": "perfil_23",
-    "tutor": {
-      "nome": "Eduardo Bittencourt Esteves",
-      "sexo": "M",
-      "avatar": "/static/darkplanner_pessoas/homem_07_diego.jpg",
-      "telefone": "(45) 99949-6190",
-      "bairro_origem": "Santa Felicidade"
-    },
-    "pet": {
-      "id": "pet_23",
-      "nome": "Mia",
-      "categoria": "cachorra",
-      "tipo_ocorrencia": "desaparecido",
-      "sexo": "Fêmea",
-      "raca": "Shih Tzu",
-      "porte": "Pequeno",
-      "recompensa": "R$ 300,00",
-      "foto_url": "/static/darkplanner_pets/cachorra_03_golden_retriever.jpg",
-      "detalhes": "Desapareceu no bairro Santa Felicidade. Muito dócil, atende pelo nome. Família e crianças desesperadas procurando."
-    },
-    "posicao_mapa": {
-      "fixado": true,
-      "lat": -24.952542,
-      "lng": -53.508289,
-      "rua": "Avenida Brasil",
-      "bairro": "FAG",
-      "referencia": "Visto no bairro Santa Felicidade",
-      "data_fixacao": "2026-11-24T17:36:10.376Z"
-    },
-    "alerta_id": 5541
-  },
-  {
-    "id": "perfil_24",
-    "tutor": {
-      "nome": "Cláudia Raia Lima",
-      "sexo": "F",
-      "avatar": "/static/darkplanner_pessoas/mulher_08_larissa.jpg",
-      "telefone": "(45) 99931-9193",
-      "bairro_origem": "Interlagos"
-    },
-    "pet": {
-      "id": "pet_24",
-      "nome": "Pandora",
-      "categoria": "cachorra",
-      "tipo_ocorrencia": "desaparecido",
-      "sexo": "Fêmea",
-      "raca": "Poodle Toy",
-      "porte": "Pequeno",
-      "recompensa": "R$ 500,00",
-      "foto_url": "/static/darkplanner_pets/cachorra_04_poodle.jpg",
-      "detalhes": "Desapareceu no bairro Interlagos. Muito dócil, atende pelo nome. Família e crianças desesperadas procurando."
-    },
-    "posicao_mapa": {
-      "fixado": true,
-      "lat": -24.928901,
-      "lng": -53.474922,
-      "rua": "Rua Jorge Lacerda",
-      "bairro": "Claudete",
-      "referencia": "Visto no bairro Interlagos",
-      "data_fixacao": "2026-11-24T17:36:25.329Z"
-    },
-    "alerta_id": 5542
-  },
-  {
-    "id": "perfil_25",
-    "tutor": {
-      "nome": "Gabriel Ramos Pires",
-      "sexo": "M",
-      "avatar": "/static/darkplanner_pessoas/homem_01_carlos.jpg",
-      "telefone": "(45) 99982-2076",
-      "bairro_origem": "Jardim Mantovani"
-    },
-    "pet": {
-      "id": "pet_25",
-      "nome": "Frida",
-      "categoria": "cachorra",
-      "tipo_ocorrencia": "adocao",
-      "sexo": "Fêmea",
-      "raca": "Golden Retriever",
-      "porte": "Médio",
-      "recompensa": "Adoção Responsável Gratuita",
-      "foto_url": "/static/darkplanner_pets/cachorra_05_pinscher.jpg",
-      "detalhes": "Resgatados no bairro Jardim Mantovani, vermifugados e comendo ração úmida. Para doação responsável e com termo de posse."
-    },
-    "posicao_mapa": {
-      "fixado": true,
-      "lat": -24.947639,
-      "lng": -53.474793,
-      "rua": "Rua Nereu Ramos",
-      "bairro": "Claudete",
-      "referencia": "Visto no bairro Jardim Mantovani",
-      "data_fixacao": "2026-11-24T17:36:39.332Z"
-    },
-    "alerta_id": 5543
-  },
-  {
-    "id": "perfil_26",
-    "tutor": {
-      "nome": "Larissa Peixoto Souza",
-      "sexo": "F",
-      "avatar": "/static/darkplanner_pessoas/mulher_02_camila.jpg",
-      "telefone": "(45) 99953-7549",
-      "bairro_origem": "Centro"
-    },
-    "pet": {
-      "id": "pet_26",
-      "nome": "Jade",
-      "categoria": "cachorra",
-      "tipo_ocorrencia": "desaparecido",
-      "sexo": "Fêmea",
-      "raca": "Labrador Amarelo",
-      "porte": "Médio",
-      "recompensa": "R$ 1.000,00",
-      "foto_url": "/static/darkplanner_pets/cachorra_06_yorkshire.jpg",
-      "detalhes": "Desapareceu no bairro Centro. Muito dócil, atende pelo nome. Família e crianças desesperadas procurando."
-    },
-    "posicao_mapa": {
-      "fixado": true,
-      "lat": -24.96009,
-      "lng": -53.507452,
-      "rua": "Avenida Tito Muffato",
-      "bairro": "Esmeralda",
-      "referencia": "Visto no bairro Centro",
-      "data_fixacao": "2026-11-24T17:37:13.724Z"
-    },
-    "alerta_id": 5544
-  },
-  {
-    "id": "perfil_27",
-    "tutor": {
-      "nome": "Julio Cesar Peixoto",
-      "sexo": "M",
-      "avatar": "/static/darkplanner_pessoas/homem_03_roberto.jpg",
-      "telefone": "(45) 99919-8731",
-      "bairro_origem": "Coqueiral"
-    },
-    "pet": {
-      "id": "pet_27",
-      "nome": "Flor",
-      "categoria": "cachorra",
-      "tipo_ocorrencia": "desaparecido",
-      "sexo": "Fêmea",
-      "raca": "Beagle",
-      "porte": "Pequeno",
-      "recompensa": "Sem Recompensa (Gratidão)",
-      "foto_url": "/static/darkplanner_pets/cachorra_07_beagle.jpg",
-      "detalhes": "Desapareceu no bairro Coqueiral. Muito dócil, atende pelo nome. Família e crianças desesperadas procurando."
-    },
-    "posicao_mapa": {
-      "fixado": true,
-      "lat": -24.941812,
-      "lng": -53.45517,
-      "rua": "Rua Di Cavalcante, 1524",
-      "bairro": "Country",
-      "referencia": "Visto no bairro Coqueiral",
-      "data_fixacao": "2026-11-24T17:37:24.912Z"
-    },
-    "alerta_id": 5545
-  },
-  {
-    "id": "perfil_28",
-    "tutor": {
-      "nome": "Mariana Souza Silveira",
-      "sexo": "F",
-      "avatar": "/static/darkplanner_pessoas/mulher_04_beatriz.jpg",
-      "telefone": "(45) 99932-8391",
-      "bairro_origem": "Neva"
-    },
-    "pet": {
-      "id": "pet_28",
-      "nome": "Luna",
-      "categoria": "cachorra",
-      "tipo_ocorrencia": "desaparecido",
-      "sexo": "Fêmea",
-      "raca": "Pinscher Mini",
-      "porte": "Pequeno",
-      "recompensa": "R$ 800,00",
-      "foto_url": "/static/darkplanner_pets/cachorra_08_spitz_alemao.jpg",
-      "detalhes": "Desapareceu no bairro Neva. Muito dócil, atende pelo nome. Família e crianças desesperadas procurando."
-    },
-    "posicao_mapa": {
-      "fixado": true,
-      "lat": -24.962172,
-      "lng": -53.464687,
-      "rua": "Rua Curitiba",
-      "bairro": "Vila Tolentino",
-      "referencia": "Visto no bairro Neva",
-      "data_fixacao": "2026-11-24T17:37:37.995Z"
-    },
-    "alerta_id": 5546
-  },
-  {
-    "id": "perfil_29",
-    "tutor": {
-      "nome": "Samuel Rosa Bittencourt",
-      "sexo": "M",
-      "avatar": "/static/darkplanner_pessoas/homem_05_rodrigo.jpg",
-      "telefone": "(45) 99990-2521",
-      "bairro_origem": "Cancelli"
-    },
-    "pet": {
-      "id": "pet_29",
-      "nome": "Belinha",
-      "categoria": "cachorra",
-      "tipo_ocorrencia": "desaparecido",
-      "sexo": "Fêmea",
-      "raca": "Buldogue Francês",
-      "porte": "Pequeno",
-      "recompensa": "R$ 1.000,00",
-      "foto_url": "/static/darkplanner_pets/cachorra_09_dachshund.jpg",
-      "detalhes": "Desapareceu no bairro Cancelli. Muito dócil, atende pelo nome. Família e crianças desesperadas procurando."
-    },
-    "posicao_mapa": {
-      "fixado": true,
-      "lat": -24.950888,
-      "lng": -53.459151,
-      "rua": "Rua Presidente Kennedy",
-      "bairro": "Coqueiral",
-      "referencia": "Visto no bairro Cancelli",
-      "data_fixacao": "2026-11-24T17:37:51.613Z"
-    },
-    "alerta_id": 5547
-  },
-  {
-    "id": "perfil_30",
-    "tutor": {
-      "nome": "Natália do Vale Becker",
-      "sexo": "F",
-      "avatar": "/static/darkplanner_pessoas/mulher_06_ana_paula.jpg",
-      "telefone": "(45) 99965-2020",
-      "bairro_origem": "Parque São Paulo"
-    },
-    "pet": {
-      "id": "pet_30",
-      "nome": "Meg",
-      "categoria": "cachorra",
-      "tipo_ocorrencia": "desaparecido",
-      "sexo": "Fêmea",
-      "raca": "Border Collie",
-      "porte": "Grande",
-      "recompensa": "R$ 200,00",
-      "foto_url": "/static/darkplanner_pets/cachorra_10_labradora_chocolate.jpg",
-      "detalhes": "Desapareceu no bairro Parque São Paulo. Muito dócil, atende pelo nome. Família e crianças desesperadas procurando."
-    },
-    "posicao_mapa": {
-      "fixado": true,
-      "lat": -24.977208,
-      "lng": -53.452671,
-      "rua": "Rua Alexandre de Gusmão",
-      "bairro": "Maria Luiza",
-      "referencia": "Visto no bairro Parque São Paulo",
-      "data_fixacao": "2026-11-24T17:38:09.222Z"
-    },
-    "alerta_id": 5548
-  },
-  {
-    "id": "perfil_31",
-    "tutor": {
-      "nome": "Bruno Carvalho Borges",
-      "sexo": "M",
-      "avatar": "/static/darkplanner_pessoas/homem_07_diego.jpg",
-      "telefone": "(45) 99961-5115",
-      "bairro_origem": "Santa Cruz"
-    },
-    "pet": {
-      "id": "pet_31",
-      "nome": "Marley",
-      "categoria": "cachorro",
-      "tipo_ocorrencia": "desaparecido",
-      "sexo": "Macho",
-      "raca": "Vira-lata Caramelo",
-      "porte": "Pequeno",
-      "recompensa": "R$ 200,00",
+      "nome": "Paçoca",
+      "especie": "cao",
+      "raca": "Cão Vira-lata",
+      "tipo_ocorrencia": "resgatado",
+      "status": "resgatado",
       "foto_url": "/static/darkplanner_pets/cachorro_01_caramelo_macho.jpg",
-      "detalhes": "Desapareceu no bairro Santa Cruz. Muito dócil, atende pelo nome. Família e crianças desesperadas procurando."
+      "descricao": "Cão dócil resgatado na Av. Brasil com ferimentos na pata. Tratado, castrado e saudável.",
+      "sexo": "Macho"
     },
     "posicao_mapa": {
+      "lat": -24.953,
+      "lng": -53.468,
       "fixado": true,
-      "lat": -24.949745,
-      "lng": -53.427724,
-      "rua": "Avenida Brasil",
-      "bairro": "Vila Militar",
-      "referencia": "Visto no bairro Santa Cruz",
-      "data_fixacao": "2026-11-24T17:38:26.782Z"
-    },
-    "alerta_id": 5549
+      "bairro": "Alto Alegre",
+      "rua": "Região do Alto Alegre"
+    }
   },
   {
-    "id": "perfil_32",
+    "id": "pet_5708",
     "tutor": {
-      "nome": "Fernanda Lima Fagundes",
-      "sexo": "F",
-      "avatar": "/static/darkplanner_pessoas/mulher_08_larissa.jpg",
-      "telefone": "(45) 99968-8401",
-      "bairro_origem": "Claudete"
+      "nome": "Mariana Souza",
+      "telefone": "45998011111",
+      "bairro_origem": "Alto Alegre",
+      "avatar": "/static/darkplanner_pessoas/mulher_01_mariana.jpg",
+      "categoria": "protetor",
+      "ong_nome": "Coletivo Patinhas do Oeste"
     },
     "pet": {
-      "id": "pet_32",
-      "nome": "Buddy",
-      "categoria": "cachorro",
-      "tipo_ocorrencia": "desaparecido",
-      "sexo": "Macho",
-      "raca": "Pastor Alemão",
-      "porte": "Médio",
-      "recompensa": "R$ 500,00",
-      "foto_url": "/static/darkplanner_pets/cachorro_02_pastor_alemao.jpg",
-      "detalhes": "Desapareceu no bairro Claudete. Muito dócil, atende pelo nome. Família e crianças desesperadas procurando."
+      "nome": "Oliver",
+      "especie": "gato",
+      "raca": "Gato Frajola",
+      "tipo_ocorrencia": "resgatado",
+      "status": "resgatado",
+      "foto_url": "/static/darkplanner_pets/gato_01_frajola.jpg",
+      "descricao": "Gatinho resgatado desnutrido em terreno baldio. Totalmente recuperado, vacinado e dócil.",
+      "sexo": "Macho"
     },
     "posicao_mapa": {
+      "lat": -24.9545,
+      "lng": -53.466,
       "fixado": true,
-      "lat": -24.941121,
-      "lng": -53.421879,
-      "rua": "Rua Europa",
-      "bairro": "Brasília",
-      "referencia": "Visto no bairro Claudete",
-      "data_fixacao": "2026-11-24T17:38:49.556Z"
-    },
-    "alerta_id": 5550
+      "bairro": "Alto Alegre",
+      "rua": "Região do Alto Alegre"
+    }
   },
   {
-    "id": "perfil_33",
+    "id": "pet_5709",
     "tutor": {
-      "nome": "Fabio Assunção Nogueira",
-      "sexo": "M",
-      "avatar": "/static/darkplanner_pessoas/homem_01_carlos.jpg",
-      "telefone": "(45) 99919-5959",
-      "bairro_origem": "Cascavel Velho"
+      "nome": "Lucas Silva",
+      "telefone": "45998022222",
+      "bairro_origem": "Santa Cruz",
+      "avatar": "/static/darkplanner_pessoas/homem_02_lucas.jpg",
+      "categoria": "protetor",
+      "ong_nome": "Coletivo Patinhas do Oeste"
     },
     "pet": {
-      "id": "pet_33",
-      "nome": "Pingo",
-      "categoria": "cachorro",
-      "tipo_ocorrencia": "desaparecido",
-      "sexo": "Macho",
-      "raca": "Shih Tzu",
-      "porte": "Pequeno",
-      "recompensa": "R$ 500,00",
-      "foto_url": "/static/darkplanner_pets/cachorro_03_buldogue_frances.jpg",
-      "detalhes": "Desapareceu no bairro Cascavel Velho. Muito dócil, atende pelo nome. Família e crianças desesperadas procurando."
-    },
-    "posicao_mapa": {
-      "fixado": true,
-      "lat": -24.974349,
-      "lng": -53.433123,
-      "rua": "Rua Pedro Baú",
-      "bairro": "Cascavel Velho",
-      "referencia": "Visto no bairro Cascavel Velho",
-      "data_fixacao": "2026-11-24T17:39:00.744Z"
-    },
-    "alerta_id": 5551
-  },
-  {
-    "id": "perfil_34",
-    "tutor": {
-      "nome": "Renata Vasconcellos Zanetti",
-      "sexo": "F",
-      "avatar": "/static/darkplanner_pessoas/mulher_02_camila.jpg",
-      "telefone": "(45) 99930-4809",
-      "bairro_origem": "Canadá"
-    },
-    "pet": {
-      "id": "pet_34",
-      "nome": "Tico",
-      "categoria": "cachorro",
-      "tipo_ocorrencia": "desaparecido",
-      "sexo": "Macho",
-      "raca": "Poodle Toy",
-      "porte": "Pequeno",
-      "recompensa": "Sem Recompensa (Gratidão)",
+      "nome": "Marley",
+      "especie": "cao",
+      "raca": "Mestiço de Labrador",
+      "tipo_ocorrencia": "resgatado",
+      "status": "resgatado",
       "foto_url": "/static/darkplanner_pets/cachorro_04_border_collie.jpg",
-      "detalhes": "Desapareceu no bairro Canadá. Muito dócil, atende pelo nome. Família e crianças desesperadas procurando."
+      "descricao": "Resgatado em situação de abandono no Santa Cruz. Adora crianças e passear.",
+      "sexo": "Macho"
     },
     "posicao_mapa": {
+      "lat": -24.972,
+      "lng": -53.49,
       "fixado": true,
-      "lat": -24.941219,
-      "lng": -53.409938,
-      "rua": "Rua Europa",
-      "bairro": "Periolo",
-      "referencia": "Visto no bairro Canadá",
-      "data_fixacao": "2026-11-24T17:39:16.770Z"
-    },
-    "alerta_id": 5552
-  },
-  {
-    "id": "perfil_35",
-    "tutor": {
-      "nome": "Rogério Ceni Dantas",
-      "sexo": "M",
-      "avatar": "/static/darkplanner_pessoas/homem_03_roberto.jpg",
-      "telefone": "(45) 99996-5159",
-      "bairro_origem": "Country"
-    },
-    "pet": {
-      "id": "pet_35",
-      "nome": "Fred",
-      "categoria": "cachorro",
-      "tipo_ocorrencia": "adocao",
-      "sexo": "Macho",
-      "raca": "Golden Retriever",
-      "porte": "Médio",
-      "recompensa": "Adoção Responsável Gratuita",
-      "foto_url": "/static/darkplanner_pets/cachorro_05_rottweiler_jovem.jpg",
-      "detalhes": "Resgatados no bairro Country, vermifugados e comendo ração úmida. Para doação responsável e com termo de posse."
-    },
-    "posicao_mapa": {
-      "fixado": true,
-      "lat": -24.930576,
-      "lng": -53.46252,
-      "rua": "Rua Marechal Cândido Rondon",
-      "bairro": "Canadá",
-      "referencia": "Visto no bairro Country",
-      "data_fixacao": "2026-11-24T17:39:28.893Z"
-    },
-    "alerta_id": 5553
-  },
-  {
-    "id": "perfil_36",
-    "tutor": {
-      "nome": "Letícia Spiller Bittencourt",
-      "sexo": "F",
-      "avatar": "/static/darkplanner_pessoas/mulher_04_beatriz.jpg",
-      "telefone": "(45) 99987-6821",
-      "bairro_origem": "Maria Luíza"
-    },
-    "pet": {
-      "id": "pet_36",
-      "nome": "Luke",
-      "categoria": "cachorro",
-      "tipo_ocorrencia": "desaparecido",
-      "sexo": "Macho",
-      "raca": "Labrador Amarelo",
-      "porte": "Médio",
-      "recompensa": "R$ 300,00",
-      "foto_url": "/static/darkplanner_pets/cachorro_06_pug.jpg",
-      "detalhes": "Desapareceu no bairro Maria Luíza. Muito dócil, atende pelo nome. Família e crianças desesperadas procurando."
-    },
-    "posicao_mapa": {
-      "fixado": true,
-      "lat": -24.917499,
-      "lng": -53.433208,
-      "rua": "Rua Leonardo da Vinci",
-      "bairro": "Barcelona",
-      "referencia": "Visto no bairro Maria Luíza",
-      "data_fixacao": "2026-11-24T17:39:51.469Z"
-    },
-    "alerta_id": 5554
-  },
-  {
-    "id": "perfil_37",
-    "tutor": {
-      "nome": "Felipe Andrade Guimarães",
-      "sexo": "M",
-      "avatar": "/static/darkplanner_pessoas/homem_05_rodrigo.jpg",
-      "telefone": "(45) 99939-3486",
-      "bairro_origem": "Brasmadeira"
-    },
-    "pet": {
-      "id": "pet_37",
-      "nome": "Chico",
-      "categoria": "cachorro",
-      "tipo_ocorrencia": "desaparecido",
-      "sexo": "Macho",
-      "raca": "Beagle",
-      "porte": "Pequeno",
-      "recompensa": "R$ 300,00",
-      "foto_url": "/static/darkplanner_pets/cachorro_07_husky_siberiano.jpg",
-      "detalhes": "Desapareceu no bairro Brasmadeira. Muito dócil, atende pelo nome. Família e crianças desesperadas procurando."
-    },
-    "posicao_mapa": {
-      "fixado": true,
-      "lat": -24.927971,
-      "lng": -53.450167,
-      "rua": "PR-486",
-      "bairro": "Canadá",
-      "referencia": "Visto no bairro Brasmadeira",
-      "data_fixacao": "2026-11-24T17:40:30.451Z"
-    },
-    "alerta_id": 5555
-  },
-  {
-    "id": "perfil_38",
-    "tutor": {
-      "nome": "Paloma Bernardi Souza",
-      "sexo": "F",
-      "avatar": "/static/darkplanner_pessoas/mulher_06_ana_paula.jpg",
-      "telefone": "(45) 99928-9392",
-      "bairro_origem": "Pacaembu"
-    },
-    "pet": {
-      "id": "pet_38",
-      "nome": "Spike",
-      "categoria": "cachorro",
-      "tipo_ocorrencia": "desaparecido",
-      "sexo": "Macho",
-      "raca": "Pinscher Mini",
-      "porte": "Pequeno",
-      "recompensa": "R$ 200,00",
-      "foto_url": "/static/darkplanner_pets/cachorro_08_schnauzer.jpg",
-      "detalhes": "Desapareceu no bairro Pacaembu. Muito dócil, atende pelo nome. Família e crianças desesperadas procurando."
-    },
-    "posicao_mapa": {
-      "fixado": true,
-      "lat": -24.949702,
-      "lng": -53.437543,
-      "rua": "Rua Machado de Assis",
-      "bairro": "Vila Militar",
-      "referencia": "Visto no bairro Pacaembu",
-      "data_fixacao": "2026-11-24T17:40:49.772Z"
-    },
-    "alerta_id": 5556
-  },
-  {
-    "id": "perfil_39",
-    "tutor": {
-      "nome": "Felipe Andrade Esteves",
-      "sexo": "M",
-      "avatar": "/static/darkplanner_pessoas/homem_07_diego.jpg",
-      "telefone": "(45) 99990-3012",
-      "bairro_origem": "Floresta"
-    },
-    "pet": {
-      "id": "pet_39",
-      "nome": "Theo",
-      "categoria": "cachorro",
-      "tipo_ocorrencia": "desaparecido",
-      "sexo": "Macho",
-      "raca": "Buldogue Francês",
-      "porte": "Pequeno",
-      "recompensa": "R$ 500,00",
-      "foto_url": "/static/darkplanner_pets/cachorro_09_pitbull_docil.jpg",
-      "detalhes": "Desapareceu no bairro Floresta. Muito dócil, atende pelo nome. Família e crianças desesperadas procurando."
-    },
-    "posicao_mapa": {
-      "fixado": true,
-      "lat": -24.904187,
-      "lng": -53.437757,
-      "rua": "Avenida Piquiri",
-      "bairro": "Barcelona",
-      "referencia": "Visto no bairro Floresta",
-      "data_fixacao": "2026-11-24T17:41:10.706Z"
-    },
-    "alerta_id": 5557
-  },
-  {
-    "id": "perfil_40",
-    "tutor": {
-      "nome": "Monique Alfradique Zanetti",
-      "sexo": "F",
-      "avatar": "/static/darkplanner_pessoas/mulher_08_larissa.jpg",
-      "telefone": "(45) 99965-8910",
-      "bairro_origem": "Morumbi"
-    },
-    "pet": {
-      "id": "pet_40",
-      "nome": "Totó",
-      "categoria": "cachorro",
-      "tipo_ocorrencia": "desaparecido",
-      "sexo": "Macho",
-      "raca": "Border Collie",
-      "porte": "Grande",
-      "recompensa": "R$ 200,00",
-      "foto_url": "/static/darkplanner_pets/cachorro_10_boxer.jpg",
-      "detalhes": "Desapareceu no bairro Morumbi. Muito dócil, atende pelo nome. Família e crianças desesperadas procurando."
-    },
-    "posicao_mapa": {
-      "fixado": true,
-      "lat": -24.919991,
-      "lng": -53.458228,
-      "rua": "PR-486",
-      "bairro": "Brasmadeira",
-      "referencia": "Visto no bairro Morumbi",
-      "data_fixacao": "2026-11-24T17:41:24.836Z"
-    },
-    "alerta_id": 5558
-  },
-  {
-    "id": "perfil_41",
-    "tutor": {
-      "nome": "Gabriel Ramos Toledo",
-      "sexo": "M",
-      "avatar": "/static/darkplanner_pessoas/homem_01_carlos.jpg",
-      "telefone": "(45) 99970-4646",
-      "bairro_origem": "Santo Onofre"
-    },
-    "pet": {
-      "id": "pet_41",
-      "nome": "Ninhada 1 Filhotes Gatinhos",
-      "categoria": "ninhada_gatos",
-      "tipo_ocorrencia": "adocao",
-      "sexo": "Machos e Fêmeas",
-      "raca": "Siamês Legítimo",
-      "porte": "Pequeno",
-      "recompensa": "Adoção Responsável Gratuita",
-      "foto_url": "/static/darkplanner_pets/ninhada_gatos_01_cesto.jpg",
-      "detalhes": "Resgatados no bairro Santo Onofre, vermifugados e comendo ração úmida. Para doação responsável e com termo de posse."
-    },
-    "posicao_mapa": {
-      "fixado": true,
-      "lat": -24.935401,
-      "lng": -53.492475,
-      "rua": "Avenida das Torres",
-      "bairro": "Parque Verde",
-      "referencia": "Visto no bairro Santo Onofre",
-      "data_fixacao": "2026-11-24T17:41:33.912Z"
-    },
-    "alerta_id": 5559
-  },
-  {
-    "id": "perfil_42",
-    "tutor": {
-      "nome": "Emanuelle Araújo Zanetti",
-      "sexo": "F",
-      "avatar": "/static/darkplanner_pessoas/mulher_02_camila.jpg",
-      "telefone": "(45) 99994-5268",
-      "bairro_origem": "Alto Alegre"
-    },
-    "pet": {
-      "id": "pet_42",
-      "nome": "Ninhada 2 Filhotes Gatinhos",
-      "categoria": "ninhada_gatos",
-      "tipo_ocorrencia": "adocao",
-      "sexo": "Machos e Fêmeas",
-      "raca": "Persa Fofo",
-      "porte": "Pequeno",
-      "recompensa": "Adoção Responsável Gratuita",
-      "foto_url": "/static/darkplanner_pets/ninhada_gatos_02_manta_azul.jpg",
-      "detalhes": "Resgatados no bairro Alto Alegre, vermifugados e comendo ração úmida. Para doação responsável e com termo de posse."
-    },
-    "posicao_mapa": {
-      "fixado": true,
-      "lat": -24.960547,
-      "lng": -53.498805,
-      "rua": "Rua Tupiniquins",
       "bairro": "Santa Cruz",
-      "referencia": "Visto no bairro Alto Alegre",
-      "data_fixacao": "2026-11-24T17:41:49.828Z"
-    },
-    "alerta_id": 5560
+      "rua": "Região do Santa Cruz"
+    }
   },
   {
-    "id": "perfil_43",
+    "id": "pet_5710",
     "tutor": {
-      "nome": "Fernando Guimarães Alves",
-      "sexo": "M",
-      "avatar": "/static/darkplanner_pessoas/homem_03_roberto.jpg",
-      "telefone": "(45) 99940-4366",
-      "bairro_origem": "Recanto Tropical"
+      "nome": "Lucas Silva",
+      "telefone": "45998022222",
+      "bairro_origem": "Santa Cruz",
+      "avatar": "/static/darkplanner_pessoas/homem_02_lucas.jpg",
+      "categoria": "protetor",
+      "ong_nome": "Coletivo Patinhas do Oeste"
     },
     "pet": {
-      "id": "pet_43",
-      "nome": "Ninhada 3 Filhotes Gatinhos",
-      "categoria": "ninhada_gatos",
-      "tipo_ocorrencia": "adocao",
-      "sexo": "Machos e Fêmeas",
-      "raca": "Frajola Dócil",
-      "porte": "Pequeno",
-      "recompensa": "Adoção Responsável Gratuita",
-      "foto_url": "/static/darkplanner_pets/ninhada_gatos_03_gramado.jpg",
-      "detalhes": "Resgatados no bairro Recanto Tropical, vermifugados e comendo ração úmida. Para doação responsável e com termo de posse."
+      "nome": "Luna",
+      "especie": "gato",
+      "raca": "Gatinha Branca",
+      "tipo_ocorrencia": "resgatado",
+      "status": "resgatado",
+      "foto_url": "/static/darkplanner_pets/gata_02_branca.jpg",
+      "descricao": "Resgatada após atropelamento. Passou por cirurgia e está 100% pronta para um lar definitivo.",
+      "sexo": "Fêmea"
     },
     "posicao_mapa": {
+      "lat": -24.97,
+      "lng": -53.488,
       "fixado": true,
-      "lat": -24.972326,
-      "lng": -53.478742,
-      "rua": "Rua Frei Henrique de Coimbra",
-      "bairro": "Pioneiros Catarinenses",
-      "referencia": "Visto no bairro Recanto Tropical",
-      "data_fixacao": "2026-11-24T17:42:10.881Z"
-    },
-    "alerta_id": 5561
-  },
-  {
-    "id": "perfil_44",
-    "tutor": {
-      "nome": "Aline Riscado Mendes",
-      "sexo": "F",
-      "avatar": "/static/darkplanner_pessoas/mulher_04_beatriz.jpg",
-      "telefone": "(45) 99923-6474",
-      "bairro_origem": "Ciro Nardi"
-    },
-    "pet": {
-      "id": "pet_44",
-      "nome": "Ninhada 4 Filhotes Gatinhos",
-      "categoria": "ninhada_gatos",
-      "tipo_ocorrencia": "adocao",
-      "sexo": "Machos e Fêmeas",
-      "raca": "Azul Russo",
-      "porte": "Pequeno",
-      "recompensa": "Adoção Responsável Gratuita",
-      "foto_url": "/static/darkplanner_pets/ninhada_gatos_04_caixa.jpg",
-      "detalhes": "Resgatados no bairro Ciro Nardi, vermifugados e comendo ração úmida. Para doação responsável e com termo de posse."
-    },
-    "posicao_mapa": {
-      "fixado": true,
-      "lat": -24.929972,
-      "lng": -53.485372,
-      "rua": "Rua Orlei Mendes de Oliveira",
-      "bairro": "Recanto Tropical",
-      "referencia": "Visto no bairro Ciro Nardi",
-      "data_fixacao": "2026-11-24T17:42:37.734Z"
-    },
-    "alerta_id": 5562
-  },
-  {
-    "id": "perfil_45",
-    "tutor": {
-      "nome": "Luciano Vargas Alves",
-      "sexo": "M",
-      "avatar": "/static/darkplanner_pessoas/homem_05_rodrigo.jpg",
-      "telefone": "(45) 99986-3192",
-      "bairro_origem": "Pioneiros Catarinenses"
-    },
-    "pet": {
-      "id": "pet_45",
-      "nome": "Ninhada 5 Filhotes Gatinhos",
-      "categoria": "ninhada_gatos",
-      "tipo_ocorrencia": "adocao",
-      "sexo": "Machos e Fêmeas",
-      "raca": "Tricolor Calico",
-      "porte": "Pequeno",
-      "recompensa": "Adoção Responsável Gratuita",
-      "foto_url": "/static/darkplanner_pets/ninhada_gatos_05_tapete.jpg",
-      "detalhes": "Resgatados no bairro Pioneiros Catarinenses, vermifugados e comendo ração úmida. Para doação responsável e com termo de posse."
-    },
-    "posicao_mapa": {
-      "fixado": true,
-      "lat": -24.979942,
-      "lng": -53.500752,
-      "rua": "Avenida Tito Muffato",
       "bairro": "Santa Cruz",
-      "referencia": "Visto no bairro Pioneiros Catarinenses",
-      "data_fixacao": "2026-11-24T17:42:55.766Z"
-    },
-    "alerta_id": 5563
+      "rua": "Região do Santa Cruz"
+    }
   },
   {
-    "id": "perfil_46",
+    "id": "pet_5711",
     "tutor": {
-      "nome": "Letícia Colin Andrade",
-      "sexo": "F",
-      "avatar": "/static/darkplanner_pessoas/mulher_06_ana_paula.jpg",
-      "telefone": "(45) 99996-5814",
-      "bairro_origem": "Guarujá"
+      "nome": "Fernanda Lima",
+      "telefone": "45998033333",
+      "bairro_origem": "São Cristóvão",
+      "avatar": "/static/darkplanner_pessoas/mulher_03_fernanda.jpg",
+      "categoria": "protetor",
+      "ong_nome": "Associação Amigos de 4 Patas Cascavel"
     },
     "pet": {
-      "id": "pet_46",
-      "nome": "Ninhada 1 Filhotes Gatinhos",
-      "categoria": "ninhada_gatos",
-      "tipo_ocorrencia": "adocao",
-      "sexo": "Machos e Fêmeas",
-      "raca": "Maine Coon Gigante",
-      "porte": "Pequeno",
-      "recompensa": "Adoção Responsável Gratuita",
-      "foto_url": "/static/darkplanner_pets/ninhada_gatos_06_laranjinhas.jpg",
-      "detalhes": "Resgatados no bairro Guarujá, vermifugados e comendo ração úmida. Para doação responsável e com termo de posse."
+      "nome": "Toddy",
+      "especie": "cao",
+      "raca": "Cão Caramelo Jovem",
+      "tipo_ocorrencia": "resgatado",
+      "status": "resgatado",
+      "foto_url": "/static/darkplanner_pets/cachorra_02_caramelo.jpg",
+      "descricao": "Resgatado filhotão correndo assustado na Rocha Pombo. Vermifugado e com primeira dose de vacina.",
+      "sexo": "Macho"
     },
     "posicao_mapa": {
+      "lat": -24.945,
+      "lng": -53.435,
       "fixado": true,
-      "lat": -24.987787,
-      "lng": -53.493685,
-      "rua": "Avenida Gralha Azul",
-      "bairro": "Guarujá",
-      "referencia": "Visto no bairro Guarujá",
-      "data_fixacao": "2026-11-24T17:43:18.197Z"
-    },
-    "alerta_id": 5564
+      "bairro": "São Cristóvão",
+      "rua": "Região do São Cristóvão"
+    }
   },
   {
-    "id": "perfil_47",
+    "id": "pet_5712",
     "tutor": {
-      "nome": "Fernando Guimarães Ramos",
-      "sexo": "M",
-      "avatar": "/static/darkplanner_pessoas/homem_07_diego.jpg",
-      "telefone": "(45) 99967-8243",
-      "bairro_origem": "14 de Novembro"
+      "nome": "Fernanda Lima",
+      "telefone": "45998033333",
+      "bairro_origem": "São Cristóvão",
+      "avatar": "/static/darkplanner_pessoas/mulher_03_fernanda.jpg",
+      "categoria": "protetor",
+      "ong_nome": "Associação Amigos de 4 Patas Cascavel"
     },
     "pet": {
-      "id": "pet_47",
-      "nome": "Ninhada 2 Filhotes Gatinhos",
-      "categoria": "ninhada_gatos",
-      "tipo_ocorrencia": "adocao",
-      "sexo": "Machos e Fêmeas",
-      "raca": "Gato Laranjinha",
-      "porte": "Pequeno",
-      "recompensa": "Adoção Responsável Gratuita",
-      "foto_url": "/static/darkplanner_pets/ninhada_gatos_07_siameses.jpg",
-      "detalhes": "Resgatados no bairro 14 de Novembro, vermifugados e comendo ração úmida. Para doação responsável e com termo de posse."
+      "nome": "Amora",
+      "especie": "gato",
+      "raca": "Gata Calico",
+      "tipo_ocorrencia": "resgatado",
+      "status": "resgatado",
+      "foto_url": "/static/darkplanner_pets/gata_03_calico_tricolor.jpg",
+      "descricao": "Resgatada com seus filhotes (todos já adotados). Ela é tranquila, carinhosa e castrada.",
+      "sexo": "Fêmea"
     },
     "posicao_mapa": {
+      "lat": -24.9465,
+      "lng": -53.437,
       "fixado": true,
-      "lat": -24.953904,
-      "lng": -53.412888,
-      "rua": "Rodovia José Neves Formighieri",
-      "bairro": "Cataratas",
-      "referencia": "Visto no bairro 14 de Novembro",
-      "data_fixacao": "2026-11-24T17:43:33.383Z"
-    },
-    "alerta_id": 5565
+      "bairro": "São Cristóvão",
+      "rua": "Região do São Cristóvão"
+    }
   },
   {
-    "id": "perfil_48",
+    "id": "pet_5713",
     "tutor": {
-      "nome": "Larissa Peixoto Toledo",
-      "sexo": "F",
-      "avatar": "/static/darkplanner_pessoas/mulher_08_larissa.jpg",
-      "telefone": "(45) 99992-8507",
-      "bairro_origem": "Santa Felicidade"
-    },
-    "pet": {
-      "id": "pet_48",
-      "nome": "Ninhada 3 Filhotes Gatinhos",
-      "categoria": "ninhada_gatos",
-      "tipo_ocorrencia": "adocao",
-      "sexo": "Machos e Fêmeas",
-      "raca": "Angorá Branco",
-      "porte": "Pequeno",
-      "recompensa": "Adoção Responsável Gratuita",
-      "foto_url": "/static/darkplanner_pets/ninhada_gatos_08_coloridos.jpg",
-      "detalhes": "Resgatados no bairro Santa Felicidade, vermifugados e comendo ração úmida. Para doação responsável e com termo de posse."
-    },
-    "posicao_mapa": {
-      "fixado": true,
-      "lat": -24.966253,
-      "lng": -53.403552,
-      "rua": "BR-277",
-      "bairro": "Colméia",
-      "referencia": "Visto no bairro Santa Felicidade",
-      "data_fixacao": "2026-11-24T17:43:53.678Z"
-    },
-    "alerta_id": 5566
-  },
-  {
-    "id": "perfil_49",
-    "tutor": {
-      "nome": "Wagner Moura Toledo",
-      "sexo": "M",
-      "avatar": "/static/darkplanner_pessoas/homem_01_carlos.jpg",
-      "telefone": "(45) 99920-1709",
-      "bairro_origem": "Interlagos"
-    },
-    "pet": {
-      "id": "pet_49",
-      "nome": "Ninhada 4 Filhotes Gatinhos",
-      "categoria": "ninhada_gatos",
-      "tipo_ocorrencia": "adocao",
-      "sexo": "Machos e Fêmeas",
-      "raca": "Gato Preto Sólido",
-      "porte": "Pequeno",
-      "recompensa": "Adoção Responsável Gratuita",
-      "foto_url": "/static/darkplanner_pets/ninhada_gatos_09_peludos.jpg",
-      "detalhes": "Resgatados no bairro Interlagos, vermifugados e comendo ração úmida. Para doação responsável e com termo de posse."
-    },
-    "posicao_mapa": {
-      "fixado": true,
-      "lat": -24.934528,
-      "lng": -53.405495,
-      "rua": "Rua Serra de Santana",
-      "bairro": "Jardim Mantovani",
-      "referencia": "Visto no bairro Interlagos",
-      "data_fixacao": "2026-11-24T17:44:12.526Z"
-    },
-    "alerta_id": 5567
-  },
-  {
-    "id": "perfil_50",
-    "tutor": {
-      "nome": "Isis Valverde Mendes",
-      "sexo": "F",
-      "avatar": "/static/darkplanner_pessoas/mulher_02_camila.jpg",
-      "telefone": "(45) 99911-9216",
-      "bairro_origem": "Jardim Mantovani"
-    },
-    "pet": {
-      "id": "pet_50",
-      "nome": "Ninhada 5 Filhotes Gatinhos",
-      "categoria": "ninhada_gatos",
-      "tipo_ocorrencia": "adocao",
-      "sexo": "Machos e Fêmeas",
-      "raca": "Bengal Oncinha",
-      "porte": "Pequeno",
-      "recompensa": "Adoção Responsável Gratuita",
-      "foto_url": "/static/darkplanner_pets/ninhada_gatos_10_sofa.jpg",
-      "detalhes": "Resgatados no bairro Jardim Mantovani, vermifugados e comendo ração úmida. Para doação responsável e com termo de posse."
-    },
-    "posicao_mapa": {
-      "fixado": true,
-      "lat": -24.970906,
-      "lng": -53.395464,
-      "rua": "BR-277",
-      "bairro": "Jardim Veneza",
-      "referencia": "Visto no bairro Jardim Mantovani",
-      "data_fixacao": "2026-11-24T17:44:27.304Z"
-    },
-    "alerta_id": 5568
-  },
-  {
-    "id": "perfil_51",
-    "tutor": {
-      "nome": "Caio Castro Zanetti",
-      "sexo": "M",
+      "nome": "Roberto Santos",
+      "telefone": "45998044444",
+      "bairro_origem": "Coqueiral",
       "avatar": "/static/darkplanner_pessoas/homem_03_roberto.jpg",
-      "telefone": "(45) 99995-1302",
-      "bairro_origem": "Centro"
+      "categoria": "protetor",
+      "ong_nome": "Associação Amigos de 4 Patas Cascavel"
     },
     "pet": {
-      "id": "pet_51",
-      "nome": "Ninhada 1 Filhotes Cãezinhos",
-      "categoria": "ninhada_caes",
-      "tipo_ocorrencia": "adocao",
-      "sexo": "Machos e Fêmeas",
-      "raca": "Filhotes Puros / Mestiços Dóceis",
-      "porte": "Filhotes Pequenos",
-      "recompensa": "Adoção Responsável Gratuita",
-      "foto_url": "/static/darkplanner_pets/ninhada_caes_01_gramado.jpg",
-      "detalhes": "Resgatados no bairro Centro, vermifugados e comendo ração úmida. Para doação responsável e com termo de posse."
+      "nome": "Barão",
+      "especie": "cao",
+      "raca": "Pastor Mestiço",
+      "tipo_ocorrencia": "resgatado",
+      "status": "resgatado",
+      "foto_url": "/static/darkplanner_pets/cachorro_02_pastor_alemao.jpg",
+      "descricao": "Resgatado em dia de temporal intenso no Coqueiral. Muito companheiro, castrado.",
+      "sexo": "Macho"
     },
     "posicao_mapa": {
+      "lat": -24.94,
+      "lng": -53.48,
       "fixado": true,
-      "lat": -24.977598,
-      "lng": -53.384864,
-      "rua": "BR-277",
-      "bairro": "Jardim Veneza",
-      "referencia": "Visto no bairro Centro",
-      "data_fixacao": "2026-11-24T17:44:47.311Z"
-    },
-    "alerta_id": 5569
+      "bairro": "Coqueiral",
+      "rua": "Região do Coqueiral"
+    }
   },
   {
-    "id": "perfil_52",
+    "id": "pet_5714",
     "tutor": {
-      "nome": "Monique Alfradique Nogueira",
-      "sexo": "F",
-      "avatar": "/static/darkplanner_pessoas/mulher_04_beatriz.jpg",
-      "telefone": "(45) 99934-7245",
-      "bairro_origem": "Coqueiral"
+      "nome": "Roberto Santos",
+      "telefone": "45998044444",
+      "bairro_origem": "Country",
+      "avatar": "/static/darkplanner_pessoas/homem_03_roberto.jpg",
+      "categoria": "protetor",
+      "ong_nome": "Associação Amigos de 4 Patas Cascavel"
     },
     "pet": {
-      "id": "pet_52",
-      "nome": "Ninhada 2 Filhotes Cãezinhos",
-      "categoria": "ninhada_caes",
-      "tipo_ocorrencia": "adocao",
-      "sexo": "Machos e Fêmeas",
-      "raca": "Filhotes Puros / Mestiços Dóceis",
-      "porte": "Filhotes Pequenos",
-      "recompensa": "Adoção Responsável Gratuita",
-      "foto_url": "/static/darkplanner_pets/ninhada_caes_02_cesto.jpg",
-      "detalhes": "Resgatados no bairro Coqueiral, vermifugados e comendo ração úmida. Para doação responsável e com termo de posse."
+      "nome": "Mimi",
+      "especie": "gato",
+      "raca": "Gatinha Siamesa",
+      "tipo_ocorrencia": "resgatado",
+      "status": "resgatado",
+      "foto_url": "/static/darkplanner_pets/gata_01_siamesa.jpg",
+      "descricao": "Gatinha encontrada abrigada embaixo de carros. Castrada, testada FIV/FeLV negativa.",
+      "sexo": "Fêmea"
     },
     "posicao_mapa": {
+      "lat": -24.935,
+      "lng": -53.475,
       "fixado": true,
-      "lat": -24.919698,
-      "lng": -53.411107,
-      "rua": "Rua Eugênio Kluska",
-      "bairro": "Florais do Paraná",
-      "referencia": "Visto no bairro Coqueiral",
-      "data_fixacao": "2026-11-24T17:45:25.104Z"
-    },
-    "alerta_id": 5571
-  },
-  {
-    "id": "perfil_53",
-    "tutor": {
-      "nome": "Igor Jansen Dantas",
-      "sexo": "M",
-      "avatar": "/static/darkplanner_pessoas/homem_05_rodrigo.jpg",
-      "telefone": "(45) 99914-4443",
-      "bairro_origem": "Neva"
-    },
-    "pet": {
-      "id": "pet_53",
-      "nome": "Ninhada 3 Filhotes Cãezinhos",
-      "categoria": "ninhada_caes",
-      "tipo_ocorrencia": "adocao",
-      "sexo": "Machos e Fêmeas",
-      "raca": "Filhotes Puros / Mestiços Dóceis",
-      "porte": "Filhotes Pequenos",
-      "recompensa": "Adoção Responsável Gratuita",
-      "foto_url": "/static/darkplanner_pets/ninhada_caes_03_golden_filhotes.jpg",
-      "detalhes": "Resgatados no bairro Neva, vermifugados e comendo ração úmida. Para doação responsável e com termo de posse."
-    },
-    "posicao_mapa": {
-      "fixado": true,
-      "lat": -24.954546,
-      "lng": -53.443186,
-      "rua": "Rua Bom Jesus",
-      "bairro": "Vila Militar",
-      "referencia": "Visto no bairro Neva",
-      "data_fixacao": "2026-11-24T17:45:05.151Z"
-    },
-    "alerta_id": 5570
-  },
-  {
-    "id": "perfil_54",
-    "tutor": {
-      "nome": "Fernanda Lima Lima",
-      "sexo": "F",
-      "avatar": "/static/darkplanner_pessoas/mulher_06_ana_paula.jpg",
-      "telefone": "(45) 99964-2811",
-      "bairro_origem": "Cancelli"
-    },
-    "pet": {
-      "id": "pet_54",
-      "nome": "Ninhada 4 Filhotes Cãezinhos",
-      "categoria": "ninhada_caes",
-      "tipo_ocorrencia": "adocao",
-      "sexo": "Machos e Fêmeas",
-      "raca": "Filhotes Puros / Mestiços Dóceis",
-      "porte": "Filhotes Pequenos",
-      "recompensa": "Adoção Responsável Gratuita",
-      "foto_url": "/static/darkplanner_pets/ninhada_caes_04_poodle_fofos.jpg",
-      "detalhes": "Resgatados no bairro Cancelli, vermifugados e comendo ração úmida. Para doação responsável e com termo de posse."
-    },
-    "posicao_mapa": {
-      "fixado": true,
-      "lat": -24.942775,
-      "lng": -53.444731,
-      "rua": "Rua Londrina",
       "bairro": "Country",
-      "referencia": "Visto no bairro Cancelli",
-      "data_fixacao": "2026-11-24T17:45:37.410Z"
-    },
-    "alerta_id": 5572
+      "rua": "Região do Country"
+    }
   },
   {
-    "id": "perfil_55",
+    "id": "pet_5715",
     "tutor": {
-      "nome": "Rodrigo Becker Toledo",
-      "sexo": "M",
-      "avatar": "/static/darkplanner_pessoas/homem_07_diego.jpg",
-      "telefone": "(45) 99992-8791",
-      "bairro_origem": "Parque São Paulo"
+      "nome": "Coletivo Patinhas do Oeste",
+      "telefone": "(45) 99814-3263",
+      "bairro_origem": "Alto Alegre",
+      "avatar": "/static/darkplanner_pessoas/mulher_01_mariana.jpg",
+      "categoria": "ong",
+      "ong_nome": "Coletivo Patinhas do Oeste"
     },
     "pet": {
-      "id": "pet_55",
-      "nome": "Ninhada 5 Filhotes Cãezinhos",
-      "categoria": "ninhada_caes",
+      "nome": "Nino",
+      "especie": "cao",
+      "raca": "Filhote Caramelo",
       "tipo_ocorrencia": "adocao",
-      "sexo": "Machos e Fêmeas",
-      "raca": "Filhotes Puros / Mestiços Dóceis",
-      "porte": "Filhotes Pequenos",
-      "recompensa": "Adoção Responsável Gratuita",
-      "foto_url": "/static/darkplanner_pets/ninhada_caes_05_beagles_filhotes.jpg",
-      "detalhes": "Resgatados no bairro Parque São Paulo, vermifugados e comendo ração úmida. Para doação responsável e com termo de posse."
-    },
-    "posicao_mapa": {
-      "fixado": true,
-      "lat": -24.957833,
-      "lng": -53.459129,
-      "rua": "Rua São Paulo",
-      "bairro": "Vila Militar",
-      "referencia": "Visto no bairro Parque São Paulo",
-      "data_fixacao": "2026-11-24T17:45:53.973Z"
-    },
-    "alerta_id": 5573
-  },
-  {
-    "id": "perfil_56",
-    "tutor": {
-      "nome": "Monique Alfradique Peixoto",
-      "sexo": "F",
-      "avatar": "/static/darkplanner_pessoas/mulher_08_larissa.jpg",
-      "telefone": "(45) 99915-7304",
-      "bairro_origem": "Santa Cruz"
-    },
-    "pet": {
-      "id": "pet_56",
-      "nome": "Ninhada 1 Filhotes Cãezinhos",
-      "categoria": "ninhada_caes",
-      "tipo_ocorrencia": "adocao",
-      "sexo": "Machos e Fêmeas",
-      "raca": "Filhotes Puros / Mestiços Dóceis",
-      "porte": "Filhotes Pequenos",
-      "recompensa": "Adoção Responsável Gratuita",
+      "status": "adocao",
       "foto_url": "/static/darkplanner_pets/ninhada_caes_06_vira_latinhas.jpg",
-      "detalhes": "Resgatados no bairro Santa Cruz, vermifugados e comendo ração úmida. Para doação responsável e com termo de posse."
+      "descricao": "Filhote resgatado pela ONG Patinhas do Oeste. 4 meses, vacinado e vermifugado. Porte médio.",
+      "sexo": "Macho"
     },
     "posicao_mapa": {
+      "lat": -24.952,
+      "lng": -53.465,
       "fixado": true,
-      "lat": -24.912381,
-      "lng": -53.4431,
-      "rua": "Avenida Piquiri",
-      "bairro": "Barcelona",
-      "referencia": "Visto no bairro Santa Cruz",
-      "data_fixacao": "2026-11-24T17:46:06.759Z"
-    },
-    "alerta_id": 5574
+      "bairro": "Alto Alegre",
+      "rua": "Região do Alto Alegre"
+    }
   },
   {
-    "id": "perfil_57",
+    "id": "pet_5716",
     "tutor": {
-      "nome": "Lucas Martins Vargas",
-      "sexo": "M",
-      "avatar": "/static/darkplanner_pessoas/homem_01_carlos.jpg",
-      "telefone": "(45) 99912-7311",
-      "bairro_origem": "Claudete"
+      "nome": "Coletivo Patinhas do Oeste",
+      "telefone": "(45) 99814-3263",
+      "bairro_origem": "Alto Alegre",
+      "avatar": "/static/darkplanner_pessoas/mulher_01_mariana.jpg",
+      "categoria": "ong",
+      "ong_nome": "Coletivo Patinhas do Oeste"
     },
     "pet": {
-      "id": "pet_57",
-      "nome": "Ninhada 2 Filhotes Cãezinhos",
-      "categoria": "ninhada_caes",
+      "nome": "Bela",
+      "especie": "cao",
+      "raca": "Golden Mestiça",
       "tipo_ocorrencia": "adocao",
-      "sexo": "Machos e Fêmeas",
-      "raca": "Filhotes Puros / Mestiços Dóceis",
-      "porte": "Filhotes Pequenos",
-      "recompensa": "Adoção Responsável Gratuita",
-      "foto_url": "/static/darkplanner_pets/ninhada_caes_07_pastor_filhotes.jpg",
-      "detalhes": "Resgatados no bairro Claudete, vermifugados e comendo ração úmida. Para doação responsável e com termo de posse."
+      "status": "adocao",
+      "foto_url": "/static/darkplanner_pets/cachorra_03_golden_retriever.jpg",
+      "descricao": "Super dócil, castrada, vacinada. Ideal para famílias com quintal. Acompanhamento pela ONG.",
+      "sexo": "Fêmea"
     },
     "posicao_mapa": {
+      "lat": -24.9535,
+      "lng": -53.467,
       "fixado": true,
-      "lat": -24.929632,
-      "lng": -53.441995,
-      "rua": "Avenida Piquiri",
-      "bairro": "Brasmadeira",
-      "referencia": "Visto no bairro Claudete",
-      "data_fixacao": "2026-11-24T17:46:33.604Z"
-    },
-    "alerta_id": 5575
+      "bairro": "Alto Alegre",
+      "rua": "Região do Alto Alegre"
+    }
   },
   {
-    "id": "perfil_58",
+    "id": "pet_5717",
     "tutor": {
-      "nome": "Helena Ranaldi Siqueira",
-      "sexo": "F",
-      "avatar": "/static/darkplanner_pessoas/mulher_02_camila.jpg",
-      "telefone": "(45) 99998-5049",
-      "bairro_origem": "Cascavel Velho"
+      "nome": "Coletivo Patinhas do Oeste",
+      "telefone": "(45) 99814-3263",
+      "bairro_origem": "Alto Alegre",
+      "avatar": "/static/darkplanner_pessoas/mulher_01_mariana.jpg",
+      "categoria": "ong",
+      "ong_nome": "Coletivo Patinhas do Oeste"
     },
     "pet": {
-      "id": "pet_58",
-      "nome": "Ninhada 3 Filhotes Cãezinhos",
-      "categoria": "ninhada_caes",
+      "nome": "Fumaça",
+      "especie": "gato",
+      "raca": "Gato Cinza Tigrado",
       "tipo_ocorrencia": "adocao",
-      "sexo": "Machos e Fêmeas",
-      "raca": "Filhotes Puros / Mestiços Dóceis",
-      "porte": "Filhotes Pequenos",
-      "recompensa": "Adoção Responsável Gratuita",
-      "foto_url": "/static/darkplanner_pets/ninhada_caes_08_labradores.jpg",
-      "detalhes": "Resgatados no bairro Cascavel Velho, vermifugados e comendo ração úmida. Para doação responsável e com termo de posse."
+      "status": "adocao",
+      "foto_url": "/static/darkplanner_pets/gato_05_tigrado_marrom.jpg",
+      "descricao": "Gato tranquilo de 1 ano. Castrado, convive super bem com outros felinos.",
+      "sexo": "Macho"
     },
     "posicao_mapa": {
+      "lat": -24.951,
+      "lng": -53.463,
       "fixado": true,
-      "lat": -24.98073,
-      "lng": -53.426621,
-      "rua": "Estrada Alto São Salvador",
-      "bairro": "Jardim Veneza",
-      "referencia": "Visto no bairro Cascavel Velho",
-      "data_fixacao": "2026-11-24T17:46:48.725Z"
-    },
-    "alerta_id": 5576
+      "bairro": "Alto Alegre",
+      "rua": "Região do Alto Alegre"
+    }
   },
   {
-    "id": "perfil_59",
+    "id": "pet_5718",
     "tutor": {
-      "nome": "Mauricio Dias Ramos",
-      "sexo": "M",
-      "avatar": "/static/darkplanner_pessoas/homem_03_roberto.jpg",
-      "telefone": "(45) 99973-9737",
-      "bairro_origem": "Canadá"
+      "nome": "Coletivo Patinhas do Oeste",
+      "telefone": "(45) 99814-3263",
+      "bairro_origem": "Alto Alegre",
+      "avatar": "/static/darkplanner_pessoas/mulher_01_mariana.jpg",
+      "categoria": "ong",
+      "ong_nome": "Coletivo Patinhas do Oeste"
     },
     "pet": {
-      "id": "pet_59",
-      "nome": "Ninhada 4 Filhotes Cãezinhos",
-      "categoria": "ninhada_caes",
+      "nome": "Pipoca",
+      "especie": "cao",
+      "raca": "Poodle Doce",
       "tipo_ocorrencia": "adocao",
-      "sexo": "Machos e Fêmeas",
-      "raca": "Filhotes Puros / Mestiços Dóceis",
-      "porte": "Filhotes Pequenos",
-      "recompensa": "Adoção Responsável Gratuita",
-      "foto_url": "/static/darkplanner_pets/ninhada_caes_09_dormindo.jpg",
-      "detalhes": "Resgatados no bairro Canadá, vermifugados e comendo ração úmida. Para doação responsável e com termo de posse."
+      "status": "adocao",
+      "foto_url": "/static/darkplanner_pets/cachorra_04_poodle.jpg",
+      "descricao": "Poodle resgatada de lar negligente. Castrada, tosa em dia, muito apegada aos humanos.",
+      "sexo": "Fêmea"
     },
     "posicao_mapa": {
+      "lat": -24.954,
+      "lng": -53.469,
       "fixado": true,
-      "lat": -24.967074,
-      "lng": -53.447156,
-      "rua": "Rua da Lapa",
-      "bairro": "Vila Militar",
-      "referencia": "Visto no bairro Canadá",
-      "data_fixacao": "2026-11-24T17:47:07.628Z"
-    },
-    "alerta_id": 5577
+      "bairro": "Alto Alegre",
+      "rua": "Região do Alto Alegre"
+    }
   },
   {
-    "id": "perfil_60",
+    "id": "pet_5719",
     "tutor": {
-      "nome": "Isis Valverde Pires",
-      "sexo": "F",
-      "avatar": "/static/darkplanner_pessoas/mulher_04_beatriz.jpg",
-      "telefone": "(45) 99953-3796",
-      "bairro_origem": "Country"
+      "nome": "Associação Amigos de 4 Patas",
+      "telefone": "(45) 99814-3263",
+      "bairro_origem": "São Cristóvão",
+      "avatar": "/static/darkplanner_pessoas/mulher_01_mariana.jpg",
+      "categoria": "ong",
+      "ong_nome": "Associação Amigos de 4 Patas"
     },
     "pet": {
-      "id": "pet_60",
-      "nome": "Ninhada 5 Filhotes Cãezinhos",
-      "categoria": "ninhada_caes",
+      "nome": "Duque",
+      "especie": "cao",
+      "raca": "Boxer Jovem",
       "tipo_ocorrencia": "adocao",
-      "sexo": "Machos e Fêmeas",
-      "raca": "Filhotes Puros / Mestiços Dóceis",
-      "porte": "Filhotes Pequenos",
-      "recompensa": "Adoção Responsável Gratuita",
-      "foto_url": "/static/darkplanner_pets/ninhada_caes_10_brincalhoes.jpg",
-      "detalhes": "Resgatados no bairro Country, vermifugados e comendo ração úmida. Para doação responsável e com termo de posse."
+      "status": "adocao",
+      "foto_url": "/static/darkplanner_pets/cachorro_10_boxer.jpg",
+      "descricao": "Porte atlético, brincalhão, castrado e sociável. Resgatado pela Associação Amigos de 4 Patas.",
+      "sexo": "Macho"
     },
     "posicao_mapa": {
+      "lat": -24.944,
+      "lng": -53.433,
       "fixado": true,
-      "lat": -24.938145,
-      "lng": -53.480222,
-      "rua": "Rua Jequitibá",
-      "bairro": "Recanto Tropical",
-      "referencia": "Visto no bairro Country",
-      "data_fixacao": "2026-11-24T17:47:21.391Z"
-    },
-    "alerta_id": 5578
+      "bairro": "São Cristóvão",
+      "rua": "Região do São Cristóvão"
+    }
   },
   {
-    "id": "perfil_61",
+    "id": "pet_5720",
     "tutor": {
-      "nome": "Felipe Andrade Andrade",
-      "sexo": "M",
-      "avatar": "/static/darkplanner_pessoas/homem_05_rodrigo.jpg",
-      "telefone": "(45) 99963-4629",
-      "bairro_origem": "Maria Luíza"
+      "nome": "Associação Amigos de 4 Patas",
+      "telefone": "(45) 99814-3263",
+      "bairro_origem": "São Cristóvão",
+      "avatar": "/static/darkplanner_pessoas/mulher_01_mariana.jpg",
+      "categoria": "ong",
+      "ong_nome": "Associação Amigos de 4 Patas"
     },
     "pet": {
-      "id": "pet_61",
-      "nome": "Calopsita Lili",
-      "categoria": "ave",
+      "nome": "Cacau",
+      "especie": "cao",
+      "raca": "Labradora Chocolate",
+      "tipo_ocorrencia": "adocao",
+      "status": "adocao",
+      "foto_url": "/static/darkplanner_pets/cachorra_10_labradora_chocolate.jpg",
+      "descricao": "Dócil, adora água e carinho. Castrada e vacinada. Termo de adoção responsável.",
+      "sexo": "Fêmea"
+    },
+    "posicao_mapa": {
+      "lat": -24.9455,
+      "lng": -53.436,
+      "fixado": true,
+      "bairro": "São Cristóvão",
+      "rua": "Região do São Cristóvão"
+    }
+  },
+  {
+    "id": "pet_5721",
+    "tutor": {
+      "nome": "Associação Amigos de 4 Patas",
+      "telefone": "(45) 99814-3263",
+      "bairro_origem": "São Cristóvão",
+      "avatar": "/static/darkplanner_pessoas/mulher_01_mariana.jpg",
+      "categoria": "ong",
+      "ong_nome": "Associação Amigos de 4 Patas"
+    },
+    "pet": {
+      "nome": "Melzinho",
+      "especie": "gato",
+      "raca": "Gatinho Laranja",
+      "tipo_ocorrencia": "adocao",
+      "status": "adocao",
+      "foto_url": "/static/darkplanner_pets/gato_02_laranjinha.jpg",
+      "descricao": "Gatinho ronronador de 6 meses. Já castrado e com vacinas importadas em dia.",
+      "sexo": "Macho"
+    },
+    "posicao_mapa": {
+      "lat": -24.943,
+      "lng": -53.432,
+      "fixado": true,
+      "bairro": "São Cristóvão",
+      "rua": "Região do São Cristóvão"
+    }
+  },
+  {
+    "id": "pet_5722",
+    "tutor": {
+      "nome": "Associação Amigos de 4 Patas",
+      "telefone": "(45) 99814-3263",
+      "bairro_origem": "São Cristóvão",
+      "avatar": "/static/darkplanner_pessoas/mulher_01_mariana.jpg",
+      "categoria": "ong",
+      "ong_nome": "Associação Amigos de 4 Patas"
+    },
+    "pet": {
+      "nome": "Zé",
+      "especie": "cao",
+      "raca": "Cão Porte Pequeno",
+      "tipo_ocorrencia": "adocao",
+      "status": "adocao",
+      "foto_url": "/static/darkplanner_pets/cachorro_06_pug.jpg",
+      "descricao": "Pequenino de 6 kg, ideal para apartamento. Super obediente, castrado e amoroso.",
+      "sexo": "Macho"
+    },
+    "posicao_mapa": {
+      "lat": -24.946,
+      "lng": -53.438,
+      "fixado": true,
+      "bairro": "São Cristóvão",
+      "rua": "Região do São Cristóvão"
+    }
+  },
+  {
+    "id": "pet_5723",
+    "tutor": {
+      "nome": "Felipe Oliveira",
+      "telefone": "45999010001",
+      "bairro_origem": "Florais do Paraná",
+      "avatar": "/static/darkplanner_pessoas/mulher_01_mariana.jpg",
+      "categoria": "tutor",
+      "ong_nome": ""
+    },
+    "pet": {
+      "nome": "Mel",
+      "especie": "gato",
+      "raca": "Gata Siamesa",
       "tipo_ocorrencia": "desaparecido",
-      "sexo": "Macho",
-      "raca": "Ave / Calopsita Mansa",
-      "porte": "Pequeno",
-      "recompensa": "R$ 300,00",
+      "status": "desaparecido",
+      "foto_url": "/static/darkplanner_pets/gata_01_siamesa.jpg",
+      "descricao": "Desapareceu próximo à Av. das Pombas no Florais do Paraná. Dócil, atende pelo nome. Crianças chorando.",
+      "sexo": "Fêmea"
+    },
+    "posicao_mapa": {
+      "lat": -24.921,
+      "lng": -53.442,
+      "fixado": true,
+      "bairro": "Florais do Paraná",
+      "rua": "Região do Florais do Paraná"
+    }
+  },
+  {
+    "id": "pet_5724",
+    "tutor": {
+      "nome": "Beatriz Costa",
+      "telefone": "45999020002",
+      "bairro_origem": "Coqueiral",
+      "avatar": "/static/darkplanner_pessoas/mulher_01_mariana.jpg",
+      "categoria": "tutor",
+      "ong_nome": ""
+    },
+    "pet": {
+      "nome": "Thor",
+      "especie": "cao",
+      "raca": "Golden Retriever",
+      "tipo_ocorrencia": "desaparecido",
+      "status": "desaparecido",
+      "foto_url": "/static/darkplanner_pets/cachorra_03_golden_retriever.jpg",
+      "descricao": "Fugiu do portão eletrônico durante a tempestade no Coqueiral. Muito amigável.",
+      "sexo": "Macho"
+    },
+    "posicao_mapa": {
+      "lat": -24.941,
+      "lng": -53.482,
+      "fixado": true,
+      "bairro": "Coqueiral",
+      "rua": "Região do Coqueiral"
+    }
+  },
+  {
+    "id": "pet_5725",
+    "tutor": {
+      "nome": "Rodrigo Alves",
+      "telefone": "45999030003",
+      "bairro_origem": "Vila Tolentino",
+      "avatar": "/static/darkplanner_pessoas/mulher_01_mariana.jpg",
+      "categoria": "tutor",
+      "ong_nome": ""
+    },
+    "pet": {
+      "nome": "Fred",
+      "especie": "gato",
+      "raca": "Gato Tricolor Calico",
+      "tipo_ocorrencia": "desaparecido",
+      "status": "desaparecido",
+      "foto_url": "/static/darkplanner_pets/gata_03_calico_tricolor.jpg",
+      "descricao": "Gatinho castrado sumiu próximo à Rua Paraná na Vila Tolentino. Usa coleira vermelha.",
+      "sexo": "Macho"
+    },
+    "posicao_mapa": {
+      "lat": -24.965,
+      "lng": -53.458,
+      "fixado": true,
+      "bairro": "Vila Tolentino",
+      "rua": "Região do Vila Tolentino"
+    }
+  },
+  {
+    "id": "pet_5726",
+    "tutor": {
+      "nome": "Ana Paula",
+      "telefone": "45999040004",
+      "bairro_origem": "Faculdade",
+      "avatar": "/static/darkplanner_pessoas/mulher_01_mariana.jpg",
+      "categoria": "tutor",
+      "ong_nome": ""
+    },
+    "pet": {
+      "nome": "Pipoca",
+      "especie": "ave",
+      "raca": "Calopsita Amarela",
+      "tipo_ocorrencia": "desaparecido",
+      "status": "desaparecido",
       "foto_url": "/static/darkplanner_pets/ave_01_calopsita_amarela.jpg",
-      "detalhes": "Desapareceu no bairro Maria Luíza. Muito dócil, atende pelo nome. Família e crianças desesperadas procurando."
+      "descricao": "Calopsita dócil voou perto da Univel no bairro Faculdade. Canta fiu-fiu e pousa no dedo.",
+      "sexo": "Fêmea"
     },
     "posicao_mapa": {
+      "lat": -24.981,
+      "lng": -53.461,
       "fixado": true,
-      "lat": -24.986622,
-      "lng": -53.447049,
-      "rua": "Rua Universitária, 2069",
       "bairro": "Faculdade",
-      "referencia": "Visto no bairro Maria Luíza",
-      "data_fixacao": "2026-11-24T17:47:41.423Z"
-    },
-    "alerta_id": 5579
+      "rua": "Região do Faculdade"
+    }
   },
   {
-    "id": "perfil_62",
+    "id": "pet_5727",
     "tutor": {
-      "nome": "Mariana Souza Esteves",
-      "sexo": "F",
-      "avatar": "/static/darkplanner_pessoas/mulher_06_ana_paula.jpg",
-      "telefone": "(45) 99990-8184",
-      "bairro_origem": "Brasmadeira"
+      "nome": "Diego Martins",
+      "telefone": "45999050005",
+      "bairro_origem": "Neva",
+      "avatar": "/static/darkplanner_pessoas/mulher_01_mariana.jpg",
+      "categoria": "tutor",
+      "ong_nome": ""
     },
     "pet": {
-      "id": "pet_62",
-      "nome": "Calopsita Zeca",
-      "categoria": "ave",
+      "nome": "Rex",
+      "especie": "cao",
+      "raca": "Pastor Alemão Capa Preta",
       "tipo_ocorrencia": "desaparecido",
-      "sexo": "Macho",
-      "raca": "Ave / Calopsita Mansa",
-      "porte": "Pequeno",
-      "recompensa": "Sem Recompensa (Gratidão)",
-      "foto_url": "/static/darkplanner_pets/ave_02_calopsita_cinza.jpg",
-      "detalhes": "Desapareceu no bairro Brasmadeira. Muito dócil, atende pelo nome. Família e crianças desesperadas procurando."
+      "status": "desaparecido",
+      "foto_url": "/static/darkplanner_pets/cachorro_02_pastor_alemao.jpg",
+      "descricao": "Cão idoso de 9 anos, surdo, sumiu na região da Neva. Precisa de medicação diária.",
+      "sexo": "Macho"
     },
     "posicao_mapa": {
+      "lat": -24.96,
+      "lng": -53.47,
       "fixado": true,
-      "lat": -24.985657,
-      "lng": -53.434167,
-      "rua": "Rua Universitária das Veredas",
-      "bairro": "Jardim Veneza",
-      "referencia": "Visto no bairro Brasmadeira",
-      "data_fixacao": "2026-11-24T17:48:10.460Z"
-    },
-    "alerta_id": 5580
+      "bairro": "Neva",
+      "rua": "Região do Neva"
+    }
   },
   {
-    "id": "perfil_63",
+    "id": "pet_5728",
     "tutor": {
-      "nome": "Leonardo Pires Andrade",
-      "sexo": "M",
-      "avatar": "/static/darkplanner_pessoas/homem_07_diego.jpg",
-      "telefone": "(45) 99929-4107",
-      "bairro_origem": "Pacaembu"
+      "nome": "Larissa Ramos (Voluntária)",
+      "telefone": "45999060006",
+      "bairro_origem": "Cancelli",
+      "avatar": "/static/darkplanner_pessoas/mulher_01_mariana.jpg",
+      "categoria": "voluntario",
+      "ong_nome": ""
     },
     "pet": {
-      "id": "pet_63",
-      "nome": "Calopsita Lili",
-      "categoria": "ave",
+      "nome": "Bob",
+      "especie": "cao",
+      "raca": "Beagle Orelhudo",
       "tipo_ocorrencia": "desaparecido",
-      "sexo": "Macho",
-      "raca": "Ave / Calopsita Mansa",
-      "porte": "Pequeno",
-      "recompensa": "Sem Recompensa (Gratidão)",
-      "foto_url": "/static/darkplanner_pets/ave_03_periquito_verde.jpg",
-      "detalhes": "Desapareceu no bairro Pacaembu. Muito dócil, atende pelo nome. Família e crianças desesperadas procurando."
+      "status": "desaparecido",
+      "foto_url": "/static/darkplanner_pets/cachorra_07_beagle.jpg",
+      "descricao": "Avistado correndo desorientado perto da praça do Cancelli. Tinha coleira azul sem placa.",
+      "sexo": "Macho"
     },
     "posicao_mapa": {
+      "lat": -24.945,
+      "lng": -53.46,
       "fixado": true,
-      "lat": -24.995374,
-      "lng": -53.454602,
-      "rua": "Rua Rio da Paz",
-      "bairro": "Nova Cidade",
-      "referencia": "Visto no bairro Pacaembu",
-      "data_fixacao": "2026-11-24T17:48:23.742Z"
-    },
-    "alerta_id": 5581
+      "bairro": "Cancelli",
+      "rua": "Região do Cancelli"
+    }
   },
   {
-    "id": "perfil_64",
+    "id": "pet_5729",
     "tutor": {
-      "nome": "Priscila Fantin Mendes",
-      "sexo": "F",
-      "avatar": "/static/darkplanner_pessoas/mulher_08_larissa.jpg",
-      "telefone": "(45) 99981-1987",
-      "bairro_origem": "Floresta"
+      "nome": "Gabriel Lima (Voluntário)",
+      "telefone": "45999070007",
+      "bairro_origem": "São Cristóvão",
+      "avatar": "/static/darkplanner_pessoas/mulher_01_mariana.jpg",
+      "categoria": "voluntario",
+      "ong_nome": ""
     },
     "pet": {
-      "id": "pet_64",
-      "nome": "Calopsita Pipoca",
-      "categoria": "ave",
+      "nome": "Mia",
+      "especie": "gato",
+      "raca": "Frajolinha Dócil",
       "tipo_ocorrencia": "desaparecido",
-      "sexo": "Macho",
-      "raca": "Ave / Calopsita Mansa",
-      "porte": "Pequeno",
-      "recompensa": "R$ 500,00",
-      "foto_url": "/static/darkplanner_pets/ave_04_periquito_azul.jpg",
-      "detalhes": "Desapareceu no bairro Floresta. Muito dócil, atende pelo nome. Família e crianças desesperadas procurando."
+      "status": "desaparecido",
+      "foto_url": "/static/darkplanner_pets/gata_05_frajola.jpg",
+      "descricao": "Gatinha avistada escondida em motor de carro no São Cristóvão. Moradores alimentando.",
+      "sexo": "Fêmea"
     },
     "posicao_mapa": {
+      "lat": -24.944,
+      "lng": -53.435,
       "fixado": true,
-      "lat": -24.974778,
-      "lng": -53.390207,
-      "rua": "BR-277",
-      "bairro": "Jardim Veneza",
-      "referencia": "Visto no bairro Floresta",
-      "data_fixacao": "2026-11-24T17:48:42.151Z"
-    },
-    "alerta_id": 5582
+      "bairro": "São Cristóvão",
+      "rua": "Região do São Cristóvão"
+    }
   },
   {
-    "id": "perfil_65",
+    "id": "pet_5730",
     "tutor": {
-      "nome": "Gabriel Ramos Nogueira",
-      "sexo": "M",
-      "avatar": "/static/darkplanner_pessoas/homem_01_carlos.jpg",
-      "telefone": "(45) 99995-7836",
-      "bairro_origem": "Morumbi"
+      "nome": "Patrícia Mendes (Voluntária)",
+      "telefone": "45999080008",
+      "bairro_origem": "Centro",
+      "avatar": "/static/darkplanner_pessoas/mulher_01_mariana.jpg",
+      "categoria": "voluntario",
+      "ong_nome": ""
     },
     "pet": {
-      "id": "pet_65",
-      "nome": "Calopsita Zeca",
-      "categoria": "ave",
+      "nome": "Nina",
+      "especie": "cao",
+      "raca": "Poodle Branca",
       "tipo_ocorrencia": "desaparecido",
-      "sexo": "Macho",
-      "raca": "Ave / Calopsita Mansa",
-      "porte": "Pequeno",
-      "recompensa": "Sem Recompensa (Gratidão)",
-      "foto_url": "/static/darkplanner_pets/ave_05_canario_belga_amarelo.jpg",
-      "detalhes": "Desapareceu no bairro Morumbi. Muito dócil, atende pelo nome. Família e crianças desesperadas procurando."
+      "status": "desaparecido",
+      "foto_url": "/static/darkplanner_pets/cachorra_04_poodle.jpg",
+      "descricao": "Cadelinha vista na calçada da Rua Rio Grande do Sul no Centro. Parece bem cuidada.",
+      "sexo": "Fêmea"
     },
     "posicao_mapa": {
+      "lat": -24.955,
+      "lng": -53.456,
       "fixado": true,
-      "lat": -24.990143,
-      "lng": -53.46473,
-      "rua": "Rua Clodoaldo Ursulano",
-      "bairro": "Nova Cidade",
-      "referencia": "Visto no bairro Morumbi",
-      "data_fixacao": "2026-11-24T17:49:20.238Z"
-    },
-    "alerta_id": 5583
+      "bairro": "Centro",
+      "rua": "Região do Centro"
+    }
   },
   {
-    "id": "perfil_66",
+    "id": "pet_5731",
     "tutor": {
-      "nome": "Luisa Arraes Guimarães",
-      "sexo": "F",
-      "avatar": "/static/darkplanner_pessoas/mulher_02_camila.jpg",
-      "telefone": "(45) 99956-4353",
-      "bairro_origem": "Santo Onofre"
+      "nome": "Juliana Prado (Voluntária)",
+      "telefone": "45999090009",
+      "bairro_origem": "Floresta",
+      "avatar": "/static/darkplanner_pessoas/mulher_01_mariana.jpg",
+      "categoria": "voluntario",
+      "ong_nome": ""
     },
     "pet": {
-      "id": "pet_66",
-      "nome": "Calopsita Pipoca",
-      "categoria": "ave",
+      "nome": "Tico",
+      "especie": "gato",
+      "raca": "Gato Azul Russo",
       "tipo_ocorrencia": "desaparecido",
-      "sexo": "Macho",
-      "raca": "Ave / Calopsita Mansa",
-      "porte": "Pequeno",
-      "recompensa": "R$ 800,00",
-      "foto_url": "/static/darkplanner_pets/ave_06_canario_da_terra.jpg",
-      "detalhes": "Desapareceu no bairro Santo Onofre. Muito dócil, atende pelo nome. Família e crianças desesperadas procurando."
+      "status": "desaparecido",
+      "foto_url": "/static/darkplanner_pets/gato_03_russian_blue.jpg",
+      "descricao": "Gato cinza de olhos amarelos visto na Rua Papagaios no bairro Floresta. Família desesperada.",
+      "sexo": "Macho"
     },
     "posicao_mapa": {
+      "lat": -24.925,
+      "lng": -53.42,
       "fixado": true,
-      "lat": -24.986272,
-      "lng": -53.4849,
-      "rua": "Estrada da Pedreira",
-      "bairro": "14 de Novembro",
-      "referencia": "Visto no bairro Santo Onofre",
-      "data_fixacao": "2026-11-24T17:49:32.097Z"
-    },
-    "alerta_id": 5584
+      "bairro": "Floresta",
+      "rua": "Região do Floresta"
+    }
   },
   {
-    "id": "perfil_67",
+    "id": "pet_5732",
     "tutor": {
-      "nome": "Caio Castro Toledo",
-      "sexo": "M",
-      "avatar": "/static/darkplanner_pessoas/homem_03_roberto.jpg",
-      "telefone": "(45) 99916-5711",
-      "bairro_origem": "Alto Alegre"
+      "nome": "Marcelo Rossi (Voluntário)",
+      "telefone": "45999100010",
+      "bairro_origem": "Cascavel Velho",
+      "avatar": "/static/darkplanner_pessoas/mulher_01_mariana.jpg",
+      "categoria": "voluntario",
+      "ong_nome": ""
     },
     "pet": {
-      "id": "pet_67",
-      "nome": "Calopsita Chico",
-      "categoria": "ave",
+      "nome": "Chico",
+      "especie": "cao",
+      "raca": "Vira-lata Caramelo",
       "tipo_ocorrencia": "desaparecido",
-      "sexo": "Macho",
-      "raca": "Ave / Calopsita Mansa",
-      "porte": "Pequeno",
-      "recompensa": "R$ 800,00",
-      "foto_url": "/static/darkplanner_pets/ave_07_agapornis_fisher.jpg",
-      "detalhes": "Desapareceu no bairro Alto Alegre. Muito dócil, atende pelo nome. Família e crianças desesperadas procurando."
+      "status": "desaparecido",
+      "foto_url": "/static/darkplanner_pets/cachorro_01_caramelo_macho.jpg",
+      "descricao": "Cãozinho avistado mancando perto do trevo do Cascavel Velho. Dócil mas assustado.",
+      "sexo": "Macho"
     },
     "posicao_mapa": {
+      "lat": -24.98,
+      "lng": -53.43,
       "fixado": true,
-      "lat": -24.939157,
-      "lng": -53.461812,
-      "rua": "Rua Visconde de Guarapuava",
-      "bairro": "Independência",
-      "referencia": "Visto no bairro Alto Alegre",
-      "data_fixacao": "2026-11-24T17:49:46.690Z"
-    },
-    "alerta_id": 5585
+      "bairro": "Cascavel Velho",
+      "rua": "Região do Cascavel Velho"
+    }
   },
   {
-    "id": "perfil_68",
+    "id": "pet_5733",
     "tutor": {
-      "nome": "Marina Ruy Barbosa Toledo",
-      "sexo": "F",
-      "avatar": "/static/darkplanner_pessoas/mulher_04_beatriz.jpg",
-      "telefone": "(45) 99997-6236",
-      "bairro_origem": "Recanto Tropical"
+      "nome": "Renata Souza",
+      "telefone": "(45) 99814-3263",
+      "bairro_origem": "Parque São Paulo",
+      "avatar": "/static/darkplanner_pessoas/mulher_01_mariana.jpg",
+      "categoria": "tutor",
+      "ong_nome": ""
     },
     "pet": {
-      "id": "pet_68",
-      "nome": "Calopsita Zeca",
-      "categoria": "ave",
-      "tipo_ocorrencia": "desaparecido",
-      "sexo": "Macho",
-      "raca": "Ave / Calopsita Mansa",
-      "porte": "Pequeno",
-      "recompensa": "R$ 500,00",
-      "foto_url": "/static/darkplanner_pets/ave_08_agapornis_azul.jpg",
-      "detalhes": "Desapareceu no bairro Recanto Tropical. Muito dócil, atende pelo nome. Família e crianças desesperadas procurando."
+      "nome": "Pretinha",
+      "especie": "gato",
+      "raca": "Gata Pretinha Dócil",
+      "tipo_ocorrencia": "reencontrado",
+      "status": "reencontrado",
+      "foto_url": "/static/darkplanner_pets/gata_04_preta.jpg",
+      "descricao": "FINAL FELIZ! A Pretinha foi reencontrada após 4 dias sumida no Parque São Paulo graças à mobilização dos vizinhos no app!",
+      "sexo": "Fêmea"
     },
     "posicao_mapa": {
+      "lat": -24.97,
+      "lng": -53.45,
       "fixado": true,
-      "lat": -24.934935,
-      "lng": -53.416171,
-      "rua": "Rua Serra da Borborema",
-      "bairro": "Brasília",
-      "referencia": "Visto no bairro Recanto Tropical",
-      "data_fixacao": "2026-11-24T17:50:01.996Z"
-    },
-    "alerta_id": 5586
+      "bairro": "Parque São Paulo",
+      "rua": "Região do Parque São Paulo"
+    }
   },
   {
-    "id": "perfil_69",
+    "id": "pet_5734",
     "tutor": {
-      "nome": "[TESTE RIGO 01] Tutor em Aberto",
-      "sexo": "M",
-      "avatar": "/static/darkplanner_pessoas/homem_05_rodrigo.jpg",
-      "telefone": "(45) 99800-0001",
-      "bairro_origem": "Ciro Nardi"
+      "nome": "Marcos Vinícius",
+      "telefone": "(45) 99814-3263",
+      "bairro_origem": "Coqueiral",
+      "avatar": "/static/darkplanner_pessoas/mulher_01_mariana.jpg",
+      "categoria": "tutor",
+      "ong_nome": ""
     },
     "pet": {
-      "id": "pet_69",
-      "nome": "Pet em Aberto",
-      "categoria": "ave",
-      "tipo_ocorrencia": "desaparecido",
-      "sexo": "Macho",
-      "raca": "Ave / Calopsita Mansa",
-      "porte": "Pequeno",
-      "recompensa": "R$ 300,00",
-      "foto_url": "/static/darkplanner_pets/ave_09_diamante_de_gould.jpg",
-      "detalhes": "Desapareceu no bairro Ciro Nardi. Muito dócil, atende pelo nome. Família e crianças desesperadas procurando."
+      "nome": "Max",
+      "especie": "cao",
+      "raca": "Rottweiler Protetor",
+      "tipo_ocorrencia": "reencontrado",
+      "status": "reencontrado",
+      "foto_url": "/static/darkplanner_pets/cachorro_05_rottweiler_jovem.jpg",
+      "descricao": "REENCONTRADO! O motorista parceiro viu o alerta sonoro da Patinha no Coqueiral e avisou o tutor em minutos!",
+      "sexo": "Macho"
     },
     "posicao_mapa": {
+      "lat": -24.94,
+      "lng": -53.483,
       "fixado": true,
-      "lat": -24.974884,
-      "lng": -53.409373,
-      "rua": "Rua Emílio de Menezes",
-      "bairro": "Jardim Veneza",
-      "referencia": "Visto no bairro Ciro Nardi",
-      "data_fixacao": "2026-11-24T17:50:37.703Z"
-    },
-    "is_manual_slot": true,
-    "alerta_id": 5587
+      "bairro": "Coqueiral",
+      "rua": "Região do Coqueiral"
+    }
   },
   {
-    "id": "perfil_70",
+    "id": "pet_5735",
     "tutor": {
-      "nome": "[TESTE RIGO 02] Tutora em Aberto",
-      "sexo": "F",
-      "avatar": "/static/darkplanner_pessoas/mulher_06_ana_paula.jpg",
-      "telefone": "(45) 99800-0002",
-      "bairro_origem": "Pioneiros Catarinenses"
+      "nome": "Helena Castro",
+      "telefone": "(45) 99814-3263",
+      "bairro_origem": "Centro",
+      "avatar": "/static/darkplanner_pessoas/mulher_01_mariana.jpg",
+      "categoria": "tutor",
+      "ong_nome": ""
     },
     "pet": {
-      "id": "pet_70",
-      "nome": "Pet em Aberto",
-      "categoria": "ave",
-      "tipo_ocorrencia": "desaparecido",
-      "sexo": "Macho",
-      "raca": "Ave / Calopsita Mansa",
-      "porte": "Pequeno",
-      "recompensa": "R$ 200,00",
-      "foto_url": "/static/darkplanner_pets/ave_10_papagaio_domestico.jpg",
-      "detalhes": "Desapareceu no bairro Pioneiros Catarinenses. Muito dócil, atende pelo nome. Família e crianças desesperadas procurando."
+      "nome": "Kiara",
+      "especie": "cao",
+      "raca": "Shih Tzu Fêmea",
+      "tipo_ocorrencia": "reencontrado",
+      "status": "reencontrado",
+      "foto_url": "/static/darkplanner_pets/cachorra_01_shih_tzu.jpg",
+      "descricao": "FINAL FELIZ! Kiara já está nos braços da família no Centro de Cascavel. Agradecemos a todos que compartilharam!",
+      "sexo": "Fêmea"
     },
     "posicao_mapa": {
+      "lat": -24.957,
+      "lng": -53.453,
       "fixado": true,
-      "lat": -24.944228,
-      "lng": -53.417456,
-      "rua": "Rua Romeu Caponi",
-      "bairro": "Periolo",
-      "referencia": "Visto no bairro Pioneiros Catarinenses",
-      "data_fixacao": "2026-11-24T17:51:19.900Z"
+      "bairro": "Centro",
+      "rua": "Região do Centro"
+    }
+  },
+  {
+    "id": "pet_5736",
+    "tutor": {
+      "nome": "André Valente",
+      "telefone": "(45) 99814-3263",
+      "bairro_origem": "Pioneiros Catarinenses",
+      "avatar": "/static/darkplanner_pessoas/mulher_01_mariana.jpg",
+      "categoria": "tutor",
+      "ong_nome": ""
     },
-    "is_manual_slot": true,
-    "alerta_id": 5588
+    "pet": {
+      "nome": "Mingau",
+      "especie": "gato",
+      "raca": "Gato Branco Peludo",
+      "tipo_ocorrencia": "reencontrado",
+      "status": "reencontrado",
+      "foto_url": "/static/darkplanner_pets/gato_07_branco_olhos_azuis.jpg",
+      "descricao": "REENCONTRADO! Estava abrigado na casa de uma voluntária no Pioneiros Catarinenses e voltou em segurança para casa.",
+      "sexo": "Macho"
+    },
+    "posicao_mapa": {
+      "lat": -24.975,
+      "lng": -53.475,
+      "fixado": true,
+      "bairro": "Pioneiros Catarinenses",
+      "rua": "Região do Pioneiros Catarinenses"
+    }
+  },
+  {
+    "id": "pet_5737",
+    "tutor": {
+      "nome": "Cláudia Ribeiro",
+      "telefone": "(45) 99814-3263",
+      "bairro_origem": "Maria Luiza",
+      "avatar": "/static/darkplanner_pessoas/mulher_01_mariana.jpg",
+      "categoria": "tutor",
+      "ong_nome": ""
+    },
+    "pet": {
+      "nome": "Toby",
+      "especie": "cao",
+      "raca": "Pinscher Alerta",
+      "tipo_ocorrencia": "reencontrado",
+      "status": "reencontrado",
+      "foto_url": "/static/darkplanner_pets/cachorra_05_pinscher.jpg",
+      "descricao": "FINAL FELIZ! Reencontrado no Maria Luiza após 24 horas de buscas ativas pela comunidade.",
+      "sexo": "Macho"
+    },
+    "posicao_mapa": {
+      "lat": -24.968,
+      "lng": -53.445,
+      "fixado": true,
+      "bairro": "Maria Luiza",
+      "rua": "Região do Maria Luiza"
+    }
+  },
+  {
+    "id": "pet_5738",
+    "tutor": {
+      "nome": "Seu Francisco (Tutor)",
+      "telefone": "(45) 99814-3263",
+      "bairro_origem": "Tropical",
+      "avatar": "/static/darkplanner_pessoas/mulher_01_mariana.jpg",
+      "categoria": "tutor",
+      "ong_nome": ""
+    },
+    "pet": {
+      "nome": "Ninhada da Belinha",
+      "especie": "cao",
+      "raca": "4 Filhotes",
+      "tipo_ocorrencia": "adocao",
+      "status": "adocao",
+      "foto_url": "/static/darkplanner_pets/ninhada_caes_01_gramado.jpg",
+      "descricao": "Cadelinha da chácara pariu e estou doando os 4 filhotinhos mestiços de porte pequeno para quem amar e cuidar bem.",
+      "sexo": "Macho"
+    },
+    "posicao_mapa": {
+      "lat": -24.93,
+      "lng": -53.49,
+      "fixado": true,
+      "bairro": "Tropical",
+      "rua": "Região do Tropical"
+    }
+  },
+  {
+    "id": "pet_5739",
+    "tutor": {
+      "nome": "Carolina Dias (Tutora)",
+      "telefone": "(45) 99814-3263",
+      "bairro_origem": "Canadá",
+      "avatar": "/static/darkplanner_pessoas/mulher_01_mariana.jpg",
+      "categoria": "tutor",
+      "ong_nome": ""
+    },
+    "pet": {
+      "nome": "Simba",
+      "especie": "gato",
+      "raca": "Gato Laranja Saudável",
+      "tipo_ocorrencia": "adocao",
+      "status": "adocao",
+      "foto_url": "/static/darkplanner_pets/gato_10_amarelo_claro.jpg",
+      "descricao": "Vou mudar de país a trabalho e não posso levar. Procuro família muito carinhosa para o Simba, que é vacinado e castrado.",
+      "sexo": "Macho"
+    },
+    "posicao_mapa": {
+      "lat": -24.938,
+      "lng": -53.45,
+      "fixado": true,
+      "bairro": "Canadá",
+      "rua": "Região do Canadá"
+    }
+  },
+  {
+    "id": "pet_5740",
+    "tutor": {
+      "nome": "Valéria Nogueira (Tutora)",
+      "telefone": "(45) 99814-3263",
+      "bairro_origem": "Santo Onofre",
+      "avatar": "/static/darkplanner_pessoas/mulher_01_mariana.jpg",
+      "categoria": "tutor",
+      "ong_nome": ""
+    },
+    "pet": {
+      "nome": "Cindy",
+      "especie": "cao",
+      "raca": "Yorkshire Mestiça",
+      "tipo_ocorrencia": "adocao",
+      "status": "adocao",
+      "foto_url": "/static/darkplanner_pets/cachorra_06_yorkshire.jpg",
+      "descricao": "Minha mãe idosa precisou ir para lar de apoio e precisamos doar a Cindy com muito amor. Castrada e muito dócil.",
+      "sexo": "Fêmea"
+    },
+    "posicao_mapa": {
+      "lat": -24.962,
+      "lng": -53.5,
+      "fixado": true,
+      "bairro": "Santo Onofre",
+      "rua": "Região do Santo Onofre"
+    }
+  },
+  {
+    "id": "pet_5741",
+    "tutor": {
+      "nome": "Gustavo Henrique (Tutor)",
+      "telefone": "(45) 99814-3263",
+      "bairro_origem": "Country",
+      "avatar": "/static/darkplanner_pessoas/mulher_01_mariana.jpg",
+      "categoria": "tutor",
+      "ong_nome": ""
+    },
+    "pet": {
+      "nome": "Branquinho",
+      "especie": "gato",
+      "raca": "Gato Angorá",
+      "tipo_ocorrencia": "adocao",
+      "status": "adocao",
+      "foto_url": "/static/darkplanner_pets/gata_09_angora_branca.jpg",
+      "descricao": "Doação por motivo de alergia severa do meu bebê de 6 meses. Ele é super calmo, silencioso e castrado.",
+      "sexo": "Macho"
+    },
+    "posicao_mapa": {
+      "lat": -24.932,
+      "lng": -53.47,
+      "fixado": true,
+      "bairro": "Country",
+      "rua": "Região do Country"
+    }
+  },
+  {
+    "id": "pet_5742",
+    "tutor": {
+      "nome": "Tiago Empresário (Tutor)",
+      "telefone": "(45) 99814-3263",
+      "bairro_origem": "Pacaembu",
+      "avatar": "/static/darkplanner_pessoas/mulher_01_mariana.jpg",
+      "categoria": "tutor",
+      "ong_nome": ""
+    },
+    "pet": {
+      "nome": "Bento",
+      "especie": "cao",
+      "raca": "Cão Companheiro",
+      "tipo_ocorrencia": "adocao",
+      "status": "adocao",
+      "foto_url": "/static/darkplanner_pets/cachorro_08_schnauzer.jpg",
+      "descricao": "Resgatei na frente da minha empresa no Pacaembu. Vermifuguei e dou a castração de presente para quem adotar.",
+      "sexo": "Macho"
+    },
+    "posicao_mapa": {
+      "lat": -24.95,
+      "lng": -53.415,
+      "fixado": true,
+      "bairro": "Pacaembu",
+      "rua": "Região do Pacaembu"
+    }
   }
 ]
