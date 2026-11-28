@@ -773,9 +773,12 @@ def rota_arquivos_vozes(filename):
 @app.route("/audios-validacao")
 @app.route("/validar-audios")
 def rota_validar_audios():
-    resp = make_response(send_from_directory("static", "validador_audios.html"))
-    resp.headers["Cache-Control"] = "no-cache, no-store, must-revalidate, max-age=0"
-    return resp
+    p = os.path.join(BASE_DIR, "static", "validador_audios.html")
+    if os.path.exists(p):
+        resp = make_response(send_from_directory("static", "validador_audios.html"))
+        resp.headers["Cache-Control"] = "no-cache, no-store, must-revalidate, max-age=0"
+        return resp
+    return "<h3>Ferramenta interna de validação de áudios desativada no ambiente de produção.</h3>", 200
 
 
 @app.route("/manifest.json")
@@ -805,20 +808,28 @@ def ping():
 
 
 @app.route("/baixar-apk")
+@app.route("/alerta_pet_brasil.apk")
 @app.route("/ALERTA_URBANO_CASCAVEL.apk")
 @app.route("/app.apk")
 @app.route("/download")
 def baixar_apk():
-    apk_path = os.path.join(BASE_DIR, "ALERTA_URBANO_CASCAVEL.apk")
-    if not os.path.exists(apk_path):
-        apk_path = os.path.join(BASE_DIR, "android_app", "app", "build", "outputs", "apk", "release", "app-release.apk")
-    if not os.path.exists(apk_path):
+    candidatos = [
+        os.path.join(BASE_DIR, "static", "alerta_pet_brasil.apk"),
+        os.path.join(BASE_DIR, "ALERTA_URBANO_CASCAVEL.apk"),
+        os.path.join(BASE_DIR, "android_app", "app", "build", "outputs", "apk", "release", "app-release.apk")
+    ]
+    apk_path = None
+    for c in candidatos:
+        if os.path.exists(c):
+            apk_path = c
+            break
+    if not apk_path:
         return "APK ainda sendo gerado...", 404
     resp = send_from_directory(
         os.path.dirname(apk_path),
         os.path.basename(apk_path),
         as_attachment=True,
-        download_name="ALERTA_PET_BRASIL_v3.13.4.apk",
+        download_name="ALERTA_PET_BRASIL_v3.13.17.apk",
         mimetype="application/vnd.android.package-archive",
         max_age=0,
     )
