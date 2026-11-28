@@ -207,88 +207,95 @@
       color: inherit;
     }
 
-    /* SPLASH SECUNDÁRIA REMOVIDA (DIRETRIZ OFICIAL RIGO - APENAS TELA NATIVA VERDE COM PATA AMARELA) */
+    /* ==================== TELA DE ABERTURA (SPLASH SCREEN • TERROSO PROFUNDO) ==================== */
     .splash {
-      display: none !important;
-      visibility: hidden !important;
-      opacity: 0 !important;
-      pointer-events: none !important;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 99999;
+      background: #2E2417 !important;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      transition: opacity 0.45s ease, visibility 0.45s ease;
+      user-select: none;
+      box-sizing: border-box;
+      padding: calc(env(safe-area-inset-top, 0px) + 36px) 24px calc(env(safe-area-inset-bottom, 0px) + 32px);
     }
     .splash.hide {
       opacity: 0;
       visibility: hidden;
       pointer-events: none;
     }
-    .splash-river-top {
+    .splash-top-content {
       flex: 1;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding-top: 40px;
-      gap: 14px;
-      z-index: 2;
-    }
-    .splash-logo {
-      width: 114px;
-      height: 114px;
-      border-radius: 50%;
-      object-fit: cover;
-      box-shadow: 0 14px 40px rgba(0, 0, 0, 0.38);
-    }
-    .splash-title {
-      font-size: 24px;
-      font-weight: 900;
-      letter-spacing: 2px;
-      color: #FED700;
-      text-transform: uppercase;
-      text-shadow: 0 2px 10px rgba(0,0,0,0.3);
-    }
-    .splash-city {
-      font-size: 12px;
-      font-weight: 800;
-      color: #ffffff;
-      letter-spacing: 2.4px;
-      text-transform: uppercase;
-      opacity: 0.95;
-    }
-    .splash-river-wave-wrap {
+      gap: 12px;
       width: 100%;
-      height: 85px;
-      position: relative;
-      margin-bottom: -1px;
-      line-height: 0;
     }
-    .splash-river-svg {
-      width: 100%;
-      height: 100%;
-      display: block;
-    }
-    .splash-river-bottom {
-      min-height: 135px;
-      background: #EDE8DF;
+    .splash-logo-paw-wrap {
+      width: 110px;
+      height: 110px;
+      margin-bottom: 8px;
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 7px;
-      padding: 10px 20px calc(env(safe-area-inset-bottom, 16px) + 20px);
-      z-index: 2;
+      filter: drop-shadow(0 6px 18px rgba(0,0,0,0.45));
+    }
+    .splash-title {
+      font-size: 25px;
+      font-weight: 900;
+      letter-spacing: 1.5px;
+      color: #FFFFFF;
+      text-transform: uppercase;
+      text-align: center;
+    }
+    .splash-city {
+      font-size: 13px;
+      font-weight: 800;
+      color: #FED700;
+      letter-spacing: 2.2px;
+      text-transform: uppercase;
+      text-align: center;
+      margin-bottom: 12px;
+    }
+    .splash-progress-bar {
+      width: 100%;
+      max-width: 280px;
+      height: 8px;
+      background: rgba(255,255,255,0.12);
+      border-radius: 999px;
+      overflow: hidden;
+      border: 1px solid rgba(254, 215, 0, 0.35);
+      margin: 10px 0 16px;
+    }
+    .splash-progress-fill {
+      height: 100%;
+      width: 35%;
+      background: #FED700;
+      border-radius: 999px;
+      transition: width 0.4s ease;
     }
     .splash-tagline {
-      font-size: 13.5px;
+      font-size: 14.5px;
       font-weight: 900;
-      color: #2E2417;
-      letter-spacing: 1.3px;
+      color: #FFFFFF;
+      letter-spacing: 0.6px;
       text-align: center;
-      text-transform: uppercase;
+      margin-bottom: 4px;
     }
     .splash-subtext {
-      font-size: 11.5px;
-      font-weight: 800;
-      color: #000000;
-      opacity: 0.88;
+      font-size: 12px;
+      font-weight: 700;
+      color: #FED700;
       text-align: center;
+      opacity: 0.95;
       letter-spacing: 0.3px;
     }
 
@@ -434,8 +441,9 @@
     }
 
     /* ==================== PÍLULA CLIMÁTICA & CONSELHOS PET ESTILO FACEBOOK ==================== */
+    /* ==================== PÍLULA ESTILO FACEBOOK: ALERTA CLIMÁTICO & PROTEÇÃO (DIRETRIZ RIGO: APENAS FRASE) ==================== */
     .facebook-clima-pill-section {
-      padding: 6px 8px 3px;
+      padding: 8px 12px 4px;
       width: 100%;
       box-sizing: border-box;
       background: var(--cor-fundo-padrao, #F7F4EE);
@@ -444,123 +452,57 @@
       background: var(--cor-bloco-card, #FFFFFF);
       border: 1.5px solid var(--cor-bloco-borda, #E8DFD3);
       border-radius: 999px;
-      padding: 6px 14px 6px 8px;
+      padding: 10px 16px;
       display: flex;
       align-items: center;
-      gap: 10px;
+      justify-content: center;
+      text-align: center;
       cursor: pointer;
-      box-shadow: 0 2px 8px rgba(46, 36, 23, 0.06);
-      transition: all 0.2s ease;
-      min-height: 48px;
+      box-shadow: 0 1.5px 5px rgba(46, 36, 23, 0.05);
+      transition: all 0.25s ease;
+      min-height: 42px;
       box-sizing: border-box;
+      width: 100%;
     }
     .facebook-clima-pill:active {
-      transform: scale(0.98);
+      transform: scale(0.985);
       background: #FAF8F5;
     }
-    .clima-pill-avatar {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      background: #FFF9E6;
-      border: 1.5px solid var(--cor-destaque-ouro, #FED700);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
-      flex-shrink: 0;
-      transition: all 0.25s ease;
-    }
-    .clima-pill-content {
-      flex: 1;
-      min-width: 0;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      line-height: 1.15;
-    }
-    .clima-pill-meta {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 10px;
-      font-weight: 800;
-      color: var(--text-muted, #786955);
-      margin-bottom: 2px;
-    }
-    .clima-pill-badge {
-      display: inline-flex;
-      align-items: center;
-      padding: 1px 6px;
-      border-radius: 999px;
-      font-size: 9px;
-      font-weight: 900;
-      text-transform: uppercase;
-      letter-spacing: 0.3px;
-      background: #ECFDF5;
-      color: #065F46;
-      border: 1px solid rgba(16, 185, 129, 0.25);
-    }
-    .clima-pill-msg {
-      font-size: 11.5px;
-      font-weight: 800;
+    .clima-pill-texto-unico {
+      font-size: 12.5px;
+      font-weight: 700;
       color: var(--cor-botao-texto, #2E2417);
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      line-height: 1.35;
       transition: opacity 0.25s ease;
-    }
-    .clima-pill-action {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #786955;
-      flex-shrink: 0;
-      padding-left: 2px;
+      display: block;
+      width: 100%;
+      text-align: center;
     }
 
-    /* Modos de Alerta da Pílula (Branco / Laranja / Vermelho) */
+    /* Modos de Alerta da Pílula (Laranja Total / Vermelho Total) */
     .facebook-clima-pill.alerta-laranja {
-      background: #FFFBEB !important;
-      border-color: #F59E0B !important;
-      box-shadow: 0 2px 10px rgba(245, 158, 11, 0.15) !important;
+      background: #EA580C !important;
+      border-color: #C2410C !important;
+      box-shadow: 0 3px 12px rgba(234, 88, 12, 0.35) !important;
     }
-    .facebook-clima-pill.alerta-laranja .clima-pill-avatar {
-      background: #FEF3C7;
-      border-color: #F59E0B;
-    }
-    .facebook-clima-pill.alerta-laranja .clima-pill-badge {
-      background: #F59E0B;
-      color: #FFFFFF;
-      border: none;
-    }
-    .facebook-clima-pill.alerta-laranja .clima-pill-msg {
-      color: #92400E;
-      font-weight: 900;
+    .facebook-clima-pill.alerta-laranja .clima-pill-texto-unico {
+      color: #FFFFFF !important;
+      font-weight: 800 !important;
     }
 
     .facebook-clima-pill.alerta-vermelho {
-      background: #FEF2F2 !important;
-      border-color: #DC2626 !important;
-      box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.25), 0 4px 14px rgba(220, 38, 38, 0.2) !important;
-      animation: pulseAlertaPill 1.8s infinite;
+      background: #DC2626 !important;
+      border-color: #991B1B !important;
+      box-shadow: 0 4px 14px rgba(220, 38, 38, 0.45) !important;
+      animation: pulseAlertaVermelho 1.8s infinite ease-in-out;
     }
-    .facebook-clima-pill.alerta-vermelho .clima-pill-avatar {
-      background: #FEE2E2;
-      border-color: #DC2626;
+    .facebook-clima-pill.alerta-vermelho .clima-pill-texto-unico {
+      color: #FFFFFF !important;
+      font-weight: 900 !important;
     }
-    .facebook-clima-pill.alerta-vermelho .clima-pill-badge {
-      background: #DC2626;
-      color: #FFFFFF;
-      border: none;
-    }
-    .facebook-clima-pill.alerta-vermelho .clima-pill-msg {
-      color: #991B1B;
-      font-weight: 900;
-    }
-    @keyframes pulseAlertaPill {
-      0%, 100% { box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.25), 0 2px 8px rgba(220, 38, 38, 0.15); }
-      50% { box-shadow: 0 0 0 4px rgba(220, 38, 38, 0.45), 0 4px 16px rgba(220, 38, 38, 0.28); }
+    @keyframes pulseAlertaVermelho {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.015); }
     }
 
     /* ==================== ESTEIRA STORIES / REELS ESTILO FACEBOOK ==================== */
@@ -7080,6 +7022,28 @@
   </script>
 </head>
 <body>
+  <!-- ==================== TELA DE ABERTURA OFICIAL (TERROSO PROFUNDO • DIRETRIZ SUPREMA RIGO) ==================== -->
+  <div class="splash" id="splash">
+    <div class="splash-top-content">
+      <div class="splash-logo-paw-wrap">
+        <svg viewBox="0 0 512 512" style="width:100%; height:100%; overflow:visible;">
+          <path d="M115.2 359.3 L109.4 379.5 L110.4 409.3 L117.1 425.6 L124.8 436.2 L137.3 447.7 L144.0 450.6 L198.8 450.6 L217.1 444.9 L244.9 439.1 L270.9 440.1 L309.3 450.6 L365.1 450.6 L378.5 442.9 L389.1 432.4 L397.8 417.9 L401.6 402.6 L401.6 382.4 L399.7 371.8 L393.0 353.6 L386.2 342.0 L371.8 323.8 L348.7 301.7 L341.1 292.0 L305.5 238.2 L288.2 223.8 L274.7 218.0 L264.2 216.1 L244.0 216.1 L235.3 218.0 L223.8 223.8 L214.2 231.5 L199.8 247.8 L162.3 300.7 L138.3 323.8 L129.6 334.3 Z" fill="#FED700"/>
+          <path d="M78.7 170.0 L64.3 178.6 L53.7 195.0 L49.8 211.3 L49.8 224.8 L54.6 244.9 L66.2 266.1 L78.7 278.6 L95.0 287.2 L101.7 289.2 L113.3 289.2 L129.6 281.5 L136.3 274.7 L142.1 264.2 L146.9 244.0 L146.9 235.3 L143.1 216.1 L135.4 198.8 L119.0 179.6 L103.7 170.9 L96.9 169.0 Z" fill="#FED700"/>
+          <path d="M177.7 62.3 L167.1 65.2 L153.6 75.8 L146.9 85.4 L142.1 96.0 L138.3 117.1 L140.2 144.0 L143.1 155.6 L148.8 168.1 L165.2 189.2 L182.5 198.8 L200.7 199.8 L208.4 197.9 L216.1 193.0 L228.6 179.6 L236.3 161.3 L239.2 146.9 L239.2 130.6 L233.4 105.6 L227.6 93.1 L219.0 80.6 L207.5 70.0 L196.9 64.3 Z" fill="#FED700"/>
+          <path d="M338.2 60.4 L327.6 60.4 L318.0 63.3 L307.4 69.1 L294.9 80.6 L288.2 89.2 L279.5 106.5 L273.8 128.7 L273.8 154.6 L279.5 174.8 L284.4 183.4 L294.0 194.0 L303.6 199.8 L314.1 202.7 L322.8 202.7 L333.4 199.8 L347.8 191.1 L359.3 179.6 L370.9 159.4 L376.6 141.1 L377.6 108.5 L371.8 88.3 L358.4 70.0 L349.7 64.3 Z" fill="#FED700"/>
+          <path d="M439.1 170.0 L417.9 170.0 L398.7 179.6 L382.4 196.9 L371.8 218.0 L368.9 231.5 L368.9 251.7 L370.9 261.3 L376.6 272.8 L382.4 279.5 L393.0 286.3 L401.6 289.2 L414.1 289.2 L426.6 285.3 L435.2 280.5 L451.6 265.1 L464.1 243.0 L468.9 222.8 L468.9 209.4 L464.1 192.1 L453.5 177.7 Z" fill="#FED700"/>
+        </svg>
+      </div>
+      <div class="splash-title">ALERTA PET BRASIL</div>
+      <div class="splash-city" id="splash-city-label">CASCAVEL • PARANÁ</div>
+      <div class="splash-progress-bar">
+        <div class="splash-progress-fill" id="splash-progress-fill"></div>
+      </div>
+      <div class="splash-tagline">QUEM AMA, CUIDA E PROCURA JUNTO</div>
+      <div class="splash-subtext">A maior rede de proteção, resgate e reencontro animal.</div>
+    </div>
+  </div>
+
   <div class="app-shell">
     <!-- ==================== CABEÇALHO COMPLETO ESTILO FACEBOOK (COLLAPSIBLE) ==================== -->
     <header class="facebook-header-wrapper" id="facebook-header-wrapper">
@@ -7115,12 +7079,12 @@
 
       <!-- ==================== LINHA DE 6 ABAS SUPERIORES ESTILO FACEBOOK ==================== -->
       <nav class="facebook-top-nav" id="facebook-top-nav">
-        <button type="button" class="fb-top-tab active" id="fb-tab-inicio" onclick="trocarAba('inicio')" title="Feed Principal">
+        <button type="button" class="fb-top-tab active" id="fb-tab-inicio" onclick="trocarAba('inicio')" title="Tela Inicial">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M3 10.5L12 3l9 7.5"></path>
             <path d="M5 9.5V20a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9.5"></path>
           </svg>
-          <span>Feed</span>
+          <span>Início</span>
         </button>
 
         <button type="button" class="fb-top-tab" id="fb-tab-mapa" onclick="trocarAba('mapa')" title="Mapa Interativo">
@@ -7186,30 +7150,12 @@
   <!-- CONTAINER DE ROLAGEM PRINCIPAL DO FEED (COM DETECÇÃO DE SCROLL PARA AUTO-HIDE DO TOPO) -->
   <div class="home-scroll-container" id="home-scroll-container" style="flex:1; overflow-y:auto; -webkit-overflow-scrolling:touch;">
     
-    <!-- 0. PÍLULA ESTILO FACEBOOK: CLIMA & PROTEÇÃO ANIMAL (DIRETRIZ OFICIAL RIGO) -->
+    <!-- 0. PÍLULA ESTILO FACEBOOK: CLIMA & PROTEÇÃO ANIMAL (DIRETRIZ OFICIAL RIGO: APENAS FRASE) -->
     <div class="facebook-clima-pill-section" id="facebook-clima-pill-section">
-      <div class="facebook-clima-pill" id="facebook-clima-pill" onclick="clicarPillClima()" title="Previsão do Tempo e Cuidados com o Pet">
-        <div class="clima-pill-avatar" id="clima-pill-avatar">
-          <span id="clima-pill-emoji">☀️</span>
-        </div>
-        <div class="clima-pill-content">
-          <div class="clima-pill-meta">
-            <span id="clima-pill-cidade-uf">Cascavel</span>
-            <span style="opacity:0.5;">•</span>
-            <span id="clima-pill-temp">24°C</span>
-            <span class="clima-pill-badge" id="clima-pill-badge">Tempo Estável</span>
-          </div>
-          <div class="clima-pill-msg" id="clima-pill-msg">
-            Aproveite o tempo bom para passear e brincar com seu pet! 🐾
-          </div>
-        </div>
-        <div class="clima-pill-action">
-          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="10"></circle>
-            <line x1="12" y1="16" x2="12" y2="12"></line>
-            <line x1="12" y1="8" x2="12.01" y2="8"></line>
-          </svg>
-        </div>
+      <div class="facebook-clima-pill" id="facebook-clima-pill" onclick="clicarPillClima()" role="alert">
+        <span class="clima-pill-texto-unico" id="clima-pill-texto-unico">
+          Tempo bom em Cascavel • Ótimo para passear com seu animal e brincar ao ar livre!
+        </span>
       </div>
     </div>
 
@@ -9937,21 +9883,43 @@
 
     // =========================================================================
     // RECURSO FACEBOOK: AUTO-HIDE DO HEADER NO SCROLL DOWN & REVEAL NO SCROLL UP
+    // (DIRETRIZ RIGO: SOOBE TUDO TRAVADO DE UMA VEZ; DESCENDO, FICA ALERTA PET E MENU)
     // =========================================================================
     let __headerScrollAttached = false;
+    function sincronizarAlturaHeader() {
+      const headerEl = document.getElementById('facebook-header-wrapper');
+      const scrollEl = document.getElementById('home-scroll-container') || document.getElementById('tab-inicio');
+      if (headerEl && scrollEl) {
+        const h = headerEl.offsetHeight;
+        if (h > 0) {
+          scrollEl.style.paddingTop = (h + 4) + 'px';
+        }
+      }
+    }
+    window.addEventListener('resize', sincronizarAlturaHeader);
+
     function setupFacebookHeaderScroll() {
       const scrollEl = document.getElementById('home-scroll-container') || document.getElementById('tab-inicio');
       const headerEl = document.getElementById('facebook-header-wrapper');
-      if (!scrollEl || !headerEl || __headerScrollAttached) return;
+      if (!scrollEl || !headerEl) return;
+
+      sincronizarAlturaHeader();
+      setTimeout(sincronizarAlturaHeader, 120);
+      setTimeout(sincronizarAlturaHeader, 600);
+
+      if (__headerScrollAttached) return;
 
       let lastY = 0;
       scrollEl.addEventListener('scroll', function() {
         const curY = scrollEl.scrollTop;
-        if (curY > lastY && curY > 60) {
-          // Subindo o dedo (rolando para ver os animais): recolhe suavemente o menu
+        if (curY <= 5) {
+          // No topo: tudo visível em posição natural
+          headerEl.classList.remove('header-hidden');
+        } else if (curY > lastY && curY > 12) {
+          // Quando começar a subir (rolando para ver os animais): sobe tudo travado de uma vez
           headerEl.classList.add('header-hidden');
-        } else if (curY < lastY) {
-          // Descendo o dedo (puxando para ver o menu): reaparece instantaneamente
+        } else if (curY < lastY - 4) {
+          // Quando for descer: desce imediatamente o Alerta Pet e o menu travados no topo
           headerEl.classList.remove('header-hidden');
         }
         lastY = Math.max(0, curY);
@@ -10451,60 +10419,45 @@
     }
 
     const DICAS_CUIDADO_BOM = [
-      "Aproveite o tempo bom para passear e brincar com seu pet! 🐾",
-      "Mantenha sempre água fresca e abrigo na sombra para o seu pet hoje 💧",
-      "Tempo agradável! Não esqueça de verificar a vacinação do seu amigo 🩺",
-      "Passeios ao ar livre fazem bem para a saúde e bem-estar do seu pet! 🐕",
-      "Dedique um tempo para escovar e dar aquele carinho no seu bichinho hoje ❤️"
+      "Tempo bom em Cascavel • Ótimo para passear com seu cachorro e brincar ao ar livre!",
+      "Tempo estável e agradável • Aproveite o dia para brincar com seu pet e cuidar da saúde dele!",
+      "Dia tranquilo na região • Mantenha água fresca disponível e leve seu animal para passear!",
+      "Clima favorável • Que tal uma visita ao veterinário ou um passeio agradável com seu amigo?",
+      "Tempo bom • Dedique carinho, brinque com seu pet e cuide da vacinação dele!"
     ];
     let _idxDicaBom = 0;
     let _timerDicaBom = null;
 
     function atualizarFacebookClimaPill(nivel, c) {
       const pill = document.getElementById('facebook-clima-pill');
-      if (!pill) return;
-      const emojiEl = document.getElementById('clima-pill-emoji');
-      const cityEl = document.getElementById('clima-pill-cidade-uf');
-      const tempEl = document.getElementById('clima-pill-temp');
-      const badgeEl = document.getElementById('clima-pill-badge');
-      const msgEl = document.getElementById('clima-pill-msg');
+      const txtEl = document.getElementById('clima-pill-texto-unico');
+      if (!pill || !txtEl) return;
 
       pill.classList.remove('alerta-laranja', 'alerta-vermelho');
 
       const cid = (state.perfil && state.perfil.cidade) ? state.perfil.cidade : (c && c.cidade ? c.cidade : 'Cascavel');
-      const temp = (c && c.temp !== undefined) ? `${c.temp}°C` : '24°C';
-
-      if (cityEl) cityEl.textContent = cid;
-      if (tempEl) tempEl.textContent = temp;
 
       if (nivel === 'vermelho') {
         pill.classList.add('alerta-vermelho');
-        if (emojiEl) emojiEl.textContent = '🚨';
-        if (badgeEl) badgeEl.textContent = 'Alerta Vermelho';
-        if (msgEl) msgEl.textContent = 'Atenção Máxima! Risco de tempestade severa. Recolha seus pets para dentro!';
+        txtEl.textContent = `Alerta Vermelho para sua região: Risco severo. Proteja e abrigue seus animais imediatamente!`;
         if (_timerDicaBom) { clearInterval(_timerDicaBom); _timerDicaBom = null; }
       } else if (nivel === 'laranja') {
         pill.classList.add('alerta-laranja');
-        if (emojiEl) emojiEl.textContent = '⚠️';
-        if (badgeEl) badgeEl.textContent = 'Alerta Laranja';
-        if (msgEl) msgEl.textContent = 'Chuva e ventos previstos. Proteja e abrigue seus animais em local seguro!';
+        txtEl.textContent = `Alerta Laranja para sua região: Chuvas e ventos. Proteja seus animais e mantenha-os em local seguro e abrigado.`;
         if (_timerDicaBom) { clearInterval(_timerDicaBom); _timerDicaBom = null; }
       } else {
-        const isNoite = new Date().getHours() < 6 || new Date().getHours() >= 19;
-        if (emojiEl) emojiEl.textContent = (c && c.icone) ? c.icone : (isNoite ? '🌙' : '☀️');
-        if (badgeEl) badgeEl.textContent = isNoite ? 'Céu Limpo' : 'Tempo Bom';
-        if (msgEl) msgEl.textContent = DICAS_CUIDADO_BOM[_idxDicaBom];
+        txtEl.textContent = DICAS_CUIDADO_BOM[_idxDicaBom];
 
         if (!_timerDicaBom) {
           _timerDicaBom = setInterval(() => {
-            const m = document.getElementById('clima-pill-msg');
+            const m = document.getElementById('clima-pill-texto-unico');
             if (!m) return;
             m.style.opacity = '0';
             setTimeout(() => {
               _idxDicaBom = (_idxDicaBom + 1) % DICAS_CUIDADO_BOM.length;
               m.textContent = DICAS_CUIDADO_BOM[_idxDicaBom];
               m.style.opacity = '1';
-            }, 300);
+            }, 250);
           }, 6000);
         }
       }
@@ -15872,14 +15825,15 @@ Estou disposto a recebê-lo e acolhê-lo. Fico no aguardo do contato! 🐾`;
       // Atualiza automaticamente a cada 60s
       setInterval(carregarDados, 60000);
 
-      // Splash Oficial: Se estiver no app Android, fecha imediatamente sem delay duplo
-      if (window.AndroidAlerta || /Alerta/i.test(navigator.userAgent)) {
-        fecharSplashImediato();
-      } else {
-        setTimeout(() => {
-          fecharSplashImediato();
-        }, 1000);
+      // Splash Oficial: Exibe a tela de abertura Terroso Profundo (Diretriz Suprema Rigo: tempo para ler e contemplar)
+      const progFill = document.getElementById('splash-progress-fill');
+      if (progFill) {
+        setTimeout(() => { progFill.style.width = '60%'; }, 300);
+        setTimeout(() => { progFill.style.width = '100%'; }, 1100);
       }
+      setTimeout(() => {
+        fecharSplashImediato();
+      }, 1900);
     });
   </script>
 
